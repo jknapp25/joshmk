@@ -1,5 +1,7 @@
 .App {
-  text-align: center;
+  /* width: 60%; */
+  /* margin-left: auto; */
+  /* margin-right: auto; */
 }
 
 .App-logo {
@@ -35,4 +37,62 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.nav-item {
+  display: inline;
+  border: none !important;
+  padding-left: 0px;
+  color: black;
+}
+
+.nav-link {
+  color: #6c757d !important;
+}
+
+.nav-link:hover {
+  color: black !important;
+}
+
+.nav-link.active {
+  color: black !important;
+}
+
+#controlled-tab-example-tabpane-work {
+  margin-top: 0px;
+}
+
+.vertical-timeline {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+}
+
+.vertical-timeline::before {
+  left: 20px !important;
+  background: rgba(0, 0, 0, 0.125) !important;
+}
+
+.vertical-timeline-element-date {
+  padding: 0px !important;
+}
+
+.vertical-timeline-element-icon {
+  box-shadow: none !important;
+}
+
+.vertical-timeline-element-icon svg {
+  height: 30px !important;
+  width: 30px !important;
+  margin-top: -15px;
+}
+
+.vertical-timeline-element-content-arrow {
+  border-right-color: rgba(0, 0, 0, 0.125) !important;
+}
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
 }
