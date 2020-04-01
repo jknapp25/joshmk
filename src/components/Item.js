@@ -13,9 +13,10 @@ import libby from "../assets/libby_van.jpeg";
 import vanDeath from "../assets/van_death.jpeg";
 import assistant from "../assets/tumps_assistant.jpeg";
 import logo from "../assets/josh_logo_5.png";
+import train from "../assets/train.png";
 export default Item;
 
-const pictures = [selfie, ios, logo, libby, vanDeath, assistant];
+const pictures = [selfie, ios, logo, libby, vanDeath, assistant, train];
 
 function Item({ item, bottomMargin }) {
   const {
@@ -62,17 +63,22 @@ function Item({ item, bottomMargin }) {
           )}{" "}
           {location && `- ${location}`}
         </Card.Subtitle>
-        <Card.Text>
-          {description}
-          {description && tags && <br />}
-          {tags.map((tag, i) => {
-            return (
-              <Badge pill variant="secondary" className="mr-2" key={i}>
-                {tag}
-              </Badge>
-            );
-          })}
-        </Card.Text>
+        {description && (
+          <Card.Text className={`${tags && tags.length > 0 ? "mb-2" : ""}`}>
+            {description}
+          </Card.Text>
+        )}
+        {tags && tags.length > 0 && (
+          <Card.Text>
+            {tags.map((tag, i) => {
+              return (
+                <Badge pill variant="secondary" className="mr-2" key={i}>
+                  {tag}
+                </Badge>
+              );
+            })}
+          </Card.Text>
+        )}
       </Card.Body>
       {people && (
         <ListGroup className="list-group-flush">

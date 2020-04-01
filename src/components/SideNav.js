@@ -1,7 +1,6 @@
 import React from "react";
 import { Nav, Fade } from "react-bootstrap";
 import "react-vertical-timeline-component/style.min.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
 import logo from "../assets/josh_logo_5.png";
 export default SideNav;

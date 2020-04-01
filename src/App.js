@@ -76,7 +76,7 @@ function App() {
               </Tabs>
             </VisibilitySensor>
           </Col>
-          <Col></Col>
+          <Col />
         </Row>
       </Container>
     </div>

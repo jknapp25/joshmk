@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Badge,
-  Card,
-  Alert,
-  ListGroup,
-  ListGroupItem,
-  OverlayTrigger,
-  Tooltip
-} from "react-bootstrap";
+import { Alert } from "react-bootstrap";
 import Item from "./Item";
 import {
   VerticalTimeline,
@@ -22,9 +14,7 @@ import {
 } from "react-icons/io";
 import { GiMechanicalArm } from "react-icons/gi";
 import "react-vertical-timeline-component/style.min.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
-import selfie from "../assets/ProfilePic.jpg";
 import resume from "../assets/resume.pdf";
 import work from "../lib/work.json";
 export default Work;
