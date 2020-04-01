@@ -1,38 +1,46 @@
 [
   {
     "title": "Storyline",
+    "subtitle": "Story building tool",
+    "subtitleLink": null,
     "link": "https://github.com/jknapp25/storyline",
     "tags": ["ReactJS", "vis", "react-boostrap"],
-    "description": "Story building tool",
+    "description": null,
     "img": null,
-    "date": null,
+    "footer": "Last updated Feb 12",
     "width": "w-50"
   },
   {
     "title": "Scrumy",
+    "subtitle": "Personal SCRUM tool",
+    "subtitleLink": null,
     "link": "https://github.com/jknapp25/scrumy",
     "tags": ["ReactJS", "react-boostrap"],
-    "description": "Personal SCRUM tool",
+    "description": null,
     "img": null,
-    "date": null,
+    "footer": "Last updated Feb 12",
     "width": "w-50"
   },
   {
-    "title": "Personal Site 2",
+    "title": "Joshmk.com",
+    "subtitle": "This site",
+    "subtitleLink": null,
     "link": null,
     "tags": ["ReactJS", "react-boostrap"],
-    "description": "Current site you are on",
+    "description": null,
     "img": null,
-    "date": null,
+    "footer": "Last updated Feb 12",
     "width": "w-50"
   },
   {
     "title": "Personal Site 1",
+    "subtitle": "The first website I built",
+    "subtitleLink": null,
     "link": null,
     "tags": ["HTML", "CSS", "JavaScript"],
-    "description": "My first full website I build",
+    "description": null,
     "img": null,
-    "date": null,
+    "footer": "Last updated Feb 12",
     "width": "w-50"
   }
 ]

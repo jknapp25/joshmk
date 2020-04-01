@@ -8,6 +8,7 @@ import {
   OverlayTrigger,
   Tooltip
 } from "react-bootstrap";
+import Item from "./Item";
 import {
   VerticalTimeline,
   VerticalTimelineElement
@@ -50,115 +51,21 @@ function Work() {
         for Josh's resume.
       </Alert>
       <VerticalTimeline animate={false} layout="1-column">
-        {work.map(
-          (
-            {
-              position,
-              company,
-              companyLink,
-              location,
-              description,
-              start,
-              present,
-              end,
-              icon,
-              badge,
-              badgeText,
-              badgeVariant,
-              people,
-              tags
-            },
-            i
-          ) => {
-            return (
-              <VerticalTimelineElement
-                contentStyle={{
-                  background: "rgb(33, 150, 243)",
-                  color: "#fff",
-                  padding: "0px"
-                }}
-                contentArrowStyle={{
-                  borderRight: "7px solid  rgb(33, 150, 243)"
-                }}
-                iconStyle={{ background: "white", color: "white" }}
-                icon={icons[icon]}
-                key={i}
-              >
-                <Card
-                  className="text-dark"
-                  style={{ borderBottomWidth: "0px" }}
-                >
-                  <Card.Body>
-                    <Card.Title>
-                      {position}
-                      {badge && (
-                        <Badge variant={badgeVariant} className="ml-2">
-                          {badgeText}
-                        </Badge>
-                      )}
-                    </Card.Title>
-                    <Card.Subtitle className="mb-2 text-muted">
-                      {companyLink ? (
-                        <a href={companyLink || ""} target="_blank">
-                          {company}
-                        </a>
-                      ) : (
-                        company
-                      )}{" "}
-                      - {location}
-                    </Card.Subtitle>
-                    <Card.Text>
-                      {description}
-                      <br />
-                      {tags.map(tag => {
-                        return (
-                          <Badge pill variant="secondary" className="mt-2 mr-2">
-                            {tag}
-                          </Badge>
-                        );
-                      })}
-                    </Card.Text>
-                  </Card.Body>
-                  {people && (
-                    <ListGroup className="list-group-flush">
-                      <ListGroupItem>
-                        {people.map(({ name, quote }, i) => {
-                          return (
-                            <OverlayTrigger
-                              key={i}
-                              placement="top"
-                              overlay={
-                                <Tooltip id={`tooltip-${i}`}>
-                                  {quote}
-                                  <br />-{name}
-                                </Tooltip>
-                              }
-                            >
-                              <img
-                                src={selfie}
-                                width="40px"
-                                alt="Co-worker_image"
-                                height="40px"
-                                style={{ borderRadius: "20px" }}
-                                className="mr-2"
-                              />
-                            </OverlayTrigger>
-                          );
-                        })}
-                      </ListGroupItem>
-                    </ListGroup>
-                  )}
-                  <Card.Footer>
-                    <small className="text-muted">
-                      {start} {(present || end) && "- "}
-                      {present ? "Present" : end}
-                    </small>
-                  </Card.Footer>
-                </Card>
-              </VerticalTimelineElement>
-            );
-          }
-        )}
+        {work.map((item, i) => {
+          return (
+            <VerticalTimelineElement
+              contentStyle={{ padding: "0px" }}
+              contentArrowStyle={{
+                borderRight: "7px solid  rgb(33, 150, 243)"
+              }}
+              iconStyle={{ background: "white", color: "white" }}
+              icon={icons[item.icon]}
+              key={i}
+            >
+              <Item item={item} bottomMargin="" />
+            </VerticalTimelineElement>
+          );
+        })}
       </VerticalTimeline>
     </>
   );
