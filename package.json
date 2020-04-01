@@ -40,6 +40,8 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^2.2.0"
+    "file-loader": "^6.0.0",
+    "gh-pages": "^2.2.0",
+    "url-loader": "^4.0.0"
   }
 }
