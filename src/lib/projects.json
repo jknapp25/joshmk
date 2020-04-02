@@ -8,7 +8,8 @@
     "description": null,
     "img": null,
     "footer": "Last updated Feb 12",
-    "width": "w-50"
+    "width": "w-50",
+    "type": "projects"
   },
   {
     "title": "Scrumy",
@@ -19,7 +20,8 @@
     "description": null,
     "img": null,
     "footer": "Last updated Feb 12",
-    "width": "w-50"
+    "width": "w-50",
+    "type": "projects"
   },
   {
     "title": "Joshmk.com",
@@ -30,7 +32,8 @@
     "description": null,
     "img": null,
     "footer": "Last updated Feb 12",
-    "width": "w-50"
+    "width": "w-50",
+    "type": "projects"
   },
   {
     "title": "Personal Site 1",
@@ -41,6 +44,7 @@
     "description": null,
     "img": null,
     "footer": "Last updated Feb 12",
-    "width": "w-50"
+    "width": "w-50",
+    "type": "projects"
   }
 ]

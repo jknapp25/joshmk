@@ -84,7 +84,7 @@ function Item({ item, bottomMargin }) {
         <ListGroup className="list-group-flush">
           <ListGroupItem>
             {people.map(({ name, quote }, i) => {
-              return (
+              return quote ? (
                 <OverlayTrigger
                   key={i}
                   placement="top"
@@ -104,6 +104,15 @@ function Item({ item, bottomMargin }) {
                     className="mr-2"
                   />
                 </OverlayTrigger>
+              ) : (
+                <img
+                  src={selfie}
+                  width="40px"
+                  alt="Co-worker_image"
+                  height="40px"
+                  style={{ borderRadius: "20px" }}
+                  className="mr-2"
+                />
               );
             })}
           </ListGroupItem>

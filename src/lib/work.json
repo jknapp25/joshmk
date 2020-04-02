@@ -11,12 +11,16 @@
     "badgeVariant": null,
     "badgeText": null,
     "people": [
-      { "name": "Bob", "quote": "Go josh!" },
-      { "name": "Steve", "quote": "Yeah!" },
-      { "name": "Riah", "quote": "He's sexy" }
+      { "name": "Jon Lester (FE)", "quote": null },
+      { "name": "Ryan Bonte (Full)", "quote": null },
+      { "name": "Roy Scheffers (FE)", "quote": null },
+      { "name": "Umar Quadri (BE)", "quote": null },
+      { "name": "Michael Ratcliffe", "quote": null },
+      { "name": "Ed Meehan", "quote": null }
     ],
     "tags": ["ReactJS", "Redux", "Bootstrap", "Python"],
-    "width": null
+    "width": null,
+    "type": "work"
   },
   {
     "subtitle": "ASML",
@@ -29,9 +33,13 @@
     "badge": true,
     "badgeVariant": "secondary",
     "badgeText": "Contract",
-    "people": null,
+    "people": [
+      { "name": "Ian McBride (Co-Worker)", "quote": "Josh is rad!" },
+      { "name": "Jan-Paul Burm (Manager)", "quote": null }
+    ],
     "tags": ["HTML", "CSS", "JavaScript", "Bootstrap"],
-    "width": null
+    "width": null,
+    "type": "work"
   },
   {
     "subtitle": "Edge Development",
@@ -46,7 +54,8 @@
     "badgeText": null,
     "people": null,
     "tags": [],
-    "width": null
+    "width": null,
+    "type": "work"
   },
   {
     "subtitle": "Marble Technologies",
@@ -61,7 +70,8 @@
     "badgeText": null,
     "people": null,
     "tags": ["Leadership"],
-    "width": null
+    "width": null,
+    "type": "work"
   },
   {
     "subtitle": "TriMike Creations",
@@ -76,7 +86,8 @@
     "badgeText": null,
     "people": null,
     "tags": ["SolidWorks", "3D Modeling"],
-    "width": null
+    "width": null,
+    "type": "work"
   },
   {
     "subtitle": "OSU Robotics & Human Control Systems Lab",
@@ -91,7 +102,8 @@
     "badgeText": null,
     "people": null,
     "tags": ["Python"],
-    "width": null
+    "width": null,
+    "type": "work"
   },
   {
     "subtitle": "Eigen Medical",
@@ -106,7 +118,8 @@
     "badgeText": null,
     "people": null,
     "tags": ["SolidWorks", "3D Modeling"],
-    "width": null
+    "width": null,
+    "type": "work"
   },
   {
     "subtitle": "Life",
@@ -121,6 +134,7 @@
     "badgeText": null,
     "people": null,
     "tags": [],
-    "width": null
+    "width": null,
+    "type": "work"
   }
 ]

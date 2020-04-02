@@ -1,16 +1,20 @@
 import React, { useState } from "react";
-import { Tabs, Tab, Container, Row, Col } from "react-bootstrap";
+import { Alert, Tabs, Tab, Container, Row, Col } from "react-bootstrap";
 import VisibilitySensor from "react-visibility-sensor";
 import Feed from "./components/Feed";
-import Work from "./components/Work";
+import Timeline from "./components/Timeline";
 import SideNav from "./components/SideNav";
 import selfie from "./assets/ProfilePic.jpg";
-import projects from "./lib/projects.json";
-import stories from "./lib/stories.json";
+import items from "./lib/items.json";
+import resume from "../assets/resume.pdf";
 import "react-vertical-timeline-component/style.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 export default App;
+
+const projects = items.filter(itm => itm.type === "projects");
+const stories = items.filter(itm => itm.type === "stories");
+const work = items.filter(itm => itm.type === "work");
 
 function App() {
   const [activePage, setActivePage] = useState("work");
@@ -57,21 +61,28 @@ function App() {
                   title="work"
                   className="pt-4 border-0 mb-4"
                 >
-                  <Work />
+                  <Alert variant="warning">
+                    Click{" "}
+                    <Alert.Link href={resume} download="Josh_Knapp_Resume">
+                      here
+                    </Alert.Link>{" "}
+                    for Josh's resume.
+                  </Alert>
+                  <Timeline items={work} />
                 </Tab>
                 <Tab
                   eventKey="projects"
                   title="projects"
                   className="pt-4 border-0"
                 >
-                  <Feed content={projects} width="w-50" type="projects" />
+                  <Feed items={projects} width="w-50" type="projects" />
                 </Tab>
                 <Tab
                   eventKey="stories"
                   title="stories"
                   className="pt-4 border-0"
                 >
-                  <Feed content={stories} width="" type="stories" />
+                  <Feed items={stories} width="" type="stories" />
                 </Tab>
               </Tabs>
             </VisibilitySensor>

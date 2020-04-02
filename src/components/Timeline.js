@@ -15,8 +15,6 @@ import {
 import { GiMechanicalArm } from "react-icons/gi";
 import "react-vertical-timeline-component/style.min.css";
 import "../App.css";
-import resume from "../assets/resume.pdf";
-import work from "../lib/work.json";
 export default Work;
 
 const icons = [
@@ -30,33 +28,24 @@ const icons = [
   <FaBaby color="#de56bbba" size="50px" />
 ];
 
-function Work() {
+function Work({ items }) {
   return (
-    <>
-      <Alert variant="warning">
-        Click{" "}
-        <Alert.Link href={resume} download="Josh_Knapp_Resume">
-          here
-        </Alert.Link>{" "}
-        for Josh's resume.
-      </Alert>
-      <VerticalTimeline animate={false} layout="1-column">
-        {work.map((item, i) => {
-          return (
-            <VerticalTimelineElement
-              contentStyle={{ padding: "0px" }}
-              contentArrowStyle={{
-                borderRight: "7px solid  rgb(33, 150, 243)"
-              }}
-              iconStyle={{ background: "white", color: "white" }}
-              icon={icons[item.icon]}
-              key={i}
-            >
-              <Item item={item} bottomMargin="" />
-            </VerticalTimelineElement>
-          );
-        })}
-      </VerticalTimeline>
-    </>
+    <VerticalTimeline animate={false} layout="1-column">
+      {items.map((item, i) => {
+        return (
+          <VerticalTimelineElement
+            contentStyle={{ padding: "0px" }}
+            contentArrowStyle={{
+              borderRight: "7px solid  rgb(33, 150, 243)"
+            }}
+            iconStyle={{ background: "white", color: "white" }}
+            icon={icons[item.icon]}
+            key={i}
+          >
+            <Item item={item} bottomMargin="" />
+          </VerticalTimelineElement>
+        );
+      })}
+    </VerticalTimeline>
   );
 }
