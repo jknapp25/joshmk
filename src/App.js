@@ -20,7 +20,7 @@ function App() {
   const [activePage, setActivePage] = useState("work");
   const [showSidebar, setShowSidebar] = useState(false);
 
-  function onChange(isVisible) {
+  function handleTabsVisibilityChange(isVisible) {
     setShowSidebar(!isVisible);
   }
 
@@ -35,9 +35,7 @@ function App() {
                 width="100"
                 height="100"
                 alt="Profile_picture"
-                style={{
-                  border: "3px solid black"
-                }}
+                style={{ border: "3px solid black" }}
                 className="mt-5 box align-top rounded-circle"
               />
             )}
@@ -49,7 +47,10 @@ function App() {
           </Col>
           <Col xs={7}>
             <h1 className="display-2 mt-5">Josh Knapp</h1>
-            <VisibilitySensor onChange={onChange} partialVisibility={true}>
+            <VisibilitySensor
+              onChange={handleTabsVisibilityChange}
+              partialVisibility={true}
+            >
               <Tabs
                 id="controlled-tab-example"
                 activeKey={activePage}

@@ -18,7 +18,7 @@ export default Item;
 
 const pictures = [selfie, ios, logo, libby, vanDeath, assistant, train];
 
-function Item({ item, bottomMargin }) {
+function Item({ item, bottomMargin = "" }) {
   const {
     title,
     subtitle,
@@ -41,7 +41,7 @@ function Item({ item, bottomMargin }) {
       <Card.Body>
         <Card.Title>
           {link ? (
-            <a href={link} target="_blank">
+            <a href={link} target="_blank" rel="noreferrer noopener">
               {title}
             </a>
           ) : (
@@ -55,7 +55,11 @@ function Item({ item, bottomMargin }) {
         </Card.Title>
         <Card.Subtitle className="text-muted mb-2">
           {subtitleLink ? (
-            <a href={subtitleLink || ""} target="_blank">
+            <a
+              href={subtitleLink || ""}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
               {subtitle}
             </a>
           ) : (
@@ -70,13 +74,11 @@ function Item({ item, bottomMargin }) {
         )}
         {tags && tags.length > 0 && (
           <Card.Text>
-            {tags.map((tag, i) => {
-              return (
-                <Badge pill variant="secondary" className="mr-2" key={i}>
-                  {tag}
-                </Badge>
-              );
-            })}
+            {tags.map((tag, i) => (
+              <Badge pill variant="secondary" className="mr-2" key={i}>
+                {tag}
+              </Badge>
+            ))}
           </Card.Text>
         )}
       </Card.Body>

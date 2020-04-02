@@ -31,21 +31,19 @@ const icons = [
 function Work({ items }) {
   return (
     <VerticalTimeline animate={false} layout="1-column">
-      {items.map((item, i) => {
-        return (
-          <VerticalTimelineElement
-            contentStyle={{ padding: "0px" }}
-            contentArrowStyle={{
-              borderRight: "7px solid  rgb(33, 150, 243)"
-            }}
-            iconStyle={{ background: "white", color: "white" }}
-            icon={icons[item.icon]}
-            key={i}
-          >
-            <Item item={item} bottomMargin="" />
-          </VerticalTimelineElement>
-        );
-      })}
+      {items.map((item, i) => (
+        <VerticalTimelineElement
+          contentStyle={{ padding: "0px" }}
+          contentArrowStyle={{
+            borderRight: "7px solid  rgb(33, 150, 243)"
+          }}
+          iconStyle={{ background: "white", color: "white" }}
+          icon={icons[item.icon]}
+          key={i}
+        >
+          <Item item={item} />
+        </VerticalTimelineElement>
+      ))}
     </VerticalTimeline>
   );
 }
