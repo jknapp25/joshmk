@@ -6,7 +6,7 @@ import Timeline from "./components/Timeline";
 import SideNav from "./components/SideNav";
 import selfie from "./assets/ProfilePic.jpg";
 import items from "./lib/items.json";
-import resume from "../assets/resume.pdf";
+import resume from "./assets/resume.pdf";
 import "react-vertical-timeline-component/style.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
