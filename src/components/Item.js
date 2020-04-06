@@ -7,6 +7,7 @@ import {
   OverlayTrigger,
   Tooltip
 } from "react-bootstrap";
+import { OverflowDetector } from "react-overflow";
 import selfie from "../assets/ProfilePic.jpg";
 import ios from "../assets/inventionofsound.jpeg";
 import libby from "../assets/libby_van.jpeg";
@@ -14,9 +15,21 @@ import vanDeath from "../assets/van_death.jpeg";
 import assistant from "../assets/tumps_assistant.jpeg";
 import logo from "../assets/josh_logo_5.png";
 import train from "../assets/train.png";
+import bestThings from "../assets/best_things.jpeg";
+import kissingRi from "../assets/kissing_ri.jpeg";
 export default Item;
 
-const pictures = [selfie, ios, logo, libby, vanDeath, assistant, train];
+const pictures = [
+  selfie,
+  ios,
+  logo,
+  libby,
+  vanDeath,
+  assistant,
+  train,
+  bestThings,
+  kissingRi
+];
 
 function Item({ item, bottomMargin = "" }) {
   const {
@@ -74,11 +87,13 @@ function Item({ item, bottomMargin = "" }) {
         )}
         {tags && tags.length > 0 && (
           <Card.Text>
-            {tags.map((tag, i) => (
-              <Badge pill variant="secondary" className="mr-2" key={i}>
-                {tag}
-              </Badge>
-            ))}
+            <div className="blah">
+              {tags.map((tag, i) => (
+                <Badge pill variant="secondary" className="mr-2" key={i}>
+                  {tag}
+                </Badge>
+              ))}
+            </div>
           </Card.Text>
         )}
       </Card.Body>
