@@ -1,22 +1,24 @@
 {
   "files": {
-    "main.css": "/static/css/main.eb5a5101.chunk.css",
-    "main.js": "/static/js/main.ede35c3f.chunk.js",
-    "main.js.map": "/static/js/main.ede35c3f.chunk.js.map",
+    "main.css": "/static/css/main.18f2081f.chunk.css",
+    "main.js": "/static/js/main.c671a1c1.chunk.js",
+    "main.js.map": "/static/js/main.c671a1c1.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.9ba8378d.js",
     "runtime-main.js.map": "/static/js/runtime-main.9ba8378d.js.map",
-    "static/css/2.254d231b.chunk.css": "/static/css/2.254d231b.chunk.css",
-    "static/js/2.1d126f4f.chunk.js": "/static/js/2.1d126f4f.chunk.js",
-    "static/js/2.1d126f4f.chunk.js.map": "/static/js/2.1d126f4f.chunk.js.map",
+    "static/css/2.f8747e81.chunk.css": "/static/css/2.f8747e81.chunk.css",
+    "static/js/2.a06772d2.chunk.js": "/static/js/2.a06772d2.chunk.js",
+    "static/js/2.a06772d2.chunk.js.map": "/static/js/2.a06772d2.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.73efa1faa952b8d47c5d8c3dac2f5afd.js": "/precache-manifest.73efa1faa952b8d47c5d8c3dac2f5afd.js",
+    "precache-manifest.8fc9662530fff0dfc693db8b308ee81c.js": "/precache-manifest.8fc9662530fff0dfc693db8b308ee81c.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/2.254d231b.chunk.css.map": "/static/css/2.254d231b.chunk.css.map",
-    "static/css/main.eb5a5101.chunk.css.map": "/static/css/main.eb5a5101.chunk.css.map",
-    "static/js/2.1d126f4f.chunk.js.LICENSE.txt": "/static/js/2.1d126f4f.chunk.js.LICENSE.txt",
+    "static/css/2.f8747e81.chunk.css.map": "/static/css/2.f8747e81.chunk.css.map",
+    "static/css/main.18f2081f.chunk.css.map": "/static/css/main.18f2081f.chunk.css.map",
+    "static/js/2.a06772d2.chunk.js.LICENSE.txt": "/static/js/2.a06772d2.chunk.js.LICENSE.txt",
     "static/media/ProfilePic.jpg": "/static/media/ProfilePic.a2c76f61.jpg",
+    "static/media/best_things.jpeg": "/static/media/best_things.6257818f.jpeg",
     "static/media/inventionofsound.jpeg": "/static/media/inventionofsound.b17c831e.jpeg",
     "static/media/josh_logo_5.png": "/static/media/josh_logo_5.a54df82b.png",
+    "static/media/kissing_ri.jpeg": "/static/media/kissing_ri.26cf50de.jpeg",
     "static/media/libby_van.jpeg": "/static/media/libby_van.5d40c4b7.jpeg",
     "static/media/resume.pdf": "/static/media/resume.61d05946.pdf",
     "static/media/train.png": "/static/media/train.f722cce2.png",
@@ -25,9 +27,9 @@
   },
   "entrypoints": [
     "static/js/runtime-main.9ba8378d.js",
-    "static/css/2.254d231b.chunk.css",
-    "static/js/2.1d126f4f.chunk.js",
-    "static/css/main.eb5a5101.chunk.css",
-    "static/js/main.ede35c3f.chunk.js"
+    "static/css/2.f8747e81.chunk.css",
+    "static/js/2.a06772d2.chunk.js",
+    "static/css/main.18f2081f.chunk.css",
+    "static/js/main.c671a1c1.chunk.js"
   ]
 }
