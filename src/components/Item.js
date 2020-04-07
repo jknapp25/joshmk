@@ -94,7 +94,7 @@ function Item({ item, bottomMargin = "" }) {
           <Card.Text>
             <div className="blah">
               {tags.map((tag, i) => (
-                <Badge pill variant="secondary" className="mr-2" key={i}>
+                <Badge pill variant="transparent" className="mr-2" key={i}>
                   {tag}
                 </Badge>
               ))}

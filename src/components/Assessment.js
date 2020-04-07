@@ -80,7 +80,7 @@ function Assessment() {
                     if (!i) return null;
                     return (
                       <tr key={i}>
-                        <td className="text-right border-right-0">{tag}</td>
+                        <td className="border-right-0">{tag}</td>
                         <td className="text-right border-left-0">{QTY}</td>
                       </tr>
                     );

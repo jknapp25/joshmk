@@ -104,3 +104,12 @@
 .blah {
   word-wrap: no-wrap;
 }
+
+.badge-pill {
+  border: 1px solid black;
+}
+
+.badge-transparent {
+  background-color: white;
+  color: black;
+}
