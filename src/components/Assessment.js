@@ -46,8 +46,8 @@ function Assessment() {
         to better predict where I want to head.
       </p>
       <p>
-        I am developing a simple algorithm that can provide a more honest
-        assessment of myself.
+        I am developing a simple algorithm, based on a basic work item tagging
+        strategy that can provide a more honest assessment of myself.
       </p>
 
       <Card className="mb-3">
@@ -106,7 +106,7 @@ function Assessment() {
               <Table striped bordered>
                 <thead>
                   <tr>
-                    <th>Tag</th>
+                    <th>Skill</th>
                     <th># of times used</th>
                   </tr>
                 </thead>

@@ -332,12 +332,13 @@
     "badgeVariant": null,
     "badgeText": null,
     "people": [
-      { "name": "Jon Lester (FE)", "quote": null },
-      { "name": "Ryan Bonte (Full)", "quote": null },
-      { "name": "Roy Scheffers (FE)", "quote": null },
-      { "name": "Umar Quadri (BE)", "quote": null },
-      { "name": "Michael Ratcliffe", "quote": null },
-      { "name": "Ed Meehan", "quote": null }
+      { "name": "Jon Lester (Frontend)", "quote": null, "img": 11 },
+      { "name": "Shani Minkowsky (Frontend)", "quote": null, "img": 9 },
+      { "name": "Ryan Bonte (Full-Stack)", "quote": null, "img": 10 },
+      { "name": "Roy Scheffers (Frontend)", "quote": null, "img": 10 },
+      { "name": "Umar Quadri (Backend)", "quote": null, "img": 10 },
+      { "name": "Ed Meehan (Product Owner)", "quote": null, "img": 10 },
+      { "name": "Michael Ratcliffe (Scrum Master)", "quote": null, "img": 10 }
     ],
     "tags": ["ReactJS", "Redux", "Bootstrap", "Python"],
     "width": null,
@@ -355,8 +356,9 @@
     "badgeVariant": "secondary",
     "badgeText": "Contract",
     "people": [
-      { "name": "Ian McBride (Co-Worker)", "quote": "Josh is rad!" },
-      { "name": "Jan-Paul Burm (Manager)", "quote": null }
+      { "name": "Ian McBride (Co-Worker)", "quote": null, "img": 10 },
+      { "name": "Jan-Paul Burm (Manager #1)", "quote": null, "img": 10 },
+      { "name": "Cristin Rosenbaum (Manager #2)", "quote": null, "img": 9 }
     ],
     "tags": ["HTML", "CSS", "JavaScript", "Bootstrap", "Spotfire"],
     "width": null,
@@ -383,7 +385,7 @@
     "subtitleLink": null,
     "title": "Co-Founder & Creative Director",
     "location": "Portland, OR",
-    "description": "Grew a profitable website client base from an untapped Portland market",
+    "description": "Grew a profitable website client base serving Portland-based artisans.",
     "footer": "December 2016 - March 2017",
     "icon": 3,
     "badge": false,

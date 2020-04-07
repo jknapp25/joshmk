@@ -7,7 +7,6 @@ import {
   OverlayTrigger,
   Tooltip
 } from "react-bootstrap";
-import { OverflowDetector } from "react-overflow";
 import selfie from "../assets/ProfilePic.jpg";
 import ios from "../assets/inventionofsound.jpeg";
 import libby from "../assets/libby_van.jpeg";
@@ -17,6 +16,9 @@ import logo from "../assets/josh_logo_5.png";
 import train from "../assets/train.png";
 import bestThings from "../assets/best_things.jpeg";
 import kissingRi from "../assets/kissing_ri.jpeg";
+import profileFemale from "../assets/profile.png";
+import profileMale from "../assets/profile_male.png";
+import jon from "../assets/jon.jpeg";
 export default Item;
 
 const pictures = [
@@ -28,7 +30,10 @@ const pictures = [
   assistant,
   train,
   bestThings,
-  kissingRi
+  kissingRi,
+  profileFemale,
+  profileMale,
+  jon
 ];
 
 function Item({ item, bottomMargin = "" }) {
@@ -100,38 +105,24 @@ function Item({ item, bottomMargin = "" }) {
       {people && (
         <ListGroup className="list-group-flush">
           <ListGroupItem>
-            {people.map(({ name, quote }, i) => {
-              return quote ? (
-                <OverlayTrigger
-                  key={i}
-                  placement="top"
-                  overlay={
-                    <Tooltip id={`tooltip-${i}`}>
-                      {quote}
-                      <br />-{name}
-                    </Tooltip>
-                  }
-                >
-                  <img
-                    src={selfie}
-                    width="40px"
-                    alt="Co-worker_image"
-                    height="40px"
-                    style={{ borderRadius: "20px" }}
-                    className="mr-2"
-                  />
-                </OverlayTrigger>
-              ) : (
+            {people.map(({ name, quote, img }, i) => (
+              <OverlayTrigger
+                key={i}
+                placement="top"
+                overlay={
+                  <Tooltip id={`tooltip-${i}`}>{quote ? quote : name}</Tooltip>
+                }
+              >
                 <img
-                  src={selfie}
+                  src={pictures[img]}
                   width="40px"
                   alt="Co-worker_image"
                   height="40px"
                   style={{ borderRadius: "20px" }}
                   className="mr-2"
                 />
-              );
-            })}
+              </OverlayTrigger>
+            ))}
           </ListGroupItem>
         </ListGroup>
       )}

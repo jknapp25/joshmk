@@ -16,10 +16,10 @@ export default App;
 const statusOrder = ["Active", "On Hold", "Complete"];
 const projects = items
   .filter(itm => itm.type === "projects")
-  .sort((a, b) => {
-    console.log(a.badgeText, b.badgeText);
-    return statusOrder.indexOf(a.badgeText) - statusOrder.indexOf(b.badgeText);
-  });
+  .sort(
+    (a, b) =>
+      statusOrder.indexOf(a.badgeText) - statusOrder.indexOf(b.badgeText)
+  );
 const stories = items.filter(itm => itm.type === "stories");
 const work = items.filter(itm => itm.type === "work");
 
