@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 import {
   Badge,
   Card,
@@ -45,7 +46,9 @@ function Item({ item, bottomMargin = "" }) {
     description,
     link,
     img,
-    footer,
+    start,
+    end,
+    lastUpdated,
     width,
     location,
     badge,
@@ -53,6 +56,16 @@ function Item({ item, bottomMargin = "" }) {
     badgeVariant,
     people
   } = item;
+  const footer =
+    start && end
+      ? moment(start).format("MMM Y") + " - " + moment(end).format("MMM Y")
+      : start
+      ? moment(start).format("MMM Y") + " - Now"
+      : end
+      ? moment(end).format("MMM Y")
+      : lastUpdated
+      ? "Last updated" + moment(lastUpdated).format("MMM Y")
+      : "";
   return (
     <Card className={`${bottomMargin} ${width}`}>
       {img && <Card.Img variant="top" src={pictures[img]} />}
