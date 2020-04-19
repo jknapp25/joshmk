@@ -11,7 +11,7 @@ import {
   IoIosBuild,
   IoMdMedical
 } from "react-icons/io";
-import { GiMechanicalArm } from "react-icons/gi";
+import { GiMechanicalArm, GiCrosscutSaw } from "react-icons/gi";
 import "react-vertical-timeline-component/style.min.css";
 import "../App.css";
 export default Work;
@@ -24,7 +24,8 @@ const icons = [
   <IoIosBuild color="#721c24" size="50px" />,
   <GiMechanicalArm color="#000000" size="50px" />,
   <IoMdMedical color="#e32525" size="50px" />,
-  <FaBaby color="#de56bbba" size="50px" />
+  <FaBaby color="#de56bbba" size="50px" />,
+  <GiCrosscutSaw color="#7e56deba" size="50px" />
 ];
 
 function Work({ items }) {

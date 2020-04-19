@@ -58,6 +58,18 @@
   color: black !important;
 }
 
+/* .nav-link a {
+  color: #6c757d !important;
+}
+
+.nav-link a:hover {
+  color: black !important;
+} */
+
+/* .nav-link a:active {
+  color: black !important;
+} */
+
 #controlled-tab-example-tabpane-work {
   margin-top: 0px;
 }

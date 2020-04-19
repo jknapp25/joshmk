@@ -1,19 +1,15 @@
 import React from "react";
+import { Link } from "@reach/router";
 import { Nav, Fade } from "react-bootstrap";
 import "react-vertical-timeline-component/style.min.css";
 import "../App.css";
 import logo from "../assets/josh_logo_5.png";
 export default SideNav;
 
-function SideNav({ show, activePage, setActivePage }) {
+function SideNav({ show }) {
   return (
     <Fade in={show}>
-      <Nav
-        activeKey={activePage}
-        onSelect={setActivePage}
-        className="sticky mr-3"
-        style={{ top: "65px", display: "block" }}
-      >
+      <Nav className="sticky mr-3" style={{ top: "65px", display: "block" }}>
         <img
           src={logo}
           width="57"
@@ -21,15 +17,18 @@ function SideNav({ show, activePage, setActivePage }) {
           alt="Logo"
           className="mb-3 mr-3"
         />
-        <Nav.Item className="d-block">
-          <Nav.Link eventKey="work">work</Nav.Link>
-        </Nav.Item>
-        <Nav.Item className="d-block">
-          <Nav.Link eventKey="projects">projects</Nav.Link>
-        </Nav.Item>
-        <Nav.Item className="d-block">
-          <Nav.Link eventKey="stories">stories</Nav.Link>
-        </Nav.Item>
+        {["work", "projects", "stories"].map((page, i) => (
+          <Nav.Item className="d-block" key={i}>
+            <Nav.Link
+              className="pl-0"
+              as={Link}
+              to={`/${page}`}
+              eventKey={"/" + page}
+            >
+              {page}
+            </Nav.Link>
+          </Nav.Item>
+        ))}
       </Nav>
     </Fade>
   );

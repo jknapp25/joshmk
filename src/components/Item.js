@@ -20,6 +20,12 @@ import kissingRi from "../assets/kissing_ri.jpeg";
 import profileFemale from "../assets/profile.png";
 import profileMale from "../assets/profile_male.png";
 import jon from "../assets/jon.jpeg";
+import desk from "../assets/desk.jpg";
+import loft1 from "../assets/loft1.jpg";
+import ian from "../assets/ian.jpeg";
+import janPaul from "../assets/jan-paul.jpg";
+import sfMarathon from "../assets/sf-marathon.jpeg";
+import portMarathon from "../assets/portland-marathon2.jpeg";
 export default Item;
 
 const pictures = [
@@ -34,8 +40,30 @@ const pictures = [
   kissingRi,
   profileFemale,
   profileMale,
-  jon
+  jon,
+  desk,
+  loft1,
+  ian,
+  janPaul,
+  sfMarathon,
+  portMarathon
 ];
+
+function createFooter(start, end, lastUpdated) {
+  return start && end
+    ? moment(start).format("MMM Y") + " - " + moment(end).format("MMM Y")
+    : start && lastUpdated
+    ? moment(start).format("MMM Y") +
+      " - " +
+      moment(lastUpdated).format("MMM Y")
+    : start
+    ? moment(start).format("MMM Y") + " - Now"
+    : end
+    ? moment(end).format("MMM Y")
+    : lastUpdated
+    ? "Last updated" + moment(lastUpdated).format("MMM Y")
+    : "";
+}
 
 function Item({ item, bottomMargin = "" }) {
   const {
@@ -56,16 +84,8 @@ function Item({ item, bottomMargin = "" }) {
     badgeVariant,
     people
   } = item;
-  const footer =
-    start && end
-      ? moment(start).format("MMM Y") + " - " + moment(end).format("MMM Y")
-      : start
-      ? moment(start).format("MMM Y") + " - Now"
-      : end
-      ? moment(end).format("MMM Y")
-      : lastUpdated
-      ? "Last updated" + moment(lastUpdated).format("MMM Y")
-      : "";
+  const footer = createFooter(start, end, lastUpdated);
+
   return (
     <Card className={`${bottomMargin} ${width}`}>
       {img && <Card.Img variant="top" src={pictures[img]} />}
@@ -105,13 +125,11 @@ function Item({ item, bottomMargin = "" }) {
         )}
         {tags && tags.length > 0 && (
           <Card.Text>
-            <div className="blah">
-              {tags.map((tag, i) => (
-                <Badge pill variant="transparent" className="mr-2" key={i}>
-                  {tag}
-                </Badge>
-              ))}
-            </div>
+            {tags.map((tag, i) => (
+              <Badge pill variant="transparent" className="mr-2" key={i}>
+                {tag}
+              </Badge>
+            ))}
           </Card.Text>
         )}
       </Card.Body>
@@ -123,7 +141,9 @@ function Item({ item, bottomMargin = "" }) {
                 key={i}
                 placement="top"
                 overlay={
-                  <Tooltip id={`tooltip-${i}`}>{quote ? quote : name}</Tooltip>
+                  <Tooltip id={`tooltip-${i}`}>{`${
+                    quote ? quote + " -" + name : name
+                  }`}</Tooltip>
                 }
               >
                 <img

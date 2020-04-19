@@ -1,6 +1,6 @@
 [
   {
-    "title": "Storyline",
+    "title": "storyline",
     "subtitle": "Story building tool",
     "subtitleLink": null,
     "link": "https://github.com/jknapp25/storyline",
@@ -15,17 +15,18 @@
     "description": null,
     "complexity": 0.7,
     "img": null,
-    "start": "2020-1-1",
+    "start": null,
     "end": null,
     "lastUpdated": null,
     "width": "w-50",
     "badge": true,
     "badgeVariant": "warning",
     "badgeText": "On Hold",
-    "type": "projects"
+    "type": "projects",
+    "hasRepo": true
   },
   {
-    "title": "Scrumy",
+    "title": "scrumy",
     "subtitle": "Personal SCRUM tool",
     "subtitleLink": null,
     "link": "https://github.com/jknapp25/scrumy",
@@ -34,13 +35,52 @@
     "description": null,
     "complexity": 0.6,
     "img": null,
-    "start": "2019-10-1",
+    "start": null,
     "end": null,
     "lastUpdated": null,
     "width": "w-50",
     "badge": true,
     "badgeVariant": "warning",
     "badgeText": "On Hold",
+    "type": "projects",
+    "hasRepo": true
+  },
+  {
+    "title": "Easel Desk",
+    "subtitle": "A desk with a built in easel",
+    "subtitleLink": null,
+    "link": null,
+    "tags": ["Wood Construction"],
+    "tagUsage": [0.8],
+    "description": null,
+    "complexity": 0.5,
+    "img": 12,
+    "start": "2019-2-18",
+    "end": "2019-2-11",
+    "lastUpdated": null,
+    "width": "w-75",
+    "badge": true,
+    "badgeVariant": "success",
+    "badgeText": "Complete",
+    "type": "projects"
+  },
+  {
+    "title": "Studio Loft",
+    "subtitle": "A lounging loft for my wife's art studio",
+    "subtitleLink": null,
+    "link": null,
+    "tags": ["Wood Construction"],
+    "tagUsage": [0.8],
+    "description": null,
+    "complexity": 0.3,
+    "img": 13,
+    "start": "2019-2-1",
+    "end": "2019-2-10",
+    "lastUpdated": null,
+    "width": "w-75",
+    "badge": true,
+    "badgeVariant": "success",
+    "badgeText": "Complete",
     "type": "projects"
   },
   {
@@ -71,11 +111,11 @@
     "tagUsage": [1],
     "description": "Time: 3:40:56, Place: 798 of 6518",
     "complexity": null,
-    "img": null,
+    "img": 17,
     "start": null,
     "end": "2012-10-05",
     "lastUpdated": null,
-    "width": "w-50",
+    "width": "w-75",
     "badge": true,
     "badgeVariant": "success",
     "badgeText": "Complete",
@@ -90,34 +130,42 @@
     "tagUsage": [1],
     "description": "Time: 3:50:03, Place: 1234 of 6040",
     "complexity": null,
-    "img": null,
+    "img": 16,
     "start": null,
     "end": "2011-07-26",
     "lastUpdated": null,
-    "width": "w-50",
+    "width": "w-75",
     "badge": true,
     "badgeVariant": "success",
     "badgeText": "Complete",
     "type": "projects"
   },
   {
-    "title": "Joshmk",
+    "title": "joshmk",
     "subtitle": "This site",
     "subtitleLink": null,
     "link": "https://github.com/jknapp25/joshmk",
-    "tags": ["Software", "ReactJS", "React-Boostrap", "JavaScript"],
-    "tagUsage": [1, 0.8, 0.2, 0.9],
+    "tags": [
+      "Software",
+      "ReactJS",
+      "React-Boostrap",
+      "JavaScript",
+      "GraphQL",
+      "Reach-Router"
+    ],
+    "tagUsage": [1, 0.8, 0.2, 0.9, 0.1, 0.1],
     "description": null,
     "complexity": 0.7,
     "img": null,
-    "start": "2020-03-1",
+    "start": null,
     "end": null,
     "lastUpdated": null,
     "width": "w-50",
     "badge": true,
     "badgeVariant": "info",
     "badgeText": "Active",
-    "type": "projects"
+    "type": "projects",
+    "hasRepo": true
   },
   {
     "title": "Personal Site",
@@ -151,7 +199,7 @@
     "start": null,
     "end": "2020-04-04",
     "lastUpdated": null,
-    "width": "",
+    "width": "w-50",
     "type": "stories"
   },
   {
@@ -167,7 +215,7 @@
     "start": null,
     "end": "2019-12-04",
     "lastUpdated": null,
-    "width": "",
+    "width": "w-75",
     "type": "stories"
   },
   {
@@ -183,7 +231,7 @@
     "start": null,
     "end": "2020-03-31",
     "lastUpdated": null,
-    "width": "",
+    "width": "w-75",
     "type": "stories"
   },
   {
@@ -199,7 +247,7 @@
     "start": null,
     "end": "2020-02-13",
     "lastUpdated": null,
-    "width": "",
+    "width": "w-50",
     "type": "stories"
   },
   {
@@ -215,7 +263,7 @@
     "start": null,
     "end": "2019-11-13",
     "lastUpdated": null,
-    "width": "",
+    "width": "w-75",
     "type": "stories"
   },
   {
@@ -231,7 +279,7 @@
     "start": null,
     "end": "2019-10-22",
     "lastUpdated": null,
-    "width": "",
+    "width": "w-75",
     "type": "stories"
   },
   {
@@ -247,7 +295,7 @@
     "start": null,
     "end": "2019-10-21",
     "lastUpdated": null,
-    "width": "",
+    "width": "w-75",
     "type": "stories"
   },
   {
@@ -263,7 +311,7 @@
     "start": null,
     "end": "2020-01-26",
     "lastUpdated": null,
-    "width": "",
+    "width": "w-100",
     "type": "stories"
   },
   {
@@ -279,7 +327,7 @@
     "start": null,
     "end": "2019-11-12",
     "lastUpdated": null,
-    "width": "",
+    "width": "w-75",
     "type": "stories"
   },
   {
@@ -295,7 +343,7 @@
     "start": null,
     "end": "2019-10-22",
     "lastUpdated": null,
-    "width": "",
+    "width": "w-75",
     "type": "stories"
   },
   {
@@ -311,7 +359,7 @@
     "start": null,
     "end": "2018-12-27",
     "lastUpdated": null,
-    "width": "",
+    "width": "w-100",
     "type": "stories"
   },
   {
@@ -327,7 +375,7 @@
     "start": null,
     "end": "2018-06-19",
     "lastUpdated": null,
-    "width": "",
+    "width": "w-100",
     "type": "stories"
   },
   {
@@ -343,7 +391,7 @@
     "start": null,
     "end": "2019-10-22",
     "lastUpdated": null,
-    "width": "",
+    "width": "w-75",
     "type": "stories"
   },
   {
@@ -359,7 +407,7 @@
     "start": null,
     "end": "2019-10-22",
     "lastUpdated": null,
-    "width": "",
+    "width": "w-75",
     "type": "stories"
   },
   {
@@ -375,7 +423,7 @@
     "start": null,
     "end": "2018-07-27",
     "lastUpdated": null,
-    "width": "",
+    "width": "w-100",
     "type": "stories"
   },
   {
@@ -391,7 +439,7 @@
     "start": null,
     "end": "2018-05-29",
     "lastUpdated": null,
-    "width": "",
+    "width": "w-100",
     "type": "stories"
   },
   {
@@ -407,7 +455,7 @@
     "start": null,
     "end": "2018-05-23",
     "lastUpdated": null,
-    "width": "",
+    "width": "w-100",
     "type": "stories"
   },
   {
@@ -423,7 +471,7 @@
     "start": null,
     "end": "2018-05-05",
     "lastUpdated": null,
-    "width": "",
+    "width": "w-100",
     "type": "stories"
   },
   {
@@ -431,7 +479,7 @@
     "subtitleLink": "https://www.asml.com/en",
     "title": "Software Engineer",
     "location": "Hillsboro, OR",
-    "description": "Part of an exciting internal software development team delivering a tool for deployment and maintenance of next generation semiconductor lithography machines.",
+    "description": "Part of an exciting international software development team delivering a tool for deployment and maintenance of next generation semiconductor lithography machines.",
     "complexity": 0.9,
     "start": "2018-11",
     "end": null,
@@ -469,8 +517,16 @@
     "badgeVariant": "secondary",
     "badgeText": "Contract",
     "people": [
-      { "name": "Ian McBride (Co-Worker)", "quote": null, "img": 10 },
-      { "name": "Jan-Paul Burm (Manager #1)", "quote": null, "img": 10 },
+      {
+        "name": "Ian McBride (Co-Worker)",
+        "quote": "He's an honest guy, with an imagination that endlessly surprises with creative delights.",
+        "img": 14
+      },
+      {
+        "name": "Jan-Paul Burm (Manager #1)",
+        "quote": "I hired Josh back in 2017 into our continuous improvement team. Josh always displayed eagerness to learn and explore better options. He has a passion for software development, especially when the solutions he is working on make life easier for end-users.",
+        "img": 15
+      },
       { "name": "Cristin Rosenbaum (Manager #2)", "quote": null, "img": 9 }
     ],
     "tags": ["Software", "HTML", "CSS", "JavaScript", "Bootstrap", "Spotfire"],
@@ -499,14 +555,34 @@
     "type": "work"
   },
   {
+    "subtitle": "People Ready",
+    "subtitleLink": null,
+    "title": "Temp worker",
+    "location": "Portland, OR",
+    "description": "Hard time. But I thoroughly enjoyed the variety. I ended up working in 11 different industries.",
+    "complexity": null,
+    "start": "2017-01",
+    "end": "2017-03",
+    "lastUpdated": null,
+    "icon": 8,
+    "badge": false,
+    "badgeVariant": null,
+    "badgeText": null,
+    "people": null,
+    "tags": [],
+    "tagUsage": [],
+    "width": null,
+    "type": "work"
+  },
+  {
     "subtitle": "Marble Technologies",
     "subtitleLink": null,
     "title": "Co-Founder & Creative Director",
     "location": "Portland, OR",
     "description": "Grew a profitable website client base serving Portland-based artisans.",
     "complexity": 0.9,
-    "start": "2016-12",
-    "end": "2017-03",
+    "start": "2016-07",
+    "end": "2017-01",
     "lastUpdated": null,
     "icon": 3,
     "badge": false,
