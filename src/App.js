@@ -10,7 +10,7 @@ export default App;
 const client = new ApolloClient({
   uri: "https://api.github.com/graphql",
   request: operation => {
-    const token = "ef708f108761b6a739564d6b8a296ff0ca2f25ac";
+    const token = "a75ea4595d78659587692d3f5bdc0d72706e0811";
     operation.setContext({
       headers: {
         authorization: token ? `Bearer ${token}` : ""
