@@ -26,6 +26,7 @@ import ian from "../assets/ian.jpeg";
 import janPaul from "../assets/jan-paul.jpg";
 import sfMarathon from "../assets/sf-marathon.jpeg";
 import portMarathon from "../assets/portland-marathon2.jpeg";
+import goalHours from "../assets/goalhours.png";
 export default Item;
 
 const pictures = [
@@ -46,7 +47,8 @@ const pictures = [
   ian,
   janPaul,
   sfMarathon,
-  portMarathon
+  portMarathon,
+  goalHours
 ];
 
 function createFooter(start, end, lastUpdated) {

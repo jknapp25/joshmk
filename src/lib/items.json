@@ -1,5 +1,25 @@
 [
   {
+    "title": "goal-hours",
+    "subtitle": "Work hours monitoring tool",
+    "subtitleLink": null,
+    "link": "https://joshmk.com/goal-hours",
+    "tags": ["Software", "ReactJS", "Chart.js", "React-Boostrap", "JavaScript"],
+    "tagUsage": [1, 0.8, 0.6, 0.1, 0.9],
+    "description": "Simple tool to help myself and my friends stick to a goal number of hours set for our work week.",
+    "complexity": 0.5,
+    "img": 18,
+    "start": null,
+    "end": "2020-05",
+    "lastUpdated": null,
+    "width": "w-75",
+    "badge": true,
+    "badgeVariant": "success",
+    "badgeText": "Complete",
+    "type": "projects",
+    "hasRepo": false
+  },
+  {
     "title": "storyline",
     "subtitle": "Story building tool",
     "subtitleLink": null,
