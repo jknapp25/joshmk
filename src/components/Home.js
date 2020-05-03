@@ -3,6 +3,7 @@ import { Router, navigate } from "@reach/router";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 import { Container, Row, Col } from "react-bootstrap";
+import GoalHours from "./GoalHours";
 import Work from "./Work";
 import Projects from "./Projects";
 import Stories from "./Stories";
@@ -102,6 +103,7 @@ function Home() {
               handleTabsVisibilityChange={handleTabsVisibilityChange}
             />
             <Skills path="/skills" />
+            <GoalHours path="/goal-hours" />
           </Router>
         </Col>
         <Col />
