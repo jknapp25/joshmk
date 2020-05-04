@@ -64,7 +64,7 @@ function createFooter(start, end, lastUpdated) {
     ? moment(end).format("MMM Y")
     : lastUpdated
     ? "Last updated" + moment(lastUpdated).format("MMM Y")
-    : "";
+    : "No date info available";
 }
 
 function Item({ item, bottomMargin = "" }) {

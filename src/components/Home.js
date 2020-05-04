@@ -37,7 +37,7 @@ function Home() {
   if (loading) return null;
 
   const itemsEnrichedWithGithubData = initialItems.map(itm => {
-    if (itm.hasRepo) {
+    if (itm.hasRepo && data) {
       const { node } = data.viewer.repositories.edges.find(
         ({ node }) => node.name === itm.title
       );
