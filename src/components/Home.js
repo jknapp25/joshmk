@@ -1,71 +1,56 @@
 import React, { useState } from "react";
-import { Router, navigate } from "@reach/router";
-import gql from "graphql-tag";
-import { useQuery } from "@apollo/react-hooks";
+import { navigate } from "@reach/router";
+// import gql from "graphql-tag";
+// import { useQuery } from "@apollo/react-hooks";
 import { Container, Row, Col } from "react-bootstrap";
-import GoalHours from "./GoalHours";
-import Work from "./Work";
-import Projects from "./Projects";
-import Stories from "./Stories";
-import Skills from "./Skills";
+// import GoalHours from "./GoalHours";
+// import Work from "./Work";
+// import Projects from "./Projects";
+// import Stories from "./Stories";
+// import Skills from "./Skills";
 import SideNav from "./SideNav";
 import selfie from "../assets/ProfilePic.jpg";
-import initialItems from "../lib/items.json";
+// import initialItems from "../lib/items.json";
 export default Home;
 
-const GET_REPOS_DATES = gql`
-  {
-    viewer {
-      repositories(last: 10) {
-        edges {
-          node {
-            createdAt
-            name
-            updatedAt
-          }
-        }
-      }
-    }
-  }
-`;
-const statusOrder = ["Active", "On Hold", "Complete"];
+// const statusOrder = ["Active", "On Hold", "Complete"];
 
-function Home() {
+function Home({ children }) {
   const [showSidebar, setShowSidebar] = useState(false);
-  const { loading, data } = useQuery(GET_REPOS_DATES);
+  // const { loading, data } = useQuery(GET_REPOS_DATES);
 
-  if (loading) return null;
+  // if (loading) return null;
 
-  const itemsEnrichedWithGithubData = initialItems.map(itm => {
-    if (itm.hasRepo && data) {
-      const { node } = data.viewer.repositories.edges.find(
-        ({ node }) => node.name === itm.title
-      );
+  // const itemsEnrichedWithGithubData = initialItems.map(itm => {
+  //   if (itm.hasRepo && data) {
+  //     const { node } = data.viewer.repositories.edges.find(
+  //       ({ node }) => node.name === itm.title
+  //     );
 
-      return {
-        ...itm,
-        start: node.createdAt,
-        lastUpdated: node.updatedAt
-      };
-    } else {
-      return itm;
-    }
-  });
+  //     return {
+  //       ...itm,
+  //       start: node.createdAt,
+  //       lastUpdated: node.updatedAt
+  //     };
+  //   } else {
+  //     return itm;
+  //   }
+  // });
 
-  const projects = itemsEnrichedWithGithubData
-    .filter(itm => itm.type === "projects")
-    .sort(
-      (a, b) =>
-        statusOrder.indexOf(a.badgeText) - statusOrder.indexOf(b.badgeText)
-    );
-  const stories = itemsEnrichedWithGithubData.filter(
-    itm => itm.type === "stories"
-  );
-  const work = itemsEnrichedWithGithubData.filter(itm => itm.type === "work");
+  // const projects = itemsEnrichedWithGithubData
+  //   .filter(itm => itm.type === "projects")
+  //   .sort(
+  //     (a, b) =>
+  //       statusOrder.indexOf(a.badgeText) - statusOrder.indexOf(b.badgeText)
+  //   );
+  // const stories = itemsEnrichedWithGithubData.filter(
+  //   itm => itm.type === "stories"
+  // );
+  // const work = itemsEnrichedWithGithubData.filter(itm => itm.type === "work");
 
-  function handleTabsVisibilityChange(isVisible) {
-    setShowSidebar(!isVisible);
-  }
+  // function handleTabsVisibilityChange(isVisible) {
+  //   setShowSidebar(!isVisible);
+  // }
 
   return (
     <Container>
@@ -85,26 +70,29 @@ function Home() {
           <SideNav show={showSidebar} />
         </Col>
         <Col xs={7}>
-          <Router primary={false}>
-            <Work
-              default
-              work={work}
-              path="/work"
-              handleTabsVisibilityChange={handleTabsVisibilityChange}
-            />
-            <Projects
-              handleTabsVisibilityChange={handleTabsVisibilityChange}
-              projects={projects}
-              path="projects"
-            />
-            <Stories
-              stories={stories}
-              path="stories"
-              handleTabsVisibilityChange={handleTabsVisibilityChange}
-            />
-            <Skills path="skills" />
-            <GoalHours path="goal-hours" />
-          </Router>
+          {children}
+          {/* <Router primary={false}>
+            <Root path="/">
+              <Work
+                default
+                work={work}
+                path="/work"
+                handleTabsVisibilityChange={handleTabsVisibilityChange}
+              />
+              <Projects
+                handleTabsVisibilityChange={handleTabsVisibilityChange}
+                projects={projects}
+                path="projects"
+              />
+              <Stories
+                stories={stories}
+                path="stories"
+                handleTabsVisibilityChange={handleTabsVisibilityChange}
+              />
+              <Skills path="skills" />
+              <GoalHours path="goal-hours" />
+            </Root>
+          </Router> */}
         </Col>
         <Col />
       </Row>

@@ -6,6 +6,7 @@ export default NavBar;
 
 function NavBar({ handleTabsVisibilityChange }) {
   const { pathname } = useLocation();
+  const activeKey = pathname === "/" ? "/work" : pathname;
   return (
     <VisibilitySensor
       onChange={handleTabsVisibilityChange}
@@ -13,11 +14,11 @@ function NavBar({ handleTabsVisibilityChange }) {
     >
       <Nav
         id="controlled-tab-example"
-        activeKey={pathname}
+        activeKey={activeKey}
         className="border-0 mb-4"
       >
-        {["work", "projects", "stories"].map(page => (
-          <Nav.Item>
+        {["work", "projects", "stories"].map((page, i) => (
+          <Nav.Item key={i}>
             <Nav.Link
               className="pl-0"
               as={Link}
