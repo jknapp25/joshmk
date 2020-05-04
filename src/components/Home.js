@@ -95,15 +95,15 @@ function Home() {
             <Projects
               handleTabsVisibilityChange={handleTabsVisibilityChange}
               projects={projects}
-              path="/projects"
+              path="projects"
             />
             <Stories
               stories={stories}
-              path="/stories"
+              path="stories"
               handleTabsVisibilityChange={handleTabsVisibilityChange}
             />
-            <Skills path="/skills" />
-            <GoalHours path="/goal-hours" />
+            <Skills path="skills" />
+            <GoalHours path="goal-hours" />
           </Router>
         </Col>
         <Col />
