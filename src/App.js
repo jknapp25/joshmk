@@ -85,12 +85,12 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <div className="App">
-        <Router primary={false} /* basepath={process.env.PUBLIC_URL} */>
+        <Router primary={false} basepath="/">
           <Home path="/">
             <Work
               default
               work={work}
-              path="/work"
+              path="work"
               handleTabsVisibilityChange={() => {}}
             />
             <Projects
