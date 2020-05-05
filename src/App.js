@@ -85,7 +85,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <div className="App">
-        <Router primary={false}>
+        <Router primary={false} /* basepath={process.env.PUBLIC_URL} */>
           <Home path="/">
             <Work
               default
