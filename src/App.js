@@ -1,18 +1,22 @@
 import React from "react";
 import ApolloClient from "apollo-boost";
-import { Router } from "@reach/router";
+import {
+  HashRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
 import gql from "graphql-tag";
-import { useQuery } from "@apollo/react-hooks";
 import { ApolloProvider } from "@apollo/react-hooks";
 import Work from "./components/Work";
 import Projects from "./components/Projects";
 import Skills from "./components/Skills";
 import GoalHours from "./components/GoalHours";
 import Stories from "./components/Stories";
+import Home from "./components/Home.js";
 import "react-vertical-timeline-component/style.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import Home from "./components/Home.js";
 import initialItems from "./lib/items.json";
 export default App;
 
@@ -48,8 +52,8 @@ const GET_REPOS_DATES = gql`
 
 function App() {
   // const { loading, data } = useQuery(GET_REPOS_DATES);
-
   // if (loading) return null;
+
   const data = null;
 
   const itemsEnrichedWithGithubData = initialItems.map(itm => {
@@ -85,27 +89,37 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <div className="App">
-        <Router primary={false} basepath="/">
-          <Home path="/">
-            <Work
-              default
-              work={work}
-              path="work"
-              handleTabsVisibilityChange={() => {}}
-            />
-            <Projects
-              handleTabsVisibilityChange={() => {}}
-              projects={projects}
-              path="projects"
-            />
-            <Stories
-              stories={stories}
-              path="stories"
-              handleTabsVisibilityChange={() => {}}
-            />
-            <Skills path="skills" />
-            <GoalHours path="goal-hours" />
-          </Home>
+        <Router>
+          <Switch>
+            <Home>
+              <Route path="/work">
+                <Work
+                  default
+                  work={work}
+                  handleTabsVisibilityChange={() => {}}
+                />
+              </Route>
+              <Route path="/projects">
+                <Projects
+                  handleTabsVisibilityChange={() => {}}
+                  projects={projects}
+                />
+              </Route>
+              <Route path="/stories">
+                <Stories
+                  stories={stories}
+                  handleTabsVisibilityChange={() => {}}
+                />
+              </Route>
+              <Route path="/skills">
+                <Skills />
+              </Route>
+              <Route path="/goal-hours">
+                <GoalHours />
+              </Route>
+              <Redirect from="/" to="work" />
+            </Home>
+          </Switch>
         </Router>
       </div>
     </ApolloProvider>

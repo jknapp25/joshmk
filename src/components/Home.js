@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { navigate } from "@reach/router";
+import { useHistory } from "react-router-dom";
 // import gql from "graphql-tag";
 // import { useQuery } from "@apollo/react-hooks";
 import { Container, Row, Col } from "react-bootstrap";
@@ -17,6 +17,7 @@ export default Home;
 
 function Home({ children }) {
   const [showSidebar, setShowSidebar] = useState(false);
+  const history = useHistory();
   // const { loading, data } = useQuery(GET_REPOS_DATES);
 
   // if (loading) return null;
@@ -64,36 +65,12 @@ function Home({ children }) {
               alt="Profile_picture"
               style={{ border: "3px solid black" }}
               className="mt-5 box align-top rounded-circle"
-              onClick={() => navigate("/skills")}
+              onClick={() => history.push("/skills")}
             />
           )}
           <SideNav show={showSidebar} />
         </Col>
-        <Col xs={7}>
-          {children}
-          {/* <Router primary={false}>
-            <Root path="/">
-              <Work
-                default
-                work={work}
-                path="/work"
-                handleTabsVisibilityChange={handleTabsVisibilityChange}
-              />
-              <Projects
-                handleTabsVisibilityChange={handleTabsVisibilityChange}
-                projects={projects}
-                path="projects"
-              />
-              <Stories
-                stories={stories}
-                path="stories"
-                handleTabsVisibilityChange={handleTabsVisibilityChange}
-              />
-              <Skills path="skills" />
-              <GoalHours path="goal-hours" />
-            </Root>
-          </Router> */}
-        </Col>
+        <Col xs={7}>{children}</Col>
         <Col />
       </Row>
     </Container>
