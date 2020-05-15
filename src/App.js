@@ -84,7 +84,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <div className="App">
-        <Router>
+        <Router primary={false}>
           <Home path="/">
             <Work
               default
