@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "@reach/router";
 import { Nav } from "react-bootstrap";
 import VisibilitySensor from "react-visibility-sensor";
 export default NavBar;

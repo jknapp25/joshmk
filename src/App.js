@@ -1,11 +1,6 @@
 import React from "react";
 import ApolloClient from "apollo-boost";
-import {
-  HashRouter as Router,
-  Switch,
-  Route,
-  Redirect
-} from "react-router-dom";
+import { Router } from "@reach/router";
 import gql from "graphql-tag";
 import { ApolloProvider } from "@apollo/react-hooks";
 import Work from "./components/Work";
@@ -90,36 +85,26 @@ function App() {
     <ApolloProvider client={client}>
       <div className="App">
         <Router>
-          <Switch>
-            <Home>
-              <Route path="/work">
-                <Work
-                  default
-                  work={work}
-                  handleTabsVisibilityChange={() => {}}
-                />
-              </Route>
-              <Route path="/projects">
-                <Projects
-                  handleTabsVisibilityChange={() => {}}
-                  projects={projects}
-                />
-              </Route>
-              <Route path="/stories">
-                <Stories
-                  stories={stories}
-                  handleTabsVisibilityChange={() => {}}
-                />
-              </Route>
-              <Route path="/skills">
-                <Skills />
-              </Route>
-              <Route path="/goal-hours">
-                <GoalHours />
-              </Route>
-              <Redirect from="/" to="work" />
-            </Home>
-          </Switch>
+          <Home path="/">
+            <Work
+              default
+              work={work}
+              handleTabsVisibilityChange={() => {}}
+              path="work"
+            />
+            <Projects
+              handleTabsVisibilityChange={() => {}}
+              projects={projects}
+              path="projects"
+            />
+            <Stories
+              stories={stories}
+              handleTabsVisibilityChange={() => {}}
+              path="stories"
+            />
+            <Skills path="skills" />
+            <GoalHours path="goal-hours" />
+          </Home>
         </Router>
       </div>
     </ApolloProvider>
