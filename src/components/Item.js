@@ -88,6 +88,13 @@ function Item({ item, bottomMargin = "" }) {
   } = item;
   const footer = createFooter(start, end, lastUpdated);
 
+  const totalPeopleWithQuotes = people
+    ? people.reduce((acc, curr) => (curr.quote ? ++acc : acc), 0)
+    : 0;
+  const totalPeopleWithoutQuotes = people
+    ? people.reduce((acc, curr) => (!curr.quote ? ++acc : acc), 0)
+    : 0;
+
   return (
     <Card className={`${bottomMargin} ${width}`}>
       {img && <Card.Img variant="top" src={pictures[img]} />}
@@ -135,29 +142,39 @@ function Item({ item, bottomMargin = "" }) {
           </Card.Text>
         )}
       </Card.Body>
-      {people && (
+      {!!totalPeopleWithQuotes && (
         <ListGroup className="list-group-flush">
           <ListGroupItem>
-            {people.map(({ name, quote, img }, i) => (
-              <OverlayTrigger
-                key={i}
-                placement="top"
-                overlay={
-                  <Tooltip id={`tooltip-${i}`}>{`${
-                    quote ? quote + " -" + name : name
-                  }`}</Tooltip>
-                }
-              >
-                <img
-                  src={pictures[img]}
-                  width="40px"
-                  alt="Co-worker_image"
-                  height="40px"
-                  style={{ borderRadius: "20px" }}
-                  className="mr-2"
-                />
-              </OverlayTrigger>
-            ))}
+            {people.map(
+              ({ name, quote, img }, i) =>
+                quote && (
+                  <>
+                    <OverlayTrigger
+                      key={i}
+                      placement="top"
+                      overlay={
+                        <Tooltip id={`tooltip-${i}`}>{`${
+                          quote ? quote + " -" + name : name
+                        }`}</Tooltip>
+                      }
+                    >
+                      <img
+                        src={pictures[img]}
+                        width="40px"
+                        alt="Co-worker_image"
+                        height="40px"
+                        style={{ borderRadius: "20px" }}
+                        className="mr-2"
+                      />
+                    </OverlayTrigger>
+                  </>
+                )
+            )}
+            <span className="text-muted">
+              {" "}
+              + {totalPeopleWithoutQuotes}{" "}
+              {totalPeopleWithoutQuotes > 1 ? "others" : "other"}
+            </span>
           </ListGroupItem>
         </ListGroup>
       )}

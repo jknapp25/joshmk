@@ -1,7 +1,7 @@
 import React from "react";
 import { Accordion, Alert, Button, Card, Table } from "react-bootstrap";
-import { FaMagic, FaPaperPlane, FaLightbulb } from "react-icons/fa";
-import { GiMagnifyingGlass } from "react-icons/gi";
+import { FaMagic, FaPaperPlane } from "react-icons/fa";
+import { GiMagnifyingGlass, GiBrain } from "react-icons/gi";
 import items from "../lib/items.json";
 import { calculateSkillsAssessments } from "../lib/utils";
 export default Skills;
@@ -168,7 +168,7 @@ function Skills() {
       </Accordion>
 
       <h5>
-        Reasoning <FaLightbulb color="#ffe047" size="1em" />
+        Reasoning <GiBrain color="pink" size="1em" />
       </h5>
 
       <p>

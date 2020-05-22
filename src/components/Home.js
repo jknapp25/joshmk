@@ -18,9 +18,9 @@ function Home({ children }) {
               width="100"
               height="100"
               alt="Profile_picture"
-              style={{ border: "3px solid black" }}
+              style={{ border: "3px solid black", cursor: "pointer" }}
               className="mt-5 box align-top rounded-circle"
-              onClick={() => navigate("/skills")}
+              onClick={() => navigate("/")}
             />
           )}
           <SideNav show={showSidebar} />

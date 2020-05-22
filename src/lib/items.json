@@ -517,8 +517,8 @@
       { "name": "Ed Meehan (Product Owner)", "quote": null, "img": 10 },
       { "name": "Michael Ratcliffe (Scrum Master)", "quote": null, "img": 10 }
     ],
-    "tags": ["Software", "ReactJS", "Redux", "Bootstrap", "Python"],
-    "tagUsage": [0.6, 0.7, 0.2, 0.1, 0.1],
+    "tags": ["Software", "ReactJS", "Redux", "Bootstrap", "Python", "Flask"],
+    "tagUsage": [0.6, 0.7, 0.2, 0.1, 0.2, 0.1],
     "width": null,
     "type": "work"
   },
@@ -527,7 +527,7 @@
     "subtitleLink": "https://www.asml.com/en",
     "title": "Software Engineer & Data Analyst",
     "location": "Hillsboro, OR",
-    "description": "Developed a MVP for maintenance planning software, highlighting a need for internal operations tracking software and kicking off multiple internal software development teams.",
+    "description": "Developed a MVP for maintenance planning software, highlighting a need for internal operations tracking tools and kicking off multiple internal software development teams.",
     "complexity": 0.8,
     "start": "2017-03",
     "end": "2018-11",
@@ -546,6 +546,21 @@
         "name": "Jan-Paul Burm (Manager #1)",
         "quote": "I hired Josh back in 2017 into our continuous improvement team. Josh always displayed eagerness to learn and explore better options. He has a passion for software development, especially when the solutions he is working on make life easier for end-users.",
         "img": 15
+      },
+      {
+        "name": "Ben Bachand",
+        "quote": null,
+        "img": 10
+      },
+      {
+        "name": "Steve Sommers",
+        "quote": null,
+        "img": 10
+      },
+      {
+        "name": "Eric Huskisson",
+        "quote": null,
+        "img": 10
       },
       { "name": "Cristin Rosenbaum (Manager #2)", "quote": null, "img": 9 }
     ],

@@ -30,16 +30,16 @@ const icons = [
 
 function Work({ items }) {
   return (
-    <VerticalTimeline animate={false} layout="1-column">
+    <VerticalTimeline animate={false} layout="1-column" className="mb-4">
       {items.map((item, i) => (
         <VerticalTimelineElement
+          key={i}
           contentStyle={{ padding: "0px" }}
           contentArrowStyle={{
             borderRight: "7px solid  rgb(33, 150, 243)"
           }}
           iconStyle={{ background: "white", color: "white" }}
           icon={icons[item.icon]}
-          key={i}
         >
           <Item item={item} />
         </VerticalTimelineElement>
