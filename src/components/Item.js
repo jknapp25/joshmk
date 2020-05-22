@@ -53,13 +53,31 @@ const pictures = [
 
 function createFooter(start, end, lastUpdated) {
   return start && end
-    ? moment(start).format("MMM Y") + " - " + moment(end).format("MMM Y")
+    ? moment(start).format("MMM Y") +
+        " - " +
+        moment(end).format("MMM Y") +
+        " (" +
+        moment(end)
+          .diff(start, "years", true)
+          .toFixed(1) +
+        " years)"
     : start && lastUpdated
     ? moment(start).format("MMM Y") +
       " - " +
-      moment(lastUpdated).format("MMM Y")
+      moment(lastUpdated).format("MMM Y") +
+      " (" +
+      moment(end)
+        .diff(start, "years", true)
+        .toFixed(1) +
+      " years)"
     : start
-    ? moment(start).format("MMM Y") + " - Now"
+    ? moment(start).format("MMM Y") +
+      " - Now" +
+      " (" +
+      moment(moment())
+        .diff(start, "years", true)
+        .toFixed(1) +
+      " years)"
     : end
     ? moment(end).format("MMM Y")
     : lastUpdated
