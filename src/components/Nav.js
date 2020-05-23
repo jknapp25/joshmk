@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useLocation, navigate } from "@reach/router";
 import { Nav } from "react-bootstrap";
 import VisibilitySensor from "react-visibility-sensor";
-import { MdShowChart } from "react-icons/md";
+import { FiBarChart2 } from "react-icons/fi";
 export default NavBar;
 
 function NavBar({ handleTabsVisibilityChange }) {
@@ -31,10 +31,10 @@ function NavBar({ handleTabsVisibilityChange }) {
           </Nav.Item>
         ))}
         <span style={{ fontSize: "1.5em", color: "#e8e8e8" }}> | </span>
-        <MdShowChart
+        <FiBarChart2
           color="#ff00eb"
-          size="2.1em"
-          className="ml-3 pt-1"
+          size="1.9em"
+          className="ml-2 pt-2"
           onClick={() => navigate("skills")}
           style={{ cursor: "pointer" }}
         />

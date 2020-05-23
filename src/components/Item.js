@@ -151,7 +151,18 @@ function Item({ item, bottomMargin = "" }) {
           </Card.Text>
         )}
         {tags && tags.length > 0 && (
-          <Card.Text>
+          <Card.Text
+            style={{ whiteSpace: "nowrap", overflowX: "scroll", boxShadow: "" }}
+          >
+            <div
+              style={{
+                width: "30px",
+                height: "25px",
+                background: "linear-gradient(to right, transparent, white)",
+                position: "absolute",
+                right: "20px"
+              }}
+            />
             {tags.map((tag, i) => (
               <Badge pill variant="transparent" className="mr-2" key={i}>
                 {tag}

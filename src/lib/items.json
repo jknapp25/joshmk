@@ -517,8 +517,16 @@
       { "name": "Ed Meehan (Product Owner)", "quote": null, "img": 10 },
       { "name": "Michael Ratcliffe (Scrum Master)", "quote": null, "img": 10 }
     ],
-    "tags": ["Software", "ReactJS", "Redux", "Bootstrap", "Python", "Flask"],
-    "tagUsage": [0.6, 0.7, 0.2, 0.1, 0.2, 0.1],
+    "tags": [
+      "Software",
+      "JavaScript",
+      "ReactJS",
+      "Redux",
+      "Bootstrap",
+      "Python",
+      "Flask"
+    ],
+    "tagUsage": [0.7, 0.7, 0.7, 0.2, 0.1, 0.2, 0.1],
     "width": null,
     "type": "work"
   },
