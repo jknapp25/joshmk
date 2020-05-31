@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { navigate } from "@reach/router";
 import { Container, Row, Col } from "react-bootstrap";
 import SideNav from "./SideNav";
 import selfie from "../assets/ProfilePic.jpg";
 export default Home;
 
-function Home({ children }) {
-  const [showSidebar, setShowSidebar] = useState(false);
-
+function Home({ children, showSidebar }) {
   return (
     <Container>
       <Row>

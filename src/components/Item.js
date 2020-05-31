@@ -6,6 +6,7 @@ import {
   ListGroup,
   ListGroupItem,
   OverlayTrigger,
+  Overlay,
   Tooltip
 } from "react-bootstrap";
 import selfie from "../assets/ProfilePic.jpg";
@@ -112,6 +113,7 @@ function Item({ item, bottomMargin = "" }) {
   const totalPeopleWithoutQuotes = people
     ? people.reduce((acc, curr) => (!curr.quote ? ++acc : acc), 0)
     : 0;
+  // const peopleWithoutQuotes = people.filter(person => person.quote);
 
   return (
     <Card className={`${bottomMargin} ${width}`}>
@@ -177,26 +179,24 @@ function Item({ item, bottomMargin = "" }) {
             {people.map(
               ({ name, quote, img }, i) =>
                 quote && (
-                  <>
-                    <OverlayTrigger
-                      key={i}
-                      placement="top"
-                      overlay={
-                        <Tooltip id={`tooltip-${i}`}>{`${
-                          quote ? quote + " -" + name : name
-                        }`}</Tooltip>
-                      }
-                    >
-                      <img
-                        src={pictures[img]}
-                        width="40px"
-                        alt="Co-worker_image"
-                        height="40px"
-                        style={{ borderRadius: "20px" }}
-                        className="mr-2"
-                      />
-                    </OverlayTrigger>
-                  </>
+                  <OverlayTrigger
+                    key={i}
+                    placement="top"
+                    overlay={
+                      <Tooltip id={`tooltip-${i}`}>{`${
+                        quote ? quote + " -" + name : name
+                      }`}</Tooltip>
+                    }
+                  >
+                    <img
+                      src={pictures[img]}
+                      width="40px"
+                      alt="Co-worker_image"
+                      height="40px"
+                      style={{ borderRadius: "20px" }}
+                      className="mr-2"
+                    />
+                  </OverlayTrigger>
                 )
             )}
             <span className="text-muted">

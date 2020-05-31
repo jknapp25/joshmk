@@ -1,6 +1,6 @@
 import React from "react";
 import Name from "./Name";
-import NavBar from "./Nav";
+import NavBar from "./NavBar";
 import Feed from "./Feed";
 export default Stories;
 

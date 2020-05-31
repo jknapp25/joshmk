@@ -1,5 +1,5 @@
 import React from "react";
-import NavBar from "./Nav";
+import NavBar from "./NavBar";
 import Name from "./Name";
 import { Alert } from "react-bootstrap";
 import Timeline from "./Timeline";

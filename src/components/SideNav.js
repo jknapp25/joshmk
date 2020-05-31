@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "@reach/router";
+import { Link, useLocation } from "@reach/router";
 import { Nav, Fade } from "react-bootstrap";
 import "react-vertical-timeline-component/style.min.css";
 import "../App.css";
@@ -7,9 +7,15 @@ import logo from "../assets/josh_logo_5.png";
 export default SideNav;
 
 function SideNav({ show }) {
+  const { pathname } = useLocation();
+  const activeKey = pathname === "/" ? "/work" : pathname;
   return (
     <Fade in={show}>
-      <Nav className="sticky mr-3" style={{ top: "65px", display: "block" }}>
+      <Nav
+        activeKey={activeKey}
+        className="sticky mr-3"
+        style={{ top: "65px", display: "block" }}
+      >
         <img
           src={logo}
           width="57"

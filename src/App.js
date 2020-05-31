@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ApolloClient from "apollo-boost";
 import { Router } from "@reach/router";
 import gql from "graphql-tag";
@@ -46,6 +46,8 @@ const GET_REPOS_DATES = gql`
 `;
 
 function App() {
+  const [showSidebar, setShowSidebar] = useState(false);
+
   // const { loading, data } = useQuery(GET_REPOS_DATES);
   // if (loading) return null;
 
@@ -78,28 +80,28 @@ function App() {
   );
   const work = itemsEnrichedWithGithubData.filter(itm => itm.type === "work");
 
-  // function handleTabsVisibilityChange(isVisible) {
-  //   setShowSidebar(!isVisible);
-  // }
+  function handleTabsVisibilityChange(isVisible) {
+    setShowSidebar(!isVisible);
+  }
   return (
     <ApolloProvider client={client}>
       <div className="App">
         <Router primary={false}>
-          <Home path="/">
+          <Home path="/" showSidebar={showSidebar}>
             <Work
               default
               work={work}
-              handleTabsVisibilityChange={() => {}}
+              handleTabsVisibilityChange={handleTabsVisibilityChange}
               path="work"
             />
             <Projects
-              handleTabsVisibilityChange={() => {}}
+              handleTabsVisibilityChange={handleTabsVisibilityChange}
               projects={projects}
               path="projects"
             />
             <Stories
               stories={stories}
-              handleTabsVisibilityChange={() => {}}
+              handleTabsVisibilityChange={handleTabsVisibilityChange}
               path="stories"
             />
             <Skills path="skills" />
