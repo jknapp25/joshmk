@@ -172,18 +172,22 @@ function Skills() {
       </h5>
 
       <p>
-        Skill inflation is a serious problem. Especially in Software. This page
-        is my attempt at honestly assessing my skills to the best of my ability.
+        Through being involved in interviewing over 30 devs over the past few
+        years, it's become clear to me that skill inflation is a serious
+        problem. Especially in Software. I'd like to see if there's a better
+        way.
       </p>
       <p>
-        I realized that I could use my history to help me determine how my
-        interests are changing to better predict where I want to head. So really
-        it's as much for you as it is for me.
+        This page is my attempt at honestly assessing my skills to the best of
+        my ability (AKA automagically) for employers as well as for myself. I
+        realized I could also use my history to help me determine how my
+        interests are changing to better predict where I want to head.
       </p>
       <p>
         The above algorithm is based on a simple work item tagging strategy and
-        allows me to automagically generate a value I can use to rank my skills.
-        It is constantly being improved to provide a more accurate assessment.
+        allows me to generate a value I can use to rank my skills. It is
+        constantly being improved to provide a more accurate assessment. I might
+        provide an API if I like where it's heading.
       </p>
     </>
   );
