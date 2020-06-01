@@ -1,16 +1,17 @@
 import React from "react";
-import moment from "moment";
 import {
   Badge,
   Card,
+  Carousel,
   ListGroup,
   ListGroupItem,
   OverlayTrigger,
-  Overlay,
   Tooltip
 } from "react-bootstrap";
+import { createTimeInfo } from "../lib/utils";
 import selfie from "../assets/ProfilePic.jpg";
 import ios from "../assets/inventionofsound.jpeg";
+import ios2 from "../assets/The_Invention_of_Sound.jpg";
 import libby from "../assets/libby_van.jpeg";
 import vanDeath from "../assets/van_death.jpeg";
 import assistant from "../assets/tumps_assistant.jpeg";
@@ -49,42 +50,9 @@ const pictures = [
   janPaul,
   sfMarathon,
   portMarathon,
-  goalHours
+  goalHours,
+  ios2
 ];
-
-function createFooter(start, end, lastUpdated) {
-  return start && end
-    ? moment(start).format("MMM Y") +
-        " - " +
-        moment(end).format("MMM Y") +
-        " (" +
-        moment(end)
-          .diff(start, "years", true)
-          .toFixed(1) +
-        " years)"
-    : start && lastUpdated
-    ? moment(start).format("MMM Y") +
-      " - " +
-      moment(lastUpdated).format("MMM Y") +
-      " (" +
-      moment(end)
-        .diff(start, "years", true)
-        .toFixed(1) +
-      " years)"
-    : start
-    ? moment(start).format("MMM Y") +
-      " - Now" +
-      " (" +
-      moment(moment())
-        .diff(start, "years", true)
-        .toFixed(1) +
-      " years)"
-    : end
-    ? moment(end).format("MMM Y")
-    : lastUpdated
-    ? "Last updated" + moment(lastUpdated).format("MMM Y")
-    : "No date info available";
-}
 
 function Item({ item, bottomMargin = "" }) {
   const {
@@ -94,7 +62,7 @@ function Item({ item, bottomMargin = "" }) {
     tags,
     description,
     link,
-    img,
+    images,
     start,
     end,
     lastUpdated,
@@ -105,7 +73,7 @@ function Item({ item, bottomMargin = "" }) {
     badgeVariant,
     people
   } = item;
-  const footer = createFooter(start, end, lastUpdated);
+  const timeInfo = createTimeInfo(start, end, lastUpdated);
 
   const totalPeopleWithQuotes = people
     ? people.reduce((acc, curr) => (curr.quote ? ++acc : acc), 0)
@@ -113,11 +81,23 @@ function Item({ item, bottomMargin = "" }) {
   const totalPeopleWithoutQuotes = people
     ? people.reduce((acc, curr) => (!curr.quote ? ++acc : acc), 0)
     : 0;
-  // const peopleWithoutQuotes = people.filter(person => person.quote);
 
   return (
     <Card className={`${bottomMargin} ${width}`}>
-      {img && <Card.Img variant="top" src={pictures[img]} />}
+      {images && images.length > 1 && (
+        <Carousel interval={10000000}>
+          {images.map(image => {
+            return (
+              <Carousel.Item>
+                <Card.Img variant="top" src={pictures[image]} />
+              </Carousel.Item>
+            );
+          })}
+        </Carousel>
+      )}
+      {images && images.length === 1 && (
+        <Card.Img variant="top" src={pictures[images[0]]} />
+      )}
       <Card.Body>
         <Card.Title>
           {link ? (
@@ -208,7 +188,7 @@ function Item({ item, bottomMargin = "" }) {
         </ListGroup>
       )}
       <Card.Footer>
-        <small className="text-muted">{footer}</small>
+        <small className="text-muted">{timeInfo}</small>
       </Card.Footer>
     </Card>
   );

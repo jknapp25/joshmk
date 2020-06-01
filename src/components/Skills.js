@@ -3,7 +3,7 @@ import { Accordion, Alert, Button, Card, Table } from "react-bootstrap";
 import { FaMagic, FaPaperPlane } from "react-icons/fa";
 import { GiMagnifyingGlass, GiBrain } from "react-icons/gi";
 import items from "../lib/items.json";
-import { calculateSkillsAssessments } from "../lib/utils";
+import { calcSkillsAssessments } from "../lib/utils";
 export default Skills;
 
 function Skills() {
@@ -12,7 +12,7 @@ function Skills() {
     sortedTagsByRank,
     sortedTagsByNumUsed,
     sortedTagsByTimeUsed
-  } = calculateSkillsAssessments(items);
+  } = calcSkillsAssessments(items);
 
   return (
     <>

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import moment from "moment";
 import {
   Table,
   FormControl,
@@ -8,8 +7,17 @@ import {
   ListGroup,
   Form
 } from "react-bootstrap";
+import BreakSelect from "./BreakSelect";
+import TimeSelect from "./TimeSelect";
 import { FaFrown, FaSmileBeam } from "react-icons/fa";
 import { Bar } from "react-chartjs-2";
+import {
+  calcMinsWorkedForDay,
+  formatMinutesWorked,
+  getOffshoot,
+  getDayTotal,
+  getTotal
+} from "../lib/goalHoursUtils";
 export default HoursGoal;
 
 const hours = {
@@ -22,7 +30,7 @@ const hours = {
   saturday: { start: "0:00", end: "0:00", breakDuration: 0 }
 };
 
-const initialConfig = {
+const initialWeekConfig = {
   sunday: { enabled: false },
   monday: { enabled: true },
   tuesday: { enabled: true },
@@ -32,156 +40,44 @@ const initialConfig = {
   saturday: { enabled: false }
 };
 
-function TimeSelect({ type, time, day, handleSelectChange }) {
-  const hoursOptions = getHoursOptions();
-
-  return (
-    <Form.Control
-      id={`time-${day}-${type}`}
-      as="select"
-      value={time}
-      onChange={e => handleSelectChange(day, type, e.target.value)}
-    >
-      {hoursOptions.map((timeOption, i) => (
-        <option key={i}>{timeOption}</option>
-      ))}
-    </Form.Control>
-  );
-}
-
-function BreakSelect({ breakDuration, day, handleSelectChange }) {
-  const options = [
-    { display: "0m", val: 0 },
-    { display: "15m", val: 15 },
-    { display: "30m", val: 30 },
-    { display: "45m", val: 45 },
-    { display: "1h", val: 60 },
-    { display: "1h15m", val: 75 },
-    { display: "1h30m", val: 90 }
-  ];
-  return (
-    <FormControl
-      as="select"
-      id={`break-${day}`}
-      onChange={e => handleSelectChange(day, "breakDuration", e.target.value)}
-      value={breakDuration}
-    >
-      {options.map(({ display, val }, i) => (
-        <option value={val} key={i}>
-          {display}
-        </option>
-      ))}
-    </FormControl>
-  );
-}
-
-function getHoursOptions() {
-  const desiredStartTime = "00:00";
-  const interval = 15;
-  const period = "m";
-  const periodsInADay = moment.duration(1, "day").as(period);
-
-  const options = [];
-  const startTimeMoment = moment(desiredStartTime, "H:mm");
-  for (let i = 0; i <= periodsInADay; i += interval) {
-    startTimeMoment.add(i === 0 ? 0 : interval, period);
-    options.push(startTimeMoment.format("H:mm"));
+const barOptions = {
+  layout: {
+    padding: {
+      top: 5
+    }
+  },
+  legend: {
+    display: false
+  },
+  scales: {
+    xAxes: [
+      {
+        gridLines: {
+          drawOnChartArea: false,
+          drawTicks: false
+        }
+      }
+    ],
+    yAxes: [
+      {
+        ticks: {
+          beginAtZero: true,
+          display: false
+        },
+        gridLines: {
+          drawTicks: false,
+          drawBorder: false,
+          drawOnChartArea: false
+        }
+      }
+    ]
   }
-
-  return options;
-}
-
-function calculateMinsWorkedForDay(startTime, endTime, breakDuration) {
-  const start = moment(startTime, "H:mm");
-  const end = moment(endTime, "H:mm");
-  const startToEndInMinutes = end.diff(start, "minutes");
-  const minutesWorked = startToEndInMinutes - breakDuration;
-  return minutesWorked;
-}
-
-function formatMinutesWorked(minutes) {
-  const h = Math.floor(minutes / 60);
-  const m = minutes % 60;
-
-  return `${h ? h + "h" : ""} ${m ? m + "m" : ""}`;
-}
-
-function getTotalMinsWorkedForWeek(data, config) {
-  return Object.keys(data).reduce((acc, curr) => {
-    return config[curr].enabled
-      ? acc +
-          calculateMinsWorkedForDay(
-            data[curr].start,
-            data[curr].end,
-            data[curr].breakDuration
-          )
-      : acc;
-  }, 0);
-}
-
-function getTotal(data, config) {
-  const totalMinutesWorkedForWeek = getTotalMinsWorkedForWeek(data, config);
-  return totalMinutesWorkedForWeek
-    ? formatMinutesWorked(totalMinutesWorkedForWeek)
-    : "0h";
-}
-
-function getDayTotal(start, end, breakDuration) {
-  return formatMinutesWorked(
-    calculateMinsWorkedForDay(start, end, breakDuration)
-  );
-}
-
-function calcNumOfDaysWorked(data, config) {
-  return Object.keys(data).reduce((acc, curr) => {
-    const dayIsValid =
-      config[curr].enabled &&
-      calculateMinsWorkedForDay(
-        data[curr].start,
-        data[curr].end,
-        data[curr].breakDuration
-      );
-    return dayIsValid ? ++acc : acc;
-  }, 0);
-}
-
-function calcGoalMinsForTimeWorked(
-  goalInHours,
-  numOfDaysWorked,
-  numOfDaysEnabled
-) {
-  const goalInMins = goalInHours * 60;
-  const goalMinsForTimeWorked =
-    (goalInMins / numOfDaysEnabled) * numOfDaysWorked;
-
-  return goalMinsForTimeWorked;
-}
-
-function calcNumOfDaysEnabled(data, config) {
-  return Object.keys(data).reduce(
-    (acc, curr) => (config[curr].enabled ? ++acc : acc),
-    0
-  );
-}
-
-function getOffshoot(goal, data, config) {
-  const numOfDaysWorked = calcNumOfDaysWorked(data, config);
-  const numOfDaysEnabled = calcNumOfDaysEnabled(data, config);
-  const goalMinsForTimeWorked = calcGoalMinsForTimeWorked(
-    goal,
-    numOfDaysWorked,
-    numOfDaysEnabled
-  );
-  const totalMinutesWorkedForWeek = getTotalMinsWorkedForWeek(data, config);
-  const offshoot = totalMinutesWorkedForWeek - goalMinsForTimeWorked;
-
-  return offshoot;
-}
+};
 
 function HoursGoal() {
   const [goal, setGoal] = useState(40);
   const [data, setData] = useState(hours);
-  const [config, setConfig] = useState(initialConfig);
+  const [config, setConfig] = useState(initialWeekConfig);
 
   const offshoot = getOffshoot(goal, data, config);
 
@@ -198,7 +94,6 @@ function HoursGoal() {
   };
 
   const chartXAxisLabels = ["S", "M", "T", "W", "T", "F", "S"];
-
   const labels = Object.keys(data)
     .map((day, i) => (config[day].enabled ? chartXAxisLabels[i] : null))
     .filter(label => label);
@@ -215,7 +110,7 @@ function HoursGoal() {
   const barData = Object.keys(data)
     .map(day => {
       return config[day].enabled
-        ? calculateMinsWorkedForDay(
+        ? calcMinsWorkedForDay(
             data[day].start,
             data[day].end,
             data[day].breakDuration
@@ -259,40 +154,6 @@ function HoursGoal() {
         type: "line"
       }
     ]
-  };
-
-  const barOptions = {
-    layout: {
-      padding: {
-        top: 5
-      }
-    },
-    legend: {
-      display: false
-    },
-    scales: {
-      xAxes: [
-        {
-          gridLines: {
-            drawOnChartArea: false,
-            drawTicks: false
-          }
-        }
-      ],
-      yAxes: [
-        {
-          ticks: {
-            beginAtZero: true,
-            display: false
-          },
-          gridLines: {
-            drawTicks: false,
-            drawBorder: false,
-            drawOnChartArea: false
-          }
-        }
-      ]
-    }
   };
 
   return (

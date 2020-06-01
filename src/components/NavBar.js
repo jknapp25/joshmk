@@ -37,6 +37,7 @@ function NavBar({ handleTabsVisibilityChange }) {
           className="ml-2 pt-2"
           onClick={() => navigate("skills")}
           style={{ cursor: "pointer" }}
+          title="Skills Overview"
         />
       </Nav>
     </VisibilitySensor>

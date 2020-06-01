@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import ApolloClient from "apollo-boost";
 import { Router } from "@reach/router";
-import gql from "graphql-tag";
-import { ApolloProvider } from "@apollo/react-hooks";
 import Work from "./components/Work";
 import Projects from "./components/Projects";
 import Skills from "./components/Skills";
@@ -17,39 +14,8 @@ export default App;
 
 const statusOrder = ["Active", "On Hold", "Complete"];
 
-const client = new ApolloClient({
-  uri: "https://api.github.com/graphql",
-  request: operation => {
-    const token = "a75ea4595d78659587692d3f5bdc0d72706e0811";
-    operation.setContext({
-      headers: {
-        authorization: token ? `Bearer ${token}` : ""
-      }
-    });
-  }
-});
-
-const GET_REPOS_DATES = gql`
-  {
-    viewer {
-      repositories(last: 10) {
-        edges {
-          node {
-            createdAt
-            name
-            updatedAt
-          }
-        }
-      }
-    }
-  }
-`;
-
 function App() {
   const [showSidebar, setShowSidebar] = useState(false);
-
-  // const { loading, data } = useQuery(GET_REPOS_DATES);
-  // if (loading) return null;
 
   const data = null;
 
@@ -83,32 +49,31 @@ function App() {
   function handleTabsVisibilityChange(isVisible) {
     setShowSidebar(!isVisible);
   }
+
   return (
-    <ApolloProvider client={client}>
-      <div className="App">
-        <Router primary={false}>
-          <Home path="/" showSidebar={showSidebar}>
-            <Work
-              default
-              work={work}
-              handleTabsVisibilityChange={handleTabsVisibilityChange}
-              path="work"
-            />
-            <Projects
-              handleTabsVisibilityChange={handleTabsVisibilityChange}
-              projects={projects}
-              path="projects"
-            />
-            <Stories
-              stories={stories}
-              handleTabsVisibilityChange={handleTabsVisibilityChange}
-              path="stories"
-            />
-            <Skills path="skills" />
-            <GoalHours path="goal-hours" />
-          </Home>
-        </Router>
-      </div>
-    </ApolloProvider>
+    <div className="App">
+      <Router primary={false}>
+        <Home path="/" showSidebar={showSidebar}>
+          <Work
+            default
+            work={work}
+            handleTabsVisibilityChange={handleTabsVisibilityChange}
+            path="work"
+          />
+          <Projects
+            handleTabsVisibilityChange={handleTabsVisibilityChange}
+            projects={projects}
+            path="projects"
+          />
+          <Stories
+            stories={stories}
+            handleTabsVisibilityChange={handleTabsVisibilityChange}
+            path="stories"
+          />
+          <Skills path="skills" />
+          <GoalHours path="goal-hours" />
+        </Home>
+      </Router>
+    </div>
   );
 }
