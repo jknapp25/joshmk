@@ -520,6 +520,7 @@
     "tags": [
       "Software",
       "JavaScript",
+      "TypeScript",
       "ReactJS",
       "Redux",
       "Bootstrap",
@@ -527,7 +528,7 @@
       "Flask",
       "React-Router"
     ],
-    "tagUsage": [0.7, 0.7, 0.7, 0.2, 0.1, 0.2, 0.1, 0.3],
+    "tagUsage": [0.7, 0.7, 0.1, 0.7, 0.2, 0.1, 0.2, 0.1, 0.3],
     "width": null,
     "type": "work"
   },

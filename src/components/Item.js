@@ -128,7 +128,11 @@ function Item({ item, bottomMargin = "" }) {
           {location && `- ${location}`}
         </Card.Subtitle>
         {description && (
-          <Card.Text className={`${tags && tags.length > 0 ? "mb-2" : ""}`}>
+          <Card.Text
+            className={`${
+              tags && tags.length > 0 ? "mb-2" : ""
+            } font-weight-normal`}
+          >
             {description}
           </Card.Text>
         )}

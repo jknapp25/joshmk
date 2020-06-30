@@ -34,12 +34,16 @@ function Work({ items }) {
       {items.map((item, i) => (
         <VerticalTimelineElement
           key={i}
-          contentStyle={{ padding: "0px" }}
+          contentStyle={{
+            padding: "0px",
+            boxShadow: "none"
+          }}
           contentArrowStyle={{
             borderRight: "7px solid  rgb(33, 150, 243)"
           }}
           iconStyle={{ background: "white", color: "white" }}
           icon={icons[item.icon]}
+          className="my-4"
         >
           <Item item={item} />
         </VerticalTimelineElement>
