@@ -3,7 +3,7 @@ import NavBar from "./NavBar";
 import Name from "./Name";
 import { Alert } from "react-bootstrap";
 import Timeline from "./Timeline";
-import resume from "../assets/Resume.pdf";
+import resume from "../assets/resume.pdf";
 export default Work;
 
 function Work({ work, handleTabsVisibilityChange }) {
