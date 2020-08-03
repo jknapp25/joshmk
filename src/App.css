@@ -81,7 +81,8 @@
 }
 
 .vertical-timeline::before {
-  left: 20px !important;
+  width: 2px;
+  left: 22px !important;
   background: rgba(0, 0, 0, 0.125) !important;
 }
 
