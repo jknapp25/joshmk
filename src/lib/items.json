@@ -518,7 +518,7 @@
     "subtitleLink": "https://www.asml.com/en",
     "title": "Software Engineer",
     "location": "Hillsboro, OR",
-    "description": "Part of an exciting international software development team delivering a tool for deployment and maintenance of next generation semiconductor lithography machines.",
+    "description": "Part of an exciting international software development team delivering a tool for deployment and maintenance of next-generation semiconductor lithography machines.",
     "complexity": 0.9,
     "start": "2018-11",
     "end": null,
@@ -549,6 +549,25 @@
       "work"
     ],
     "tagUsage": [0.7, 0.7, 0.1, 0.7, 0.2, 0.1, 0.2, 0.1, 0.3, 0],
+    "list": [
+      "Work primarily on the client side (React/Redux)",
+      "Delivered many integration (cypress) and unit tests (Jest, Enzyme, React-Testing-Library)",
+      "Advocated for experimentation with new waves of latest technology",
+      "Key voice in SCRUM ceremonies: stand-ups, retrospectives, plannings, demo’s and refinements",
+      "Collaborated across teams and with external service providers to deliver complex features",
+      "Represented entire team in demo’s for customers and stakeholders",
+      "Deployed to DTAP environment both manually and via automated pipeline (Azure Pipelines)",
+      "Provided thoughtful feedback on colleagues work via Pull Requests",
+      "Advocated for automation wherever possible",
+      "Estimated work and maintained ticket-closing focus to meet deadlines",
+      "Greatly enjoyed sharing knowledge via code reviews and mentoring other team members",
+      "Internalized business goals for technical decision making",
+      "Technically interviewed >30 people to grow team from 2 to 8 developers",
+      "Participated in kicking off 2 complementary SCRUM development teams",
+      "Delivered small tickets on the Backend (Python, Flask, MySQL)",
+      "Interacted with internal IT to maximize security",
+      "Used IDE tools VS Code and PyCharm"
+    ],
     "width": null
   },
   {
@@ -604,6 +623,11 @@
       "work"
     ],
     "tagUsage": [0.7, 0.2, 0.2, 0.8, 0.5, 0.4, 0.3, 0],
+    "list": [
+      "Delivered world-wide Skills Management dashboard",
+      "Created local OPEX reports, presented to local management and aligned with engineers at headquarters",
+      "Traveled internationally to represent greater team"
+    ],
     "width": null
   },
   {
@@ -630,7 +654,7 @@
     "subtitleLink": null,
     "title": "Temp worker",
     "location": "Portland, OR",
-    "description": "Hard time. But I thoroughly enjoyed the variety. I ended up working in 11 different industries.",
+    "description": "Worked in 11 different industries.",
     "complexity": null,
     "start": "2017-01",
     "end": "2017-03",
@@ -699,6 +723,37 @@
     "people": null,
     "tags": ["Software", "Python", "Ubuntu", "work"],
     "tagUsage": [0.9, 0.8, 0.4, 0],
+    "list": [
+      "Utilized Python and open-source robotics technology like ROS and OpenRave to control a 6ft robot arm using a keyboard, floating mouse and game controller",
+      "Analyzed 3D point cloud data from XBOX Kinects",
+      "Presented technology to paying customers",
+      "Tried not to trip over little self-driving robots scanning the room"
+    ],
+    "width": null
+  },
+  {
+    "subtitle": "Oregon State University",
+    "subtitleLink": null,
+    "title": "B.S. Industrial Engineering, Business Engineering Option, Minor in Business & Entrepreneurship",
+    "location": "Corvallis, OR",
+    "description": null,
+    "complexity": null,
+    "start": "2011-07",
+    "end": "2016-06",
+    "lastUpdated": null,
+    "icon": null,
+    "badge": false,
+    "badgeVariant": null,
+    "badgeText": null,
+    "people": [],
+    "tags": ["education"],
+    "tagUsage": [],
+    "list": [
+      "Learned the basics of HTML, CSS and JavaScript while receiving mentorship from an experienced React developer for ODOT",
+      "Utilized Python for robotics research",
+      "Utilized Matlab for Mechanical engineering simulations",
+      "Participated in Mars Rover team and Underwater Robotics team"
+    ],
     "width": null
   },
   {
@@ -737,25 +792,6 @@
     "people": null,
     "tags": ["SolidWorks", "3D Modeling", "work"],
     "tagUsage": [0.3, 0.3, 0],
-    "width": null
-  },
-  {
-    "subtitle": "Life",
-    "subtitleLink": null,
-    "title": "Birth & Survival",
-    "location": "Earth, The Milky Way",
-    "complexity": null,
-    "description": "Where the hell am I?",
-    "start": "1993-02-03",
-    "end": "2010-09",
-    "lastUpdated": null,
-    "icon": 7,
-    "badge": false,
-    "badgeVariant": null,
-    "badgeText": null,
-    "people": null,
-    "tags": ["work"],
-    "tagUsage": [0],
     "width": null
   }
 ]

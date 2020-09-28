@@ -5,7 +5,7 @@ import {
   Card,
   CardGroup,
   ListGroup,
-  Form
+  Form,
 } from "react-bootstrap";
 import BreakSelect from "./BreakSelect";
 import TimeSelect from "./TimeSelect";
@@ -16,7 +16,7 @@ import {
   formatMinutesWorked,
   getOffshoot,
   getDayTotal,
-  getTotal
+  getTotal,
 } from "../lib/goalHoursUtils";
 export default HoursGoal;
 
@@ -27,7 +27,7 @@ const hours = {
   wednesday: { start: "0:00", end: "0:00", breakDuration: 0 },
   thursday: { start: "0:00", end: "0:00", breakDuration: 0 },
   friday: { start: "0:00", end: "0:00", breakDuration: 0 },
-  saturday: { start: "0:00", end: "0:00", breakDuration: 0 }
+  saturday: { start: "0:00", end: "0:00", breakDuration: 0 },
 };
 
 const initialWeekConfig = {
@@ -37,41 +37,41 @@ const initialWeekConfig = {
   wednesday: { enabled: true },
   thursday: { enabled: true },
   friday: { enabled: true },
-  saturday: { enabled: false }
+  saturday: { enabled: false },
 };
 
 const barOptions = {
   layout: {
     padding: {
-      top: 5
-    }
+      top: 5,
+    },
   },
   legend: {
-    display: false
+    display: false,
   },
   scales: {
     xAxes: [
       {
         gridLines: {
           drawOnChartArea: false,
-          drawTicks: false
-        }
-      }
+          drawTicks: false,
+        },
+      },
     ],
     yAxes: [
       {
         ticks: {
           beginAtZero: true,
-          display: false
+          display: false,
         },
         gridLines: {
           drawTicks: false,
           drawBorder: false,
-          drawOnChartArea: false
-        }
-      }
-    ]
-  }
+          drawOnChartArea: false,
+        },
+      },
+    ],
+  },
 };
 
 function HoursGoal() {
@@ -81,7 +81,7 @@ function HoursGoal() {
 
   const offshoot = getOffshoot(goal, data, config);
 
-  const handleSwitchToggle = day => {
+  const handleSwitchToggle = (day) => {
     let update = JSON.parse(JSON.stringify(config));
     update[day] = { ...update[day], enabled: !update[day].enabled };
     setConfig(update);
@@ -96,7 +96,7 @@ function HoursGoal() {
   const chartXAxisLabels = ["S", "M", "T", "W", "T", "F", "S"];
   const labels = Object.keys(data)
     .map((day, i) => (config[day].enabled ? chartXAxisLabels[i] : null))
-    .filter(label => label);
+    .filter((label) => label);
 
   const dayTotals = Object.keys(data).reduce((acc, curr) => {
     acc[curr] = getDayTotal(
@@ -108,7 +108,7 @@ function HoursGoal() {
   }, {});
 
   const barData = Object.keys(data)
-    .map(day => {
+    .map((day) => {
       return config[day].enabled
         ? calcMinsWorkedForDay(
             data[day].start,
@@ -117,7 +117,7 @@ function HoursGoal() {
           ) / 60
         : null;
     })
-    .filter(val => val !== null)
+    .filter((val) => val !== null)
     .reduce((acc, curr, idx) => {
       const update = acc;
       if (idx) {
@@ -141,7 +141,7 @@ function HoursGoal() {
       {
         barPercentage: 0.2,
         data: barData,
-        label: "Accumulated hours"
+        label: "Accumulated hours",
       },
       {
         fill: false,
@@ -151,14 +151,14 @@ function HoursGoal() {
         borderWidth: 2,
         borderColor: "blue",
         label: "Goal hours",
-        type: "line"
-      }
-    ]
+        type: "line",
+      },
+    ],
   };
 
   return (
     <>
-      <CardGroup className="mt-5">
+      <CardGroup>
         <Card>
           <Card.Body className="text-center">
             <Bar data={chartData} options={barOptions} />
@@ -204,7 +204,7 @@ function HoursGoal() {
         aria-describedby="goal"
         style={{ display: "inline", width: "200px" }}
         value={goal || ""}
-        onChange={e => setGoal(e.target.value)}
+        onChange={(e) => setGoal(e.target.value)}
       />
       <span className="ml-2" style={{ display: "inline" }}>
         hrs
@@ -270,7 +270,7 @@ function HoursGoal() {
         as="textarea"
         rows="7"
         value={JSON.stringify(data)}
-        onChange={e => setData(JSON.parse(e.target.value))}
+        onChange={(e) => setData(JSON.parse(e.target.value))}
       />
     </>
   );

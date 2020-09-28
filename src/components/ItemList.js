@@ -2,8 +2,9 @@ import React from "react";
 import { Alert } from "react-bootstrap";
 import Item from "./Item";
 import Timeline from "./Timeline";
+import Resume from "./Resume";
 import { useLocation } from "@reach/router";
-import resume from "../assets/resume.pdf";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 export default ItemList;
 
 const statusOrder = ["Active", "On Hold", "Complete"];
@@ -13,6 +14,7 @@ function ItemList({ items }) {
 
   const itemType = pathname.substring(1) || "blog";
   let filteredItems = items.filter((itm) => itm.tags.includes(itemType));
+  let education = items.filter((itm) => itm.tags.includes("education"));
 
   if (itemType === "projects") {
     filteredItems = filteredItems.sort(
@@ -26,9 +28,12 @@ function ItemList({ items }) {
       <>
         <Alert variant="info">
           Click{" "}
-          <Alert.Link href={resume} download="Josh_Knapp_Resume">
-            here
-          </Alert.Link>{" "}
+          <PDFDownloadLink
+            document={<Resume items={filteredItems} education={education} />}
+            fileName="Josh_Knapp_Resume.pdf"
+          >
+            <span className="alert-link">here</span>
+          </PDFDownloadLink>{" "}
           for Josh's resume
         </Alert>
         <Timeline items={filteredItems} />
