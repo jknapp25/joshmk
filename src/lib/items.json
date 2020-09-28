@@ -1,12 +1,57 @@
 [
   {
+    "title": "pick-my-people",
+    "subtitle": "Follow your favorite people",
+    "subtitleLink": null,
+    "link": "https://pickmypeople.com",
+    "tags": ["Software", "ReactJS", "JavaScript", "projects"],
+    "tagUsage": [1, 0.8, 0.8, 0],
+    "description": "I'm tired of social media. I hate that there's 100 platforms we have to check to keep up. This project zeroes in on the humans behind the platforms and centralizes their creativity.",
+    "complexity": 0.8,
+    "images": [],
+    "start": "2020-9-1",
+    "end": null,
+    "lastUpdated": null,
+    "width": "w-75",
+    "badge": true,
+    "badgeVariant": "info",
+    "badgeText": "Active",
+    "hasRepo": false
+  },
+  {
+    "title": "read",
+    "subtitle": "Story app",
+    "subtitleLink": null,
+    "link": "https://master.d1nxmutkqt666w.amplifyapp.com",
+    "tags": ["Software", "ReactJS", "JavaScript", "projects"],
+    "tagUsage": [1, 0.8, 0.8, 0],
+    "description": "I joined a writing group, and I noticed that it was difficult sharing exactly what was new that we had written. So I created this to help.",
+    "complexity": 0.6,
+    "images": [],
+    "start": null,
+    "end": null,
+    "lastUpdated": null,
+    "width": "w-75",
+    "badge": true,
+    "badgeVariant": "info",
+    "badgeText": "Active",
+    "hasRepo": false
+  },
+  {
     "title": "goal-hours",
-    "subtitle": "Work hours monitoring tool",
+    "subtitle": "Work hours monitoring app",
     "subtitleLink": null,
     "link": "https://joshmk.com/goal-hours",
-    "tags": ["Software", "ReactJS", "Chart.js", "React-Boostrap", "JavaScript"],
-    "tagUsage": [1, 0.8, 0.6, 0.1, 0.9],
-    "description": "Simple tool to help myself and my friends stick to a goal number of hours set for our work week.",
+    "tags": [
+      "Software",
+      "ReactJS",
+      "Chart.js",
+      "React-Boostrap",
+      "JavaScript",
+      "projects"
+    ],
+    "tagUsage": [1, 0.8, 0.6, 0.1, 0.9, 0],
+    "description": "Simple app to help myself and my friends stick to a goal number of hours set for our work week.",
     "complexity": 0.5,
     "images": [18],
     "start": null,
@@ -16,12 +61,11 @@
     "badge": true,
     "badgeVariant": "success",
     "badgeText": "Complete",
-    "type": "projects",
     "hasRepo": false
   },
   {
     "title": "storyline",
-    "subtitle": "Story building tool",
+    "subtitle": "Story building app",
     "subtitleLink": null,
     "link": "https://github.com/jknapp25/storyline",
     "tags": [
@@ -29,9 +73,10 @@
       "ReactJS",
       "Vis-Timeline",
       "React-Boostrap",
-      "JavaScript"
+      "JavaScript",
+      "projects"
     ],
-    "tagUsage": [1, 0.8, 0.3, 0.4, 0.9],
+    "tagUsage": [1, 0.8, 0.3, 0.4, 0.9, 0],
     "description": null,
     "complexity": 0.7,
     "images": [],
@@ -42,16 +87,15 @@
     "badge": true,
     "badgeVariant": "warning",
     "badgeText": "On Hold",
-    "type": "projects",
     "hasRepo": true
   },
   {
     "title": "scrumy",
-    "subtitle": "Personal SCRUM tool",
+    "subtitle": "Personal SCRUM app",
     "subtitleLink": null,
     "link": "https://github.com/jknapp25/scrumy",
-    "tags": ["Software", "ReactJS", "React-Boostrap", "JavaScript"],
-    "tagUsage": [1, 0.8, 0.4, 0.9],
+    "tags": ["Software", "ReactJS", "React-Boostrap", "JavaScript", "projects"],
+    "tagUsage": [1, 0.8, 0.4, 0.9, 0],
     "description": null,
     "complexity": 0.6,
     "images": [],
@@ -62,7 +106,6 @@
     "badge": true,
     "badgeVariant": "warning",
     "badgeText": "On Hold",
-    "type": "projects",
     "hasRepo": true
   },
   {
@@ -70,8 +113,8 @@
     "subtitle": "A desk with a built in easel",
     "subtitleLink": null,
     "link": null,
-    "tags": ["Wood Construction"],
-    "tagUsage": [0.8],
+    "tags": ["Wood Construction", "projects"],
+    "tagUsage": [0.8, 0],
     "description": null,
     "complexity": 0.5,
     "images": [12],
@@ -81,16 +124,15 @@
     "width": "w-75",
     "badge": true,
     "badgeVariant": "success",
-    "badgeText": "Complete",
-    "type": "projects"
+    "badgeText": "Complete"
   },
   {
     "title": "Studio Loft",
     "subtitle": "A lounging loft for my wife's art studio",
     "subtitleLink": null,
     "link": null,
-    "tags": ["Wood Construction"],
-    "tagUsage": [0.8],
+    "tags": ["Wood Construction", "projects"],
+    "tagUsage": [0.8, 0],
     "description": null,
     "complexity": 0.3,
     "images": [13],
@@ -100,16 +142,15 @@
     "width": "w-75",
     "badge": true,
     "badgeVariant": "success",
-    "badgeText": "Complete",
-    "type": "projects"
+    "badgeText": "Complete"
   },
   {
     "title": "WA Marathon",
     "subtitle": "Amica Seattle Marathon",
     "subtitleLink": null,
     "link": null,
-    "tags": ["Running"],
-    "tagUsage": [1],
+    "tags": ["Running", "projects"],
+    "tagUsage": [1, 0],
     "description": "Time: 4:01:45, Place: 626 of 1794",
     "complexity": null,
     "images": [],
@@ -119,16 +160,15 @@
     "width": "w-50",
     "badge": true,
     "badgeVariant": "success",
-    "badgeText": "Complete",
-    "type": "projects"
+    "badgeText": "Complete"
   },
   {
     "title": "OR Marathon",
     "subtitle": "Portland Marathon",
     "subtitleLink": null,
     "link": null,
-    "tags": ["Running"],
-    "tagUsage": [1],
+    "tags": ["Running", "projects"],
+    "tagUsage": [1, 0],
     "description": "Time: 3:40:56, Place: 798 of 6518",
     "complexity": null,
     "images": [17],
@@ -138,16 +178,15 @@
     "width": "w-75",
     "badge": true,
     "badgeVariant": "success",
-    "badgeText": "Complete",
-    "type": "projects"
+    "badgeText": "Complete"
   },
   {
     "title": "CA Marathon",
     "subtitle": "San Francisco Marathon",
     "subtitleLink": null,
     "link": null,
-    "tags": ["Running"],
-    "tagUsage": [1],
+    "tags": ["Running", "projects"],
+    "tagUsage": [1, 0],
     "description": "Time: 3:50:03, Place: 1234 of 6040",
     "complexity": null,
     "images": [16],
@@ -157,8 +196,7 @@
     "width": "w-75",
     "badge": true,
     "badgeVariant": "success",
-    "badgeText": "Complete",
-    "type": "projects"
+    "badgeText": "Complete"
   },
   {
     "title": "joshmk",
@@ -171,20 +209,20 @@
       "React-Boostrap",
       "JavaScript",
       "GraphQL",
-      "Reach-Router"
+      "Reach-Router",
+      "projects"
     ],
-    "tagUsage": [1, 0.8, 0.2, 0.9, 0.1, 0.1],
-    "description": null,
+    "tagUsage": [1, 0.8, 0.2, 0.9, 0.1, 0.1, 0],
+    "description": "At the start of COVID I wanted another project to work on during all the extra time I was saving from not commuting 3 1/2 hours a day. This is what came from that.",
     "complexity": 0.7,
     "images": [],
     "start": null,
     "end": null,
     "lastUpdated": null,
-    "width": "w-50",
+    "width": "w-75",
     "badge": true,
     "badgeVariant": "info",
     "badgeText": "Active",
-    "type": "projects",
     "hasRepo": true
   },
   {
@@ -192,8 +230,8 @@
     "subtitle": "The first website I built",
     "subtitleLink": null,
     "link": null,
-    "tags": ["Software", "HTML", "CSS", "JavaScript", "jQuery"],
-    "tagUsage": [1, 0.2, 0.2, 0.8, 0.3],
+    "tags": ["Software", "HTML", "CSS", "JavaScript", "jQuery", "projects"],
+    "tagUsage": [1, 0.2, 0.2, 0.8, 0.3, 0],
     "description": null,
     "complexity": 0.8,
     "images": [],
@@ -203,296 +241,277 @@
     "width": "w-50",
     "badge": true,
     "badgeVariant": "success",
-    "badgeText": "Complete",
-    "type": "projects"
+    "badgeText": "Complete"
   },
   {
     "title": "If I Had a Bike",
     "subtitle": "From here to whatever",
     "subtitleLink": null,
     "link": "https://medium.com/@joshknapp/todays-bike-ride-bd4ffae7a4df",
-    "tags": ["Poetry", "Short Story", "Fantasy"],
-    "tagUsage": [1, 1, 1],
+    "tags": ["Poetry", "Short Story", "Fantasy", "blog"],
+    "tagUsage": [1, 1, 1, 0],
     "description": null,
     "complexity": null,
     "images": [],
     "start": null,
     "end": "2020-04-04",
     "lastUpdated": null,
-    "width": "w-50",
-    "type": "stories"
+    "width": "w-50"
   },
   {
     "title": "The Clicket",
     "subtitle": "Creature Field Guide",
     "subtitleLink": null,
     "link": null,
-    "tags": ["Fiction", "Mythical Creatures"],
-    "tagUsage": [1, 1],
+    "tags": ["Fiction", "Mythical Creatures", "blog"],
+    "tagUsage": [1, 1, 0],
     "description": "Millipede like light bug. 1.5ft long at maturity. By repeating a specific sequence of clicking sounds, the clicket will illuminate for up to an hour depending on maturity. If wrapped around a limb of a host, the clicket can survive as an indefinite source of powerful light on a very small amount of host blood. Despite modern battery and bulb technology being very good, the clicket is still unrivaled in terms of efficiency.",
     "complexity": null,
     "images": [],
     "start": null,
     "end": "2019-12-04",
     "lastUpdated": null,
-    "width": "w-75",
-    "type": "stories"
+    "width": "w-75"
   },
   {
     "title": "The Sham",
     "subtitle": "Creature Field Guide",
     "subtitleLink": null,
     "link": null,
-    "tags": ["Fiction", "Mythical Creatures"],
-    "tagUsage": [1, 1],
+    "tags": ["Fiction", "Mythical Creatures", "blog"],
+    "tagUsage": [1, 1, 0],
     "description": "Small bird, no more than two inches tall. Swarms together to build elaborate nests extremely quickly. Thousands of years ago it developed a method for camouflaging it’s nests by replicating objects and patterns in the nests surroundings. For example, if there was lots of fallen trees in a wooded area, it may choose to build a nest out of sticks, rocks and mud that looks like a fallen tree. Today, this translates into suburban homedwellers going to bed at night and waking up to a replica of their home next door made of sticks, rocks and mud. Or if you’ve ever noticed a row of mailboxes and one mailbox without a house, that is often the artwork of the Sham.",
     "complexity": null,
     "images": [],
     "start": null,
     "end": "2020-03-31",
     "lastUpdated": null,
-    "width": "w-75",
-    "type": "stories"
+    "width": "w-75"
   },
   {
     "title": "Prevent unnecessary re-render’s in React components",
     "subtitle": "The useEffect dependency array",
     "subtitleLink": null,
     "link": "https://medium.com/@joshknapp/prevent-unnecessary-re-renders-in-react-components-7130b966dad3",
-    "tags": ["ReactJS", "Software"],
-    "tagUsage": [0.7, 0.2],
+    "tags": ["ReactJS", "Software", "blog"],
+    "tagUsage": [0.7, 0.2, 0],
     "description": null,
     "complexity": null,
     "images": [],
     "start": null,
     "end": "2020-02-13",
     "lastUpdated": null,
-    "width": "w-50",
-    "type": "stories"
+    "width": "w-50"
   },
   {
     "title": "The Fwelsh",
     "subtitle": "Creature Field Guide",
     "subtitleLink": null,
     "link": null,
-    "tags": ["Fiction", "Mythical Creatures"],
-    "tagUsage": [1, 1],
+    "tags": ["Fiction", "Mythical Creatures", "blog"],
+    "tagUsage": [1, 1, 0],
     "description": "Peacock like bird. Unable to fly long distances. Translucent red/orangish feathers. When it sits, it becomes a small fire which can be very useful for camp-outs, but If not tended to, the fire will grow indefinitely and destroy anything in its path. The only way to stop the fire is to ignore it, then the bird will return to its original form and walk away.",
     "complexity": null,
     "images": [],
     "start": null,
     "end": "2019-11-13",
     "lastUpdated": null,
-    "width": "w-75",
-    "type": "stories"
+    "width": "w-75"
   },
   {
     "title": "The Lulem",
     "subtitle": "Creature Field Guide",
     "subtitleLink": null,
     "link": null,
-    "tags": ["Fiction", "Mythical Creatures"],
-    "tagUsage": [1, 1],
+    "tags": ["Fiction", "Mythical Creatures", "blog"],
+    "tagUsage": [1, 1, 0],
     "description": "A peculiar bubble like creature, that resembles a transparent breast, typically can be found adhering to underwater rocks. Actually a species of sea slug. It can be brought into the home and adhered to a wall to absorb impurities in the air. When pressed, it excreates a clear, thick, honey like substance that’s delicious in most teas.",
     "complexity": null,
     "images": [],
     "start": null,
     "end": "2019-10-22",
     "lastUpdated": null,
-    "width": "w-75",
-    "type": "stories"
+    "width": "w-75"
   },
   {
     "title": "The Stumble-Upon",
     "subtitle": "Creature Field Guide",
     "subtitleLink": null,
     "link": null,
-    "tags": ["Fiction", "Mythical Creatures"],
-    "tagUsage": [1, 1],
+    "tags": ["Fiction", "Mythical Creatures", "blog"],
+    "tagUsage": [1, 1, 0],
     "description": "When alone in the desert, if rocks are kicked and stumble into each other, a dog-like spirit may enter them. This creature kept ancient Israelites spirits up when they wondered through the desert. The stumble-upon is very playful, and impossible to catch due to it’s ability to shift it’s spirit to nearby rocks when caught.",
     "complexity": null,
     "images": [],
     "start": null,
     "end": "2019-10-21",
     "lastUpdated": null,
-    "width": "w-75",
-    "type": "stories"
+    "width": "w-75"
   },
   {
     "title": "My Dream Home (on wheels)",
     "subtitle": "A wish-list of features…",
     "subtitleLink": null,
     "link": "https://medium.com/@joshknapp/my-dream-home-on-wheels-bb59304fd686",
-    "tags": ["VanLife"],
-    "tagUsage": [1],
+    "tags": ["VanLife", "blog"],
+    "tagUsage": [1, 0],
     "description": null,
     "complexity": null,
     "images": [3],
     "start": null,
     "end": "2020-01-26",
     "lastUpdated": null,
-    "width": "w-100",
-    "type": "stories"
+    "width": "w-100"
   },
   {
     "title": "The Snug",
     "subtitle": "Creature Field Guide",
     "subtitleLink": null,
     "link": null,
-    "tags": ["Fiction", "Mythical Creatures"],
-    "tagUsage": [1, 1],
+    "tags": ["Fiction", "Mythical Creatures", "blog"],
+    "tagUsage": [1, 1, 0],
     "description": "Furry, fleshy, ball. No eyes, ears, or limbs. It feeds off of warmth. Makes a sort of subtle purring noise. Theoretically may never die unless it kills itself or another creature eats it. But it will continue to grow rapidly. Very delicious. Humans have continually tried to make them house pets but often fail due to the animals stupidity. It will tend to roll into the fireplace, onto a burning stove, into a hot bath, etc. they will congregate in large packs and lie like a pile of rocks, feeding off of each other’s warmth and the source of warmth they are on. Yellow snugs are extremely rare.",
     "complexity": null,
     "images": [],
     "start": null,
     "end": "2019-11-12",
     "lastUpdated": null,
-    "width": "w-75",
-    "type": "stories"
+    "width": "w-75"
   },
   {
     "title": "The Ballon",
     "subtitle": "Creature Field Guide",
     "subtitleLink": null,
     "link": null,
-    "tags": ["Fiction", "Mythical Creatures"],
-    "tagUsage": [1, 1],
+    "tags": ["Fiction", "Mythical Creatures", "blog"],
+    "tagUsage": [1, 1, 0],
     "description": "Large, flat, oval shaped beetle. 3ft in diameter at maturity. Lives on the bottom of rivers. Commonly mistaken for rocks or boulders. It's exoskeleton is stronger than steel. During ancient war times distilled anise was often poured into the shallows of a river, and the ballon would congregate in that area. When picked up, soldiers would place the ballon on their forearm and it’s legs would latch on to the host. Creating an extremely effective battle shield.",
     "complexity": null,
     "images": [],
     "start": null,
     "end": "2019-10-22",
     "lastUpdated": null,
-    "width": "w-75",
-    "type": "stories"
+    "width": "w-75"
   },
   {
     "title": "All women are worth protecting",
     "subtitle": "Your ex-girlfriend, your barista, your mom, your friends friend, your mother-in-law, your step-sister, every one of them.",
     "subtitleLink": null,
     "link": "https://medium.com/the-magnificent-kingdom/all-women-are-worth-protecting-646a5a461896",
-    "tags": ["Life", "Women"],
-    "tagUsage": [0.8, 0.9],
+    "tags": ["Life", "Women", "blog"],
+    "tagUsage": [0.8, 0.9, 0],
     "description": null,
     "complexity": null,
     "images": [8],
     "start": null,
     "end": "2018-12-27",
     "lastUpdated": null,
-    "width": "w-100",
-    "type": "stories"
+    "width": "w-100"
   },
   {
     "title": "I’m now Trump’s OFFICIAL personal assistant!",
     "subtitle": null,
     "subtitleLink": null,
     "link": "https://medium.com/@joshknapp/im-now-trump-s-official-personal-assistant-a824b538681d",
-    "tags": ["Fiction", "Short Story", "Politics"],
-    "tagUsage": [0.9, 0.9, 0.2],
+    "tags": ["Fiction", "Short Story", "Politics", "blog"],
+    "tagUsage": [0.9, 0.9, 0.2, 0],
     "description": "Through a family friend, a young woman receives the honored role as Trump's personal assistant. Or so she thinks.",
     "complexity": null,
     "images": [5],
     "start": null,
     "end": "2018-06-19",
     "lastUpdated": null,
-    "width": "w-100",
-    "type": "stories"
+    "width": "w-100"
   },
   {
     "title": "The Swoodle",
     "subtitle": "Creature Field Guide",
     "subtitleLink": null,
     "link": null,
-    "tags": ["Fiction", "Mythical Creatures"],
-    "tagUsage": [1, 1],
+    "tags": ["Fiction", "Mythical Creatures", "blog"],
+    "tagUsage": [1, 1, 0],
     "description": "Long, skinny, ferret-like creature with shaggy fur. Enjoys climbing to the top of long drapes and staying there for extended periods of time. Often adopted as pets of bald people, due to the creatures love of curling up atop bald heads. ",
     "complexity": null,
     "images": [],
     "start": null,
     "end": "2019-10-22",
     "lastUpdated": null,
-    "width": "w-75",
-    "type": "stories"
+    "width": "w-75"
   },
   {
     "title": "The Looth",
     "subtitle": "Creature Field Guide",
     "subtitleLink": null,
     "link": null,
-    "tags": ["Fiction", "Mythical Creatures"],
-    "tagUsage": [1, 1],
+    "tags": ["Fiction", "Mythical Creatures", "blog"],
+    "tagUsage": [1, 1, 0],
     "description": "Extremely skinny, needle-like fish. Super sharp nose. Approximately 8-10in at maturity. Lies on the sea floor in shallow water with many others. In small bursts, it swims fast enough to swim straight through the body of other fish and even humans. Can be deadly in large swarms. It’s treated carcass is often wound together to create sturdy baskets.",
     "complexity": null,
     "images": [],
     "start": null,
     "end": "2019-10-22",
     "lastUpdated": null,
-    "width": "w-75",
-    "type": "stories"
+    "width": "w-75"
   },
   {
     "title": "The Train Station at the Center of the Earth",
     "subtitle": "I wonder what’s there…",
     "subtitleLink": null,
     "link": "https://medium.com/the-magnificent-kingdom/the-train-station-at-the-center-of-the-earth-58efaddbb0d",
-    "tags": ["Fiction"],
-    "tagUsage": [1],
+    "tags": ["Fiction", "blog"],
+    "tagUsage": [1, 0],
     "description": null,
     "complexity": null,
     "images": [6],
     "start": null,
     "end": "2018-07-27",
     "lastUpdated": null,
-    "width": "w-100",
-    "type": "stories"
+    "width": "w-100"
   },
   {
     "title": "The Best Things",
     "subtitle": "What is says on the tin...",
     "subtitleLink": null,
     "link": "https://medium.com/the-magnificent-kingdom/the-best-things-e17bf0822043",
-    "tags": ["Poetry"],
-    "tagUsage": [1],
+    "tags": ["Poetry", "blog"],
+    "tagUsage": [1, 0],
     "description": null,
     "complexity": null,
     "images": [7],
     "start": null,
     "end": "2018-05-29",
     "lastUpdated": null,
-    "width": "w-100",
-    "type": "stories"
+    "width": "w-100"
   },
   {
     "title": "The Invention of Sound",
     "subtitle": "An old instrument builder living on the edge of a dense forest receives a letter from an unknown source, kicking off an adventure the world has always been waiting for.",
     "subtitleLink": null,
     "link": "https://medium.com/the-magnificent-kingdom/the-invention-of-sound-34d36210c4a7",
-    "tags": ["Fiction", "Short Story"],
-    "tagUsage": [1, 1],
+    "tags": ["Fiction", "Short Story", "blog"],
+    "tagUsage": [1, 1, 0],
     "description": null,
     "complexity": null,
     "images": [1, 19],
     "start": null,
     "end": "2018-05-23",
     "lastUpdated": null,
-    "width": "w-100",
-    "type": "stories"
+    "width": "w-100"
   },
   {
     "title": "Beware of Falling Objects",
     "subtitle": "How it feels having your home-on-wheels deleted by a tree",
     "subtitleLink": null,
     "link": "https://medium.com/@joshknapp/beware-of-falling-objects-ff1995423d9a",
-    "tags": ["Life"],
-    "tagUsage": [1],
+    "tags": ["Life", "blog"],
+    "tagUsage": [1, 0],
     "description": null,
     "complexity": null,
     "images": [4],
     "start": null,
     "end": "2018-05-05",
     "lastUpdated": null,
-    "width": "w-100",
-    "type": "stories"
+    "width": "w-100"
   },
   {
     "subtitle": "ASML",
@@ -526,11 +545,11 @@
       "Bootstrap",
       "Python",
       "Flask",
-      "React-Router"
+      "React-Router",
+      "work"
     ],
-    "tagUsage": [0.7, 0.7, 0.1, 0.7, 0.2, 0.1, 0.2, 0.1, 0.3],
-    "width": null,
-    "type": "work"
+    "tagUsage": [0.7, 0.7, 0.1, 0.7, 0.2, 0.1, 0.2, 0.1, 0.3, 0],
+    "width": null
   },
   {
     "subtitle": "ASML",
@@ -581,11 +600,11 @@
       "JavaScript",
       "jQuery",
       "Bootstrap",
-      "Spotfire"
+      "Spotfire",
+      "work"
     ],
-    "tagUsage": [0.7, 0.2, 0.2, 0.8, 0.5, 0.4, 0.3],
-    "width": null,
-    "type": "work"
+    "tagUsage": [0.7, 0.2, 0.2, 0.8, 0.5, 0.4, 0.3, 0],
+    "width": null
   },
   {
     "subtitle": "Edge Development",
@@ -602,10 +621,9 @@
     "badgeVariant": null,
     "badgeText": null,
     "people": null,
-    "tags": [],
-    "tagUsage": null,
-    "width": null,
-    "type": "work"
+    "tags": ["work"],
+    "tagUsage": [0],
+    "width": null
   },
   {
     "subtitle": "People Ready",
@@ -622,10 +640,9 @@
     "badgeVariant": null,
     "badgeText": null,
     "people": null,
-    "tags": [],
-    "tagUsage": [],
-    "width": null,
-    "type": "work"
+    "tags": ["work"],
+    "tagUsage": [0],
+    "width": null
   },
   {
     "subtitle": "Marble Technologies",
@@ -642,10 +659,9 @@
     "badgeVariant": null,
     "badgeText": null,
     "people": null,
-    "tags": ["Entrepreneurship"],
-    "tagUsage": [1],
-    "width": null,
-    "type": "work"
+    "tags": ["Entrepreneurship", "work"],
+    "tagUsage": [1, 0],
+    "width": null
   },
   {
     "subtitle": "TriMike Creations",
@@ -662,10 +678,9 @@
     "badgeVariant": null,
     "badgeText": null,
     "people": null,
-    "tags": ["SolidWorks", "3D Modeling"],
-    "tagUsage": [0.6, 0.6],
-    "width": null,
-    "type": "work"
+    "tags": ["SolidWorks", "3D Modeling", "work"],
+    "tagUsage": [0.6, 0.6, 0],
+    "width": null
   },
   {
     "subtitle": "OSU Robotics & Human Control Systems Lab",
@@ -682,10 +697,9 @@
     "badgeVariant": null,
     "badgeText": null,
     "people": null,
-    "tags": ["Software", "Python", "Ubuntu"],
-    "tagUsage": [0.9, 0.8, 0.4],
-    "width": null,
-    "type": "work"
+    "tags": ["Software", "Python", "Ubuntu", "work"],
+    "tagUsage": [0.9, 0.8, 0.4, 0],
+    "width": null
   },
   {
     "subtitle": "Eigen Medical",
@@ -702,10 +716,9 @@
     "badgeVariant": null,
     "badgeText": null,
     "people": null,
-    "tags": ["SolidWorks", "3D Modeling"],
-    "tagUsage": [0.4, 0.4],
-    "width": null,
-    "type": "work"
+    "tags": ["SolidWorks", "3D Modeling", "work"],
+    "tagUsage": [0.4, 0.4, 0],
+    "width": null
   },
   {
     "subtitle": "Eigen Medical",
@@ -722,10 +735,9 @@
     "badgeVariant": null,
     "badgeText": null,
     "people": null,
-    "tags": ["SolidWorks", "3D Modeling"],
-    "tagUsage": [0.3, 0.3],
-    "width": null,
-    "type": "work"
+    "tags": ["SolidWorks", "3D Modeling", "work"],
+    "tagUsage": [0.3, 0.3, 0],
+    "width": null
   },
   {
     "subtitle": "Life",
@@ -742,9 +754,8 @@
     "badgeVariant": null,
     "badgeText": null,
     "people": null,
-    "tags": [],
-    "tagUsage": null,
-    "width": null,
-    "type": "work"
+    "tags": ["work"],
+    "tagUsage": [0],
+    "width": null
   }
 ]

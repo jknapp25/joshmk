@@ -5,9 +5,9 @@ import VisibilitySensor from "react-visibility-sensor";
 import { FiBarChart2 } from "react-icons/fi";
 export default NavBar;
 
-function NavBar({ handleTabsVisibilityChange }) {
+function NavBar({ handleTabsVisibilityChange, navOptions }) {
   const { pathname } = useLocation();
-  const activeKey = pathname === "/" ? "/work" : pathname;
+  const activeKey = pathname === "/" ? "/blog" : pathname;
   return (
     <VisibilitySensor
       onChange={handleTabsVisibilityChange}
@@ -18,7 +18,7 @@ function NavBar({ handleTabsVisibilityChange }) {
         activeKey={activeKey}
         className="border-0 mb-4"
       >
-        {["work", "projects", "stories"].map((page, i) => (
+        {navOptions.map((page, i) => (
           <Nav.Item key={i}>
             <Nav.Link
               className="pl-0"

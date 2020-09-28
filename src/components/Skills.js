@@ -11,17 +11,15 @@ function Skills() {
     topSix,
     sortedTagsByRank,
     sortedTagsByNumUsed,
-    sortedTagsByTimeUsed
+    sortedTagsByTimeUsed,
   } = calcSkillsAssessments(items);
 
   return (
     <>
-      <h3 className="mt-5 mb-4">Skills Overview</h3>
-
+      <h3 className="mb-4">Skills Overview</h3>
       <h5>
         Top Skills <FaPaperPlane color="blue" size="1em" />
       </h5>
-
       <Table striped bordered className="mb-4">
         <tbody>
           <tr>

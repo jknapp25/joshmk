@@ -1,11 +1,15 @@
 import React from "react";
 import { navigate } from "@reach/router";
 import { Container, Row, Col } from "react-bootstrap";
+import Name from "./Name";
+import NavBar from "./NavBar";
 import SideNav from "./SideNav";
 import selfie from "../assets/ProfilePic.jpg";
 export default Home;
 
-function Home({ children, showSidebar }) {
+const navOptions = ["blog", "work", "projects"];
+
+function Home({ children, showSidebar, handleTabsVisibilityChange }) {
   return (
     <Container>
       <Row>
@@ -21,9 +25,16 @@ function Home({ children, showSidebar }) {
               onClick={() => navigate("/")}
             />
           )}
-          <SideNav show={showSidebar} />
+          <SideNav show={showSidebar} navOptions={navOptions} />
         </Col>
-        <Col xs={7}>{children}</Col>
+        <Col xs={7}>
+          <Name />
+          <NavBar
+            handleTabsVisibilityChange={handleTabsVisibilityChange}
+            navOptions={navOptions}
+          />
+          {children}
+        </Col>
         <Col />
       </Row>
     </Container>

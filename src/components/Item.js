@@ -6,7 +6,7 @@ import {
   ListGroup,
   ListGroupItem,
   OverlayTrigger,
-  Tooltip
+  Tooltip,
 } from "react-bootstrap";
 import { createTimeInfo } from "../lib/utils";
 import selfie from "../assets/ProfilePic.jpg";
@@ -31,7 +31,7 @@ import portMarathon from "../assets/portland-marathon2.jpeg";
 import goalHours from "../assets/goalhours.png";
 export default Item;
 
-const pictures = [
+const picture = [
   selfie,
   ios,
   logo,
@@ -51,7 +51,7 @@ const pictures = [
   sfMarathon,
   portMarathon,
   goalHours,
-  ios2
+  ios2,
 ];
 
 function Item({ item, bottomMargin = "" }) {
@@ -71,7 +71,7 @@ function Item({ item, bottomMargin = "" }) {
     badge,
     badgeText,
     badgeVariant,
-    people
+    people,
   } = item;
   const timeInfo = createTimeInfo(start, end, lastUpdated);
 
@@ -86,17 +86,17 @@ function Item({ item, bottomMargin = "" }) {
     <Card className={`${bottomMargin} ${width}`}>
       {images && images.length > 1 && (
         <Carousel interval={10000000}>
-          {images.map(image => {
+          {images.map((image) => {
             return (
               <Carousel.Item>
-                <Card.Img variant="top" src={pictures[image]} />
+                <Card.Img variant="top" src={picture[image]} />
               </Carousel.Item>
             );
           })}
         </Carousel>
       )}
       {images && images.length === 1 && (
-        <Card.Img variant="top" src={pictures[images[0]]} />
+        <Card.Img variant="top" src={picture[images[0]]} />
       )}
       <Card.Body>
         <Card.Title>
@@ -146,7 +146,7 @@ function Item({ item, bottomMargin = "" }) {
                 height: "25px",
                 background: "linear-gradient(to right, transparent, white)",
                 position: "absolute",
-                right: "20px"
+                right: "20px",
               }}
             />
             {tags.map((tag, i) => (
@@ -173,7 +173,7 @@ function Item({ item, bottomMargin = "" }) {
                     }
                   >
                     <img
-                      src={pictures[img]}
+                      src={picture[img]}
                       width="40px"
                       alt="Co-worker_image"
                       height="40px"

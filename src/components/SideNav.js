@@ -6,9 +6,9 @@ import "../App.css";
 import logo from "../assets/josh_logo_5.png";
 export default SideNav;
 
-function SideNav({ show }) {
+function SideNav({ show, navOptions }) {
   const { pathname } = useLocation();
-  const activeKey = pathname === "/" ? "/work" : pathname;
+  const activeKey = pathname === "/" ? "/blog" : pathname;
   return (
     <Fade in={show}>
       <Nav
@@ -23,7 +23,7 @@ function SideNav({ show }) {
           alt="Logo"
           className="mb-3 mr-3"
         />
-        {["work", "projects", "stories"].map((page, i) => (
+        {navOptions.map((page, i) => (
           <Nav.Item className="d-block" key={i}>
             <Nav.Link
               className="pl-0"
