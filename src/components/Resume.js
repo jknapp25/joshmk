@@ -86,13 +86,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginTop: 12,
     marginBottom: 2,
-    // fontFamily: "Arial Bold",
   },
   sectionSubHeader: {
     fontSize: 11,
     color: "#990000",
     marginBottom: 6,
-    // fontWeight: "bold",
   },
   sectionDescription: {
     fontSize: 12,
@@ -127,7 +125,7 @@ const profession = "Front-End Developer";
 const phone = "541.368.8091";
 const website = "joshmk.com";
 const email = "joshknappp@gmail.com";
-const description1 = `Best described as a React specialist, I shine at developing high-quality user interfaces while also delivering value across the stack.`;
+const description1 = `Best described as a T-shaped generalist, I shine at developing high-quality user interfaces while also delivering value across the stack.`;
 const description2 = `My favorite part of this career is seeing the joy and/or relief on a user’s face when the software you created solves their problem well. I love simplifying complex needs into simple and beautiful tools. For my next step, I’d like to work with a high-energy, creative team that is loaded with ideas.`;
 
 const frontendSkills =
