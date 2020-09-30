@@ -4,36 +4,54 @@ import {
   Page,
   Text,
   StyleSheet,
-  // Font,
+  Font,
   View,
 } from "@react-pdf/renderer";
 import { createTimeInfo } from "../lib/utils";
 import moment from "moment";
+import arial from "../assets/arial.ttf";
+import arialBold from "../assets/arial-bold.ttf";
+import comfortaa from "../assets/comfortaa.ttf";
+import comfortaaBold from "../assets/comfortaa-bold.ttf";
 export default Resume;
 
-// const source = "https://fonts.googleapis.com/css?family=Tangerine";
-
-// Font.register({
-//   family: "Tangerine",
-//   src: source,
-//   // fontStyle: "normal",
-//   // fontWeight: "normal",
-// });
+Font.register({
+  family: "Arial",
+  src: arial,
+  fontStyle: "normal",
+  fontWeight: "normal",
+});
+Font.register({
+  family: "Arial Bold",
+  src: arialBold,
+});
+Font.register({
+  family: "Comfortaa",
+  src: comfortaa,
+});
+Font.register({
+  family: "Comfortaa Bold",
+  src: comfortaaBold,
+});
 
 const styles = StyleSheet.create({
   page: {
     padding: 64,
-    // fontFamily: "Tangerine",
+    lineHeight: 1.15,
+    fontFamily: "Arial",
   },
   name: {
     fontSize: 40,
     marginBottom: 4,
+    fontFamily: "Comfortaa",
   },
   profession: {
     fontSize: 14,
     marginBottom: 3,
     color: "#990000",
     textTransform: "uppercase",
+    fontFamily: "Comfortaa Bold",
+    letterSpacing: 1.15,
   },
   contacts: {
     fontSize: 11,
@@ -41,7 +59,7 @@ const styles = StyleSheet.create({
     color: "gray",
   },
   section: {
-    fontSize: 20,
+    fontSize: 18,
     marginBottom: 4,
     marginTop: 14,
   },
@@ -68,11 +86,13 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginTop: 12,
     marginBottom: 2,
+    // fontFamily: "Arial Bold",
   },
   sectionSubHeader: {
     fontSize: 11,
     color: "#990000",
     marginBottom: 6,
+    // fontWeight: "bold",
   },
   sectionDescription: {
     fontSize: 12,
@@ -95,6 +115,10 @@ const styles = StyleSheet.create({
     fontSize: 8,
     color: "lightgray",
     marginTop: 28,
+    textAlign: "center",
+  },
+  bold: {
+    fontFamily: "Arial Bold",
   },
 });
 
@@ -136,13 +160,21 @@ function Resume({ items, education }) {
           }}
         />
         <Text style={styles.section}>Skills</Text>
-        <Text style={styles.sectionHeader}>Frontend</Text>
+        <Text style={styles.sectionHeader}>
+          <Text style={styles.bold}>Frontend</Text>
+        </Text>
         <Text style={styles.text}>{frontendSkills}</Text>
-        <Text style={styles.sectionHeader}>Backend</Text>
+        <Text style={styles.sectionHeader}>
+          <Text style={styles.bold}>Backend</Text>
+        </Text>
         <Text style={styles.text}>{backendSkills}</Text>
-        <Text style={styles.sectionHeader}>Testing</Text>
+        <Text style={styles.sectionHeader}>
+          <Text style={styles.bold}>Testing</Text>
+        </Text>
         <Text style={styles.text}>{testingSkills}</Text>
-        <Text style={styles.sectionHeader}>General</Text>
+        <Text style={styles.sectionHeader}>
+          <Text style={styles.bold}>General</Text>
+        </Text>
         <Text style={styles.text}>{generalSkills}</Text>
         <View
           style={{
@@ -156,13 +188,13 @@ function Resume({ items, education }) {
         {items.map((item) => {
           return (
             <>
-              <Text
-                style={styles.sectionHeader}
-              >{`${item.title} / ${item.subtitle}`}</Text>
-              <Text style={styles.sectionSubHeader}>{`${createTimeInfo(
-                item.start,
-                item.end
-              )}, ${item.location}`}</Text>
+              <Text style={styles.sectionHeader}>
+                <Text style={styles.bold}>{item.title}</Text> |{" "}
+                {`${createTimeInfo(item.start, item.end)}`}
+              </Text>
+              <Text style={styles.sectionSubHeader}>
+                {item.subtitle} - {item.location}
+              </Text>
               <Text style={styles.sectionDescription}>{item.description}</Text>
               {item.list && item.list.length > 0
                 ? item.list.map((listItem) => {
@@ -185,13 +217,13 @@ function Resume({ items, education }) {
         <Text style={styles.section}>Education</Text>
         {education.map((item, i) => (
           <Fragment key={i}>
-            <Text
-              style={styles.sectionHeader}
-            >{`${item.title} / ${item.subtitle}`}</Text>
-            <Text style={styles.sectionSubHeader}>{`${createTimeInfo(
-              item.start,
-              item.end
-            )}, ${item.location}`}</Text>
+            <Text style={styles.sectionHeader}>
+              <Text style={styles.bold}>{item.title}</Text> |{" "}
+              <Text>{`${createTimeInfo(item.start, item.end)}`}</Text>
+            </Text>
+            <Text style={styles.sectionSubHeader}>
+              {item.subtitle} - {item.location}
+            </Text>
             {item.list && item.list.length > 0
               ? item.list.map((listItem) => {
                   return <Text style={styles.listItem}>&bull; {listItem}</Text>;
