@@ -41,6 +41,9 @@ import sfg31 from "../assets/sfg31.jpg";
 import sfg32 from "../assets/sfg32.jpg";
 import productCollage from "../assets/productCollage.jpg";
 import autumn from "../assets/autumn.jpg";
+import fig1 from "../assets/fig1.jpg";
+import fig2 from "../assets/fig2.jpg";
+import fig3 from "../assets/fig3.jpg";
 export default Item;
 
 const picture = [
@@ -75,6 +78,9 @@ const picture = [
   sfg32,
   productCollage,
   autumn,
+  fig1,
+  fig2,
+  fig3,
 ];
 
 function Item({ item, bottomMargin = "" }) {

@@ -74,6 +74,21 @@
     "width": "w-100"
   },
   {
+    "title": "My first figure drawings!",
+    "subtitle": null,
+    "subtitleLink": null,
+    "link": null,
+    "tags": ["blog", "drawing", "figure drawing"],
+    "tagUsage": [1, 1],
+    "description": "I've never thought I would be able to draw a body. I always thought it was way too complex. But hey, I really like these! Thanks too my beautiful wife for being very drawable :)",
+    "complexity": null,
+    "images": [32, 31, 33],
+    "start": null,
+    "end": "2020-09-19",
+    "lastUpdated": null,
+    "width": "w-100"
+  },
+  {
     "title": "Product Collage",
     "subtitle": null,
     "subtitleLink": null,
