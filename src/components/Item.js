@@ -8,6 +8,7 @@ import {
   OverlayTrigger,
   Tooltip,
 } from "react-bootstrap";
+import { navigate } from "@reach/router";
 import { createTimeInfo } from "../lib/utils";
 import selfie from "../assets/ProfilePic.jpg";
 import ios from "../assets/inventionofsound.jpeg";
@@ -28,7 +29,18 @@ import ian from "../assets/ian.jpeg";
 import janPaul from "../assets/jan-paul.jpg";
 import sfMarathon from "../assets/sf-marathon.jpeg";
 import portMarathon from "../assets/portland-marathon2.jpeg";
+import bigMagicBook from "../assets/big-magic-book.jpg";
+import bigMagicNotes from "../assets/big-magic-notes.jpg";
+import bigMagicQuote from "../assets/big-magic-quote.jpg";
 import goalHours from "../assets/goalhours.png";
+import belltowerWindow from "../assets/belltower-window.jpg";
+import harvester from "../assets/harvester.jpg";
+import sfg21 from "../assets/sfg21.jpg";
+import sfg22 from "../assets/sfg22.jpg";
+import sfg31 from "../assets/sfg31.jpg";
+import sfg32 from "../assets/sfg32.jpg";
+import productCollage from "../assets/productCollage.jpg";
+import autumn from "../assets/autumn.jpg";
 export default Item;
 
 const picture = [
@@ -52,6 +64,17 @@ const picture = [
   portMarathon,
   goalHours,
   ios2,
+  bigMagicBook,
+  bigMagicNotes,
+  bigMagicQuote,
+  belltowerWindow,
+  harvester,
+  sfg21,
+  sfg22,
+  sfg31,
+  sfg32,
+  productCollage,
+  autumn,
 ];
 
 function Item({ item, bottomMargin = "" }) {
@@ -73,7 +96,8 @@ function Item({ item, bottomMargin = "" }) {
     badgeVariant,
     people,
   } = item;
-  const timeInfo = createTimeInfo(start, end, lastUpdated);
+  const timeIncludesDay = tags.includes("blog");
+  const timeInfo = createTimeInfo(start, end, lastUpdated, timeIncludesDay);
 
   const totalPeopleWithQuotes = people
     ? people.reduce((acc, curr) => (curr.quote ? ++acc : acc), 0)
@@ -150,7 +174,13 @@ function Item({ item, bottomMargin = "" }) {
               }}
             />
             {tags.map((tag, i) => (
-              <Badge pill variant="transparent" className="mr-2" key={i}>
+              <Badge
+                pill
+                variant="transparent"
+                className="mr-2"
+                key={i}
+                onClick={() => navigate(`?search=${tag}`)}
+              >
                 {tag}
               </Badge>
             ))}
@@ -177,8 +207,7 @@ function Item({ item, bottomMargin = "" }) {
                       width="40px"
                       alt="Co-worker_image"
                       height="40px"
-                      style={{ borderRadius: "20px" }}
-                      className="mr-2"
+                      className="mr-2 rounded-circle"
                     />
                   </OverlayTrigger>
                 )

@@ -4,16 +4,31 @@ import Item from "./Item";
 import Timeline from "./Timeline";
 import Resume from "./Resume";
 import { useLocation } from "@reach/router";
+import { parse } from "query-string";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 export default ItemList;
 
 const statusOrder = ["Active", "On Hold", "Complete"];
 
 function ItemList({ items }) {
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
+  const searchParams = parse(search);
 
-  const itemType = pathname.substring(1) || "blog";
-  let filteredItems = items.filter((itm) => itm.tags.includes(itemType));
+  let itemType = pathname.substring(1) || "blog";
+
+  if (searchParams.search) itemType = searchParams.search;
+
+  let filteredItems = items
+    .filter((itm) => itm.tags.includes(itemType))
+    .sort(function (a, b) {
+      if (a.end < b.end) {
+        return 1;
+      } else if (b.end < a.end) {
+        return -1;
+      } else {
+        return 0; // note: sort is not necessarily stable in JS
+      }
+    });
   let education = items.filter((itm) => itm.tags.includes("education"));
 
   if (itemType === "projects") {

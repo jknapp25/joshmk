@@ -38,23 +38,23 @@ export function calcSkillsAssessments(items) {
   });
 
   let sortedTagsByNumUsed = Object.keys(skillCalcs)
-    .map(key => ({
+    .map((key) => ({
       tag: key,
-      numUsed: skillCalcs[key].numUsed
+      numUsed: skillCalcs[key].numUsed,
     }))
     .sort((a, b) => b.numUsed - a.numUsed);
 
   let sortedTagsByTimeUsed = Object.keys(skillCalcs)
-    .map(key => ({
+    .map((key) => ({
       tag: key,
-      timeUsed: skillCalcs[key].timeUsed
+      timeUsed: skillCalcs[key].timeUsed,
     }))
     .sort((a, b) => b.timeUsed - a.timeUsed);
 
   let sortedTagsByRank = Object.keys(skillCalcs)
-    .map(key => ({
+    .map((key) => ({
       tag: key,
-      rankIndex: Math.round(skillCalcs[key].rankIndex)
+      rankIndex: Math.round(skillCalcs[key].rankIndex),
     }))
     .sort((a, b) => b.rankIndex - a.rankIndex);
   let topSix = sortedTagsByRank.slice(0, 6);
@@ -63,35 +63,37 @@ export function calcSkillsAssessments(items) {
     sortedTagsByNumUsed,
     sortedTagsByTimeUsed,
     sortedTagsByRank,
-    topSix
+    topSix,
   };
 }
 
-export function createTimeInfo(start, end, lastUpdated) {
-  // prefix 'f' = 'formatted'
-  const fStart = start ? moment(start).format("MMM Y") : null;
-  const fEnd = end ? moment(end).format("MMM Y") : null;
-  const fLastUpdated = lastUpdated ? moment(lastUpdated).format("MMM Y") : null;
+export function createTimeInfo(start, end, lastUpdated, includeDay = false) {
+  const format = includeDay ? "MMM D, Y" : "MMM Y";
+  const formattedStart = start ? moment(start).format(format) : null;
+  const formattedEnd = end ? moment(end).format(format) : null;
+  const formattedLastUpdated = lastUpdated
+    ? moment(lastUpdated).format(format)
+    : null;
 
   if (start && end) {
     const duration = moment(end).diff(start, "years", true);
     const fDuration = duration > 0.1 ? duration.toFixed(1) : 0;
-    return `${fStart} - ${fEnd} (${fDuration} years)`;
+    return `${formattedStart} - ${formattedEnd} (${fDuration} years)`;
   }
 
   if (start && lastUpdated) {
     const duration = moment(lastUpdated).diff(start, "years", true);
     const fDuration = duration > 0.1 ? duration.toFixed(1) : 0;
-    return `${fStart} - ${fLastUpdated} (${fDuration} years)`;
+    return `${formattedStart} - ${formattedLastUpdated} (${fDuration} years)`;
   }
 
   if (start) {
     const duration = moment(moment()).diff(start, "years", true);
     const fDuration = duration > 0.1 ? duration.toFixed(1) : 0;
-    return `${fStart} - Now (${fDuration} years)`;
+    return `${formattedStart} - Now (${fDuration} years)`;
   }
 
-  if (end) return fEnd;
-  if (lastUpdated) return `Last updated ${fLastUpdated}`;
+  if (end) return formattedEnd;
+  if (lastUpdated) return `Last updated ${formattedLastUpdated}`;
   return "No date info available";
 }

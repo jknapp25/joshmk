@@ -115,6 +115,18 @@
 
 .badge-pill {
   border: 1px solid black;
+  cursor: pointer;
+}
+.badge-pill:hover {
+  background-color: black;
+  color: white;
+}
+.badge-pill.active {
+  cursor: default;
+}
+.badge-pill.active:hover {
+  background-color: transparent;
+  color: black;
 }
 
 .badge-transparent {
@@ -131,4 +143,8 @@ html {
   width: 0px;
   background: transparent;
   height: 0px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }

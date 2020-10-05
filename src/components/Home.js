@@ -1,6 +1,7 @@
 import React from "react";
-import { navigate } from "@reach/router";
-import { Container, Row, Col } from "react-bootstrap";
+import { navigate, useLocation } from "@reach/router";
+import { parse } from "query-string";
+import { Badge, Container, Row, Col } from "react-bootstrap";
 import Name from "./Name";
 import NavBar from "./NavBar";
 import SideNav from "./SideNav";
@@ -10,11 +11,16 @@ export default Home;
 const navOptions = ["blog", "work", "projects"];
 
 function Home({ children, showSidebar, handleTabsVisibilityChange }) {
+  const { search } = useLocation();
+  const searchParams = parse(search);
+
+  const activeSearch = searchParams.search || null;
+
   return (
     <Container>
       <Row>
         <Col className="text-right">
-          {!showSidebar && (
+          {!showSidebar || activeSearch ? (
             <img
               src={selfie}
               width="100"
@@ -24,15 +30,32 @@ function Home({ children, showSidebar, handleTabsVisibilityChange }) {
               className="mt-5 box align-top rounded-circle"
               onClick={() => navigate("/")}
             />
-          )}
-          <SideNav show={showSidebar} navOptions={navOptions} />
+          ) : null}
+          {!activeSearch ? (
+            <SideNav show={showSidebar} navOptions={navOptions} />
+          ) : null}
         </Col>
         <Col xs={7}>
           <Name />
-          <NavBar
-            handleTabsVisibilityChange={handleTabsVisibilityChange}
-            navOptions={navOptions}
-          />
+          {activeSearch ? (
+            <div className="mb-4">
+              Viewing items tagged:
+              <Badge pill variant="transparent" className="ml-2 active">
+                {activeSearch}
+              </Badge>
+              <span
+                className="text-muted ml-2 cursor-pointer"
+                onClick={() => navigate("/")}
+              >
+                clear
+              </span>
+            </div>
+          ) : (
+            <NavBar
+              handleTabsVisibilityChange={handleTabsVisibilityChange}
+              navOptions={navOptions}
+            />
+          )}
           {children}
         </Col>
         <Col />

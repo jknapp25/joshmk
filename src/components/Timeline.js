@@ -2,14 +2,14 @@ import React from "react";
 import Item from "./Item";
 import {
   VerticalTimeline,
-  VerticalTimelineElement
+  VerticalTimelineElement,
 } from "react-vertical-timeline-component";
 import { FaReact, FaHardHat, FaBaby } from "react-icons/fa";
 import {
   IoLogoJavascript,
   IoIosPeople,
   IoIosBuild,
-  IoMdMedical
+  IoMdMedical,
 } from "react-icons/io";
 import { GiMechanicalArm, GiCrosscutSaw } from "react-icons/gi";
 import "react-vertical-timeline-component/style.min.css";
@@ -25,7 +25,7 @@ const icons = [
   <GiMechanicalArm color="#000000" size="50px" />,
   <IoMdMedical color="#e32525" size="50px" />,
   <FaBaby color="#de56bbba" size="50px" />,
-  <GiCrosscutSaw color="#7e56deba" size="50px" />
+  <GiCrosscutSaw color="#7e56deba" size="50px" />,
 ];
 
 function Work({ items }) {
@@ -36,10 +36,10 @@ function Work({ items }) {
           key={i}
           contentStyle={{
             padding: "0px",
-            boxShadow: "none"
+            boxShadow: "none",
           }}
           contentArrowStyle={{
-            borderRight: "7px solid  rgb(33, 150, 243)"
+            borderRight: "7px solid  rgb(33, 150, 243)",
           }}
           iconStyle={{ background: "white", color: "white" }}
           icon={icons[item.icon]}
