@@ -177,15 +177,15 @@ function Skills() {
       </p>
       <p>
         This page is my attempt at honestly assessing my skills to the best of
-        my ability (AKA automagically) for employers as well as for myself. I
-        realized I could also use my history to help me determine how my
-        interests are changing to better predict where I want to head.
+        my ability (AKA automagically) for employers as well as for myself. It
+        also helps me reflect on how my interests are changing to better predict
+        where I want to head.
       </p>
       <p>
-        The above algorithm is based on a simple work item tagging strategy and
-        allows me to generate a value I can use to rank my skills. It is
-        constantly being improved to provide a more accurate assessment. I might
-        provide an API if I like where it's heading.
+        The algorithm is based on a simple work item tagging strategy and allows
+        me to generate a value I can use to rank my skills. It is constantly
+        being improved to provide a more accurate assessment. I might provide an
+        API if I like where it's heading.
       </p>
     </>
   );
