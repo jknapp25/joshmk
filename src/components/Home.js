@@ -26,8 +26,7 @@ function Home({ children, showSidebar, handleTabsVisibilityChange }) {
               width="100"
               height="100"
               alt="Profile_picture"
-              style={{ border: "3px solid black", cursor: "pointer" }}
-              className="mt-5 box align-top rounded-circle"
+              className="mt-5 box align-top rounded-circle cursor-pointer"
               onClick={() => navigate("/")}
             />
           ) : null}
