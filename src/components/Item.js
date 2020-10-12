@@ -44,6 +44,9 @@ import autumn from "../assets/autumn.jpg";
 import fig1 from "../assets/fig1.jpg";
 import fig2 from "../assets/fig2.jpg";
 import fig3 from "../assets/fig3.jpg";
+import fungi1 from "../assets/fungi1.jpg";
+import fungi2 from "../assets/fungi2.jpg";
+import fungi3 from "../assets/fungi3.jpg";
 export default Item;
 
 const picture = [
@@ -81,6 +84,9 @@ const picture = [
   fig1,
   fig2,
   fig3,
+  fungi1,
+  fungi2,
+  fungi3,
 ];
 
 function Item({ item, bottomMargin = "" }) {
