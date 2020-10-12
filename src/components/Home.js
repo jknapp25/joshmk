@@ -5,7 +5,7 @@ import { Badge, Container, Row, Col } from "react-bootstrap";
 import Name from "./Name";
 import NavBar from "./NavBar";
 import SideNav from "./SideNav";
-import selfie from "../assets/ProfilePic.jpg";
+import selfie from "../assets/selfie2.jpg";
 export default Home;
 
 const navOptions = ["blog", "work", "projects"];

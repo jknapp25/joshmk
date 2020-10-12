@@ -10,7 +10,7 @@ import {
 } from "react-bootstrap";
 import { navigate } from "@reach/router";
 import { createTimeInfo } from "../lib/utils";
-import selfie from "../assets/ProfilePic.jpg";
+import selfie from "../assets/selfie2.jpg";
 import ios from "../assets/inventionofsound.jpeg";
 import ios2 from "../assets/The_Invention_of_Sound.jpg";
 import libby from "../assets/libby_van.jpeg";
