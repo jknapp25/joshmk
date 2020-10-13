@@ -47,6 +47,11 @@ import fig3 from "../assets/fig3.jpg";
 import fungi1 from "../assets/fungi1.jpg";
 import fungi2 from "../assets/fungi2.jpg";
 import fungi3 from "../assets/fungi3.jpg";
+import wedDress1 from "../assets/wedDress1.jpg";
+import wedDress2 from "../assets/wedDress2.jpg";
+import wedDress3 from "../assets/wedDress3.jpg";
+import wedDress4 from "../assets/wedDress4.jpg";
+import wedDress5 from "../assets/wedDress5.jpg";
 export default Item;
 
 const picture = [
@@ -87,6 +92,11 @@ const picture = [
   fungi1,
   fungi2,
   fungi3,
+  wedDress4,
+  wedDress1,
+  wedDress2,
+  wedDress3,
+  wedDress5,
 ];
 
 function Item({ item, bottomMargin = "" }) {
