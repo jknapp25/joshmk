@@ -171,9 +171,8 @@ function Skills() {
 
       <p>
         Through being involved in interviewing over 30 devs over the past few
-        years, it's become clear to me that skill inflation is a serious
-        problem. Especially in Software. I'd like to see if there's a better
-        way.
+        years, it's become clear to me that skill inflation is a serious problem
+        in Software. I'd like to see if there's a better way.
       </p>
       <p>
         This page is my attempt at honestly assessing my skills to the best of
