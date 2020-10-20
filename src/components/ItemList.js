@@ -26,7 +26,7 @@ function ItemList({ items }) {
       } else if (b.end < a.end) {
         return -1;
       } else {
-        return 0; // note: sort is not necessarily stable in JS
+        return 0;
       }
     });
   let education = items.filter((itm) => itm.tags.includes("education"));
@@ -56,7 +56,7 @@ function ItemList({ items }) {
     );
   } else {
     return filteredItems.map((item, i) => (
-      <Item item={item} bottomMargin="mb-4" key={i} />
+      <Item key={i} item={item} bottomMargin="mb-4" />
     ));
   }
 }

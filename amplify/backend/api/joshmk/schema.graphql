@@ -1,0 +1,16 @@
+type Item @model {
+  id: ID!
+  title: String
+  subTitle: String
+  subTitleLink: String
+  description: String
+  link: String
+  tags: [String]
+  images: [Int]
+  start: String
+  end: String
+  lastUpdated: String
+  width: String
+  complexity: Float
+  tagUsage: [Float]
+}

@@ -52,6 +52,7 @@ import wedDress2 from "../assets/wedDress2.jpg";
 import wedDress3 from "../assets/wedDress3.jpg";
 import wedDress4 from "../assets/wedDress4.jpg";
 import wedDress5 from "../assets/wedDress5.jpg";
+import crest from "../assets/knappCrest.jpg";
 export default Item;
 
 const picture = [
@@ -97,6 +98,7 @@ const picture = [
   wedDress2,
   wedDress3,
   wedDress5,
+  crest,
 ];
 
 function Item({ item, bottomMargin = "" }) {
@@ -118,7 +120,7 @@ function Item({ item, bottomMargin = "" }) {
     badgeVariant,
     people,
   } = item;
-  const timeIncludesDay = tags.includes("blog");
+  const timeIncludesDay = tags && tags.length && tags.includes("blog");
   const timeInfo = createTimeInfo(start, end, lastUpdated, timeIncludesDay);
 
   const totalPeopleWithQuotes = people
@@ -132,13 +134,11 @@ function Item({ item, bottomMargin = "" }) {
     <Card className={`${bottomMargin} ${width}`}>
       {images && images.length > 1 && (
         <Carousel interval={10000000}>
-          {images.map((image) => {
-            return (
-              <Carousel.Item>
-                <Card.Img variant="top" src={picture[image]} />
-              </Carousel.Item>
-            );
-          })}
+          {images.map((image, i) => (
+            <Carousel.Item key={i}>
+              <Card.Img variant="top" src={picture[image]} />
+            </Carousel.Item>
+          ))}
         </Carousel>
       )}
       {images && images.length === 1 && (
@@ -184,17 +184,12 @@ function Item({ item, bottomMargin = "" }) {
         )}
         {tags && tags.length > 0 && (
           <Card.Text
-            style={{ whiteSpace: "nowrap", overflowX: "scroll", boxShadow: "" }}
+            style={{
+              whiteSpace: "nowrap",
+              overflowX: "scroll",
+              boxShadow: "",
+            }}
           >
-            <div
-              style={{
-                width: "30px",
-                height: "25px",
-                background: "linear-gradient(to right, transparent, white)",
-                position: "absolute",
-                right: "20px",
-              }}
-            />
             {tags.map((tag, i) => (
               <Badge
                 pill

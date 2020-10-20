@@ -195,11 +195,11 @@ function Resume({ items, education }) {
               </Text>
               <Text style={styles.sectionDescription}>{item.description}</Text>
               {item.list && item.list.length > 0
-                ? item.list.map((listItem) => {
-                    return (
-                      <Text style={styles.listItem}>&bull; {listItem}</Text>
-                    );
-                  })
+                ? item.list.map((listItem, i) => (
+                    <Text key={i} style={styles.listItem}>
+                      &bull; {listItem}
+                    </Text>
+                  ))
                 : null}
             </>
           );
@@ -223,9 +223,11 @@ function Resume({ items, education }) {
               {item.subtitle} - {item.location}
             </Text>
             {item.list && item.list.length > 0
-              ? item.list.map((listItem) => {
-                  return <Text style={styles.listItem}>&bull; {listItem}</Text>;
-                })
+              ? item.list.map((listItem, i) => (
+                  <Text key={i} style={styles.listItem}>
+                    &bull; {listItem}
+                  </Text>
+                ))
               : null}
           </Fragment>
         ))}
