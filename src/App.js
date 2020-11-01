@@ -4,16 +4,32 @@ import ItemList from "./components/ItemList";
 import Skills from "./components/Skills";
 import GoalHours from "./components/GoalHours";
 import Home from "./components/Home.js";
-// import AddItem from "./components/AddItem.js";
+import AddItem from "./components/AddItem.js";
 import items from "./lib/items.json";
-// import Amplify from "aws-amplify";
-// import awsconfig from "./aws-exports";
+import Amplify from "aws-amplify";
+import { withAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
 import "react-vertical-timeline-component/style.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-export default App;
+export default withAuthenticator(App);
 
-// Amplify.configure(awsconfig);
+Amplify.configure({
+  "aws_project_region": "us-west-2",
+  Auth: {
+      identityPoolId: 'us-west-2:9579e2e0-16ba-43c4-a613-9a9fd99fc3f2',
+      region: 'us-west-2',
+      userPoolId: 'us-west-2_T0B7qRcPP',
+      userPoolWebClientId: '4qfe9ji8aqs296bi3ekaqp57ua',
+      mandatorySignIn: false,
+  },
+  Storage:{
+    AWSS3: {
+      bucket: 'joshmk-bucket', 
+      region: 'us-west-2', 
+    }
+  }
+});
+
 
 function App() {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -29,9 +45,10 @@ function App() {
           <ItemList default items={items} />
           <Skills path="skills" />
           <GoalHours path="goal-hours" />
-          {/* <AddItem path="add" /> */}
+          <AddItem path="add" />
         </Home>
       </Router>
+      <AmplifySignOut />
     </div>
   );
 }

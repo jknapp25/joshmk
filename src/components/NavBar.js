@@ -40,14 +40,14 @@ function NavBar({ handleTabsVisibilityChange, navOptions }) {
           style={{ cursor: "pointer" }}
           title="Skills Overview"
         />
-        {/* <AiOutlinePlusCircle
+        <AiOutlinePlusCircle
           color="green"
           size="1.9em"
           className="ml-2 pt-2"
           onClick={() => navigate("add")}
           style={{ cursor: "pointer" }}
           title="Add item"
-        /> */}
+        />
       </Nav>
     </VisibilitySensor>
   );

@@ -25,7 +25,7 @@
     }
   },
   "auth": {
-    "joshmk8ab6188e": {
+    "joshmk8113573c": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
