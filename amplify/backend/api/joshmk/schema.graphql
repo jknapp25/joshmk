@@ -6,7 +6,7 @@ type Item @model {
   description: String
   link: String
   tags: [String]
-  images: [Int]
+  images: [String]
   start: String
   end: String
   lastUpdated: String

@@ -1,40 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Button, ButtonGroup, Card, Form, FormControl,Figure,Image } from "react-bootstrap";
-import { API, graphqlOperation, Storage, Auth } from "aws-amplify";
+import { Button, ButtonGroup, Card, Form, FormControl,Image } from "react-bootstrap";
+import { API, graphqlOperation, Storage } from "aws-amplify";
 import { createItem } from "../graphql/mutations";
 import * as queries from "../graphql/queries";
 import Item from "./Item";
 export default AddItem;
-
-// {
-//   "title": "3 years later",
-//   "subtitle": null,
-//   "subtitleLink": null,
-//   "link": null,
-//   "tags": ["blog", "Photography", "Marriage", "Women", "Love"],
-//   "tagUsage": [1, 1, 1, 1, 1],
-//   "description": "Today we took pictures of Riah in her wedding dress on Manzanita Beach. She's been wanting to do this for the last three years. I love how they turned out. Naturally I like the more smiley ones, but she likes the more mysterious ones.",
-//   "complexity": null,
-//   "images": [37, 38, 39, 40, 41],
-//   "start": null,
-//   "end": "2020-10-08",
-//   "lastUpdated": null,
-//   "width": "w-100"
-// },
-
-// Auth.configure({
-//   region: "us-west-2",
-//   identityPoolId: "us-west-2:9a18e0e1-e9c6-43d9-bfb5-273e6efd6864",
-//   userPoolId: "us-west-2_ywcgViCzT",
-//   userPoolWebClientId: "4rlf73fo4fjokm39c8c4i6pla5",
-// });
-
-Storage.configure({
-  AWSS3: {
-    bucket: "joshmk-bucket",
-    region: "us-west-2",
-  },
-});
 
 const itemTypes = {
   blog: ["title", "description", "tags", "images", "end"],
@@ -84,7 +54,6 @@ function AddItem() {
   async function handleAdd() {
     const newTags = tags.split(" ");
     const newTagUsage = tagUsage.split(" ").map((strNum) => parseFloat(strNum));
-    const newImages = images.split(" ").map((strNum) => parseInt(strNum, 10));
     const newComplexity = parseFloat(complexity);
 
     const item = {
@@ -96,7 +65,7 @@ function AddItem() {
       tags: newTags,
       tagUsage: newTagUsage,
       complexity: newComplexity,
-      images: newImages,
+      images,
       start,
       end,
       lastUpdated: "",
@@ -112,8 +81,11 @@ function AddItem() {
     const { key } = await Storage.put(file.name, file, {
       contentType: file.type,
     });
+    console.log('upload')
     if (key) {
+      console.log(key)
       const updImages = [...images, key];
+      console.log(updImages)
       setImages(updImages);
     }
   }
@@ -298,7 +270,7 @@ function AddItem() {
         </Card.Body>
       </Card>
       <Button className="mt-2" onClick={handleAdd}>
-        Add item
+        Create item
       </Button>
       <hr />
       {items.length > 0 ? (

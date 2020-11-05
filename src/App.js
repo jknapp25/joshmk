@@ -15,6 +15,10 @@ export default withAuthenticator(App);
 
 Amplify.configure({
   "aws_project_region": "us-west-2",
+  'aws_appsync_graphqlEndpoint': 'https://7gp2g5vrvnempduyilcqm7gcxm.appsync-api.us-west-2.amazonaws.com/graphql',
+  'aws_appsync_region': 'us-west-2',
+  'aws_appsync_authenticationType': 'API_KEY',
+  'aws_appsync_apiKey': 'da2-adm65wjtf5halghqn7b4xmlroa',
   Auth: {
       identityPoolId: 'us-west-2:9579e2e0-16ba-43c4-a613-9a9fd99fc3f2',
       region: 'us-west-2',

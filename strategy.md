@@ -1,7 +1,7 @@
 # Adding my own items
 
-Store current items
-Get all data storeable
+Verify item uploading data looks okay
+Upload all current items
 Hide addition page
 Configurable posts
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState,useEffect} from "react";
 import {
   Badge,
   Card,
@@ -9,6 +9,7 @@ import {
   Tooltip,
 } from "react-bootstrap";
 import { navigate } from "@reach/router";
+import { Storage } from "aws-amplify";
 import { createTimeInfo } from "../lib/utils";
 import selfie from "../assets/selfie2.jpg";
 import ios from "../assets/inventionofsound.jpeg";
@@ -130,20 +131,33 @@ function Item({ item, bottomMargin = "" }) {
     ? people.reduce((acc, curr) => (!curr.quote ? ++acc : acc), 0)
     : 0;
 
+  const [imageUrls, setImageUrls] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      const imageUrls = await Storage.get(images[0]);
+      setImageUrls([imageUrls]);
+    }
+    if (images.length) {
+      fetchData();
+    }
+  }, [images]);
+
+  console.log(imageUrls)
+
   return (
     <Card className={`${bottomMargin} ${width}`}>
-      {images && images.length > 1 && (
+      {images && images.length > 1 ? (
         <Carousel interval={10000000}>
-          {images.map((image, i) => (
+          {imageUrls.map((url, i) => (
             <Carousel.Item key={i}>
-              <Card.Img variant="top" src={picture[image]} />
+              <Card.Img variant="top" src={url} />
             </Carousel.Item>
           ))}
         </Carousel>
-      )}
-      {images && images.length === 1 && (
-        <Card.Img variant="top" src={picture[images[0]]} />
-      )}
+      ) :null}
+      {images && images.length === 1 && imageUrls[0] ? (
+        <Card.Img variant="top" src={imageUrls[0]} />
+      ): null}
       <Card.Body>
         <Card.Title>
           {link ? (
