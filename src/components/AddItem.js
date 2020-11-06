@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Button, ButtonGroup, Card, Form, FormControl,Image } from "react-bootstrap";
+import Post from './Post'
+import PostEditor from './PostEditor'
 import { API, graphqlOperation, Storage } from "aws-amplify";
 import { createPost } from "../graphql/mutations";
 import * as queries from "../graphql/queries";
-import Item from "./Item";
 export default AddItem;
 
 const itemTypes = {
@@ -51,7 +52,7 @@ function AddItem() {
   const [end, setEnd] = useState("");
   const [itemType, setItemType] = useState("blog");
 
-  async function handleAdd() {
+  async function handleCreate(type, data) {
     const newTags = tags.split(" ");
     const newTagUsage = tagUsage.split(" ").map((strNum) => parseFloat(strNum));
     const newComplexity = parseFloat(complexity);
@@ -75,6 +76,30 @@ function AddItem() {
     const updItems = [...items, item];
     setItems(updItems);
   }
+  // async function handleAdd() {
+  //   const newTags = tags.split(" ");
+  //   const newTagUsage = tagUsage.split(" ").map((strNum) => parseFloat(strNum));
+  //   const newComplexity = parseFloat(complexity);
+
+  //   const item = {
+  //     title,
+  //     description,
+  //     subTitle,
+  //     subTitleLink,
+  //     link,
+  //     tags: newTags,
+  //     tagUsage: newTagUsage,
+  //     complexity: newComplexity,
+  //     images,
+  //     start,
+  //     end,
+  //     lastUpdated: "",
+  //     width: "w-100",
+  //   };
+  //   await API.graphql(graphqlOperation(createPost, { input: item }));
+  //   const updItems = [...items, item];
+  //   setItems(updItems);
+  // }
 
   async function handleImageUpload(e) {
     const file = e.target.files[0];
@@ -261,17 +286,17 @@ function AddItem() {
           </Button>
         ))}
       </ButtonGroup>
+      {itemType === 'blog' ? (
+        <PostEditor handleImageUpload={handleImageUpload} onCreate={handleCreate} />
+      ): null}
       <Card className="mb-4">
         <Card.Body>
           {itemTypes[itemType].map((field) => fields[field])}
         </Card.Body>
       </Card>
-      <Button className="mt-2" onClick={handleAdd}>
-        Create item
-      </Button>
       <hr />
       {items.length > 0 ? (
-        items.map((item, i) => <Item item={item} bottomMargin="mb-4" key={i} />)
+        items.map((item, i) => <Post key={i} post={item} />)
       ) : (
         <div>No items</div>
       )}

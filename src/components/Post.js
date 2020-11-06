@@ -24,9 +24,8 @@ function Post({ post }) {
     }
   }, [images]);
 
-
   return (
-    <div className={`mb-5 w-100`}>
+    <div className="mb-5 w-100">
       {images && images.length > 1 ? (
         <Carousel interval={10000000}>
           {imageUrls.map((url, i) => (
@@ -35,7 +34,7 @@ function Post({ post }) {
             </Carousel.Item>
           ))}
         </Carousel>
-      ) :null}
+      ) : null}
       {images && images.length === 1 && imageUrls[0] ? (
         <Image src={imageUrls[0]} fluid />
       ): null}
