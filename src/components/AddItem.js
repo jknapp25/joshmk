@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, ButtonGroup, Card, Form, FormControl,Image } from "react-bootstrap";
 import { API, graphqlOperation, Storage } from "aws-amplify";
-import { createItem } from "../graphql/mutations";
+import { createPost } from "../graphql/mutations";
 import * as queries from "../graphql/queries";
 import Item from "./Item";
 export default AddItem;
@@ -71,7 +71,7 @@ function AddItem() {
       lastUpdated: "",
       width: "w-100",
     };
-    await API.graphql(graphqlOperation(createItem, { input: item }));
+    await API.graphql(graphqlOperation(createPost, { input: item }));
     const updItems = [...items, item];
     setItems(updItems);
   }
@@ -81,19 +81,16 @@ function AddItem() {
     const { key } = await Storage.put(file.name, file, {
       contentType: file.type,
     });
-    console.log('upload')
     if (key) {
-      console.log(key)
       const updImages = [...images, key];
-      console.log(updImages)
       setImages(updImages);
     }
   }
 
   useEffect(() => {
     async function fetchData() {
-      const allItems = await API.graphql({ query: queries.listItems });
-      setItems(allItems.data.listItems.items);
+      const allItems = await API.graphql({ query: queries.listPosts });
+      setItems(allItems.data.listPosts.items);
     }
     fetchData();
   }, []);

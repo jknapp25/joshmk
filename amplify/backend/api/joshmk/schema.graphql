@@ -1,16 +1,38 @@
-type Item @model {
+type Post @model {
   id: ID!
   title: String
-  subTitle: String
-  subTitleLink: String
-  description: String
-  link: String
+  content: String
   tags: [String]
+  images: [String]
+}
+
+type Project @model {
+  id: ID!
+  name: String
+  summary: String
+  tasks: [String]
+  link: String
+  status: String
+  tags: [String]
+  type: String
   images: [String]
   start: String
   end: String
-  lastUpdated: String
-  width: String
+  complexity: Float
+  tagUsage: [Float]
+}
+
+type Job @model {
+  id: ID!
+  company: String
+  role: String
+  location: String
+  summary: String
+  details: [String]
+  companyUrl: String
+  tags: [String]
+  start: String
+  end: String
   complexity: Float
   tagUsage: [Float]
 }

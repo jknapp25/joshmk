@@ -137,12 +137,11 @@ function Item({ item, bottomMargin = "" }) {
       const imageUrls = await Storage.get(images[0]);
       setImageUrls([imageUrls]);
     }
-    if (images.length) {
+    if (images && images.length) {
       fetchData();
     }
   }, [images]);
 
-  console.log(imageUrls)
 
   return (
     <Card className={`${bottomMargin} ${width}`}>

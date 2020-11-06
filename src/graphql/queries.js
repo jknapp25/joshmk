@@ -1,21 +1,53 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getItem = /* GraphQL */ `
-  query GetItem($id: ID!) {
-    getItem(id: $id) {
+export const getPost = /* GraphQL */ `
+  query GetPost($id: ID!) {
+    getPost(id: $id) {
       id
       title
-      subTitle
-      subTitleLink
-      description
-      link
+      content
       tags
+      images
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listPosts = /* GraphQL */ `
+  query ListPosts(
+    $filter: ModelPostFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        content
+        tags
+        images
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getProject = /* GraphQL */ `
+  query GetProject($id: ID!) {
+    getProject(id: $id) {
+      id
+      name
+      summary
+      tasks
+      link
+      status
+      tags
+      type
       images
       start
       end
-      lastUpdated
-      width
       complexity
       tagUsage
       createdAt
@@ -23,26 +55,72 @@ export const getItem = /* GraphQL */ `
     }
   }
 `;
-export const listItems = /* GraphQL */ `
-  query ListItems(
-    $filter: ModelItemFilterInput
+export const listProjects = /* GraphQL */ `
+  query ListProjects(
+    $filter: ModelProjectFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listItems(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listProjects(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        title
-        subTitle
-        subTitleLink
-        description
+        name
+        summary
+        tasks
         link
+        status
         tags
+        type
         images
         start
         end
-        lastUpdated
-        width
+        complexity
+        tagUsage
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getJob = /* GraphQL */ `
+  query GetJob($id: ID!) {
+    getJob(id: $id) {
+      id
+      company
+      role
+      location
+      summary
+      details
+      companyUrl
+      tags
+      start
+      end
+      complexity
+      tagUsage
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listJobs = /* GraphQL */ `
+  query ListJobs(
+    $filter: ModelJobFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listJobs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        company
+        role
+        location
+        summary
+        details
+        companyUrl
+        tags
+        start
+        end
         complexity
         tagUsage
         createdAt

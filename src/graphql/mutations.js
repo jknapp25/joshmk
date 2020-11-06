@@ -1,24 +1,71 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createItem = /* GraphQL */ `
-  mutation CreateItem(
-    $input: CreateItemInput!
-    $condition: ModelItemConditionInput
+export const createPost = /* GraphQL */ `
+  mutation CreatePost(
+    $input: CreatePostInput!
+    $condition: ModelPostConditionInput
   ) {
-    createItem(input: $input, condition: $condition) {
+    createPost(input: $input, condition: $condition) {
       id
       title
-      subTitle
-      subTitleLink
-      description
-      link
+      content
       tags
+      images
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updatePost = /* GraphQL */ `
+  mutation UpdatePost(
+    $input: UpdatePostInput!
+    $condition: ModelPostConditionInput
+  ) {
+    updatePost(input: $input, condition: $condition) {
+      id
+      title
+      content
+      tags
+      images
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deletePost = /* GraphQL */ `
+  mutation DeletePost(
+    $input: DeletePostInput!
+    $condition: ModelPostConditionInput
+  ) {
+    deletePost(input: $input, condition: $condition) {
+      id
+      title
+      content
+      tags
+      images
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createProject = /* GraphQL */ `
+  mutation CreateProject(
+    $input: CreateProjectInput!
+    $condition: ModelProjectConditionInput
+  ) {
+    createProject(input: $input, condition: $condition) {
+      id
+      name
+      summary
+      tasks
+      link
+      status
+      tags
+      type
       images
       start
       end
-      lastUpdated
-      width
       complexity
       tagUsage
       createdAt
@@ -26,24 +73,23 @@ export const createItem = /* GraphQL */ `
     }
   }
 `;
-export const updateItem = /* GraphQL */ `
-  mutation UpdateItem(
-    $input: UpdateItemInput!
-    $condition: ModelItemConditionInput
+export const updateProject = /* GraphQL */ `
+  mutation UpdateProject(
+    $input: UpdateProjectInput!
+    $condition: ModelProjectConditionInput
   ) {
-    updateItem(input: $input, condition: $condition) {
+    updateProject(input: $input, condition: $condition) {
       id
-      title
-      subTitle
-      subTitleLink
-      description
+      name
+      summary
+      tasks
       link
+      status
       tags
+      type
       images
       start
       end
-      lastUpdated
-      width
       complexity
       tagUsage
       createdAt
@@ -51,24 +97,92 @@ export const updateItem = /* GraphQL */ `
     }
   }
 `;
-export const deleteItem = /* GraphQL */ `
-  mutation DeleteItem(
-    $input: DeleteItemInput!
-    $condition: ModelItemConditionInput
+export const deleteProject = /* GraphQL */ `
+  mutation DeleteProject(
+    $input: DeleteProjectInput!
+    $condition: ModelProjectConditionInput
   ) {
-    deleteItem(input: $input, condition: $condition) {
+    deleteProject(input: $input, condition: $condition) {
       id
-      title
-      subTitle
-      subTitleLink
-      description
+      name
+      summary
+      tasks
       link
+      status
       tags
+      type
       images
       start
       end
-      lastUpdated
-      width
+      complexity
+      tagUsage
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createJob = /* GraphQL */ `
+  mutation CreateJob(
+    $input: CreateJobInput!
+    $condition: ModelJobConditionInput
+  ) {
+    createJob(input: $input, condition: $condition) {
+      id
+      company
+      role
+      location
+      summary
+      details
+      companyUrl
+      tags
+      start
+      end
+      complexity
+      tagUsage
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateJob = /* GraphQL */ `
+  mutation UpdateJob(
+    $input: UpdateJobInput!
+    $condition: ModelJobConditionInput
+  ) {
+    updateJob(input: $input, condition: $condition) {
+      id
+      company
+      role
+      location
+      summary
+      details
+      companyUrl
+      tags
+      start
+      end
+      complexity
+      tagUsage
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteJob = /* GraphQL */ `
+  mutation DeleteJob(
+    $input: DeleteJobInput!
+    $condition: ModelJobConditionInput
+  ) {
+    deleteJob(input: $input, condition: $condition) {
+      id
+      company
+      role
+      location
+      summary
+      details
+      companyUrl
+      tags
+      start
+      end
       complexity
       tagUsage
       createdAt
