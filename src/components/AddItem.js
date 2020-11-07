@@ -53,28 +53,9 @@ function AddItem() {
   const [itemType, setItemType] = useState("blog");
 
   async function handleCreate(type, data) {
-    const newTags = tags.split(" ");
-    const newTagUsage = tagUsage.split(" ").map((strNum) => parseFloat(strNum));
-    const newComplexity = parseFloat(complexity);
-
-    const item = {
-      title,
-      description,
-      subTitle,
-      subTitleLink,
-      link,
-      tags: newTags,
-      tagUsage: newTagUsage,
-      complexity: newComplexity,
-      images,
-      start,
-      end,
-      lastUpdated: "",
-      width: "w-100",
-    };
-    await API.graphql(graphqlOperation(createPost, { input: item }));
-    const updItems = [...items, item];
-    setItems(updItems);
+    if (type === 'blog')  {
+      await API.graphql(graphqlOperation(createPost, { input: data }));
+    }
   }
   // async function handleAdd() {
   //   const newTags = tags.split(" ");
@@ -114,8 +95,9 @@ function AddItem() {
 
   useEffect(() => {
     async function fetchData() {
-      const allItems = await API.graphql({ query: queries.listPosts });
-      setItems(allItems.data.listPosts.items);
+      const postsData = await API.graphql({ query: queries.listPosts });
+      const posts = postsData.data.listPosts.items.map((post) => ({...post, type: 'blog'}))
+      setItems(posts);
     }
     fetchData();
   }, []);
@@ -296,7 +278,12 @@ function AddItem() {
       </Card>
       <hr />
       {items.length > 0 ? (
-        items.map((item, i) => <Post key={i} post={item} />)
+        items.map((item, i) => {
+          item.type === 'blog' ? (
+            
+          )
+          <Post key={i} post={item} />
+        })
       ) : (
         <div>No items</div>
       )}
