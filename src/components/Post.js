@@ -1,6 +1,7 @@
 import React, {useState,useEffect} from "react";
 import {
   Badge,
+  Card,
   Carousel,
   Image,
 } from "react-bootstrap";
@@ -25,7 +26,7 @@ function Post({ post }) {
   }, [images]);
 
   return (
-    <div className="mb-5 w-100">
+    <Card className="px-0 py-4 border-top border-left-0 border-right-0 border-bottom-0">
       {images && images.length > 1 ? (
         <Carousel interval={10000000}>
           {imageUrls.map((url, i) => (
@@ -35,15 +36,15 @@ function Post({ post }) {
           ))}
         </Carousel>
       ) : null}
-      {images && images.length === 1 && imageUrls[0] ? (
-        <Image src={imageUrls[0]} fluid />
-      ): null}
-        <small className="text-muted">{timeInfo}</small>
-        <h5>{title}</h5>
+        <h2 className="mb-1">{title}</h2>
+        <div className="mb-3"><small className="text-muted">{timeInfo}</small></div>
+        {images && images.length === 1 && imageUrls[0] ? (
+          <Image src={imageUrls[0]} fluid />
+        ): null}
         <div
           className={`${
             tags && tags.length > 0 ? "mb-2" : ""
-          } font-weight-normal`}
+          } font-weight-normal mt-2`}
         >
           {content}
         </div>
@@ -68,6 +69,6 @@ function Post({ post }) {
             ))}
           </div>
         )}
-    </div>
+    </Card>
   );
 }

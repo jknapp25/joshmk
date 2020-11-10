@@ -3,7 +3,7 @@ import { Button, Form, FormControl,Image } from "react-bootstrap";
 import { Storage } from "aws-amplify";
 export default PostEditor;
 
-function PostEditor({ handleImageUpload, onCreate }) {
+function PostEditor({ onCreate }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [tags, setTags] = useState("");
@@ -20,15 +20,27 @@ function PostEditor({ handleImageUpload, onCreate }) {
     }
   }, [images]);
 
+  async function handleImageUpload(e) {
+    const file = e.target.files[0];
+    const { key } = await Storage.put(file.name, file, {
+      contentType: file.type,
+    });
+    if (key) {
+      const updImages = [...images, key];
+      setImages(updImages);
+    }
+  }
+
   function handleButtonClick() {
+    const updTags = tags.split(' ');
     const data = {
       title,
       content,
-      tags,
+      tags: updTags,
       images,
     }
 
-    onCreate('blog', data)
+    onCreate('post', data)
   }
 
   return (
