@@ -1,5 +1,4 @@
 import React from "react";
-import Item from "./Item";
 import {
   VerticalTimeline,
   VerticalTimelineElement,
@@ -12,6 +11,7 @@ import {
   IoMdMedical,
 } from "react-icons/io";
 import { GiMechanicalArm, GiCrosscutSaw } from "react-icons/gi";
+import Job from './Job';
 import "react-vertical-timeline-component/style.min.css";
 import "../App.css";
 export default Work;
@@ -45,7 +45,7 @@ function Work({ items }) {
           icon={icons[item.icon]}
           className="my-4"
         >
-          <Item item={item} />
+          <Job job={item} />
         </VerticalTimelineElement>
       ))}
     </VerticalTimeline>

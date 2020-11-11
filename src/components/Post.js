@@ -17,8 +17,14 @@ function Post({ post }) {
   const [imageUrls, setImageUrls] = useState([]);
   useEffect(() => {
     async function fetchData() {
-      const imageUrls = await Storage.get(images[0]);
-      setImageUrls([imageUrls]);
+
+      const imagesCalls = images.map((url) => {
+        return Storage.get(url);
+      })
+
+      const imageUrls = await Promise.all(imagesCalls)
+
+      setImageUrls(imageUrls);
     }
     if (images && images.length) {
       fetchData();
@@ -27,17 +33,17 @@ function Post({ post }) {
 
   return (
     <Card className="px-0 py-4 border-top border-left-0 border-right-0 border-bottom-0">
+        <h2 className="mb-1">{title}</h2>
+        <div className="mb-3"><small className="text-muted">{timeInfo}</small></div>
       {images && images.length > 1 ? (
         <Carousel interval={10000000}>
           {imageUrls.map((url, i) => (
             <Carousel.Item key={i}>
-              <Image variant="top" src={url} />
+              <img className="w-100" src={url} alt={url} />
             </Carousel.Item>
           ))}
         </Carousel>
       ) : null}
-        <h2 className="mb-1">{title}</h2>
-        <div className="mb-3"><small className="text-muted">{timeInfo}</small></div>
         {images && images.length === 1 && imageUrls[0] ? (
           <Image src={imageUrls[0]} fluid />
         ): null}

@@ -1,9 +1,10 @@
 # Adding my own items
 
-Verify item uploading data looks okay
-Upload all current items
+Lists fetch their item types
+Item editing
+Add all items
 Hide addition page
-Configurable posts
+Block permalink pages
 
 # Content types
 

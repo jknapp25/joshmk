@@ -1,25 +1,51 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Alert } from "react-bootstrap";
-import Item from "./Item";
 import Timeline from "./Timeline";
 import Resume from "./Resume";
 import { useLocation } from "@reach/router";
 import { parse } from "query-string";
 import { PDFDownloadLink } from "@react-pdf/renderer";
+import { API } from "aws-amplify";
+import * as queries from "../graphql/queries";
+import Post from './Post';
+import Project from './Project';
 export default ItemList;
 
 const statusOrder = ["Active", "On Hold", "Complete"];
 
-function ItemList({ items }) {
+function ItemList() {
   const { pathname, search } = useLocation();
   const searchParams = parse(search);
+  const [items, setItems] = useState([])
 
-  let itemType = pathname.substring(1) || "blog";
+  let pageName = pathname.substring(1) || "blog";
+  if (searchParams.search) pageName = searchParams.search;
 
-  if (searchParams.search) itemType = searchParams.search;
+  useEffect(() => {
+    async function fetchData() {
+      let items = []
 
-  let filteredItems = items
-    .filter((itm) => itm.tags.includes(itemType))
+      if (pageName === 'blog') {
+        const postsData = await API.graphql({ query: queries.listPosts });
+        items = postsData.data.listPosts.items.map((post) => ({...post, type: 'post'}));
+      }
+
+      if (pageName === 'work') {
+        const jobsData = await API.graphql({ query: queries.listJobs });
+        items = jobsData.data.listJobs.items.map((job) => ({...job, type: 'job'}));
+      }
+
+      if (pageName === 'projects') {
+        const projectsData = await API.graphql({ query: queries.listProjects });
+        items = projectsData.data.listProjects.items.map((project) => ({...project, type: 'project'}));
+      }
+
+      setItems(items);
+    }
+    fetchData();
+  }, [pageName]);
+
+  let sortedItems = items
     .sort(function (a, b) {
       if (a.end < b.end) {
         return 1;
@@ -29,34 +55,38 @@ function ItemList({ items }) {
         return 0;
       }
     });
-  let education = items.filter((itm) => itm.tags.includes("education"));
+  let education = sortedItems.filter((itm) => itm.tags.includes("education"));
 
-  if (itemType === "projects") {
-    filteredItems = filteredItems.sort(
+  if (pageName === "projects") {
+    sortedItems = sortedItems.sort(
       (a, b) =>
         statusOrder.indexOf(a.badgeText) - statusOrder.indexOf(b.badgeText)
     );
   }
 
-  if (itemType === "work") {
+  if (pageName === "work") {
     return (
       <>
         <Alert variant="info">
           Click{" "}
           <PDFDownloadLink
-            document={<Resume items={filteredItems} education={education} />}
+            document={<Resume items={sortedItems} education={education} />}
             fileName="Josh_Knapp_Resume.pdf"
           >
             <span className="alert-link">here</span>
           </PDFDownloadLink>{" "}
           for Josh's resume
         </Alert>
-        <Timeline items={filteredItems} />
+        <Timeline items={sortedItems} />
       </>
     );
+  } else if (pageName === "projects") {
+    return sortedItems.map((item, i) => (
+      <Project key={i} project={item} />
+    ));
   } else {
-    return filteredItems.map((item, i) => (
-      <Item key={i} item={item} bottomMargin="mb-4" />
+    return sortedItems.map((item, i) => (
+      <Post key={i} post={item} />
     ));
   }
 }
