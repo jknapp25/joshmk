@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Form, FormControl,Image } from "react-bootstrap";
+import { Button, Form, FormControl, Image } from "react-bootstrap";
 import { Storage } from "aws-amplify";
 export default PostEditor;
 
@@ -12,13 +12,24 @@ function PostEditor({ onCreate }) {
 
   useEffect(() => {
     async function fetchData() {
-      const imageUrls = await Storage.get(images[0]);
-      setImageUrls([imageUrls]);
+      const imagesCalls = images.map((url) => {
+        return Storage.get(url);
+      })
+      const imageUrls = await Promise.all(imagesCalls)
+      setImageUrls(imageUrls);
     }
-    if (images.length) {
+    if (images && images.length) {
       fetchData();
     }
   }, [images]);
+
+  function clearEditor() {
+    setTitle('');
+    setContent('');
+    setTags('');
+    setImages([]);
+    setImageUrls([]);
+  }
 
   async function handleImageUpload(e) {
     const file = e.target.files[0];
@@ -40,7 +51,8 @@ function PostEditor({ onCreate }) {
       images,
     }
 
-    onCreate('post', data)
+    onCreate('post', data);
+    clearEditor();
   }
 
   return (
@@ -81,9 +93,9 @@ function PostEditor({ onCreate }) {
         onChange={handleImageUpload}
       />
       <div className="mb-2">
-        {imageUrls.map( (url) => 
+        {imageUrls.map((url, i) =>
           (
-            <Image src={url} width="100" height="auto" thumbnail />
+            <Image key={url} src={url} width="100" height="auto" thumbnail />
           )
         )}
       </div>
@@ -91,6 +103,6 @@ function PostEditor({ onCreate }) {
       <Button className="mt-2" onClick={handleButtonClick}>
         Create
       </Button>
-  </>
+    </>
   );
 }

@@ -7,6 +7,7 @@ import {
 import { navigate } from "@reach/router";
 import { Storage } from "aws-amplify";
 import { createTimeInfo } from "../lib/utils";
+import {statusColorLookup} from '../lib/utils';
 export default Project;
 
 function Project({ project }) {
@@ -57,9 +58,9 @@ function Project({ project }) {
           ) : (
             name
           )}
-          {status && status === 'contract' ? (
-            <Badge variant='secondary' className="ml-2">
-              Contract
+          {status ? (
+            <Badge variant={statusColorLookup[status]} className="ml-2">
+              {status}
             </Badge>
           ): null}
         </Card.Title>

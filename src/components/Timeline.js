@@ -42,7 +42,7 @@ function Work({ items }) {
             borderRight: "7px solid  rgb(33, 150, 243)",
           }}
           iconStyle={{ background: "white", color: "white" }}
-          icon={icons[item.icon]}
+          icon={icons[0]}
           className="my-4"
         >
           <Job job={item} />

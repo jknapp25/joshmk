@@ -8,7 +8,7 @@ import SideNav from "./SideNav";
 import selfie from "../assets/selfie2.jpg";
 export default Home;
 
-const navOptions = ["blog", "work", "projects"];
+const navOptions = ["blog", "work", "projects", "add"];
 
 function Home({ children, showSidebar, handleTabsVisibilityChange }) {
   const { search } = useLocation();
@@ -20,22 +20,22 @@ function Home({ children, showSidebar, handleTabsVisibilityChange }) {
     <Container>
       <Row>
         <Col className="text-right">
-          {!showSidebar || activeSearch ? (
-            <img
-              src={selfie}
-              width="100"
-              height="100"
-              alt="Profile_picture"
-              className="mt-5 box align-top rounded-circle cursor-pointer"
-              onClick={() => navigate("/")}
-            />
-          ) : null}
-          {!activeSearch ? (
-            <SideNav show={showSidebar} navOptions={navOptions} />
-          ) : null}
+          {/* {!showSidebar || activeSearch ? ( */}
+          {/* <img
+            src={selfie}
+            width="100"
+            height="100"
+            alt="Profile_picture"
+            className="mt-5 box align-top rounded-circle cursor-pointer"
+            onClick={() => navigate("/")}
+          /> */}
+          {/* ) : null} */}
+          {/* {!activeSearch ? ( */}
+          <SideNav show={true} navOptions={navOptions} />
+          {/* ) : null} */}
         </Col>
         <Col xs={7}>
-          <Name />
+          {/* <Name /> */}
           {activeSearch ? (
             <div className="mb-4">
               Viewing items tagged:
@@ -49,12 +49,7 @@ function Home({ children, showSidebar, handleTabsVisibilityChange }) {
                 clear
               </span>
             </div>
-          ) : (
-            <NavBar
-              handleTabsVisibilityChange={handleTabsVisibilityChange}
-              navOptions={navOptions}
-            />
-          )}
+          ) : null}
           {children}
         </Col>
         <Col />

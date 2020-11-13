@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Button, Form, FormControl,Image } from "react-bootstrap";
+import { Button, Dropdown, Form, FormControl,Image } from "react-bootstrap";
 import { Storage } from "aws-amplify";
+import {statusColorLookup} from '../lib/utils';
 export default ProjectEditor;
 
 function ProjectEditor({ onCreate }) {
@@ -8,7 +9,7 @@ function ProjectEditor({ onCreate }) {
   const [summary, setSummary] = useState("");
   const [tasks, setTasks] = useState([]);
   const [link, setLink] = useState('');
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState('active');
   const [tags, setTags] = useState('');
   const [type, setType] = useState('full-time');
   const [start, setStart] = useState('');
@@ -80,6 +81,18 @@ function ProjectEditor({ onCreate }) {
         value={summary || ""}
         onChange={(e) => setSummary(e.target.value)}
       />
+
+      <Form.Label className="mb-0">Status</Form.Label>
+      <Dropdown>
+      <Dropdown.Toggle className="mb-2" variant={statusColorLookup[status] || 'secondary'}>
+        {status || 'Select'}
+      </Dropdown.Toggle>
+      <Dropdown.Menu>
+        {Object.keys(statusColorLookup).map((statusName) => (
+          <Dropdown.Item variant={statusColorLookup[statusName]} onClick={() => setStatus(statusName)}>{statusName}</Dropdown.Item>
+        ))}
+      </Dropdown.Menu>
+    </Dropdown>
 
       <Form.Label className="mb-0">Link</Form.Label>
       <FormControl

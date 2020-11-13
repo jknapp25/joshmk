@@ -5,6 +5,8 @@ Item editing
 Add all items
 Hide addition page
 Block permalink pages
+Post link next to title
+Set post dates to actuals
 
 # Content types
 

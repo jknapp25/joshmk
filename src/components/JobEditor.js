@@ -7,6 +7,7 @@ function JobEditor({ onCreate }) {
   const [role, setRole] = useState("");
   const [location, setLocation] = useState("");
   const [summary, setSummary] = useState("");
+  const [activeDetail, setActiveDetail] = useState('');
   const [details, setDetails] = useState([]);
   const [companyUrl, setCompanyUrl] = useState('');
   const [tags, setTags] = useState('');
@@ -18,17 +19,17 @@ function JobEditor({ onCreate }) {
   function handleButtonClick() {
     const updTags = tags.split(' ');
     const data = {
-     company,
-     role,
-     location,
-     summary,
-     details,
-     companyUrl,
-     tags: updTags,
-     start,
-     end,
-     complexity,
-     tagUsage
+      company,
+      role,
+      location,
+      summary,
+      details,
+      companyUrl,
+      tags: updTags,
+      start,
+      end,
+      complexity,
+      tagUsage
     }
 
     onCreate('job', data)
@@ -62,7 +63,7 @@ function JobEditor({ onCreate }) {
         value={companyUrl || ""}
         onChange={(e) => setCompanyUrl(e.target.value)}
       />
-      
+
       <Form.Label className="mb-0">Summary</Form.Label>
       <FormControl
         id="summary"
@@ -73,6 +74,27 @@ function JobEditor({ onCreate }) {
         value={summary || ""}
         onChange={(e) => setSummary(e.target.value)}
       />
+
+      <Form.Label className="mb-0">Details</Form.Label>
+      <FormControl
+        id="activeDetail"
+        as="textarea"
+        rows="2"
+        aria-describedby="activeDetail"
+        value={activeDetail || ""}
+        onChange={(e) => setActiveDetail(e.target.value)}
+      />
+      <Button variant="link" size="sm" className="mt-2 mb-1 pl-0 pt-0" onClick={() => {
+        setDetails([...details, activeDetail]);
+        setActiveDetail('');
+      }}>
+        Add
+      </Button>
+      <ul>
+        {details.map((detail) => (
+          <li>{detail}</li>
+        ))}
+      </ul>
 
       <Form.Label className="mb-0">Location</Form.Label>
       <FormControl
@@ -113,6 +135,6 @@ function JobEditor({ onCreate }) {
       <Button className="mt-2" onClick={handleButtonClick}>
         Create
       </Button>
-  </>
+    </>
   );
 }

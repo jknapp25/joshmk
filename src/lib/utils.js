@@ -1,5 +1,11 @@
 import moment from "moment";
 
+export const statusColorLookup = {
+  active: 'info',
+  "on hold": 'warning',
+  completed: 'success'
+}
+
 export function calcSkillsAssessments(items) {
   /**
    *  Calculation:

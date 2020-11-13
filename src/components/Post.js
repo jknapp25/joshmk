@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   Badge,
   Card,
@@ -33,10 +33,10 @@ function Post({ post }) {
 
   return (
     <Card className="px-0 py-4 border-top border-left-0 border-right-0 border-bottom-0">
-        <h2 className="mb-1">{title}</h2>
-        <div className="mb-3"><small className="text-muted">{timeInfo}</small></div>
+      <h2 className="mb-1">{title}</h2>
+      <div className="mb-3"><small className="text-muted">{timeInfo}</small></div>
       {images && images.length > 1 ? (
-        <Carousel interval={10000000}>
+        <Carousel className="mb-3" interval={10000000}>
           {imageUrls.map((url, i) => (
             <Carousel.Item key={i}>
               <img className="w-100" src={url} alt={url} />
@@ -44,37 +44,36 @@ function Post({ post }) {
           ))}
         </Carousel>
       ) : null}
-        {images && images.length === 1 && imageUrls[0] ? (
-          <Image src={imageUrls[0]} fluid />
-        ): null}
+      {images && images.length === 1 && imageUrls[0] ? (
+        <Image className="mb-3" src={imageUrls[0]} fluid />
+      ) : null}
+      <div
+        className={`${tags && tags.length > 0 ? "mb-3" : ""
+          } font-weight-normal`}
+      >
+        {content}
+      </div>
+      {tags && tags.length > 0 && (
         <div
-          className={`${
-            tags && tags.length > 0 ? "mb-2" : ""
-          } font-weight-normal mt-2`}
+          style={{
+            whiteSpace: "nowrap",
+            overflowX: "scroll",
+            boxShadow: "",
+          }}
         >
-          {content}
+          {tags.map((tag, i) => (
+            <Badge
+              key={i}
+              pill
+              variant="transparent"
+              className="mr-2"
+              onClick={() => navigate(`?search=${tag}`)}
+            >
+              {tag}
+            </Badge>
+          ))}
         </div>
-        {tags && tags.length > 0 && (
-          <div
-            style={{
-              whiteSpace: "nowrap",
-              overflowX: "scroll",
-              boxShadow: "",
-            }}
-          >
-            {tags.map((tag, i) => (
-              <Badge
-                pill
-                variant="transparent"
-                className="mr-2"
-                key={i}
-                onClick={() => navigate(`?search=${tag}`)}
-              >
-                {tag}
-              </Badge>
-            ))}
-          </div>
-        )}
+      )}
     </Card>
   );
 }

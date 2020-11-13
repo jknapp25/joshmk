@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Alert } from "react-bootstrap";
 import Timeline from "./Timeline";
 import Resume from "./Resume";
@@ -27,17 +27,17 @@ function ItemList() {
 
       if (pageName === 'blog') {
         const postsData = await API.graphql({ query: queries.listPosts });
-        items = postsData.data.listPosts.items.map((post) => ({...post, type: 'post'}));
+        items = postsData.data.listPosts.items.map((post) => ({ ...post, type: 'post' }));
       }
 
       if (pageName === 'work') {
         const jobsData = await API.graphql({ query: queries.listJobs });
-        items = jobsData.data.listJobs.items.map((job) => ({...job, type: 'job'}));
+        items = jobsData.data.listJobs.items.map((job) => ({ ...job, type: 'job' }));
       }
 
       if (pageName === 'projects') {
         const projectsData = await API.graphql({ query: queries.listProjects });
-        items = projectsData.data.listProjects.items.map((project) => ({...project, type: 'project'}));
+        items = projectsData.data.listProjects.items.map((project) => ({ ...project, type: 'project' }));
       }
 
       setItems(items);
@@ -67,7 +67,7 @@ function ItemList() {
   if (pageName === "work") {
     return (
       <>
-        <Alert variant="info">
+        <Alert variant="info" className="mt-4">
           Click{" "}
           <PDFDownloadLink
             document={<Resume items={sortedItems} education={education} />}
