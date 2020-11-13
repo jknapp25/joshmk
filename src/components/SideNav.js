@@ -17,15 +17,7 @@ function SideNav({ show, navOptions }) {
         className="sticky mr-3"
         style={{ top: "65px", display: "block" }}
       >
-        <img
-          src={selfie}
-          width="150"
-          height="150"
-          alt="Profile_picture"
-          className="mr-3 mb-4 box align-top cursor-pointer"
-          style={{ borderRadius: '15px' }}
-          onClick={() => navigate("/")}
-        />
+
         {/* <img
           src={logo}
           width="57"

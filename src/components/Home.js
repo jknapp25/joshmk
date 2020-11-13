@@ -52,7 +52,15 @@ function Home({ children, showSidebar, handleTabsVisibilityChange }) {
           ) : null}
           {children}
         </Col>
-        <Col />
+        <Col >        <img
+          src={selfie}
+          width="250"
+          height="250"
+          alt="Profile_picture"
+          className="m-4 box align-top cursor-pointer"
+          style={{ borderRadius: '15px' }}
+          onClick={() => navigate("/")}
+        /></Col>
       </Row>
     </Container>
   );
