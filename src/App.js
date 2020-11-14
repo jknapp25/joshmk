@@ -52,7 +52,7 @@ function App() {
           <CreateItem path="create" />
         </Home>
       </Router>
-      <AmplifySignOut />
+      {/* <AmplifySignOut /> */}
     </div>
   );
 }
