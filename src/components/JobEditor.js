@@ -7,17 +7,32 @@ function JobEditor({ onCreate }) {
   const [role, setRole] = useState("");
   const [location, setLocation] = useState("");
   const [summary, setSummary] = useState("");
-  const [activeDetail, setActiveDetail] = useState('');
+  const [activeDetail, setActiveDetail] = useState("");
   const [details, setDetails] = useState([]);
-  const [companyUrl, setCompanyUrl] = useState('');
-  const [tags, setTags] = useState('');
-  const [start, setStart] = useState('');
-  const [end, setEnd] = useState('');
+  const [companyUrl, setCompanyUrl] = useState("");
+  const [tags, setTags] = useState("");
+  const [start, setStart] = useState("");
+  const [end, setEnd] = useState("");
   const [complexity, setComplexity] = useState(0);
   const [tagUsage, setTagUsage] = useState([]);
 
+  function clearEditor() {
+    setCompany("");
+    setCompanyUrl("");
+    setActiveDetail("");
+    setDetails([]);
+    setRole("");
+    setLocation("");
+    setSummary("");
+    setTags("");
+    setStart("");
+    setEnd("");
+    setComplexity(0);
+    setTagUsage([]);
+  }
+
   function handleButtonClick() {
-    const updTags = tags.split(' ');
+    const updTags = tags.split(" ");
     const data = {
       company,
       role,
@@ -29,10 +44,11 @@ function JobEditor({ onCreate }) {
       start,
       end,
       complexity,
-      tagUsage
-    }
+      tagUsage,
+    };
 
-    onCreate('job', data)
+    onCreate("job", data);
+    clearEditor();
   }
 
   return (
@@ -84,10 +100,15 @@ function JobEditor({ onCreate }) {
         value={activeDetail || ""}
         onChange={(e) => setActiveDetail(e.target.value)}
       />
-      <Button variant="link" size="sm" className="mt-2 mb-1 pl-0 pt-0" onClick={() => {
-        setDetails([...details, activeDetail]);
-        setActiveDetail('');
-      }}>
+      <Button
+        variant="link"
+        size="sm"
+        className="mt-2 mb-1 pl-0 pt-0"
+        onClick={() => {
+          setDetails([...details, activeDetail]);
+          setActiveDetail("");
+        }}
+      >
         Add
       </Button>
       <ul>

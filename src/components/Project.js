@@ -1,26 +1,13 @@
-import React, {useState,useEffect} from "react";
-import {
-  Badge,
-  Card,
-  Carousel,
-} from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Badge, Card, Carousel } from "react-bootstrap";
 import { navigate } from "@reach/router";
 import { Storage } from "aws-amplify";
 import { createTimeInfo } from "../lib/utils";
-import {statusColorLookup} from '../lib/utils';
+import { statusColorLookup } from "../lib/utils";
 export default Project;
 
 function Project({ project }) {
-  const {
-    name,
-    tags,
-    summary,
-    status,
-    link,
-    images,
-    start,
-    end,
-  } = project;
+  const { name, tags, summary, status, link, images, start, end } = project;
   const timeInfo = createTimeInfo(start, end, null, false);
 
   const [imageUrls, setImageUrls] = useState([]);
@@ -34,9 +21,8 @@ function Project({ project }) {
     }
   }, [images]);
 
-
   return (
-    <Card className={`mb-2`}>
+    <Card className="mb-4">
       {images && images.length > 1 ? (
         <Carousel interval={10000000}>
           {imageUrls.map((url, i) => (
@@ -45,10 +31,10 @@ function Project({ project }) {
             </Carousel.Item>
           ))}
         </Carousel>
-      ) :null}
+      ) : null}
       {images && images.length === 1 && imageUrls[0] ? (
         <Card.Img variant="top" src={imageUrls[0]} />
-      ): null}
+      ) : null}
       <Card.Body>
         <Card.Title>
           {link ? (
@@ -62,16 +48,10 @@ function Project({ project }) {
             <Badge variant={statusColorLookup[status]} className="ml-2">
               {status}
             </Badge>
-          ): null}
+          ) : null}
         </Card.Title>
         {summary ? (
-          <Card.Text
-            className={`${
-              tags && tags.length > 0 ? "mb-2" : ""
-            } font-weight-normal`}
-          >
-            {summary}
-          </Card.Text>
+          <Card.Text className="font-weight-normal">{summary}</Card.Text>
         ) : null}
         {tags && tags.length > 0 && (
           <Card.Text
@@ -80,6 +60,7 @@ function Project({ project }) {
               overflowX: "scroll",
               boxShadow: "",
             }}
+            className="mt-2"
           >
             {tags.map((tag, i) => (
               <Badge

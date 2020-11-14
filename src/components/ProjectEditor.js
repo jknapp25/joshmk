@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { Button, Dropdown, Form, FormControl,Image } from "react-bootstrap";
+import { Button, Dropdown, Form, FormControl, Image } from "react-bootstrap";
 import { Storage } from "aws-amplify";
-import {statusColorLookup} from '../lib/utils';
+import { statusColorLookup } from "../lib/utils";
 export default ProjectEditor;
 
 function ProjectEditor({ onCreate }) {
   const [name, setName] = useState("");
   const [summary, setSummary] = useState("");
+  const [activeTask, setActiveTask] = useState("");
   const [tasks, setTasks] = useState([]);
-  const [link, setLink] = useState('');
-  const [status, setStatus] = useState('active');
-  const [tags, setTags] = useState('');
-  const [type, setType] = useState('full-time');
-  const [start, setStart] = useState('');
-  const [end, setEnd] = useState('');
+  const [link, setLink] = useState("");
+  const [status, setStatus] = useState("active");
+  const [tags, setTags] = useState("");
+  const [type, setType] = useState("full-time");
+  const [start, setStart] = useState("");
+  const [end, setEnd] = useState("");
   const [complexity, setComplexity] = useState(0);
   const [tagUsage, setTagUsage] = useState([]);
   const [images, setImages] = useState([]);
@@ -29,6 +30,22 @@ function ProjectEditor({ onCreate }) {
     }
   }, [images]);
 
+  function clearEditor() {
+    setName("");
+    setSummary("");
+    setTasks([]);
+    setLink("");
+    setStatus("active");
+    setTags("");
+    setType("full-time");
+    setStart("");
+    setEnd("");
+    setComplexity(0);
+    setTagUsage([]);
+    setImages([]);
+    setImageUrls([]);
+  }
+
   async function handleImageUpload(e) {
     const file = e.target.files[0];
     const { key } = await Storage.put(file.name, file, {
@@ -41,7 +58,7 @@ function ProjectEditor({ onCreate }) {
   }
 
   function handleButtonClick() {
-    const updTags = tags.split(' ');
+    const updTags = tags.split(" ");
     const data = {
       name,
       summary,
@@ -54,10 +71,11 @@ function ProjectEditor({ onCreate }) {
       end,
       complexity,
       tagUsage,
-      images
-    }
+      images,
+    };
 
-    onCreate('project', data)
+    onCreate("project", data);
+    clearEditor();
   }
 
   return (
@@ -82,17 +100,49 @@ function ProjectEditor({ onCreate }) {
         onChange={(e) => setSummary(e.target.value)}
       />
 
+      <Form.Label className="mb-0">Tasks</Form.Label>
+      <FormControl
+        id="activeTask"
+        aria-describedby="activeTask"
+        value={activeTask || ""}
+        onChange={(e) => setActiveTask(e.target.value)}
+      />
+      <Button
+        variant="link"
+        size="sm"
+        className="mt-2 mb-1 pl-0 pt-0"
+        onClick={() => {
+          setTasks([...tasks, activeTask]);
+          setActiveTask("");
+        }}
+      >
+        Add
+      </Button>
+      <ul>
+        {tasks.map((task) => (
+          <li>{task}</li>
+        ))}
+      </ul>
+
       <Form.Label className="mb-0">Status</Form.Label>
       <Dropdown>
-      <Dropdown.Toggle className="mb-2" variant={statusColorLookup[status] || 'secondary'}>
-        {status || 'Select'}
-      </Dropdown.Toggle>
-      <Dropdown.Menu>
-        {Object.keys(statusColorLookup).map((statusName) => (
-          <Dropdown.Item variant={statusColorLookup[statusName]} onClick={() => setStatus(statusName)}>{statusName}</Dropdown.Item>
-        ))}
-      </Dropdown.Menu>
-    </Dropdown>
+        <Dropdown.Toggle
+          className="mb-2"
+          variant={statusColorLookup[status] || "secondary"}
+        >
+          {status || "Select"}
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+          {Object.keys(statusColorLookup).map((statusName) => (
+            <Dropdown.Item
+              variant={statusColorLookup[statusName]}
+              onClick={() => setStatus(statusName)}
+            >
+              {statusName}
+            </Dropdown.Item>
+          ))}
+        </Dropdown.Menu>
+      </Dropdown>
 
       <Form.Label className="mb-0">Link</Form.Label>
       <FormControl
@@ -119,11 +169,9 @@ function ProjectEditor({ onCreate }) {
         onChange={handleImageUpload}
       />
       <div className="mb-2">
-        {imageUrls.map( (url) => 
-          (
-            <Image src={url} width="100" height="auto" thumbnail />
-          )
-        )}
+        {imageUrls.map((url) => (
+          <Image src={url} width="100" height="auto" thumbnail />
+        ))}
       </div>
 
       <Form.Label className="mb-0">Start (ex: 2020-10-14)</Form.Label>
@@ -147,6 +195,6 @@ function ProjectEditor({ onCreate }) {
       <Button className="mt-2" onClick={handleButtonClick}>
         Create
       </Button>
-  </>
+    </>
   );
 }

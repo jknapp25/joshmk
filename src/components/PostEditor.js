@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, FormControl, Image } from "react-bootstrap";
 import { Storage } from "aws-amplify";
+import { API } from "aws-amplify";
+import * as queries from "../graphql/queries";
 export default PostEditor;
 
-function PostEditor({ onCreate }) {
+function PostEditor({ id = null, onCreate, onUpdate }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [tags, setTags] = useState("");
@@ -14,8 +16,8 @@ function PostEditor({ onCreate }) {
     async function fetchData() {
       const imagesCalls = images.map((url) => {
         return Storage.get(url);
-      })
-      const imageUrls = await Promise.all(imagesCalls)
+      });
+      const imageUrls = await Promise.all(imagesCalls);
       setImageUrls(imageUrls);
     }
     if (images && images.length) {
@@ -23,10 +25,29 @@ function PostEditor({ onCreate }) {
     }
   }, [images]);
 
+  useEffect(() => {
+    async function fetchData() {
+      const postData = await API.graphql({
+        query: queries.getPost,
+        variables: { id },
+      });
+
+      if (postData) {
+        setTitle(postData.data.getPost.title);
+        setContent(postData.data.getPost.content);
+        setTags(postData.data.getPost.tags);
+        setImages(postData.data.getPost.images);
+      }
+    }
+    if (id) {
+      fetchData();
+    }
+  }, [id]);
+
   function clearEditor() {
-    setTitle('');
-    setContent('');
-    setTags('');
+    setTitle("");
+    setContent("");
+    setTags("");
     setImages([]);
     setImageUrls([]);
   }
@@ -43,15 +64,20 @@ function PostEditor({ onCreate }) {
   }
 
   function handleButtonClick() {
-    const updTags = tags.split(' ');
+    const updTags = tags.split(" ");
     const data = {
       title,
       content,
       tags: updTags,
       images,
-    }
+    };
 
-    onCreate('post', data);
+    if (id) {
+      data.id = id;
+      onUpdate("post", data);
+    } else {
+      onCreate("post", data);
+    }
     clearEditor();
   }
 
@@ -93,15 +119,13 @@ function PostEditor({ onCreate }) {
         onChange={handleImageUpload}
       />
       <div className="mb-2">
-        {imageUrls.map((url, i) =>
-          (
-            <Image key={url} src={url} width="100" height="auto" thumbnail />
-          )
-        )}
+        {imageUrls.map((url, i) => (
+          <Image key={url} src={url} width="100" height="auto" thumbnail />
+        ))}
       </div>
 
       <Button className="mt-2" onClick={handleButtonClick}>
-        Create
+        {id ? "Update" : "Create"}
       </Button>
     </>
   );

@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  Badge,
-  Card,
-} from "react-bootstrap";
+import { Badge, Card } from "react-bootstrap";
 import { navigate } from "@reach/router";
 import { createTimeInfo } from "../lib/utils";
 export default Job;
@@ -26,11 +23,11 @@ function Job({ job }) {
       <Card.Body>
         <Card.Title>
           {role}
-          {type === 'contract' ? (
+          {type === "contract" ? (
             <Badge variant="secondary" className="ml-2">
               Contract
             </Badge>
-          ): null}
+          ) : null}
         </Card.Title>
         <Card.Subtitle className="text-muted mb-2">
           {companyUrl ? (

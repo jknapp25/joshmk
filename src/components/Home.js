@@ -1,41 +1,45 @@
 import React from "react";
 import { navigate, useLocation } from "@reach/router";
 import { parse } from "query-string";
-import { Badge, Container, Row, Col } from "react-bootstrap";
-import Name from "./Name";
-import NavBar from "./NavBar";
+import { Badge, Card, Container, Row, Col } from "react-bootstrap";
 import SideNav from "./SideNav";
 import selfie from "../assets/selfie2.jpg";
 export default Home;
 
 const navOptions = ["blog", "work", "projects", "add"];
 
-function Home({ children, showSidebar, handleTabsVisibilityChange }) {
+function Home({ children }) {
   const { search } = useLocation();
   const searchParams = parse(search);
 
   const activeSearch = searchParams.search || null;
 
   return (
-    <Container>
+    <Container fluid>
       <Row>
-        <Col className="text-right">
-          {/* {!showSidebar || activeSearch ? ( */}
-          {/* <img
-            src={selfie}
-            width="100"
-            height="100"
-            alt="Profile_picture"
-            className="mt-5 box align-top rounded-circle cursor-pointer"
-            onClick={() => navigate("/")}
-          /> */}
-          {/* ) : null} */}
-          {/* {!activeSearch ? ( */}
-          <SideNav show={true} navOptions={navOptions} />
-          {/* ) : null} */}
+        <Col>
+          <Card
+            className="mx-3 my-4 position-sticky"
+            style={{ borderRadius: "15px", top: "20px" }}
+          >
+            <Card.Img
+              variant="top"
+              src={selfie}
+              style={{
+                borderTopLeftRadius: "15px",
+                borderTopRightRadius: "15px",
+              }}
+              onClick={() => navigate("/")}
+            />
+            <Card.Footer>
+              <Card.Title>Josh Knapp</Card.Title>
+              <Card.Text>
+                I create stories, apps, and whatever comes to mind...
+              </Card.Text>
+            </Card.Footer>
+          </Card>
         </Col>
-        <Col xs={7}>
-          {/* <Name /> */}
+        <Col xs={6}>
           {activeSearch ? (
             <div className="mb-4">
               Viewing items tagged:
@@ -52,15 +56,9 @@ function Home({ children, showSidebar, handleTabsVisibilityChange }) {
           ) : null}
           {children}
         </Col>
-        <Col >        <img
-          src={selfie}
-          width="250"
-          height="250"
-          alt="Profile_picture"
-          className="m-4 box align-top cursor-pointer"
-          style={{ borderRadius: '15px' }}
-          onClick={() => navigate("/")}
-        /></Col>
+        <Col>
+          <SideNav show={true} navOptions={navOptions} />
+        </Col>
       </Row>
     </Container>
   );
