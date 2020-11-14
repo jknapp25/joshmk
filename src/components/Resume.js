@@ -137,6 +137,7 @@ const generalSkills =
   "Agile, Lean, Scrum, Azure DevOps, GitHub, CI/CD pipelines, PyCharm, VS Code, Chrome Developer Tools, GIT, Git hooks";
 
 function Resume({ items, education }) {
+  // if (!items || items.length === 0) return <Document />;
   return (
     <Document>
       <Page size="A4" style={styles.page}>

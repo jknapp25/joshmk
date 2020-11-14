@@ -22,6 +22,8 @@ function ItemList() {
   if (searchParams.search) pageName = searchParams.search;
 
   useEffect(() => {
+    setItems([]);
+
     async function fetchData() {
       let items = [];
 
