@@ -9,10 +9,10 @@ export default Home;
 const navOptions = ["blog", "work", "projects", "create"];
 
 function Home({ children }) {
-  const { search } = useLocation();
+  const { pathname, search } = useLocation();
   const searchParams = parse(search);
 
-  const activeSearch = searchParams.search || null;
+  const activeSearch = pathname === "/search";
 
   return (
     <Container fluid>
@@ -41,10 +41,10 @@ function Home({ children }) {
         </Col>
         <Col xs={6}>
           {activeSearch ? (
-            <div className="mb-4">
+            <div className="mb-4 mt-4">
               Viewing items tagged:
               <Badge pill variant="transparent" className="ml-2 active">
-                {activeSearch}
+                {searchParams.tag}
               </Badge>
               <span
                 className="text-muted ml-2 cursor-pointer"

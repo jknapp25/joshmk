@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   Badge,
   Card,
@@ -142,7 +142,6 @@ function Item({ item, bottomMargin = "" }) {
     }
   }, [images]);
 
-
   return (
     <Card className={`${bottomMargin} ${width}`}>
       {images && images.length > 1 ? (
@@ -153,10 +152,10 @@ function Item({ item, bottomMargin = "" }) {
             </Carousel.Item>
           ))}
         </Carousel>
-      ) :null}
+      ) : null}
       {images && images.length === 1 && imageUrls[0] ? (
         <Card.Img variant="top" src={imageUrls[0]} />
-      ): null}
+      ) : null}
       <Card.Body>
         <Card.Title>
           {link ? (
@@ -209,7 +208,7 @@ function Item({ item, bottomMargin = "" }) {
                 variant="transparent"
                 className="mr-2"
                 key={i}
-                onClick={() => navigate(`?search=${tag}`)}
+                onClick={() => navigate(`/search?tag=${tag}`)}
               >
                 {tag}
               </Badge>

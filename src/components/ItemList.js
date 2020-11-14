@@ -9,6 +9,7 @@ import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import Post from "./Post";
 import Project from "./Project";
+import Job from "./Job";
 export default ItemList;
 
 const statusOrder = ["Active", "On Hold", "Complete"];
@@ -19,7 +20,6 @@ function ItemList() {
   const [items, setItems] = useState([]);
 
   let pageName = pathname.substring(1) || "blog";
-  if (searchParams.search) pageName = searchParams.search;
 
   useEffect(() => {
     setItems([]);
@@ -27,28 +27,33 @@ function ItemList() {
     async function fetchData() {
       let items = [];
 
-      if (pageName === "blog") {
+      if (pageName === "blog" || pageName === "search") {
         const postsData = await API.graphql({ query: queries.listPosts });
-        items = postsData.data.listPosts.items.map((post) => ({
+        const posts = postsData.data.listPosts.items.map((post) => ({
           ...post,
           type: "post",
         }));
+        items = [...items, ...posts];
       }
 
-      if (pageName === "work") {
+      if (pageName === "work" || pageName === "search") {
         const jobsData = await API.graphql({ query: queries.listJobs });
-        items = jobsData.data.listJobs.items.map((job) => ({
+        const jobs = jobsData.data.listJobs.items.map((job) => ({
           ...job,
           type: "job",
         }));
+        items = [...items, ...jobs];
       }
 
-      if (pageName === "projects") {
+      if (pageName === "projects" || pageName === "search") {
         const projectsData = await API.graphql({ query: queries.listProjects });
-        items = projectsData.data.listProjects.items.map((project) => ({
-          ...project,
-          type: "project",
-        }));
+        const projects = projectsData.data.listProjects.items.map(
+          (project) => ({
+            ...project,
+            type: "project",
+          })
+        );
+        items = [...items, ...projects];
       }
 
       setItems(items);
@@ -57,9 +62,9 @@ function ItemList() {
   }, [pageName]);
 
   let sortedItems = items.sort(function (a, b) {
-    if (a.end < b.end) {
+    if (a.createdAt < b.createdAt) {
       return 1;
-    } else if (b.end < a.end) {
+    } else if (b.createdAt < a.createdAt) {
       return -1;
     } else {
       return 0;
@@ -96,6 +101,29 @@ function ItemList() {
         {sortedItems.map((item, i) => (
           <Project key={i} project={item} />
         ))}
+      </div>
+    );
+  } else if (pageName === "search") {
+    const filteredItems = sortedItems.filter((item) =>
+      item.tags.includes(searchParams.tag)
+    );
+    return (
+      <div className="my-4">
+        {filteredItems.map((item, i) => {
+          if (item.type === "post")
+            return (
+              <Post
+                key={i}
+                setEditingItemId={() => {}}
+                post={item}
+                showEdit={false}
+              />
+            );
+          if (item.type === "job") return <Job key={i} job={item} />;
+          if (item.type === "project")
+            return <Project key={i} project={item} />;
+          return null;
+        })}
       </div>
     );
   } else {

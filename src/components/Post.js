@@ -75,7 +75,7 @@ function Post({ post, setEditingItemId, showEdit = false }) {
               pill
               variant="transparent"
               className="mr-2"
-              onClick={() => navigate(`?search=${tag}`)}
+              onClick={() => navigate(`/search?tag=${tag}`)}
             >
               {tag}
             </Badge>

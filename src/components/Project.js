@@ -68,7 +68,7 @@ function Project({ project }) {
                 variant="transparent"
                 className="mr-2"
                 key={i}
-                onClick={() => navigate(`?search=${tag}`)}
+                onClick={() => navigate(`/search?tag=${tag}`)}
               >
                 {tag}
               </Badge>
