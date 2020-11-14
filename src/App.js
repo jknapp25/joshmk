@@ -4,7 +4,7 @@ import ItemList from "./components/ItemList";
 import Skills from "./components/Skills";
 import GoalHours from "./components/GoalHours";
 import Home from "./components/Home.js";
-import AddItem from "./components/AddItem.js";
+import CreateItem from "./components/CreateItem.js";
 import items from "./lib/items.json";
 import Amplify from "aws-amplify";
 import { withAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
@@ -49,7 +49,7 @@ function App() {
           <ItemList default items={items} />
           <Skills path="skills" />
           <GoalHours path="goal-hours" />
-          <AddItem path="add" />
+          <CreateItem path="create" />
         </Home>
       </Router>
       <AmplifySignOut />

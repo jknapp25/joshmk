@@ -6,7 +6,7 @@ import SideNav from "./SideNav";
 import selfie from "../assets/selfie2.jpg";
 export default Home;
 
-const navOptions = ["blog", "work", "projects", "add"];
+const navOptions = ["blog", "work", "projects", "create"];
 
 function Home({ children }) {
   const { search } = useLocation();
