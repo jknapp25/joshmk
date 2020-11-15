@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Alert } from "react-bootstrap";
+import { Alert, Badge } from "react-bootstrap";
 import Timeline from "./Timeline";
 import Resume from "./Resume";
-import { useLocation } from "@reach/router";
+import { useLocation, navigate } from "@reach/router";
 import { parse } from "query-string";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { API } from "aws-amplify";
@@ -109,6 +109,19 @@ function ItemList() {
     );
     return (
       <div className="my-4">
+        <h3 className="mb-4 mt-4">
+          {filteredItems.length} items tagged
+          <Badge pill variant="transparent" className="ml-2 active">
+            {searchParams.tag}
+          </Badge>{" "}
+          |
+          <span
+            className="text-muted ml-2 cursor-pointer"
+            onClick={() => navigate("/")}
+          >
+            clear search
+          </span>
+        </h3>
         {filteredItems.map((item, i) => {
           if (item.type === "post")
             return (

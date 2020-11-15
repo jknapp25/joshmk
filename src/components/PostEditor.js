@@ -35,7 +35,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
       if (postData) {
         setTitle(postData.data.getPost.title);
         setContent(postData.data.getPost.content);
-        setTags(postData.data.getPost.tags);
+        setTags(postData.data.getPost.tags.join(" "));
         setImages(postData.data.getPost.images);
       }
     }

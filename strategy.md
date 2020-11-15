@@ -1,8 +1,6 @@
 # Adding my own items
 
-Lists fetch their item types
-Item editing
-Add all items
+Item editing (project, job)
 Hide addition page
 Block permalink pages
 Post link next to title

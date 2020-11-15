@@ -16,9 +16,9 @@ import {
   updateProject,
 } from "../graphql/mutations";
 import * as queries from "../graphql/queries";
-export default AddItem;
+export default CreateItem;
 
-function AddItem() {
+function CreateItem() {
   const [items, setItems] = useState([]);
   const [itemType, setItemType] = useState("post");
   const [editingItemId, setEditingItemId] = useState("");

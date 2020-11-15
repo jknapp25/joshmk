@@ -39,23 +39,7 @@ function Home({ children }) {
             </Card.Footer>
           </Card>
         </Col>
-        <Col xs={6}>
-          {activeSearch ? (
-            <div className="mb-4 mt-4">
-              Viewing items tagged:
-              <Badge pill variant="transparent" className="ml-2 active">
-                {searchParams.tag}
-              </Badge>
-              <span
-                className="text-muted ml-2 cursor-pointer"
-                onClick={() => navigate("/")}
-              >
-                clear
-              </span>
-            </div>
-          ) : null}
-          {children}
-        </Col>
+        <Col xs={6}>{children}</Col>
         <Col>
           <SideNav show={true} navOptions={navOptions} />
         </Col>
