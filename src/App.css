@@ -148,3 +148,16 @@ html {
 .cursor-pointer {
   cursor: pointer;
 }
+
+.card-body {
+  background-color: transparent !important;
+}
+
+.card-footer {
+  background-color: transparent !important;
+}
+
+.card {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+  border: none !important;
+}

@@ -27,7 +27,7 @@ function Post({ post, setEditingItemId, showEdit = false }) {
   }, [images]);
 
   return (
-    <Card className="px-0 py-4 border-top border-left-0 border-right-0 border-bottom-0">
+    <div className="px-0 py-4 border-top border-left-0 border-right-0 border-bottom-0">
       <h2 className="mb-1">
         {title}{" "}
         {showEdit ? (
@@ -82,6 +82,6 @@ function Post({ post, setEditingItemId, showEdit = false }) {
           ))}
         </div>
       )}
-    </Card>
+    </div>
   );
 }
