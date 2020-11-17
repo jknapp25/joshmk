@@ -11,6 +11,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
   const [tags, setTags] = useState("");
   const [images, setImages] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
+  const [createdAt, setCreatedAt] = useState("");
 
   useEffect(() => {
     async function fetchData() {
@@ -37,6 +38,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
         setContent(postData.data.getPost.content);
         setTags(postData.data.getPost.tags.join(" "));
         setImages(postData.data.getPost.images);
+        setCreatedAt(postData.data.getPost.createdAt);
       }
     }
     if (id) {
@@ -50,6 +52,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
     setTags("");
     setImages([]);
     setImageUrls([]);
+    setCreatedAt("");
   }
 
   async function handleImageUpload(e) {
@@ -74,6 +77,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
 
     if (id) {
       data.id = id;
+      data.createdAt = createdAt;
       onUpdate("post", data);
     } else {
       onCreate("post", data);
@@ -123,6 +127,17 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
           <Image key={url} src={url} width="100" height="auto" thumbnail />
         ))}
       </div>
+
+      <Form.Label className="mb-0">
+        Created At (ex: 2020-11-21T17:42:34Z)
+      </Form.Label>
+      <FormControl
+        id="createdAt"
+        className="mb-2"
+        aria-describedby="createdAt"
+        value={createdAt || ""}
+        onChange={(e) => setCreatedAt(e.target.value)}
+      />
 
       <Button className="mt-2" onClick={handleButtonClick}>
         {id ? "Update" : "Create"}

@@ -31,7 +31,12 @@ function Post({ post, setEditingItemId, showEdit = false }) {
       <h2 className="mb-1">
         {title}{" "}
         {showEdit ? (
-          <span onClick={() => setEditingItemId(id)}>
+          <span
+            onClick={() => {
+              setEditingItemId(id);
+              window.scrollTo(0, 0);
+            }}
+          >
             <GoPencil
               color="secondary"
               style={{ display: "inline", cursor: "pointer", color: "#6c757d" }}

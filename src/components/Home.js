@@ -1,39 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { navigate } from "@reach/router";
 import { Card, Container, Row, Col, Fade } from "react-bootstrap";
 import SideNav from "./SideNav";
 import selfie from "../assets/selfie2.jpg";
+import Truncate from "react-truncate";
 export default Home;
 
 const navOptions = ["blog", "work", "projects", "create"];
 
 function Home({ children }) {
-  const [scrollY, setScrollY] = useState(0);
-  const [dir, setDir] = useState("up");
+  const [showAsides, setAhowAsides] = useState(true);
 
-  useEffect(() => {
-    window.addEventListener("scroll", (e) => handleNavigation(e), false);
-    return () => {
-      window.removeEventListener("scroll", (e) => handleNavigation(e), false);
-    };
-  }, [scrollY]);
-
-  function handleNavigation(e) {
-    const window = e.currentTarget;
-
-    if (scrollY > window.scrollY) {
-      setDir("up");
-    } else if (scrollY < window.scrollY) {
-      setDir("down");
+  function handleScroll(e) {
+    if (e.nativeEvent.wheelDelta > 0) {
+      if (!showAsides) setAhowAsides(true);
+    } else {
+      if (showAsides) setAhowAsides(false);
     }
-    setScrollY(window.scrollY);
   }
 
   return (
-    <Container fluid>
+    <Container fluid onWheel={handleScroll}>
       <Row>
         <Col>
-          <Fade in={dir === "up"}>
+          <Fade in={showAsides}>
             <Card
               className="mx-3 my-4 position-sticky"
               style={{ borderRadius: "15px", top: "20px" }}
@@ -58,9 +48,7 @@ function Home({ children }) {
         </Col>
         <Col xs={6}>{children}</Col>
         <Col>
-          {dir === "up" ? (
-            <SideNav show={true} navOptions={navOptions} />
-          ) : null}
+          {showAsides ? <SideNav show={true} navOptions={navOptions} /> : null}
         </Col>
       </Row>
     </Container>

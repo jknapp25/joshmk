@@ -12,7 +12,7 @@ import Project from "./Project";
 import Job from "./Job";
 export default ItemList;
 
-const statusOrder = ["Active", "On Hold", "Complete"];
+const statusOrder = ["active", "on hold", "completed"];
 
 function ItemList() {
   const { pathname, search } = useLocation();
@@ -61,25 +61,17 @@ function ItemList() {
     fetchData();
   }, [pageName]);
 
-  let sortedItems = items.sort(function (a, b) {
-    if (a.createdAt < b.createdAt) {
-      return 1;
-    } else if (b.createdAt < a.createdAt) {
-      return -1;
-    } else {
-      return 0;
-    }
-  });
-  let education = sortedItems.filter((itm) => itm.tags.includes("education"));
-
-  if (pageName === "projects") {
-    sortedItems = sortedItems.sort(
-      (a, b) =>
-        statusOrder.indexOf(a.badgeText) - statusOrder.indexOf(b.badgeText)
-    );
-  }
-
   if (pageName === "work") {
+    let sortedItems = items.sort(function (a, b) {
+      if (a.start < b.start) {
+        return 1;
+      } else if (b.start < a.start) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+    let education = sortedItems.filter((itm) => itm.tags.includes("education"));
     return (
       <div className="my-4">
         <Alert variant="info">
@@ -96,15 +88,18 @@ function ItemList() {
       </div>
     );
   } else if (pageName === "projects") {
+    let projects = items.sort(
+      (a, b) => statusOrder.indexOf(a.status) - statusOrder.indexOf(b.status)
+    );
     return (
       <div className="my-4">
-        {sortedItems.map((item, i) => (
+        {projects.map((item, i) => (
           <Project key={i} project={item} />
         ))}
       </div>
     );
   } else if (pageName === "search") {
-    const filteredItems = sortedItems.filter((item) =>
+    const filteredItems = items.filter((item) =>
       item.tags.includes(searchParams.tag)
     );
     return (
@@ -140,6 +135,15 @@ function ItemList() {
       </div>
     );
   } else {
+    let sortedItems = items.sort(function (a, b) {
+      if (a.createdAt < b.createdAt) {
+        return 1;
+      } else if (b.createdAt < a.createdAt) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
     return sortedItems.map((item, i) => <Post key={i} post={item} />);
   }
 }

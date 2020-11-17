@@ -4,6 +4,7 @@ type Post @model {
   content: String
   tags: [String]
   images: [String]
+  createdAt: String
 }
 
 type Project @model {
