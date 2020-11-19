@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Badge, Carousel, Image } from "react-bootstrap";
 import { navigate } from "@reach/router";
 import { Storage } from "aws-amplify";
@@ -10,6 +10,13 @@ function Post({ post, setEditingItemId, setItemType, showEdit = false }) {
   const { id, title, content, tags, images, createdAt } = post;
   const timeInfo = createTimeInfo(null, createdAt, null, true);
 
+  const isMounted = useRef(true);
+  useEffect(() => {
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
+
   const [imageUrls, setImageUrls] = useState([]);
   useEffect(() => {
     async function fetchData() {
@@ -19,7 +26,7 @@ function Post({ post, setEditingItemId, setItemType, showEdit = false }) {
 
       const imageUrls = await Promise.all(imagesCalls);
 
-      setImageUrls(imageUrls);
+      if (isMounted.current) setImageUrls(imageUrls);
     }
     if (images && images.length) {
       fetchData();

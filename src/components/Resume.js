@@ -38,19 +38,19 @@ const styles = StyleSheet.create({
   page: {
     padding: 64,
     lineHeight: 1.15,
-    // fontFamily: "Arial",
+    fontFamily: "Arial",
   },
   name: {
     fontSize: 40,
     marginBottom: 4,
-    // fontFamily: "Comfortaa",
+    fontFamily: "Comfortaa",
   },
   profession: {
     fontSize: 14,
     marginBottom: 3,
     color: "#990000",
     textTransform: "uppercase",
-    // fontFamily: "Comfortaa Bold",
+    fontFamily: "Comfortaa Bold",
     letterSpacing: 1.15,
   },
   contacts: {
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   bold: {
-    // fontFamily: "Arial Bold",
+    fontFamily: "Arial Bold",
   },
 });
 
@@ -185,9 +185,9 @@ function Resume({ items }) {
           }}
         />
         <Text style={styles.section}>Experience</Text>
-        {jobs.map((item) => {
+        {jobs.map((item, i) => {
           return (
-            <>
+            <Fragment key={i}>
               <Text style={styles.sectionHeader}>
                 <Text style={styles.bold}>{item.role}</Text> |{" "}
                 {`${createTimeInfo(item.start, item.end)}`}
@@ -203,7 +203,7 @@ function Resume({ items }) {
                     </Text>
                   ))
                 : null}
-            </>
+            </Fragment>
           );
         })}
         <View

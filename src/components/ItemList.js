@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Alert, Badge } from "react-bootstrap";
 import Timeline from "./Timeline";
 import Resume from "./Resume";
@@ -21,6 +21,13 @@ function ItemList() {
   const [items, setItems] = useState([]);
 
   let pageName = pathname.substring(1) || "blog";
+
+  const isMounted = useRef(true);
+  useEffect(() => {
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
 
   useEffect(() => {
     setItems([]);
@@ -67,10 +74,12 @@ function ItemList() {
         items = [...items, ...projects];
       }
 
-      setItems(items);
+      if (isMounted.current) setItems(items);
     }
     fetchData();
   }, [pageName]);
+
+  if (items.length === 0) return null;
 
   if (pageName === "work") {
     let sortedItems = items.sort(function (a, b) {
