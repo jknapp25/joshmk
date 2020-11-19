@@ -3,10 +3,9 @@ import { navigate } from "@reach/router";
 import { Card, Container, Row, Col, Fade } from "react-bootstrap";
 import SideNav from "./SideNav";
 import selfie from "../assets/selfie2.jpg";
-import Truncate from "react-truncate";
 export default Home;
 
-const navOptions = ["blog", "work", "projects", "create"];
+const navOptions = ["blog", "work", "projects"];
 
 function Home({ children }) {
   const [showAsides, setAhowAsides] = useState(true);
