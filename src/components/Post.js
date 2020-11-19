@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Badge, Card, Carousel, Image } from "react-bootstrap";
+import { Badge, Carousel, Image } from "react-bootstrap";
 import { navigate } from "@reach/router";
 import { Storage } from "aws-amplify";
 import { createTimeInfo } from "../lib/utils";
 import { GoPencil } from "react-icons/go";
 export default Post;
 
-function Post({ post, setEditingItemId, showEdit = false }) {
+function Post({ post, setEditingItemId, setItemType, showEdit = false }) {
   const { id, title, content, tags, images, createdAt } = post;
   const timeInfo = createTimeInfo(null, createdAt, null, true);
 
@@ -33,6 +33,7 @@ function Post({ post, setEditingItemId, showEdit = false }) {
         {showEdit ? (
           <span
             onClick={() => {
+              setItemType("post");
               setEditingItemId(id);
               window.scrollTo(0, 0);
             }}

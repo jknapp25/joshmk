@@ -3,20 +3,25 @@ import { Button } from "react-bootstrap";
 import Post from "./Post";
 import Job from "./Job";
 import Project from "./Project";
+import Education from "./Education";
 import PostEditor from "./PostEditor";
 import JobEditor from "./JobEditor";
 import ProjectEditor from "./ProjectEditor";
+import EducationEditor from "./EducationEditor";
 import { API, graphqlOperation } from "aws-amplify";
 import {
   createPost,
   createJob,
   createProject,
+  createEducation,
   updatePost,
   updateJob,
   updateProject,
+  updateEducation,
 } from "../graphql/mutations";
 import * as queries from "../graphql/queries";
-export default CreateItem;
+import { withAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
+export default withAuthenticator(CreateItem);
 
 function CreateItem() {
   const [items, setItems] = useState([]);
@@ -24,27 +29,25 @@ function CreateItem() {
   const [editingItemId, setEditingItemId] = useState("");
 
   async function handleCreate(type, data) {
-    if (type === "post") {
+    if (type === "post")
       await API.graphql(graphqlOperation(createPost, { input: data }));
-    }
-    if (type === "job") {
+    if (type === "job")
       await API.graphql(graphqlOperation(createJob, { input: data }));
-    }
-    if (type === "project") {
+    if (type === "project")
       await API.graphql(graphqlOperation(createProject, { input: data }));
-    }
+    if (type === "education")
+      await API.graphql(graphqlOperation(createEducation, { input: data }));
   }
 
   async function handleUpdate(type, data) {
-    if (type === "post") {
+    if (type === "post")
       await API.graphql(graphqlOperation(updatePost, { input: data }));
-    }
-    if (type === "job") {
+    if (type === "job")
       await API.graphql(graphqlOperation(updateJob, { input: data }));
-    }
-    if (type === "project") {
+    if (type === "project")
       await API.graphql(graphqlOperation(updateProject, { input: data }));
-    }
+    if (type === "education")
+      await API.graphql(graphqlOperation(updateEducation, { input: data }));
   }
 
   useEffect(() => {
@@ -67,7 +70,17 @@ function CreateItem() {
         type: "project",
       }));
 
-      const fetchedItems = [...posts, ...jobs, ...projects];
+      const educationsData = await API.graphql({
+        query: queries.listEducations,
+      });
+      const educations = educationsData.data.listEducations.items.map(
+        (education) => ({
+          ...education,
+          type: "education",
+        })
+      );
+
+      const fetchedItems = [...posts, ...jobs, ...projects, ...educations];
 
       setItems(fetchedItems);
     }
@@ -76,21 +89,26 @@ function CreateItem() {
 
   return (
     <>
-      {["post", "job", "project"].map((type) => (
-        <Button
-          key={type}
-          variant={type === itemType ? "primary" : "secondary"}
-          className="mr-2 mt-4"
-          size="lg"
-          onClick={() => setItemType(type)}
-        >
-          {type === "post" ? "Write a post" : null}
-          {type === "job" ? "Add work experience" : null}
-          {type === "project" ? "Start a project" : null}
-        </Button>
-      ))}
+      <div className="my-4">
+        <AmplifySignOut />
+      </div>
 
-      <div className="mb-4" />
+      <div className="my-4">
+        {["post", "job", "project", "education"].map((type) => (
+          <Button
+            key={type}
+            variant={type === itemType ? "primary" : "secondary"}
+            className="mr-2 mb-2"
+            size="lg"
+            onClick={() => setItemType(type)}
+          >
+            {type === "post" ? "Write a post" : null}
+            {type === "job" ? "Add work experience" : null}
+            {type === "project" ? "Start a project" : null}
+            {type === "education" ? "Add education" : null}
+          </Button>
+        ))}
+      </div>
 
       {itemType === "post" ? (
         <PostEditor
@@ -99,9 +117,26 @@ function CreateItem() {
           onUpdate={handleUpdate}
         />
       ) : null}
-      {itemType === "job" ? <JobEditor onCreate={handleCreate} /> : null}
+      {itemType === "job" ? (
+        <JobEditor
+          id={editingItemId}
+          onCreate={handleCreate}
+          onUpdate={handleUpdate}
+        />
+      ) : null}
       {itemType === "project" ? (
-        <ProjectEditor onCreate={handleCreate} />
+        <ProjectEditor
+          id={editingItemId}
+          onCreate={handleCreate}
+          onUpdate={handleUpdate}
+        />
+      ) : null}
+      {itemType === "education" ? (
+        <EducationEditor
+          id={editingItemId}
+          onCreate={handleCreate}
+          onUpdate={handleUpdate}
+        />
       ) : null}
       <div className="mb-5" />
       {items.length > 0 ? (
@@ -110,14 +145,42 @@ function CreateItem() {
             return (
               <Post
                 key={i}
-                setEditingItemId={setEditingItemId}
                 post={item}
+                setEditingItemId={setEditingItemId}
+                setItemType={setItemType}
                 showEdit={true}
               />
             );
-          if (item.type === "job") return <Job key={i} job={item} />;
+          if (item.type === "job")
+            return (
+              <Job
+                key={i}
+                job={item}
+                setEditingItemId={setEditingItemId}
+                setItemType={setItemType}
+                showEdit={true}
+              />
+            );
           if (item.type === "project")
-            return <Project key={i} project={item} />;
+            return (
+              <Project
+                key={i}
+                project={item}
+                setEditingItemId={setEditingItemId}
+                setItemType={setItemType}
+                showEdit={true}
+              />
+            );
+          if (item.type === "education")
+            return (
+              <Education
+                key={i}
+                education={item}
+                setEditingItemId={setEditingItemId}
+                setItemType={setItemType}
+                showEdit={true}
+              />
+            );
           return null;
         })
       ) : (

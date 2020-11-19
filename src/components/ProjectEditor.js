@@ -2,16 +2,19 @@ import React, { useState, useEffect } from "react";
 import { Button, Dropdown, Form, FormControl, Image } from "react-bootstrap";
 import { Storage } from "aws-amplify";
 import { statusColorLookup } from "../lib/utils";
+import { API } from "aws-amplify";
+import * as queries from "../graphql/queries";
 export default ProjectEditor;
 
-function ProjectEditor({ onCreate }) {
+function ProjectEditor({ id = null, onCreate, onUpdate }) {
   const [name, setName] = useState("");
   const [summary, setSummary] = useState("");
   const [activeTask, setActiveTask] = useState("");
   const [tasks, setTasks] = useState([]);
   const [link, setLink] = useState("");
   const [status, setStatus] = useState("active");
-  const [tags, setTags] = useState("");
+  const [tags, setTags] = useState([]);
+  const [activeTag, setActiveTag] = useState("");
   const [type, setType] = useState("full-time");
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
@@ -19,6 +22,25 @@ function ProjectEditor({ onCreate }) {
   const [tagUsage, setTagUsage] = useState([]);
   const [images, setImages] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const projectData = await API.graphql({
+        query: queries.getProject,
+        variables: { id },
+      });
+
+      if (projectData) {
+        setName(projectData.data.getProject.name);
+        setSummary(projectData.data.getProject.summary);
+        setTags(projectData.data.getProject.tags);
+        setImages(projectData.data.getProject.images);
+      }
+    }
+    if (id) {
+      fetchData();
+    }
+  }, [id]);
 
   useEffect(() => {
     async function fetchData() {
@@ -36,7 +58,7 @@ function ProjectEditor({ onCreate }) {
     setTasks([]);
     setLink("");
     setStatus("active");
-    setTags("");
+    setTags([]);
     setType("full-time");
     setStart("");
     setEnd("");
@@ -58,14 +80,13 @@ function ProjectEditor({ onCreate }) {
   }
 
   function handleButtonClick() {
-    const updTags = tags.split(" ");
     const data = {
       name,
       summary,
       tasks,
       link,
       status,
-      tags: updTags,
+      tags,
       type,
       start,
       end,
@@ -74,7 +95,13 @@ function ProjectEditor({ onCreate }) {
       images,
     };
 
-    onCreate("project", data);
+    if (id) {
+      data.id = id;
+      onUpdate("project", data);
+    } else {
+      onCreate("project", data);
+    }
+
     clearEditor();
   }
 
@@ -153,14 +180,31 @@ function ProjectEditor({ onCreate }) {
         onChange={(e) => setLink(e.target.value)}
       />
 
-      <Form.Label className="mb-0">Tags (ex: blog cheese monkey)</Form.Label>
+      <Form.Label className="mb-0">Tags</Form.Label>
       <FormControl
-        id="tags"
-        className="mb-2"
-        aria-describedby="tags"
-        value={tags || ""}
-        onChange={(e) => setTags(e.target.value)}
+        id="activetag"
+        as="textarea"
+        rows="2"
+        aria-describedby="activetag"
+        value={activeTag || ""}
+        onChange={(e) => setActiveTag(e.target.value)}
       />
+      <Button
+        variant="link"
+        size="sm"
+        className="mt-2 mb-1 pl-0 pt-0"
+        onClick={() => {
+          setTags([...tags, activeTag]);
+          activeTag("");
+        }}
+      >
+        Add
+      </Button>
+      <ul>
+        {tags.map((tag) => (
+          <li>{tag}</li>
+        ))}
+      </ul>
 
       <Form.File
         id="images"
@@ -193,7 +237,7 @@ function ProjectEditor({ onCreate }) {
       />
 
       <Button className="mt-2" onClick={handleButtonClick}>
-        Create
+        {id ? "Update" : "Create"}
       </Button>
     </>
   );

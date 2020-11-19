@@ -2,35 +2,39 @@ import React, { useState, useEffect } from "react";
 import { Button, Form, FormControl } from "react-bootstrap";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
-export default JobEditor;
+export default EducationEditor;
 
-function JobEditor({ id = null, onCreate, onUpdate }) {
-  const [company, setCompany] = useState("");
-  const [role, setRole] = useState("");
+function EducationEditor({ id = null, onCreate, onUpdate }) {
+  const [organization, setOrganization] = useState("");
+  const [degree, setDegree] = useState("");
   const [location, setLocation] = useState("");
   const [summary, setSummary] = useState("");
-  const [activeDetail, setActiveDetail] = useState("");
   const [details, setDetails] = useState([]);
-  const [companyUrl, setCompanyUrl] = useState("");
+  const [organizationUrl, setOrganizationUrl] = useState("");
   const [tags, setTags] = useState([]);
-  const [activeTag, setActiveTag] = useState("");
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
-  const [complexity, setComplexity] = useState(0);
-  const [tagUsage, setTagUsage] = useState([]);
+
+  const [activeTag, setActiveTag] = useState("");
+  const [activeDetail, setActiveDetail] = useState("");
 
   useEffect(() => {
     async function fetchData() {
-      const jobData = await API.graphql({
-        query: queries.getJob,
+      const educationData = await API.graphql({
+        query: queries.getEducation,
         variables: { id },
       });
 
-      if (jobData) {
-        setCompany(jobData.data.getJob.company);
-        setRole(jobData.data.getJob.role);
-        setLocation(jobData.data.getJob.location);
-        setTags(jobData.data.getJob.tags);
+      if (educationData) {
+        setOrganization(educationData.data.getEducation.organization);
+        setDegree(educationData.data.getEducation.degree);
+        setTags(educationData.data.getEducation.tags);
+        setLocation(educationData.data.getEducation.location);
+        setSummary(educationData.data.getEducation.summary);
+        setDetails(educationData.data.getEducation.details);
+        setOrganizationUrl(educationData.data.getEducation.organizationUrl);
+        setStart(educationData.data.getEducation.start);
+        setEnd(educationData.data.getEducation.end);
       }
     }
     if (id) {
@@ -39,80 +43,83 @@ function JobEditor({ id = null, onCreate, onUpdate }) {
   }, [id]);
 
   function clearEditor() {
-    setCompany("");
-    setCompanyUrl("");
-    setActiveDetail("");
-    setDetails([]);
-    setRole("");
+    setOrganization("");
+    setDegree("");
+    setTags([]);
     setLocation("");
     setSummary("");
-    setTags([]);
+    setDetails([]);
+    setOrganizationUrl("");
     setStart("");
     setEnd("");
-    setComplexity(0);
-    setTagUsage([]);
   }
 
   function handleButtonClick() {
     const data = {
-      company,
-      role,
+      organization,
+      degree,
       location,
       summary,
       details,
-      companyUrl,
-      tags,
+      organizationUrl,
       start,
       end,
-      complexity,
-      tagUsage,
+      tags,
     };
 
     if (id) {
       data.id = id;
-      onUpdate("job", data);
+      onUpdate("education", data);
     } else {
-      onCreate("job", data);
+      onCreate("education", data);
     }
-
     clearEditor();
   }
 
   return (
     <>
-      <Form.Label className="mb-0">Role</Form.Label>
+      <Form.Label className="mb-0">Organization</Form.Label>
       <FormControl
-        id="role"
+        id="organization"
         className="mb-2"
-        aria-describedby="role"
-        value={role || ""}
-        onChange={(e) => setRole(e.target.value)}
+        aria-describedby="title"
+        value={organization || ""}
+        onChange={(e) => setOrganization(e.target.value)}
       />
 
-      <Form.Label className="mb-0">Company</Form.Label>
+      <Form.Label className="mb-0">Organization Website URL</Form.Label>
       <FormControl
-        id="company"
+        id="organizationUrl"
         className="mb-2"
-        aria-describedby="company"
-        value={company || ""}
-        onChange={(e) => setCompany(e.target.value)}
+        aria-describedby="organizationUrl"
+        value={organizationUrl || ""}
+        onChange={(e) => setOrganizationUrl(e.target.value)}
       />
 
-      <Form.Label className="mb-0">Company Website URL</Form.Label>
+      <Form.Label className="mb-0">Degree</Form.Label>
       <FormControl
-        id="companyUrl"
+        id="degree"
         className="mb-2"
-        aria-describedby="companyUrl"
-        value={companyUrl || ""}
-        onChange={(e) => setCompanyUrl(e.target.value)}
+        aria-describedby="degree"
+        value={degree || ""}
+        onChange={(e) => setDegree(e.target.value)}
+      />
+
+      <Form.Label className="mb-0">Location</Form.Label>
+      <FormControl
+        id="location"
+        className="mb-2"
+        aria-describedby="location"
+        value={location || ""}
+        onChange={(e) => setLocation(e.target.value)}
       />
 
       <Form.Label className="mb-0">Summary</Form.Label>
       <FormControl
         id="summary"
-        as="textarea"
-        rows="2"
         className="mb-2"
+        as="textarea"
+        rows="3"
         aria-describedby="summary"
         value={summary || ""}
         onChange={(e) => setSummary(e.target.value)}
@@ -144,20 +151,9 @@ function JobEditor({ id = null, onCreate, onUpdate }) {
         ))}
       </ul>
 
-      <Form.Label className="mb-0">Location</Form.Label>
-      <FormControl
-        id="location"
-        className="mb-2"
-        aria-describedby="location"
-        value={location || ""}
-        onChange={(e) => setLocation(e.target.value)}
-      />
-
       <Form.Label className="mb-0">Tags</Form.Label>
       <FormControl
         id="activetag"
-        as="textarea"
-        rows="2"
         aria-describedby="activetag"
         value={activeTag || ""}
         onChange={(e) => setActiveTag(e.target.value)}
@@ -168,7 +164,7 @@ function JobEditor({ id = null, onCreate, onUpdate }) {
         className="mt-2 mb-1 pl-0 pt-0"
         onClick={() => {
           setTags([...tags, activeTag]);
-          activeTag("");
+          setActiveTag("");
         }}
       >
         Add

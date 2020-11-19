@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import {
   Document,
   Page,
@@ -38,19 +38,19 @@ const styles = StyleSheet.create({
   page: {
     padding: 64,
     lineHeight: 1.15,
-    fontFamily: "Arial",
+    // fontFamily: "Arial",
   },
   name: {
     fontSize: 40,
     marginBottom: 4,
-    fontFamily: "Comfortaa",
+    // fontFamily: "Comfortaa",
   },
   profession: {
     fontSize: 14,
     marginBottom: 3,
     color: "#990000",
     textTransform: "uppercase",
-    fontFamily: "Comfortaa Bold",
+    // fontFamily: "Comfortaa Bold",
     letterSpacing: 1.15,
   },
   contacts: {
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   bold: {
-    fontFamily: "Arial Bold",
+    // fontFamily: "Arial Bold",
   },
 });
 
@@ -136,8 +136,9 @@ const testingSkills = "Cypress, Jest, Enzyme, React Testing Library";
 const generalSkills =
   "Agile, Lean, Scrum, Azure DevOps, GitHub, CI/CD pipelines, PyCharm, VS Code, Chrome Developer Tools, GIT, Git hooks";
 
-function Resume({ items, education }) {
-  // if (!items || items.length === 0) return <Document />;
+function Resume({ items }) {
+  const jobs = items.filter((item) => item.type !== "education");
+  const education = items.filter((item) => item.type === "education");
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -184,19 +185,19 @@ function Resume({ items, education }) {
           }}
         />
         <Text style={styles.section}>Experience</Text>
-        {items.map((item) => {
+        {jobs.map((item) => {
           return (
             <>
               <Text style={styles.sectionHeader}>
-                <Text style={styles.bold}>{item.title}</Text> |{" "}
+                <Text style={styles.bold}>{item.role}</Text> |{" "}
                 {`${createTimeInfo(item.start, item.end)}`}
               </Text>
               <Text style={styles.sectionSubHeader}>
-                {item.subtitle} - {item.location}
+                {item.company} - {item.location}
               </Text>
-              <Text style={styles.sectionDescription}>{item.description}</Text>
-              {item.list && item.list.length > 0
-                ? item.list.map((listItem, i) => (
+              <Text style={styles.sectionDescription}>{item.summary}</Text>
+              {item.details && item.details.length > 0
+                ? item.details.map((listItem, i) => (
                     <Text key={i} style={styles.listItem}>
                       &bull; {listItem}
                     </Text>
@@ -217,14 +218,14 @@ function Resume({ items, education }) {
         {education.map((item, i) => (
           <Fragment key={i}>
             <Text style={styles.sectionHeader}>
-              <Text style={styles.bold}>{item.title}</Text> |{" "}
+              <Text style={styles.bold}>{item.degree}</Text> |{" "}
               <Text>{`${createTimeInfo(item.start, item.end)}`}</Text>
             </Text>
             <Text style={styles.sectionSubHeader}>
-              {item.subtitle} - {item.location}
+              {item.organization} - {item.location}
             </Text>
-            {item.list && item.list.length > 0
-              ? item.list.map((listItem, i) => (
+            {item.details && item.details.length > 0
+              ? item.details.map((listItem, i) => (
                   <Text key={i} style={styles.listItem}>
                     &bull; {listItem}
                   </Text>

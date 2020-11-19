@@ -3,37 +3,37 @@ import { Badge, Card } from "react-bootstrap";
 import { navigate } from "@reach/router";
 import { createTimeInfo } from "../lib/utils";
 import { GoPencil } from "react-icons/go";
-export default Job;
+export default Education;
 
-function Job({ job, setEditingItemId, setItemType, showEdit = false }) {
+function Education({
+  education,
+  setEditingItemId,
+  setItemType,
+  showEdit = false,
+}) {
   const {
     id,
-    company,
-    role,
+    organization,
+    degree,
     location,
     summary,
-    companyUrl,
+    details,
+    organizationUrl,
     tags,
-    type,
     start,
     end,
-  } = job;
+  } = education;
   const timeInfo = createTimeInfo(start, end, null, false);
 
   return (
     <Card className="mb-2">
       <Card.Body>
         <Card.Title>
-          {role}
-          {type === "contract" ? (
-            <Badge variant="secondary" className="ml-2">
-              Contract
-            </Badge>
-          ) : null}{" "}
+          {degree}{" "}
           {showEdit ? (
             <span
               onClick={() => {
-                setItemType("job");
+                setItemType("education");
                 setEditingItemId(id);
                 window.scrollTo(0, 0);
               }}
@@ -50,16 +50,16 @@ function Job({ job, setEditingItemId, setItemType, showEdit = false }) {
           ) : null}
         </Card.Title>
         <Card.Subtitle className="text-muted mb-2">
-          {companyUrl ? (
+          {organization ? (
             <a
-              href={companyUrl || ""}
+              href={organizationUrl || ""}
               target="_blank"
               rel="noreferrer noopener"
             >
-              {company}
+              {organization}
             </a>
           ) : (
-            company
+            organization
           )}{" "}
           {location && `- ${location}`}
         </Card.Subtitle>
@@ -70,6 +70,19 @@ function Job({ job, setEditingItemId, setItemType, showEdit = false }) {
             } font-weight-normal`}
           >
             {summary}
+          </Card.Text>
+        )}
+        {details && details.length > 0 && (
+          <Card.Text
+            className={`${
+              tags && tags.length > 0 ? "mb-2" : ""
+            } font-weight-normal`}
+          >
+            <ul>
+              {details.map((detail) => (
+                <li>{detail}</li>
+              ))}
+            </ul>
           </Card.Text>
         )}
         {tags && tags.length > 0 && (

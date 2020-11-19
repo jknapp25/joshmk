@@ -4,10 +4,11 @@ import { navigate } from "@reach/router";
 import { Storage } from "aws-amplify";
 import { createTimeInfo } from "../lib/utils";
 import { statusColorLookup } from "../lib/utils";
+import { GoPencil } from "react-icons/go";
 export default Project;
 
-function Project({ project }) {
-  const { name, tags, summary, status, link, images, start, end } = project;
+function Project({ project, setEditingItemId, setItemType, showEdit = false }) {
+  const { id, name, tags, summary, status, link, images, start, end } = project;
   const timeInfo = createTimeInfo(start, end, null, false);
 
   const [imageUrls, setImageUrls] = useState([]);
@@ -48,6 +49,24 @@ function Project({ project }) {
             <Badge variant={statusColorLookup[status]} className="ml-2">
               {status}
             </Badge>
+          ) : null}{" "}
+          {showEdit ? (
+            <span
+              onClick={() => {
+                setItemType("project");
+                setEditingItemId(id);
+                window.scrollTo(0, 0);
+              }}
+            >
+              <GoPencil
+                color="secondary"
+                style={{
+                  display: "inline",
+                  cursor: "pointer",
+                  color: "#6c757d",
+                }}
+              />
+            </span>
           ) : null}
         </Card.Title>
         {summary ? (

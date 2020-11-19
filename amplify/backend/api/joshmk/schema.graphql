@@ -37,3 +37,18 @@ type Job @model {
   complexity: Float
   tagUsage: [Float]
 }
+
+type Education @model {
+  id: ID!
+  organization: String
+  degree: String
+  location: String
+  summary: String
+  details: [String]
+  organizationUrl: String
+  tags: [String]
+  start: String
+  end: String
+  complexity: Float
+  tagUsage: [Float]
+}

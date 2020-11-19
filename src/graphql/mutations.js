@@ -190,3 +190,72 @@ export const deleteJob = /* GraphQL */ `
     }
   }
 `;
+export const createEducation = /* GraphQL */ `
+  mutation CreateEducation(
+    $input: CreateEducationInput!
+    $condition: ModelEducationConditionInput
+  ) {
+    createEducation(input: $input, condition: $condition) {
+      id
+      organization
+      degree
+      location
+      summary
+      details
+      organizationUrl
+      tags
+      start
+      end
+      complexity
+      tagUsage
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateEducation = /* GraphQL */ `
+  mutation UpdateEducation(
+    $input: UpdateEducationInput!
+    $condition: ModelEducationConditionInput
+  ) {
+    updateEducation(input: $input, condition: $condition) {
+      id
+      organization
+      degree
+      location
+      summary
+      details
+      organizationUrl
+      tags
+      start
+      end
+      complexity
+      tagUsage
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteEducation = /* GraphQL */ `
+  mutation DeleteEducation(
+    $input: DeleteEducationInput!
+    $condition: ModelEducationConditionInput
+  ) {
+    deleteEducation(input: $input, condition: $condition) {
+      id
+      organization
+      degree
+      location
+      summary
+      details
+      organizationUrl
+      tags
+      start
+      end
+      complexity
+      tagUsage
+      createdAt
+      updatedAt
+    }
+  }
+`;

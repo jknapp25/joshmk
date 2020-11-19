@@ -163,3 +163,63 @@ export const onDeleteJob = /* GraphQL */ `
     }
   }
 `;
+export const onCreateEducation = /* GraphQL */ `
+  subscription OnCreateEducation {
+    onCreateEducation {
+      id
+      organization
+      degree
+      location
+      summary
+      details
+      organizationUrl
+      tags
+      start
+      end
+      complexity
+      tagUsage
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateEducation = /* GraphQL */ `
+  subscription OnUpdateEducation {
+    onUpdateEducation {
+      id
+      organization
+      degree
+      location
+      summary
+      details
+      organizationUrl
+      tags
+      start
+      end
+      complexity
+      tagUsage
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteEducation = /* GraphQL */ `
+  subscription OnDeleteEducation {
+    onDeleteEducation {
+      id
+      organization
+      degree
+      location
+      summary
+      details
+      organizationUrl
+      tags
+      start
+      end
+      complexity
+      tagUsage
+      createdAt
+      updatedAt
+    }
+  }
+`;

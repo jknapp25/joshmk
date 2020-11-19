@@ -7,11 +7,10 @@ import Home from "./components/Home.js";
 import CreateItem from "./components/CreateItem.js";
 import items from "./lib/items.json";
 import Amplify from "aws-amplify";
-import { withAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
 import "react-vertical-timeline-component/style.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-export default withAuthenticator(App);
+export default App;
 
 Amplify.configure({
   aws_project_region: "us-west-2",
@@ -52,7 +51,6 @@ function App() {
           <CreateItem path="create" />
         </Home>
       </Router>
-      {/* <AmplifySignOut /> */}
     </div>
   );
 }

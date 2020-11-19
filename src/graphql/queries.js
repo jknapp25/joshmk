@@ -130,3 +130,50 @@ export const listJobs = /* GraphQL */ `
     }
   }
 `;
+export const getEducation = /* GraphQL */ `
+  query GetEducation($id: ID!) {
+    getEducation(id: $id) {
+      id
+      organization
+      degree
+      location
+      summary
+      details
+      organizationUrl
+      tags
+      start
+      end
+      complexity
+      tagUsage
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listEducations = /* GraphQL */ `
+  query ListEducations(
+    $filter: ModelEducationFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listEducations(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        organization
+        degree
+        location
+        summary
+        details
+        organizationUrl
+        tags
+        start
+        end
+        complexity
+        tagUsage
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;

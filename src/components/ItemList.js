@@ -10,6 +10,7 @@ import * as queries from "../graphql/queries";
 import Post from "./Post";
 import Project from "./Project";
 import Job from "./Job";
+import { FaTimes } from "react-icons/fa";
 export default ItemList;
 
 const statusOrder = ["active", "on hold", "completed"];
@@ -42,7 +43,17 @@ function ItemList() {
           ...job,
           type: "job",
         }));
-        items = [...items, ...jobs];
+
+        const educationData = await API.graphql({
+          query: queries.listEducations,
+        });
+        const educations = educationData.data.listEducations.items.map(
+          (education) => ({
+            ...education,
+            type: "education",
+          })
+        );
+        items = [...items, ...jobs, ...educations];
       }
 
       if (pageName === "projects" || pageName === "search") {
@@ -109,12 +120,11 @@ function ItemList() {
           <Badge pill variant="transparent" className="ml-2 active">
             {searchParams.tag}
           </Badge>{" "}
-          |
           <span
             className="text-muted ml-2 cursor-pointer"
             onClick={() => navigate("/")}
           >
-            clear search
+            <FaTimes color="#dc3545" title="clear search" />
           </span>
         </h3>
         {filteredItems.map((item, i) => {
