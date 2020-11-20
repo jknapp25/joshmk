@@ -15,7 +15,6 @@ type Project @model {
   link: String
   status: String
   tags: [String]
-  type: String
   images: [String]
   start: String
   end: String
@@ -31,6 +30,7 @@ type Job @model {
   summary: String
   details: [String]
   companyUrl: String
+  type: String
   tags: [String]
   start: String
   end: String

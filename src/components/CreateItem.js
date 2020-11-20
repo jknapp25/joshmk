@@ -87,6 +87,16 @@ function CreateItem() {
     fetchData();
   }, []);
 
+  let sortedItems = items.sort(function (a, b) {
+    if (a.createdAt < b.createdAt) {
+      return 1;
+    } else if (b.createdAt < a.createdAt) {
+      return -1;
+    } else {
+      return 0;
+    }
+  });
+
   return (
     <>
       <div className="my-4">
@@ -139,8 +149,8 @@ function CreateItem() {
         />
       ) : null}
       <div className="mb-5" />
-      {items.length > 0 ? (
-        items.map((item, i) => {
+      {sortedItems.length > 0 ? (
+        sortedItems.map((item, i) => {
           if (item.type === "post")
             return (
               <Post

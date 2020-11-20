@@ -4,8 +4,8 @@ import ItemList from "./components/ItemList";
 import Skills from "./components/Skills";
 import GoalHours from "./components/GoalHours";
 import Home from "./components/Home.js";
+import Post from "./components/Post.js";
 import CreateItem from "./components/CreateItem.js";
-import items from "./lib/items.json";
 import Amplify from "aws-amplify";
 import "react-vertical-timeline-component/style.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -45,7 +45,8 @@ function App() {
           showSidebar={showSidebar}
           handleTabsVisibilityChange={(isVisible) => setShowSidebar(!isVisible)}
         >
-          <ItemList default items={items} />
+          <ItemList default />
+          <Post path="post/:id" />
           <Skills path="skills" />
           <GoalHours path="goal-hours" />
           <CreateItem path="create" />

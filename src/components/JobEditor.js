@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Form, FormControl } from "react-bootstrap";
+import { Button, ButtonGroup, Form, FormControl } from "react-bootstrap";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 export default JobEditor;
@@ -10,6 +10,7 @@ function JobEditor({ id = null, onCreate, onUpdate }) {
   const [location, setLocation] = useState("");
   const [summary, setSummary] = useState("");
   const [activeDetail, setActiveDetail] = useState("");
+  const [type, setType] = useState("full-time");
   const [details, setDetails] = useState([]);
   const [companyUrl, setCompanyUrl] = useState("");
   const [tags, setTags] = useState([]);
@@ -28,9 +29,15 @@ function JobEditor({ id = null, onCreate, onUpdate }) {
 
       if (jobData) {
         setCompany(jobData.data.getJob.company);
+        setCompanyUrl(jobData.data.getJob.companyUrl);
         setRole(jobData.data.getJob.role);
         setLocation(jobData.data.getJob.location);
+        setType(jobData.data.getJob.type);
         setTags(jobData.data.getJob.tags);
+        setDetails(jobData.data.getJob.details);
+        setStart(jobData.data.getJob.start);
+        setEnd(jobData.data.getJob.end);
+        setActiveDetail("");
       }
     }
     if (id) {
@@ -44,6 +51,7 @@ function JobEditor({ id = null, onCreate, onUpdate }) {
     setActiveDetail("");
     setDetails([]);
     setRole("");
+    setType("");
     setLocation("");
     setSummary("");
     setTags([]);
@@ -59,6 +67,7 @@ function JobEditor({ id = null, onCreate, onUpdate }) {
       role,
       location,
       summary,
+      type,
       details,
       companyUrl,
       tags,
@@ -153,11 +162,23 @@ function JobEditor({ id = null, onCreate, onUpdate }) {
         onChange={(e) => setLocation(e.target.value)}
       />
 
+      <Form.Label className="mb-0">Type</Form.Label>
+      <ButtonGroup className="mb-2 d-block">
+        {["full-time", "contract"].map((jobType) => (
+          <Button
+            variant={jobType === type ? "primary" : "secondary"}
+            onClick={() => {
+              setType(jobType);
+            }}
+          >
+            {jobType}
+          </Button>
+        ))}
+      </ButtonGroup>
+
       <Form.Label className="mb-0">Tags</Form.Label>
       <FormControl
         id="activetag"
-        as="textarea"
-        rows="2"
         aria-describedby="activetag"
         value={activeTag || ""}
         onChange={(e) => setActiveTag(e.target.value)}

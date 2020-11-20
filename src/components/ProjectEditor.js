@@ -15,7 +15,6 @@ function ProjectEditor({ id = null, onCreate, onUpdate }) {
   const [status, setStatus] = useState("active");
   const [tags, setTags] = useState([]);
   const [activeTag, setActiveTag] = useState("");
-  const [type, setType] = useState("full-time");
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
   const [complexity, setComplexity] = useState(0);
@@ -35,6 +34,11 @@ function ProjectEditor({ id = null, onCreate, onUpdate }) {
         setSummary(projectData.data.getProject.summary);
         setTags(projectData.data.getProject.tags);
         setImages(projectData.data.getProject.images);
+        setTasks(projectData.data.getProject.tasks);
+        setLink(projectData.data.getProject.link);
+        setStatus(projectData.data.getProject.status);
+        setStart(projectData.data.getProject.start);
+        setEnd(projectData.data.getProject.end);
       }
     }
     if (id) {
@@ -59,7 +63,6 @@ function ProjectEditor({ id = null, onCreate, onUpdate }) {
     setLink("");
     setStatus("active");
     setTags([]);
-    setType("full-time");
     setStart("");
     setEnd("");
     setComplexity(0);
@@ -87,7 +90,6 @@ function ProjectEditor({ id = null, onCreate, onUpdate }) {
       link,
       status,
       tags,
-      type,
       start,
       end,
       complexity,
@@ -183,8 +185,6 @@ function ProjectEditor({ id = null, onCreate, onUpdate }) {
       <Form.Label className="mb-0">Tags</Form.Label>
       <FormControl
         id="activetag"
-        as="textarea"
-        rows="2"
         aria-describedby="activetag"
         value={activeTag || ""}
         onChange={(e) => setActiveTag(e.target.value)}
@@ -195,7 +195,7 @@ function ProjectEditor({ id = null, onCreate, onUpdate }) {
         className="mt-2 mb-1 pl-0 pt-0"
         onClick={() => {
           setTags([...tags, activeTag]);
-          activeTag("");
+          setActiveTag("");
         }}
       >
         Add

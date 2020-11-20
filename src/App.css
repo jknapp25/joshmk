@@ -161,3 +161,11 @@ html {
   background-color: rgba(0, 0, 0, 0.04) !important;
   border: none !important;
 }
+
+a {
+  color: black !important;
+  text-decoration: none !important;
+}
+a:hover {
+  color: #007bff !important;
+}

@@ -8,10 +8,11 @@ export default PostEditor;
 function PostEditor({ id = null, onCreate, onUpdate }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [tags, setTags] = useState("");
+  const [tags, setTags] = useState([]);
   const [images, setImages] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
   const [createdAt, setCreatedAt] = useState("");
+  const [activeTag, setActiveTag] = useState("");
 
   useEffect(() => {
     async function fetchData() {
@@ -36,7 +37,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
       if (postData) {
         setTitle(postData.data.getPost.title);
         setContent(postData.data.getPost.content);
-        setTags(postData.data.getPost.tags.join(" "));
+        setTags(postData.data.getPost.tags);
         setImages(postData.data.getPost.images);
         setCreatedAt(postData.data.getPost.createdAt);
       }
@@ -49,7 +50,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
   function clearEditor() {
     setTitle("");
     setContent("");
-    setTags("");
+    setTags([]);
     setImages([]);
     setImageUrls([]);
     setCreatedAt("");
@@ -67,11 +68,10 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
   }
 
   function handleButtonClick() {
-    const updTags = tags.split(" ");
     const data = {
       title,
       content,
-      tags: updTags,
+      tags,
       images,
     };
 
@@ -107,14 +107,29 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
         onChange={(e) => setContent(e.target.value)}
       />
 
-      <Form.Label className="mb-0">Tags (ex: blog cheese monkey)</Form.Label>
+      <Form.Label className="mb-0">Tags</Form.Label>
       <FormControl
-        id="tags"
-        className="mb-2"
-        aria-describedby="tags"
-        value={tags || ""}
-        onChange={(e) => setTags(e.target.value)}
+        id="activetag"
+        aria-describedby="activetag"
+        value={activeTag || ""}
+        onChange={(e) => setActiveTag(e.target.value)}
       />
+      <Button
+        variant="link"
+        size="sm"
+        className="mt-2 mb-1 pl-0 pt-0"
+        onClick={() => {
+          setTags([...tags, activeTag]);
+          setActiveTag("");
+        }}
+      >
+        Add
+      </Button>
+      <ul>
+        {tags.map((tag) => (
+          <li>{tag}</li>
+        ))}
+      </ul>
 
       <Form.File
         id="images"

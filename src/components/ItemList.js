@@ -10,6 +10,7 @@ import * as queries from "../graphql/queries";
 import Post from "./Post";
 import Project from "./Project";
 import Job from "./Job";
+import Education from "./Education";
 import { FaTimes } from "react-icons/fa";
 export default ItemList;
 
@@ -137,18 +138,12 @@ function ItemList() {
           </span>
         </h3>
         {filteredItems.map((item, i) => {
-          if (item.type === "post")
-            return (
-              <Post
-                key={i}
-                setEditingItemId={() => {}}
-                post={item}
-                showEdit={false}
-              />
-            );
+          if (item.type === "post") return <Post key={i} post={item} />;
           if (item.type === "job") return <Job key={i} job={item} />;
           if (item.type === "project")
             return <Project key={i} project={item} />;
+          if (item.type === "education")
+            return <Education key={i} education={item} />;
           return null;
         })}
       </div>
