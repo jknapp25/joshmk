@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { navigate } from "@reach/router";
 import { Card, Container, Row, Col, Fade } from "react-bootstrap";
 import SideNav from "./SideNav";
-import selfie from "../assets/selfie2.jpg";
+import spaceman from "../assets/spaceman2.gif";
 export default Home;
 
 const navOptions = ["blog", "work", "projects"];
@@ -25,17 +25,30 @@ function Home({ children }) {
           <Fade in={showAsides}>
             <Card
               className="mx-3 my-4 position-sticky"
-              style={{ borderRadius: "15px", top: "20px" }}
+              style={{
+                borderRadius: "15px",
+                top: "20px",
+                backgroundColor: "red",
+              }}
             >
-              <Card.Img
-                variant="top"
-                src={selfie}
+              <div
                 style={{
                   borderTopLeftRadius: "15px",
                   borderTopRightRadius: "15px",
+                  backgroundColor: "#007bff",
                 }}
-                onClick={() => navigate("/")}
-              />
+              >
+                <Card.Img
+                  variant="top"
+                  src={spaceman}
+                  style={{
+                    borderTopLeftRadius: "15px",
+                    borderTopRightRadius: "15px",
+                    opacity: 0.95,
+                  }}
+                  onClick={() => navigate("/")}
+                />
+              </div>
               <Card.Footer>
                 <Card.Title>Josh Knapp</Card.Title>
                 <Card.Text>
