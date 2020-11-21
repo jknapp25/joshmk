@@ -169,3 +169,49 @@ a {
 a:hover {
   color: #007bff !important;
 }
+
+@keyframes fadeColors {
+  0% {
+    background-color: red;
+  }
+  10% {
+    background-color: blue;
+  }
+  20% {
+    background-color: orange;
+  }
+  30% {
+    background-color: yellow;
+  }
+  40% {
+    background-color: green;
+  }
+  50% {
+    background-color: purple;
+  }
+  60% {
+    background-color: brown;
+  }
+  70% {
+    background-color: turquoise;
+  }
+  80% {
+    background-color: magenta;
+  }
+  90% {
+    background-color: teal;
+  }
+  100% {
+    background-color: gold;
+  }
+}
+
+#thingy {
+  background-color: white;
+  animation-name: fadeColors;
+  animation-iteration-count: infinite;
+  animation-duration: 40s;
+  -webkit-animation-name: fadeColors;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-duration: 40s;
+}

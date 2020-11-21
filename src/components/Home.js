@@ -32,10 +32,10 @@ function Home({ children }) {
               }}
             >
               <div
+                id="thingy"
                 style={{
                   borderTopLeftRadius: "15px",
                   borderTopRightRadius: "15px",
-                  backgroundColor: "#007bff",
                 }}
               >
                 <Card.Img
@@ -44,7 +44,7 @@ function Home({ children }) {
                   style={{
                     borderTopLeftRadius: "15px",
                     borderTopRightRadius: "15px",
-                    opacity: 0.95,
+                    opacity: 0.75,
                   }}
                   onClick={() => navigate("/")}
                 />
