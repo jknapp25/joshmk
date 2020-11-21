@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { navigate } from "@reach/router";
 import { Card, Container, Row, Col, Fade } from "react-bootstrap";
 import SideNav from "./SideNav";
-import spaceman from "../assets/spaceman2.gif";
+import spaceman from "../assets/spaceman3.gif";
 export default Home;
 
 const navOptions = ["blog", "work", "projects"];
