@@ -6,6 +6,7 @@ import GoalHours from "./components/GoalHours";
 import Home from "./components/Home.js";
 import Post from "./components/Post.js";
 import CreateItem from "./components/CreateItem.js";
+import Configure from "./components/Configure.js";
 import Amplify from "aws-amplify";
 import "react-vertical-timeline-component/style.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -50,6 +51,7 @@ function App() {
           <Skills path="skills" />
           <GoalHours path="goal-hours" />
           <CreateItem path="create" />
+          <Configure path="configure" />
         </Home>
       </Router>
     </div>

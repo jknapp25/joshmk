@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Badge, Carousel, Image } from "react-bootstrap";
-import { navigate, Link } from "@reach/router";
+import { navigate } from "@reach/router";
 import { Storage } from "aws-amplify";
 import { createTimeInfo } from "../lib/utils";
 import { GoPencil } from "react-icons/go";

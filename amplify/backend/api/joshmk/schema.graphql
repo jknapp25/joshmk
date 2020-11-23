@@ -52,3 +52,11 @@ type Education @model {
   complexity: Float
   tagUsage: [Float]
 }
+
+type Configurations @model {
+  id: ID!
+  name: String
+  tagline: String
+  avatar: String
+  pages: [String]
+}
