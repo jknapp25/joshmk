@@ -7,13 +7,14 @@ export default SideNav;
 
 function SideNav({ show, navOptions }) {
   const { pathname } = useLocation();
-  const activeKey = pathname === "/" ? "/blog" : pathname;
+  if (!navOptions || navOptions.length === 0) return null;
+  const activeKey = pathname === "/" ? `/${navOptions[0]}` : pathname;
   return (
     <Fade in={show}>
       <Nav
         activeKey={activeKey}
-        className="sticky mr-3"
-        style={{ top: "65px", display: "block" }}
+        className="sticky mr-3 d-block"
+        style={{ top: "65px" }}
       >
         {navOptions.map((page, i) => (
           <Nav.Item

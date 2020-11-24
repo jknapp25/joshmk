@@ -20,7 +20,6 @@ export default Configure;
 const pageOptions = ["blog", "work", "projects"];
 
 function Configure() {
-  const [id, setId] = useState("43452c80-eb8c-469c-9713-e66fbd5f6db0");
   const [name, setName] = useState("");
   const [tagline, setTagline] = useState("");
   const [avatar, setAvatar] = useState("");
@@ -46,16 +45,16 @@ function Configure() {
       pages,
     };
 
-    if (id) {
-      inpData.id = id;
+    if (process.env.REACT_APP_CONFIGURATION_ID) {
+      inpData.id = process.env.REACT_APP_CONFIGURATION_ID;
       await API.graphql(
         graphqlOperation(updateConfigurations, { input: inpData })
       );
     } else {
-      const data = await API.graphql(
+      await API.graphql(
         graphqlOperation(createConfigurations, { input: inpData })
       );
-      setId(data.data.createConfigurations.id);
+      // setId(data.data.createConfigurations.id);
     }
   }
 
@@ -63,7 +62,7 @@ function Configure() {
     async function fetchData() {
       const configData = await API.graphql({
         query: queries.getConfigurations,
-        variables: { id },
+        variables: { id: process.env.REACT_APP_CONFIGURATION_ID },
       });
       setName(configData.data.getConfigurations.name);
       setTagline(configData.data.getConfigurations.tagline);
@@ -71,7 +70,7 @@ function Configure() {
       setPages(configData.data.getConfigurations.pages);
     }
     fetchData();
-  }, [id]);
+  }, []);
 
   return (
     <div className="mt-4">
@@ -103,12 +102,22 @@ function Configure() {
       <Form.File
         id="avatar"
         className="mb-2"
-        label="Avatar"
+        label="Avatar (if your image is over 5mb, let me know, I have to add it manually)"
         onChange={handleImageUpload}
       />
       <div className="mb-2">
         {avatar ? (
-          <Image src={avatar} width="100" height="auto" thumbnail />
+          <>
+            <Image src={avatar} width="100" height="auto" thumbnail />
+            <FaTimes
+              color="#dc3545"
+              title="delete image"
+              onClick={() => {
+                setAvatar("");
+                setEdited(true);
+              }}
+            />
+          </>
         ) : null}
       </div>
 
