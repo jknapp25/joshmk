@@ -50,7 +50,6 @@ export const onCreateProject = /* GraphQL */ `
       link
       status
       tags
-      type
       images
       start
       end
@@ -71,7 +70,6 @@ export const onUpdateProject = /* GraphQL */ `
       link
       status
       tags
-      type
       images
       start
       end
@@ -92,7 +90,6 @@ export const onDeleteProject = /* GraphQL */ `
       link
       status
       tags
-      type
       images
       start
       end
@@ -113,6 +110,7 @@ export const onCreateJob = /* GraphQL */ `
       summary
       details
       companyUrl
+      type
       tags
       start
       end
@@ -133,6 +131,7 @@ export const onUpdateJob = /* GraphQL */ `
       summary
       details
       companyUrl
+      type
       tags
       start
       end
@@ -153,6 +152,7 @@ export const onDeleteJob = /* GraphQL */ `
       summary
       details
       companyUrl
+      type
       tags
       start
       end
@@ -218,6 +218,45 @@ export const onDeleteEducation = /* GraphQL */ `
       end
       complexity
       tagUsage
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateConfigurations = /* GraphQL */ `
+  subscription OnCreateConfigurations {
+    onCreateConfigurations {
+      id
+      name
+      tagline
+      avatar
+      pages
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateConfigurations = /* GraphQL */ `
+  subscription OnUpdateConfigurations {
+    onUpdateConfigurations {
+      id
+      name
+      tagline
+      avatar
+      pages
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteConfigurations = /* GraphQL */ `
+  subscription OnDeleteConfigurations {
+    onDeleteConfigurations {
+      id
+      name
+      tagline
+      avatar
+      pages
       createdAt
       updatedAt
     }

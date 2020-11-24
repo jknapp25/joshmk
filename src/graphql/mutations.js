@@ -62,7 +62,6 @@ export const createProject = /* GraphQL */ `
       link
       status
       tags
-      type
       images
       start
       end
@@ -86,7 +85,6 @@ export const updateProject = /* GraphQL */ `
       link
       status
       tags
-      type
       images
       start
       end
@@ -110,7 +108,6 @@ export const deleteProject = /* GraphQL */ `
       link
       status
       tags
-      type
       images
       start
       end
@@ -134,6 +131,7 @@ export const createJob = /* GraphQL */ `
       summary
       details
       companyUrl
+      type
       tags
       start
       end
@@ -157,6 +155,7 @@ export const updateJob = /* GraphQL */ `
       summary
       details
       companyUrl
+      type
       tags
       start
       end
@@ -180,6 +179,7 @@ export const deleteJob = /* GraphQL */ `
       summary
       details
       companyUrl
+      type
       tags
       start
       end
@@ -254,6 +254,54 @@ export const deleteEducation = /* GraphQL */ `
       end
       complexity
       tagUsage
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createConfigurations = /* GraphQL */ `
+  mutation CreateConfigurations(
+    $input: CreateConfigurationsInput!
+    $condition: ModelConfigurationsConditionInput
+  ) {
+    createConfigurations(input: $input, condition: $condition) {
+      id
+      name
+      tagline
+      avatar
+      pages
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateConfigurations = /* GraphQL */ `
+  mutation UpdateConfigurations(
+    $input: UpdateConfigurationsInput!
+    $condition: ModelConfigurationsConditionInput
+  ) {
+    updateConfigurations(input: $input, condition: $condition) {
+      id
+      name
+      tagline
+      avatar
+      pages
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteConfigurations = /* GraphQL */ `
+  mutation DeleteConfigurations(
+    $input: DeleteConfigurationsInput!
+    $condition: ModelConfigurationsConditionInput
+  ) {
+    deleteConfigurations(input: $input, condition: $condition) {
+      id
+      name
+      tagline
+      avatar
+      pages
       createdAt
       updatedAt
     }

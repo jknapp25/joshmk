@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import {
   Button,
   Dropdown,
@@ -9,18 +9,22 @@ import {
 } from "react-bootstrap";
 import { FaTimes } from "react-icons/fa";
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
-// import { API, graphqlOperation } from "aws-amplify";
-// import { createPost } from "../graphql/mutations";
-// import * as queries from "../graphql/queries";
+import { Storage, API, graphqlOperation } from "aws-amplify";
+import {
+  createConfigurations,
+  updateConfigurations,
+} from "../graphql/mutations";
+import * as queries from "../graphql/queries";
 export default Configure;
 
 const pageOptions = ["blog", "work", "projects"];
 
 function Configure() {
+  const [id, setId] = useState("43452c80-eb8c-469c-9713-e66fbd5f6db0");
   const [name, setName] = useState("");
   const [tagline, setTagline] = useState("");
   const [avatar, setAvatar] = useState("");
-  const [pages, setPages] = useState(["blog"]);
+  const [pages, setPages] = useState([""]);
   const [edited, setEdited] = useState(false);
 
   async function handleImageUpload(e) {
@@ -35,8 +39,39 @@ function Configure() {
   }
 
   async function handleSave() {
-    // await API.graphql(graphqlOperation(createPost, { input: {} }));
+    let inpData = {
+      name,
+      tagline,
+      avatar,
+      pages,
+    };
+
+    if (id) {
+      inpData.id = id;
+      await API.graphql(
+        graphqlOperation(updateConfigurations, { input: inpData })
+      );
+    } else {
+      const data = await API.graphql(
+        graphqlOperation(createConfigurations, { input: inpData })
+      );
+      setId(data.data.createConfigurations.id);
+    }
   }
+
+  useEffect(() => {
+    async function fetchData() {
+      const configData = await API.graphql({
+        query: queries.getConfigurations,
+        variables: { id },
+      });
+      setName(configData.data.getConfigurations.name);
+      setTagline(configData.data.getConfigurations.tagline);
+      setAvatar(configData.data.getConfigurations.avatar);
+      setPages(configData.data.getConfigurations.pages);
+    }
+    fetchData();
+  }, [id]);
 
   return (
     <div className="mt-4">
@@ -81,7 +116,7 @@ function Configure() {
       <Table bordered className="mb-1">
         <tbody>
           {pages.map((page, i) => (
-            <tr>
+            <tr key={i}>
               <td>
                 {page} {i === 0 ? "(home)" : ""}
               </td>
@@ -135,8 +170,8 @@ function Configure() {
             Add page
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            {pageOptions.map((option) => (
-              <>
+            {pageOptions.map((option, i) => (
+              <Fragment key={i}>
                 <Dropdown.Item
                   onClick={() => {
                     const updPages = [...pages, option];
@@ -147,7 +182,7 @@ function Configure() {
                 >
                   {option}
                 </Dropdown.Item>
-              </>
+              </Fragment>
             ))}
           </Dropdown.Menu>
         </Dropdown>

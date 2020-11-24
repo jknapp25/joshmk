@@ -44,7 +44,6 @@ export const getProject = /* GraphQL */ `
       link
       status
       tags
-      type
       images
       start
       end
@@ -70,7 +69,6 @@ export const listProjects = /* GraphQL */ `
         link
         status
         tags
-        type
         images
         start
         end
@@ -93,6 +91,7 @@ export const getJob = /* GraphQL */ `
       summary
       details
       companyUrl
+      type
       tags
       start
       end
@@ -118,6 +117,7 @@ export const listJobs = /* GraphQL */ `
         summary
         details
         companyUrl
+        type
         tags
         start
         end
@@ -170,6 +170,39 @@ export const listEducations = /* GraphQL */ `
         end
         complexity
         tagUsage
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getConfigurations = /* GraphQL */ `
+  query GetConfigurations($id: ID!) {
+    getConfigurations(id: $id) {
+      id
+      name
+      tagline
+      avatar
+      pages
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listConfigurationss = /* GraphQL */ `
+  query ListConfigurationss(
+    $filter: ModelConfigurationsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listConfigurationss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        tagline
+        avatar
+        pages
         createdAt
         updatedAt
       }
