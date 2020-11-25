@@ -3,6 +3,7 @@ import { Button, Form, FormControl, Image } from "react-bootstrap";
 import { Storage } from "aws-amplify";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
+import RichTextEditor from "./RichTextEditor";
 export default PostEditor;
 
 function PostEditor({ id = null, onCreate, onUpdate }) {
@@ -97,7 +98,8 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
       />
 
       <Form.Label className="mb-0">Content</Form.Label>
-      <FormControl
+      <RichTextEditor />
+      {/* <FormControl
         id="content"
         className="mb-2"
         as="textarea"
@@ -105,9 +107,9 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
         aria-describedby="content"
         value={content || ""}
         onChange={(e) => setContent(e.target.value)}
-      />
+      /> */}
 
-      <Form.Label className="mb-0">Tags</Form.Label>
+      <Form.Label className="mb-0 mt-2">Tags</Form.Label>
       <FormControl
         id="activetag"
         aria-describedby="activetag"

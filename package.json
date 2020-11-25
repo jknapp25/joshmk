@@ -32,7 +32,9 @@
     "react-scripts": "3.4.1",
     "react-truncate": "^2.4.0",
     "react-vertical-timeline-component": "^2.5.0",
-    "react-visibility-sensor": "^5.1.1"
+    "react-visibility-sensor": "^5.1.1",
+    "slate": "^0.59.0",
+    "slate-react": "^0.59.0"
   },
   "scripts": {
     "predeploy": "npm run build",
