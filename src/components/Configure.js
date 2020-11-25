@@ -23,16 +23,28 @@ function Configure() {
   const [name, setName] = useState("");
   const [tagline, setTagline] = useState("");
   const [avatar, setAvatar] = useState("");
+  const [favicon, setFavicon] = useState("");
   const [pages, setPages] = useState([""]);
   const [edited, setEdited] = useState(false);
 
-  async function handleImageUpload(e) {
+  async function handleAvatarUpload(e) {
     const file = e.target.files[0];
     const { key } = await Storage.put(file.name, file, {
       contentType: file.type,
     });
     if (key) {
       setAvatar(key);
+      setEdited(true);
+    }
+  }
+
+  async function handleFaviconUpload(e) {
+    const file = e.target.files[0];
+    const { key } = await Storage.put(file.name, file, {
+      contentType: file.type,
+    });
+    if (key) {
+      setFavicon(key);
       setEdited(true);
     }
   }
@@ -103,7 +115,7 @@ function Configure() {
         id="avatar"
         className="mb-2"
         label="Avatar (if your image is over 5mb, let me know, I have to add it manually)"
-        onChange={handleImageUpload}
+        onChange={handleAvatarUpload}
       />
       <div className="mb-2">
         {avatar ? (
@@ -112,8 +124,32 @@ function Configure() {
             <FaTimes
               color="#dc3545"
               title="delete image"
+              className="cursor-pointer"
               onClick={() => {
                 setAvatar("");
+                setEdited(true);
+              }}
+            />
+          </>
+        ) : null}
+      </div>
+
+      <Form.File
+        id="favicon"
+        className="mb-2"
+        label="Favicon"
+        onChange={handleFaviconUpload}
+      />
+      <div className="mb-2">
+        {favicon ? (
+          <>
+            <Image src={favicon} width="100" height="auto" thumbnail />
+            <FaTimes
+              color="#dc3545"
+              title="delete image"
+              className="cursor-pointer"
+              onClick={() => {
+                setFavicon("");
                 setEdited(true);
               }}
             />

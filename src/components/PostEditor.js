@@ -138,7 +138,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
         onChange={handleImageUpload}
       />
       <div className="mb-2">
-        {imageUrls.map((url, i) => (
+        {imageUrls.map((url) => (
           <Image key={url} src={url} width="100" height="auto" thumbnail />
         ))}
       </div>

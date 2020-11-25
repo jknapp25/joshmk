@@ -58,6 +58,5 @@ type Configurations @model {
   name: String
   tagline: String
   avatar: String
-  favicon: String
   pages: [String]
 }
