@@ -20,22 +20,22 @@ function EducationEditor({ id = null, onCreate, onUpdate }) {
 
   useEffect(() => {
     async function fetchData() {
-      const educationData = await API.graphql({
-        query: queries.getEducation,
-        variables: { id },
-      });
+      // const educationData = await API.graphql({
+      //   query: queries.getEducation,
+      //   variables: { id },
+      // });
 
-      if (educationData) {
-        setOrganization(educationData.data.getEducation.organization);
-        setDegree(educationData.data.getEducation.degree);
-        setTags(educationData.data.getEducation.tags);
-        setLocation(educationData.data.getEducation.location);
-        setSummary(educationData.data.getEducation.summary);
-        setDetails(educationData.data.getEducation.details);
-        setOrganizationUrl(educationData.data.getEducation.organizationUrl);
-        setStart(educationData.data.getEducation.start);
-        setEnd(educationData.data.getEducation.end);
-      }
+      // if (educationData) {
+      //   setOrganization(educationData.data.getEducation.organization);
+      //   setDegree(educationData.data.getEducation.degree);
+      //   setTags(educationData.data.getEducation.tags);
+      //   setLocation(educationData.data.getEducation.location);
+      //   setSummary(educationData.data.getEducation.summary);
+      //   setDetails(educationData.data.getEducation.details);
+      //   setOrganizationUrl(educationData.data.getEducation.organizationUrl);
+      //   setStart(educationData.data.getEducation.start);
+      //   setEnd(educationData.data.getEducation.end);
+      // }
     }
     if (id) {
       fetchData();

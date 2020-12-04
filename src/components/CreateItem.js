@@ -29,62 +29,62 @@ function CreateItem() {
   const [editingItemId, setEditingItemId] = useState("");
 
   async function handleCreate(type, data) {
-    if (type === "post")
-      await API.graphql(graphqlOperation(createPost, { input: data }));
-    if (type === "job")
-      await API.graphql(graphqlOperation(createJob, { input: data }));
-    if (type === "project")
-      await API.graphql(graphqlOperation(createProject, { input: data }));
-    if (type === "education")
-      await API.graphql(graphqlOperation(createEducation, { input: data }));
+    // if (type === "post")
+    //   await API.graphql(graphqlOperation(createPost, { input: data }));
+    // if (type === "job")
+    //   await API.graphql(graphqlOperation(createJob, { input: data }));
+    // if (type === "project")
+    //   await API.graphql(graphqlOperation(createProject, { input: data }));
+    // if (type === "education")
+    //   await API.graphql(graphqlOperation(createEducation, { input: data }));
   }
 
   async function handleUpdate(type, data) {
-    if (type === "post")
-      await API.graphql(graphqlOperation(updatePost, { input: data }));
-    if (type === "job")
-      await API.graphql(graphqlOperation(updateJob, { input: data }));
-    if (type === "project")
-      await API.graphql(graphqlOperation(updateProject, { input: data }));
-    if (type === "education")
-      await API.graphql(graphqlOperation(updateEducation, { input: data }));
+    // if (type === "post")
+    //   await API.graphql(graphqlOperation(updatePost, { input: data }));
+    // if (type === "job")
+    //   await API.graphql(graphqlOperation(updateJob, { input: data }));
+    // if (type === "project")
+    //   await API.graphql(graphqlOperation(updateProject, { input: data }));
+    // if (type === "education")
+    //   await API.graphql(graphqlOperation(updateEducation, { input: data }));
   }
 
   useEffect(() => {
-    async function fetchData() {
-      const postsData = await API.graphql({ query: queries.listPosts });
-      const posts = postsData.data.listPosts.items.map((post) => ({
-        ...post,
-        type: "post",
-      }));
+    // async function fetchData() {
+    //   const postsData = await API.graphql({ query: queries.listPosts });
+    //   const posts = postsData.data.listPosts.items.map((post) => ({
+    //     ...post,
+    //     type: "post",
+    //   }));
 
-      const jobsData = await API.graphql({ query: queries.listJobs });
-      const jobs = jobsData.data.listJobs.items.map((job) => ({
-        ...job,
-        type: "job",
-      }));
+    //   const jobsData = await API.graphql({ query: queries.listJobs });
+    //   const jobs = jobsData.data.listJobs.items.map((job) => ({
+    //     ...job,
+    //     type: "job",
+    //   }));
 
-      const projectsData = await API.graphql({ query: queries.listProjects });
-      const projects = projectsData.data.listProjects.items.map((project) => ({
-        ...project,
-        type: "project",
-      }));
+    //   const projectsData = await API.graphql({ query: queries.listProjects });
+    //   const projects = projectsData.data.listProjects.items.map((project) => ({
+    //     ...project,
+    //     type: "project",
+    //   }));
 
-      const educationsData = await API.graphql({
-        query: queries.listEducations,
-      });
-      const educations = educationsData.data.listEducations.items.map(
-        (education) => ({
-          ...education,
-          type: "education",
-        })
-      );
+    //   const educationsData = await API.graphql({
+    //     query: queries.listEducations,
+    //   });
+    //   const educations = educationsData.data.listEducations.items.map(
+    //     (education) => ({
+    //       ...education,
+    //       type: "education",
+    //     })
+    //   );
 
-      const fetchedItems = [...posts, ...jobs, ...projects, ...educations];
+    //   const fetchedItems = [...posts, ...jobs, ...projects, ...educations];
 
-      setItems(fetchedItems);
-    }
-    fetchData();
+    //   setItems(fetchedItems);
+    // }
+    // fetchData();
   }, []);
 
   let sortedItems = items.sort(function (a, b) {

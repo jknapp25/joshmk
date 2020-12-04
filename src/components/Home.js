@@ -22,11 +22,11 @@ function Home({ children }) {
 
   useEffect(() => {
     async function fetchData() {
-      const configData = await API.graphql({
-        query: queries.getConfigurations,
-        variables: { id: process.env.REACT_APP_CONFIGURATION_ID },
-      });
-      setConfig(configData.data.getConfigurations);
+      // const configData = await API.graphql({
+      //   query: queries.getConfigurations,
+      //   variables: { id: process.env.REACT_APP_CONFIGURATION_ID },
+      // });
+      // setConfig(configData.data.getConfigurations);
     }
     if (process.env.REACT_APP_CONFIGURATION_ID) {
       fetchData();

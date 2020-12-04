@@ -33,51 +33,51 @@ function ItemList() {
   useEffect(() => {
     setItems([]);
 
-    async function fetchData() {
-      let items = [];
+    // async function fetchData() {
+    //   let items = [];
 
-      if (pageName === "blog" || pageName === "search") {
-        const postsData = await API.graphql({ query: queries.listPosts });
-        const posts = postsData.data.listPosts.items.map((post) => ({
-          ...post,
-          type: "post",
-        }));
-        items = [...items, ...posts];
-      }
+    //   if (pageName === "blog" || pageName === "search") {
+    //     const postsData = await API.graphql({ query: queries.listPosts });
+    //     const posts = postsData.data.listPosts.items.map((post) => ({
+    //       ...post,
+    //       type: "post",
+    //     }));
+    //     items = [...items, ...posts];
+    //   }
 
-      if (pageName === "work" || pageName === "search") {
-        const jobsData = await API.graphql({ query: queries.listJobs });
-        const jobs = jobsData.data.listJobs.items.map((job) => ({
-          ...job,
-          type: "job",
-        }));
+    //   if (pageName === "work" || pageName === "search") {
+    //     const jobsData = await API.graphql({ query: queries.listJobs });
+    //     const jobs = jobsData.data.listJobs.items.map((job) => ({
+    //       ...job,
+    //       type: "job",
+    //     }));
 
-        const educationData = await API.graphql({
-          query: queries.listEducations,
-        });
-        const educations = educationData.data.listEducations.items.map(
-          (education) => ({
-            ...education,
-            type: "education",
-          })
-        );
-        items = [...items, ...jobs, ...educations];
-      }
+    //     const educationData = await API.graphql({
+    //       query: queries.listEducations,
+    //     });
+    //     const educations = educationData.data.listEducations.items.map(
+    //       (education) => ({
+    //         ...education,
+    //         type: "education",
+    //       })
+    //     );
+    //     items = [...items, ...jobs, ...educations];
+    //   }
 
-      if (pageName === "projects" || pageName === "search") {
-        const projectsData = await API.graphql({ query: queries.listProjects });
-        const projects = projectsData.data.listProjects.items.map(
-          (project) => ({
-            ...project,
-            type: "project",
-          })
-        );
-        items = [...items, ...projects];
-      }
+    //   if (pageName === "projects" || pageName === "search") {
+    //     const projectsData = await API.graphql({ query: queries.listProjects });
+    //     const projects = projectsData.data.listProjects.items.map(
+    //       (project) => ({
+    //         ...project,
+    //         type: "project",
+    //       })
+    //     );
+    //     items = [...items, ...projects];
+    //   }
 
-      if (isMounted.current) setItems(items);
-    }
-    fetchData();
+    //   if (isMounted.current) setItems(items);
+    // }
+    // fetchData();
   }, [pageName]);
 
   if (items.length === 0) return null;

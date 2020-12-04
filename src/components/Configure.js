@@ -59,27 +59,27 @@ function Configure() {
 
     if (process.env.REACT_APP_CONFIGURATION_ID) {
       inpData.id = process.env.REACT_APP_CONFIGURATION_ID;
-      await API.graphql(
-        graphqlOperation(updateConfigurations, { input: inpData })
-      );
+      // await API.graphql(
+      //   graphqlOperation(updateConfigurations, { input: inpData })
+      // );
     } else {
-      await API.graphql(
-        graphqlOperation(createConfigurations, { input: inpData })
-      );
+      // await API.graphql(
+      //   graphqlOperation(createConfigurations, { input: inpData })
+      // );
       // setId(data.data.createConfigurations.id);
     }
   }
 
   useEffect(() => {
     async function fetchData() {
-      const configData = await API.graphql({
-        query: queries.getConfigurations,
-        variables: { id: process.env.REACT_APP_CONFIGURATION_ID },
-      });
-      setName(configData.data.getConfigurations.name);
-      setTagline(configData.data.getConfigurations.tagline);
-      setAvatar(configData.data.getConfigurations.avatar);
-      setPages(configData.data.getConfigurations.pages);
+      // const configData = await API.graphql({
+      //   query: queries.getConfigurations,
+      //   variables: { id: process.env.REACT_APP_CONFIGURATION_ID },
+      // });
+      // setName(configData.data.getConfigurations.name);
+      // setTagline(configData.data.getConfigurations.tagline);
+      // setAvatar(configData.data.getConfigurations.avatar);
+      // setPages(configData.data.getConfigurations.pages);
     }
     fetchData();
   }, []);

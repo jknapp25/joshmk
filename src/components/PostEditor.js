@@ -30,18 +30,18 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
 
   useEffect(() => {
     async function fetchData() {
-      const postData = await API.graphql({
-        query: queries.getPost,
-        variables: { id },
-      });
+      // const postData = await API.graphql({
+      //   query: queries.getPost,
+      //   variables: { id },
+      // });
 
-      if (postData) {
-        setTitle(postData.data.getPost.title);
-        setContent(postData.data.getPost.content);
-        setTags(postData.data.getPost.tags);
-        setImages(postData.data.getPost.images);
-        setCreatedAt(postData.data.getPost.createdAt);
-      }
+      // if (postData) {
+      //   setTitle(postData.data.getPost.title);
+      //   setContent(postData.data.getPost.content);
+      //   setTags(postData.data.getPost.tags);
+      //   setImages(postData.data.getPost.images);
+      //   setCreatedAt(postData.data.getPost.createdAt);
+      // }
     }
     if (id) {
       fetchData();

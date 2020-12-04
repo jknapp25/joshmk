@@ -26,14 +26,14 @@ function Post({
 
   useEffect(() => {
     async function fetchData() {
-      const postData = await API.graphql({
-        query: queries.getPost,
-        variables: { id: props.id },
-      });
+      // const postData = await API.graphql({
+      //   query: queries.getPost,
+      //   variables: { id: props.id },
+      // });
 
-      if (postData) {
-        setRealPost(postData.data.getPost);
-      }
+      // if (postData) {
+      //   setRealPost(postData.data.getPost);
+      // }
     }
     if (props.id) {
       fetchData();

@@ -24,22 +24,22 @@ function ProjectEditor({ id = null, onCreate, onUpdate }) {
 
   useEffect(() => {
     async function fetchData() {
-      const projectData = await API.graphql({
-        query: queries.getProject,
-        variables: { id },
-      });
+      // const projectData = await API.graphql({
+      //   query: queries.getProject,
+      //   variables: { id },
+      // });
 
-      if (projectData) {
-        setName(projectData.data.getProject.name);
-        setSummary(projectData.data.getProject.summary);
-        setTags(projectData.data.getProject.tags);
-        setImages(projectData.data.getProject.images);
-        setTasks(projectData.data.getProject.tasks);
-        setLink(projectData.data.getProject.link);
-        setStatus(projectData.data.getProject.status);
-        setStart(projectData.data.getProject.start);
-        setEnd(projectData.data.getProject.end);
-      }
+      // if (projectData) {
+      //   setName(projectData.data.getProject.name);
+      //   setSummary(projectData.data.getProject.summary);
+      //   setTags(projectData.data.getProject.tags);
+      //   setImages(projectData.data.getProject.images);
+      //   setTasks(projectData.data.getProject.tasks);
+      //   setLink(projectData.data.getProject.link);
+      //   setStatus(projectData.data.getProject.status);
+      //   setStart(projectData.data.getProject.start);
+      //   setEnd(projectData.data.getProject.end);
+      // }
     }
     if (id) {
       fetchData();
