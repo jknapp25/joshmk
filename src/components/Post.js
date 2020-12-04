@@ -95,7 +95,7 @@ function Post({
         </Carousel>
       ) : null}
       {images && images.length === 1 && imageUrls[0] ? (
-        <Image className="mb-3" src={imageUrls[0]} fluid />
+        <Image className="mb-3 w-100" src={imageUrls[0]} fluid />
       ) : null}
       <div
         className={`${
