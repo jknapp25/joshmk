@@ -4,7 +4,7 @@ import { Card, Container, Row, Col, Fade } from "react-bootstrap";
 import SideNav from "./SideNav";
 import { Helmet } from "react-helmet";
 import { API, Storage } from "aws-amplify";
-import * as queries from "../graphql/queries";
+// import * as queries from "../graphql/queries";
 export default Home;
 
 function Home({ children }) {

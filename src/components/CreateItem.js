@@ -9,17 +9,17 @@ import JobEditor from "./JobEditor";
 import ProjectEditor from "./ProjectEditor";
 import EducationEditor from "./EducationEditor";
 import { API, graphqlOperation } from "aws-amplify";
-import {
-  createPost,
-  createJob,
-  createProject,
-  createEducation,
-  updatePost,
-  updateJob,
-  updateProject,
-  updateEducation,
-} from "../graphql/mutations";
-import * as queries from "../graphql/queries";
+// import {
+//   createPost,
+//   createJob,
+//   createProject,
+//   createEducation,
+//   updatePost,
+//   updateJob,
+//   updateProject,
+//   updateEducation,
+// } from "../graphql/mutations";
+// import * as queries from "../graphql/queries";
 import { withAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
 export default withAuthenticator(CreateItem);
 

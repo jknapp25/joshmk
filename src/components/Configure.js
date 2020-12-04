@@ -10,11 +10,11 @@ import {
 import { FaTimes } from "react-icons/fa";
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 import { Storage, API, graphqlOperation } from "aws-amplify";
-import {
-  createConfigurations,
-  updateConfigurations,
-} from "../graphql/mutations";
-import * as queries from "../graphql/queries";
+// import {
+//   createConfigurations,
+//   updateConfigurations,
+// } from "../graphql/mutations";
+// import * as queries from "../graphql/queries";
 export default Configure;
 
 const pageOptions = ["blog", "work", "projects"];

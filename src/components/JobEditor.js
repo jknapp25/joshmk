@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, ButtonGroup, Form, FormControl } from "react-bootstrap";
 import { API } from "aws-amplify";
-import * as queries from "../graphql/queries";
+// import * as queries from "../graphql/queries";
 export default JobEditor;
 
 function JobEditor({ id = null, onCreate, onUpdate }) {

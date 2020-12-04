@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Form, FormControl, Image } from "react-bootstrap";
 import { Storage } from "aws-amplify";
 import { API } from "aws-amplify";
-import * as queries from "../graphql/queries";
+// import * as queries from "../graphql/queries";
 import RichTextEditor from "./RichTextEditor";
 export default PostEditor;
 

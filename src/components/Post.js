@@ -5,7 +5,7 @@ import { Storage } from "aws-amplify";
 import { createTimeInfo } from "../lib/utils";
 import { GoPencil } from "react-icons/go";
 import { API } from "aws-amplify";
-import * as queries from "../graphql/queries";
+// import * as queries from "../graphql/queries";
 export default Post;
 
 function Post({

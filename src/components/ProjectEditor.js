@@ -3,7 +3,7 @@ import { Button, Dropdown, Form, FormControl, Image } from "react-bootstrap";
 import { Storage } from "aws-amplify";
 import { statusColorLookup } from "../lib/utils";
 import { API } from "aws-amplify";
-import * as queries from "../graphql/queries";
+// import * as queries from "../graphql/queries";
 export default ProjectEditor;
 
 function ProjectEditor({ id = null, onCreate, onUpdate }) {

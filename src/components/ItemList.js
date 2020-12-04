@@ -6,7 +6,7 @@ import { useLocation, navigate } from "@reach/router";
 import { parse } from "query-string";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { API } from "aws-amplify";
-import * as queries from "../graphql/queries";
+// import * as queries from "../graphql/queries";
 import Post from "./Post";
 import Project from "./Project";
 import Job from "./Job";
