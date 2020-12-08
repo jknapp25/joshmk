@@ -1,4 +1,4 @@
-type Post @model {
+type Post @model @auth(rules: [{allow: public}]) {
   id: ID!
   title: String
   content: String
@@ -7,7 +7,7 @@ type Post @model {
   createdAt: String
 }
 
-type Project @model {
+type Project @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String
   summary: String
@@ -22,7 +22,7 @@ type Project @model {
   tagUsage: [Float]
 }
 
-type Job @model {
+type Job @model @auth(rules: [{allow: public}]) {
   id: ID!
   company: String
   role: String
@@ -38,7 +38,7 @@ type Job @model {
   tagUsage: [Float]
 }
 
-type Education @model {
+type Education @model @auth(rules: [{allow: public}]) {
   id: ID!
   organization: String
   degree: String
@@ -53,7 +53,7 @@ type Education @model {
   tagUsage: [Float]
 }
 
-type Configuration @model {
+type Configuration @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String
   tagline: String
@@ -61,3 +61,4 @@ type Configuration @model {
   favicon: String
   pages: [String]
 }
+ 

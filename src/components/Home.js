@@ -11,6 +11,7 @@ function Home({ children }) {
   const [showAsides, setAhowAsides] = useState(true);
   const [config, setConfig] = useState({});
   const [avatarUrl, setAvatarUrl] = useState("");
+  const [faviconUrl, setFaviconUrl] = useState("");
 
   function handleScroll(e) {
     if (e.nativeEvent.wheelDelta > 0) {
@@ -43,12 +44,23 @@ function Home({ children }) {
     }
   }, [config.avatar]);
 
+  useEffect(() => {
+    async function fetchData() {
+      const faviconUrl = await Storage.get(config.favicon);
+      setFaviconUrl(faviconUrl);
+    }
+    if (config.favicon) {
+      fetchData();
+    }
+  }, [config.favicon]);
+
   // if (Object.keys(config).length === 0) return null;
 
   return (
     <Container fluid onWheel={handleScroll}>
       <Helmet>
         <title>{config.name || ""}</title>
+        <link rel="icon" type="image/png" href={faviconUrl} sizes="16x16" />
       </Helmet>
       <Row>
         <Col>

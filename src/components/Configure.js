@@ -23,6 +23,8 @@ function Configure() {
   const [favicon, setFavicon] = useState("");
   const [pages, setPages] = useState([]);
   const [edited, setEdited] = useState(false);
+  const [avatarUrl, setAvatarUrl] = useState("");
+  const [faviconUrl, setFaviconUrl] = useState("");
 
   async function handleAvatarUpload(e) {
     const file = e.target.files[0];
@@ -46,12 +48,33 @@ function Configure() {
     }
   }
 
+  useEffect(() => {
+    async function fetchData() {
+      const avatarUrl = await Storage.get(avatar);
+      setAvatarUrl(avatarUrl);
+    }
+    if (avatar) {
+      fetchData();
+    }
+  }, [avatar]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const faviconUrl = await Storage.get(favicon);
+      setFaviconUrl(faviconUrl);
+    }
+    if (favicon) {
+      fetchData();
+    }
+  }, [favicon]);
+
   async function handleSave() {
     let inpData = {
       name,
       tagline,
       avatar,
       pages,
+      favicon,
     };
 
     if (process.env.REACT_APP_CONFIGURATION_ID) {
@@ -60,7 +83,7 @@ function Configure() {
         graphqlOperation(updateConfiguration, { input: inpData })
       );
     } else {
-      const info = await API.graphql(
+      await API.graphql(
         graphqlOperation(createConfiguration, { input: inpData })
       );
 
@@ -78,6 +101,7 @@ function Configure() {
       setTagline(configData.data.getConfiguration.tagline);
       setAvatar(configData.data.getConfiguration.avatar);
       setPages(configData.data.getConfiguration.pages);
+      setFavicon(configData.data.getConfiguration.favicon);
     }
     if (process.env.REACT_APP_CONFIGURATION_ID) {
       fetchData();
@@ -118,9 +142,9 @@ function Configure() {
         onChange={handleAvatarUpload}
       />
       <div className="mb-2">
-        {avatar ? (
+        {avatarUrl ? (
           <>
-            <Image src={avatar} width="100" height="auto" thumbnail />
+            <Image src={avatarUrl} width="100" height="auto" thumbnail />
             <FaTimes
               color="#dc3545"
               title="delete image"
@@ -141,9 +165,9 @@ function Configure() {
         onChange={handleFaviconUpload}
       />
       <div className="mb-2">
-        {favicon ? (
+        {faviconUrl ? (
           <>
-            <Image src={favicon} width="100" height="auto" thumbnail />
+            <Image src={faviconUrl} width="100" height="auto" thumbnail />
             <FaTimes
               color="#dc3545"
               title="delete image"
@@ -232,7 +256,6 @@ function Configure() {
           </Dropdown.Menu>
         </Dropdown>
       ) : null}
-
       {edited ? (
         <Button className="mt-2" variant="primary" onClick={handleSave}>
           Save
