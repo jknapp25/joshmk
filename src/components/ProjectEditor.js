@@ -6,6 +6,8 @@ import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 export default ProjectEditor;
 
+//for naught
+
 function ProjectEditor({ id = null, onCreate, onUpdate }) {
   const [name, setName] = useState("");
   const [summary, setSummary] = useState("");
