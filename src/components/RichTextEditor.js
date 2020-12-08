@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState, useCallback } from "react";
+import React, {  useMemo, useState, useCallback } from "react";
 import { Editor, createEditor, Transforms, Text } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
 export default RichTextEditor;

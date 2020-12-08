@@ -170,7 +170,7 @@ a:hover {
   color: #007bff !important;
 }
 
-@keyframes fadeColors {
+/* @keyframes fadeColors {
   0% {
     background-color: red;
   }
@@ -214,4 +214,4 @@ a:hover {
   -webkit-animation-name: fadeColors;
   -webkit-animation-iteration-count: infinite;
   -webkit-animation-duration: 40s;
-}
+} */

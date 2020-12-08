@@ -10,11 +10,8 @@ import {
 import { FaTimes } from "react-icons/fa";
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 import { Storage, API, graphqlOperation } from "aws-amplify";
-// import {
-//   createConfigurations,
-//   updateConfigurations,
-// } from "../graphql/mutations";
-// import * as queries from "../graphql/queries";
+import { createConfiguration, updateConfiguration } from "../graphql/mutations";
+import * as queries from "../graphql/queries";
 export default Configure;
 
 const pageOptions = ["blog", "work", "projects"];
@@ -24,7 +21,7 @@ function Configure() {
   const [tagline, setTagline] = useState("");
   const [avatar, setAvatar] = useState("");
   const [favicon, setFavicon] = useState("");
-  const [pages, setPages] = useState([""]);
+  const [pages, setPages] = useState([]);
   const [edited, setEdited] = useState(false);
 
   async function handleAvatarUpload(e) {
@@ -59,29 +56,32 @@ function Configure() {
 
     if (process.env.REACT_APP_CONFIGURATION_ID) {
       inpData.id = process.env.REACT_APP_CONFIGURATION_ID;
-      // await API.graphql(
-      //   graphqlOperation(updateConfigurations, { input: inpData })
-      // );
+      await API.graphql(
+        graphqlOperation(updateConfiguration, { input: inpData })
+      );
     } else {
-      // await API.graphql(
-      //   graphqlOperation(createConfigurations, { input: inpData })
-      // );
-      // setId(data.data.createConfigurations.id);
+      const info = await API.graphql(
+        graphqlOperation(createConfiguration, { input: inpData })
+      );
+
+      // setId(data.data.createConfiguration.id);
     }
   }
 
   useEffect(() => {
     async function fetchData() {
-      // const configData = await API.graphql({
-      //   query: queries.getConfigurations,
-      //   variables: { id: process.env.REACT_APP_CONFIGURATION_ID },
-      // });
-      // setName(configData.data.getConfigurations.name);
-      // setTagline(configData.data.getConfigurations.tagline);
-      // setAvatar(configData.data.getConfigurations.avatar);
-      // setPages(configData.data.getConfigurations.pages);
+      const configData = await API.graphql({
+        query: queries.getConfiguration,
+        variables: { id: process.env.REACT_APP_CONFIGURATION_ID },
+      });
+      setName(configData.data.getConfiguration.name);
+      setTagline(configData.data.getConfiguration.tagline);
+      setAvatar(configData.data.getConfiguration.avatar);
+      setPages(configData.data.getConfiguration.pages);
     }
-    fetchData();
+    if (process.env.REACT_APP_CONFIGURATION_ID) {
+      fetchData();
+    }
   }, []);
 
   return (

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, ButtonGroup, Form, FormControl } from "react-bootstrap";
 import { API } from "aws-amplify";
-// import * as queries from "../graphql/queries";
+import * as queries from "../graphql/queries";
 export default JobEditor;
 
 function JobEditor({ id = null, onCreate, onUpdate }) {
@@ -22,23 +22,23 @@ function JobEditor({ id = null, onCreate, onUpdate }) {
 
   useEffect(() => {
     async function fetchData() {
-      // const jobData = await API.graphql({
-      //   query: queries.getJob,
-      //   variables: { id },
-      // });
+      const jobData = await API.graphql({
+        query: queries.getJob,
+        variables: { id },
+      });
 
-      // if (jobData) {
-      //   setCompany(jobData.data.getJob.company);
-      //   setCompanyUrl(jobData.data.getJob.companyUrl);
-      //   setRole(jobData.data.getJob.role);
-      //   setLocation(jobData.data.getJob.location);
-      //   setType(jobData.data.getJob.type);
-      //   setTags(jobData.data.getJob.tags);
-      //   setDetails(jobData.data.getJob.details);
-      //   setStart(jobData.data.getJob.start);
-      //   setEnd(jobData.data.getJob.end);
-      //   setActiveDetail("");
-      // }
+      if (jobData) {
+        setCompany(jobData.data.getJob.company);
+        setCompanyUrl(jobData.data.getJob.companyUrl);
+        setRole(jobData.data.getJob.role);
+        setLocation(jobData.data.getJob.location);
+        setType(jobData.data.getJob.type);
+        setTags(jobData.data.getJob.tags);
+        setDetails(jobData.data.getJob.details);
+        setStart(jobData.data.getJob.start);
+        setEnd(jobData.data.getJob.end);
+        setActiveDetail("");
+      }
     }
     if (id) {
       fetchData();

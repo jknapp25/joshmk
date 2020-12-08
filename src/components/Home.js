@@ -4,7 +4,7 @@ import { Card, Container, Row, Col, Fade } from "react-bootstrap";
 import SideNav from "./SideNav";
 import { Helmet } from "react-helmet";
 import { API, Storage } from "aws-amplify";
-// import * as queries from "../graphql/queries";
+import * as queries from "../graphql/queries";
 export default Home;
 
 function Home({ children }) {
@@ -22,11 +22,11 @@ function Home({ children }) {
 
   useEffect(() => {
     async function fetchData() {
-      // const configData = await API.graphql({
-      //   query: queries.getConfigurations,
-      //   variables: { id: process.env.REACT_APP_CONFIGURATION_ID },
-      // });
-      // setConfig(configData.data.getConfigurations);
+      const configData = await API.graphql({
+        query: queries.getConfiguration,
+        variables: { id: process.env.REACT_APP_CONFIGURATION_ID },
+      });
+      setConfig(configData.data.getConfiguration || {});
     }
     if (process.env.REACT_APP_CONFIGURATION_ID) {
       fetchData();
@@ -43,7 +43,7 @@ function Home({ children }) {
     }
   }, [config.avatar]);
 
-  if (Object.keys(config).length === 0) return null;
+  // if (Object.keys(config).length === 0) return null;
 
   return (
     <Container fluid onWheel={handleScroll}>
@@ -58,11 +58,11 @@ function Home({ children }) {
               style={{
                 borderRadius: "15px",
                 top: "20px",
-                backgroundColor: "red",
+                // backgroundColor: "red",
               }}
             >
               <div
-                id="thingy"
+                // id="thingy"
                 style={{
                   borderTopLeftRadius: "15px",
                   borderTopRightRadius: "15px",
@@ -74,7 +74,7 @@ function Home({ children }) {
                   style={{
                     borderTopLeftRadius: "15px",
                     borderTopRightRadius: "15px",
-                    opacity: 0.75,
+                    // opacity: 0.75,
                   }}
                   onClick={() => navigate("/")}
                 />

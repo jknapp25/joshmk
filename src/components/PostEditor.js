@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Form, FormControl, Image } from "react-bootstrap";
 import { Storage } from "aws-amplify";
 import { API } from "aws-amplify";
-// import * as queries from "../graphql/queries";
+import * as queries from "../graphql/queries";
 import RichTextEditor from "./RichTextEditor";
 export default PostEditor;
 
@@ -30,18 +30,18 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
 
   useEffect(() => {
     async function fetchData() {
-      // const postData = await API.graphql({
-      //   query: queries.getPost,
-      //   variables: { id },
-      // });
+      const postData = await API.graphql({
+        query: queries.getPost,
+        variables: { id },
+      });
 
-      // if (postData) {
-      //   setTitle(postData.data.getPost.title);
-      //   setContent(postData.data.getPost.content);
-      //   setTags(postData.data.getPost.tags);
-      //   setImages(postData.data.getPost.images);
-      //   setCreatedAt(postData.data.getPost.createdAt);
-      // }
+      if (postData) {
+        setTitle(postData.data.getPost.title);
+        setContent(postData.data.getPost.content);
+        setTags(postData.data.getPost.tags);
+        setImages(postData.data.getPost.images);
+        setCreatedAt(postData.data.getPost.createdAt);
+      }
     }
     if (id) {
       fetchData();
@@ -98,8 +98,8 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
       />
 
       <Form.Label className="mb-0">Content</Form.Label>
-      <RichTextEditor />
-      {/* <FormControl
+      {/* <RichTextEditor /> */}
+      <FormControl
         id="content"
         className="mb-2"
         as="textarea"
@@ -107,7 +107,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
         aria-describedby="content"
         value={content || ""}
         onChange={(e) => setContent(e.target.value)}
-      /> */}
+      />
 
       <Form.Label className="mb-0 mt-2">Tags</Form.Label>
       <FormControl
