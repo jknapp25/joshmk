@@ -79,6 +79,7 @@ function Configure() {
 
     if (process.env.REACT_APP_CONFIGURATION_ID) {
       inpData.id = process.env.REACT_APP_CONFIGURATION_ID;
+
       await API.graphql(
         graphqlOperation(updateConfiguration, { input: inpData })
       );
@@ -86,8 +87,6 @@ function Configure() {
       await API.graphql(
         graphqlOperation(createConfiguration, { input: inpData })
       );
-
-      // setId(data.data.createConfiguration.id);
     }
   }
 

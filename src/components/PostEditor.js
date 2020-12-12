@@ -17,9 +17,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
 
   useEffect(() => {
     async function fetchData() {
-      const imagesCalls = images.map((url) => {
-        return Storage.get(url);
-      });
+      const imagesCalls = images.map((url) => Storage.get(url));
       const imageUrls = await Promise.all(imagesCalls);
       setImageUrls(imageUrls);
     }

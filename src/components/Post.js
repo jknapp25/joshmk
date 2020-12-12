@@ -4,8 +4,10 @@ import { navigate } from "@reach/router";
 import { Storage } from "aws-amplify";
 import { createTimeInfo } from "../lib/utils";
 import { GoPencil } from "react-icons/go";
-import { API } from "aws-amplify";
+import { FaTrashAlt } from "react-icons/fa";
+import { API, graphqlOperation } from "aws-amplify";
 import * as queries from "../graphql/queries";
+import { deletePost } from "../graphql/mutations";
 export default Post;
 
 function Post({
@@ -56,6 +58,15 @@ function Post({
     }
   }, [realPost.images]);
 
+  async function deletePst() {
+    console.log(realPost);
+    if (realPost.id) {
+      await API.graphql(
+        graphqlOperation(deletePost, { input: { id: realPost.id } })
+      );
+    }
+  }
+
   if (!realPost) return null;
 
   const { id, title, content, tags, images, createdAt } = realPost;
@@ -68,18 +79,40 @@ function Post({
           {title}
         </span>{" "}
         {showEdit ? (
-          <span
-            onClick={() => {
-              setItemType("post");
-              setEditingItemId(id);
-              window.scrollTo(0, 0);
-            }}
-          >
-            <GoPencil
-              color="secondary"
-              style={{ display: "inline", cursor: "pointer", color: "#6c757d" }}
-            />
-          </span>
+          <>
+            <span
+              onClick={() => {
+                setItemType("post");
+                setEditingItemId(id);
+                window.scrollTo(0, 0);
+              }}
+            >
+              <GoPencil
+                style={{
+                  display: "inline",
+                  cursor: "pointer",
+                  color: "#6c757d",
+                }}
+              />
+            </span>
+            <span
+              onClick={() => {
+                const shouldDelete = window.confirm("Delete the item?");
+                if (shouldDelete) {
+                  deletePst();
+                }
+              }}
+            >
+              <FaTrashAlt
+                className="ml-2"
+                style={{
+                  display: "inline",
+                  cursor: "pointer",
+                  color: "#dc3545",
+                }}
+              />
+            </span>
+          </>
         ) : null}
       </h2>
       <div className="mb-3">
