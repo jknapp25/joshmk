@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { Button, Form, FormControl, Image } from "react-bootstrap";
 import { Storage } from "aws-amplify";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import RichTextEditor from "./RichTextEditor";
+import { FaTimes } from "react-icons/fa";
 export default PostEditor;
 
 function PostEditor({ id = null, onCreate, onUpdate }) {
@@ -138,8 +139,21 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
         onChange={handleImageUpload}
       />
       <div className="mb-2">
-        {imageUrls.map((url) => (
-          <Image key={url} src={url} width="100" height="auto" thumbnail />
+        {imageUrls.map((url, i) => (
+          <Fragment key={i}>
+            <Image key={url} src={url} width="100" height="auto" thumbnail />
+            <FaTimes
+              color="#dc3545"
+              title="delete image"
+              className="cursor-pointer"
+              onClick={() => {
+                const updImages = images;
+                updImages.splice(i, 1);
+                console.log(updImages);
+                setImages(updImages);
+              }}
+            />
+          </Fragment>
         ))}
       </div>
 
