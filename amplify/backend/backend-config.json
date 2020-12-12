@@ -7,7 +7,7 @@
   },
   "function": {},
   "api": {
-    "joshmkapi": {
+    "joshmk": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "output": {
@@ -16,14 +16,10 @@
             "authenticationType": "API_KEY",
             "apiKeyConfig": {
               "apiKeyExpirationDays": 365,
-              "description": "joshmk"
+              "description": "joshmkapi"
             }
           },
-          "additionalAuthenticationProviders": [
-            {
-              "authenticationType": "AWS_IAM"
-            }
-          ]
+          "additionalAuthenticationProviders": []
         }
       }
     }
