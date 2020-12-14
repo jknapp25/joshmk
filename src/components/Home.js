@@ -64,45 +64,37 @@ function Home({ children }) {
       </Helmet>
       <Row>
         <Col>
-          <Fade in={showAsides}>
-            <Card
-              className="mx-3 my-4 position-sticky"
+          <Card
+            className="mx-3 mt-4"
+            style={{
+              borderRadius: "15px",
+            }}
+          >
+            <div
               style={{
-                borderRadius: "15px",
-                top: "20px",
-                // backgroundColor: "red",
+                borderTopLeftRadius: "15px",
+                borderTopRightRadius: "15px",
               }}
             >
-              <div
-                // id="thingy"
+              <Card.Img
+                variant="top"
+                src={avatarUrl}
                 style={{
                   borderTopLeftRadius: "15px",
                   borderTopRightRadius: "15px",
                 }}
-              >
-                <Card.Img
-                  variant="top"
-                  src={avatarUrl}
-                  style={{
-                    borderTopLeftRadius: "15px",
-                    borderTopRightRadius: "15px",
-                    // opacity: 0.75,
-                  }}
-                  onClick={() => navigate("/")}
-                />
-              </div>
-              <Card.Footer>
-                <Card.Title>{config.name}</Card.Title>
-                <Card.Text>{config.tagline}</Card.Text>
-              </Card.Footer>
-            </Card>
-          </Fade>
+                onClick={() => navigate("/")}
+              />
+            </div>
+            <Card.Footer>
+              <Card.Title>{config.name}</Card.Title>
+              <Card.Text>{config.tagline}</Card.Text>
+            </Card.Footer>
+          </Card>
         </Col>
         <Col xs={6}>{children}</Col>
         <Col>
-          {showAsides ? (
-            <SideNav show={true} navOptions={config.pages} />
-          ) : null}
+          <SideNav navOptions={config.pages} />
         </Col>
       </Row>
     </Container>
