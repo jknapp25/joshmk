@@ -1,10 +1,9 @@
-import React, { useState, useEffect, Fragment } from "react";
-import { Button, Form, FormControl, Image } from "react-bootstrap";
-import { Storage } from "aws-amplify";
+import React, { useState, useEffect } from "react";
+import { Button, Form, FormControl } from "react-bootstrap";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import RichTextEditor from "./RichTextEditor";
-import { FaTimes } from "react-icons/fa";
+import ImageUploader from "./ImageUploader";
 export default PostEditor;
 
 function PostEditor({ id = null, onCreate, onUpdate }) {
@@ -12,20 +11,8 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
   const [content, setContent] = useState("");
   const [tags, setTags] = useState([]);
   const [images, setImages] = useState([]);
-  const [imageUrls, setImageUrls] = useState([]);
   const [createdAt, setCreatedAt] = useState("");
   const [activeTag, setActiveTag] = useState("");
-
-  useEffect(() => {
-    async function fetchData() {
-      const imagesCalls = images.map((url) => Storage.get(url));
-      const imageUrls = await Promise.all(imagesCalls);
-      setImageUrls(imageUrls);
-    }
-    if (images && images.length) {
-      fetchData();
-    }
-  }, [images]);
 
   useEffect(() => {
     async function fetchData() {
@@ -52,19 +39,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
     setContent("");
     setTags([]);
     setImages([]);
-    setImageUrls([]);
     setCreatedAt("");
-  }
-
-  async function handleImageUpload(e) {
-    const file = e.target.files[0];
-    const { key } = await Storage.put(file.name, file, {
-      contentType: file.type,
-    });
-    if (key) {
-      const updImages = [...images, key];
-      setImages(updImages);
-    }
   }
 
   function handleButtonClick() {
@@ -132,30 +107,14 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
         ))}
       </ul>
 
-      <Form.File
-        id="images"
-        className="mb-2"
-        label="Images"
-        onChange={handleImageUpload}
+      <ImageUploader
+        images={images || []}
+        afterEdit={(imgs) => {
+          setImages(imgs);
+        }}
+        fieldId="images"
+        fieldLabel="Images"
       />
-      <div className="mb-2">
-        {imageUrls.map((url, i) => (
-          <Fragment key={i}>
-            <Image key={url} src={url} width="100" height="auto" thumbnail />
-            <FaTimes
-              color="#dc3545"
-              title="delete image"
-              className="cursor-pointer"
-              onClick={() => {
-                const updImages = images;
-                updImages.splice(i, 1);
-                console.log(updImages);
-                setImages(updImages);
-              }}
-            />
-          </Fragment>
-        ))}
-      </div>
 
       <Form.Label className="mb-0">
         Created At (ex: 2020-11-21T17:42:34Z)

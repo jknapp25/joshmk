@@ -9,6 +9,7 @@ import {
 } from "react-bootstrap";
 import { FaTimes } from "react-icons/fa";
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
+import ImageUploader from "./ImageUploader";
 import { Storage, API, graphqlOperation } from "aws-amplify";
 import { createConfiguration, updateConfiguration } from "../graphql/mutations";
 import * as queries from "../graphql/queries";
@@ -23,50 +24,50 @@ function Configure() {
   const [favicon, setFavicon] = useState("");
   const [pages, setPages] = useState([]);
   const [edited, setEdited] = useState(false);
-  const [avatarUrl, setAvatarUrl] = useState("");
-  const [faviconUrl, setFaviconUrl] = useState("");
+  // const [avatarUrl, setAvatarUrl] = useState("");
+  // const [faviconUrl, setFaviconUrl] = useState("");
 
-  async function handleAvatarUpload(e) {
-    const file = e.target.files[0];
-    const { key } = await Storage.put(file.name, file, {
-      contentType: file.type,
-    });
-    if (key) {
-      setAvatar(key);
-      setEdited(true);
-    }
-  }
+  // async function handleAvatarUpload(e) {
+  //   const file = e.target.files[0];
+  //   const { key } = await Storage.put(file.name, file, {
+  //     contentType: file.type,
+  //   });
+  //   if (key) {
+  //     setAvatar(key);
+  //     setEdited(true);
+  //   }
+  // }
 
-  async function handleFaviconUpload(e) {
-    const file = e.target.files[0];
-    const { key } = await Storage.put(file.name, file, {
-      contentType: file.type,
-    });
-    if (key) {
-      setFavicon(key);
-      setEdited(true);
-    }
-  }
+  // async function handleFaviconUpload(e) {
+  //   const file = e.target.files[0];
+  //   const { key } = await Storage.put(file.name, file, {
+  //     contentType: file.type,
+  //   });
+  //   if (key) {
+  //     setFavicon(key);
+  //     setEdited(true);
+  //   }
+  // }
 
-  useEffect(() => {
-    async function fetchData() {
-      const avatarUrl = await Storage.get(avatar);
-      setAvatarUrl(avatarUrl);
-    }
-    if (avatar) {
-      fetchData();
-    }
-  }, [avatar]);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const avatarUrl = await Storage.get(avatar);
+  //     setAvatarUrl(avatarUrl);
+  //   }
+  //   if (avatar) {
+  //     fetchData();
+  //   }
+  // }, [avatar]);
 
-  useEffect(() => {
-    async function fetchData() {
-      const faviconUrl = await Storage.get(favicon);
-      setFaviconUrl(faviconUrl);
-    }
-    if (favicon) {
-      fetchData();
-    }
-  }, [favicon]);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const faviconUrl = await Storage.get(favicon);
+  //     setFaviconUrl(faviconUrl);
+  //   }
+  //   if (favicon) {
+  //     fetchData();
+  //   }
+  // }, [favicon]);
 
   async function handleSave() {
     let inpData = {
@@ -134,51 +135,35 @@ function Configure() {
         }}
       />
 
-      <Form.File
-        id="avatar"
-        className="mb-2"
-        label="Avatar (if your image is over 5mb, let me know, I have to add it manually)"
-        onChange={handleAvatarUpload}
+      <ImageUploader
+        images={avatar ? [avatar] : []}
+        afterEdit={(imgs) => {
+          if (imgs && imgs.length) {
+            setAvatar(imgs[0]);
+          } else {
+            setAvatar("");
+          }
+          setEdited(true);
+        }}
+        fieldId="avatar"
+        fieldLabel="Avatar (if your image is over 5mb, let me know, I have to add it manually)"
+        imageLimit={1}
       />
-      <div className="mb-2">
-        {avatarUrl ? (
-          <>
-            <Image src={avatarUrl} width="100" height="auto" thumbnail />
-            <FaTimes
-              color="#dc3545"
-              title="delete image"
-              className="cursor-pointer"
-              onClick={() => {
-                setAvatar("");
-                setEdited(true);
-              }}
-            />
-          </>
-        ) : null}
-      </div>
 
-      <Form.File
-        id="favicon"
-        className="mb-2"
-        label="Favicon"
-        onChange={handleFaviconUpload}
+      <ImageUploader
+        images={favicon ? [favicon] : []}
+        afterEdit={(imgs) => {
+          if (imgs && imgs.length) {
+            setFavicon(imgs[0]);
+          } else {
+            setFavicon("");
+          }
+          setEdited(true);
+        }}
+        fieldId="favicon"
+        fieldLabel="Favicon"
+        imageLimit={1}
       />
-      <div className="mb-2">
-        {faviconUrl ? (
-          <>
-            <Image src={faviconUrl} width="100" height="auto" thumbnail />
-            <FaTimes
-              color="#dc3545"
-              title="delete image"
-              className="cursor-pointer"
-              onClick={() => {
-                setFavicon("");
-                setEdited(true);
-              }}
-            />
-          </>
-        ) : null}
-      </div>
 
       <Form.Label className="mb-0">Pages</Form.Label>
       <Table bordered className="mb-1">

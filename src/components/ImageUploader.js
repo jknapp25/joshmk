@@ -1,13 +1,18 @@
 import React, { useState, useEffect, Fragment } from "react";
-import { Button, Form, FormControl, Image } from "react-bootstrap";
+import { Form, FormFile, Image } from "react-bootstrap";
 import { Storage } from "aws-amplify";
-import { API } from "aws-amplify";
-import * as queries from "../graphql/queries";
-import RichTextEditor from "./RichTextEditor";
 import { FaTimes } from "react-icons/fa";
-export default PostEditor;
+export default ImageUploader;
 
-function ImageUploader({ images, imageUrls, afterEdit }) {
+function ImageUploader({
+  images,
+  afterEdit,
+  fieldId,
+  fieldLabel,
+  imageLimit = null,
+}) {
+  const [imageUrls, setImageUrls] = useState([]);
+
   async function handleImageUpload(e) {
     const file = e.target.files[0];
     const { key } = await Storage.put(file.name, file, {
@@ -16,34 +21,50 @@ function ImageUploader({ images, imageUrls, afterEdit }) {
     if (key) {
       const updImages = [...images, key];
       afterEdit(updImages);
-      // setImages(updImages);
     }
   }
 
-  return imageUrls.map((url, i) => (
+  useEffect(() => {
+    async function fetchData() {
+      const imagesCalls = images.map((url) => Storage.get(url));
+      const resImageUrls = await Promise.all(imagesCalls);
+      setImageUrls(resImageUrls);
+    }
+    if (images && images.length) {
+      fetchData();
+    } else {
+      setImageUrls([]);
+    }
+  }, [images]);
+
+  const reachedImageLimit =
+    imageLimit && images && images.length === imageLimit;
+
+  return (
     <>
-      <Form.File
-        id="images"
-        className="mb-2"
-        label="Images"
-        onChange={handleImageUpload}
-      />
-      <div className="mb-2">
-        <Fragment key={i}>
-          <Image key={url} src={url} width="100" height="auto" thumbnail />
-          <FaTimes
-            color="#dc3545"
-            title="delete image"
-            className="cursor-pointer"
-            onClick={() => {
-              const updImages = images;
-              updImages.splice(i, 1);
-              afterEdit(updImages);
-              // setImages(updImages);
-            }}
-          />
-        </Fragment>
-      </div>
+      <FormFile.Label className="mb-0">{fieldLabel}</FormFile.Label>
+      {!reachedImageLimit ? (
+        <Form.File id={fieldId} className="mb-2" onChange={handleImageUpload} />
+      ) : null}
+      {images.length ? (
+        <div className="mb-2">
+          {imageUrls.map((url, i) => (
+            <Fragment key={i}>
+              <Image key={url} src={url} width="100" height="auto" thumbnail />
+              <FaTimes
+                color="#dc3545"
+                title="delete image"
+                className="cursor-pointer"
+                onClick={() => {
+                  const updImages = [...images];
+                  updImages.splice(i, 1);
+                  afterEdit(updImages);
+                }}
+              />
+            </Fragment>
+          ))}
+        </div>
+      ) : null}
     </>
-  ));
+  );
 }

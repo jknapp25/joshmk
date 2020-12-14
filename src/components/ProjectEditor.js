@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Button, Dropdown, Form, FormControl, Image } from "react-bootstrap";
+import { Button, Dropdown, Form, FormControl } from "react-bootstrap";
+import ImageUploader from "./ImageUploader";
 import { Storage } from "aws-amplify";
 import { statusColorLookup } from "../lib/utils";
 import { API } from "aws-amplify";
@@ -22,7 +23,6 @@ function ProjectEditor({ id = null, onCreate, onUpdate }) {
   const [complexity, setComplexity] = useState(0);
   const [tagUsage, setTagUsage] = useState([]);
   const [images, setImages] = useState([]);
-  const [imageUrls, setImageUrls] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -48,16 +48,6 @@ function ProjectEditor({ id = null, onCreate, onUpdate }) {
     }
   }, [id]);
 
-  useEffect(() => {
-    async function fetchData() {
-      const imageUrls = await Storage.get(images[0]);
-      setImageUrls([imageUrls]);
-    }
-    if (images.length) {
-      fetchData();
-    }
-  }, [images]);
-
   function clearEditor() {
     setName("");
     setSummary("");
@@ -70,18 +60,6 @@ function ProjectEditor({ id = null, onCreate, onUpdate }) {
     setComplexity(0);
     setTagUsage([]);
     setImages([]);
-    setImageUrls([]);
-  }
-
-  async function handleImageUpload(e) {
-    const file = e.target.files[0];
-    const { key } = await Storage.put(file.name, file, {
-      contentType: file.type,
-    });
-    if (key) {
-      const updImages = [...images, key];
-      setImages(updImages);
-    }
   }
 
   function handleButtonClick() {
@@ -208,17 +186,14 @@ function ProjectEditor({ id = null, onCreate, onUpdate }) {
         ))}
       </ul>
 
-      <Form.File
-        id="images"
-        className="mb-2"
-        label="Images"
-        onChange={handleImageUpload}
+      <ImageUploader
+        images={images || []}
+        afterEdit={(imgs) => {
+          setImages(imgs);
+        }}
+        fieldId="images"
+        fieldLabel="Images"
       />
-      <div className="mb-2">
-        {imageUrls.map((url) => (
-          <Image src={url} width="100" height="auto" thumbnail />
-        ))}
-      </div>
 
       <Form.Label className="mb-0">Start (ex: 2020-10-14)</Form.Label>
       <FormControl
