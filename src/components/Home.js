@@ -7,6 +7,8 @@ import { API, Storage } from "aws-amplify";
 import * as queries from "../graphql/queries";
 export default Home;
 
+export const ConfigContext = React.createContext({});
+
 function Home({ children }) {
   const [showAsides, setAhowAsides] = useState(true);
   const [config, setConfig] = useState({});
@@ -54,49 +56,49 @@ function Home({ children }) {
     }
   }, [config.favicon]);
 
-  // if (Object.keys(config).length === 0) return null;
-
   return (
-    <Container fluid onWheel={handleScroll}>
-      <Helmet>
-        <title>{config.name || ""}</title>
-        <link rel="icon" type="image/png" href={faviconUrl} sizes="16x16" />
-      </Helmet>
-      <Row>
-        <Col>
-          <Card
-            className="mx-3 mt-4"
-            style={{
-              borderRadius: "15px",
-            }}
-          >
-            <div
+    <ConfigContext.Provider value={config}>
+      <Container fluid onWheel={handleScroll}>
+        <Helmet>
+          <title>{config.name || ""}</title>
+          <link rel="icon" type="image/png" href={faviconUrl} sizes="16x16" />
+        </Helmet>
+        <Row>
+          <Col>
+            <Card
+              className="mx-3 mt-4"
               style={{
-                borderTopLeftRadius: "15px",
-                borderTopRightRadius: "15px",
+                borderRadius: "15px",
               }}
             >
-              <Card.Img
-                variant="top"
-                src={avatarUrl}
+              <div
                 style={{
                   borderTopLeftRadius: "15px",
                   borderTopRightRadius: "15px",
                 }}
-                onClick={() => navigate("/")}
-              />
-            </div>
-            <Card.Footer>
-              <Card.Title>{config.name}</Card.Title>
-              <Card.Text>{config.tagline}</Card.Text>
-            </Card.Footer>
-          </Card>
-        </Col>
-        <Col xs={6}>{children}</Col>
-        <Col>
-          <SideNav navOptions={config.pages} />
-        </Col>
-      </Row>
-    </Container>
+              >
+                <Card.Img
+                  variant="top"
+                  src={avatarUrl}
+                  style={{
+                    borderTopLeftRadius: "15px",
+                    borderTopRightRadius: "15px",
+                  }}
+                  onClick={() => navigate("/")}
+                />
+              </div>
+              <Card.Footer>
+                <Card.Title>{config.name}</Card.Title>
+                <Card.Text>{config.tagline}</Card.Text>
+              </Card.Footer>
+            </Card>
+          </Col>
+          <Col xs={6}>{children}</Col>
+          <Col>
+            <SideNav navOptions={config.pages} />
+          </Col>
+        </Row>
+      </Container>
+    </ConfigContext.Provider>
   );
 }

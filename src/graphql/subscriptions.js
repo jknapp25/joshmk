@@ -232,6 +232,7 @@ export const onCreateConfiguration = /* GraphQL */ `
       avatar
       favicon
       pages
+      resumeGeneratorEnabled
       createdAt
       updatedAt
     }
@@ -246,6 +247,7 @@ export const onUpdateConfiguration = /* GraphQL */ `
       avatar
       favicon
       pages
+      resumeGeneratorEnabled
       createdAt
       updatedAt
     }
@@ -260,6 +262,7 @@ export const onDeleteConfiguration = /* GraphQL */ `
       avatar
       favicon
       pages
+      resumeGeneratorEnabled
       createdAt
       updatedAt
     }

@@ -4,13 +4,14 @@ import {
   Dropdown,
   Form,
   FormControl,
-  Image,
   Table,
+  Accordion,
+  Card,
 } from "react-bootstrap";
 import { FaTimes } from "react-icons/fa";
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 import ImageUploader from "./ImageUploader";
-import { Storage, API, graphqlOperation } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
 import { createConfiguration, updateConfiguration } from "../graphql/mutations";
 import * as queries from "../graphql/queries";
 export default Configure;
@@ -24,50 +25,7 @@ function Configure() {
   const [favicon, setFavicon] = useState("");
   const [pages, setPages] = useState([]);
   const [edited, setEdited] = useState(false);
-  // const [avatarUrl, setAvatarUrl] = useState("");
-  // const [faviconUrl, setFaviconUrl] = useState("");
-
-  // async function handleAvatarUpload(e) {
-  //   const file = e.target.files[0];
-  //   const { key } = await Storage.put(file.name, file, {
-  //     contentType: file.type,
-  //   });
-  //   if (key) {
-  //     setAvatar(key);
-  //     setEdited(true);
-  //   }
-  // }
-
-  // async function handleFaviconUpload(e) {
-  //   const file = e.target.files[0];
-  //   const { key } = await Storage.put(file.name, file, {
-  //     contentType: file.type,
-  //   });
-  //   if (key) {
-  //     setFavicon(key);
-  //     setEdited(true);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const avatarUrl = await Storage.get(avatar);
-  //     setAvatarUrl(avatarUrl);
-  //   }
-  //   if (avatar) {
-  //     fetchData();
-  //   }
-  // }, [avatar]);
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const faviconUrl = await Storage.get(favicon);
-  //     setFaviconUrl(faviconUrl);
-  //   }
-  //   if (favicon) {
-  //     fetchData();
-  //   }
-  // }, [favicon]);
+  const [resumeGeneratorEnabled, setResumeGeneratorEnabled] = useState(false);
 
   async function handleSave() {
     let inpData = {
@@ -76,6 +34,7 @@ function Configure() {
       avatar,
       pages,
       favicon,
+      resumeGeneratorEnabled,
     };
 
     if (process.env.REACT_APP_CONFIGURATION_ID) {
@@ -102,6 +61,9 @@ function Configure() {
       setAvatar(configData.data.getConfiguration.avatar);
       setPages(configData.data.getConfiguration.pages);
       setFavicon(configData.data.getConfiguration.favicon);
+      setResumeGeneratorEnabled(
+        configData.data.getConfiguration.resumeGeneratorEnabled
+      );
     }
     if (process.env.REACT_APP_CONFIGURATION_ID) {
       fetchData();
@@ -240,6 +202,35 @@ function Configure() {
           </Dropdown.Menu>
         </Dropdown>
       ) : null}
+
+      <Accordion className="mt-3">
+        <Card className="bg-transparent">
+          <Card.Header className="p-0 bg-transparent">
+            <Accordion.Toggle
+              as={Button}
+              variant="link"
+              eventKey="0"
+              className="pl-0"
+            >
+              Advanced
+            </Accordion.Toggle>
+          </Card.Header>
+          <Accordion.Collapse eventKey="0">
+            <Card.Body className="bg-transparent px-0">
+              <Form.Check
+                type="checkbox"
+                label="Enable resume generator"
+                checked={resumeGeneratorEnabled}
+                onChange={() => {
+                  setResumeGeneratorEnabled(!resumeGeneratorEnabled);
+                  setEdited(true);
+                }}
+              />
+            </Card.Body>
+          </Accordion.Collapse>
+        </Card>
+      </Accordion>
+
       {edited ? (
         <Button className="mt-2" variant="primary" onClick={handleSave}>
           Save

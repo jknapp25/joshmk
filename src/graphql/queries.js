@@ -186,6 +186,7 @@ export const getConfiguration = /* GraphQL */ `
       avatar
       favicon
       pages
+      resumeGeneratorEnabled
       createdAt
       updatedAt
     }
@@ -205,6 +206,7 @@ export const listConfigurations = /* GraphQL */ `
         avatar
         favicon
         pages
+        resumeGeneratorEnabled
         createdAt
         updatedAt
       }

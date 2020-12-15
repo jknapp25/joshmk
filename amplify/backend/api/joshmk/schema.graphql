@@ -60,4 +60,5 @@ type Configuration @model @auth(rules: [{ allow: public }]) {
   avatar: String
   favicon: String
   pages: [String]
+  resumeGeneratorEnabled: Boolean
 }

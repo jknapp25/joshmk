@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { Alert, Badge } from "react-bootstrap";
 import Timeline from "./Timeline";
 import Resume from "./Resume";
@@ -12,12 +12,14 @@ import Project from "./Project";
 import Job from "./Job";
 import Education from "./Education";
 import { FaTimes } from "react-icons/fa";
+import { ConfigContext } from "./Home";
 export default ItemList;
 
 const statusOrder = ["active", "on hold", "completed"];
 
 function ItemList() {
   const { pathname, search } = useLocation();
+  const config = useContext(ConfigContext);
   const searchParams = parse(search);
   const [items, setItems] = useState([]);
 
@@ -93,18 +95,21 @@ function ItemList() {
       }
     });
     let education = sortedItems.filter((itm) => itm.tags.includes("education"));
+
     return (
       <div className="my-4">
-        <Alert variant="info">
-          Click{" "}
-          <PDFDownloadLink
-            document={<Resume items={sortedItems} education={education} />}
-            fileName="Josh_Knapp_Resume.pdf"
-          >
-            <span className="alert-link">here</span>
-          </PDFDownloadLink>{" "}
-          for Josh's resume
-        </Alert>
+        {config?.resumeGeneratorEnabled ? (
+          <Alert variant="info">
+            Click{" "}
+            <PDFDownloadLink
+              document={<Resume items={sortedItems} education={education} />}
+              fileName={`${config.name.replace(" ", "_")}_Resume.pdf`}
+            >
+              <span className="alert-link">here</span>
+            </PDFDownloadLink>{" "}
+            for {config.name}'s resume
+          </Alert>
+        ) : null}
         <Timeline items={sortedItems} />
       </div>
     );
