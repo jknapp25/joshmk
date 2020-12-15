@@ -1,5 +1,5 @@
 import React from "react";
-import { Badge, Card } from "react-bootstrap";
+import { Accordion, Badge, Button, Card } from "react-bootstrap";
 import { navigate } from "@reach/router";
 import { createTimeInfo } from "../lib/utils";
 import { GoPencil } from "react-icons/go";
@@ -12,6 +12,7 @@ function Job({ job, setEditingItemId, setItemType, showEdit = false }) {
     role,
     location,
     summary,
+    details,
     companyUrl,
     tags,
     type,
@@ -61,9 +62,9 @@ function Job({ job, setEditingItemId, setItemType, showEdit = false }) {
           ) : (
             company
           )}{" "}
-          {location && `- ${location}`}
+          {location ? `- ${location}` : null}
         </Card.Subtitle>
-        {summary && (
+        {summary ? (
           <Card.Text
             className={`${
               tags && tags.length > 0 ? "mb-2" : ""
@@ -71,8 +72,33 @@ function Job({ job, setEditingItemId, setItemType, showEdit = false }) {
           >
             {summary}
           </Card.Text>
-        )}
-        {tags && tags.length > 0 && (
+        ) : null}
+        {details ? (
+          <Accordion className="mt-3">
+            <Card className="bg-transparent">
+              <Card.Header className="p-0 bg-transparent border-bottom-0">
+                <Accordion.Toggle
+                  as={Button}
+                  variant="link"
+                  eventKey="0"
+                  className="pl-0"
+                >
+                  View details
+                </Accordion.Toggle>
+              </Card.Header>
+              <Accordion.Collapse eventKey="0">
+                <Card.Body className="bg-transparent px-0 pb-0">
+                  <ul>
+                    {details.map((detail) => (
+                      <li>{detail}</li>
+                    ))}
+                  </ul>
+                </Card.Body>
+              </Accordion.Collapse>
+            </Card>
+          </Accordion>
+        ) : null}
+        {tags && tags.length > 0 ? (
           <Card.Text
             style={{
               whiteSpace: "nowrap",
@@ -92,7 +118,7 @@ function Job({ job, setEditingItemId, setItemType, showEdit = false }) {
               </Badge>
             ))}
           </Card.Text>
-        )}
+        ) : null}
       </Card.Body>
       <Card.Footer>
         <small className="text-muted">{timeInfo}</small>

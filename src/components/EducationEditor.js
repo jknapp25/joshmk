@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Form, FormControl } from "react-bootstrap";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
+import { useIsMounted } from "../lib/utils";
 export default EducationEditor;
 
 function EducationEditor({ id = null, onCreate, onUpdate }) {
@@ -14,9 +15,10 @@ function EducationEditor({ id = null, onCreate, onUpdate }) {
   const [tags, setTags] = useState([]);
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
-
   const [activeTag, setActiveTag] = useState("");
   const [activeDetail, setActiveDetail] = useState("");
+
+  const isMounted = useIsMounted();
 
   useEffect(() => {
     async function fetchData() {
@@ -25,7 +27,7 @@ function EducationEditor({ id = null, onCreate, onUpdate }) {
         variables: { id },
       });
 
-      if (educationData) {
+      if (educationData && isMounted.current) {
         setOrganization(educationData.data.getEducation.organization);
         setDegree(educationData.data.getEducation.degree);
         setTags(educationData.data.getEducation.tags);
@@ -40,7 +42,7 @@ function EducationEditor({ id = null, onCreate, onUpdate }) {
     if (id) {
       fetchData();
     }
-  }, [id]);
+  }, [id, isMounted]);
 
   function clearEditor() {
     setOrganization("");
@@ -73,7 +75,8 @@ function EducationEditor({ id = null, onCreate, onUpdate }) {
     } else {
       onCreate("education", data);
     }
-    clearEditor();
+
+    if (isMounted.current) clearEditor();
   }
 
   return (

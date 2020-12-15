@@ -1,10 +1,11 @@
 import moment from "moment";
+import { useRef, useEffect } from "react";
 
 export const statusColorLookup = {
-  active: 'info',
-  "on hold": 'warning',
-  completed: 'success'
-}
+  active: "info",
+  "on hold": "warning",
+  completed: "success",
+};
 
 export function calcSkillsAssessments(items) {
   /**
@@ -103,3 +104,12 @@ export function createTimeInfo(start, end, lastUpdated, includeDay = false) {
   if (lastUpdated) return `Last updated ${formattedLastUpdated}`;
   return "No date info available";
 }
+
+export const useIsMounted = () => {
+  const isMounted = useRef(false);
+  useEffect(() => {
+    isMounted.current = true;
+    return () => (isMounted.current = false);
+  }, []);
+  return isMounted;
+};

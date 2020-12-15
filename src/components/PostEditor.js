@@ -4,6 +4,7 @@ import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import RichTextEditor from "./RichTextEditor";
 import ImageUploader from "./ImageUploader";
+import { useIsMounted } from "../lib/utils";
 export default PostEditor;
 
 function PostEditor({ id = null, onCreate, onUpdate }) {
@@ -14,6 +15,8 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
   const [createdAt, setCreatedAt] = useState("");
   const [activeTag, setActiveTag] = useState("");
 
+  const isMounted = useIsMounted();
+
   useEffect(() => {
     async function fetchData() {
       const postData = await API.graphql({
@@ -21,7 +24,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
         variables: { id },
       });
 
-      if (postData) {
+      if (postData && isMounted.current) {
         setTitle(postData.data.getPost.title);
         setContent(postData.data.getPost.content);
         setTags(postData.data.getPost.tags);
@@ -32,7 +35,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
     if (id) {
       fetchData();
     }
-  }, [id]);
+  }, [id, isMounted]);
 
   function clearEditor() {
     setTitle("");
@@ -57,7 +60,8 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
     } else {
       onCreate("post", data);
     }
-    clearEditor();
+
+    if (isMounted.current) clearEditor();
   }
 
   return (

@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Badge, Carousel, Image } from "react-bootstrap";
 import { navigate } from "@reach/router";
 import { Storage } from "aws-amplify";
-import { createTimeInfo } from "../lib/utils";
+import { createTimeInfo, useIsMounted } from "../lib/utils";
 import { GoPencil } from "react-icons/go";
 import { FaTrashAlt } from "react-icons/fa";
 import { API, graphqlOperation } from "aws-amplify";
@@ -18,13 +18,7 @@ function Post({
   ...props
 }) {
   const [realPost, setRealPost] = useState(post);
-
-  const isMounted = useRef(true);
-  useEffect(() => {
-    return () => {
-      isMounted.current = false;
-    };
-  }, []);
+  const isMounted = useIsMounted();
 
   useEffect(() => {
     async function fetchData() {
@@ -33,14 +27,14 @@ function Post({
         variables: { id: props.id },
       });
 
-      if (postData) {
+      if (postData && isMounted.current) {
         setRealPost(postData.data.getPost);
       }
     }
     if (props.id) {
       fetchData();
     }
-  }, [props.id]);
+  }, [props.id, isMounted]);
 
   const [imageUrls, setImageUrls] = useState([]);
   useEffect(() => {
@@ -48,12 +42,12 @@ function Post({
       const imagesCalls = realPost.images.map((url) => Storage.get(url));
       const imageUrls = await Promise.all(imagesCalls);
 
-      if (isMounted.current) setImageUrls(imageUrls);
+      if (imageUrls && isMounted.current) setImageUrls(imageUrls);
     }
     if (realPost.images && realPost.images.length) {
       fetchData();
     }
-  }, [realPost.images]);
+  }, [realPost.images, isMounted]);
 
   async function deletePst() {
     if (realPost.id) {

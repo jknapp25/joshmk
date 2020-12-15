@@ -1,22 +1,15 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Badge, Card, Carousel } from "react-bootstrap";
 import { navigate } from "@reach/router";
 import { Storage } from "aws-amplify";
-import { createTimeInfo } from "../lib/utils";
-import { statusColorLookup } from "../lib/utils";
+import { createTimeInfo, useIsMounted, statusColorLookup } from "../lib/utils";
 import { GoPencil } from "react-icons/go";
 export default Project;
 
 function Project({ project, setEditingItemId, setItemType, showEdit = false }) {
   const { id, name, tags, summary, status, link, images, start, end } = project;
   const timeInfo = createTimeInfo(start, end, null, false);
-
-  const isMounted = useRef(true);
-  useEffect(() => {
-    return () => {
-      isMounted.current = false;
-    };
-  }, []);
+  const isMounted = useIsMounted();
 
   const [imageUrls, setImageUrls] = useState([]);
   useEffect(() => {
@@ -28,7 +21,7 @@ function Project({ project, setEditingItemId, setItemType, showEdit = false }) {
     if (images && images.length) {
       fetchData();
     }
-  }, [images]);
+  }, [images, isMounted]);
 
   return (
     <Card className="mb-4">

@@ -76,7 +76,7 @@ function Configure() {
       <Form.Label className="mb-0">Name</Form.Label>
       <FormControl
         id="name"
-        className="mb-2"
+        className="mb-3"
         aria-describedby="name"
         value={name || ""}
         onChange={(e) => {
@@ -88,7 +88,7 @@ function Configure() {
       <Form.Label className="mb-0">Tagline</Form.Label>
       <FormControl
         id="tagline"
-        className="mb-2"
+        className="mb-4"
         aria-describedby="tagline"
         value={tagline || ""}
         onChange={(e) => {
@@ -96,6 +96,8 @@ function Configure() {
           setEdited(true);
         }}
       />
+
+      <hr />
 
       <ImageUploader
         images={avatar ? [avatar] : []}
@@ -127,8 +129,10 @@ function Configure() {
         imageLimit={1}
       />
 
+      <hr />
+
       <Form.Label className="mb-0">Pages</Form.Label>
-      <Table bordered className="mb-1">
+      <Table bordered className="mb-3">
         <tbody>
           {pages.map((page, i) => (
             <tr key={i}>
@@ -203,9 +207,11 @@ function Configure() {
         </Dropdown>
       ) : null}
 
+      <hr />
+
       <Accordion className="mt-3">
         <Card className="bg-transparent">
-          <Card.Header className="p-0 bg-transparent">
+          <Card.Header className="p-0 bg-transparent border-bottom-0">
             <Accordion.Toggle
               as={Button}
               variant="link"

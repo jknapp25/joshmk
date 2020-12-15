@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, ButtonGroup, Form, FormControl } from "react-bootstrap";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
+import { useIsMounted } from "../lib/utils";
 export default JobEditor;
 
 function JobEditor({ id = null, onCreate, onUpdate }) {
@@ -20,6 +21,8 @@ function JobEditor({ id = null, onCreate, onUpdate }) {
   const [complexity, setComplexity] = useState(0);
   const [tagUsage, setTagUsage] = useState([]);
 
+  const isMounted = useIsMounted();
+
   useEffect(() => {
     async function fetchData() {
       const jobData = await API.graphql({
@@ -27,7 +30,7 @@ function JobEditor({ id = null, onCreate, onUpdate }) {
         variables: { id },
       });
 
-      if (jobData) {
+      if (jobData && isMounted.current) {
         setCompany(jobData.data.getJob.company);
         setCompanyUrl(jobData.data.getJob.companyUrl);
         setRole(jobData.data.getJob.role);
@@ -43,7 +46,7 @@ function JobEditor({ id = null, onCreate, onUpdate }) {
     if (id) {
       fetchData();
     }
-  }, [id]);
+  }, [id, isMounted]);
 
   function clearEditor() {
     setCompany("");
@@ -84,7 +87,7 @@ function JobEditor({ id = null, onCreate, onUpdate }) {
       onCreate("job", data);
     }
 
-    clearEditor();
+    if (isMounted.current) clearEditor();
   }
 
   return (
