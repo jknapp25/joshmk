@@ -89,8 +89,8 @@ function Job({ job, setEditingItemId, setItemType, showEdit = false }) {
               <Accordion.Collapse eventKey="0">
                 <Card.Body className="bg-transparent px-0 pb-0">
                   <ul>
-                    {details.map((detail) => (
-                      <li>{detail}</li>
+                    {details.map((detail, i) => (
+                      <li key={i}>{detail}</li>
                     ))}
                   </ul>
                 </Card.Body>

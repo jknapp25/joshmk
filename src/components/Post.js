@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Badge, Carousel, Image } from "react-bootstrap";
+import { Badge } from "react-bootstrap";
 import { navigate } from "@reach/router";
-import { Storage } from "aws-amplify";
+import ImageCarousel from "./ImageCarousel";
 import { createTimeInfo, useIsMounted } from "../lib/utils";
 import { GoPencil } from "react-icons/go";
 import { FaTrashAlt } from "react-icons/fa";
@@ -35,19 +35,6 @@ function Post({
       fetchData();
     }
   }, [props.id, isMounted]);
-
-  const [imageUrls, setImageUrls] = useState([]);
-  useEffect(() => {
-    async function fetchData() {
-      const imagesCalls = realPost.images.map((url) => Storage.get(url));
-      const imageUrls = await Promise.all(imagesCalls);
-
-      if (imageUrls && isMounted.current) setImageUrls(imageUrls);
-    }
-    if (realPost.images && realPost.images.length) {
-      fetchData();
-    }
-  }, [realPost.images, isMounted]);
 
   async function deletePst() {
     if (realPost.id) {
@@ -108,18 +95,9 @@ function Post({
       <div className="mb-3">
         <small className="text-muted">{timeInfo}</small>
       </div>
-      {images && images.length > 1 ? (
-        <Carousel className="mb-3" interval={10000000}>
-          {imageUrls.map((url, i) => (
-            <Carousel.Item key={i}>
-              <img className="w-100" src={url} alt={url} />
-            </Carousel.Item>
-          ))}
-        </Carousel>
-      ) : null}
-      {images && images.length === 1 && imageUrls[0] ? (
-        <Image className="mb-3 w-100" src={imageUrls[0]} fluid />
-      ) : null}
+
+      <ImageCarousel images={images} />
+
       <div
         className={`${
           tags && tags.length > 0 ? "mb-3" : ""

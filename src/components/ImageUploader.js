@@ -2,6 +2,7 @@ import React, { useState, useEffect, Fragment } from "react";
 import { Form, FormFile, Image } from "react-bootstrap";
 import { Storage } from "aws-amplify";
 import { FaTimes } from "react-icons/fa";
+import { useIsMounted } from "../lib/utils";
 export default ImageUploader;
 
 function ImageUploader({
@@ -12,6 +13,7 @@ function ImageUploader({
   imageLimit = null,
 }) {
   const [imageUrls, setImageUrls] = useState([]);
+  const isMounted = useIsMounted();
 
   async function handleImageUpload(e) {
     const file = e.target.files[0];
@@ -28,14 +30,15 @@ function ImageUploader({
     async function fetchData() {
       const imagesCalls = images.map((url) => Storage.get(url));
       const resImageUrls = await Promise.all(imagesCalls);
-      setImageUrls(resImageUrls);
+
+      if (isMounted.current) setImageUrls(resImageUrls);
     }
     if (images && images.length) {
       fetchData();
     } else {
-      setImageUrls([]);
+      if (isMounted.current) setImageUrls([]);
     }
-  }, [images]);
+  }, [images, isMounted]);
 
   const reachedImageLimit =
     imageLimit && images && images.length === imageLimit;

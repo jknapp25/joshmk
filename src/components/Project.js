@@ -1,42 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { Badge, Card, Carousel } from "react-bootstrap";
+import React from "react";
+import { Badge, Card } from "react-bootstrap";
+import ImageCarousel from "./ImageCarousel";
 import { navigate } from "@reach/router";
-import { Storage } from "aws-amplify";
-import { createTimeInfo, useIsMounted, statusColorLookup } from "../lib/utils";
+import { createTimeInfo, statusColorLookup } from "../lib/utils";
 import { GoPencil } from "react-icons/go";
 export default Project;
 
 function Project({ project, setEditingItemId, setItemType, showEdit = false }) {
   const { id, name, tags, summary, status, link, images, start, end } = project;
   const timeInfo = createTimeInfo(start, end, null, false);
-  const isMounted = useIsMounted();
-
-  const [imageUrls, setImageUrls] = useState([]);
-  useEffect(() => {
-    async function fetchData() {
-      const imagesCalls = images.map((url) => Storage.get(url));
-      const imageUrls = await Promise.all(imagesCalls);
-      if (isMounted.current) setImageUrls(imageUrls);
-    }
-    if (images && images.length) {
-      fetchData();
-    }
-  }, [images, isMounted]);
 
   return (
     <Card className="mb-4">
-      {images && images.length > 1 ? (
-        <Carousel interval={10000000}>
-          {imageUrls.map((url, i) => (
-            <Carousel.Item key={i}>
-              <Card.Img variant="top" src={url} />
-            </Carousel.Item>
-          ))}
-        </Carousel>
-      ) : null}
-      {images && images.length === 1 && imageUrls[0] ? (
-        <Card.Img variant="top" src={imageUrls[0]} />
-      ) : null}
+      <ImageCarousel images={images} />
+
       <Card.Body>
         <Card.Title>
           {link ? (
