@@ -14,6 +14,7 @@ import ImageUploader from "./ImageUploader";
 import { API, graphqlOperation } from "aws-amplify";
 import { createConfiguration, updateConfiguration } from "../graphql/mutations";
 import * as queries from "../graphql/queries";
+import { useIsMounted } from "../lib/utils";
 export default Configure;
 
 const pageOptions = ["blog", "work", "projects"];
@@ -26,6 +27,8 @@ function Configure() {
   const [pages, setPages] = useState([]);
   const [edited, setEdited] = useState(false);
   const [resumeGeneratorEnabled, setResumeGeneratorEnabled] = useState(false);
+
+  const isMounted = useIsMounted();
 
   async function handleSave() {
     let inpData = {
@@ -56,19 +59,22 @@ function Configure() {
         query: queries.getConfiguration,
         variables: { id: process.env.REACT_APP_CONFIGURATION_ID },
       });
-      setName(configData.data.getConfiguration.name);
-      setTagline(configData.data.getConfiguration.tagline);
-      setAvatar(configData.data.getConfiguration.avatar);
-      setPages(configData.data.getConfiguration.pages);
-      setFavicon(configData.data.getConfiguration.favicon);
-      setResumeGeneratorEnabled(
-        configData.data.getConfiguration.resumeGeneratorEnabled
-      );
+
+      if (configData && isMounted.current) {
+        setName(configData.data.getConfiguration.name);
+        setTagline(configData.data.getConfiguration.tagline);
+        setAvatar(configData.data.getConfiguration.avatar);
+        setPages(configData.data.getConfiguration.pages);
+        setFavicon(configData.data.getConfiguration.favicon);
+        setResumeGeneratorEnabled(
+          configData.data.getConfiguration.resumeGeneratorEnabled
+        );
+      }
     }
     if (process.env.REACT_APP_CONFIGURATION_ID) {
       fetchData();
     }
-  }, []);
+  }, [isMounted]);
 
   return (
     <div className="mt-4">

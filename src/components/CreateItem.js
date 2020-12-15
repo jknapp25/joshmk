@@ -21,12 +21,15 @@ import {
 } from "../graphql/mutations";
 import * as queries from "../graphql/queries";
 import { withAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
+import { useIsMounted } from "../lib/utils";
 export default withAuthenticator(CreateItem);
 
 function CreateItem() {
   const [items, setItems] = useState([]);
   const [itemType, setItemType] = useState("post");
   const [editingItemId, setEditingItemId] = useState("");
+
+  const isMounted = useIsMounted();
 
   async function handleCreate(type, data) {
     if (type === "post")
@@ -82,10 +85,10 @@ function CreateItem() {
 
       const fetchedItems = [...posts, ...jobs, ...projects, ...educations];
 
-      setItems(fetchedItems);
+      if (isMounted.current) setItems(fetchedItems);
     }
     fetchData();
-  }, []);
+  }, [isMounted]);
 
   let sortedItems = items.sort(function (a, b) {
     if (a.createdAt < b.createdAt) {

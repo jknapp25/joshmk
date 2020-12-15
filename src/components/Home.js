@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { navigate } from "@reach/router";
-import { Card, Container, Row, Col, Fade } from "react-bootstrap";
+import { Card, Container, Row, Col } from "react-bootstrap";
 import SideNav from "./SideNav";
 import { Helmet } from "react-helmet";
 import { API, Storage } from "aws-amplify";
 import * as queries from "../graphql/queries";
+import { useIsMounted } from "../lib/utils";
 export default Home;
 
 export const ConfigContext = React.createContext({});
@@ -14,6 +15,8 @@ function Home({ children }) {
   const [config, setConfig] = useState({});
   const [avatarUrl, setAvatarUrl] = useState("");
   const [faviconUrl, setFaviconUrl] = useState("");
+
+  const isMounted = useIsMounted();
 
   function handleScroll(e) {
     if (e.nativeEvent.wheelDelta > 0) {
@@ -29,32 +32,33 @@ function Home({ children }) {
         query: queries.getConfiguration,
         variables: { id: process.env.REACT_APP_CONFIGURATION_ID },
       });
-      setConfig(configData.data.getConfiguration || {});
+      if (configData && isMounted.current)
+        setConfig(configData.data.getConfiguration || {});
     }
     if (process.env.REACT_APP_CONFIGURATION_ID) {
       fetchData();
     }
-  }, []);
+  }, [isMounted]);
 
   useEffect(() => {
     async function fetchData() {
       const avatarUrl = await Storage.get(config.avatar);
-      setAvatarUrl(avatarUrl);
+      if (avatarUrl && isMounted.current) setAvatarUrl(avatarUrl);
     }
     if (config.avatar) {
       fetchData();
     }
-  }, [config.avatar]);
+  }, [config.avatar, isMounted]);
 
   useEffect(() => {
     async function fetchData() {
       const faviconUrl = await Storage.get(config.favicon);
-      setFaviconUrl(faviconUrl);
+      if (faviconUrl && isMounted.current) setFaviconUrl(faviconUrl);
     }
     if (config.favicon) {
       fetchData();
     }
-  }, [config.favicon]);
+  }, [config.favicon, isMounted]);
 
   return (
     <ConfigContext.Provider value={config}>
