@@ -45,10 +45,7 @@ function Post({
   const [imageUrls, setImageUrls] = useState([]);
   useEffect(() => {
     async function fetchData() {
-      const imagesCalls = realPost.images.map((url) => {
-        return Storage.get(url);
-      });
-
+      const imagesCalls = realPost.images.map((url) => Storage.get(url));
       const imageUrls = await Promise.all(imagesCalls);
 
       if (isMounted.current) setImageUrls(imageUrls);
@@ -59,7 +56,6 @@ function Post({
   }, [realPost.images]);
 
   async function deletePst() {
-    console.log(realPost);
     if (realPost.id) {
       await API.graphql(
         graphqlOperation(deletePost, { input: { id: realPost.id } })

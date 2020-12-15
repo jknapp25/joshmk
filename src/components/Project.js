@@ -21,9 +21,9 @@ function Project({ project, setEditingItemId, setItemType, showEdit = false }) {
   const [imageUrls, setImageUrls] = useState([]);
   useEffect(() => {
     async function fetchData() {
-      const imageUrls = await Storage.get(images[0]);
-
-      if (isMounted.current) setImageUrls([imageUrls]);
+      const imagesCalls = images.map((url) => Storage.get(url));
+      const imageUrls = await Promise.all(imagesCalls);
+      if (isMounted.current) setImageUrls(imageUrls);
     }
     if (images && images.length) {
       fetchData();
