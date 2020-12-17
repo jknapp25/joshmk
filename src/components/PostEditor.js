@@ -5,6 +5,7 @@ import * as queries from "../graphql/queries";
 import RichTextEditor from "./RichTextEditor";
 import { FaTimes } from "react-icons/fa";
 import ImageUploader from "./ImageUploader";
+import TagEditor from "./TagEditor";
 import { useIsMounted } from "../lib/utils";
 export default PostEditor;
 
@@ -14,7 +15,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
   const [tags, setTags] = useState([]);
   const [images, setImages] = useState([]);
   const [createdAt, setCreatedAt] = useState("");
-  const [activeTag, setActiveTag] = useState("");
+  // const [activeTag, setActiveTag] = useState("");
 
   const isMounted = useIsMounted();
 
@@ -65,12 +66,6 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
     if (isMounted.current) clearEditor();
   }
 
-  function deleteTag(i) {
-    const updTags = [...tags];
-    updTags.splice(i, 1);
-    setTags(updTags);
-  }
-
   return (
     <>
       <Form.Label className="mb-0">Title</Form.Label>
@@ -94,7 +89,9 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
         onChange={(e) => setContent(e.target.value)}
       />
 
-      <Form.Label className="mb-0 mt-2">Tags</Form.Label>
+      <TagEditor onChange={(updTags) => setTags(updTags)} />
+
+      {/* <Form.Label className="mb-0 mt-2">Tags</Form.Label>
       <FormControl
         id="activetag"
         aria-describedby="activetag"
@@ -125,7 +122,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
             </span>
           </li>
         ))}
-      </ul>
+      </ul> */}
 
       <ImageUploader
         images={images || []}
