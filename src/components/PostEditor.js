@@ -3,6 +3,7 @@ import { Button, Form, FormControl } from "react-bootstrap";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import RichTextEditor from "./RichTextEditor";
+import { FaTimes } from "react-icons/fa";
 import ImageUploader from "./ImageUploader";
 import { useIsMounted } from "../lib/utils";
 export default PostEditor;
@@ -64,6 +65,12 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
     if (isMounted.current) clearEditor();
   }
 
+  function deleteTag(i) {
+    const updTags = [...tags];
+    updTags.splice(i, 1);
+    setTags(updTags);
+  }
+
   return (
     <>
       <Form.Label className="mb-0">Title</Form.Label>
@@ -106,8 +113,17 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
         Add
       </Button>
       <ul>
-        {tags.map((tag) => (
-          <li>{tag}</li>
+        {tags.map((tag, i) => (
+          <li>
+            {tag}{" "}
+            <span onClick={() => deleteTag(i)}>
+              <FaTimes
+                className="ml-2 d-inline cursor-pointer"
+                color="#dc3545"
+                title="delete tag"
+              />
+            </span>
+          </li>
         ))}
       </ul>
 
