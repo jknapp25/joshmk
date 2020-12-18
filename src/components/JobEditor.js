@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, ButtonGroup, Form, FormControl } from "react-bootstrap";
 import { API } from "aws-amplify";
+import TagEditor from "./TagEditor";
 import * as queries from "../graphql/queries";
 import { useIsMounted } from "../lib/utils";
 export default JobEditor;
@@ -15,7 +16,6 @@ function JobEditor({ id = null, onCreate, onUpdate }) {
   const [details, setDetails] = useState([]);
   const [companyUrl, setCompanyUrl] = useState("");
   const [tags, setTags] = useState([]);
-  const [activeTag, setActiveTag] = useState("");
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
   const [complexity, setComplexity] = useState(0);
@@ -179,29 +179,7 @@ function JobEditor({ id = null, onCreate, onUpdate }) {
         ))}
       </ButtonGroup>
 
-      <Form.Label className="mb-0">Tags</Form.Label>
-      <FormControl
-        id="activetag"
-        aria-describedby="activetag"
-        value={activeTag || ""}
-        onChange={(e) => setActiveTag(e.target.value)}
-      />
-      <Button
-        variant="link"
-        size="sm"
-        className="mt-2 mb-1 pl-0 pt-0"
-        onClick={() => {
-          setTags([...tags, activeTag]);
-          activeTag("");
-        }}
-      >
-        Add
-      </Button>
-      <ul>
-        {tags.map((tag) => (
-          <li>{tag}</li>
-        ))}
-      </ul>
+      <TagEditor tags={tags} onChange={(updTags) => setTags(updTags)} />
 
       <Form.Label className="mb-0">Start (ex: 2020-10-14)</Form.Label>
       <FormControl

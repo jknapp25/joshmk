@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, FormControl } from "react-bootstrap";
+import TagEditor from "./TagEditor";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import { useIsMounted } from "../lib/utils";
@@ -15,7 +16,6 @@ function EducationEditor({ id = null, onCreate, onUpdate }) {
   const [tags, setTags] = useState([]);
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
-  const [activeTag, setActiveTag] = useState("");
   const [activeDetail, setActiveDetail] = useState("");
 
   const isMounted = useIsMounted();
@@ -154,29 +154,7 @@ function EducationEditor({ id = null, onCreate, onUpdate }) {
         ))}
       </ul>
 
-      <Form.Label className="mb-0">Tags</Form.Label>
-      <FormControl
-        id="activetag"
-        aria-describedby="activetag"
-        value={activeTag || ""}
-        onChange={(e) => setActiveTag(e.target.value)}
-      />
-      <Button
-        variant="link"
-        size="sm"
-        className="mt-2 mb-1 pl-0 pt-0"
-        onClick={() => {
-          setTags([...tags, activeTag]);
-          setActiveTag("");
-        }}
-      >
-        Add
-      </Button>
-      <ul>
-        {tags.map((tag) => (
-          <li>{tag}</li>
-        ))}
-      </ul>
+      <TagEditor tags={tags} onChange={(updTags) => setTags(updTags)} />
 
       <Form.Label className="mb-0">Start (ex: 2020-10-14)</Form.Label>
       <FormControl

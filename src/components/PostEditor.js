@@ -3,7 +3,6 @@ import { Button, Form, FormControl } from "react-bootstrap";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import RichTextEditor from "./RichTextEditor";
-import { FaTimes } from "react-icons/fa";
 import ImageUploader from "./ImageUploader";
 import TagEditor from "./TagEditor";
 import { useIsMounted } from "../lib/utils";
@@ -15,7 +14,6 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
   const [tags, setTags] = useState([]);
   const [images, setImages] = useState([]);
   const [createdAt, setCreatedAt] = useState("");
-  // const [activeTag, setActiveTag] = useState("");
 
   const isMounted = useIsMounted();
 
@@ -89,40 +87,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
         onChange={(e) => setContent(e.target.value)}
       />
 
-      <TagEditor onChange={(updTags) => setTags(updTags)} />
-
-      {/* <Form.Label className="mb-0 mt-2">Tags</Form.Label>
-      <FormControl
-        id="activetag"
-        aria-describedby="activetag"
-        value={activeTag || ""}
-        onChange={(e) => setActiveTag(e.target.value)}
-      />
-      <Button
-        variant="link"
-        size="sm"
-        className="mt-2 mb-1 pl-0 pt-0"
-        onClick={() => {
-          setTags([...tags, activeTag]);
-          setActiveTag("");
-        }}
-      >
-        Add
-      </Button>
-      <ul>
-        {tags.map((tag, i) => (
-          <li>
-            {tag}{" "}
-            <span onClick={() => deleteTag(i)}>
-              <FaTimes
-                className="ml-2 d-inline cursor-pointer"
-                color="#dc3545"
-                title="delete tag"
-              />
-            </span>
-          </li>
-        ))}
-      </ul> */}
+      <TagEditor tags={tags} onChange={(updTags) => setTags(updTags)} />
 
       <ImageUploader
         images={images || []}

@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Button, Dropdown, Form, FormControl } from "react-bootstrap";
 import ImageUploader from "./ImageUploader";
-import { Storage } from "aws-amplify";
+import TagEditor from "./TagEditor";
 import { statusColorLookup } from "../lib/utils";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 export default ProjectEditor;
-
-//for naught
 
 function ProjectEditor({ id = null, onCreate, onUpdate }) {
   const [name, setName] = useState("");
@@ -17,7 +15,6 @@ function ProjectEditor({ id = null, onCreate, onUpdate }) {
   const [link, setLink] = useState("");
   const [status, setStatus] = useState("active");
   const [tags, setTags] = useState([]);
-  const [activeTag, setActiveTag] = useState("");
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
   const [complexity, setComplexity] = useState(0);
@@ -162,29 +159,7 @@ function ProjectEditor({ id = null, onCreate, onUpdate }) {
         onChange={(e) => setLink(e.target.value)}
       />
 
-      <Form.Label className="mb-0">Tags</Form.Label>
-      <FormControl
-        id="activetag"
-        aria-describedby="activetag"
-        value={activeTag || ""}
-        onChange={(e) => setActiveTag(e.target.value)}
-      />
-      <Button
-        variant="link"
-        size="sm"
-        className="mt-2 mb-1 pl-0 pt-0"
-        onClick={() => {
-          setTags([...tags, activeTag]);
-          setActiveTag("");
-        }}
-      >
-        Add
-      </Button>
-      <ul>
-        {tags.map((tag) => (
-          <li>{tag}</li>
-        ))}
-      </ul>
+      <TagEditor tags={tags} onChange={(updTags) => setTags(updTags)} />
 
       <ImageUploader
         images={images || []}

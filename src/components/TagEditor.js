@@ -3,13 +3,13 @@ import { Button, Form, FormControl } from "react-bootstrap";
 import { FaTimes } from "react-icons/fa";
 export default TagEditor;
 
-function TagEditor({ onChange }) {
-  const [tags, setTags] = useState([]);
+function TagEditor({ tags, onChange }) {
   const [activeTag, setActiveTag] = useState("");
 
   function addTag() {
+    if (!activeTag) return;
+
     const updTags = [...tags, activeTag];
-    setTags(updTags);
     setActiveTag("");
     onChange(updTags);
   }
@@ -17,7 +17,6 @@ function TagEditor({ onChange }) {
   function deleteTag(i) {
     const updTags = [...tags];
     updTags.splice(i, 1);
-    setTags(updTags);
     onChange(updTags);
   }
 
