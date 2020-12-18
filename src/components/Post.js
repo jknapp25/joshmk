@@ -96,7 +96,7 @@ function Post({
         <small className="text-muted">{timeInfo}</small>
       </div>
 
-      <ImageCarousel images={images} />
+      <ImageCarousel images={images} classes="mb-3" />
 
       <div
         className={`${

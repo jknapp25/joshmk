@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Carousel, Image } from "react-bootstrap";
+import { Carousel } from "react-bootstrap";
 import { useIsMounted } from "../lib/utils";
 import { Storage } from "aws-amplify";
 export default ImageCarousel;
 
-function ImageCarousel({ images = [] }) {
+function ImageCarousel({ images = [], classes = "" }) {
   const [imageUrls, setImageUrls] = useState([]);
   const isMounted = useIsMounted();
 
@@ -24,19 +24,20 @@ function ImageCarousel({ images = [] }) {
 
   if (images.length === 0) return null;
 
+  const isOneImage = images.length === 1;
+
   return (
-    <>
-      {images.length > 1 ? (
-        <Carousel className="mb-3" interval={10000000}>
-          {imageUrls.map((url, i) => (
-            <Carousel.Item key={i}>
-              <img className="w-100" src={url} alt={url} />
-            </Carousel.Item>
-          ))}
-        </Carousel>
-      ) : (
-        <Image className="mb-3 w-100" src={imageUrls[0]} fluid />
-      )}
-    </>
+    <Carousel
+      className={classes}
+      controls={!isOneImage}
+      indicators={!isOneImage}
+      slide={false}
+    >
+      {imageUrls.map((url, i) => (
+        <Carousel.Item key={i}>
+          <img className="w-100" src={url} alt={url} />
+        </Carousel.Item>
+      ))}
+    </Carousel>
   );
 }
