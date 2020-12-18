@@ -55,8 +55,10 @@ type Education @model @auth(rules: [{ allow: public }]) {
 
 type Configuration @model @auth(rules: [{ allow: public }]) {
   id: ID!
-  name: String
+  fullName: String
+  nickName: String
   tagline: String
+  bio: String
   avatar: String
   favicon: String
   pages: [String]

@@ -227,8 +227,10 @@ export const onCreateConfiguration = /* GraphQL */ `
   subscription OnCreateConfiguration {
     onCreateConfiguration {
       id
-      name
+      fullName
+      nickName
       tagline
+      bio
       avatar
       favicon
       pages
@@ -242,8 +244,10 @@ export const onUpdateConfiguration = /* GraphQL */ `
   subscription OnUpdateConfiguration {
     onUpdateConfiguration {
       id
-      name
+      fullName
+      nickName
       tagline
+      bio
       avatar
       favicon
       pages
@@ -257,8 +261,10 @@ export const onDeleteConfiguration = /* GraphQL */ `
   subscription OnDeleteConfiguration {
     onDeleteConfiguration {
       id
-      name
+      fullName
+      nickName
       tagline
+      bio
       avatar
       favicon
       pages

@@ -181,8 +181,10 @@ export const getConfiguration = /* GraphQL */ `
   query GetConfiguration($id: ID!) {
     getConfiguration(id: $id) {
       id
-      name
+      fullName
+      nickName
       tagline
+      bio
       avatar
       favicon
       pages
@@ -201,8 +203,10 @@ export const listConfigurations = /* GraphQL */ `
     listConfigurations(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        name
+        fullName
+        nickName
         tagline
+        bio
         avatar
         favicon
         pages

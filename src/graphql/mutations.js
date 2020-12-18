@@ -266,8 +266,10 @@ export const createConfiguration = /* GraphQL */ `
   ) {
     createConfiguration(input: $input, condition: $condition) {
       id
-      name
+      fullName
+      nickName
       tagline
+      bio
       avatar
       favicon
       pages
@@ -284,8 +286,10 @@ export const updateConfiguration = /* GraphQL */ `
   ) {
     updateConfiguration(input: $input, condition: $condition) {
       id
-      name
+      fullName
+      nickName
       tagline
+      bio
       avatar
       favicon
       pages
@@ -302,8 +306,10 @@ export const deleteConfiguration = /* GraphQL */ `
   ) {
     deleteConfiguration(input: $input, condition: $condition) {
       id
-      name
+      fullName
+      nickName
       tagline
+      bio
       avatar
       favicon
       pages

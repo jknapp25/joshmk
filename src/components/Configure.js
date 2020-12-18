@@ -20,8 +20,10 @@ export default Configure;
 const pageOptions = ["blog", "work", "projects"];
 
 function Configure() {
-  const [name, setName] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [nickName, setNickName] = useState("");
   const [tagline, setTagline] = useState("");
+  const [bio, setBio] = useState("");
   const [avatar, setAvatar] = useState("");
   const [favicon, setFavicon] = useState("");
   const [pages, setPages] = useState([]);
@@ -32,8 +34,10 @@ function Configure() {
 
   async function handleSave() {
     let inpData = {
-      name,
+      fullName,
+      nickName,
       tagline,
+      bio,
       avatar,
       pages,
       favicon,
@@ -61,8 +65,10 @@ function Configure() {
       });
 
       if (configData && isMounted.current) {
-        setName(configData.data.getConfiguration.name);
+        setFullName(configData.data.getConfiguration.fullName);
+        setNickName(configData.data.getConfiguration.nickName);
         setTagline(configData.data.getConfiguration.tagline);
+        setBio(configData.data.getConfiguration.bio);
         setAvatar(configData.data.getConfiguration.avatar);
         setPages(configData.data.getConfiguration.pages);
         setFavicon(configData.data.getConfiguration.favicon);
@@ -78,23 +84,35 @@ function Configure() {
 
   return (
     <div className="mt-4">
-      <h4>Configure</h4>
-      <Form.Label className="mb-0">Name</Form.Label>
+      <h4 className="mb-3">Configure</h4>
+      <Form.Label className="mb-1">Full Name</Form.Label>
       <FormControl
-        id="name"
+        id="fullName"
         className="mb-3"
-        aria-describedby="name"
-        value={name || ""}
+        aria-describedby="fullName"
+        value={fullName || ""}
         onChange={(e) => {
-          setName(e.target.value);
+          setFullName(e.target.value);
           setEdited(true);
         }}
       />
 
-      <Form.Label className="mb-0">Tagline</Form.Label>
+      <Form.Label className="mb-1">Nickname</Form.Label>
+      <FormControl
+        id="nickName"
+        className="mb-3"
+        aria-describedby="nickName"
+        value={nickName || ""}
+        onChange={(e) => {
+          setNickName(e.target.value);
+          setEdited(true);
+        }}
+      />
+
+      <Form.Label className="mb-1">Tagline</Form.Label>
       <FormControl
         id="tagline"
-        className="mb-4"
+        className="mb-3"
         aria-describedby="tagline"
         value={tagline || ""}
         onChange={(e) => {
@@ -103,7 +121,21 @@ function Configure() {
         }}
       />
 
-      <hr />
+      <Form.Label className="mb-1">Bio</Form.Label>
+      <FormControl
+        id="bio"
+        as="textarea"
+        rows="3"
+        // className="mb-4"
+        aria-describedby="bio"
+        value={bio || ""}
+        onChange={(e) => {
+          setBio(e.target.value);
+          setEdited(true);
+        }}
+      />
+
+      <hr className="my-4" />
 
       <ImageUploader
         images={avatar ? [avatar] : []}
@@ -135,9 +167,9 @@ function Configure() {
         imageLimit={1}
       />
 
-      <hr />
+      <hr className="my-4" />
 
-      <Form.Label className="mb-0">Pages</Form.Label>
+      <Form.Label className="mb-1">Pages</Form.Label>
       <Table bordered className="mb-3">
         <tbody>
           {pages.map((page, i) => (
@@ -213,9 +245,9 @@ function Configure() {
         </Dropdown>
       ) : null}
 
-      <hr />
+      <hr className="my-4" />
 
-      <Accordion className="mt-3">
+      <Accordion>
         <Card className="bg-transparent">
           <Card.Header className="p-0 bg-transparent border-bottom-0">
             <Accordion.Toggle

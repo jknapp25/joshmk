@@ -113,9 +113,13 @@
   word-wrap: no-wrap;
 }
 
+.badge {
+  border-radius: 0px !important;
+}
 .badge-pill {
   border: 1px solid black;
   cursor: pointer;
+  border-radius: 0px !important;
 }
 .badge-pill:hover {
   background-color: black;
@@ -160,6 +164,11 @@ html {
 .card {
   background-color: rgba(0, 0, 0, 0.04) !important;
   border: none !important;
+  border-radius: 0px !important;
+}
+
+.card-img-top {
+  border-radius: 0px !important;
 }
 
 a {

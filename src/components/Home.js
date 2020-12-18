@@ -64,41 +64,27 @@ function Home({ children }) {
     <ConfigContext.Provider value={config}>
       <Container fluid onWheel={handleScroll}>
         <Helmet>
-          <title>{config.name || ""}</title>
+          <title>{config.fullName || ""}</title>
           <link rel="icon" type="image/png" href={faviconUrl} sizes="16x16" />
         </Helmet>
         <Row>
-          <Col>
-            <Card
-              className="mx-3 mt-4"
-              style={{
-                borderRadius: "15px",
-              }}
-            >
-              <div
-                style={{
-                  borderTopLeftRadius: "15px",
-                  borderTopRightRadius: "15px",
-                }}
-              >
+          <Col xs={3}>
+            <Card className="mx-3 mt-4">
+              <div>
                 <Card.Img
                   variant="top"
                   src={avatarUrl}
-                  style={{
-                    borderTopLeftRadius: "15px",
-                    borderTopRightRadius: "15px",
-                  }}
                   onClick={() => navigate("/")}
                 />
               </div>
               <Card.Footer>
-                <Card.Title>{config.name}</Card.Title>
+                <Card.Title>{config.fullName}</Card.Title>
                 <Card.Text>{config.tagline}</Card.Text>
               </Card.Footer>
             </Card>
           </Col>
           <Col xs={6}>{children}</Col>
-          <Col>
+          <Col xs={3}>
             <SideNav navOptions={config.pages} />
           </Col>
         </Row>

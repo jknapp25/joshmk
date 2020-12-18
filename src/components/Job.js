@@ -62,7 +62,8 @@ function Job({ job, setEditingItemId, setItemType, showEdit = false }) {
           ) : (
             company
           )}{" "}
-          {location ? `- ${location}` : null}
+          {companyUrl && location ? " - " : null}
+          {location || null}
         </Card.Subtitle>
         {summary ? (
           <Card.Text
@@ -74,14 +75,14 @@ function Job({ job, setEditingItemId, setItemType, showEdit = false }) {
           </Card.Text>
         ) : null}
         {details ? (
-          <Accordion className="mt-3">
+          <Accordion className="mt-3 bg-transparent">
             <Card className="bg-transparent">
               <Card.Header className="p-0 bg-transparent border-bottom-0">
                 <Accordion.Toggle
                   as={Button}
                   variant="link"
                   eventKey="0"
-                  className="pl-0"
+                  className="pl-0 py-0"
                 >
                   View details
                 </Accordion.Toggle>

@@ -45,7 +45,7 @@ function ImageUploader({
 
   return (
     <>
-      <FormFile.Label className="mb-0">{fieldLabel}</FormFile.Label>
+      <FormFile.Label className="mb-1">{fieldLabel}</FormFile.Label>
       {!reachedImageLimit ? (
         <Form.File id={fieldId} className="mb-2" onChange={handleImageUpload} />
       ) : null}
