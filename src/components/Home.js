@@ -11,20 +11,11 @@ export default Home;
 export const ConfigContext = React.createContext({});
 
 function Home({ children }) {
-  const [showAsides, setAhowAsides] = useState(true);
   const [config, setConfig] = useState({});
   const [avatarUrl, setAvatarUrl] = useState("");
   const [faviconUrl, setFaviconUrl] = useState("");
 
   const isMounted = useIsMounted();
-
-  function handleScroll(e) {
-    if (e.nativeEvent.wheelDelta > 0) {
-      if (!showAsides) setAhowAsides(true);
-    } else {
-      if (showAsides) setAhowAsides(false);
-    }
-  }
 
   useEffect(() => {
     async function fetchData() {
@@ -62,7 +53,7 @@ function Home({ children }) {
 
   return (
     <ConfigContext.Provider value={config}>
-      <Container fluid onWheel={handleScroll}>
+      <Container fluid>
         <Helmet>
           <title>{config.fullName || ""}</title>
           <link rel="icon" type="image/png" href={faviconUrl} sizes="16x16" />

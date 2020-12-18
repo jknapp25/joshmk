@@ -7,6 +7,7 @@ import Home from "./components/Home.js";
 import Post from "./components/Post.js";
 import CreateItem from "./components/CreateItem.js";
 import Configure from "./components/Configure.js";
+import Bio from "./components/Bio.js";
 import Amplify from "aws-amplify";
 import awsExports from "./aws-exports";
 import "react-vertical-timeline-component/style.min.css";
@@ -16,45 +17,18 @@ export default App;
 
 Amplify.configure(awsExports);
 
-// Amplify.configure({
-//   aws_project_region: "us-west-2",
-//   aws_appsync_graphqlEndpoint:
-//     "https://7gp2g5vrvnempduyilcqm7gcxm.appsync-api.us-west-2.amazonaws.com/graphql",
-//   aws_appsync_region: "us-west-2",
-//   aws_appsync_authenticationType: "API_KEY",
-//   aws_appsync_apiKey: "da2-adm65wjtf5halghqn7b4xmlroa",
-//   Auth: {
-//     identityPoolId: "us-west-2:9579e2e0-16ba-43c4-a613-9a9fd99fc3f2",
-//     region: "us-west-2",
-//     userPoolId: "us-west-2_T0B7qRcPP",
-//     userPoolWebClientId: "4qfe9ji8aqs296bi3ekaqp57ua",
-//     mandatorySignIn: false,
-//   },
-//   Storage: {
-//     AWSS3: {
-//       bucket: "joshmk-bucket",
-//       region: "us-west-2",
-//     },
-//   },
-// });
-
 function App() {
-  const [showSidebar, setShowSidebar] = useState(false);
-
   return (
     <div className="App">
       <Router primary={false}>
-        <Home
-          path="/"
-          showSidebar={showSidebar}
-          handleTabsVisibilityChange={(isVisible) => setShowSidebar(!isVisible)}
-        >
+        <Home path="/">
           <ItemList default />
           <Post path="post/:id" />
           <Skills path="skills" />
           <GoalHours path="goal-hours" />
           <CreateItem path="create" />
           <Configure path="configure" />
+          <Bio path="bio" />
         </Home>
       </Router>
     </div>
