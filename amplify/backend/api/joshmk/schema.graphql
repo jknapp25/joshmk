@@ -61,6 +61,8 @@ type Configuration @model @auth(rules: [{ allow: public }]) {
   bio: String
   avatar: String
   favicon: String
+  instagramUrl: String
+  youtubeUrl: String
   pages: [String]
   resumeGeneratorEnabled: Boolean
 }

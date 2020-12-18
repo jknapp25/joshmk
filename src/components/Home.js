@@ -4,6 +4,8 @@ import { Card, Container, Row, Col } from "react-bootstrap";
 import SideNav from "./SideNav";
 import { Helmet } from "react-helmet";
 import { API, Storage } from "aws-amplify";
+import { RiInstagramFill } from "react-icons/ri";
+import { FaYoutube } from "react-icons/fa";
 import * as queries from "../graphql/queries";
 import { useIsMounted } from "../lib/utils";
 export default Home;
@@ -61,16 +63,34 @@ function Home({ children }) {
         <Row>
           <Col xs={3}>
             <Card className="mx-3 mt-4">
-              <div>
-                <Card.Img
-                  variant="top"
-                  src={avatarUrl}
-                  onClick={() => navigate("/")}
-                />
-              </div>
-              <Card.Footer>
+              <Card.Img
+                variant="top"
+                src={avatarUrl}
+                onClick={() => navigate("/")}
+              />
+              <Card.Body>
                 <Card.Title>{config.fullName}</Card.Title>
                 <Card.Text>{config.tagline}</Card.Text>
+              </Card.Body>
+              <Card.Footer>
+                <RiInstagramFill
+                  className="d-inline cursor-pointer"
+                  size="1.3em"
+                  title="instagram"
+                  onClick={() => window.open(config.instagramUrl, "_blank")}
+                  style={{
+                    color: "rgba(108,117,125,.7)",
+                  }}
+                />
+                <FaYoutube
+                  className="ml-2 d-inline cursor-pointer"
+                  size="1.3em"
+                  title="youtube"
+                  onClick={() => window.open(config.youtubeUrl, "_blank")}
+                  style={{
+                    color: "rgba(108,117,125,.7)",
+                  }}
+                />
               </Card.Footer>
             </Card>
           </Col>

@@ -23,6 +23,8 @@ function Configure() {
   const [fullName, setFullName] = useState("");
   const [nickName, setNickName] = useState("");
   const [tagline, setTagline] = useState("");
+  const [instagramUrl, setInstagramUrl] = useState("");
+  const [youtubeUrl, setYoutubeUrl] = useState("");
   const [bio, setBio] = useState("");
   const [avatar, setAvatar] = useState("");
   const [favicon, setFavicon] = useState("");
@@ -38,6 +40,8 @@ function Configure() {
       nickName,
       tagline,
       bio,
+      instagramUrl,
+      youtubeUrl,
       avatar,
       pages,
       favicon,
@@ -70,6 +74,8 @@ function Configure() {
         setTagline(configData.data.getConfiguration.tagline);
         setBio(configData.data.getConfiguration.bio);
         setAvatar(configData.data.getConfiguration.avatar);
+        setInstagramUrl(configData.data.getConfiguration.instagramUrl);
+        setYoutubeUrl(configData.data.getConfiguration.youtubeUrl);
         setPages(configData.data.getConfiguration.pages);
         setFavicon(configData.data.getConfiguration.favicon);
         setResumeGeneratorEnabled(
@@ -124,13 +130,37 @@ function Configure() {
       <Form.Label className="mb-1">Bio</Form.Label>
       <FormControl
         id="bio"
+        className="mb-3"
         as="textarea"
         rows="3"
-        // className="mb-4"
         aria-describedby="bio"
         value={bio || ""}
         onChange={(e) => {
           setBio(e.target.value);
+          setEdited(true);
+        }}
+      />
+
+      <Form.Label className="mb-1">Instagram URL</Form.Label>
+      <FormControl
+        id="instagramUrl"
+        className="mb-3"
+        aria-describedby="instagramUrl"
+        value={instagramUrl || ""}
+        onChange={(e) => {
+          setInstagramUrl(e.target.value);
+          setEdited(true);
+        }}
+      />
+
+      <Form.Label className="mb-1">YouTube URL</Form.Label>
+      <FormControl
+        id="youtubeUrl"
+        className="mb-3"
+        aria-describedby="youtubeUrl"
+        value={youtubeUrl || ""}
+        onChange={(e) => {
+          setYoutubeUrl(e.target.value);
           setEdited(true);
         }}
       />

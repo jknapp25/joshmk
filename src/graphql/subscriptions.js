@@ -233,6 +233,8 @@ export const onCreateConfiguration = /* GraphQL */ `
       bio
       avatar
       favicon
+      instagramUrl
+      youtubeUrl
       pages
       resumeGeneratorEnabled
       createdAt
@@ -250,6 +252,8 @@ export const onUpdateConfiguration = /* GraphQL */ `
       bio
       avatar
       favicon
+      instagramUrl
+      youtubeUrl
       pages
       resumeGeneratorEnabled
       createdAt
@@ -267,6 +271,8 @@ export const onDeleteConfiguration = /* GraphQL */ `
       bio
       avatar
       favicon
+      instagramUrl
+      youtubeUrl
       pages
       resumeGeneratorEnabled
       createdAt

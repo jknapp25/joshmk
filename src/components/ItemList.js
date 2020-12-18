@@ -103,11 +103,11 @@ function ItemList() {
             Click{" "}
             <PDFDownloadLink
               document={<Resume items={sortedItems} education={education} />}
-              fileName={`${config.name.replace(" ", "_")}_Resume.pdf`}
+              fileName={`${config.fullName.replace(" ", "_")}_Resume.pdf`}
             >
               <span className="alert-link">here</span>
             </PDFDownloadLink>{" "}
-            for {config.name}'s resume
+            for {config.nickName}'s resume
           </Alert>
         ) : null}
         <Timeline items={sortedItems} />
