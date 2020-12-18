@@ -29,6 +29,7 @@ function ImageCarousel({ images = [], classes = "" }) {
   return (
     <Carousel
       className={classes}
+      interval={1000000}
       controls={!isOneImage}
       indicators={!isOneImage}
       slide={false}

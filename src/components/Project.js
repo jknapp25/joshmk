@@ -12,7 +12,7 @@ function Project({ project, setEditingItemId, setItemType, showEdit = false }) {
 
   return (
     <Card className="mb-4">
-      <ImageCarousel images={images} classes="mb-3" />
+      <ImageCarousel images={images} />
 
       <Card.Body>
         <Card.Title>
