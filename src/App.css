@@ -182,6 +182,16 @@ a:hover {
 button:focus {
   box-shadow: none !important;
 }
+
+.social-icon {
+  color: rgba(108, 117, 125, 0.7);
+}
+.social-icon.instagram:hover {
+  color: #833ab4;
+}
+.social-icon.youtube:hover {
+  color: #ff0000;
+}
 /* @keyframes fadeColors {
   0% {
     background-color: red;

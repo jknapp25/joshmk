@@ -17,7 +17,7 @@ import * as queries from "../graphql/queries";
 import { useIsMounted } from "../lib/utils";
 export default Configure;
 
-const pageOptions = ["blog", "work", "projects"];
+const pageOptions = ["blog", "work", "projects", "gallery"];
 
 function Configure() {
   const [fullName, setFullName] = useState("");

@@ -191,6 +191,7 @@ export const getConfiguration = /* GraphQL */ `
       youtubeUrl
       pages
       resumeGeneratorEnabled
+      galleryImages
       createdAt
       updatedAt
     }
@@ -215,6 +216,7 @@ export const listConfigurations = /* GraphQL */ `
         youtubeUrl
         pages
         resumeGeneratorEnabled
+        galleryImages
         createdAt
         updatedAt
       }

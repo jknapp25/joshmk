@@ -8,6 +8,7 @@ import PostEditor from "./PostEditor";
 import JobEditor from "./JobEditor";
 import ProjectEditor from "./ProjectEditor";
 import EducationEditor from "./EducationEditor";
+import GalleryEditor from "./GalleryEditor";
 import { API, graphqlOperation } from "aws-amplify";
 import {
   createPost,
@@ -18,6 +19,7 @@ import {
   updateJob,
   updateProject,
   updateEducation,
+  updateConfiguration,
 } from "../graphql/mutations";
 import * as queries from "../graphql/queries";
 import { withAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
@@ -51,6 +53,9 @@ function CreateItem() {
       await API.graphql(graphqlOperation(updateProject, { input: data }));
     if (type === "education")
       await API.graphql(graphqlOperation(updateEducation, { input: data }));
+    if (type === "gallery") {
+      await API.graphql(graphqlOperation(updateConfiguration, { input: data }));
+    }
   }
 
   useEffect(() => {
@@ -107,7 +112,7 @@ function CreateItem() {
       </div>
 
       <div className="my-4">
-        {["post", "job", "project", "education"].map((type) => (
+        {["post", "job", "project", "education", "gallery"].map((type) => (
           <Button
             key={type}
             variant={type === itemType ? "primary" : "secondary"}
@@ -119,6 +124,7 @@ function CreateItem() {
             {type === "job" ? "Add work experience" : null}
             {type === "project" ? "Start a project" : null}
             {type === "education" ? "Add education" : null}
+            {type === "gallery" ? "Add images to gallery" : null}
           </Button>
         ))}
       </div>
@@ -150,6 +156,9 @@ function CreateItem() {
           onCreate={handleCreate}
           onUpdate={handleUpdate}
         />
+      ) : null}
+      {itemType === "gallery" ? (
+        <GalleryEditor onUpdate={handleUpdate} />
       ) : null}
       <div className="mb-5" />
       {sortedItems.length > 0 ? (

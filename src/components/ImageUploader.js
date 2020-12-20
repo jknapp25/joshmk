@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, FormFile, Image } from "react-bootstrap";
 import { Storage } from "aws-amplify";
 import { FaTimes } from "react-icons/fa";
@@ -52,19 +52,19 @@ function ImageUploader({
       {images.length ? (
         <div className="mb-2">
           {imageUrls.map((url, i) => (
-            <Fragment key={i}>
-              <Image key={url} src={url} width="100" height="auto" thumbnail />
+            <div key={i} className="d-inline-block pr-2 pb-2">
+              <Image key={url} src={url} width="100" height="auto" />
               <FaTimes
                 color="#dc3545"
                 title="delete image"
-                className="cursor-pointer"
+                className="cursor-pointer float-right"
                 onClick={() => {
                   const updImages = [...images];
                   updImages.splice(i, 1);
                   afterEdit(updImages);
                 }}
               />
-            </Fragment>
+            </div>
           ))}
         </div>
       ) : null}

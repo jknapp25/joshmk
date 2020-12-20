@@ -39,11 +39,11 @@ function TagEditor({ tags, onChange }) {
       </Button>
       <ul>
         {tags.map((tag, i) => (
-          <li>
+          <li key={i}>
             {tag}{" "}
             <span onClick={() => deleteTag(i)}>
               <FaTimes
-                className="ml-2 d-inline cursor-pointer"
+                className="ml-1 d-inline cursor-pointer"
                 color="#dc3545"
                 title="delete tag"
               />

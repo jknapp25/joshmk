@@ -276,6 +276,7 @@ export const createConfiguration = /* GraphQL */ `
       youtubeUrl
       pages
       resumeGeneratorEnabled
+      galleryImages
       createdAt
       updatedAt
     }
@@ -298,6 +299,7 @@ export const updateConfiguration = /* GraphQL */ `
       youtubeUrl
       pages
       resumeGeneratorEnabled
+      galleryImages
       createdAt
       updatedAt
     }
@@ -320,6 +322,7 @@ export const deleteConfiguration = /* GraphQL */ `
       youtubeUrl
       pages
       resumeGeneratorEnabled
+      galleryImages
       createdAt
       updatedAt
     }

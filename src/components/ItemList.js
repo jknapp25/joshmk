@@ -12,7 +12,7 @@ import Project from "./Project";
 import Job from "./Job";
 import Education from "./Education";
 import { FaTimes } from "react-icons/fa";
-import { ConfigContext } from "./Home";
+import { ConfigContext } from "../App";
 export default ItemList;
 
 const statusOrder = ["active", "on hold", "completed"];
