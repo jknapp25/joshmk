@@ -180,7 +180,7 @@ function Configure() {
         fieldId="avatar"
         fieldLabel="Avatar"
         fileSizeLimit={5}
-        imageLimit={1}
+        multiple={false}
         imageDisplayName="Avatar"
       />
 
@@ -197,7 +197,7 @@ function Configure() {
         fieldId="favicon"
         fieldLabel="Favicon"
         fileSizeLimit={0.2}
-        imageLimit={1}
+        multiple={false}
         imageDisplayName="Favicon"
       />
 

@@ -12,26 +12,58 @@ function ImageUploader({
   fieldId,
   fieldLabel,
   fileSizeLimit = 5, // MB
-  imageLimit = null,
+  multiple = true,
 }) {
   const [imageUrls, setImageUrls] = useState([]);
   const isMounted = useIsMounted();
 
   async function handleImageUpload(e) {
-    const file = e.target.files[0];
-    const fileSizeInMegabytes = (file.size / 1024 / 1024).toFixed(4);
+    const { files } = e.target;
 
-    if (fileSizeInMegabytes > fileSizeLimit) {
-      alert(`${imageDisplayName} cannot be larger than ${fileSizeLimit}MB`);
-      return;
+    if (!files || files.length === 0) return;
+
+    let showFileSizeError = false;
+
+    let uploads = [];
+
+    if (multiple) {
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const fileSizeInMegabytes = (file.size / 1024 / 1024).toFixed(4);
+
+        if (fileSizeInMegabytes > fileSizeLimit) {
+          showFileSizeError = true;
+        } else {
+          uploads.push(
+            Storage.put(file.name, file, { contentType: file.type })
+          );
+        }
+      }
+    } else {
+      const file = files[0];
+      const fileSizeInMegabytes = (file.size / 1024 / 1024).toFixed(4);
+
+      if (fileSizeInMegabytes > fileSizeLimit) {
+        showFileSizeError = true;
+      } else {
+        uploads.push(Storage.put(file.name, file, { contentType: file.type }));
+      }
     }
 
-    const { key } = await Storage.put(file.name, file, {
-      contentType: file.type,
-    });
-    if (key) {
-      const updImages = [...images, key];
+    const resUploadKeyObjects = await Promise.all(uploads);
+
+    if (resUploadKeyObjects && resUploadKeyObjects.length > 0) {
+      const resUploadKeys = resUploadKeyObjects.map((obj) => obj.key);
+      const updImages = [...images, ...resUploadKeys];
+
       afterEdit(updImages);
+    }
+
+    if (showFileSizeError) {
+      const errorText = multiple
+        ? `One or more ${imageDisplayName}'s exceeds the size limit of ${fileSizeLimit}MB`
+        : `${imageDisplayName} exceeds the size limit of ${fileSizeLimit}MB`;
+      alert(errorText);
     }
   }
 
@@ -49,14 +81,18 @@ function ImageUploader({
     }
   }, [images, isMounted]);
 
-  const reachedImageLimit =
-    imageLimit && images && images.length === imageLimit;
+  const reachedImageLimit = !!images && images.length > 1 && !multiple;
 
   return (
     <>
       <FormFile.Label className="mb-1">{fieldLabel}</FormFile.Label>
       {!reachedImageLimit ? (
-        <Form.File id={fieldId} className="mb-2" onChange={handleImageUpload} />
+        <Form.File
+          id={fieldId}
+          className="mb-2"
+          multiple={multiple}
+          onChange={handleImageUpload}
+        />
       ) : null}
       {images.length ? (
         <div className="mb-2">
