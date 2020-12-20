@@ -37,8 +37,6 @@ function GalleryEditor({ onUpdate }) {
     if (isMounted.current) clearEditor();
   }
 
-  console.log(images);
-
   return (
     <>
       <ImageUploader
@@ -48,6 +46,7 @@ function GalleryEditor({ onUpdate }) {
         }}
         fieldId="images"
         fieldLabel="Images"
+        fileSizeLimit={5}
       />
 
       <Button className="mt-2" onClick={handleButtonClick}>

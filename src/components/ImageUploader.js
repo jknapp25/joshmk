@@ -6,10 +6,12 @@ import { useIsMounted } from "../lib/utils";
 export default ImageUploader;
 
 function ImageUploader({
+  imageDisplayName = "Image",
   images,
   afterEdit,
   fieldId,
   fieldLabel,
+  fileSizeLimit = 5, // MB
   imageLimit = null,
 }) {
   const [imageUrls, setImageUrls] = useState([]);
@@ -17,6 +19,13 @@ function ImageUploader({
 
   async function handleImageUpload(e) {
     const file = e.target.files[0];
+    const fileSizeInMegabytes = (file.size / 1024 / 1024).toFixed(4);
+
+    if (fileSizeInMegabytes > fileSizeLimit) {
+      alert(`${imageDisplayName} cannot be larger than ${fileSizeLimit}MB`);
+      return;
+    }
+
     const { key } = await Storage.put(file.name, file, {
       contentType: file.type,
     });

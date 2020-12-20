@@ -168,6 +168,7 @@ function ProjectEditor({ id = null, onCreate, onUpdate }) {
         }}
         fieldId="images"
         fieldLabel="Images"
+        fileSizeLimit={5}
       />
 
       <Form.Label className="mb-0">Start (ex: 2020-10-14)</Form.Label>

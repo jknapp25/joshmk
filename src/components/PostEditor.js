@@ -96,6 +96,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
         }}
         fieldId="images"
         fieldLabel="Images"
+        fileSizeLimit={5}
       />
 
       <Form.Label className="mb-0">

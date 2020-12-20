@@ -178,8 +178,10 @@ function Configure() {
           setEdited(true);
         }}
         fieldId="avatar"
-        fieldLabel="Avatar (if your image is over 5mb, let me know, I have to add it manually)"
+        fieldLabel="Avatar"
+        fileSizeLimit={5}
         imageLimit={1}
+        imageDisplayName="Avatar"
       />
 
       <ImageUploader
@@ -194,7 +196,9 @@ function Configure() {
         }}
         fieldId="favicon"
         fieldLabel="Favicon"
+        fileSizeLimit={0.2}
         imageLimit={1}
+        imageDisplayName="Favicon"
       />
 
       <hr className="my-4" />
