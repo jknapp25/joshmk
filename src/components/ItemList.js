@@ -163,6 +163,17 @@ function ItemList() {
         return 0;
       }
     });
-    return sortedItems.map((item, i) => <Post key={i} post={item} />);
+    return sortedItems.map((item, i) => {
+      return (
+        <>
+          {i === 0 ? <div className="py-2" /> : null}
+          <Post key={i} post={item} />
+          {i !== sortedItems.length - 1 ? (
+            <hr style={{ marginTop: "1.9em", marginBottom: "1.4em" }} />
+          ) : null}
+          {i === sortedItems.length - 1 ? <div className="py-2" /> : null}
+        </>
+      );
+    });
   }
 }

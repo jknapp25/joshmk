@@ -50,7 +50,7 @@ function Post({
   const timeInfo = createTimeInfo(null, createdAt, null, true);
 
   return (
-    <div className="px-0 py-4 border-top border-left-0 border-right-0 border-bottom-0">
+    <div className="px-0 border-0">
       <h2 className="mb-1">
         <span className="cursor-pointer" onClick={() => navigate(`post/${id}`)}>
           {title}

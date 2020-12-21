@@ -29,14 +29,16 @@ function TagEditor({ tags, onChange }) {
         value={activeTag || ""}
         onChange={(e) => setActiveTag(e.target.value)}
       />
-      <Button
-        variant="link"
-        size="sm"
-        className="mt-2 mb-1 pl-0 pt-0"
-        onClick={addTag}
-      >
-        Add
-      </Button>
+      {activeTag.length ? (
+        <Button
+          variant="link"
+          size="sm"
+          className="mt-2 mb-1 pl-0 pt-0"
+          onClick={addTag}
+        >
+          Add
+        </Button>
+      ) : null}
       <ul>
         {tags.map((tag, i) => (
           <li key={i}>
