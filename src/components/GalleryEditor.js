@@ -8,6 +8,7 @@ export default GalleryEditor;
 function GalleryEditor({ onUpdate }) {
   const config = useContext(ConfigContext);
   const [images, setImages] = useState([]);
+  const [edited, setEdited] = useState(false);
 
   const isMounted = useIsMounted();
 
@@ -43,15 +44,18 @@ function GalleryEditor({ onUpdate }) {
         images={images || []}
         afterEdit={(imgs) => {
           setImages(imgs);
+          setEdited(true);
         }}
         fieldId="images"
         fieldLabel="Images"
         fileSizeLimit={5}
       />
 
-      <Button className="mt-2" onClick={handleButtonClick}>
-        Update
-      </Button>
+      {edited ? (
+        <Button className="mt-2" onClick={handleButtonClick}>
+          Update
+        </Button>
+      ) : null}
     </>
   );
 }
