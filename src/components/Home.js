@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { navigate, useLocation } from "@reach/router";
+import { navigate, useLocation, Link } from "@reach/router";
 import { Card, Container, Row, Col } from "react-bootstrap";
 import SideNav from "./SideNav";
 import { Helmet } from "react-helmet";
@@ -71,7 +71,9 @@ function Home({ children }) {
               onClick={() => navigate("/")}
             />
             <Card.Body>
-              <Card.Title>{config.fullName}</Card.Title>
+              <Card.Title>
+                <Link to="bio">{config.fullName}</Link>
+              </Card.Title>
               <Card.Text>{config.tagline}</Card.Text>
             </Card.Body>
             <Card.Footer>

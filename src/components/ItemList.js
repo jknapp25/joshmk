@@ -143,13 +143,18 @@ function ItemList() {
           </span>
         </h3>
         {filteredItems.map((item, i) => {
-          if (item.type === "post") return <Post key={i} post={item} />;
-          if (item.type === "job") return <Job key={i} job={item} />;
-          if (item.type === "project")
-            return <Project key={i} project={item} />;
-          if (item.type === "education")
-            return <Education key={i} education={item} />;
-          return null;
+          return (
+            <div className="py-2">
+              {item.type === "post" ? <Post key={i} post={item} /> : null}
+              {item.type === "job" ? <Job key={i} job={item} /> : null}
+              {item.type === "project" ? (
+                <Project key={i} project={item} />
+              ) : null}
+              {item.type === "education" ? (
+                <Education key={i} education={item} />
+              ) : null}
+            </div>
+          );
         })}
       </div>
     );

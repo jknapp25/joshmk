@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Badge } from "react-bootstrap";
-import { navigate } from "@reach/router";
+import { navigate, Link } from "@reach/router";
 import ImageCarousel from "./ImageCarousel";
 import { createTimeInfo, useIsMounted } from "../lib/utils";
 import { GoPencil } from "react-icons/go";
@@ -52,8 +52,8 @@ function Post({
   return (
     <div className="px-0 border-0">
       <h2 className="mb-1">
-        <span className="cursor-pointer" onClick={() => navigate(`post/${id}`)}>
-          {title}
+        <span className="cursor-pointer">
+          <Link to={`/post/${id}`}>{title}</Link>
         </span>{" "}
         {showEdit ? (
           <>
