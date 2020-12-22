@@ -10,7 +10,7 @@ function Gallery() {
   const { galleryImages } = useContext(ConfigContext);
 
   const [imageUrls, setImageUrls] = useState([]);
-  const [fsImageUrl, setFSImageUrl] = useState("");
+  const [fsImageIdx, setFSImageIdx] = useState(null);
   const isMounted = useIsMounted();
 
   useEffect(() => {
@@ -38,13 +38,14 @@ function Gallery() {
             src={imageUrl}
             style={{ width: "200px", height: "250px", cursor: "zoom-in" }}
             className="m-3"
-            onClick={() => setFSImageUrl(imageUrl)}
+            onClick={() => setFSImageIdx(i)}
           />
         ))}
       </div>
       <FullScreenImageCarousel
-        imageUrl={fsImageUrl}
-        onClose={() => setFSImageUrl("")}
+        initialImageIdx={fsImageIdx}
+        imageUrls={imageUrls}
+        onClose={() => setFSImageIdx(null)}
       />
     </>
   );
