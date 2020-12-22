@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Image } from "react-bootstrap";
-import FullScreenImage from "./FullScreenImage";
+import FullScreenImageCarousel from "./FullScreenImageCarousel";
 import { Storage } from "aws-amplify";
 import { ConfigContext } from "../App";
 import { useIsMounted } from "../lib/utils";
@@ -36,18 +36,16 @@ function Gallery() {
           <Image
             key={i}
             src={imageUrl}
-            style={{ width: "200px", height: "250px" }}
-            className="m-3 cursor-pointer"
+            style={{ width: "200px", height: "250px", cursor: "zoom-in" }}
+            className="m-3"
             onClick={() => setFSImageUrl(imageUrl)}
           />
         ))}
       </div>
-      {fsImageUrl ? (
-        <FullScreenImage
-          imageUrl={fsImageUrl}
-          onClose={() => setFSImageUrl("")}
-        />
-      ) : null}
+      <FullScreenImageCarousel
+        imageUrl={fsImageUrl}
+        onClose={() => setFSImageUrl("")}
+      />
     </>
   );
 }

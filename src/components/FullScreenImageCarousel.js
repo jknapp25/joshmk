@@ -1,9 +1,10 @@
 import React from "react";
 import { Image } from "react-bootstrap";
 import { FaTimes } from "react-icons/fa";
-export default FullScreenImage;
+export default FullScreenImageCarousel;
 
-function FullScreenImage({ imageUrl, onClose }) {
+function FullScreenImageCarousel({ imageUrl, onClose }) {
+  if (!imageUrl) return null;
   return (
     <div
       style={{

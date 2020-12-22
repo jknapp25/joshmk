@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Carousel } from "react-bootstrap";
 import { useIsMounted } from "../lib/utils";
 import { Storage } from "aws-amplify";
+import FullScreenImageCarousel from "./FullScreenImageCarousel";
 export default ImageCarousel;
 
 function ImageCarousel({ images = [], classes = "" }) {
   const [imageUrls, setImageUrls] = useState([]);
+  const [fsImageUrl, setFSImageUrl] = useState("");
   const isMounted = useIsMounted();
 
   useEffect(() => {
@@ -27,18 +29,28 @@ function ImageCarousel({ images = [], classes = "" }) {
   const isOneImage = images.length === 1;
 
   return (
-    <Carousel
-      className={classes}
-      interval={1000000}
-      controls={!isOneImage}
-      indicators={!isOneImage}
-      slide={false}
-    >
-      {imageUrls.map((url, i) => (
-        <Carousel.Item key={i}>
-          <img className="w-100" src={url} alt={url} />
-        </Carousel.Item>
-      ))}
-    </Carousel>
+    <>
+      <Carousel
+        className={classes}
+        interval={1000000}
+        controls={!isOneImage}
+        indicators={!isOneImage}
+        slide={false}
+      >
+        {imageUrls.map((url, i) => (
+          <Carousel.Item
+            key={i}
+            onClick={() => setFSImageUrl(url)}
+            style={{ cursor: "zoom-in" }}
+          >
+            <img className="w-100" src={url} alt={url} />
+          </Carousel.Item>
+        ))}
+      </Carousel>
+      <FullScreenImageCarousel
+        imageUrl={fsImageUrl}
+        onClose={() => setFSImageUrl("")}
+      />
+    </>
   );
 }
