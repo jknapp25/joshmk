@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Image } from "react-bootstrap";
+import FullScreenImage from "./FullScreenImage";
 import { Storage } from "aws-amplify";
 import { ConfigContext } from "../App";
 import { useIsMounted } from "../lib/utils";
@@ -9,6 +10,7 @@ function Gallery() {
   const { galleryImages } = useContext(ConfigContext);
 
   const [imageUrls, setImageUrls] = useState([]);
+  const [fsImageUrl, setFSImageUrl] = useState("");
   const isMounted = useIsMounted();
 
   useEffect(() => {
@@ -28,15 +30,24 @@ function Gallery() {
   if (!imageUrls || imageUrls.length === 0) return null;
 
   return (
-    <div className="mt-3">
-      {imageUrls.map((imageUrl, i) => (
-        <Image
-          key={i}
-          src={imageUrl}
-          style={{ width: "200px", height: "250px" }}
-          className="m-3"
+    <>
+      <div className="mt-3">
+        {imageUrls.map((imageUrl, i) => (
+          <Image
+            key={i}
+            src={imageUrl}
+            style={{ width: "200px", height: "250px" }}
+            className="m-3 cursor-pointer"
+            onClick={() => setFSImageUrl(imageUrl)}
+          />
+        ))}
+      </div>
+      {fsImageUrl ? (
+        <FullScreenImage
+          imageUrl={fsImageUrl}
+          onClose={() => setFSImageUrl("")}
         />
-      ))}
-    </div>
+      ) : null}
+    </>
   );
 }
