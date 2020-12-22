@@ -7,7 +7,7 @@ export default ImageCarousel;
 
 function ImageCarousel({ images = [], classes = "" }) {
   const [imageUrls, setImageUrls] = useState([]);
-  const [fsImageUrl, setFSImageUrl] = useState("");
+  const [fsImageIdx, setFSImageIdx] = useState(null);
   const isMounted = useIsMounted();
 
   useEffect(() => {
@@ -40,7 +40,7 @@ function ImageCarousel({ images = [], classes = "" }) {
         {imageUrls.map((url, i) => (
           <Carousel.Item
             key={i}
-            onClick={() => setFSImageUrl(url)}
+            onClick={() => setFSImageIdx(i)}
             style={{ cursor: "zoom-in" }}
           >
             <img className="w-100" src={url} alt={url} />
@@ -48,8 +48,9 @@ function ImageCarousel({ images = [], classes = "" }) {
         ))}
       </Carousel>
       <FullScreenImageCarousel
-        imageUrl={fsImageUrl}
-        onClose={() => setFSImageUrl("")}
+        initialImageIdx={fsImageIdx}
+        imageUrls={imageUrls}
+        onClose={() => setFSImageIdx(null)}
       />
     </>
   );

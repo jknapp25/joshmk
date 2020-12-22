@@ -1,10 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Image } from "react-bootstrap";
-import { FaTimes } from "react-icons/fa";
+import { FaTimes, FaAngleLeft, FaAngleRight } from "react-icons/fa";
 export default FullScreenImageCarousel;
 
-function FullScreenImageCarousel({ imageUrl, onClose }) {
-  if (!imageUrl) return null;
+function FullScreenImageCarousel({
+  initialImageIdx = null,
+  imageUrls = [],
+  onClose,
+}) {
+  const [activeImageIdx, setActiveImageIdx] = useState(null);
+
+  useEffect(() => {
+    if (initialImageIdx !== null) {
+      setActiveImageIdx(initialImageIdx);
+    }
+  }, [initialImageIdx]);
+
+  function handleClose() {
+    setActiveImageIdx(null);
+    onClose();
+  }
+
+  function handleLeft() {
+    const updImgIdx =
+      activeImageIdx - 1 >= 0 ? activeImageIdx - 1 : imageUrls.length - 1;
+
+    setActiveImageIdx(updImgIdx);
+    onClose();
+  }
+
+  function handleRight() {
+    const updImgIdx =
+      activeImageIdx + 1 < imageUrls.length - 1 ? activeImageIdx + 1 : 0;
+
+    setActiveImageIdx(updImgIdx);
+    onClose();
+  }
+
+  if (imageUrls.length === 0 || activeImageIdx === null) return null;
+
   return (
     <div
       style={{
@@ -17,14 +51,37 @@ function FullScreenImageCarousel({ imageUrl, onClose }) {
         zIndex: 1000000,
       }}
     >
-      <Image src={imageUrl} className="h-100 w-auto d-block mx-auto" />
+      <Image
+        src={imageUrls[activeImageIdx]}
+        className="h-100 w-auto d-block mx-auto"
+      />
       <FaTimes
-        className="ml-2 position-absolute cursor-pointer"
+        className="position-absolute cursor-pointer"
         size="2em"
         color="white"
-        onClick={onClose}
+        onClick={handleClose}
         style={{
           top: "10px",
+          right: "10px",
+        }}
+      />
+      <FaAngleLeft
+        className="ml-2 position-absolute cursor-pointer"
+        size="3em"
+        color="white"
+        onClick={handleLeft}
+        style={{
+          top: "50%",
+          left: "10px",
+        }}
+      />
+      <FaAngleRight
+        className="ml-2 position-absolute cursor-pointer"
+        size="3em"
+        color="white"
+        onClick={handleRight}
+        style={{
+          top: "50%",
           right: "10px",
         }}
       />
