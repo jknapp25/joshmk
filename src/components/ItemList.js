@@ -97,7 +97,7 @@ function ItemList() {
     let education = sortedItems.filter((itm) => itm.tags.includes("education"));
 
     return (
-      <div className="my-4">
+      <>
         {config?.resumeGeneratorEnabled ? (
           <Alert variant="info">
             Click{" "}
@@ -111,26 +111,20 @@ function ItemList() {
           </Alert>
         ) : null}
         <Timeline items={sortedItems} />
-      </div>
+      </>
     );
   } else if (pageName === "projects") {
     let projects = items.sort(
       (a, b) => statusOrder.indexOf(a.status) - statusOrder.indexOf(b.status)
     );
-    return (
-      <div className="my-4">
-        {projects.map((item, i) => (
-          <Project key={i} project={item} />
-        ))}
-      </div>
-    );
+    return projects.map((item, i) => <Project key={i} project={item} />);
   } else if (pageName === "search") {
     const filteredItems = items.filter((item) =>
       item.tags.includes(searchParams.tag)
     );
     return (
-      <div className="my-4">
-        <h3 className="mb-4 mt-4">
+      <>
+        <h3 className="mb-4 mt-1">
           {filteredItems.length} items tagged
           <Badge pill variant="transparent" className="ml-2 active">
             {searchParams.tag}
@@ -143,20 +137,15 @@ function ItemList() {
           </span>
         </h3>
         {filteredItems.map((item, i) => {
-          return (
-            <div className="py-2">
-              {item.type === "post" ? <Post key={i} post={item} /> : null}
-              {item.type === "job" ? <Job key={i} job={item} /> : null}
-              {item.type === "project" ? (
-                <Project key={i} project={item} />
-              ) : null}
-              {item.type === "education" ? (
-                <Education key={i} education={item} />
-              ) : null}
-            </div>
-          );
+          if (item.type === "post") return <Post key={i} post={item} />;
+          if (item.type === "job") return <Job key={i} job={item} />;
+          if (item.type === "project")
+            return <Project key={i} project={item} />;
+          if (item.type === "education")
+            return <Education key={i} education={item} />;
+          return null;
         })}
-      </div>
+      </>
     );
   } else {
     let sortedItems = items.sort(function (a, b) {
@@ -171,7 +160,6 @@ function ItemList() {
     return sortedItems.map((item, i) => {
       return (
         <>
-          {i === 0 ? <div className="py-2" /> : null}
           <Post key={i} post={item} />
           {i !== sortedItems.length - 1 ? (
             <hr style={{ marginTop: "1.9em", marginBottom: "1.4em" }} />

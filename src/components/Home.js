@@ -92,7 +92,9 @@ function Home({ children }) {
             </Card.Footer>
           </Card>
         </Col>
-        <Col xs={6}>{children}</Col>
+        <Col xs={6} className="py-4">
+          {children}
+        </Col>
         <Col xs={3}>
           <SideNav navOptions={config.pages} />
         </Col>

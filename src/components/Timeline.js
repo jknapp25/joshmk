@@ -11,7 +11,7 @@ import {
   IoMdMedical,
 } from "react-icons/io";
 import { GiMechanicalArm, GiCrosscutSaw } from "react-icons/gi";
-import Job from './Job';
+import Job from "./Job";
 import "react-vertical-timeline-component/style.min.css";
 import "../App.css";
 export default Work;
@@ -30,7 +30,7 @@ const icons = [
 
 function Work({ items }) {
   return (
-    <VerticalTimeline animate={false} layout="1-column" className="mb-4">
+    <VerticalTimeline animate={false} layout="1-column">
       {items.map((item, i) => (
         <VerticalTimelineElement
           key={i}
@@ -43,7 +43,7 @@ function Work({ items }) {
           }}
           iconStyle={{ background: "white", color: "white" }}
           icon={icons[0]}
-          className="my-4"
+          className="mb-3 mt-0"
         >
           <Job job={item} />
         </VerticalTimelineElement>
