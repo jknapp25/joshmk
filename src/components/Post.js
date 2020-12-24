@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
+import moment from "moment";
 import { Badge } from "react-bootstrap";
 import { navigate, Link } from "@reach/router";
 import ImageCarousel from "./ImageCarousel";
-import { createTimeInfo, useIsMounted } from "../lib/utils";
+import { useIsMounted } from "../lib/utils";
 import { GoPencil } from "react-icons/go";
 import { FaTrashAlt } from "react-icons/fa";
 import { API, graphqlOperation } from "aws-amplify";
@@ -47,7 +48,7 @@ function Post({
   if (!realPost) return null;
 
   const { id, title, content, tags, images, createdAt } = realPost;
-  const timeInfo = createTimeInfo(null, createdAt, null, true);
+  const date = createdAt ? moment(createdAt).format("dddd, MMMM D, Y") : null;
 
   return (
     <div className="px-0 border-0">
@@ -93,7 +94,7 @@ function Post({
         ) : null}
       </h2>
       <div className="mb-3">
-        <small className="text-muted">{timeInfo}</small>
+        <small className="text-muted">{date || "No date"}</small>
       </div>
 
       <ImageCarousel images={images} classes="mb-3" />
