@@ -50,6 +50,7 @@ function FullScreenImageCarousel({
         backgroundColor: "black",
         zIndex: 1000000,
       }}
+      className="noSelect"
     >
       <Image
         src={imageUrls[activeImageIdx]}
