@@ -47,7 +47,9 @@ function Home({ children }) {
           <link rel="icon" type="image/png" href={faviconUrl} sizes="16x16" />
         </Helmet>
         <Row>
-          <Col xs={10}>{children}</Col>
+          <Col xs={10} className="p-4">
+            {children}
+          </Col>
           <Col xs={2}>
             <SideNav navOptions={config.pages} />
           </Col>

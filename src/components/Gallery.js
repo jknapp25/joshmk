@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Image } from "react-bootstrap";
+import { Card, CardColumns, Image } from "react-bootstrap";
 import FullScreenImageCarousel from "./FullScreenImageCarousel";
 import { Storage } from "aws-amplify";
 import { ConfigContext } from "../App";
@@ -31,17 +31,18 @@ function Gallery() {
 
   return (
     <>
-      <div className="mt-3">
+      <CardColumns>
         {imageUrls.map((imageUrl, i) => (
-          <Image
-            key={i}
-            src={imageUrl}
-            style={{ width: "200px", height: "250px", cursor: "zoom-in" }}
-            className="m-3"
-            onClick={() => setFSImageIdx(i)}
-          />
+          <Card>
+            <Card.Img
+              variant="top"
+              style={{ cursor: "zoom-in" }}
+              src={imageUrl}
+              onClick={() => setFSImageIdx(i)}
+            />
+          </Card>
         ))}
-      </div>
+      </CardColumns>
       <FullScreenImageCarousel
         initialImageIdx={fsImageIdx}
         imageUrls={imageUrls}

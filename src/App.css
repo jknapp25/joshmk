@@ -202,6 +202,10 @@ button:focus {
   user-select: none;
 }
 
+.card-columns {
+  column-count: 4 !important;
+}
+
 /* @keyframes fadeColors {
   0% {
     background-color: red;
