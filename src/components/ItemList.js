@@ -125,7 +125,8 @@ function ItemList() {
     return (
       <>
         <h3 className="mb-4 mt-1">
-          {filteredItems.length} items tagged
+          {filteredItems.length} item{filteredItems.length > 1 ? "s" : ""}{" "}
+          tagged
           <Badge pill variant="transparent" className="ml-2 active">
             {searchParams.tag}
           </Badge>{" "}
