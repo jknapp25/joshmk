@@ -89,7 +89,7 @@ function Configure() {
   }, [isMounted]);
 
   return (
-    <div className="mt-4">
+    <div>
       <h4 className="mb-3">Configure</h4>
       <Form.Label className="mb-1">Full Name</Form.Label>
       <FormControl

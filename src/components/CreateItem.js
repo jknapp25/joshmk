@@ -107,7 +107,7 @@ function CreateItem() {
 
   return (
     <>
-      <div className="my-4">
+      <div className="mb-4">
         <AmplifySignOut />
       </div>
 
