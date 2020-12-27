@@ -58,10 +58,6 @@ function Home({ children }) {
     );
   }
 
-  const colorShiftingId = window.location.href.includes("joshmk")
-    ? "thingy"
-    : "";
-
   const hasSocialLinks = !!config.instagramUrl || !!config.youtubeUrl;
 
   return (
@@ -73,13 +69,11 @@ function Home({ children }) {
       <Row>
         <Col xs={3}>
           <Card className="mx-3 mt-4">
-            <div id={colorShiftingId}>
-              <Card.Img
-                variant="top"
-                src={avatarUrl}
-                onClick={() => navigate("/")}
-              />
-            </div>
+            <Card.Img
+              variant="top"
+              src={avatarUrl}
+              onClick={() => navigate("/")}
+            />
             <Card.Body>
               <Card.Title>
                 <Link to="bio">{config.fullName}</Link>
