@@ -37,6 +37,7 @@ function JobEditor({ id = null, onCreate, onUpdate }) {
         setLocation(jobData.data.getJob.location);
         setType(jobData.data.getJob.type);
         setTags(jobData.data.getJob.tags);
+        setSummary(jobData.data.getJob.summary);
         setDetails(jobData.data.getJob.details);
         setStart(jobData.data.getJob.start);
         setEnd(jobData.data.getJob.end);
