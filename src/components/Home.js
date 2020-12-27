@@ -71,12 +71,13 @@ function Home({ children }) {
       <Row>
         <Col xs={3}>
           <Card className="mx-3 mt-4">
-            <Card.Img
-              variant="top"
-              id={colorShiftingId}
-              src={avatarUrl}
-              onClick={() => navigate("/")}
-            />
+            <div id={colorShiftingId}>
+              <Card.Img
+                variant="top"
+                src={avatarUrl}
+                onClick={() => navigate("/")}
+              />
+            </div>
             <Card.Body>
               <Card.Title>
                 <Link to="bio">{config.fullName}</Link>
