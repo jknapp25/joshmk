@@ -1,2 +1,3 @@
-Deploy/setup second one for Riah
-Rich text editing of post content
+Test development environment
+CD to update both sites
+Rich text editing
