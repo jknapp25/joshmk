@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Card, CardColumns, Image } from "react-bootstrap";
+import { Card, CardColumns } from "react-bootstrap";
 import FullScreenImageCarousel from "./FullScreenImageCarousel";
 import { Storage } from "aws-amplify";
 import { ConfigContext } from "../App";

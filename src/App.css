@@ -206,7 +206,7 @@ button:focus {
   column-count: 4 !important;
 }
 
-/* @keyframes fadeColors {
+@keyframes fadeColors {
   0% {
     background-color: red;
   }
@@ -250,4 +250,4 @@ button:focus {
   -webkit-animation-name: fadeColors;
   -webkit-animation-iteration-count: infinite;
   -webkit-animation-duration: 40s;
-} */
+}

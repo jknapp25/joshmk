@@ -69,6 +69,7 @@ function Home({ children }) {
           <Card className="mx-3 mt-4">
             <Card.Img
               variant="top"
+              className="thingy"
               src={avatarUrl}
               onClick={() => navigate("/")}
             />
