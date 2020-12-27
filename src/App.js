@@ -28,20 +28,23 @@ function App() {
   const configContextValue = { ...config, setConfig };
 
   const isMounted = useIsMounted();
+  const configIdName = window.location.href.includes("joshmk")
+    ? "REACT_APP_JOSHMK_CONFIGURATION_ID"
+    : "REACT_APP_CONFIGURATION_ID";
 
   useEffect(() => {
     async function fetchData() {
       const configData = await API.graphql({
         query: queries.getConfiguration,
-        variables: { id: process.env.REACT_APP_CONFIGURATION_ID },
+        variables: { id: process.env[configIdName] },
       });
       if (configData && isMounted.current)
         setConfig(configData.data.getConfiguration || {});
     }
-    if (process.env.REACT_APP_CONFIGURATION_ID) {
+    if (process.env[configIdName]) {
       fetchData();
     }
-  }, [isMounted]);
+  }, [isMounted, configIdName]);
 
   return (
     <ConfigContext.Provider value={configContextValue}>
