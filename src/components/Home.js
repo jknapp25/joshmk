@@ -58,6 +58,10 @@ function Home({ children }) {
     );
   }
 
+  const colorShiftingId = window.location.href.includes("joshmk")
+    ? "thingy"
+    : "";
+
   return (
     <Container fluid>
       <Helmet>
@@ -69,7 +73,7 @@ function Home({ children }) {
           <Card className="mx-3 mt-4">
             <Card.Img
               variant="top"
-              className="thingy"
+              id={colorShiftingId}
               src={avatarUrl}
               onClick={() => navigate("/")}
             />
