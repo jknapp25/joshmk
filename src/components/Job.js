@@ -74,7 +74,7 @@ function Job({ job, setEditingItemId, setItemType, showEdit = false }) {
             {summary}
           </Card.Text>
         ) : null}
-        {details ? (
+        {details && details.length > 0 ? (
           <Accordion className="mt-3 bg-transparent">
             <Card className="bg-transparent">
               <Card.Header className="p-0 bg-transparent border-bottom-0">

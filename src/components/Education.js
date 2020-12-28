@@ -63,7 +63,7 @@ function Education({
           )}{" "}
           {location && `- ${location}`}
         </Card.Subtitle>
-        {summary && (
+        {summary ? (
           <Card.Text
             className={`${
               tags && tags.length > 0 ? "mb-2" : ""
@@ -71,8 +71,8 @@ function Education({
           >
             {summary}
           </Card.Text>
-        )}
-        {details && details.length > 0 && (
+        ) : null}
+        {details && details.length > 0 ? (
           <Card.Text
             className={`${
               tags && tags.length > 0 ? "mb-2" : ""
@@ -84,8 +84,8 @@ function Education({
               ))}
             </ul>
           </Card.Text>
-        )}
-        {tags && tags.length > 0 && (
+        ) : null}
+        {tags && tags.length > 0 ? (
           <Card.Text
             style={{
               whiteSpace: "nowrap",
@@ -105,7 +105,7 @@ function Education({
               </Badge>
             ))}
           </Card.Text>
-        )}
+        ) : null}
       </Card.Body>
       <Card.Footer>
         <small className="text-muted">{timeInfo}</small>
