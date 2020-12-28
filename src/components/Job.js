@@ -3,6 +3,9 @@ import { Accordion, Badge, Button, Card } from "react-bootstrap";
 import { navigate } from "@reach/router";
 import { createTimeInfo } from "../lib/utils";
 import { GoPencil } from "react-icons/go";
+import { FaTrashAlt } from "react-icons/fa";
+import { API, graphqlOperation } from "aws-amplify";
+import { deleteJob } from "../graphql/mutations";
 export default Job;
 
 function Job({ job, setEditingItemId, setItemType, showEdit = false }) {
@@ -21,6 +24,12 @@ function Job({ job, setEditingItemId, setItemType, showEdit = false }) {
   } = job;
   const timeInfo = createTimeInfo(start, end, null, false);
 
+  async function deleteJb() {
+    if (id) {
+      await API.graphql(graphqlOperation(deleteJob, { input: { id } }));
+    }
+  }
+
   return (
     <Card className="mb-2">
       <Card.Body>
@@ -32,22 +41,41 @@ function Job({ job, setEditingItemId, setItemType, showEdit = false }) {
             </Badge>
           ) : null}{" "}
           {showEdit ? (
-            <span
-              onClick={() => {
-                setItemType("job");
-                setEditingItemId(id);
-                window.scrollTo(0, 0);
-              }}
-            >
-              <GoPencil
-                color="secondary"
-                style={{
-                  display: "inline",
-                  cursor: "pointer",
-                  color: "#6c757d",
+            <>
+              <span
+                onClick={() => {
+                  setItemType("job");
+                  setEditingItemId(id);
+                  window.scrollTo(0, 0);
                 }}
-              />
-            </span>
+              >
+                <GoPencil
+                  color="secondary"
+                  style={{
+                    display: "inline",
+                    cursor: "pointer",
+                    color: "#6c757d",
+                  }}
+                />
+              </span>
+              <span
+                onClick={() => {
+                  const shouldDelete = window.confirm("Delete the item?");
+                  if (shouldDelete) {
+                    deleteJb();
+                  }
+                }}
+              >
+                <FaTrashAlt
+                  className="ml-2"
+                  style={{
+                    display: "inline",
+                    cursor: "pointer",
+                    color: "#dc3545",
+                  }}
+                />
+              </span>
+            </>
           ) : null}
         </Card.Title>
         <Card.Subtitle className="text-muted mb-2">
