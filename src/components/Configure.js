@@ -34,6 +34,10 @@ function Configure() {
 
   const isMounted = useIsMounted();
 
+  const configIdName = window.location.href.includes("joshmk")
+    ? "REACT_APP_JOSHMK_CONFIGURATION_ID"
+    : "REACT_APP_CONFIGURATION_ID";
+
   async function handleSave() {
     let inpData = {
       fullName,
@@ -48,8 +52,8 @@ function Configure() {
       resumeGeneratorEnabled,
     };
 
-    if (process.env.REACT_APP_CONFIGURATION_ID) {
-      inpData.id = process.env.REACT_APP_CONFIGURATION_ID;
+    if (process.env[configIdName]) {
+      inpData.id = process.env[configIdName];
 
       await API.graphql(
         graphqlOperation(updateConfiguration, { input: inpData })
@@ -65,7 +69,7 @@ function Configure() {
     async function fetchData() {
       const configData = await API.graphql({
         query: queries.getConfiguration,
-        variables: { id: process.env.REACT_APP_CONFIGURATION_ID },
+        variables: { id: process.env[configIdName] },
       });
 
       if (configData && isMounted.current) {
@@ -83,10 +87,10 @@ function Configure() {
         );
       }
     }
-    if (process.env.REACT_APP_CONFIGURATION_ID) {
+    if (process.env[configIdName]) {
       fetchData();
     }
-  }, [isMounted]);
+  }, [isMounted, configIdName]);
 
   return (
     <div>

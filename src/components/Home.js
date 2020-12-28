@@ -58,6 +58,8 @@ function Home({ children }) {
     );
   }
 
+  const hasSocialLinks = !!config.instagramUrl || !!config.youtubeUrl;
+
   return (
     <Container fluid>
       <Helmet>
@@ -78,20 +80,26 @@ function Home({ children }) {
               </Card.Title>
               <Card.Text>{config.tagline}</Card.Text>
             </Card.Body>
-            <Card.Footer>
-              <RiInstagramFill
-                className="d-inline cursor-pointer social-icon instagram"
-                size="1.3em"
-                title="instagram"
-                onClick={() => window.open(config.instagramUrl, "_blank")}
-              />
-              <FaYoutube
-                className="ml-2 d-inline cursor-pointer social-icon youtube"
-                size="1.3em"
-                title="youtube"
-                onClick={() => window.open(config.youtubeUrl, "_blank")}
-              />
-            </Card.Footer>
+            {hasSocialLinks ? (
+              <Card.Footer>
+                {!!config.instagramUrl ? (
+                  <RiInstagramFill
+                    className="d-inline cursor-pointer social-icon instagram"
+                    size="1.3em"
+                    title="instagram"
+                    onClick={() => window.open(config.instagramUrl, "_blank")}
+                  />
+                ) : null}
+                {!!config.youtubeUrl ? (
+                  <FaYoutube
+                    className="ml-2 d-inline cursor-pointer social-icon youtube"
+                    size="1.3em"
+                    title="youtube"
+                    onClick={() => window.open(config.youtubeUrl, "_blank")}
+                  />
+                ) : null}
+              </Card.Footer>
+            ) : null}
           </Card>
         </Col>
         <Col xs={6} className="py-4">
