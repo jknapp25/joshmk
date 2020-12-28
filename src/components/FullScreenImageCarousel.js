@@ -66,26 +66,30 @@ function FullScreenImageCarousel({
           right: "10px",
         }}
       />
-      <FaAngleLeft
-        className="ml-2 position-absolute cursor-pointer"
-        size="3em"
-        color="white"
-        onClick={handleLeft}
-        style={{
-          top: "50%",
-          left: "10px",
-        }}
-      />
-      <FaAngleRight
-        className="ml-2 position-absolute cursor-pointer"
-        size="3em"
-        color="white"
-        onClick={handleRight}
-        style={{
-          top: "50%",
-          right: "10px",
-        }}
-      />
+      {imageUrls.length > 1 ? (
+        <>
+          <FaAngleLeft
+            className="ml-2 position-absolute cursor-pointer"
+            size="3em"
+            color="white"
+            onClick={handleLeft}
+            style={{
+              top: "50%",
+              left: "10px",
+            }}
+          />
+          <FaAngleRight
+            className="ml-2 position-absolute cursor-pointer"
+            size="3em"
+            color="white"
+            onClick={handleRight}
+            style={{
+              top: "50%",
+              right: "10px",
+            }}
+          />
+        </>
+      ) : null}
     </div>
   );
 }
