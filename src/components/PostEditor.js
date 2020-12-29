@@ -91,20 +91,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
         onChange={(e) => setTitle(e.target.value)}
       />
 
-      <Form.Label className="mb-0">
-        Content *DON'T USE THIS ANYMORE. It's only hear for migration purposes
-      </Form.Label>
-      <FormControl
-        id="content"
-        className="mb-2"
-        as="textarea"
-        rows="3"
-        aria-describedby="content"
-        value={content || ""}
-        onChange={(e) => setContent(e.target.value)}
-      />
-
-      <Form.Label className="mb-0">Rich Content</Form.Label>
+      <Form.Label className="mb-0">Content</Form.Label>
       <RichTextEditor
         value={richContent}
         onChange={(updRichContent) => setRichContent(updRichContent)}
