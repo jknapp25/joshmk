@@ -67,11 +67,11 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
       richContent: JSON.stringify(richContent),
       tags,
       images,
+      createdAt: createdAt || undefined,
     };
 
     if (id) {
       data.id = id;
-      data.createdAt = createdAt;
       onUpdate("post", data);
     } else {
       onCreate("post", data);
