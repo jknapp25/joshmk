@@ -26,15 +26,13 @@ function FullScreenImageCarousel({
       activeImageIdx - 1 >= 0 ? activeImageIdx - 1 : imageUrls.length - 1;
 
     setActiveImageIdx(updImgIdx);
-    onClose();
   }
 
   function handleRight() {
     const updImgIdx =
-      activeImageIdx + 1 < imageUrls.length - 1 ? activeImageIdx + 1 : 0;
+      activeImageIdx < imageUrls.length - 1 ? activeImageIdx + 1 : 0;
 
     setActiveImageIdx(updImgIdx);
-    onClose();
   }
 
   if (imageUrls.length === 0 || activeImageIdx === null) return null;
