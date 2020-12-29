@@ -8,9 +8,17 @@ import TagEditor from "./TagEditor";
 import { useIsMounted } from "../lib/utils";
 export default PostEditor;
 
+const blankEditorValue = [
+  {
+    type: "paragraph",
+    children: [{ text: "" }],
+  },
+];
+
 function PostEditor({ id = null, onCreate, onUpdate }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [richContent, setRichContent] = useState(blankEditorValue);
   const [tags, setTags] = useState([]);
   const [images, setImages] = useState([]);
   const [createdAt, setCreatedAt] = useState("");
@@ -27,6 +35,12 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
       if (postData && isMounted.current) {
         setTitle(postData.data.getPost.title);
         setContent(postData.data.getPost.content);
+        if (postData.data.getPost.richContent) {
+          const richContentResponse = JSON.parse(
+            postData.data.getPost.richContent
+          );
+          setRichContent(richContentResponse);
+        }
         setTags(postData.data.getPost.tags);
         setImages(postData.data.getPost.images);
         setCreatedAt(postData.data.getPost.createdAt);
@@ -40,6 +54,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
   function clearEditor() {
     setTitle("");
     setContent("");
+    setRichContent(blankEditorValue);
     setTags([]);
     setImages([]);
     setCreatedAt("");
@@ -49,6 +64,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
     const data = {
       title,
       content,
+      richContent: JSON.stringify(richContent),
       tags,
       images,
     };
@@ -76,8 +92,11 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
       />
 
       <Form.Label className="mb-0">Content</Form.Label>
-      {/* <RichTextEditor /> */}
-      <FormControl
+      <RichTextEditor
+        value={richContent}
+        onChange={(updRichContent) => setRichContent(updRichContent)}
+      />
+      {/* <FormControl
         id="content"
         className="mb-2"
         as="textarea"
@@ -85,7 +104,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
         aria-describedby="content"
         value={content || ""}
         onChange={(e) => setContent(e.target.value)}
-      />
+      /> */}
 
       <TagEditor tags={tags} onChange={(updTags) => setTags(updTags)} />
 

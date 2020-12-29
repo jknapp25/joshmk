@@ -9,6 +9,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import { API, graphqlOperation } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import { deletePost } from "../graphql/mutations";
+import RichTextEditor from "./RichTextEditor";
 export default Post;
 
 function Post({
@@ -47,8 +48,10 @@ function Post({
 
   if (!realPost) return null;
 
-  const { id, title, content, tags, images, createdAt } = realPost;
+  let { id, title, content, richContent, tags, images, createdAt } = realPost;
   const date = createdAt ? moment(createdAt).format("dddd, MMMM D, Y") : null;
+
+  richContent = richContent ? JSON.parse(richContent) : richContent;
 
   return (
     <div className="px-0 border-0">
@@ -104,7 +107,14 @@ function Post({
           tags && tags.length > 0 ? "mb-3" : ""
         } font-weight-normal`}
       >
-        {content}
+        {content || ""}
+        {richContent ? (
+          <RichTextEditor
+            value={richContent}
+            onChange={() => {}}
+            readOnly={true}
+          />
+        ) : null}
       </div>
       {tags && tags.length > 0 && (
         <div

@@ -1,10 +1,9 @@
-import React, { useMemo, useState, useCallback } from "react";
+import React, { useMemo, useState, useCallback, useEffect } from "react";
 import {
   createEditor,
   Editor,
   Transforms,
   Text,
-  // Node,
   Range,
   Element as SlateElement,
 } from "slate";
@@ -12,7 +11,6 @@ import {
   Editable,
   withReact,
   Slate,
-  // useSlate,
   useSelected,
   useFocused,
 } from "slate-react";
@@ -20,6 +18,14 @@ import { Button } from "react-bootstrap";
 import isUrl from "is-url";
 import imageExtensions from "image-extensions";
 import { withHistory } from "slate-history";
+
+const blankEditorValue = [
+  {
+    type: "paragraph",
+    children: [{ text: "" }],
+  },
+];
+
 const CustomEditor = {
   isBoldMarkActive(editor) {
     const [match] = Editor.nodes(editor, {
@@ -81,22 +87,23 @@ const CustomEditor = {
     );
   },
 };
-const App = () => {
+
+const RichTextEditor = ({
+  value = blankEditorValue,
+  onChange = () => {},
+  readOnly = false,
+}) => {
   const editor = useMemo(
     () => withLinks(withImages(withHistory(withReact(createEditor())))),
     []
   );
-  const [value, setValue] = useState([
-    {
-      type: "paragraph",
-      children: [{ text: "A line of text in a paragraph." }],
-    },
-  ]);
+
   const insertImage = (editor, url) => {
     const text = { text: "" };
     const image = { type: "image", url, children: [text] };
     Transforms.insertNodes(editor, image);
   };
+
   const renderElement = useCallback((props) => {
     switch (props.element.type) {
       case "code":
@@ -109,101 +116,115 @@ const App = () => {
         return <DefaultElement {...props} />;
     }
   }, []);
+
   const renderLeaf = useCallback((props) => {
     return <Leaf {...props} />;
   }, []);
+
   return (
     <Slate
       editor={editor}
       value={value}
       onChange={(value) => {
-        setValue(value);
-        // save JSON to DB here
-        console.log(value);
+        onChange(value);
       }}
     >
+      {!readOnly ? (
+        <div
+          style={{
+            borderTopLeftRadius: ".25em",
+            borderTopRightRadius: ".25em",
+          }}
+          className="bg-gray-750 py-1 px-2 border border-bottom-0"
+        >
+          <Button
+            variant="light"
+            className="p-1 bg-transparent border-0"
+            onMouseDown={(event) => {
+              event.preventDefault();
+              CustomEditor.toggleBoldMark(editor);
+            }}
+          >
+            <span className="font-weight-bold">B</span>
+          </Button>
+          <Button
+            variant="light"
+            className="p-1 ml-1 bg-transparent border-0"
+            onMouseDown={(event) => {
+              event.preventDefault();
+              CustomEditor.toggleItalicMark(editor);
+            }}
+          >
+            <em>I</em>
+          </Button>
+          <Button
+            variant="light"
+            className="p-1 ml-1 bg-transparent border-0"
+            onMouseDown={(event) => {
+              event.preventDefault();
+              CustomEditor.toggleUnderlineMark(editor);
+            }}
+          >
+            <u>U</u>
+          </Button>
+          {/* <Button
+            variant="light"
+            className="p-1 ml-1 bg-transparent border-0"
+            onMouseDown={(event) => {
+              event.preventDefault();
+              CustomEditor.toggleCodeBlock(editor);
+            }}
+          >
+            {"<>"}
+          </Button>
+          <Button
+            variant="light"
+            className="p-1 ml-1 bg-transparent border-0"
+            onMouseDown={(event) => {
+              event.preventDefault();
+              const url = window.prompt("Enter the URL of the link:");
+              if (!url) return;
+              insertLink(editor, url);
+            }}
+          >
+            <i className="fa fa-link" title="Link" />
+          </Button>
+          <Button
+            variant="light"
+            className="p-1 ml-1 bg-transparent border-0"
+            onMouseDown={(event) => {
+              event.preventDefault();
+              const url = window.prompt("Enter the URL of the image:");
+              if (!url) return;
+              insertImage(editor, url);
+            }}
+          >
+            <i className="fa fa-image" title="Image" />
+          </Button> */}
+        </div>
+      ) : null}
       <div
-        style={{
-          borderTopLeftRadius: ".25em",
-          borderTopRightRadius: ".25em",
-        }}
-        className="bg-gray-750 py-1 px-2 border border-bottom-0"
-      >
-        <Button
-          className="btn-ghost-secondary p-1 bg-transparent border-0"
-          onMouseDown={(event) => {
-            event.preventDefault();
-            CustomEditor.toggleBoldMark(editor);
-          }}
-        >
-          <span className="font-weight-bold">B</span>
-        </Button>
-        <Button
-          className="btn-ghost-secondary p-1 ml-1 bg-transparent border-0"
-          onMouseDown={(event) => {
-            event.preventDefault();
-            CustomEditor.toggleItalicMark(editor);
-          }}
-        >
-          <em>I</em>
-        </Button>
-        <Button
-          className="btn-ghost-secondary p-1 ml-1 bg-transparent border-0"
-          onMouseDown={(event) => {
-            event.preventDefault();
-            CustomEditor.toggleUnderlineMark(editor);
-          }}
-        >
-          <u>U</u>
-        </Button>
-        <Button
-          className="btn-ghost-secondary p-1 ml-1 bg-transparent border-0"
-          onMouseDown={(event) => {
-            event.preventDefault();
-            CustomEditor.toggleCodeBlock(editor);
-          }}
-        >
-          {"<>"}
-        </Button>
-        <Button
-          className="btn-ghost-secondary p-1 ml-1 bg-transparent border-0"
-          onMouseDown={(event) => {
-            event.preventDefault();
-            const url = window.prompt("Enter the URL of the link:");
-            if (!url) return;
-            insertLink(editor, url);
-          }}
-        >
-          <i className="fa fa-link" title="Link" />
-        </Button>
-        <Button
-          className="btn-ghost-secondary p-1 ml-1 bg-transparent border-0"
-          onMouseDown={(event) => {
-            event.preventDefault();
-            const url = window.prompt("Enter the URL of the image:");
-            if (!url) return;
-            insertImage(editor, url);
-          }}
-        >
-          <i className="fa fa-image" title="Image" />
-        </Button>
-      </div>
-      <div
-        style={{
-          borderBottomLeftRadius: ".25em",
-          borderBottomRightRadius: ".25em",
-          paddingLeft: "12px",
-          paddingRight: "12px",
-        }}
-        className="bg-gray-650 py-2 border"
+        style={
+          !readOnly
+            ? {
+                borderBottomLeftRadius: ".25em",
+                borderBottomRightRadius: ".25em",
+                paddingLeft: "12px",
+                paddingRight: "12px",
+              }
+            : {}
+        }
+        className={!readOnly ? `bg-gray-650 py-2 border` : ""}
       >
         <Editable
+          readOnly={readOnly}
           renderElement={renderElement}
           renderLeaf={renderLeaf}
           onKeyDown={(event) => {
             if (!event.ctrlKey) {
               return;
             }
+
             // Replace the `onKeyDown` logic with our new commands.
             switch (event.key) {
               case "`": {
@@ -235,11 +256,14 @@ const App = () => {
     </Slate>
   );
 };
+
 const withImages = (editor) => {
   const { insertData, isVoid } = editor;
+
   editor.isVoid = (element) => {
     return element.type === "image" ? true : isVoid(element);
   };
+
   editor.insertData = (data) => {
     const text = data.getData("text/plain");
     const { files } = data;
@@ -261,13 +285,16 @@ const withImages = (editor) => {
       insertData(data);
     }
   };
+
   return editor;
 };
+
 const insertImage = (editor, url) => {
   const text = { text: "" };
   const image = { type: "image", url, children: [text] };
   Transforms.insertNodes(editor, image);
 };
+
 const CodeElement = (props) => {
   return (
     <pre {...props.attributes}>
@@ -275,6 +302,7 @@ const CodeElement = (props) => {
     </pre>
   );
 };
+
 const DefaultElement = (props) => {
   return (
     <p className="mb-0" {...props.attributes}>
@@ -282,6 +310,7 @@ const DefaultElement = (props) => {
     </p>
   );
 };
+
 const ImageElement = ({ attributes, children, element }) => {
   const selected = useSelected();
   const focused = useFocused();
@@ -303,6 +332,7 @@ const ImageElement = ({ attributes, children, element }) => {
     </div>
   );
 };
+
 const withLinks = (editor) => {
   const { insertData, insertText, isInline } = editor;
   editor.isInline = (element) => {
@@ -325,11 +355,13 @@ const withLinks = (editor) => {
   };
   return editor;
 };
+
 const insertLink = (editor, url) => {
   if (editor.selection) {
     wrapLink(editor, url);
   }
 };
+
 const isLinkActive = (editor) => {
   const [link] = Editor.nodes(editor, {
     match: (n) =>
@@ -337,12 +369,14 @@ const isLinkActive = (editor) => {
   });
   return !!link;
 };
+
 const unwrapLink = (editor) => {
   Transforms.unwrapNodes(editor, {
     match: (n) =>
       !Editor.isEditor(n) && SlateElement.isElement(n) && n.type === "link",
   });
 };
+
 const wrapLink = (editor, url) => {
   if (isLinkActive(editor)) {
     unwrapLink(editor);
@@ -361,6 +395,7 @@ const wrapLink = (editor, url) => {
     Transforms.collapse(editor, { edge: "end" });
   }
 };
+
 const LinkElement = ({ attributes, children, element }) => {
   switch (element.type) {
     case "link":
@@ -373,12 +408,14 @@ const LinkElement = ({ attributes, children, element }) => {
       return <p {...attributes}>{children}</p>;
   }
 };
+
 const isImageUrl = (url) => {
   if (!url) return false;
   if (!isUrl(url)) return false;
   const ext = new URL(url).pathname.split(".").pop();
   return imageExtensions.includes(ext);
 };
+
 const Leaf = ({ attributes, children, leaf }) => {
   if (leaf.bold) {
     children = <strong>{children}</strong>;
@@ -394,4 +431,5 @@ const Leaf = ({ attributes, children, leaf }) => {
   }
   return <span {...attributes}>{children}</span>;
 };
-export default App;
+
+export default RichTextEditor;
