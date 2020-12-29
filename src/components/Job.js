@@ -103,9 +103,9 @@ function Job({ job, setEditingItemId, setItemType, showEdit = false }) {
           </Card.Text>
         ) : null}
         {details && details.length > 0 ? (
-          <Accordion className="mt-3 bg-transparent">
-            <Card className="bg-transparent">
-              <Card.Header className="p-0 bg-transparent border-bottom-0">
+          <Accordion className="mt-3">
+            <Card id="accordion-card-header-hide">
+              <Card.Header className="p-0 border-bottom-0 bg-transparent">
                 <Accordion.Toggle
                   as={Button}
                   variant="link"

@@ -205,3 +205,7 @@ button:focus {
 .card-columns {
   column-count: 4 !important;
 }
+
+#accordion-card-header-hide {
+  background-color: transparent !important;
+}
