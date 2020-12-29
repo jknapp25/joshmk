@@ -91,12 +91,10 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
         onChange={(e) => setTitle(e.target.value)}
       />
 
-      <Form.Label className="mb-0">Content</Form.Label>
-      <RichTextEditor
-        value={richContent}
-        onChange={(updRichContent) => setRichContent(updRichContent)}
-      />
-      {/* <FormControl
+      <Form.Label className="mb-0">
+        Content *DON'T USE THIS ANYMORE. It's only hear for migration purposes
+      </Form.Label>
+      <FormControl
         id="content"
         className="mb-2"
         as="textarea"
@@ -104,7 +102,13 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
         aria-describedby="content"
         value={content || ""}
         onChange={(e) => setContent(e.target.value)}
-      /> */}
+      />
+
+      <Form.Label className="mb-0">Rich Content</Form.Label>
+      <RichTextEditor
+        value={richContent}
+        onChange={(updRichContent) => setRichContent(updRichContent)}
+      />
 
       <TagEditor tags={tags} onChange={(updTags) => setTags(updTags)} />
 
