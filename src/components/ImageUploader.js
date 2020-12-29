@@ -81,7 +81,7 @@ function ImageUploader({
     }
   }, [images, isMounted]);
 
-  const reachedImageLimit = !!images && images.length > 1 && !multiple;
+  const reachedImageLimit = !!images && images.length === 1 && !multiple;
 
   return (
     <>
