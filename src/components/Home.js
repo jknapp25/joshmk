@@ -76,7 +76,9 @@ function Home({ children }) {
             />
             <Card.Body>
               <Card.Title>
-                <Link to="bio">{config.fullName}</Link>
+                <Link to="bio" className="hidden-link">
+                  {config.fullName}
+                </Link>
               </Card.Title>
               <Card.Text>{config.tagline}</Card.Text>
             </Card.Body>

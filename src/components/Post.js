@@ -57,7 +57,9 @@ function Post({
     <div className="px-0 border-0">
       <h2 className="mb-1">
         <span className="cursor-pointer">
-          <Link to={`/post/${id}`}>{title}</Link>
+          <Link to={`/post/${id}`} className="hidden-link">
+            {title}
+          </Link>
         </span>{" "}
         {showEdit ? (
           <>

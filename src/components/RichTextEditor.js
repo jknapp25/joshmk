@@ -18,6 +18,7 @@ import { Button } from "react-bootstrap";
 import isUrl from "is-url";
 import imageExtensions from "image-extensions";
 import { withHistory } from "slate-history";
+import { FaLink } from "react-icons/fa";
 
 const blankEditorValue = [
   {
@@ -176,7 +177,7 @@ const RichTextEditor = ({
             }}
           >
             {"<>"}
-          </Button>
+          </Button> */}
           <Button
             variant="light"
             className="p-1 ml-1 bg-transparent border-0"
@@ -187,9 +188,18 @@ const RichTextEditor = ({
               insertLink(editor, url);
             }}
           >
-            <i className="fa fa-link" title="Link" />
+            <FaLink
+              title="Link"
+              size=".8em"
+              // style={{
+              //   display: "inline",
+              //   cursor: "pointer",
+              //   color: "#dc3545",
+              // }}
+            />
+            {/* <i className="fa fa-link" title="Link" /> */}
           </Button>
-          <Button
+          {/* <Button
             variant="light"
             className="p-1 ml-1 bg-transparent border-0"
             onMouseDown={(event) => {
@@ -400,7 +410,13 @@ const LinkElement = ({ attributes, children, element }) => {
   switch (element.type) {
     case "link":
       return (
-        <a {...attributes} href={element.url}>
+        <a
+          {...attributes}
+          href={element.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="cursor-pointer"
+        >
           {children}
         </a>
       );

@@ -171,9 +171,13 @@ html {
   border-radius: 0px !important;
 }
 
-a {
+.hidden-link {
   color: black !important;
   text-decoration: none !important;
+}
+
+a {
+  color: #dc3545 !important;
 }
 a:hover {
   color: #dc3545 !important;
