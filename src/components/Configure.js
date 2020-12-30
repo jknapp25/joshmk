@@ -11,6 +11,7 @@ import {
 import { FaTimes } from "react-icons/fa";
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 import ImageUploader from "./ImageUploader";
+import RichTextEditor from "./RichTextEditor";
 import { API, graphqlOperation } from "aws-amplify";
 import { createConfiguration, updateConfiguration } from "../graphql/mutations";
 import * as queries from "../graphql/queries";
@@ -19,13 +20,20 @@ export default Configure;
 
 const pageOptions = ["blog", "work", "projects", "gallery"];
 
+const blankEditorValue = [
+  {
+    type: "paragraph",
+    children: [{ text: "" }],
+  },
+];
+
 function Configure() {
   const [fullName, setFullName] = useState("");
   const [nickName, setNickName] = useState("");
   const [tagline, setTagline] = useState("");
   const [instagramUrl, setInstagramUrl] = useState("");
   const [youtubeUrl, setYoutubeUrl] = useState("");
-  const [bio, setBio] = useState("");
+  const [bio, setBio] = useState(blankEditorValue);
   const [avatar, setAvatar] = useState("");
   const [favicon, setFavicon] = useState("");
   const [pages, setPages] = useState([]);
@@ -43,7 +51,7 @@ function Configure() {
       fullName,
       nickName,
       tagline,
-      bio,
+      bio: JSON.stringify(bio),
       instagramUrl,
       youtubeUrl,
       avatar,
@@ -76,7 +84,12 @@ function Configure() {
         setFullName(configData.data.getConfiguration.fullName);
         setNickName(configData.data.getConfiguration.nickName);
         setTagline(configData.data.getConfiguration.tagline);
-        setBio(configData.data.getConfiguration.bio);
+        if (configData.data.getConfiguration.bio) {
+          const richContentResponse = JSON.parse(
+            configData.data.getConfiguration.bio
+          );
+          setBio(richContentResponse);
+        }
         setAvatar(configData.data.getConfiguration.avatar);
         setInstagramUrl(configData.data.getConfiguration.instagramUrl);
         setYoutubeUrl(configData.data.getConfiguration.youtubeUrl);
@@ -132,15 +145,11 @@ function Configure() {
       />
 
       <Form.Label className="mb-1">Bio</Form.Label>
-      <FormControl
-        id="bio"
-        className="mb-3"
-        as="textarea"
-        rows="3"
-        aria-describedby="bio"
-        value={bio || ""}
-        onChange={(e) => {
-          setBio(e.target.value);
+      <RichTextEditor
+        value={bio}
+        classes="mb-3"
+        onChange={(updBio) => {
+          setBio(updBio);
           setEdited(true);
         }}
       />

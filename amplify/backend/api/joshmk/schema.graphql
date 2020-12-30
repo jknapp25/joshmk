@@ -59,7 +59,7 @@ type Configuration @model @auth(rules: [{ allow: public }]) {
   fullName: String
   nickName: String
   tagline: String
-  bio: String
+  bio: AWSJSON
   avatar: String
   favicon: String
   instagramUrl: String

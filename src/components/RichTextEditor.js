@@ -93,6 +93,7 @@ const RichTextEditor = ({
   value = blankEditorValue,
   onChange = () => {},
   readOnly = false,
+  classes = "",
 }) => {
   const editor = useMemo(
     () => withLinks(withImages(withHistory(withReact(createEditor())))),
@@ -188,16 +189,7 @@ const RichTextEditor = ({
               insertLink(editor, url);
             }}
           >
-            <FaLink
-              title="Link"
-              size=".8em"
-              // style={{
-              //   display: "inline",
-              //   cursor: "pointer",
-              //   color: "#dc3545",
-              // }}
-            />
-            {/* <i className="fa fa-link" title="Link" /> */}
+            <FaLink title="Link" size=".8em" />
           </Button>
           {/* <Button
             variant="light"
@@ -224,7 +216,7 @@ const RichTextEditor = ({
               }
             : {}
         }
-        className={!readOnly ? `bg-gray-650 py-2 border` : ""}
+        className={!readOnly ? `bg-gray-650 py-2 border ${classes}` : classes}
       >
         <Editable
           readOnly={readOnly}
