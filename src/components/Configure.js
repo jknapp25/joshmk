@@ -84,12 +84,12 @@ function Configure() {
         setFullName(configData.data.getConfiguration.fullName);
         setNickName(configData.data.getConfiguration.nickName);
         setTagline(configData.data.getConfiguration.tagline);
-        // if (configData.data.getConfiguration.bio) {
-        //   const richContentResponse = JSON.parse(
-        //     configData.data.getConfiguration.bio
-        //   );
-        //   setBio(richContentResponse);
-        // }
+        if (configData.data.getConfiguration.bio) {
+          const richContentResponse = JSON.parse(
+            configData.data.getConfiguration.bio
+          );
+          setBio(richContentResponse);
+        }
         setAvatar(configData.data.getConfiguration.avatar);
         setInstagramUrl(configData.data.getConfiguration.instagramUrl);
         setYoutubeUrl(configData.data.getConfiguration.youtubeUrl);
