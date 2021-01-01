@@ -10,7 +10,7 @@ function SideNav({ navOptions }) {
   if (!navOptions || navOptions.length === 0) return null;
   const activeKey = pathname === "/" ? `/${navOptions[0]}` : pathname;
   return (
-    <Nav activeKey={activeKey} className="position-fixed mr-3 mt-5 d-block">
+    <Nav activeKey={activeKey} className="position-fixed mr-3 mt-3 d-block">
       {navOptions.map((page, i) => (
         <Nav.Item
           className={`d-block ${activeKey === "/" + page ? "border-left" : ""}`}

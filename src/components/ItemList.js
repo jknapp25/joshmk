@@ -126,10 +126,7 @@ function ItemList() {
       <>
         <h3 className="mb-4 mt-1">
           {filteredItems.length} item{filteredItems.length > 1 ? "s" : ""}{" "}
-          tagged
-          <Badge pill variant="transparent" className="ml-2 active">
-            {searchParams.tag}
-          </Badge>{" "}
+          tagged {searchParams.tag}
           <span
             className="text-muted ml-2 cursor-pointer"
             onClick={() => navigate("/")}
@@ -163,7 +160,14 @@ function ItemList() {
         <>
           <Post key={i} post={item} />
           {i !== sortedItems.length - 1 ? (
-            <hr style={{ marginTop: "1.9em", marginBottom: "1.4em" }} />
+            <hr
+              style={{
+                marginTop: "1.5em",
+                marginBottom: "1.4em",
+                marginLeft: "-15px",
+                marginRight: "-15px",
+              }}
+            />
           ) : null}
           {i === sortedItems.length - 1 ? <div className="py-2" /> : null}
         </>

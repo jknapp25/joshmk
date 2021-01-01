@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
-import { Badge } from "react-bootstrap";
-import { navigate, Link } from "@reach/router";
+import { Link } from "@reach/router";
 import ImageCarousel from "./ImageCarousel";
 import { useIsMounted } from "../lib/utils";
 import { GoPencil } from "react-icons/go";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt, FaTag } from "react-icons/fa";
 import { API, graphqlOperation } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import { deletePost } from "../graphql/mutations";
@@ -126,16 +125,22 @@ function Post({
             boxShadow: "",
           }}
         >
+          <FaTag
+            className="mr-2"
+            style={{
+              display: "inline",
+              color: "rgba(108, 117, 125, 0.7)",
+            }}
+          />
           {tags.map((tag, i) => (
-            <Badge
-              key={i}
-              pill
-              variant="transparent"
-              className="mr-2"
-              onClick={() => navigate(`/search?tag=${tag}`)}
-            >
-              {tag}
-            </Badge>
+            <>
+              <Link to={`/search?tag=${tag}`}>{tag}</Link>
+              {i !== tags.length - 1 ? (
+                <span style={{ color: "rgba(108, 117, 125, 0.7)" }}>, </span>
+              ) : (
+                ""
+              )}
+            </>
           ))}
         </div>
       )}
