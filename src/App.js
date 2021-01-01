@@ -58,7 +58,7 @@ function App() {
             <GoalHours path="goal-hours" />
             <CreateItem path="create" />
             <Configure path="configure" />
-            <Bio path="bio" bio={config.bio} />
+            <Bio path="about" bio={config.bio} />
           </Home>
         </Router>
       </div>

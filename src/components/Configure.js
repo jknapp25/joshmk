@@ -18,7 +18,7 @@ import * as queries from "../graphql/queries";
 import { useIsMounted } from "../lib/utils";
 export default Configure;
 
-const pageOptions = ["blog", "work", "projects", "gallery"];
+const pageOptions = ["blog", "work", "projects", "gallery", "about"];
 
 const blankEditorValue = [
   {

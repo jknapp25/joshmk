@@ -78,7 +78,7 @@ function Home({ children }) {
             />
             <Card.Body>
               <Card.Title>
-                <Link to="bio" className="hidden-link">
+                <Link to="about" className="hidden-link">
                   {config.fullName}
                 </Link>
               </Card.Title>
@@ -106,7 +106,7 @@ function Home({ children }) {
             ) : null}
           </Card>
         </Col>
-        <Col xs={6} className="py-4 border-left border-right">
+        <Col xs={6} className="py-4 border-left border-right bg-white">
           {children}
         </Col>
         <Col xs={3} className="py-4 bg-light">
