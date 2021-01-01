@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { navigate, useLocation, Link } from "@reach/router";
-import { Card, Container, Row, Col } from "react-bootstrap";
+import { Button, Card, Container, Row, Col } from "react-bootstrap";
 import SideNav from "./SideNav";
 import { Helmet } from "react-helmet";
 import { Storage } from "aws-amplify";
@@ -47,10 +47,10 @@ function Home({ children }) {
           <link rel="icon" type="image/png" href={faviconUrl} sizes="16x16" />
         </Helmet>
         <Row>
-          <Col xs={10} className="p-4">
+          <Col xs={11} className="p-4">
             {children}
           </Col>
-          <Col xs={2}>
+          <Col xs={1}>
             <SideNav navOptions={config.pages} />
           </Col>
         </Row>
@@ -60,6 +60,8 @@ function Home({ children }) {
 
   const hasSocialLinks = !!config.instagramUrl || !!config.youtubeUrl;
 
+  if (!config.pages || config.pages.length === 0) return null;
+
   return (
     <Container fluid>
       <Helmet>
@@ -67,8 +69,8 @@ function Home({ children }) {
         <link rel="icon" type="image/png" href={faviconUrl} sizes="16x16" />
       </Helmet>
       <Row>
-        <Col xs={3}>
-          <Card className="mx-3 mt-4">
+        <Col xs={3} className="p-4 bg-light">
+          <Card>
             <Card.Img
               variant="top"
               src={avatarUrl}
@@ -104,13 +106,39 @@ function Home({ children }) {
             ) : null}
           </Card>
         </Col>
-        <Col xs={6} className="py-4">
+        <Col xs={6} className="py-4 border-left border-right">
           {children}
         </Col>
-        <Col xs={3}>
-          <SideNav navOptions={config.pages} />
+        <Col xs={3} className="py-4 bg-light">
+          <div className="position-fixed">
+            <NavButtons pages={config.pages} />
+            <div className="my-3" />
+            <small className="text-muted">Popular tags</small>
+            <p>
+              Coming soon
+              {/* <a>love</a>, <a>hope</a>, <a>soul desires</a>, <a>sex</a>,{" "}
+              <a>fiction</a>, <a>stories</a>, <a>creativity</a>,{" "}
+              <a>paintings</a> */}
+            </p>
+          </div>
         </Col>
       </Row>
     </Container>
   );
+}
+
+function NavButtons({ pages }) {
+  const { pathname } = useLocation();
+  const activePage = pathname === "/" ? `/${pages[0]}` : pathname;
+  return pages.map((page) => (
+    <Button
+      variant={`/${page}` === activePage ? "danger" : "light"}
+      size="md"
+      className="d-inline mr-2 mb-2"
+      style={{ borderRadius: "0px" }}
+      onClick={() => navigate(`/${page}`)}
+    >
+      {page}
+    </Button>
+  ));
 }

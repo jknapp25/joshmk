@@ -162,8 +162,6 @@ html {
 }
 
 .card {
-  background-color: rgba(0, 0, 0, 0.04) !important;
-  border: none !important;
   border-radius: 0px !important;
 }
 
