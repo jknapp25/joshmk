@@ -1,9 +1,10 @@
 import React from "react";
 import { Badge, Card } from "react-bootstrap";
 import ImageCarousel from "./ImageCarousel";
-import { navigate } from "@reach/router";
+import { Link } from "@reach/router";
 import { createTimeInfo, statusColorLookup } from "../lib/utils";
 import { GoPencil } from "react-icons/go";
+import { FaTag } from "react-icons/fa";
 export default Project;
 
 function Project({ project, setEditingItemId, setItemType, showEdit = false }) {
@@ -50,31 +51,33 @@ function Project({ project, setEditingItemId, setItemType, showEdit = false }) {
         {summary ? (
           <Card.Text className="font-weight-normal">{summary}</Card.Text>
         ) : null}
-        {tags && tags.length > 0 && (
-          <Card.Text
-            style={{
-              whiteSpace: "nowrap",
-              overflowX: "scroll",
-              boxShadow: "",
-            }}
-            className="mt-2"
-          >
-            {tags.map((tag, i) => (
-              <Badge
-                pill
-                variant="transparent"
-                className="mr-2"
-                key={i}
-                onClick={() => navigate(`/search?tag=${tag}`)}
-              >
-                {tag}
-              </Badge>
-            ))}
-          </Card.Text>
-        )}
+        <Card.Text className="mt-2">
+          <small className="text-muted">{timeInfo}</small>
+        </Card.Text>
       </Card.Body>
-      <Card.Footer>
-        <small className="text-muted">{timeInfo}</small>
+      <Card.Footer
+        style={{
+          whiteSpace: "nowrap",
+          overflowX: "scroll",
+          boxShadow: "",
+        }}
+      >
+        <FaTag
+          className="mr-2 d-inline"
+          style={{
+            color: "rgba(108, 117, 125, 0.7)",
+          }}
+        />
+        {tags.map((tag, i) => (
+          <>
+            <Link to={`/search?tag=${tag}`}>{tag}</Link>
+            {i !== tags.length - 1 ? (
+              <span style={{ color: "rgba(108, 117, 125, 0.7)" }}>, </span>
+            ) : (
+              ""
+            )}
+          </>
+        ))}
       </Card.Footer>
     </Card>
   );

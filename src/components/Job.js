@@ -1,9 +1,9 @@
 import React from "react";
 import { Accordion, Badge, Button, Card } from "react-bootstrap";
-import { navigate } from "@reach/router";
 import { createTimeInfo } from "../lib/utils";
+import { Link } from "@reach/router";
 import { GoPencil } from "react-icons/go";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt, FaTag } from "react-icons/fa";
 import { API, graphqlOperation } from "aws-amplify";
 import { deleteJob } from "../graphql/mutations";
 export default Job;
@@ -103,14 +103,14 @@ function Job({ job, setEditingItemId, setItemType, showEdit = false }) {
           </Card.Text>
         ) : null}
         {details && details.length > 0 ? (
-          <Accordion className="mt-3">
-            <Card id="accordion-card-header-hide">
-              <Card.Header className="p-0 border-bottom-0 bg-transparent">
+          <Accordion className="mt-3 border-0">
+            <Card id="accordion-card-header-hide" className="border-0">
+              <Card.Header className="p-0 border-bottom-0 bg-transparent border-0">
                 <Accordion.Toggle
                   as={Button}
                   variant="link"
                   eventKey="0"
-                  className="pl-0 py-0"
+                  className="pl-0 py-0 text-danger"
                 >
                   View details
                 </Accordion.Toggle>
@@ -127,31 +127,36 @@ function Job({ job, setEditingItemId, setItemType, showEdit = false }) {
             </Card>
           </Accordion>
         ) : null}
-        {tags && tags.length > 0 ? (
-          <Card.Text
-            style={{
-              whiteSpace: "nowrap",
-              overflowX: "scroll",
-              boxShadow: "",
-            }}
-          >
-            {tags.map((tag, i) => (
-              <Badge
-                pill
-                variant="transparent"
-                className="mr-2"
-                key={i}
-                onClick={() => navigate(`/search?tag=${tag}`)}
-              >
-                {tag}
-              </Badge>
-            ))}
-          </Card.Text>
-        ) : null}
+        <Card.Text>
+          <small className="text-muted">{timeInfo}</small>
+        </Card.Text>
       </Card.Body>
-      <Card.Footer>
-        <small className="text-muted">{timeInfo}</small>
-      </Card.Footer>
+      {tags && tags.length > 0 ? (
+        <Card.Footer
+          style={{
+            whiteSpace: "nowrap",
+            overflowX: "scroll",
+            boxShadow: "",
+          }}
+        >
+          <FaTag
+            className="mr-2 d-inline"
+            style={{
+              color: "rgba(108, 117, 125, 0.7)",
+            }}
+          />
+          {tags.map((tag, i) => (
+            <>
+              <Link to={`/search?tag=${tag}`}>{tag}</Link>
+              {i !== tags.length - 1 ? (
+                <span style={{ color: "rgba(108, 117, 125, 0.7)" }}>, </span>
+              ) : (
+                ""
+              )}
+            </>
+          ))}
+        </Card.Footer>
+      ) : null}
     </Card>
   );
 }

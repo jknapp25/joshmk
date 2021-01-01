@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
+import { Card } from "react-bootstrap";
 import { Link } from "@reach/router";
 import ImageCarousel from "./ImageCarousel";
 import { useIsMounted } from "../lib/utils";
@@ -47,68 +48,67 @@ function Post({
 
   if (!realPost) return null;
 
-  let { id, title, content, richContent, tags, images, createdAt } = realPost;
+  let { id, title, richContent, tags, images, createdAt } = realPost;
   const date = createdAt ? moment(createdAt).format("dddd, MMMM D, Y") : null;
 
   richContent = richContent ? JSON.parse(richContent) : richContent;
 
   return (
-    <div className="px-0 border-0">
-      <h2 className="mb-1">
-        <span className="cursor-pointer">
-          <Link to={`/post/${id}`} className="hidden-link">
-            {title}
-          </Link>
-        </span>{" "}
-        {showEdit ? (
-          <>
-            <span
-              onClick={() => {
-                setItemType("post");
-                setEditingItemId(id);
-                window.scrollTo(0, 0);
-              }}
-            >
-              <GoPencil
-                style={{
-                  display: "inline",
-                  cursor: "pointer",
-                  color: "#6c757d",
-                }}
-              />
-            </span>
-            <span
-              onClick={() => {
-                const shouldDelete = window.confirm("Delete the item?");
-                if (shouldDelete) {
-                  deletePst();
-                }
-              }}
-            >
-              <FaTrashAlt
-                className="ml-2"
-                style={{
-                  display: "inline",
-                  cursor: "pointer",
-                  color: "#dc3545",
-                }}
-              />
-            </span>
-          </>
-        ) : null}
-      </h2>
-      <div className="mb-3">
-        <small className="text-muted">{date || "No date"}</small>
-      </div>
+    <Card>
+      <Card.Body>
+        <Card.Title>
+          <h2>
+            <span className="cursor-pointer">
+              <Link to={`/post/${id}`} className="hidden-link">
+                {title}
+              </Link>
+            </span>{" "}
+            {showEdit ? (
+              <>
+                <span
+                  onClick={() => {
+                    setItemType("post");
+                    setEditingItemId(id);
+                    window.scrollTo(0, 0);
+                  }}
+                >
+                  <GoPencil
+                    style={{
+                      display: "inline",
+                      cursor: "pointer",
+                      color: "#6c757d",
+                    }}
+                  />
+                </span>
+                <span
+                  onClick={() => {
+                    const shouldDelete = window.confirm("Delete the item?");
+                    if (shouldDelete) {
+                      deletePst();
+                    }
+                  }}
+                >
+                  <FaTrashAlt
+                    className="ml-2"
+                    style={{
+                      display: "inline",
+                      cursor: "pointer",
+                      color: "#dc3545",
+                    }}
+                  />
+                </span>
+              </>
+            ) : null}
+          </h2>
+        </Card.Title>
+        <Card.Subtitle className="text-muted">
+          {date || "No date"}
+        </Card.Subtitle>
+      </Card.Body>
 
       <ImageCarousel images={images} classes="mb-3" />
 
-      <div
-        className={`${
-          tags && tags.length > 0 ? "mb-3" : ""
-        } font-weight-normal`}
-      >
-        {content || ""}
+      <Card.Body className="pt-0">
         {richContent ? (
           <RichTextEditor
             value={richContent}
@@ -116,9 +116,9 @@ function Post({
             readOnly={true}
           />
         ) : null}
-      </div>
+      </Card.Body>
       {tags && tags.length > 0 && (
-        <div
+        <Card.Footer
           style={{
             whiteSpace: "nowrap",
             overflowX: "scroll",
@@ -126,9 +126,8 @@ function Post({
           }}
         >
           <FaTag
-            className="mr-2"
+            className="mr-2 d-inline"
             style={{
-              display: "inline",
               color: "rgba(108, 117, 125, 0.7)",
             }}
           />
@@ -142,8 +141,8 @@ function Post({
               )}
             </>
           ))}
-        </div>
+        </Card.Footer>
       )}
-    </div>
+    </Card>
   );
 }

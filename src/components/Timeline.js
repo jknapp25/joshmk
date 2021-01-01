@@ -18,11 +18,12 @@ function Work({ items }) {
           contentStyle={{
             padding: "0px",
             boxShadow: "none",
+            backgroundColor: "transparent",
           }}
           contentArrowStyle={{
             borderRight: "7px solid  rgb(33, 150, 243)",
           }}
-          iconStyle={{ background: "white", color: "white" }}
+          iconStyle={{ background: "#f8f9fa", color: "white" }}
           icon={<FaReact color="#61dafb" size="50px" />}
           className="mb-3 mt-0"
         >

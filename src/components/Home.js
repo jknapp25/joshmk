@@ -106,10 +106,10 @@ function Home({ children }) {
             ) : null}
           </Card>
         </Col>
-        <Col xs={6} className="py-4 border-left border-right bg-white">
+        <Col xs={6} className="py-4 bg-light px-0">
           {children}
         </Col>
-        <Col xs={3} className="py-4 bg-light">
+        <Col xs={3} className="p-4 bg-light">
           <div className="position-fixed">
             <NavButtons pages={config.pages} />
             <div className="my-3" />

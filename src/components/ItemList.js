@@ -159,17 +159,7 @@ function ItemList() {
       return (
         <>
           <Post key={i} post={item} />
-          {i !== sortedItems.length - 1 ? (
-            <hr
-              style={{
-                marginTop: "1.5em",
-                marginBottom: "1.4em",
-                marginLeft: "-15px",
-                marginRight: "-15px",
-              }}
-            />
-          ) : null}
-          {i === sortedItems.length - 1 ? <div className="py-2" /> : null}
+          {i !== sortedItems.length - 1 ? <div className="my-3" /> : null}
         </>
       );
     });
