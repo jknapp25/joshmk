@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { Alert } from "react-bootstrap";
-import Timeline from "./Timeline";
 import Resume from "./Resume";
 import { useLocation, navigate } from "@reach/router";
 import { parse } from "query-string";
@@ -84,8 +83,10 @@ function ItemList() {
 
   if (items.length === 0) return null;
 
+  let preppedItems = [];
+  let education = [];
   if (pageName === "work") {
-    let sortedItems = items.sort(function (a, b) {
+    preppedItems = items.sort(function (a, b) {
       if (a.start < b.start) {
         return 1;
       } else if (b.start < a.start) {
@@ -94,59 +95,15 @@ function ItemList() {
         return 0;
       }
     });
-    let education = sortedItems.filter((itm) => itm.tags.includes("education"));
-
-    return (
-      <>
-        {config?.resumeGeneratorEnabled ? (
-          <Alert variant="info">
-            Click{" "}
-            <PDFDownloadLink
-              document={<Resume items={sortedItems} education={education} />}
-              fileName={`${config.fullName.replace(" ", "_")}_Resume.pdf`}
-            >
-              <span className="alert-link">here</span>
-            </PDFDownloadLink>{" "}
-            for {config.nickName}'s resume
-          </Alert>
-        ) : null}
-        <Timeline items={sortedItems} />
-      </>
-    );
+    education = preppedItems.filter((itm) => itm.tags.includes("education"));
   } else if (pageName === "projects") {
-    let projects = items.sort(
+    preppedItems = items.sort(
       (a, b) => statusOrder.indexOf(a.status) - statusOrder.indexOf(b.status)
     );
-    return projects.map((item, i) => <Project key={i} project={item} />);
   } else if (pageName === "search") {
-    const filteredItems = items.filter((item) =>
-      item.tags.includes(searchParams.tag)
-    );
-    return (
-      <>
-        <h3 className="mb-4 mt-1">
-          {filteredItems.length} item{filteredItems.length > 1 ? "s" : ""}{" "}
-          tagged {searchParams.tag}
-          <span
-            className="text-muted ml-2 cursor-pointer"
-            onClick={() => navigate("/")}
-          >
-            <FaTimes color="#dc3545" title="clear search" />
-          </span>
-        </h3>
-        {filteredItems.map((item, i) => {
-          if (item.type === "post") return <Post key={i} post={item} />;
-          if (item.type === "job") return <Job key={i} job={item} />;
-          if (item.type === "project")
-            return <Project key={i} project={item} />;
-          if (item.type === "education")
-            return <Education key={i} education={item} />;
-          return null;
-        })}
-      </>
-    );
+    preppedItems = items.filter((item) => item.tags.includes(searchParams.tag));
   } else {
-    let sortedItems = items.sort(function (a, b) {
+    preppedItems = items.sort(function (a, b) {
       if (a.createdAt < b.createdAt) {
         return 1;
       } else if (b.createdAt < a.createdAt) {
@@ -155,13 +112,45 @@ function ItemList() {
         return 0;
       }
     });
-    return sortedItems.map((item, i) => {
-      return (
-        <>
-          <Post key={i} post={item} />
-          {i !== sortedItems.length - 1 ? <div className="my-3" /> : null}
-        </>
-      );
-    });
   }
+
+  return (
+    <>
+      {pageName === "work" && config?.resumeGeneratorEnabled ? (
+        <Alert variant="info">
+          Click{" "}
+          <PDFDownloadLink
+            document={<Resume items={preppedItems} education={education} />}
+            fileName={`${config.fullName.replace(" ", "_")}_Resume.pdf`}
+          >
+            <span className="alert-link">here</span>
+          </PDFDownloadLink>{" "}
+          for {config.nickName}'s resume
+        </Alert>
+      ) : null}
+      {pageName === "search" ? (
+        <h3 className="mb-4 mt-1">
+          {preppedItems.length} item{preppedItems.length > 1 ? "s" : ""} tagged{" "}
+          {searchParams.tag}
+          <span
+            className="text-muted ml-2 cursor-pointer"
+            onClick={() => navigate("/")}
+          >
+            <FaTimes color="#dc3545" title="clear search" />
+          </span>
+        </h3>
+      ) : null}
+      {preppedItems.map((item, i) => (
+        <>
+          {item.type === "post" ? <Post key={i} post={item} /> : null}
+          {item.type === "job" ? <Job key={i} job={item} /> : null}
+          {item.type === "project" ? <Project key={i} project={item} /> : null}
+          {item.type === "education" ? (
+            <Education key={i} education={item} />
+          ) : null}
+          {i !== preppedItems.length - 1 ? <div className="my-4" /> : null}
+        </>
+      ))}
+    </>
+  );
 }

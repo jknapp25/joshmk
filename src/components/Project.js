@@ -12,7 +12,7 @@ function Project({ project, setEditingItemId, setItemType, showEdit = false }) {
   const timeInfo = createTimeInfo(start, end, null, false);
 
   return (
-    <Card className="mb-4">
+    <Card>
       <ImageCarousel images={images} />
 
       <Card.Body>
