@@ -39,25 +39,6 @@ function Home({ children }) {
     }
   }, [config.favicon, isMounted]);
 
-  if (pathname === "/gallery") {
-    return (
-      <Container fluid>
-        <Helmet>
-          <title>{config.fullName || ""}</title>
-          <link rel="icon" type="image/png" href={faviconUrl} sizes="16x16" />
-        </Helmet>
-        <Row>
-          <Col xs={11} className="p-4">
-            {children}
-          </Col>
-          <Col xs={1}>
-            <SideNav navOptions={config.pages} />
-          </Col>
-        </Row>
-      </Container>
-    );
-  }
-
   const hasSocialLinks = !!config.instagramUrl || !!config.youtubeUrl;
 
   if (!config.pages || config.pages.length === 0) return null;
@@ -68,61 +49,83 @@ function Home({ children }) {
         <title>{config.fullName || ""}</title>
         <link rel="icon" type="image/png" href={faviconUrl} sizes="16x16" />
       </Helmet>
-      <Row>
-        <Col xs={3} className="p-4 bg-light">
-          <Card>
-            <Card.Img
-              variant="top"
-              src={avatarUrl}
-              onClick={() => navigate("/")}
-            />
-            <Card.Body>
-              <Card.Title>
-                <Link to="about" className="hidden-link">
-                  {config.fullName}
-                </Link>
-              </Card.Title>
-              <Card.Text>{config.tagline}</Card.Text>
-            </Card.Body>
-            {hasSocialLinks ? (
-              <Card.Footer>
-                {!!config.instagramUrl ? (
-                  <RiInstagramFill
-                    className="d-inline cursor-pointer social-icon instagram"
-                    size="1.3em"
-                    title="instagram"
-                    onClick={() => window.open(config.instagramUrl, "_blank")}
-                  />
-                ) : null}
-                {!!config.youtubeUrl ? (
-                  <FaYoutube
-                    className="ml-2 d-inline cursor-pointer social-icon youtube"
-                    size="1.3em"
-                    title="youtube"
-                    onClick={() => window.open(config.youtubeUrl, "_blank")}
-                  />
-                ) : null}
-              </Card.Footer>
-            ) : null}
-          </Card>
-        </Col>
-        <Col xs={6} className="py-4 bg-light px-0">
-          {children}
-        </Col>
-        <Col xs={3} className="p-4 bg-light">
-          <div className="position-fixed">
-            <NavButtons pages={config.pages} />
-            <div className="my-3" />
-            <small className="text-muted">Popular tags</small>
-            <p>
-              Coming soon
-              {/* <a>love</a>, <a>hope</a>, <a>soul desires</a>, <a>sex</a>,{" "}
+      {pathname === "/gallery" ? (
+        <Row>
+          <Col xs={11} className="p-4">
+            {children}
+          </Col>
+          <Col xs={1}>
+            <SideNav navOptions={config.pages} />
+          </Col>
+        </Row>
+      ) : (
+        <Row>
+          <Col sm={5} md={4} lg={3} className="pt-4 bg-light">
+            <div className="pb-3 hidden-lg">
+              <NavButtons pages={config.pages} />
+              <div className="my-3" />
+              <small className="text-muted">Popular tags</small>
+              <p>
+                Coming soon
+                {/* <a>love</a>, <a>hope</a>, <a>soul desires</a>, <a>sex</a>,{" "}
               <a>fiction</a>, <a>stories</a>, <a>creativity</a>,{" "}
               <a>paintings</a> */}
-            </p>
-          </div>
-        </Col>
-      </Row>
+              </p>
+            </div>
+            <Card>
+              <Card.Img
+                variant="top"
+                src={avatarUrl}
+                onClick={() => navigate("/")}
+              />
+              <Card.Body>
+                <Card.Title>
+                  <Link to="about" className="hidden-link">
+                    {config.fullName}
+                  </Link>
+                </Card.Title>
+                <Card.Text>{config.tagline}</Card.Text>
+              </Card.Body>
+              {hasSocialLinks ? (
+                <Card.Footer>
+                  {!!config.instagramUrl ? (
+                    <RiInstagramFill
+                      className="d-inline cursor-pointer social-icon instagram"
+                      size="1.3em"
+                      title="instagram"
+                      onClick={() => window.open(config.instagramUrl, "_blank")}
+                    />
+                  ) : null}
+                  {!!config.youtubeUrl ? (
+                    <FaYoutube
+                      className="ml-2 d-inline cursor-pointer social-icon youtube"
+                      size="1.3em"
+                      title="youtube"
+                      onClick={() => window.open(config.youtubeUrl, "_blank")}
+                    />
+                  ) : null}
+                </Card.Footer>
+              ) : null}
+            </Card>
+          </Col>
+          <Col sm={7} md={8} lg={6} className="py-4 bg-light float">
+            {children}
+          </Col>
+          <Col md={4} lg={3} className="py-4 bg-light hidden-sm">
+            <div className="position-fixed">
+              <NavButtons pages={config.pages} />
+              <div className="my-3" />
+              <small className="text-muted">Popular tags</small>
+              <p>
+                Coming soon
+                {/* <a>love</a>, <a>hope</a>, <a>soul desires</a>, <a>sex</a>,{" "}
+              <a>fiction</a>, <a>stories</a>, <a>creativity</a>,{" "}
+              <a>paintings</a> */}
+              </p>
+            </div>
+          </Col>
+        </Row>
+      )}
     </Container>
   );
 }

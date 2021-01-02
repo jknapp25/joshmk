@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
-import { Alert, Badge } from "react-bootstrap";
+import { Alert } from "react-bootstrap";
 import Timeline from "./Timeline";
 import Resume from "./Resume";
 import { useLocation, navigate } from "@reach/router";

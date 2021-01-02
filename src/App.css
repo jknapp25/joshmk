@@ -208,3 +208,15 @@ button:focus {
 #accordion-card-header-hide {
   background-color: transparent !important;
 }
+
+@media (min-width: 992px) {
+  .hidden-lg {
+    display: none !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .hidden-sm {
+    display: none !important;
+  }
+}
