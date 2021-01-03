@@ -54,8 +54,9 @@ function Home({ children }) {
           <Col xs={11} className="p-4">
             {children}
           </Col>
-          <Col xs={1}>
-            <SideNav navOptions={config.pages} />
+          <Col xs={1} className="pt-4">
+            {/* <SideNav navOptions={config.pages} /> */}
+            <NavButtons pages={config.pages} />
           </Col>
         </Row>
       ) : (
