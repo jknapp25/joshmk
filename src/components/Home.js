@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { navigate, useLocation, Link } from "@reach/router";
 import { Button, Card, Container, Row, Col } from "react-bootstrap";
 import SideNav from "./SideNav";
+import ProfileCard from "./ProfileCard";
 import { Helmet } from "react-helmet";
 import { Storage } from "aws-amplify";
 import { RiInstagramFill } from "react-icons/ri";
@@ -39,8 +40,6 @@ function Home({ children }) {
     }
   }, [config.favicon, isMounted]);
 
-  const hasSocialLinks = !!config.instagramUrl || !!config.youtubeUrl;
-
   if (!config.pages || config.pages.length === 0) return null;
 
   return (
@@ -52,16 +51,8 @@ function Home({ children }) {
       {pathname === "/gallery" ? (
         <Row>
           <Col xs={12} sm={10} md={10} lg={11} className="p-4">
-            <div className="hidden-md">
+            <div className="hidden-md mb-3">
               <NavButtons pages={config.pages} />
-              <div className="my-3 hidden-xs" />
-              <small className="text-muted hidden-xs">Popular tags</small>
-              <p className="hidden-xs">
-                Coming soon
-                {/* <a>love</a>, <a>hope</a>, <a>soul desires</a>, <a>sex</a>,{" "}
-              <a>fiction</a>, <a>stories</a>, <a>creativity</a>,{" "}
-              <a>paintings</a> */}
-              </p>
             </div>
             {children}
           </Col>
@@ -74,50 +65,8 @@ function Home({ children }) {
           <Col sm={5} md={4} lg={3} className="pt-4 bg-light">
             <div className="hidden-md">
               <NavButtons pages={config.pages} />
-              <div className="my-3 hidden-xs" />
-              <small className="text-muted hidden-xs">Popular tags</small>
-              <p className="hidden-xs">
-                Coming soon
-                {/* <a>love</a>, <a>hope</a>, <a>soul desires</a>, <a>sex</a>,{" "}
-              <a>fiction</a>, <a>stories</a>, <a>creativity</a>,{" "}
-              <a>paintings</a> */}
-              </p>
             </div>
-            <Card className="hidden-xs">
-              <Card.Img
-                variant="top"
-                src={avatarUrl}
-                onClick={() => navigate("/")}
-              />
-              <Card.Body>
-                <Card.Title>
-                  <Link to="about" className="hidden-link">
-                    {config.fullName}
-                  </Link>
-                </Card.Title>
-                <Card.Text>{config.tagline}</Card.Text>
-              </Card.Body>
-              {hasSocialLinks ? (
-                <Card.Footer>
-                  {!!config.instagramUrl ? (
-                    <RiInstagramFill
-                      className="d-inline cursor-pointer social-icon instagram"
-                      size="1.3em"
-                      title="instagram"
-                      onClick={() => window.open(config.instagramUrl, "_blank")}
-                    />
-                  ) : null}
-                  {!!config.youtubeUrl ? (
-                    <FaYoutube
-                      className="ml-2 d-inline cursor-pointer social-icon youtube"
-                      size="1.3em"
-                      title="youtube"
-                      onClick={() => window.open(config.youtubeUrl, "_blank")}
-                    />
-                  ) : null}
-                </Card.Footer>
-              ) : null}
-            </Card>
+            <ProfileCard avatarUrl={avatarUrl} config={config} />
             <div className="pt-4 hidden-lg hidden-xs">
               <NavButtons pages={config.pages} />
               <div className="my-3 hidden-xs" />
