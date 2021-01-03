@@ -225,10 +225,16 @@ button:focus {
   .hidden-sm {
     display: none !important;
   }
+  .card-columns {
+    column-count: 3 !important;
+  }
 }
 
 @media (max-width: 574px) {
   .hidden-xs {
     display: none !important;
+  }
+  .card-columns {
+    column-count: 1 !important;
   }
 }

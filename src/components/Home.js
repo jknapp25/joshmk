@@ -51,12 +51,22 @@ function Home({ children }) {
       </Helmet>
       {pathname === "/gallery" ? (
         <Row>
-          <Col xs={11} className="p-4">
+          <Col xs={12} sm={10} md={10} lg={11} className="p-4">
+            <div className="hidden-md">
+              <NavButtons pages={config.pages} />
+              <div className="my-3 hidden-xs" />
+              <small className="text-muted hidden-xs">Popular tags</small>
+              <p className="hidden-xs">
+                Coming soon
+                {/* <a>love</a>, <a>hope</a>, <a>soul desires</a>, <a>sex</a>,{" "}
+              <a>fiction</a>, <a>stories</a>, <a>creativity</a>,{" "}
+              <a>paintings</a> */}
+              </p>
+            </div>
             {children}
           </Col>
-          <Col xs={1} className="pt-4">
-            {/* <SideNav navOptions={config.pages} /> */}
-            <NavButtons pages={config.pages} />
+          <Col sm={2} md={2} lg={1} className="pt-4 hidden-xs">
+            <NavButtons pages={config.pages} classes="float-right" />
           </Col>
         </Row>
       ) : (
@@ -142,14 +152,14 @@ function Home({ children }) {
   );
 }
 
-function NavButtons({ pages }) {
+function NavButtons({ pages, classes = "" }) {
   const { pathname } = useLocation();
   const activePage = pathname === "/" ? `/${pages[0]}` : pathname;
   return pages.map((page) => (
     <Button
       variant={`/${page}` === activePage ? "danger" : "light"}
       size="md"
-      className="d-inline mr-2 mb-2"
+      className={`d-inline mr-2 mb-2 ${classes}`}
       style={{ borderRadius: "0px" }}
       onClick={() => navigate(`/${page}`)}
     >
