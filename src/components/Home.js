@@ -61,18 +61,18 @@ function Home({ children }) {
       ) : (
         <Row>
           <Col sm={5} md={4} lg={3} className="pt-4 bg-light">
-            <div className="pb-3 hidden-lg">
+            <div className="hidden-md">
               <NavButtons pages={config.pages} />
-              <div className="my-3" />
-              <small className="text-muted">Popular tags</small>
-              <p>
+              <div className="my-3 hidden-xs" />
+              <small className="text-muted hidden-xs">Popular tags</small>
+              <p className="hidden-xs">
                 Coming soon
                 {/* <a>love</a>, <a>hope</a>, <a>soul desires</a>, <a>sex</a>,{" "}
               <a>fiction</a>, <a>stories</a>, <a>creativity</a>,{" "}
               <a>paintings</a> */}
               </p>
             </div>
-            <Card>
+            <Card className="hidden-xs">
               <Card.Img
                 variant="top"
                 src={avatarUrl}
@@ -107,6 +107,17 @@ function Home({ children }) {
                 </Card.Footer>
               ) : null}
             </Card>
+            <div className="pt-4 hidden-lg hidden-xs">
+              <NavButtons pages={config.pages} />
+              <div className="my-3 hidden-xs" />
+              <small className="text-muted hidden-xs">Popular tags</small>
+              <p className="hidden-xs">
+                Coming soon
+                {/* <a>love</a>, <a>hope</a>, <a>soul desires</a>, <a>sex</a>,{" "}
+              <a>fiction</a>, <a>stories</a>, <a>creativity</a>,{" "}
+              <a>paintings</a> */}
+              </p>
+            </div>
           </Col>
           <Col sm={7} md={8} lg={6} className="py-4 bg-light float">
             {children}

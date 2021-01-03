@@ -215,8 +215,20 @@ button:focus {
   }
 }
 
+@media (min-width: 574px) {
+  .hidden-md {
+    display: none !important;
+  }
+}
+
 @media (max-width: 992px) {
   .hidden-sm {
+    display: none !important;
+  }
+}
+
+@media (max-width: 574px) {
+  .hidden-xs {
     display: none !important;
   }
 }
