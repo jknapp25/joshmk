@@ -50,13 +50,13 @@ function Home({ children }) {
       </Helmet>
       {pathname === "/gallery" ? (
         <Row>
-          <Col xs={12} sm={10} md={10} lg={11} className="p-4">
+          <Col xs={12} sm={10} md={10} lg={11} className="p-4 bg-light">
             <div className="hidden-md mb-3">
               <NavButtons pages={config.pages} />
             </div>
             {children}
           </Col>
-          <Col sm={2} md={2} lg={1} className="pt-4 hidden-xs">
+          <Col sm={2} md={2} lg={1} className="pt-4 hidden-xs bg-light">
             <NavButtons pages={config.pages} classes="float-right" />
           </Col>
         </Row>
