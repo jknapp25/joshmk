@@ -117,13 +117,15 @@ function ItemList() {
   return (
     <>
       {pageName === "work" && config?.resumeGeneratorEnabled ? (
-        <Alert variant="info">
+        <Alert variant="light">
           Click{" "}
           <PDFDownloadLink
             document={<Resume items={preppedItems} education={education} />}
             fileName={`${config.fullName.replace(" ", "_")}_Resume.pdf`}
           >
-            <span className="alert-link">here</span>
+            <a className="alert-link" href="#">
+              here
+            </a>
           </PDFDownloadLink>{" "}
           for {config.nickName}'s resume
         </Alert>
