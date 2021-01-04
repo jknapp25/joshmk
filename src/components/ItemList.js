@@ -117,7 +117,7 @@ function ItemList() {
   return (
     <>
       {pageName === "work" && config?.resumeGeneratorEnabled ? (
-        <Alert variant="info" className="border">
+        <Alert variant="light" className="border">
           Click{" "}
           <PDFDownloadLink
             document={<Resume items={preppedItems} education={education} />}
