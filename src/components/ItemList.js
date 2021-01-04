@@ -145,7 +145,7 @@ function ItemList() {
           {item.type === "post" ? <Post key={i} post={item} /> : null}
           {item.type === "job" ? <Job key={i} job={item} /> : null}
           {item.type === "project" ? <Project key={i} project={item} /> : null}
-          {item.type === "education" ? (
+          {item.type === "education" && !pageName === "work" ? (
             <Education key={i} education={item} />
           ) : null}
           {i !== preppedItems.length - 1 ? <div className="my-4" /> : null}

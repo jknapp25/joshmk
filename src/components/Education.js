@@ -1,8 +1,9 @@
 import React from "react";
-import { Badge, Card } from "react-bootstrap";
-import { navigate } from "@reach/router";
+import { Card } from "react-bootstrap";
+import { Link } from "@reach/router";
 import { createTimeInfo } from "../lib/utils";
 import { GoPencil } from "react-icons/go";
+import { FaTag } from "react-icons/fa";
 export default Education;
 
 function Education({
@@ -85,31 +86,36 @@ function Education({
             </ul>
           </Card.Text>
         ) : null}
-        {tags && tags.length > 0 ? (
-          <Card.Text
-            style={{
-              whiteSpace: "nowrap",
-              overflowX: "scroll",
-              boxShadow: "",
-            }}
-          >
-            {tags.map((tag, i) => (
-              <Badge
-                pill
-                variant="transparent"
-                className="mr-2"
-                key={i}
-                onClick={() => navigate(`/search?tag=${tag}`)}
-              >
-                {tag}
-              </Badge>
-            ))}
-          </Card.Text>
-        ) : null}
+        <Card.Text>
+          <small className="text-muted">{timeInfo}</small>
+        </Card.Text>
       </Card.Body>
-      <Card.Footer>
-        <small className="text-muted">{timeInfo}</small>
-      </Card.Footer>
+      {tags && tags.length > 0 && (
+        <Card.Footer
+          style={{
+            whiteSpace: "nowrap",
+            overflowX: "scroll",
+            boxShadow: "",
+          }}
+        >
+          <FaTag
+            className="mr-2 d-inline"
+            style={{
+              color: "rgba(108, 117, 125, 0.7)",
+            }}
+          />
+          {tags.map((tag, i) => (
+            <>
+              <Link to={`/search?tag=${tag}`}>{tag}</Link>
+              {i !== tags.length - 1 ? (
+                <span style={{ color: "rgba(108, 117, 125, 0.7)" }}>, </span>
+              ) : (
+                ""
+              )}
+            </>
+          ))}
+        </Card.Footer>
+      )}
     </Card>
   );
 }
