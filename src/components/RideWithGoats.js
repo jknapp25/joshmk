@@ -164,8 +164,8 @@ function RideWithGoats() {
       <Row>
         <Col
           lg={3}
-          className="bg-light px-0"
-          style={{ height: "100vh", overflowY: "auto" }}
+          className="bg-light px-0 shadow"
+          style={{ height: "100vh", overflowY: "auto", zIndex: 1000000 }}
         >
           <Row className="ml-3 mt-3 mr-3 mb-1">
             <h2 className="d-block">Josh's Life Route</h2>
