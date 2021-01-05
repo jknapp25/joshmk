@@ -83,24 +83,31 @@ const route = [
   },
   {
     description: "Got married",
-    position: [45.33030091508855, 237.00648234986696],
+    position: [45.330300915, 237.006482349866],
     location: "Newberg, OR",
     zoom: 13,
     animateDuration: 2,
   },
   {
+    description: "Adventure to Costa Rica",
+    position: [9.659976893509427, 277.25303133601216],
+    location: "Puerto Viejo de Talamance, Costa Rica",
+    zoom: 11,
+    animateDuration: 3,
+  },
+  {
     description: "Opened/closed an art boutique",
-    position: [45.557794254101914, 237.34583649521463],
+    position: [45.55929337528038, 237.35185199868823],
     location: "Portland, OR",
-    zoom: 13,
+    zoom: 16,
     animateDuration: 2,
   },
   {
     description: "Moved into a little ADU / COVID fortress",
-    position: [45.557794254101914, 237.34583649521463],
+    position: [45.553373439823126, 237.33035915096616],
     location: "Portland, OR",
-    zoom: 13,
-    animateDuration: 2,
+    zoom: 15,
+    animateDuration: 1,
   },
 ];
 
@@ -129,7 +136,7 @@ function RideWithGoats() {
   const [activePlaceIdx, setActivePlaceIdx] = useState(null);
 
   const onMove = useCallback(() => {
-    console.log(map.getCenter());
+    // console.log(map.getCenter());
   }, [map]);
 
   useEffect(() => {
