@@ -326,7 +326,6 @@ function RideWithGoats() {
               position: "fixed",
               zIndex: 1000000000,
             }}
-            className="text-center"
           >
             <img
               alt={travelMode}
@@ -341,12 +340,11 @@ function RideWithGoats() {
                 height: activePlaceIdx === 0 ? "70px" : "30px",
               }}
             />
-
             {travelMode === "goat" && activePlaceIdx === 0
               ? "Let's gooooat!"
               : null}
             {travelMode === "pegasus" && activePlaceIdx === 0
-              ? "weeeesnaw..."
+              ? "weesnaw..."
               : null}
           </div>
         </Col>
