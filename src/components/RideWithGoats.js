@@ -59,6 +59,13 @@ const route = [
     animateDuration: 2,
   },
   {
+    description: "Started a business",
+    position: [45.52022746753431, 237.32211362588654],
+    location: "Portland, OR",
+    zoom: 14,
+    animateDuration: 2,
+  },
+  {
     description: "Started a church",
     position: [45.5539487899847, 237.33706196023283],
     location: "Portland, OR",
