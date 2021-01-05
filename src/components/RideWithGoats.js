@@ -19,7 +19,7 @@ const obs = { pegasus: pegasus, goat: goat };
 
 const route = [
   {
-    description: "Bird's eye view (from space?)",
+    description: "Bird's eye view (from space)",
     position: [39.86231722624386, 242.56914339360512],
     // location: "Irvine, CA",
     zoom: 5,
