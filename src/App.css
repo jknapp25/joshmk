@@ -243,6 +243,12 @@ button:focus {
 .orange {
   background-color: #ea6d2c;
 }
+.orange td {
+  color: white;
+}
+.orange td small.text-muted {
+  color: #495057 !important;
+}
 .hover-orange:hover {
   background-color: #ea6d2c;
 }
