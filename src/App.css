@@ -238,3 +238,18 @@ button:focus {
     column-count: 1 !important;
   }
 }
+
+/* Ride with GPS styling */
+.orange {
+  background-color: #ea6d2c;
+}
+.hover-orange:hover {
+  background-color: #ea6d2c;
+}
+.hover-gray:hover {
+  background-color: #f3f3f3;
+}
+
+.premium {
+  background-color: #a8a8a8;
+}

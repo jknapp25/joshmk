@@ -9,6 +9,7 @@ import CreateItem from "./components/CreateItem.js";
 import Configure from "./components/Configure.js";
 import Bio from "./components/Bio.js";
 import Gallery from "./components/Gallery.js";
+import RideWithGoats from "./components/RideWithGoats.js";
 import Amplify from "aws-amplify";
 import awsExports from "./aws-exports";
 import * as queries from "./graphql/queries";
@@ -59,6 +60,7 @@ function App() {
             <CreateItem path="create" />
             <Configure path="configure" />
             <Bio path="about" bio={config.bio} />
+            <RideWithGoats path="rwg" />
           </Home>
         </Router>
       </div>
