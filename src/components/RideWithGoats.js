@@ -78,7 +78,7 @@ const route = [
     description: "Started a church",
     position: [45.5539487899847, 237.33706196023283],
     location: "Portland, OR",
-    zoom: 13,
+    zoom: 14,
     animateDuration: 2,
   },
   {
@@ -240,7 +240,7 @@ function RideWithGoats() {
             </Table>
           </Row>
           <Row className="ml-3 mr-3 mt-3 mb-1">
-            <h5>Select route stops</h5>
+            <h5>Select places</h5>
           </Row>
           <Table>
             <tbody>
@@ -291,7 +291,7 @@ function RideWithGoats() {
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            {route.map(({ position, location }, i) => {
+            {route.map(({ position, location, zoom, animateDuration }, i) => {
               return location ? (
                 <Marker
                   key={i}
@@ -301,6 +301,16 @@ function RideWithGoats() {
                       ? pinIconOrange
                       : pinIcon
                   }
+                  eventHandlers={{
+                    click: (e) => {
+                      map.setView(position, zoom, {
+                        animate: true,
+                        duration: animateDuration,
+                        easeLinearity: 0.5,
+                      });
+                      setActivePlaceIdx(i);
+                    },
+                  }}
                 ></Marker>
               ) : null;
             })}
