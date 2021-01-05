@@ -206,7 +206,7 @@ function RideWithGoats() {
                       alt="bike"
                       src={bike}
                       style={{ height: imgDim, width: imgDim }}
-                      title="Bike"
+                      title="Bike (Premium option)"
                     />
                   </td>
                 </tr>
@@ -216,7 +216,7 @@ function RideWithGoats() {
                       alt="crab"
                       src={crab}
                       style={{ height: imgDim, width: imgDim }}
-                      title="Crab"
+                      title="Crab (Premium option)"
                     />
                   </td>
                   <td align="center" className="premium border-0">
@@ -224,7 +224,7 @@ function RideWithGoats() {
                       alt="crocodile"
                       src={crocodile}
                       style={{ height: imgDim, width: imgDim }}
-                      title="Crocodile"
+                      title="Crocodile (Premium option)"
                     />
                   </td>
                   <td align="center" className="premium border-0">
@@ -232,7 +232,7 @@ function RideWithGoats() {
                       alt="train"
                       src={train}
                       style={{ height: imgDim, width: imgDim }}
-                      title="Hyperloop"
+                      title="Hyperloop (Premium option)"
                     />
                   </td>
                 </tr>
