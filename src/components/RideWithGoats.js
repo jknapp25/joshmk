@@ -19,6 +19,13 @@ const obs = { pegasus: pegasus, goat: goat };
 
 const route = [
   {
+    description: "Bird's eye view (from space?)",
+    position: [39.86231722624386, 242.56914339360512],
+    // location: "Irvine, CA",
+    zoom: 5,
+    animateDuration: 2,
+  },
+  {
     description: "Born",
     position: [33.7, 242.15],
     location: "Irvine, CA",
@@ -133,7 +140,7 @@ function RideWithGoats() {
 
   const [map, setMap] = useState(null);
   const [travelMode, setTravelMode] = useState("goat");
-  const [activePlaceIdx, setActivePlaceIdx] = useState(null);
+  const [activePlaceIdx, setActivePlaceIdx] = useState(0);
 
   const onMove = useCallback(() => {
     // console.log(map.getCenter());
@@ -259,9 +266,11 @@ function RideWithGoats() {
                     }}
                   >
                     <td className="pl-3 align-middle">{i + 1}</td>
-                    <td style={{ lineHeight: "1.1em" }}>
+                    <td style={{ lineHeight: location ? "1.1em" : "" }}>
                       <div style={{ fontSize: "16px" }}>{description}</div>
-                      <small className="text-muted">{location}</small>
+                      {location ? (
+                        <small className="text-muted">{location}</small>
+                      ) : null}
                     </td>
                   </tr>
                 )
@@ -271,8 +280,8 @@ function RideWithGoats() {
         </Col>
         <Col lg={9} className="h-100 pl-0">
           <MapContainer
-            center={[39.86231722624386, 242.56914339360512]}
-            zoom={5}
+            center={route[0].position}
+            zoom={route[0].zoom}
             scrollWheelZoom={false}
             zoomControl={false}
             whenCreated={setMap}
@@ -282,17 +291,19 @@ function RideWithGoats() {
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            {route.map(({ position }, i) => (
-              <Marker
-                key={i}
-                position={position}
-                icon={
-                  activePlaceIdx !== null && activePlaceIdx === i
-                    ? pinIconOrange
-                    : pinIcon
-                }
-              ></Marker>
-            ))}
+            {route.map(({ position, location }, i) => {
+              return location ? (
+                <Marker
+                  key={i}
+                  position={position}
+                  icon={
+                    activePlaceIdx !== null && activePlaceIdx === i
+                      ? pinIconOrange
+                      : pinIcon
+                  }
+                ></Marker>
+              ) : null;
+            })}
             <ZoomControl position="bottomright" />
           </MapContainer>
 
