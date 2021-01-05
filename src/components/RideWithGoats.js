@@ -31,7 +31,7 @@ const route = [
     animateDuration: 3,
   },
   {
-    description: "Karate at Forest Lake",
+    description: "Taikwando with Master Sparling",
     position: [39.04385525319721, 238.92019708470275],
     location: "Auburn, CA",
     zoom: 14,
@@ -76,6 +76,13 @@ const route = [
     description: "Got married",
     position: [45.33030091508855, 237.00648234986696],
     location: "Newberg, OR",
+    zoom: 13,
+    animateDuration: 2,
+  },
+  {
+    description: "Opened an art boutique",
+    position: [45.557794254101914, 237.34583649521463],
+    location: "Portland, OR",
     zoom: 13,
     animateDuration: 2,
   },
