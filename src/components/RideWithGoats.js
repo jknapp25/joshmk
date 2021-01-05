@@ -15,6 +15,8 @@ export default RideWithGoats;
 
 const imgDim = "50px";
 
+const obs = { pegasus: pegasus, goat: goat };
+
 const route = [
   {
     description: "Born",
@@ -87,7 +89,14 @@ const route = [
     animateDuration: 2,
   },
   {
-    description: "Opened an art boutique",
+    description: "Opened/closed an art boutique",
+    position: [45.557794254101914, 237.34583649521463],
+    location: "Portland, OR",
+    zoom: 13,
+    animateDuration: 2,
+  },
+  {
+    description: "Moved into a little ADU / COVID fortress",
     position: [45.557794254101914, 237.34583649521463],
     location: "Portland, OR",
     zoom: 13,
@@ -279,6 +288,20 @@ function RideWithGoats() {
             ))}
             <ZoomControl position="bottomright" />
           </MapContainer>
+
+          <img
+            alt={travelMode}
+            src={obs[travelMode]}
+            title={travelMode}
+            style={{
+              top: "51.5%",
+              left: "61.5%",
+              position: "fixed",
+              zIndex: 1000000000,
+              width: "30px",
+              height: "30px",
+            }}
+          />
         </Col>
       </Row>
     </Col>
