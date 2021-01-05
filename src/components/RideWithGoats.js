@@ -319,19 +319,36 @@ function RideWithGoats() {
             <ZoomControl position="bottomright" />
           </MapContainer>
 
-          <img
-            alt={travelMode}
-            src={avatar[travelMode]}
-            title={travelMode}
+          <div
             style={{
-              top: "51.5%",
-              left: "61.5%",
+              top: activePlaceIdx === 0 ? "95%" : "51.5%",
+              left: activePlaceIdx === 0 ? "27%" : "61.5%",
               position: "fixed",
               zIndex: 1000000000,
-              width: "30px",
-              height: "30px",
             }}
-          />
+            className="text-center"
+          >
+            <img
+              alt={travelMode}
+              src={avatar[travelMode]}
+              title={travelMode}
+              style={{
+                top: activePlaceIdx === 0 ? "86%" : "51.5%",
+                left: activePlaceIdx === 0 ? "28%" : "61.5%",
+                position: "fixed",
+                zIndex: 1000000000,
+                width: activePlaceIdx === 0 ? "70px" : "30px",
+                height: activePlaceIdx === 0 ? "70px" : "30px",
+              }}
+            />
+
+            {travelMode === "goat" && activePlaceIdx === 0
+              ? "Let's gooooat!"
+              : null}
+            {travelMode === "pegasus" && activePlaceIdx === 0
+              ? "weeeesnaw..."
+              : null}
+          </div>
         </Col>
       </Row>
     </Col>
