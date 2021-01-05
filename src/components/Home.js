@@ -7,6 +7,7 @@ import { Helmet } from "react-helmet";
 import { Storage } from "aws-amplify";
 import { RiInstagramFill } from "react-icons/ri";
 import { FaYoutube } from "react-icons/fa";
+import goatFavicon from "../assets/goat-favicon.png";
 import { useIsMounted } from "../lib/utils";
 import { ConfigContext } from "../App";
 export default Home;
@@ -44,10 +45,17 @@ function Home({ children }) {
 
   return (
     <Container fluid className={pathname === "/rwg" ? "px-0" : ""}>
-      <Helmet>
-        <title>{config.fullName || ""}</title>
-        <link rel="icon" type="image/png" href={faviconUrl} sizes="16x16" />
-      </Helmet>
+      {pathname === "/rwg" ? (
+        <Helmet>
+          <title>Ride With Goats</title>
+          <link rel="icon" type="image/png" href={goatFavicon} sizes="16x16" />
+        </Helmet>
+      ) : (
+        <Helmet>
+          <title>{config.fullName || ""}</title>
+          <link rel="icon" type="image/png" href={faviconUrl} sizes="16x16" />
+        </Helmet>
+      )}
       {pathname === "/rwg" ? children : null}
       {pathname === "/gallery" ? (
         <Row>
