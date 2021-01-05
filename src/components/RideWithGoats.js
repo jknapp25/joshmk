@@ -9,13 +9,15 @@ import crab from "../assets/crab.png";
 import train from "../assets/train.png";
 import pin from "../assets/pin.png";
 import pinOrange from "../assets/pinOrange.png";
+import pegasusColor from "../assets/pegasusColor.png";
+import goatColor from "../assets/goatColor.png";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 export default RideWithGoats;
 
 const imgDim = "50px";
 
-const obs = { pegasus: pegasus, goat: goat };
+const avatar = { pegasus: pegasusColor, goat: goatColor };
 
 const route = [
   {
@@ -98,7 +100,7 @@ const route = [
   {
     description: "Adventure to Costa Rica",
     position: [9.659976893509427, 277.25303133601216],
-    location: "Puerto Viejo de Talamance, Costa Rica",
+    location: "Puerto Viejo de Talamanca, Costa Rica",
     zoom: 11,
     animateDuration: 3,
   },
@@ -319,7 +321,7 @@ function RideWithGoats() {
 
           <img
             alt={travelMode}
-            src={obs[travelMode]}
+            src={avatar[travelMode]}
             title={travelMode}
             style={{
               top: "51.5%",
