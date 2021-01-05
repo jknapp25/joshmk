@@ -321,31 +321,29 @@ function RideWithGoats() {
 
           <div
             style={{
-              top: activePlaceIdx === 0 ? "95%" : "51.5%",
+              top: activePlaceIdx === 0 ? "86%" : "51.5%",
               left: activePlaceIdx === 0 ? "27%" : "61.5%",
               position: "fixed",
               zIndex: 1000000000,
             }}
+            className="text-center"
           >
             <img
               alt={travelMode}
               src={avatar[travelMode]}
               title={travelMode}
               style={{
-                top: activePlaceIdx === 0 ? "86%" : "51.5%",
-                left: activePlaceIdx === 0 ? "28%" : "61.5%",
-                position: "fixed",
-                zIndex: 1000000000,
                 width: activePlaceIdx === 0 ? "70px" : "30px",
                 height: activePlaceIdx === 0 ? "70px" : "30px",
               }}
+              className="d-block m-auto"
             />
-            {travelMode === "goat" && activePlaceIdx === 0
-              ? "Let's gooooat!"
-              : null}
-            {travelMode === "pegasus" && activePlaceIdx === 0
-              ? "weesnaw..."
-              : null}
+            {activePlaceIdx === 0 ? (
+              <span>
+                {travelMode === "goat" ? "Let's gooooat!" : null}
+                {travelMode === "pegasus" ? "weesnaw..." : null}
+              </span>
+            ) : null}
           </div>
         </Col>
       </Row>
