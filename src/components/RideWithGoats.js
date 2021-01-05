@@ -240,7 +240,7 @@ function RideWithGoats() {
             </Table>
           </Row>
           <Row className="ml-3 mr-3 mt-3 mb-1">
-            <h5>Route</h5>
+            <h5>Select route stops</h5>
           </Row>
           <Table>
             <tbody>
