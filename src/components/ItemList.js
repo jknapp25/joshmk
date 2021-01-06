@@ -85,16 +85,21 @@ function ItemList() {
 
   let preppedItems = [];
   let education = [];
+
+  // sort items by date
+  preppedItems = items.sort((a, b) => {
+    const aSortVal = a.createdAt || a.start;
+    const bSortVal = b.createdAt || b.start;
+    if (aSortVal < bSortVal) {
+      return 1;
+    } else if (bSortVal < aSortVal) {
+      return -1;
+    } else {
+      return 0;
+    }
+  });
+
   if (pageName === "work") {
-    preppedItems = items.sort(function (a, b) {
-      if (a.start < b.start) {
-        return 1;
-      } else if (b.start < a.start) {
-        return -1;
-      } else {
-        return 0;
-      }
-    });
     education = preppedItems.filter((itm) => itm.tags.includes("education"));
   } else if (pageName === "projects") {
     preppedItems = items.sort(
@@ -102,16 +107,6 @@ function ItemList() {
     );
   } else if (pageName === "search") {
     preppedItems = items.filter((item) => item.tags.includes(searchParams.tag));
-  } else {
-    preppedItems = items.sort(function (a, b) {
-      if (a.createdAt < b.createdAt) {
-        return 1;
-      } else if (b.createdAt < a.createdAt) {
-        return -1;
-      } else {
-        return 0;
-      }
-    });
   }
 
   return (
