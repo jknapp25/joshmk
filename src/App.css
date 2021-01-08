@@ -137,8 +137,8 @@
 }
 
 .badge-lightgray {
-  background-color: rgb(230, 230, 230) !important;
-  color: black !important;
+  background-color: #dc354613 !important;
+  color: #dc3545 !important;
   font-weight: 400 !important;
 }
 .badge-lightgray.hover:hover {
