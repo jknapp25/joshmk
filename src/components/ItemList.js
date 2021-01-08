@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
-import { Alert } from "react-bootstrap";
+import { Alert, Badge } from "react-bootstrap";
 import Resume from "./Resume";
 import { useLocation, navigate } from "@reach/router";
 import { parse } from "query-string";
@@ -126,7 +126,7 @@ function ItemList() {
       {pageName === "search" ? (
         <h3 className="mb-4 mt-1">
           {preppedItems.length} item{preppedItems.length > 1 ? "s" : ""} tagged{" "}
-          {searchParams.tag}
+          <Badge variant="lightgray">{searchParams.tag}</Badge>
           <span
             className="text-muted ml-2 cursor-pointer"
             onClick={() => navigate("/")}
@@ -143,7 +143,9 @@ function ItemList() {
           {item.type === "education" && !pageName === "work" ? (
             <Education key={i} education={item} />
           ) : null}
-          {i !== preppedItems.length - 1 ? <div className="my-4" /> : null}
+          {i !== preppedItems.length - 1 ? (
+            <div style={{ height: "35px" }} />
+          ) : null}
         </>
       ))}
     </>

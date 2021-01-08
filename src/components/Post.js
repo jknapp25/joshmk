@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
-import { Card } from "react-bootstrap";
-import { Link } from "@reach/router";
+import { Badge, Card } from "react-bootstrap";
+import { Link, navigate } from "@reach/router";
 import ImageCarousel from "./ImageCarousel";
 import { useIsMounted } from "../lib/utils";
 import { GoPencil } from "react-icons/go";
-import { FaTrashAlt, FaTag } from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
 import { API, graphqlOperation } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import { deletePost } from "../graphql/mutations";
@@ -54,95 +54,91 @@ function Post({
   richContent = richContent ? JSON.parse(richContent) : richContent;
 
   return (
-    <Card>
-      <Card.Body>
-        <Card.Title>
-          <h2>
-            <span className="cursor-pointer">
-              <Link to={`/post/${id}`} className="hidden-link">
-                {title}
-              </Link>
-            </span>{" "}
-            {showEdit ? (
-              <>
-                <span
-                  onClick={() => {
-                    setItemType("post");
-                    setEditingItemId(id);
-                    window.scrollTo(0, 0);
-                  }}
-                >
-                  <GoPencil
-                    style={{
-                      display: "inline",
-                      cursor: "pointer",
-                      color: "#6c757d",
+    <>
+      <Card>
+        <Card.Body>
+          <Card.Title>
+            <h2>
+              <span className="cursor-pointer">
+                <Link to={`/post/${id}`} className="hidden-link">
+                  {title}
+                </Link>
+              </span>{" "}
+              {showEdit ? (
+                <>
+                  <span
+                    onClick={() => {
+                      setItemType("post");
+                      setEditingItemId(id);
+                      window.scrollTo(0, 0);
                     }}
-                  />
-                </span>
-                <span
-                  onClick={() => {
-                    const shouldDelete = window.confirm("Delete the item?");
-                    if (shouldDelete) {
-                      deletePst();
-                    }
-                  }}
-                >
-                  <FaTrashAlt
-                    className="ml-2"
-                    style={{
-                      display: "inline",
-                      cursor: "pointer",
-                      color: "#dc3545",
+                  >
+                    <GoPencil
+                      style={{
+                        display: "inline",
+                        cursor: "pointer",
+                        color: "#6c757d",
+                      }}
+                    />
+                  </span>
+                  <span
+                    onClick={() => {
+                      const shouldDelete = window.confirm("Delete the item?");
+                      if (shouldDelete) {
+                        deletePst();
+                      }
                     }}
-                  />
-                </span>
-              </>
-            ) : null}
-          </h2>
-        </Card.Title>
-        <Card.Subtitle className="text-muted">
-          {date || "No date"}
-        </Card.Subtitle>
-      </Card.Body>
+                  >
+                    <FaTrashAlt
+                      className="ml-2"
+                      style={{
+                        display: "inline",
+                        cursor: "pointer",
+                        color: "#dc3545",
+                      }}
+                    />
+                  </span>
+                </>
+              ) : null}
+            </h2>
+          </Card.Title>
+          <Card.Subtitle className="text-muted">
+            {date || "No date"}
+          </Card.Subtitle>
+        </Card.Body>
 
-      <ImageCarousel images={images} classes="mb-3" />
+        <ImageCarousel images={images} classes="mb-3" />
 
-      <Card.Body className="pt-0">
-        {richContent ? (
-          <RichTextEditor
-            value={richContent}
-            onChange={() => {}}
-            readOnly={true}
-          />
-        ) : null}
-      </Card.Body>
+        <Card.Body className="pt-0">
+          {richContent ? (
+            <RichTextEditor
+              value={richContent}
+              onChange={() => {}}
+              readOnly={true}
+            />
+          ) : null}
+        </Card.Body>
+      </Card>
       {tags && tags.length > 0 && (
-        <Card.Footer
+        <div
           style={{
             whiteSpace: "nowrap",
             overflowX: "scroll",
             boxShadow: "",
           }}
+          className="mt-1"
         >
-          <FaTag
-            className="mr-2 d-inline"
-            style={{
-              color: "rgba(108, 117, 125, 0.7)",
-            }}
-          />
-          {tags.map((tag, i) => (
-            <>
-              <Link to={`/search?tag=${tag}`}>{tag}</Link>
-              {i !== tags.length - 1 ? (
-                <span style={{ color: "rgba(108, 117, 125, 0.7)" }}>, </span>
-              ) : (
-                ""
-              )}
-            </>
+          {tags.map((tag) => (
+            <Badge
+              variant="lightgray"
+              className="mr-2 cursor-pointer hover"
+              onClick={() => navigate(`/search?tag=${tag}`)}
+            >
+              {tag}
+            </Badge>
           ))}
-        </Card.Footer>
+        </div>
       )}
-    </Card>
+    </>
   );
 }

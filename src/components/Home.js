@@ -1,12 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
-import { navigate, useLocation, Link } from "@reach/router";
-import { Button, Card, Container, Row, Col } from "react-bootstrap";
-import SideNav from "./SideNav";
+import { navigate, useLocation } from "@reach/router";
+import { Button, Container, Row, Col, Badge } from "react-bootstrap";
 import ProfileCard from "./ProfileCard";
 import { Helmet } from "react-helmet";
 import { Storage } from "aws-amplify";
-import { RiInstagramFill } from "react-icons/ri";
-import { FaYoutube } from "react-icons/fa";
 import goatFavicon from "../assets/goat-favicon.png";
 import { useIsMounted } from "../lib/utils";
 import { ConfigContext } from "../App";
@@ -42,6 +39,10 @@ function Home({ children }) {
   }, [config.favicon, isMounted]);
 
   if (!config.pages || config.pages.length === 0) return null;
+
+  const popularTags = window.location.href.includes("joshmk")
+    ? ["poetry", "drawing", "creature", "Exogenesis", "God", "book notes"]
+    : ["painting", "art studio", "art", "writing"];
 
   return (
     <Container fluid className={pathname === "/rwg" ? "px-0" : ""}>
@@ -81,10 +82,15 @@ function Home({ children }) {
               <div className="my-3 hidden-xs" />
               <small className="text-muted hidden-xs">Popular tags</small>
               <p className="hidden-xs">
-                Coming soon
-                {/* <a>love</a>, <a>hope</a>, <a>soul desires</a>, <a>sex</a>,{" "}
-              <a>fiction</a>, <a>stories</a>, <a>creativity</a>,{" "}
-              <a>paintings</a> */}
+                {popularTags.map((tag) => (
+                  <Badge
+                    variant="lightgray"
+                    className="mr-2 cursor-pointer"
+                    onClick={() => navigate(`/search?tag=${tag}`)}
+                  >
+                    {tag}
+                  </Badge>
+                ))}
               </p>
             </div>
           </Col>
@@ -97,10 +103,15 @@ function Home({ children }) {
               <div className="my-3" />
               <small className="text-muted">Popular tags</small>
               <p>
-                Coming soon
-                {/* <a>love</a>, <a>hope</a>, <a>soul desires</a>, <a>sex</a>,{" "}
-              <a>fiction</a>, <a>stories</a>, <a>creativity</a>,{" "}
-              <a>paintings</a> */}
+                {popularTags.map((tag) => (
+                  <Badge
+                    variant="lightgray"
+                    className="mr-2 cursor-pointer hover"
+                    onClick={() => navigate(`/search?tag=${tag}`)}
+                  >
+                    {tag}
+                  </Badge>
+                ))}
               </p>
             </div>
           </Col>

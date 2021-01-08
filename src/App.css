@@ -136,6 +136,16 @@
   font-weight: normal !important;
 }
 
+.badge-lightgray {
+  background-color: rgb(230, 230, 230) !important;
+  color: black !important;
+  font-weight: 400 !important;
+}
+.badge-lightgray.hover:hover {
+  background-color: #dc3545 !important;
+  color: white !important;
+}
+
 html {
   overflow: scroll;
   overflow-x: hidden;
