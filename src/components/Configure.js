@@ -11,7 +11,7 @@ import {
 import { FaTimes } from "react-icons/fa";
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 import ImageUploader from "./ImageUploader";
-import RichTextEditor from "./RichTextEditor";
+import RichTextEditor from "./RichTextEditor/RichTextEditor";
 import { API, graphqlOperation } from "aws-amplify";
 import { createConfiguration, updateConfiguration } from "../graphql/mutations";
 import * as queries from "../graphql/queries";

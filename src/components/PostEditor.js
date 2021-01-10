@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Form, FormControl } from "react-bootstrap";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
-import RichTextEditor from "./RichTextEditor";
+import RichTextEditor from "./RichTextEditor/RichTextEditor";
 import ImageUploader from "./ImageUploader";
 import TagEditor from "./TagEditor";
 import { useIsMounted } from "../lib/utils";
@@ -95,6 +95,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
       <RichTextEditor
         value={richContent}
         onChange={(updRichContent) => setRichContent(updRichContent)}
+        classes="bg-white"
       />
 
       <TagEditor tags={tags} onChange={(updTags) => setTags(updTags)} />

@@ -9,7 +9,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import { API, graphqlOperation } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import { deletePost } from "../graphql/mutations";
-import RichTextEditor from "./RichTextEditor";
+import RichTextEditor from "./RichTextEditor/RichTextEditor";
 export default Post;
 
 function Post({

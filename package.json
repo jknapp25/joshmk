@@ -67,5 +67,12 @@
   "devDependencies": {
     "file-loader": "^6.0.0",
     "url-loader": "^4.0.0"
+  },
+  "bit": {
+    "env": {
+      "compiler": "bit.envs/compilers/react@1.0.21"
+    },
+    "componentsDefaultDirectory": "components/{name}",
+    "packageManager": "npm"
   }
 }

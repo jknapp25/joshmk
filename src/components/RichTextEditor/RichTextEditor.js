@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useCallback, useEffect } from "react";
+import React, { useMemo, useCallback, useRef } from "react";
 import {
   createEditor,
   Editor,
@@ -18,7 +18,6 @@ import { Button } from "react-bootstrap";
 import isUrl from "is-url";
 import imageExtensions from "image-extensions";
 import { withHistory } from "slate-history";
-import { FaLink } from "react-icons/fa";
 
 const blankEditorValue = [
   {
@@ -49,12 +48,6 @@ const CustomEditor = {
     });
     return !!match;
   },
-  isCodeBlockActive(editor) {
-    const [match] = Editor.nodes(editor, {
-      match: (n) => n.type === "code",
-    });
-    return !!match;
-  },
   toggleBoldMark(editor) {
     const isActive = CustomEditor.isBoldMarkActive(editor);
     Transforms.setNodes(
@@ -79,14 +72,6 @@ const CustomEditor = {
       { match: (n) => Text.isText(n), split: true }
     );
   },
-  toggleCodeBlock(editor) {
-    const isActive = CustomEditor.isCodeBlockActive(editor);
-    Transforms.setNodes(
-      editor,
-      { type: isActive ? null : "code" },
-      { match: (n) => Editor.isBlock(editor, n) }
-    );
-  },
 };
 
 const RichTextEditor = ({
@@ -100,11 +85,7 @@ const RichTextEditor = ({
     []
   );
 
-  const insertImage = (editor, url) => {
-    const text = { text: "" };
-    const image = { type: "image", url, children: [text] };
-    Transforms.insertNodes(editor, image);
-  };
+  let imgInputRef = useRef();
 
   const renderElement = useCallback((props) => {
     switch (props.element.type) {
@@ -119,10 +100,27 @@ const RichTextEditor = ({
     }
   }, []);
 
-  const renderLeaf = useCallback((props) => {
-    return <Leaf {...props} />;
-  }, []);
+  const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
 
+  function handleImgUpload(event) {
+    event.stopPropagation();
+    event.preventDefault();
+
+    var file = event.target.files[0];
+
+    const reader = new FileReader();
+
+    // Executes after read is successful
+    reader.onload = function (e) {
+      try {
+        insertImage(editor, e.target.result);
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.log(e);
+      }
+    };
+    reader.readAsDataURL(file);
+  }
   return (
     <Slate
       editor={editor}
@@ -169,16 +167,6 @@ const RichTextEditor = ({
           >
             <u>U</u>
           </Button>
-          {/* <Button
-            variant="light"
-            className="p-1 ml-1 bg-transparent border-0"
-            onMouseDown={(event) => {
-              event.preventDefault();
-              CustomEditor.toggleCodeBlock(editor);
-            }}
-          >
-            {"<>"}
-          </Button> */}
           <Button
             variant="light"
             className="p-1 ml-1 bg-transparent border-0"
@@ -189,20 +177,22 @@ const RichTextEditor = ({
               insertLink(editor, url);
             }}
           >
-            <FaLink title="Link" size=".8em" />
+            <i className="fa fa-link" title="Link" />
           </Button>
-          {/* <Button
+          <Button
             variant="light"
             className="p-1 ml-1 bg-transparent border-0"
-            onMouseDown={(event) => {
-              event.preventDefault();
-              const url = window.prompt("Enter the URL of the image:");
-              if (!url) return;
-              insertImage(editor, url);
-            }}
+            onClick={() => imgInputRef.click()}
           >
             <i className="fa fa-image" title="Image" />
-          </Button> */}
+          </Button>
+          <input
+            id="imgInput"
+            type="file"
+            ref={(ref) => (imgInputRef = ref)}
+            style={{ display: "none" }}
+            onChange={handleImgUpload}
+          />
         </div>
       ) : null}
       <div
@@ -216,7 +206,7 @@ const RichTextEditor = ({
               }
             : {}
         }
-        className={!readOnly ? `bg-gray-650 py-2 border ${classes}` : classes}
+        className={!readOnly ? `py-2 border ${classes}` : classes}
       >
         <Editable
           readOnly={readOnly}
@@ -226,7 +216,6 @@ const RichTextEditor = ({
             if (!event.ctrlKey) {
               return;
             }
-
             // Replace the `onKeyDown` logic with our new commands.
             switch (event.key) {
               case "`": {
@@ -287,13 +276,22 @@ const withImages = (editor) => {
       insertData(data);
     }
   };
-
   return editor;
 };
 
 const insertImage = (editor, url) => {
   const text = { text: "" };
-  const image = { type: "image", url, children: [text] };
+  const image = [
+    {
+      type: "image",
+      url,
+      children: [text],
+    },
+    {
+      type: "paragraph",
+      children: [text],
+    },
+  ];
   Transforms.insertNodes(editor, image);
 };
 

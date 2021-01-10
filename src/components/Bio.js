@@ -1,5 +1,5 @@
 import React from "react";
-import RichTextEditor from "./RichTextEditor";
+import RichTextEditor from "./RichTextEditor/RichTextEditor";
 import { Card } from "react-bootstrap";
 export default Bio;
 
