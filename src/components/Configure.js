@@ -148,6 +148,7 @@ function Configure() {
       <RichTextEditor
         value={bio}
         classes="mb-3"
+        buttons={["bold", "italic", "underline", "link"]}
         onChange={(updBio) => {
           setBio(updBio);
           setEdited(true);

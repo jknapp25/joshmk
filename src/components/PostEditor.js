@@ -95,6 +95,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
       <RichTextEditor
         value={richContent}
         onChange={(updRichContent) => setRichContent(updRichContent)}
+        buttons={["bold", "italic", "underline", "link"]}
         classes="bg-white"
       />
 

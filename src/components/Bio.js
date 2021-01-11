@@ -9,7 +9,12 @@ function Bio({ bio }) {
   return (
     <Card>
       <Card.Body>
-        <RichTextEditor value={bio} onChange={() => {}} readOnly={true} />
+        <RichTextEditor
+          value={bio}
+          onChange={() => {}}
+          readOnly={true}
+          buttons={["bold", "italic", "underline", "link"]}
+        />
       </Card.Body>
     </Card>
   );

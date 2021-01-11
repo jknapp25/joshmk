@@ -18,6 +18,7 @@ import { Button } from "react-bootstrap";
 import isUrl from "is-url";
 import imageExtensions from "image-extensions";
 import { withHistory } from "slate-history";
+import { FaLink, FaImage } from "react-icons/fa";
 
 const blankEditorValue = [
   {
@@ -79,6 +80,7 @@ const RichTextEditor = ({
   onChange = () => {},
   readOnly = false,
   classes = "",
+  buttons = [],
 }) => {
   const editor = useMemo(
     () => withLinks(withImages(withHistory(withReact(createEditor())))),
@@ -137,62 +139,75 @@ const RichTextEditor = ({
           }}
           className="bg-gray-750 py-1 px-2 border border-bottom-0"
         >
-          <Button
-            variant="light"
-            className="p-1 bg-transparent border-0"
-            onMouseDown={(event) => {
-              event.preventDefault();
-              CustomEditor.toggleBoldMark(editor);
-            }}
-          >
-            <span className="font-weight-bold">B</span>
-          </Button>
-          <Button
-            variant="light"
-            className="p-1 ml-1 bg-transparent border-0"
-            onMouseDown={(event) => {
-              event.preventDefault();
-              CustomEditor.toggleItalicMark(editor);
-            }}
-          >
-            <em>I</em>
-          </Button>
-          <Button
-            variant="light"
-            className="p-1 ml-1 bg-transparent border-0"
-            onMouseDown={(event) => {
-              event.preventDefault();
-              CustomEditor.toggleUnderlineMark(editor);
-            }}
-          >
-            <u>U</u>
-          </Button>
-          <Button
-            variant="light"
-            className="p-1 ml-1 bg-transparent border-0"
-            onMouseDown={(event) => {
-              event.preventDefault();
-              const url = window.prompt("Enter the URL of the link:");
-              if (!url) return;
-              insertLink(editor, url);
-            }}
-          >
-            <i className="fa fa-link" title="Link" />
-          </Button>
-          <Button
-            variant="light"
-            className="p-1 ml-1 bg-transparent border-0"
-            onClick={() => imgInputRef.click()}
-          >
-            <i className="fa fa-image" title="Image" />
-          </Button>
-          <input
-            id="imgInput"
-            type="file"
-            ref={(ref) => (imgInputRef = ref)}
-            style={{ display: "none" }}
-            onChange={handleImgUpload}
-          />
+          {buttons.includes("bold") ? (
+            <Button
+              variant="light"
+              className="p-1 bg-transparent border-0"
+              onMouseDown={(event) => {
+                event.preventDefault();
+                CustomEditor.toggleBoldMark(editor);
+              }}
+            >
+              <span className="font-weight-bold">B</span>
+            </Button>
+          ) : null}
+          {buttons.includes("italic") ? (
+            <Button
+              variant="light"
+              className="p-1 ml-1 bg-transparent border-0"
+              onMouseDown={(event) => {
+                event.preventDefault();
+                CustomEditor.toggleItalicMark(editor);
+              }}
+            >
+              <em>I</em>
+            </Button>
+          ) : null}
+          {buttons.includes("underline") ? (
+            <Button
+              variant="light"
+              className="p-1 ml-1 bg-transparent border-0"
+              onMouseDown={(event) => {
+                event.preventDefault();
+                CustomEditor.toggleUnderlineMark(editor);
+              }}
+            >
+              <u>U</u>
+            </Button>
+          ) : null}
+          {buttons.includes("link") ? (
+            <Button
+              variant="light"
+              className="p-1 ml-1 bg-transparent border-0"
+              onMouseDown={(event) => {
+                event.preventDefault();
+                const url = window.prompt("Enter the URL of the link:");
+                if (!url) return;
+                insertLink(editor, url);
+              }}
+            >
+              <FaLink style={{ color: "black" }} />
+            </Button>
+          ) : null}
+          {buttons.includes("image") ? (
+            <>
+              <Button
+                variant="light"
+                className="p-1 ml-1 bg-transparent border-0"
+                onClick={() => imgInputRef.click()}
+              >
+                <FaImage style={{ color: "black" }} />
+                <i className="fa fa-image" title="Image" />
+              </Button>
+              <input
+                id="imgInput"
+                type="file"
+                ref={(ref) => (imgInputRef = ref)}
+                style={{ display: "none" }}
+                onChange={handleImgUpload}
+              />
+            </>
+          ) : null}
         </div>
       ) : null}
       <div
