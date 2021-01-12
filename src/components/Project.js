@@ -4,11 +4,20 @@ import ImageCarousel from "./ImageCarousel";
 import { navigate } from "@reach/router";
 import { createTimeInfo, statusColorLookup } from "../lib/utils";
 import { GoPencil } from "react-icons/go";
+import { FaTrashAlt } from "react-icons/fa";
+import { API, graphqlOperation } from "aws-amplify";
+import { deleteProject } from "../graphql/mutations";
 export default Project;
 
 function Project({ project, setEditingItemId, setItemType, showEdit = false }) {
   const { id, name, tags, summary, status, link, images, start, end } = project;
   const timeInfo = createTimeInfo(start, end, null, false);
+
+  async function deleteProjekt() {
+    if (id) {
+      await API.graphql(graphqlOperation(deleteProject, { input: { id } }));
+    }
+  }
 
   return (
     <>
@@ -30,22 +39,41 @@ function Project({ project, setEditingItemId, setItemType, showEdit = false }) {
               </Badge>
             ) : null}{" "}
             {showEdit ? (
-              <span
-                onClick={() => {
-                  setItemType("project");
-                  setEditingItemId(id);
-                  window.scrollTo(0, 0);
-                }}
-              >
-                <GoPencil
-                  color="secondary"
-                  style={{
-                    display: "inline",
-                    cursor: "pointer",
-                    color: "#6c757d",
+              <>
+                <span
+                  onClick={() => {
+                    setItemType("project");
+                    setEditingItemId(id);
+                    window.scrollTo(0, 0);
                   }}
-                />
-              </span>
+                >
+                  <GoPencil
+                    color="secondary"
+                    style={{
+                      display: "inline",
+                      cursor: "pointer",
+                      color: "#6c757d",
+                    }}
+                  />
+                </span>
+                <span
+                  onClick={() => {
+                    const shouldDelete = window.confirm("Delete the item?");
+                    if (shouldDelete) {
+                      deleteProjekt();
+                    }
+                  }}
+                >
+                  <FaTrashAlt
+                    className="ml-2"
+                    style={{
+                      display: "inline",
+                      cursor: "pointer",
+                      color: "#dc3545",
+                    }}
+                  />
+                </span>
+              </>
             ) : null}
           </Card.Title>
           {summary ? (
