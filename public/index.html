@@ -8,7 +8,7 @@
     ></script> -->
 
     <script>
-      const googleAnalyticsTag;
+      let googleAnalyticsTag = "";
       switch (window.location.hostname) {
         case "riahraineart.com":
           googleAnalyticsTag = "G-HYYDK1PKMD";
@@ -20,13 +20,15 @@
           break;
       }
 
-      document.write(
-        "<scr" +
-          'ipt async src="https://www.googletagmanager.com/gtag/js?id=' +
-          googleAnalyticsTag +
-          '"></scr' +
-          "ipt>"
-      );
+      if (googleAnalyticsTag) {
+        document.write(
+          "<scr" +
+            'ipt async src="https://www.googletagmanager.com/gtag/js?id=' +
+            googleAnalyticsTag +
+            '"></scr' +
+            "ipt>"
+        );
+      }
     </script>
 
     <script>
