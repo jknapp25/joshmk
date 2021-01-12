@@ -106,6 +106,7 @@ function Home({ children }) {
               <p>
                 {popularTags.map((tag) => (
                   <Badge
+                    key={"popular-tag-" + tag}
                     variant="lightgray"
                     className="mr-2 cursor-pointer hover"
                     onClick={() => navigate(`/search?tag=${tag}`)}

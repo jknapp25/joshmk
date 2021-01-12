@@ -89,8 +89,8 @@ function ItemList() {
 
   // sort items by date
   preppedItems = items.sort((a, b) => {
-    const aSortVal = a.createdAt || a.start;
-    const bSortVal = b.createdAt || b.start;
+    const aSortVal = pageName === "blog" ? a.createdAt : a.start;
+    const bSortVal = pageName === "blog" ? b.createdAt : b.start;
     if (aSortVal < bSortVal) {
       return 1;
     } else if (bSortVal < aSortVal) {
@@ -102,10 +102,6 @@ function ItemList() {
 
   if (pageName === "work") {
     education = preppedItems.filter((itm) => itm.tags.includes("education"));
-  } else if (pageName === "projects") {
-    preppedItems = preppedItems.sort(
-      (a, b) => statusOrder.indexOf(a.status) - statusOrder.indexOf(b.status)
-    );
   } else if (pageName === "search") {
     preppedItems = preppedItems.filter((item) =>
       item.tags.includes(searchParams.tag)

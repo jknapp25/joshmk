@@ -1,9 +1,9 @@
 import React from "react";
 import { Accordion, Badge, Button, Card } from "react-bootstrap";
 import { createTimeInfo } from "../lib/utils";
-import { Link, navigate } from "@reach/router";
+import { navigate } from "@reach/router";
 import { GoPencil } from "react-icons/go";
-import { FaTrashAlt, FaTag } from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
 import { API, graphqlOperation } from "aws-amplify";
 import { deleteJob } from "../graphql/mutations";
 export default Job;
