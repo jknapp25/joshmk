@@ -84,6 +84,7 @@ function Home({ children }) {
               <p className="hidden-xs">
                 {popularTags.map((tag) => (
                   <Badge
+                    key={pathname + tag}
                     variant="lightgray"
                     className="mr-2 cursor-pointer"
                     onClick={() => navigate(`/search?tag=${tag}`)}
@@ -126,6 +127,7 @@ function NavButtons({ pages, classes = "" }) {
   const activePage = pathname === "/" ? `/${pages[0]}` : pathname;
   return pages.map((page) => (
     <Button
+      key={pathname + page}
       variant={`/${page}` === activePage ? "danger" : "light"}
       size="md"
       className={`d-inline mr-2 mb-2 ${classes}`}

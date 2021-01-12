@@ -128,8 +128,9 @@ function Post({
           }}
           className="mt-1"
         >
-          {tags.map((tag) => (
+          {tags.map((tag, i) => (
             <Badge
+              key={i}
               variant="lightgray"
               className="mr-2 cursor-pointer hover"
               onClick={() => navigate(`/search?tag=${tag}`)}

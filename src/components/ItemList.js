@@ -12,6 +12,7 @@ import Job from "./Job";
 import Education from "./Education";
 import { FaTimes } from "react-icons/fa";
 import { ConfigContext } from "../App";
+import { Fragment } from "react";
 export default ItemList;
 
 const statusOrder = ["active", "on hold", "completed"];
@@ -136,17 +137,17 @@ function ItemList() {
         </h3>
       ) : null}
       {preppedItems.map((item, i) => (
-        <>
-          {item.type === "post" ? <Post key={i} post={item} /> : null}
-          {item.type === "job" ? <Job key={i} job={item} /> : null}
-          {item.type === "project" ? <Project key={i} project={item} /> : null}
+        <Fragment key={i}>
+          {item.type === "post" ? <Post post={item} /> : null}
+          {item.type === "job" ? <Job job={item} /> : null}
+          {item.type === "project" ? <Project project={item} /> : null}
           {item.type === "education" && !pageName === "work" ? (
-            <Education key={i} education={item} />
+            <Education education={item} />
           ) : null}
           {i !== preppedItems.length - 1 ? (
             <div style={{ height: "35px" }} />
           ) : null}
-        </>
+        </Fragment>
       ))}
     </>
   );
