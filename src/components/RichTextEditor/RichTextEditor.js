@@ -18,7 +18,7 @@ import { Button } from "react-bootstrap";
 import isUrl from "is-url";
 import imageExtensions from "image-extensions";
 import { withHistory } from "slate-history";
-import { FaLink, FaImage } from "react-icons/fa";
+import { FaLink, FaImage, FaYoutube } from "react-icons/fa";
 
 const blankEditorValue = [
   {
@@ -83,7 +83,8 @@ const RichTextEditor = ({
   buttons = [],
 }) => {
   const editor = useMemo(
-    () => withLinks(withImages(withHistory(withReact(createEditor())))),
+    () =>
+      withEmbeds(withLinks(withImages(withHistory(withReact(createEditor()))))),
     []
   );
 
@@ -97,6 +98,8 @@ const RichTextEditor = ({
         return <ImageElement {...props} />;
       case "link":
         return <LinkElement {...props} />;
+      case "video":
+        return <VideoElement {...props} />;
       default:
         return <DefaultElement {...props} />;
     }
@@ -197,7 +200,6 @@ const RichTextEditor = ({
                 onClick={() => imgInputRef.click()}
               >
                 <FaImage style={{ color: "black" }} />
-                <i className="fa fa-image" title="Image" />
               </Button>
               <input
                 id="imgInput"
@@ -207,6 +209,22 @@ const RichTextEditor = ({
                 onChange={handleImgUpload}
               />
             </>
+          ) : null}
+          {buttons.includes("video") ? (
+            <Button
+              variant="light"
+              className="p-1 ml-1 bg-transparent border-0"
+              onMouseDown={(event) => {
+                event.preventDefault();
+                const url = window.prompt(
+                  "Enter the embed URL of the YouTube video:"
+                );
+                if (!url) return;
+                insertVideo(editor, url);
+              }}
+            >
+              <FaYoutube style={{ color: "black" }} />
+            </Button>
           ) : null}
         </div>
       ) : null}
@@ -294,6 +312,13 @@ const withImages = (editor) => {
   return editor;
 };
 
+const withEmbeds = (editor) => {
+  const { isVoid } = editor;
+  editor.isVoid = (element) =>
+    element.type === "video" ? true : isVoid(element);
+  return editor;
+};
+
 const insertImage = (editor, url) => {
   const text = { text: "" };
   const image = [
@@ -310,12 +335,20 @@ const insertImage = (editor, url) => {
   Transforms.insertNodes(editor, image);
 };
 
-const CodeElement = (props) => {
-  return (
-    <pre {...props.attributes}>
-      <code>{props.children}</code>
-    </pre>
-  );
+const insertVideo = (editor, url) => {
+  const text = { text: "" };
+  const video = [
+    {
+      type: "video",
+      url,
+      children: [text],
+    },
+    {
+      type: "paragraph",
+      children: [text],
+    },
+  ];
+  Transforms.insertNodes(editor, video);
 };
 
 const DefaultElement = (props) => {
@@ -324,6 +357,33 @@ const DefaultElement = (props) => {
       {props.children}
     </p>
   );
+};
+
+const CodeElement = (props) => {
+  return (
+    <pre {...props.attributes}>
+      <code>{props.children}</code>
+    </pre>
+  );
+};
+
+const LinkElement = ({ attributes, children, element }) => {
+  switch (element.type) {
+    case "link":
+      return (
+        <a
+          {...attributes}
+          href={element.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="cursor-pointer"
+        >
+          {children}
+        </a>
+      );
+    default:
+      return <p {...attributes}>{children}</p>;
+  }
 };
 
 const ImageElement = ({ attributes, children, element }) => {
@@ -342,6 +402,29 @@ const ImageElement = ({ attributes, children, element }) => {
             boxShadow: selected && focused ? "0 0 0 3px #B4D5FF" : "none",
           }}
         />
+      </div>
+      {children}
+    </div>
+  );
+};
+
+const VideoElement = ({ attributes, children, element }) => {
+  return (
+    <div {...attributes}>
+      <div
+        contentEditable={false}
+        style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}
+      >
+        <iframe
+          title="YouTube video"
+          width="100%"
+          height="100%"
+          style={{ position: "absolute", top: 0, left: 0 }}
+          src={element.url}
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
       </div>
       {children}
     </div>
@@ -408,25 +491,6 @@ const wrapLink = (editor, url) => {
   } else {
     Transforms.wrapNodes(editor, link, { split: true });
     Transforms.collapse(editor, { edge: "end" });
-  }
-};
-
-const LinkElement = ({ attributes, children, element }) => {
-  switch (element.type) {
-    case "link":
-      return (
-        <a
-          {...attributes}
-          href={element.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="cursor-pointer"
-        >
-          {children}
-        </a>
-      );
-    default:
-      return <p {...attributes}>{children}</p>;
   }
 };
 
