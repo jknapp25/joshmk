@@ -15,8 +15,6 @@ import { ConfigContext } from "../App";
 import { Fragment } from "react";
 export default ItemList;
 
-const statusOrder = ["active", "on hold", "completed"];
-
 function ItemList() {
   const { pathname, search } = useLocation();
   const config = useContext(ConfigContext);
