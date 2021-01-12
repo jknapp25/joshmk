@@ -103,11 +103,13 @@ function ItemList() {
   if (pageName === "work") {
     education = preppedItems.filter((itm) => itm.tags.includes("education"));
   } else if (pageName === "projects") {
-    preppedItems = items.sort(
+    preppedItems = preppedItems.sort(
       (a, b) => statusOrder.indexOf(a.status) - statusOrder.indexOf(b.status)
     );
   } else if (pageName === "search") {
-    preppedItems = items.filter((item) => item.tags.includes(searchParams.tag));
+    preppedItems = preppedItems.filter((item) =>
+      item.tags.includes(searchParams.tag)
+    );
   }
 
   return (
