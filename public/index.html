@@ -4,8 +4,31 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <!-- <script
       async
-      src="https://www.googletagmanager.com/gtag/js?id=G-QRWMZPNQJE"
-    ></script>
+      src="https://www.googletagmanager.com/gtag/js?id=" + "G-QRWMZPNQJE"
+    ></script> -->
+
+    <script>
+      const googleAnalyticsTag;
+      switch (window.location.hostname) {
+        case "riahraineart.com":
+          googleAnalyticsTag = "G-HYYDK1PKMD";
+          break;
+        case "joshmk.com":
+          googleAnalyticsTag = "G-QRWMZPNQJE";
+          break;
+        default:
+          break;
+      }
+
+      document.write(
+        "<scr" +
+          'ipt async src="https://www.googletagmanager.com/gtag/js?id=' +
+          googleAnalyticsTag +
+          '"></scr' +
+          "ipt>"
+      );
+    </script>
+
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
@@ -13,8 +36,8 @@
       }
       gtag("js", new Date());
 
-      gtag("config", "G-QRWMZPNQJE");
-    </script> -->
+      gtag("config", googleAnalyticsTag);
+    </script>
 
     <meta charset="utf-8" />
     <!-- <link rel="icon" href="%PUBLIC_URL%/favicon.ico" /> -->
