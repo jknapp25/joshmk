@@ -146,7 +146,7 @@ function RideWithGoats() {
 
   const onMove = useCallback(() => {
     // console.log(map.getCenter());
-  }, [map]);
+  }, []);
 
   useEffect(() => {
     if (map) {
