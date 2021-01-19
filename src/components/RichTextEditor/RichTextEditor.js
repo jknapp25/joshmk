@@ -154,6 +154,7 @@ const RichTextEditor = ({
         className={!readOnly ? `py-2 border ${classes}` : classes}
       >
         <Editable
+          readOnly={readOnly}
           renderElement={renderElement}
           renderLeaf={renderLeaf}
           placeholder={placeholder}
