@@ -17,6 +17,7 @@ import warlord3 from "../assets/warlord3.jpg";
 import warlord4 from "../assets/warlord4.jpg";
 import josh from "../assets/josh.jpg";
 import riah from "../assets/riah.jpg";
+import ben from "../assets/ben.jpg";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import emailjs, { init } from "emailjs-com";
 import "./BattleOfFyetnas.css";
@@ -30,6 +31,7 @@ const peopleStyles = { width: "80px", height: "80px" };
 const warriors = [
   { name: "Riah Knapp", skill: "sorcerer", image: riah },
   { name: "Josh Knapp", skill: "sorcerer", image: josh },
+  { name: "Ben Tissell", skill: "archer", image: ben },
 ];
 const totalWarriors = 15;
 
