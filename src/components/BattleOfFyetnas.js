@@ -285,6 +285,14 @@ function BattleOfFyetnas() {
                   Yes, for now. Josh is also working on a mobile version of this
                   page, but it's unclear when that will be ready.
                 </p>
+                <p>
+                  <strong>What happens if we fall behind?</strong>
+                </p>
+                <p>
+                  If you are not able to do a workout, this needs to be
+                  communicated to the others so that they can do joint workouts
+                  to recuperate hits.
+                </p>
               </>
             </Accordion.Collapse>
           </Accordion>
