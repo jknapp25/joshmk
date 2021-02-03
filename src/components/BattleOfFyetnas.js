@@ -240,6 +240,15 @@ function BattleOfFyetnas() {
             <Accordion.Collapse eventKey="0">
               <>
                 <p>
+                  <strong>What was the original motivation behind this?</strong>
+                </p>
+                <p>
+                  It was clear that many people in my circles (Josh) are
+                  desiring to be healthier and put in place a consistent workout
+                  habit. I'm hoping that a month of 5+ workouts a week, and some
+                  peer accountability will help kick-off this habit for people.
+                </p>
+                <p>
                   <strong>How many hits does it take to kill a warlord?</strong>
                 </p>
                 <ul>
