@@ -7,6 +7,7 @@ import {
   Table,
   Accordion,
   Card,
+  FormFile,
 } from "react-bootstrap";
 import { FaTimes } from "react-icons/fa";
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
@@ -181,6 +182,7 @@ function Configure() {
 
       <hr className="my-4" />
 
+      <FormFile.Label className="mb-1">Avatar</FormFile.Label>
       <ImageUploader
         images={avatar ? [avatar] : []}
         afterEdit={(imgs) => {
@@ -192,12 +194,12 @@ function Configure() {
           setEdited(true);
         }}
         fieldId="avatar"
-        fieldLabel="Avatar"
         fileSizeLimit={5}
         multiple={false}
         imageDisplayName="Avatar"
       />
 
+      <FormFile.Label className="mb-1">Favicon</FormFile.Label>
       <ImageUploader
         images={favicon ? [favicon] : []}
         afterEdit={(imgs) => {
@@ -209,7 +211,6 @@ function Configure() {
           setEdited(true);
         }}
         fieldId="favicon"
-        fieldLabel="Favicon"
         fileSizeLimit={0.2}
         multiple={false}
         imageDisplayName="Favicon"

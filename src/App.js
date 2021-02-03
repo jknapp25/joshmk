@@ -18,6 +18,7 @@ import { API } from "aws-amplify";
 import "react-vertical-timeline-component/style.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import BattleOfFyetnas from "./components/BattleOfFyetnas";
 export default App;
 
 Amplify.configure(awsExports);
@@ -61,6 +62,7 @@ function App() {
             <Configure path="configure" />
             <Bio path="about" bio={config.bio} />
             <RideWithGoats path="rwg" />
+            <BattleOfFyetnas path="battle-of-fyetnas" />
           </Home>
         </Router>
       </div>

@@ -58,6 +58,7 @@ function Home({ children }) {
         </Helmet>
       )}
       {pathname === "/rwg" ? children : null}
+      {pathname === "/battle-of-fyetnas" ? children : null}
       {pathname === "/gallery" ? (
         <Row>
           <Col xs={12} sm={10} md={10} lg={11} className="p-4 bg-light">
@@ -70,7 +71,7 @@ function Home({ children }) {
             <NavButtons pages={config.pages} classes="float-right" />
           </Col>
         </Row>
-      ) : pathname !== "/rwg" ? (
+      ) : pathname !== "/rwg" && pathname !== "/battle-of-fyetnas" ? (
         <Row>
           <Col sm={5} md={4} lg={3} className="pt-4 bg-light">
             <div className="hidden-md">

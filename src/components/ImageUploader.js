@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Form, FormFile, Image } from "react-bootstrap";
+import { Form, Image } from "react-bootstrap";
 import { Storage } from "aws-amplify";
 import { FaTimes } from "react-icons/fa";
 import { useIsMounted } from "../lib/utils";
@@ -10,7 +10,7 @@ function ImageUploader({
   images,
   afterEdit,
   fieldId,
-  fieldLabel,
+  fieldName = "",
   fileSizeLimit = 5, // MB
   multiple = true,
 }) {
@@ -85,13 +85,13 @@ function ImageUploader({
 
   return (
     <>
-      <FormFile.Label className="mb-1">{fieldLabel}</FormFile.Label>
       {!reachedImageLimit ? (
         <Form.File
           id={fieldId}
           className="mb-2"
           multiple={multiple}
           onChange={handleImageUpload}
+          name={fieldName}
         />
       ) : null}
       {images.length ? (

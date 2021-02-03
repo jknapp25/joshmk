@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Button } from "react-bootstrap";
+import { Button, FormFile } from "react-bootstrap";
 import ImageUploader from "./ImageUploader";
 import { useIsMounted } from "../lib/utils";
 import { ConfigContext } from "../App";
@@ -40,6 +40,7 @@ function GalleryEditor({ onUpdate }) {
 
   return (
     <>
+      <FormFile.Label className="mb-1">Images</FormFile.Label>
       <ImageUploader
         images={images || []}
         afterEdit={(imgs) => {
@@ -47,7 +48,6 @@ function GalleryEditor({ onUpdate }) {
           setEdited(true);
         }}
         fieldId="images"
-        fieldLabel="Images"
         fileSizeLimit={5}
       />
 
