@@ -273,6 +273,16 @@ function BattleOfFyetnas() {
                   Yes, joint workouts will earn 2 hits per person that attended.
                   For example: 3 people ran together = 3 * 2 = 6 hits.
                 </p>
+                <p>
+                  <strong>
+                    Do I have to input my progress on the desktop version of
+                    this page?
+                  </strong>
+                </p>
+                <p>
+                  Yes, for now. Josh is also working on a mobile version of this
+                  page, but it's unclear when that will be ready.
+                </p>
               </>
             </Accordion.Collapse>
           </Accordion>
