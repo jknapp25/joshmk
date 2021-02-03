@@ -69,7 +69,7 @@ function BattleOfFyetnas() {
           lg={6}
           className="pt-4 hidden-xs bg-transparent"
         >
-          <h1 className="mt-3 mb-0" style={{ fontFamily: "fantasy" }}>
+          <h1 className="mt-3 mb-0" style={{ fontFamily: "MedievalSharp" }}>
             <span style={{ textDecoration: "underline 3px solid black" }}>
               The Battle of Fyetna&#347;
             </span>{" "}
@@ -172,9 +172,9 @@ function BattleOfFyetnas() {
             </strong>
           </p>
           <div className="my-4" />
-          <h3 style={{ fontFamily: "fantasy" }}>The Goal</h3>
+          <h3 style={{ fontFamily: "MedievalSharp" }}>The Goal</h3>
           <p>Defeat the 4 warlords of Fyetna&#347;.</p>
-          <h3 style={{ fontFamily: "fantasy" }}>How</h3>
+          <h3 style={{ fontFamily: "MedievalSharp" }}>How</h3>
           <p>
             The demons exist to separate, so they can only be defeated by unity.
             Each warrior will commit to working out 5 days of the week and
@@ -188,8 +188,8 @@ function BattleOfFyetnas() {
             Every day that someone does not workout, it will weaken the
             collective ability to defeat the warlord.
           </p>
-          <h3 style={{ fontFamily: "fantasy" }}>
-            Warriors{"  "}
+          <h3 style={{ fontFamily: "MedievalSharp" }}>
+            Warriors:{"  "}
             {warriors.length}/{totalWarriors}
           </h3>
           <Table className="border-bottom border-top border-dark">
@@ -216,7 +216,7 @@ function BattleOfFyetnas() {
               className="pl-0 pb-0 text-dark text-decoration-none"
               onClick={() => setFaqOpen(!faqOpen)}
             >
-              <h3 style={{ fontFamily: "fantasy" }}>
+              <h3 style={{ fontFamily: "MedievalSharp" }}>
                 FAQ{" "}
                 {faqOpen ? (
                   <FaCaretUp
@@ -302,7 +302,7 @@ function BattleOfFyetnas() {
                     <option>Select one...</option>
                     <option>Archer (runner)</option>
                     <option>Knight (bicyclist)</option>
-                    <option>Horseman (weight-lifter)</option>
+                    <option>Gladiator (weight-lifter)</option>
                     <option>Sorcerer (multiple)</option>
                   </Form.Control>
                   <Form.Label className="mb-1 text-light">
@@ -335,7 +335,12 @@ function BattleOfFyetnas() {
                     }}
                     type="submit"
                   >
-                    <h2>Join the Battle</h2>
+                    <h1
+                      className="pt-2"
+                      style={{ fontFamily: "MedievalSharp" }}
+                    >
+                      Join the Battle
+                    </h1>
                   </Button>
                 </Card.Footer>
               </Card>
