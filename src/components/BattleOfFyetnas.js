@@ -48,11 +48,13 @@ function BattleOfFyetnas() {
         "user_YmjT0y9RWFvhcFf32gw1i"
       )
       .then(
-        (result) => {
-          console.log(result.text);
+        () => {
           setSubmitSuccess(true);
         },
         (error) => {
+          alert(
+            "Could not send your submission. Please make sure your avatar is smaller than 500kb. If the issue continues, call/text Josh at 541-368-8091."
+          );
           console.log(error.text);
         }
       );
