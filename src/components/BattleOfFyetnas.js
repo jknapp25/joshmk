@@ -19,6 +19,7 @@ import josh from "../assets/josh.jpg";
 import riah from "../assets/riah.jpg";
 import ben from "../assets/ben.jpg";
 import taylor from "../assets/taylor.jpg";
+import natalie from "../assets/natalie.jpg";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import emailjs, { init } from "emailjs-com";
 import "./BattleOfFyetnas.css";
@@ -27,7 +28,24 @@ export default BattleOfFyetnas;
 init("user_YmjT0y9RWFvhcFf32gw1i");
 
 const warlordStyles = { width: "180px", height: "180px" };
-const warriorStyles = { width: "80px", height: "80px" };
+// const warriorStyles = { width: "80px", height: "80px" };
+const circular = {
+  width: "80px",
+  height: "80px",
+  borderRadius: "50%",
+  position: "relative",
+  overflow: "hidden",
+};
+const circularImage = {
+  maxWidth: "100%",
+  // maxHeight: "100%",
+  width: "auto",
+  height: "auto",
+  position: "absolute",
+  left: "50%",
+  top: "50%",
+  transform: "translate(-50%, -50%)",
+};
 
 const warriors = [
   {
@@ -53,6 +71,12 @@ const warriors = [
     skill: "gladiator",
     image: taylor,
     phoneNumber: "+1 503-593-8657",
+  },
+  {
+    name: "Natalie",
+    skill: "huntress",
+    image: natalie,
+    phoneNumber: "+1 541-760-9656",
   },
 ];
 const warlords = [
@@ -219,7 +243,9 @@ function BattleOfFyetnas() {
               <tr>
                 {warriors.map(({ image, name, skill }) => (
                   <td align="center" className="border-0">
-                    <Image src={image} roundedCircle style={warriorStyles} />
+                    <div style={circular}>
+                      <Image src={image} roundedCircle style={circularImage} />
+                    </div>
                     <div>{name}</div>
                     <div style={{ lineHeight: "1em", color: "#bd1818" }}>
                       <small>{skill}</small>
