@@ -315,7 +315,7 @@ function BattleOfFyetnas() {
               style={{ backgroundColor: "green", color: "white" }}
             >
               <h1 style={{ fontFamily: "MedievalSharp" }}>
-                You have enlisted!{" "}
+                You have enlisted!
               </h1>
               <p className="mb-0">
                 You will be added to the warriors list today.
