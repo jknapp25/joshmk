@@ -311,7 +311,7 @@ function BattleOfFyetnas() {
               </>
             </Accordion.Collapse>
           </Accordion>
-          <div className="py-1" />
+          <div className="py-2" />
 
           {submitSuccess ? (
             <div
