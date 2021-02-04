@@ -372,7 +372,7 @@ function BattleOfFyetnas() {
                   <div className="py-1" />
                   <Form.Label className="text-light mb-0">Address</Form.Label>
                   <small className="text-muted d-block mb-2">
-                    A small victory gift will be sent out afterward
+                    For a small victory gift
                   </small>
                   <Form.Control type="text" className="mb-2" name="address" />
                 </Card.Body>
