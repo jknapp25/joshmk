@@ -30,10 +30,30 @@ const warlordStyles = { width: "180px", height: "180px" };
 const peopleStyles = { width: "80px", height: "80px" };
 
 const warriors = [
-  { name: "Riah Knapp", skill: "sorcerer", image: riah },
-  { name: "Josh Knapp", skill: "sorcerer", image: josh },
-  { name: "Ben Tissell", skill: "archer", image: ben },
-  { name: "Taylor Rassi", skill: "gladiator", image: taylor },
+  {
+    name: "Riah Knapp",
+    skill: "sorcerer",
+    image: riah,
+    phoneNumber: "+1 541-231-8973",
+  },
+  {
+    name: "Josh Knapp",
+    skill: "sorcerer",
+    image: josh,
+    phoneNumber: "+1 541-368-8091",
+  },
+  {
+    name: "Ben Tissell",
+    skill: "archer",
+    image: ben,
+    phoneNumber: "+1 503-307-6484",
+  },
+  {
+    name: "Taylor Rassi",
+    skill: "gladiator",
+    image: taylor,
+    phoneNumber: "+1 503-593-8657",
+  },
 ];
 const warlords = [
   {
@@ -344,11 +364,14 @@ function BattleOfFyetnas() {
                   </Form.Label>
                   <Form.Control type="text" name="phone" />
                   <div className="py-2" />
-                  <Form.Label className="mb-1 text-light">
+                  <Form.Label className="mb-0 text-light">
                     Primary Skill
                   </Form.Label>
+                  <small className="text-muted d-block mb-2">
+                    Select a skill...
+                  </small>
                   <Form.Control as="select" name="skill">
-                    <option>Select one...</option>
+                    <option></option>
                     <option>Archer (runner)</option>
                     <option>Knight (bicyclist)</option>
                     <option>Gladiator (weight-lifter)</option>
@@ -399,7 +422,7 @@ function BattleOfFyetnas() {
               </Card>
             </Form>
           )}
-          <div className="py-2" />
+          <div className="py-3" />
         </Col>
         <Col
           xs={12}
