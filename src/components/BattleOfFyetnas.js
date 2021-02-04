@@ -280,6 +280,10 @@ function BattleOfFyetnas() {
                   logging.
                 </p>
                 <p>
+                  <strong>What kind of workouts do I have to do?</strong>
+                </p>
+                <p>Any kind you want!</p>
+                <p>
                   <strong>Are joint workouts worth more?</strong>
                 </p>
                 <p>
