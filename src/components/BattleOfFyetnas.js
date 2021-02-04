@@ -18,7 +18,7 @@ import warlord4 from "../assets/warlord4.jpg";
 import josh from "../assets/josh.jpg";
 import riah from "../assets/riah.jpg";
 import ben from "../assets/ben.jpg";
-import taylor from "../assets/taylor.jpg";
+import taylor from "../assets/taylor.JPG";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import emailjs, { init } from "emailjs-com";
 import "./BattleOfFyetnas.css";
@@ -35,6 +35,33 @@ const warriors = [
   { name: "Ben Tissell", skill: "archer", image: ben },
   { name: "Taylor Rassi", skill: "gladiator", image: taylor },
 ];
+const warlords = [
+  {
+    name: "Vilkyu",
+    health: 60,
+    description: "demon of loneliness",
+    image: warlord1,
+  },
+  {
+    name: "Vilkyu",
+    health: 65,
+    description: "demon of loneliness",
+    image: warlord2,
+  },
+  {
+    name: "Vilkyu",
+    health: 70,
+    description: "demon of loneliness",
+    image: warlord3,
+  },
+  {
+    name: "Vilkyu",
+    health: 75,
+    description: "demon of loneliness",
+    image: warlord4,
+  },
+];
+
 const totalWarriors = 15;
 
 function BattleOfFyetnas() {
@@ -111,57 +138,22 @@ function BattleOfFyetnas() {
             <Table style={{ backgroundColor: "#212529", color: "white" }}>
               <tbody>
                 <tr>
-                  <td
-                    align="center"
-                    className="pr-0"
-                    style={{ borderTop: "0px" }}
-                  >
-                    <Image src={warlord1} roundedCircle style={warlordStyles} />
-                    <div className="font-weight-bold">Vilkyu [60H]</div>
-                    <div>demon of loneliness</div>
-                    <div>
-                      <span className="text-muted">Week 1</span>
-                    </div>
-                  </td>
-                  <td
-                    align="center"
-                    className="px-0"
-                    style={{ borderTop: "0px" }}
-                  >
-                    <Image src={warlord2} roundedCircle style={warlordStyles} />
-                    <br />
-                    <strong>Muldur [65H]</strong>
-                    <br />
-                    demon of shame
-                    <br />
-                    <span className="text-muted">Week 2</span>
-                  </td>
-                  <td
-                    align="center"
-                    className="px-0"
-                    style={{ borderTop: "0px" }}
-                  >
-                    <Image src={warlord3} roundedCircle style={warlordStyles} />
-                    <br />
-                    <strong>Ziir [70H]</strong>
-                    <br />
-                    demon of purposelessness
-                    <br />
-                    <span className="text-muted">Week 3</span>
-                  </td>
-                  <td
-                    align="center"
-                    className="pl-0"
-                    style={{ borderTop: "0px" }}
-                  >
-                    <Image src={warlord4} roundedCircle style={warlordStyles} />
-                    <br />
-                    <strong>Bradock [75H]</strong>
-                    <br />
-                    demon of fear
-                    <br />
-                    <span className="text-muted">Week 4</span>
-                  </td>
+                  {warlords.map(({ image, name, description, health }, i) => (
+                    <td
+                      align="center"
+                      className="px-0"
+                      style={{ borderTop: "0px" }}
+                    >
+                      <Image src={image} roundedCircle style={warlordStyles} />
+                      <div className="font-weight-bold">
+                        {name} [{health}H]
+                      </div>
+                      <div>{description}</div>
+                      <div>
+                        <span className="text-muted">Week {i + 1}</span>
+                      </div>
+                    </td>
+                  ))}
                 </tr>
               </tbody>
             </Table>
