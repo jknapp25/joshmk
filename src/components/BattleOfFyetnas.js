@@ -43,21 +43,21 @@ const warlords = [
     image: warlord1,
   },
   {
-    name: "Vilkyu",
+    name: "Muldur",
     health: 65,
-    description: "demon of loneliness",
+    description: "demon of shame",
     image: warlord2,
   },
   {
-    name: "Vilkyu",
+    name: "Ziir",
     health: 70,
-    description: "demon of loneliness",
+    description: "demon of purposelessness",
     image: warlord3,
   },
   {
-    name: "Vilkyu",
+    name: "Bradock",
     health: 75,
-    description: "demon of loneliness",
+    description: "demon of fear",
     image: warlord4,
   },
 ];
@@ -146,7 +146,18 @@ function BattleOfFyetnas() {
                     >
                       <Image src={image} roundedCircle style={warlordStyles} />
                       <div className="font-weight-bold">
-                        {name} [{health}H]
+                        {name}{" "}
+                        <Badge
+                          style={{
+                            // lineHeight: "1.4rem",
+                            // paddingTop: "20px",
+                            backgroundColor: "#bd1818",
+                            color: "white",
+                          }}
+                        >
+                          {health}H
+                        </Badge>
+                        {/* [{health}H] */}
                       </div>
                       <div>{description}</div>
                       <div>
