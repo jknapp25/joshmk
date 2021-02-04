@@ -99,9 +99,7 @@ function BattleOfFyetnas() {
         "user_YmjT0y9RWFvhcFf32gw1i"
       )
       .then(
-        () => {
-          setSubmitSuccess(true);
-        },
+        () => setSubmitSuccess(true),
         (error) => {
           alert(
             "Could not send your submission. Please make sure your avatar is smaller than 500kb. If the issue continues, call/text Josh at 541-368-8091."
@@ -199,9 +197,10 @@ function BattleOfFyetnas() {
           <p>Defeat the 4 warlords of Fyetna&#347;.</p>
           <h3 style={{ fontFamily: "MedievalSharp" }}>How</h3>
           <p>
-            The demons exist to separate, so they can only be defeated by unity.
-            Each warrior will commit to working out 5 days of the week and
-            together we will defeat them by rising to the fitness challenge.
+            The warlords exist to separate, so they can only be defeated by
+            unity. Each warrior will commit to working out 5 days of the week
+            and together we will defeat the warlords by rising to the fitness
+            challenge for one month (4 weeks).
           </p>
           <p>
             <strong>
