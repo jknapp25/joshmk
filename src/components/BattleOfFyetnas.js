@@ -18,7 +18,7 @@ import warlord4 from "../assets/warlord4.jpg";
 import josh from "../assets/josh.jpg";
 import riah from "../assets/riah.jpg";
 import ben from "../assets/ben.jpg";
-import taylor from "../assets/taylor.JPG";
+import taylor from "../assets/taylor.jpg";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import emailjs, { init } from "emailjs-com";
 import "./BattleOfFyetnas.css";
