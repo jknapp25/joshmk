@@ -18,6 +18,7 @@ import warlord4 from "../assets/warlord4.jpg";
 import josh from "../assets/josh.jpg";
 import riah from "../assets/riah.jpg";
 import ben from "../assets/ben.jpg";
+import taylor from "../assets/taylor.jpg";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import emailjs, { init } from "emailjs-com";
 import "./BattleOfFyetnas.css";
@@ -32,6 +33,7 @@ const warriors = [
   { name: "Riah Knapp", skill: "sorcerer", image: riah },
   { name: "Josh Knapp", skill: "sorcerer", image: josh },
   { name: "Ben Tissell", skill: "archer", image: ben },
+  { name: "Taylor Rassi", skill: "gladiator", image: taylor },
 ];
 const totalWarriors = 15;
 
@@ -161,49 +163,6 @@ function BattleOfFyetnas() {
                     <span className="text-muted">Week 4</span>
                   </td>
                 </tr>
-                {/* <tr>
-                  <td
-                    align="center"
-                    style={{ borderTop: "0px", paddingTop: 0 }}
-                  >
-                    <br />
-                    <strong>Vilkyu [60H]</strong>
-                    <br />
-                    demon of loneliness
-                    <br />
-                    <span className="text-muted">Week 1</span>
-                  </td>
-                  <td
-                    align="center"
-                    style={{ borderTop: "0px", paddingTop: 0 }}
-                  >
-                    <strong>Muldur [65H]</strong>
-                    <br />
-                    demon of shame
-                    <br />
-                    <span className="text-muted">Week 2</span>
-                  </td>
-                  <td
-                    align="center"
-                    style={{ borderTop: "0px", paddingTop: 0 }}
-                  >
-                    <strong>Ziir [70H]</strong>
-                    <br />
-                    demon of purposelessness
-                    <br />
-                    <span className="text-muted">Week 3</span>
-                  </td>
-                  <td
-                    align="center"
-                    style={{ borderTop: "0px", paddingTop: 0 }}
-                  >
-                    <strong>Bradock [75H]</strong>
-                    <br />
-                    demon of fear
-                    <br />
-                    <span className="text-muted">Week 4</span>
-                  </td>
-                </tr> */}
               </tbody>
             </Table>
           </div>
