@@ -194,7 +194,7 @@ function BattleOfFyetnas() {
           </p>
           <h3 style={{ fontFamily: "MedievalSharp" }}>
             Warriors:{"  "}
-            {warriors.length}/{totalWarriors}
+            {totalWarriors - warriors.length} needed
           </h3>
           <Table className="border-bottom border-top border-dark">
             <tbody>
@@ -350,7 +350,7 @@ function BattleOfFyetnas() {
                     fileSizeLimit={0.5}
                   />
                   <Form.Label className="mb-1 text-light">
-                    Address (for a small gift)
+                    Address (for a small victory gift)
                   </Form.Label>
                   <Form.Control type="text" className="mb-2" name="address" />
                 </Card.Body>
