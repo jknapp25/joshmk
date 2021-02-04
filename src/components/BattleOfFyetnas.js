@@ -27,7 +27,7 @@ export default BattleOfFyetnas;
 init("user_YmjT0y9RWFvhcFf32gw1i");
 
 const warlordStyles = { width: "180px", height: "180px" };
-const peopleStyles = { width: "80px", height: "80px" };
+const warriorStyles = { width: "80px", height: "80px" };
 
 const warriors = [
   {
@@ -169,15 +169,12 @@ function BattleOfFyetnas() {
                         {name}{" "}
                         <Badge
                           style={{
-                            // lineHeight: "1.4rem",
-                            // paddingTop: "20px",
                             backgroundColor: "#bd1818",
                             color: "white",
                           }}
                         >
                           {health}H
                         </Badge>
-                        {/* [{health}H] */}
                       </div>
                       <div>{description}</div>
                       <div>
@@ -223,7 +220,7 @@ function BattleOfFyetnas() {
               <tr>
                 {warriors.map(({ image, name, skill }) => (
                   <td align="center" className="border-0">
-                    <Image src={image} roundedCircle style={peopleStyles} />
+                    <Image src={image} roundedCircle style={warriorStyles} />
                     <div>{name}</div>
                     <div style={{ lineHeight: "1em", color: "#bd1818" }}>
                       <small>{skill}</small>
