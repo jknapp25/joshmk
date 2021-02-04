@@ -308,37 +308,51 @@ function BattleOfFyetnas() {
             </Accordion.Collapse>
           </Accordion>
           <div className="py-1" />
+
           {submitSuccess ? (
-            <div>
-              You have enlisted! Josh will get you added to the warriors list
-              today.
+            <div
+              className="p-3 text-center"
+              style={{ backgroundColor: "green", color: "white" }}
+            >
+              <h1 style={{ fontFamily: "MedievalSharp" }}>
+                You have enlisted!{" "}
+              </h1>
+              <p className="mb-0">
+                You will be added to the warriors list today.
+              </p>
             </div>
           ) : (
             <Form id="enlist-form" onSubmit={sendEmail}>
               <Card
-                className="border-danger"
-                style={{ backgroundColor: "#212529" }}
+                style={{
+                  backgroundColor: "#212529",
+                  border: "4px solid #bd1818",
+                }}
               >
                 <Card.Body>
                   <Form.Label className="mb-1 text-light">Name</Form.Label>
-                  <Form.Control type="text" className="mb-2" name="name" />
+                  <Form.Control type="text" name="name" />
+                  <div className="py-2" />
                   <Form.Label className="mb-1 text-light">
                     Phone Number
                   </Form.Label>
-                  <Form.Control type="text" className="mb-2" name="phone" />
+                  <Form.Control type="text" name="phone" />
+                  <div className="py-2" />
                   <Form.Label className="mb-1 text-light">
                     Primary Skill
                   </Form.Label>
-                  <Form.Control as="select" className="mb-2" name="skill">
+                  <Form.Control as="select" name="skill">
                     <option>Select one...</option>
                     <option>Archer (runner)</option>
                     <option>Knight (bicyclist)</option>
                     <option>Gladiator (weight-lifter)</option>
                     <option>Sorcerer (multiple)</option>
                   </Form.Control>
-                  <Form.Label className="mb-1 text-light">
-                    Avatar (max image size: 500kb)
-                  </Form.Label>
+                  <div className="py-2" />
+                  <Form.Label className="mb-0 text-light">Avatar</Form.Label>
+                  <small className="text-muted d-block mb-2">
+                    Max image size: 500kb
+                  </small>
                   <ImageUploader
                     images={[]}
                     afterEdit={() => {}}
@@ -349,9 +363,11 @@ function BattleOfFyetnas() {
                     imageDisplayName="avatar"
                     fileSizeLimit={0.5}
                   />
-                  <Form.Label className="mb-1 text-light">
-                    Address (for a small victory gift)
-                  </Form.Label>
+                  <div className="py-1" />
+                  <Form.Label className="text-light mb-0">Address</Form.Label>
+                  <small className="text-muted d-block mb-2">
+                    A small victory gift will be sent out afterward
+                  </small>
                   <Form.Control type="text" className="mb-2" name="address" />
                 </Card.Body>
                 <Card.Footer className="p-0">
