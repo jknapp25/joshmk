@@ -109,24 +109,64 @@ function BattleOfFyetnas() {
             <Table style={{ backgroundColor: "#212529", color: "white" }}>
               <tbody>
                 <tr>
-                  <td align="center" style={{ borderTop: "0px" }}>
+                  <td
+                    align="center"
+                    className="pr-0"
+                    style={{ borderTop: "0px" }}
+                  >
                     <Image src={warlord1} roundedCircle style={warlordStyles} />
+                    <div className="font-weight-bold">Vilkyu [60H]</div>
+                    <div>demon of loneliness</div>
+                    <div>
+                      <span className="text-muted">Week 1</span>
+                    </div>
                   </td>
-                  <td align="center" style={{ borderTop: "0px" }}>
+                  <td
+                    align="center"
+                    className="px-0"
+                    style={{ borderTop: "0px" }}
+                  >
                     <Image src={warlord2} roundedCircle style={warlordStyles} />
+                    <br />
+                    <strong>Muldur [65H]</strong>
+                    <br />
+                    demon of shame
+                    <br />
+                    <span className="text-muted">Week 2</span>
                   </td>
-                  <td align="center" style={{ borderTop: "0px" }}>
+                  <td
+                    align="center"
+                    className="px-0"
+                    style={{ borderTop: "0px" }}
+                  >
                     <Image src={warlord3} roundedCircle style={warlordStyles} />
+                    <br />
+                    <strong>Ziir [70H]</strong>
+                    <br />
+                    demon of purposelessness
+                    <br />
+                    <span className="text-muted">Week 3</span>
                   </td>
-                  <td align="center" style={{ borderTop: "0px" }}>
+                  <td
+                    align="center"
+                    className="pl-0"
+                    style={{ borderTop: "0px" }}
+                  >
                     <Image src={warlord4} roundedCircle style={warlordStyles} />
+                    <br />
+                    <strong>Bradock [75H]</strong>
+                    <br />
+                    demon of fear
+                    <br />
+                    <span className="text-muted">Week 4</span>
                   </td>
                 </tr>
-                <tr>
+                {/* <tr>
                   <td
                     align="center"
                     style={{ borderTop: "0px", paddingTop: 0 }}
                   >
+                    <br />
                     <strong>Vilkyu [60H]</strong>
                     <br />
                     demon of loneliness
@@ -163,7 +203,7 @@ function BattleOfFyetnas() {
                     <br />
                     <span className="text-muted">Week 4</span>
                   </td>
-                </tr>
+                </tr> */}
               </tbody>
             </Table>
           </div>
