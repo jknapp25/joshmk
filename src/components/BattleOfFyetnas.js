@@ -171,7 +171,7 @@ function BattleOfFyetnas() {
           </div>
           <p>
             The warlords have now been released into the realm of Fyetna&#347;,
-            an in-between space where they are able to wreak havoc on humanity,
+            an in-between space where they are wreaking havoc on humanity,
             hidden under the guise of shapelessness.{" "}
             <strong>
               If allowed to continue, the ramifications will be irreparable.
