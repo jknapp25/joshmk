@@ -83,13 +83,13 @@ const warriors = [
     name: "Garrett Tams",
     skill: "sorcerer",
     image: garrett,
-    phoneNumber: "+1 541-760-9656",
+    phoneNumber: "+1 775-830-2345",
   },
   {
     name: "Lilly Tams",
     skill: "sorcerer",
     image: lilly,
-    phoneNumber: "+1 541-760-9656",
+    phoneNumber: "+1 503-544-6116",
   },
 ];
 const warlords = [
@@ -462,7 +462,8 @@ function BattleOfFyetnas() {
                   <p>
                     If you are not able to do a workout, this needs to be
                     communicated to the others so that they can do joint
-                    workouts to recuperate hits.
+                    workouts to recuperate hits. If you hover over people's
+                    avatars, you will see their phone number.
                   </p>
                   <p>
                     <strong>
