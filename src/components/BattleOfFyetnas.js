@@ -21,6 +21,8 @@ import riah from "../assets/riah.jpg";
 import ben from "../assets/ben.jpg";
 import taylor from "../assets/tay.jpg";
 import natalie from "../assets/natalie.jpg";
+import garrett from "../assets/garrett.jpg";
+import lilly from "../assets/lilly.jpg";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import emailjs, { init } from "emailjs-com";
 import "./BattleOfFyetnas.css";
@@ -75,6 +77,18 @@ const warriors = [
     name: "Natalie",
     skill: "huntress",
     image: natalie,
+    phoneNumber: "+1 541-760-9656",
+  },
+  {
+    name: "Garrett Tams",
+    skill: "sorcerer",
+    image: garrett,
+    phoneNumber: "+1 541-760-9656",
+  },
+  {
+    name: "Lilly Tams",
+    skill: "sorcerer",
+    image: lilly,
     phoneNumber: "+1 541-760-9656",
   },
 ];
@@ -295,21 +309,55 @@ function BattleOfFyetnas() {
             <Table className="border-bottom border-top border-dark">
               <tbody>
                 <tr>
-                  {warriors.map(({ image, name, skill }) => (
-                    <td align="center" className="border-0">
-                      <div style={circular}>
-                        <Image
-                          src={image}
-                          roundedCircle
-                          style={circularImage}
-                        />
-                      </div>
-                      <div>{name}</div>
-                      <div style={{ lineHeight: "1em", color: "#bd1818" }}>
-                        <small>{skill}</small>
-                      </div>
-                    </td>
-                  ))}
+                  {warriors
+                    .slice(0, 5)
+                    .map(({ image, name, skill, phoneNumber }) => (
+                      <td align="center" className="border-0">
+                        <div style={circular}>
+                          <Image
+                            src={image}
+                            roundedCircle
+                            style={circularImage}
+                            title={phoneNumber}
+                          />
+                        </div>
+                        <div>{name}</div>
+                        <div style={{ lineHeight: "1em", color: "#bd1818" }}>
+                          <small>{skill}</small>
+                        </div>
+                      </td>
+                    ))}
+                </tr>
+                <tr>
+                  <td align="center" className="border-0" colSpan="2">
+                    <div style={circular}>
+                      <Image
+                        src={warriors[5].image}
+                        roundedCircle
+                        style={circularImage}
+                        title={warriors[5].phoneNumber}
+                      />
+                    </div>
+                    <div>{warriors[5].name}</div>
+                    <div style={{ lineHeight: "1em", color: "#bd1818" }}>
+                      <small>{warriors[5].skill}</small>
+                    </div>
+                  </td>
+
+                  <td align="center" className="border-0" colSpan="3">
+                    <div style={circular}>
+                      <Image
+                        src={warriors[6].image}
+                        roundedCircle
+                        style={circularImage}
+                        title={warriors[6].phoneNumber}
+                      />
+                    </div>
+                    <div>{warriors[6].name}</div>
+                    <div style={{ lineHeight: "1em", color: "#bd1818" }}>
+                      <small>{warriors[6].skill}</small>
+                    </div>
+                  </td>
                 </tr>
               </tbody>
             </Table>
@@ -416,6 +464,13 @@ function BattleOfFyetnas() {
                     communicated to the others so that they can do joint
                     workouts to recuperate hits.
                   </p>
+                  <p>
+                    <strong>
+                      Do joint workouts count if they are done with someone that
+                      is not in the warriors list?
+                    </strong>
+                  </p>
+                  <p>No</p>
                 </>
               </Accordion.Collapse>
             </Accordion>
