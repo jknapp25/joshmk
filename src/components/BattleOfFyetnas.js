@@ -467,11 +467,22 @@ function BattleOfFyetnas() {
                   </p>
                   <p>
                     <strong>
-                      Do joint workouts count if they are done with someone that
-                      is not in the warriors list?
+                      Do joint workouts count for 2 hits if they are done with
+                      someone that is not in the warriors list?
                     </strong>
                   </p>
-                  <p>No</p>
+                  <p>No, just 1 hit</p>
+                  <p>
+                    <strong>
+                      If I do more than one workout in a day, can I count all of
+                      them?
+                    </strong>
+                  </p>
+                  <p>
+                    No, just one workout will count for that day. If that was
+                    allowed, one person could do 5 workouts in a day and it
+                    would defeat the purpose of collaboration.
+                  </p>
                 </>
               </Accordion.Collapse>
             </Accordion>
