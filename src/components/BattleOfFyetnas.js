@@ -18,7 +18,7 @@ import warlord4 from "../assets/warlord4.jpg";
 import josh from "../assets/josh.jpg";
 import riah from "../assets/riah.jpg";
 import ben from "../assets/ben.jpg";
-import taylor from "../assets/taylor.JPG";
+import taylor from "../assets/taylor.jpg";
 import natalie from "../assets/natalie.jpg";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import emailjs, { init } from "emailjs-com";
@@ -28,7 +28,6 @@ export default BattleOfFyetnas;
 init("user_YmjT0y9RWFvhcFf32gw1i");
 
 const warlordStyles = { width: "180px", height: "180px" };
-// const warriorStyles = { width: "80px", height: "80px" };
 const circular = {
   width: "80px",
   height: "80px",
@@ -38,7 +37,6 @@ const circular = {
 };
 const circularImage = {
   maxWidth: "100%",
-  // maxHeight: "100%",
   width: "auto",
   height: "auto",
   position: "absolute",
