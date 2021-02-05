@@ -234,7 +234,7 @@ function BattleOfFyetnas() {
           </p>
           <h3 style={{ fontFamily: "MedievalSharp" }}>
             Warriors:{"  "}
-            {totalWarriors - warriors.length} needed
+            {totalWarriors - warriors.length} more needed
           </h3>
           <Table className="border-bottom border-top border-dark">
             <tbody>
