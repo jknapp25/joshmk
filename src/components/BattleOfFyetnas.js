@@ -53,16 +53,16 @@ const warriors = [
     phoneNumber: "+1 541-231-8973",
   },
   {
-    name: "Josh Knapp",
-    skill: "sorcerer",
-    image: josh,
-    phoneNumber: "+1 541-368-8091",
-  },
-  {
     name: "Ben Tissell",
     skill: "archer",
     image: ben,
     phoneNumber: "+1 503-307-6484",
+  },
+  {
+    name: "Josh Knapp",
+    skill: "sorcerer",
+    image: josh,
+    phoneNumber: "+1 541-368-8091",
   },
   {
     name: "Taylor Rassi",
