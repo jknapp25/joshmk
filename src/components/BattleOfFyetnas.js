@@ -15,7 +15,7 @@ import warlord1 from "../assets/warlord1.jpg";
 import warlord2 from "../assets/warlord2.jpg";
 import warlord3 from "../assets/warlord3.jpg";
 import warlord4 from "../assets/warlord4.jpg";
-import josh from "../assets/josh.jpg";
+import josh from "../assets/josh1.jpg";
 import riah from "../assets/riah.jpg";
 import ben from "../assets/ben.jpg";
 import taylor from "../assets/taylor.jpg";
