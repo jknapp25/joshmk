@@ -16,7 +16,7 @@ function Calendar({ collapsed = false }) {
       <thead className="border-bottom">
         <tr align="center">
           {!collapsed ? (
-            <th className="font-weight-bold" colspan="7">
+            <th className="font-weight-bold" colSpan="7">
               February
             </th>
           ) : null}

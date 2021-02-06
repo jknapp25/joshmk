@@ -49,50 +49,50 @@ const circularImage = {
   transform: "translate(-50%, -50%)",
 };
 
-const warriors = [
-  {
+const warriors = {
+  "Riah Knapp": {
     name: "Riah Knapp",
     skill: "sorcerer",
     image: riah,
     phoneNumber: "+1 541-231-8973",
   },
-  {
+  "Ben Tissell": {
     name: "Ben Tissell",
     skill: "archer",
     image: ben,
     phoneNumber: "+1 503-307-6484",
   },
-  {
+  "Josh Knapp": {
     name: "Josh Knapp",
     skill: "sorcerer",
     image: josh,
     phoneNumber: "+1 541-368-8091",
   },
-  {
+  "Taylor Rassi": {
     name: "Taylor Rassi",
     skill: "gladiator",
     image: taylor,
     phoneNumber: "+1 503-593-8657",
   },
-  {
+  Natalie: {
     name: "Natalie",
     skill: "huntress",
     image: natalie,
     phoneNumber: "+1 541-760-9656",
   },
-  {
+  "Garrett Tams": {
     name: "Garrett Tams",
     skill: "sorcerer",
     image: garrett,
     phoneNumber: "+1 775-830-2345",
   },
-  {
+  "Lilly Tams": {
     name: "Lilly Tams",
     skill: "sorcerer",
     image: lilly,
     phoneNumber: "+1 503-544-6116",
   },
-];
+};
 const warlords = [
   {
     name: "Vilkyu",
@@ -148,21 +148,21 @@ const warlords = [
 const workouts = [
   {
     warrior: "Josh Knapp",
-    description: "I ran 23 miles",
+    description: "I rode a goat 37 miles",
     joint: false,
-    createdOn: "10-14-12",
+    date: "2021-02-12",
   },
   {
     warrior: "Riah Knapp",
     description: "I did calistenics",
     joint: false,
-    createdOn: "10-14-12",
+    date: "2021-02-11",
   },
   {
     warrior: "Ben Tissell",
-    description: "I rode a goat 37 miles",
-    joint: false,
-    createdOn: "10-14-12",
+    description: "Taylor and I jumped on a trampoline for 7 hours",
+    joint: true,
+    date: "2021-02-10",
   },
 ];
 
@@ -229,7 +229,7 @@ function BattleOfFyetnas() {
             onSelect={(selectedKey) => setActivePage(selectedKey)}
           >
             {["Details", "Battle", "FAQ"].map((page) => (
-              <Nav.Item>
+              <Nav.Item key={page}>
                 <Nav.Link eventKey={page} className="pl-0">
                   <h4
                     className={`${
@@ -357,34 +357,38 @@ function BattleOfFyetnas() {
                   Add workout
                 </Button>
               </div>
-              <Card className="bg-dark text-light">
-                <Card.Body>
-                  <Row>
-                    <Col lg="2" className="pr-0">
-                      <Image
-                        src={josh}
-                        roundedCircle
-                        style={{
-                          width: "60px",
-                          height: "60px",
-                        }}
-                      />
-                    </Col>
-                    <Col lg="8" className="pl-2">
-                      <div>
-                        <small className="text-muted">2 days ago</small>
-                      </div>
-                      <div>I did a 3 mile run with Ben</div>
-                    </Col>
-                    <Col
-                      lg="2"
-                      className="text-right text-success font-weight-bold"
-                    >
-                      +2 hits
-                    </Col>
-                  </Row>
-                </Card.Body>
-              </Card>
+              {workouts.map(({ warrior, description, joint, date }) => (
+                <Card className="bg-dark text-light mb-2">
+                  <Card.Body>
+                    <Row>
+                      <Col lg="2" className="pr-0">
+                        <Image
+                          src={warriors[warrior].image}
+                          roundedCircle
+                          style={{
+                            width: "60px",
+                            height: "60px",
+                          }}
+                        />
+                      </Col>
+                      <Col lg="8" className="pl-2">
+                        <div>
+                          <small className="text-muted">
+                            {moment(date).format("dddd, MMMM Do")}
+                          </small>
+                        </div>
+                        <div>{description}</div>
+                      </Col>
+                      <Col
+                        lg="2"
+                        className="text-right text-success font-weight-bold"
+                      >
+                        +{joint ? "2 hits" : "1 hit"}
+                      </Col>
+                    </Row>
+                  </Card.Body>
+                </Card>
+              ))}
             </Col>
             <Col lg={2} className="p-4 bg-transparent"></Col>
           </Row>
@@ -431,6 +435,7 @@ function BattleOfFyetnas() {
                             align="center"
                             className="px-0"
                             style={{ borderTop: "0px" }}
+                            key={name}
                           >
                             <Image
                               src={image}
@@ -487,26 +492,26 @@ function BattleOfFyetnas() {
               </p>
               <h3 style={{ fontFamily: "MedievalSharp" }}>
                 Warriors:{"  "}
-                {totalWarriors - warriors.length} more needed
+                {totalWarriors - Object.keys(warriors).length} more needed
               </h3>
               <Table className="border-bottom border-top border-dark">
                 <tbody>
                   <tr>
-                    {warriors
+                    {Object.keys(warriors)
                       .slice(0, 5)
-                      .map(({ image, name, skill, phoneNumber }) => (
-                        <td align="center" className="border-0">
+                      .map((warrior, i) => (
+                        <td align="center" className="border-0" key={i}>
                           <div style={circular}>
                             <Image
-                              src={image}
+                              src={warriors[warrior].image}
                               roundedCircle
                               style={circularImage}
-                              title={phoneNumber}
+                              title={warriors[warrior].phoneNumber}
                             />
                           </div>
-                          <div>{name}</div>
+                          <div>{warriors[warrior].name}</div>
                           <div style={{ lineHeight: "1em", color: "#bd1818" }}>
-                            <small>{skill}</small>
+                            <small>{warriors[warrior].skill}</small>
                           </div>
                         </td>
                       ))}
@@ -515,30 +520,30 @@ function BattleOfFyetnas() {
                     <td align="center" className="border-0" colSpan="2">
                       <div style={circular}>
                         <Image
-                          src={warriors[5].image}
+                          src={warriors["Garrett Tams"].image}
                           roundedCircle
                           style={circularImage}
-                          title={warriors[5].phoneNumber}
+                          title={warriors["Garrett Tams"].phoneNumber}
                         />
                       </div>
-                      <div>{warriors[5].name}</div>
+                      <div>{warriors["Garrett Tams"].name}</div>
                       <div style={{ lineHeight: "1em", color: "#bd1818" }}>
-                        <small>{warriors[5].skill}</small>
+                        <small>{warriors["Garrett Tams"].skill}</small>
                       </div>
                     </td>
 
                     <td align="center" className="border-0" colSpan="3">
                       <div style={circular}>
                         <Image
-                          src={warriors[6].image}
+                          src={warriors["Lilly Tams"].image}
                           roundedCircle
                           style={circularImage}
-                          title={warriors[6].phoneNumber}
+                          title={warriors["Lilly Tams"].phoneNumber}
                         />
                       </div>
-                      <div>{warriors[6].name}</div>
+                      <div>{warriors["Lilly Tams"].name}</div>
                       <div style={{ lineHeight: "1em", color: "#bd1818" }}>
-                        <small>{warriors[6].skill}</small>
+                        <small>{warriors["Lilly Tams"].skill}</small>
                       </div>
                     </td>
                   </tr>
@@ -675,9 +680,9 @@ function BattleOfFyetnas() {
             </p>
             <p>
               It was clear that many people in my circles (Josh) are desiring to
-              be healthier and put in place a consistent workout habit. I'm
-              hoping that a month of 5+ workouts a week, and some peer
-              accountability will help kick-off this habit for people.
+              be healthier and put in place workout habits. I'm hoping that a
+              month of 5+ workouts a week, and some peer accountability will
+              help kick-off this habit for people.
             </p>
             <p>
               <strong>How many hits does it take to kill a warlord?</strong>
