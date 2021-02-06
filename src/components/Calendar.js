@@ -5,7 +5,7 @@ export default Calendar;
 const calTdStyles = { height: "80px" };
 
 const calendarCell = (dayNum) => (
-  <td align="left">
+  <td align="left" className="p-1">
     <span className="text-muted">{dayNum || ""}</span>
   </td>
 );
