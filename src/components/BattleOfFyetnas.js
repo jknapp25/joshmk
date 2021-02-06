@@ -11,6 +11,7 @@ import {
   Form,
   Nav,
   ProgressBar,
+  Modal,
 } from "react-bootstrap";
 import Calendar from "./Calendar";
 import ImageUploader from "./ImageUploader";
@@ -154,7 +155,7 @@ const workouts = [
   },
   {
     warrior: "Riah Knapp",
-    description: "I did calistenics",
+    description: "I did calisthenics",
     joint: false,
     date: "2021-02-11",
   },
@@ -172,6 +173,7 @@ const currentDate = "2021-02-08"; // moment();
 function BattleOfFyetnas() {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [activePage, setActivePage] = useState("Details");
+  const [show, setShow] = useState(false);
 
   function sendEmail(e) {
     e.preventDefault();
@@ -353,7 +355,11 @@ function BattleOfFyetnas() {
               <Calendar />
               <div className="d-block mb-4">
                 <h5 className="d-inline">Workouts</h5>
-                <Button variant="success" className="float-right">
+                <Button
+                  variant="success"
+                  className="float-right"
+                  onClick={() => setShow(true)}
+                >
                   Add workout
                 </Button>
               </div>
@@ -769,6 +775,37 @@ function BattleOfFyetnas() {
           ></Col>
         </Row>
       ) : null}
+      <Modal show={show} onHide={() => setShow(false)}>
+        <Modal.Body className="bg-dark text-light">
+          <Form.Label className="mb-0 text-light">Your name</Form.Label>
+          <Form.Control as="select" rows={2} name="skill">
+            <option></option>
+            {Object.keys(warriors).map((warr) => (
+              <option>{warr}</option>
+            ))}
+          </Form.Control>
+          <div className="py-2" />
+          <Form.Label className="mb-1 text-light">
+            Workout description
+          </Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={2}
+            className="bg-dark border-secondary text-light"
+          />
+          <div className="py-2" />
+          <Form.Check type="checkbox" label="Joint?" />
+        </Modal.Body>
+
+        <Modal.Footer className="bg-dark border-dark">
+          <Button variant="secondary" onClick={() => setShow(false)}>
+            Close
+          </Button>
+          <Button variant="success" onClick={() => setShow(false)}>
+            Save
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Col>
   );
 }
