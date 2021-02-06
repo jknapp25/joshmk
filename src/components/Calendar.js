@@ -10,14 +10,16 @@ const calendarCell = (dayNum) => (
   </td>
 );
 
-function Calendar() {
+function Calendar({ collapsed = false }) {
   return (
     <Table bordered variant="dark">
       <thead className="border-bottom">
         <tr align="center">
-          <th className="font-weight-bold" colspan="7">
-            February
-          </th>
+          {!collapsed ? (
+            <th className="font-weight-bold" colspan="7">
+              February
+            </th>
+          ) : null}
         </tr>
         <tr align="center">
           {["S", "M", "T", "W", "T", "F", "S"].map((day) => (

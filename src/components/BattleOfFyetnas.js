@@ -7,7 +7,6 @@ import {
   Col,
   Button,
   Badge,
-  Accordion,
   Card,
   Form,
   Nav,
@@ -26,7 +25,6 @@ import taylor from "../assets/tay.jpg";
 import natalie from "../assets/natalie.jpg";
 import garrett from "../assets/garrett.jpg";
 import lilly from "../assets/lilly.jpg";
-import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import emailjs, { init } from "emailjs-com";
 import "./BattleOfFyetnas.css";
 export default BattleOfFyetnas;
@@ -147,13 +145,33 @@ const warlords = [
   },
 ];
 
+const workouts = [
+  {
+    warrior: "Josh Knapp",
+    description: "I ran 23 miles",
+    joint: false,
+    createdOn: "10-14-12",
+  },
+  {
+    warrior: "Riah Knapp",
+    description: "I did calistenics",
+    joint: false,
+    createdOn: "10-14-12",
+  },
+  {
+    warrior: "Ben Tissell",
+    description: "I rode a goat 37 miles",
+    joint: false,
+    createdOn: "10-14-12",
+  },
+];
+
 const totalWarriors = 15;
 const currentDate = "2021-02-08"; // moment();
 
 function BattleOfFyetnas() {
-  const [faqOpen, setFaqOpen] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [activePage, setActivePage] = useState("Battle");
+  const [activePage, setActivePage] = useState("Details");
 
   function sendEmail(e) {
     e.preventDefault();
@@ -568,7 +586,7 @@ function BattleOfFyetnas() {
                         <option></option>
                         <option>Archer (runner)</option>
                         <option>Knight (bicyclist)</option>
-                        <option>Gladiator (weight-lifter)</option>
+                        <option>Gladiator (weights/calisthenics)</option>
                         <option>Sorcerer (multiple)</option>
                       </Form.Control>
                       <div className="py-2" />
