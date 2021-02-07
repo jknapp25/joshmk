@@ -27,6 +27,7 @@ import natalie from "../assets/natalie.jpg";
 import garrett from "../assets/garrett.jpg";
 import lilly from "../assets/lilly.jpg";
 import nathan from "../assets/nathan.jpg";
+import james from "../assets/james.jpg";
 import emailjs, { init } from "emailjs-com";
 import "./BattleOfFyetnas.css";
 export default BattleOfFyetnas;
@@ -99,6 +100,12 @@ const warriors = {
     skill: "sorcerer",
     image: nathan,
     phoneNumber: "+1 503-914-8148",
+  },
+  "James Sheu": {
+    name: "James Sheu",
+    skill: "sorcerer",
+    image: james,
+    phoneNumber: "+1 559-283-3584",
   },
 };
 const warlords = [
@@ -179,7 +186,7 @@ const currentDate = "2021-02-08"; // moment();
 
 function BattleOfFyetnas() {
   const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [activePage, setActivePage] = useState("Details");
+  const [activePage, setActivePage] = useState("Battle");
   const [show, setShow] = useState(false);
 
   function sendEmail(e) {
@@ -260,7 +267,7 @@ function BattleOfFyetnas() {
           <Row style={{ backgroundColor: "#e2b065" }}>
             <Col lg={2} className="p-4 bg-transparent"></Col>
             <Col lg={8} className="mb-3 text-center font-weight-bold">
-              THIS IS A PREVIEW
+              COMING TODAY (SUNDAY)
             </Col>
             <Col lg={2} className="p-4 bg-transparent"></Col>
           </Row>
@@ -359,7 +366,7 @@ function BattleOfFyetnas() {
               )}
             </Col>
             <Col lg={5} className="bg-transparent">
-              <Calendar />
+              {/* <Calendar /> */}
               <div className="d-block mb-4">
                 <h5 className="d-inline">Workouts</h5>
                 <Button
@@ -503,6 +510,11 @@ function BattleOfFyetnas() {
                 Every day that someone does not workout, it will weaken the
                 collective ability to defeat the warlord.
               </p>
+              <h3 style={{ fontFamily: "MedievalSharp" }}>When</h3>
+              <p>
+                February 7 - March 6{" "}
+                <strong>*last minute enlistments are allowed on Feb 7</strong>
+              </p>
               <h3 style={{ fontFamily: "MedievalSharp" }}>
                 Warriors:{"  "}
                 {totalWarriors - Object.keys(warriors).length} more needed
@@ -530,9 +542,8 @@ function BattleOfFyetnas() {
                       ))}
                   </tr>
                   <tr>
-                    <td className="border-0"></td>
                     {Object.keys(warriors)
-                      .slice(5, 8)
+                      .slice(5, 9)
                       .map((warrior, i) => (
                         <td align="center" className="border-0" key={i}>
                           <div style={circular}>
