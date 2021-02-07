@@ -26,6 +26,7 @@ import taylor from "../assets/tay.jpg";
 import natalie from "../assets/natalie.jpg";
 import garrett from "../assets/garrett.jpg";
 import lilly from "../assets/lilly.jpg";
+import nathan from "../assets/nathan.jpg";
 import emailjs, { init } from "emailjs-com";
 import "./BattleOfFyetnas.css";
 export default BattleOfFyetnas;
@@ -92,6 +93,12 @@ const warriors = {
     skill: "sorcerer",
     image: lilly,
     phoneNumber: "+1 503-544-6116",
+  },
+  "Nathan A Walker": {
+    name: "Nathan A Walker",
+    skill: "sorcerer",
+    image: nathan,
+    phoneNumber: "+1 503-914-8148",
   },
 };
 const warlords = [
@@ -523,35 +530,26 @@ function BattleOfFyetnas() {
                       ))}
                   </tr>
                   <tr>
-                    <td align="center" className="border-0" colSpan="2">
-                      <div style={circular}>
-                        <Image
-                          src={warriors["Garrett Tams"].image}
-                          roundedCircle
-                          style={circularImage}
-                          title={warriors["Garrett Tams"].phoneNumber}
-                        />
-                      </div>
-                      <div>{warriors["Garrett Tams"].name}</div>
-                      <div style={{ lineHeight: "1em", color: "#bd1818" }}>
-                        <small>{warriors["Garrett Tams"].skill}</small>
-                      </div>
-                    </td>
-
-                    <td align="center" className="border-0" colSpan="3">
-                      <div style={circular}>
-                        <Image
-                          src={warriors["Lilly Tams"].image}
-                          roundedCircle
-                          style={circularImage}
-                          title={warriors["Lilly Tams"].phoneNumber}
-                        />
-                      </div>
-                      <div>{warriors["Lilly Tams"].name}</div>
-                      <div style={{ lineHeight: "1em", color: "#bd1818" }}>
-                        <small>{warriors["Lilly Tams"].skill}</small>
-                      </div>
-                    </td>
+                    <td className="border-0"></td>
+                    {Object.keys(warriors)
+                      .slice(5, 8)
+                      .map((warrior, i) => (
+                        <td align="center" className="border-0" key={i}>
+                          <div style={circular}>
+                            <Image
+                              src={warriors[warrior].image}
+                              roundedCircle
+                              style={circularImage}
+                              title={warriors[warrior].phoneNumber}
+                            />
+                          </div>
+                          <div>{warriors[warrior].name}</div>
+                          <div style={{ lineHeight: "1em", color: "#bd1818" }}>
+                            <small>{warriors[warrior].skill}</small>
+                          </div>
+                        </td>
+                      ))}
+                    <td className="border-0"></td>
                   </tr>
                 </tbody>
               </Table>
