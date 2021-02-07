@@ -226,3 +226,34 @@ export const listConfigurations = /* GraphQL */ `
     }
   }
 `;
+export const getWorkout = /* GraphQL */ `
+  query GetWorkout($id: ID!) {
+    getWorkout(id: $id) {
+      id
+      warrior
+      description
+      joint
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listWorkouts = /* GraphQL */ `
+  query ListWorkouts(
+    $filter: ModelWorkoutFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listWorkouts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        warrior
+        description
+        joint
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;

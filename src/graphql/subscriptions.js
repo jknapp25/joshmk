@@ -286,3 +286,39 @@ export const onDeleteConfiguration = /* GraphQL */ `
     }
   }
 `;
+export const onCreateWorkout = /* GraphQL */ `
+  subscription OnCreateWorkout {
+    onCreateWorkout {
+      id
+      warrior
+      description
+      joint
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateWorkout = /* GraphQL */ `
+  subscription OnUpdateWorkout {
+    onUpdateWorkout {
+      id
+      warrior
+      description
+      joint
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteWorkout = /* GraphQL */ `
+  subscription OnDeleteWorkout {
+    onDeleteWorkout {
+      id
+      warrior
+      description
+      joint
+      createdAt
+      updatedAt
+    }
+  }
+`;

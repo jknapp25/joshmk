@@ -68,3 +68,10 @@ type Configuration @model @auth(rules: [{ allow: public }]) {
   resumeGeneratorEnabled: Boolean
   galleryImages: [String]
 }
+
+type Workout @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  warrior: String
+  description: String
+  joint: Boolean
+}

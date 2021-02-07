@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import moment from "moment";
 import {
   Image,
@@ -29,6 +29,10 @@ import lilly from "../assets/lilly.jpg";
 import nathan from "../assets/nathan.jpg";
 import james from "../assets/james.jpg";
 import emailjs, { init } from "emailjs-com";
+import { API, graphqlOperation } from "aws-amplify";
+import * as queries from "../graphql/queries";
+import { createWorkout } from "../graphql/mutations";
+import { useIsMounted } from "../lib/utils";
 import "./BattleOfFyetnas.css";
 export default BattleOfFyetnas;
 
@@ -114,21 +118,21 @@ const warlords = [
     health: 60,
     description: "demon of loneliness",
     image: warlord1,
-    start: "2021-02-01",
-    end: "2021-02-06",
+    start: "2021-02-07",
+    end: "2021-02-13",
     sayings: [
       "No one really cares!",
       "Doing things for yourself takes away time for socializing",
     ],
-    defeated: true,
+    defeated: false,
   },
   {
     name: "Muldur",
     health: 65,
     description: "demon of shame",
     image: warlord2,
-    start: "2021-02-07",
-    end: "2021-02-13",
+    start: "2021-02-14",
+    end: "2021-02-20",
     sayings: ["You'll never have the body you want", "Self-care is selfish!"],
     defeated: false,
   },
@@ -137,8 +141,8 @@ const warlords = [
     health: 70,
     description: "demon of purposelessness",
     image: warlord3,
-    start: "2021-02-14",
-    end: "2021-02-20",
+    start: "2021-02-21",
+    end: "2021-02-27",
     sayings: [
       "What's the point of all this?!",
       "Doing things for yourself takes away time for socializing",
@@ -150,8 +154,8 @@ const warlords = [
     health: 75,
     description: "demon of fear",
     image: warlord4,
-    start: "2021-02-21",
-    end: "2021-02-27",
+    start: "2021-02-28",
+    end: "2021-03-06",
     sayings: [
       "What if you get hurt?",
       "Doing things for yourself takes away time for socializing",
@@ -160,34 +164,42 @@ const warlords = [
   },
 ];
 
-const workouts = [
-  {
-    warrior: "Josh Knapp",
-    description: "I rode a goat 37 miles",
-    joint: false,
-    date: "2021-02-12",
-  },
-  {
-    warrior: "Riah Knapp",
-    description: "I did calisthenics",
-    joint: false,
-    date: "2021-02-11",
-  },
-  {
-    warrior: "Ben Tissell",
-    description: "Taylor and I jumped on a trampoline for 7 hours",
-    joint: true,
-    date: "2021-02-10",
-  },
-];
+// const workouts = [
+//   {
+//     warrior: "Josh Knapp",
+//     description: "I rode a goat 37 miles",
+//     joint: false,
+//     date: "2021-02-12",
+//   },
+//   {
+//     warrior: "Riah Knapp",
+//     description: "I did calisthenics",
+//     joint: false,
+//     date: "2021-02-11",
+//   },
+//   {
+//     warrior: "Ben Tissell",
+//     description: "Taylor and I jumped on a trampoline for 7 hours",
+//     joint: true,
+//     date: "2021-02-10",
+//   },
+// ];
 
 const totalWarriors = 15;
-const currentDate = "2021-02-08"; // moment();
+const currentDate = moment(); // moment();
 
 function BattleOfFyetnas() {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [activePage, setActivePage] = useState("Battle");
   const [show, setShow] = useState(false);
+  const [workouts, setWorkouts] = useState([]);
+
+  //workout stuff
+  const [warrior, setWarrior] = useState("");
+  const [description, setDescription] = useState("");
+  const [joint, setJoint] = useState(false);
+
+  const isMounted = useIsMounted();
 
   function sendEmail(e) {
     e.preventDefault();
@@ -210,6 +222,24 @@ function BattleOfFyetnas() {
       );
   }
 
+  async function addWorkout() {
+    setShow(false);
+
+    const data = { warrior, description, joint };
+    await API.graphql(graphqlOperation(createWorkout, { input: data }));
+  }
+
+  useEffect(() => {
+    async function fetchData() {
+      const items = await API.graphql({ query: queries.listWorkouts });
+
+      const fetchedWorkouts = items.data.listWorkouts.items;
+      if (isMounted.current) setWorkouts(fetchedWorkouts);
+    }
+
+    fetchData();
+  }, [isMounted]);
+
   return (
     <Col className="px-0">
       <Row style={{ backgroundColor: "#e2b065" }}>
@@ -224,14 +254,15 @@ function BattleOfFyetnas() {
           <h1 className="mt-3 mb-0" style={{ fontFamily: "MedievalSharp" }}>
             <span>The Battle of Fyetna&#347;</span>{" "}
             <Badge
-              style={{
-                lineHeight: "1.4rem",
-                paddingTop: "20px",
-                backgroundColor: "#bd1818",
-                color: "white",
-              }}
+              // style={{
+              //   lineHeight: "1.4rem",
+              //   paddingTop: "20px",
+              //   backgroundColor: "#bd1818",
+              //   color: "white",
+              // }}
+              variant="success"
             >
-              Feb 7 - Mar 6
+              Active
             </Badge>
           </h1>
           <div style={{ transform: "translateY(-10px)" }}>
@@ -244,7 +275,7 @@ function BattleOfFyetnas() {
             activeKey={activePage}
             onSelect={(selectedKey) => setActivePage(selectedKey)}
           >
-            {["Details", "Battle", "FAQ"].map((page) => (
+            {["Battle", "Details", "FAQ"].map((page) => (
               <Nav.Item key={page}>
                 <Nav.Link eventKey={page} className="pl-0">
                   <h4
@@ -266,13 +297,6 @@ function BattleOfFyetnas() {
         <>
           <Row style={{ backgroundColor: "#e2b065" }}>
             <Col lg={2} className="p-4 bg-transparent"></Col>
-            <Col lg={8} className="mb-3 text-center font-weight-bold">
-              COMING TODAY (SUNDAY)
-            </Col>
-            <Col lg={2} className="p-4 bg-transparent"></Col>
-          </Row>
-          <Row style={{ backgroundColor: "#e2b065" }}>
-            <Col lg={2} className="p-4 bg-transparent"></Col>
             <Col lg={3} className="bg-transparent">
               {warlords.map(
                 (
@@ -291,8 +315,25 @@ function BattleOfFyetnas() {
                   if (
                     moment(currentDate).isBetween(moment(start), moment(end))
                   ) {
+                    const workoutsDuringTimeframe = workouts.filter((wo) =>
+                      moment(wo.createdAt).isBetween(moment(start), moment(end))
+                    );
+                    const totalHits = workoutsDuringTimeframe.reduce(
+                      (acc, curr) => {
+                        if (curr.joint) {
+                          return acc + 2;
+                        } else {
+                          return acc + 1;
+                        }
+                      },
+                      0
+                    );
+                    const progress = ((health - totalHits) / health) * 100;
                     return (
-                      <Card className="text-center bg-dark text-light mb-2">
+                      <Card
+                        className="text-center bg-dark text-light mb-2"
+                        key={i}
+                      >
                         <div className="position-absolute ml-2 mt-1">
                           <small className="float-left text-muted">
                             Week {i + 1}
@@ -310,7 +351,7 @@ function BattleOfFyetnas() {
                             }}
                           />
                           <div className="mb-3">"{sayings[0]}"</div>
-                          <ProgressBar now={60} />
+                          <ProgressBar now={progress} />
                           <small>STRENGTH</small>
                         </Card.Body>
                       </Card>
@@ -322,6 +363,7 @@ function BattleOfFyetnas() {
                           className={`bg-${
                             defeated ? "success" : "danger"
                           } text-light mb-2`}
+                          key={i}
                         >
                           <Card.Body className="mt-2 align-middle text-center p-1">
                             <h3>
@@ -335,7 +377,7 @@ function BattleOfFyetnas() {
                     }
 
                     return (
-                      <Card className="bg-dark text-light mb-2">
+                      <Card className="bg-dark text-light mb-2" key={i}>
                         <div className="position-absolute ml-2 mt-1 d-block">
                           <small className="float-left text-muted">
                             Week {i + 1}
@@ -377,8 +419,11 @@ function BattleOfFyetnas() {
                   Add workout
                 </Button>
               </div>
-              {workouts.map(({ warrior, description, joint, date }) => (
-                <Card className="bg-dark text-light mb-2">
+              {!workouts || workouts.length === 0 ? (
+                <div>No workouts</div>
+              ) : null}
+              {workouts.map(({ warrior, description, joint, date }, i) => (
+                <Card className="bg-dark text-light mb-2" key={i}>
                   <Card.Body>
                     <Row>
                       <Col lg="2" className="pr-0">
@@ -787,10 +832,16 @@ function BattleOfFyetnas() {
       <Modal show={show} onHide={() => setShow(false)}>
         <Modal.Body className="bg-dark text-light">
           <Form.Label className="mb-0 text-light">Your name</Form.Label>
-          <Form.Control as="select" rows={2} name="skill">
+          <Form.Control
+            as="select"
+            rows={2}
+            name="skill"
+            value={warrior}
+            onChange={(e) => setWarrior(e.target.value)}
+          >
             <option></option>
             {Object.keys(warriors).map((warr) => (
-              <option>{warr}</option>
+              <option key={warr}>{warr}</option>
             ))}
           </Form.Control>
           <div className="py-2" />
@@ -801,16 +852,24 @@ function BattleOfFyetnas() {
             as="textarea"
             rows={2}
             className="bg-dark border-secondary text-light"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
           />
           <div className="py-2" />
-          <Form.Check type="checkbox" label="Joint?" />
+          <Form.Check
+            type="checkbox"
+            label="Worked out with other warriors"
+            checked={joint}
+            onChange={() => setJoint(!joint)}
+          />
         </Modal.Body>
 
-        <Modal.Footer className="bg-dark border-dark">
+        <Modal.Footer className="bg-dark border-dark text-light">
+          <span className="mr-2">Max: 1 workout/day, 5 workouts/wk</span>
           <Button variant="secondary" onClick={() => setShow(false)}>
             Close
           </Button>
-          <Button variant="success" onClick={() => setShow(false)}>
+          <Button variant="success" onClick={addWorkout}>
             Save
           </Button>
         </Modal.Footer>
