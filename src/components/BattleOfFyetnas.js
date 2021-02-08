@@ -514,7 +514,9 @@ const WarlordFuture = ({ warlord, weekNum }) => {
 };
 
 const Workout = ({ workout }) => {
-  const { warrior, date, description, joint } = workout;
+  const { warrior, createdAt, description, joint } = workout;
+  console.log(createdAt);
+  console.log(moment(createdAt).format("dddd, MMMM Do"));
   return (
     <Card className="bg-dark text-light mb-2">
       <Card.Body>
@@ -532,7 +534,7 @@ const Workout = ({ workout }) => {
           <Col lg="8" className="pl-2">
             <div>
               <small className="text-muted">
-                {moment(date).format("dddd, MMMM Do")}
+                {moment(createdAt).format("dddd, MMMM Do")}
               </small>
             </div>
             <div>{description}</div>
