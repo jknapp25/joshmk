@@ -515,21 +515,27 @@ const WarlordFuture = ({ warlord, weekNum }) => {
 
 const Workout = ({ workout }) => {
   const { warrior, createdAt, description, joint } = workout;
-  console.log(createdAt);
-  console.log(moment(createdAt).format("dddd, MMMM Do"));
   return (
     <Card className="bg-dark text-light mb-2">
       <Card.Body>
         <Row>
           <Col lg="2" className="pr-0">
-            <Image
-              src={warriors[warrior].image}
-              roundedCircle
+            <div
               style={{
                 width: "60px",
                 height: "60px",
+                borderRadius: "50%",
+                position: "relative",
+                overflow: "hidden",
               }}
-            />
+            >
+              <Image
+                src={warriors[warrior].image}
+                roundedCircle
+                style={circularImage}
+                title={warriors[warrior].phoneNumber}
+              />
+            </div>
           </Col>
           <Col lg="8" className="pl-2">
             <div>
