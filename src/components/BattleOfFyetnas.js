@@ -212,10 +212,10 @@ function BattleOfFyetnas() {
                 <Card.Body>
                   <p>
                     Day one, the warriors launched a surprise attack, taking
-                    Vilkyu off-guard. Many hits were dealt, including two highly
-                    effective blows in which sorcerers Garrett and Lilly
-                    combined their powers and obliterated his active spell
-                    working to convince the warriors that no ones cares.
+                    Vilkyu off-guard. Many hits were dealt, including one highly
+                    effective blow in which sorcerers Garrett and Lilly combined
+                    their powers and obliterated his active spell working to
+                    convince the warriors that no ones cares.
                   </p>
                   <p className="mb-0">An epic start to a crucial battle!</p>
                 </Card.Body>
@@ -595,6 +595,7 @@ const Workout = ({ workout }) => {
               {warriors[warrior].skill === "sorcerer" ? (
                 <GiMoebiusStar
                   className="mr-1"
+                  title="sorcerer"
                   style={{
                     display: "inline",
                     color: "#2feca7",
@@ -604,6 +605,7 @@ const Workout = ({ workout }) => {
               {warriors[warrior].skill === "gladiator" ? (
                 <GiSharpAxe
                   className="mr-1"
+                  title="gladiator"
                   style={{
                     display: "inline",
                     color: "#ec6d2f",
@@ -613,6 +615,7 @@ const Workout = ({ workout }) => {
               {warriors[warrior].skill === "archer" ? (
                 <GiPocketBow
                   className="mr-1"
+                  title="archer"
                   style={{
                     display: "inline",
                     color: "#ecdf2f",
@@ -622,6 +625,7 @@ const Workout = ({ workout }) => {
               {warriors[warrior].skill === "huntress" ? (
                 <GiThrownKnife
                   className="mr-1"
+                  title="huntress"
                   style={{
                     display: "inline",
                     color: "#ecdf2f",
