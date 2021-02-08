@@ -26,7 +26,7 @@ import taylor from "../assets/tay.jpg";
 import natalie from "../assets/natalie.jpg";
 import garrett from "../assets/garrett.jpg";
 import lilly from "../assets/lilly.jpg";
-import nathan from "../assets/nathan.jpg";
+import nathan from "../assets/nathan2.jpg";
 import james from "../assets/james.jpg";
 import emailjs, { init } from "emailjs-com";
 import { API, graphqlOperation } from "aws-amplify";
@@ -38,158 +38,10 @@ export default BattleOfFyetnas;
 
 init("user_YmjT0y9RWFvhcFf32gw1i");
 
-const warlordStyles = { width: "180px", height: "180px" };
-const circular = {
-  width: "80px",
-  height: "80px",
-  borderRadius: "50%",
-  position: "relative",
-  overflow: "hidden",
-};
-const circularImage = {
-  maxWidth: "100%",
-  width: "auto",
-  height: "auto",
-  position: "absolute",
-  left: "50%",
-  top: "50%",
-  transform: "translate(-50%, -50%)",
-};
-
-const warriors = {
-  "Riah Knapp": {
-    name: "Riah Knapp",
-    skill: "sorcerer",
-    image: riah,
-    phoneNumber: "+1 541-231-8973",
-  },
-  "Ben Tissell": {
-    name: "Ben Tissell",
-    skill: "archer",
-    image: ben,
-    phoneNumber: "+1 503-307-6484",
-  },
-  "Josh Knapp": {
-    name: "Josh Knapp",
-    skill: "sorcerer",
-    image: josh,
-    phoneNumber: "+1 541-368-8091",
-  },
-  "Taylor Rassi": {
-    name: "Taylor Rassi",
-    skill: "gladiator",
-    image: taylor,
-    phoneNumber: "+1 503-593-8657",
-  },
-  Natalie: {
-    name: "Natalie",
-    skill: "huntress",
-    image: natalie,
-    phoneNumber: "+1 541-760-9656",
-  },
-  "Garrett Tams": {
-    name: "Garrett Tams",
-    skill: "sorcerer",
-    image: garrett,
-    phoneNumber: "+1 775-830-2345",
-  },
-  "Lilly Tams": {
-    name: "Lilly Tams",
-    skill: "sorcerer",
-    image: lilly,
-    phoneNumber: "+1 503-544-6116",
-  },
-  "Nathan A Walker": {
-    name: "Nathan A Walker",
-    skill: "sorcerer",
-    image: nathan,
-    phoneNumber: "+1 503-914-8148",
-  },
-  "James Sheu": {
-    name: "James Sheu",
-    skill: "sorcerer",
-    image: james,
-    phoneNumber: "+1 559-283-3584",
-  },
-};
-const warlords = [
-  {
-    name: "Vilkyu",
-    health: 60,
-    description: "demon of loneliness",
-    image: warlord1,
-    start: "2021-02-07",
-    end: "2021-02-13",
-    sayings: [
-      "No one really cares!",
-      "Doing things for yourself takes away time for socializing",
-    ],
-    defeated: false,
-  },
-  {
-    name: "Muldur",
-    health: 65,
-    description: "demon of shame",
-    image: warlord2,
-    start: "2021-02-14",
-    end: "2021-02-20",
-    sayings: ["You'll never have the body you want", "Self-care is selfish!"],
-    defeated: false,
-  },
-  {
-    name: "Ziir",
-    health: 70,
-    description: "demon of purposelessness",
-    image: warlord3,
-    start: "2021-02-21",
-    end: "2021-02-27",
-    sayings: [
-      "What's the point of all this?!",
-      "Doing things for yourself takes away time for socializing",
-    ],
-    defeated: false,
-  },
-  {
-    name: "Bradock",
-    health: 75,
-    description: "demon of fear",
-    image: warlord4,
-    start: "2021-02-28",
-    end: "2021-03-06",
-    sayings: [
-      "What if you get hurt?",
-      "Doing things for yourself takes away time for socializing",
-    ],
-    defeated: false,
-  },
-];
-
-// const workouts = [
-//   {
-//     warrior: "Josh Knapp",
-//     description: "I rode a goat 37 miles",
-//     joint: false,
-//     date: "2021-02-12",
-//   },
-//   {
-//     warrior: "Riah Knapp",
-//     description: "I did calisthenics",
-//     joint: false,
-//     date: "2021-02-11",
-//   },
-//   {
-//     warrior: "Ben Tissell",
-//     description: "Taylor and I jumped on a trampoline for 7 hours",
-//     joint: true,
-//     date: "2021-02-10",
-//   },
-// ];
-
-const totalWarriors = 15;
-const currentDate = moment(); // moment();
+const totalAllowedWarriors = 15;
+const currentDate = moment();
 
 function BattleOfFyetnas() {
-  const [submitSuccess, setSubmitSuccess] = useState(false);
   const [activePage, setActivePage] = useState("Battle");
   const [show, setShow] = useState(false);
   const [workouts, setWorkouts] = useState([]);
@@ -200,27 +52,6 @@ function BattleOfFyetnas() {
   const [joint, setJoint] = useState(false);
 
   const isMounted = useIsMounted();
-
-  function sendEmail(e) {
-    e.preventDefault();
-
-    emailjs
-      .sendForm(
-        "service_pwc7pql",
-        "template_b21nihq",
-        e.target,
-        "user_YmjT0y9RWFvhcFf32gw1i"
-      )
-      .then(
-        () => setSubmitSuccess(true),
-        (error) => {
-          alert(
-            "Could not send your submission. Please make sure your avatar is smaller than 500kb. If the issue continues, call/text Josh at 541-368-8091."
-          );
-          console.log(error.text);
-        }
-      );
-  }
 
   async function addWorkout() {
     setShow(false);
@@ -253,17 +84,7 @@ function BattleOfFyetnas() {
         >
           <h1 className="mt-3 mb-0" style={{ fontFamily: "MedievalSharp" }}>
             <span>The Battle of Fyetna&#347;</span>{" "}
-            <Badge
-              // style={{
-              //   lineHeight: "1.4rem",
-              //   paddingTop: "20px",
-              //   backgroundColor: "#bd1818",
-              //   color: "white",
-              // }}
-              variant="success"
-            >
-              Active
-            </Badge>
+            <Badge variant="success">Active</Badge>
           </h1>
           <div style={{ transform: "translateY(-10px)" }}>
             <small className="text-muted">
@@ -275,7 +96,7 @@ function BattleOfFyetnas() {
             activeKey={activePage}
             onSelect={(selectedKey) => setActivePage(selectedKey)}
           >
-            {["Battle", "Details", "FAQ"].map((page) => (
+            {["Details", "Battle", "FAQ"].map((page) => (
               <Nav.Item key={page}>
                 <Nav.Link eventKey={page} className="pl-0">
                   <h4
@@ -298,114 +119,53 @@ function BattleOfFyetnas() {
           <Row style={{ backgroundColor: "#e2b065" }}>
             <Col lg={2} className="p-4 bg-transparent"></Col>
             <Col lg={3} className="bg-transparent">
-              {warlords.map(
-                (
-                  {
-                    name,
-                    description,
-                    image,
-                    sayings,
-                    start,
-                    end,
-                    health,
-                    defeated,
-                  },
-                  i
-                ) => {
-                  if (
-                    moment(currentDate).isBetween(moment(start), moment(end))
-                  ) {
-                    const workoutsDuringTimeframe = workouts.filter((wo) =>
-                      moment(wo.createdAt).isBetween(moment(start), moment(end))
-                    );
-                    const totalHits = workoutsDuringTimeframe.reduce(
-                      (acc, curr) => {
-                        if (curr.joint) {
-                          return acc + 2;
-                        } else {
-                          return acc + 1;
-                        }
-                      },
-                      0
-                    );
-                    const progress = ((health - totalHits) / health) * 100;
-                    return (
-                      <Card
-                        className="text-center bg-dark text-light mb-2"
-                        key={i}
-                      >
-                        <div className="position-absolute ml-2 mt-1">
-                          <small className="float-left text-muted">
-                            Week {i + 1}
-                          </small>
-                        </div>
-                        <Card.Body>
-                          <h4 className="mb-0">{name}</h4>
-                          <div className="mb-2">{description}</div>
-                          <Image
-                            src={image}
-                            roundedCircle
-                            style={{
-                              width: "260px",
-                              height: "260px",
-                            }}
-                          />
-                          <div className="mb-3">"{sayings[0]}"</div>
-                          <ProgressBar now={progress} />
-                          <small>STRENGTH</small>
-                        </Card.Body>
-                      </Card>
-                    );
-                  } else {
-                    if (moment(currentDate).isAfter(moment(end))) {
-                      return (
-                        <Card
-                          className={`bg-${
-                            defeated ? "success" : "danger"
-                          } text-light mb-2`}
-                          key={i}
-                        >
-                          <Card.Body className="mt-2 align-middle text-center p-1">
-                            <h3>
-                              {defeated
-                                ? `Defeated ${name}`
-                                : `${name} survived`}
-                            </h3>
-                          </Card.Body>
-                        </Card>
-                      );
-                    }
-
-                    return (
-                      <Card className="bg-dark text-light mb-2" key={i}>
-                        <div className="position-absolute ml-2 mt-1 d-block">
-                          <small className="float-left text-muted">
-                            Week {i + 1}
-                          </small>
-                        </div>
-                        <Card.Body className="mt-2 align-middle">
-                          <Row>
-                            <Col lg="3" className="pr-0">
-                              <Image
-                                src={image}
-                                roundedCircle
-                                style={{
-                                  width: "60px",
-                                  height: "60px",
-                                }}
-                              />
-                            </Col>
-                            <Col lg="9" className="pl-2">
-                              <h4 className="mb-0">{name}</h4>
-                              <div className="mb-2">{description}</div>
-                            </Col>
-                          </Row>
-                        </Card.Body>
-                      </Card>
-                    );
+              {warlords.map((warlord, i) => {
+                if (
+                  moment(currentDate).isBetween(
+                    moment(warlord.start),
+                    moment(warlord.end)
+                  )
+                ) {
+                  const workoutsDuringTimeframe = workouts.filter((wo) =>
+                    moment(wo.createdAt).isBetween(
+                      moment(warlord.start),
+                      moment(warlord.end)
+                    )
+                  );
+                  const totalHits = workoutsDuringTimeframe.reduce(
+                    (acc, curr) => {
+                      if (curr.joint) {
+                        return acc + 2;
+                      } else {
+                        return acc + 1;
+                      }
+                    },
+                    0
+                  );
+                  const progress =
+                    ((warlord.health - totalHits) / warlord.health) * 100;
+                  return (
+                    <WarlordActive
+                      key={warlord.name}
+                      warlord={warlord}
+                      progress={progress}
+                      weekNum={i + 1}
+                    />
+                  );
+                } else {
+                  if (moment(currentDate).isAfter(moment(warlord.end))) {
+                    return <WarlordPast key={warlord.name} warlord={warlord} />;
                   }
+
+                  return (
+                    <WarlordFuture
+                      key={warlord.name}
+                      warlord={warlord}
+                      weekNum={i + 1}
+                    />
+                  );
                 }
-              )}
+              })}
             </Col>
             <Col lg={5} className="bg-transparent">
               {/* <Calendar /> */}
@@ -422,37 +182,8 @@ function BattleOfFyetnas() {
               {!workouts || workouts.length === 0 ? (
                 <div>No workouts</div>
               ) : null}
-              {workouts.map(({ warrior, description, joint, date }, i) => (
-                <Card className="bg-dark text-light mb-2" key={i}>
-                  <Card.Body>
-                    <Row>
-                      <Col lg="2" className="pr-0">
-                        <Image
-                          src={warriors[warrior].image}
-                          roundedCircle
-                          style={{
-                            width: "60px",
-                            height: "60px",
-                          }}
-                        />
-                      </Col>
-                      <Col lg="8" className="pl-2">
-                        <div>
-                          <small className="text-muted">
-                            {moment(date).format("dddd, MMMM Do")}
-                          </small>
-                        </div>
-                        <div>{description}</div>
-                      </Col>
-                      <Col
-                        lg="2"
-                        className="text-right text-success font-weight-bold"
-                      >
-                        +{joint ? "2 hits" : "1 hit"}
-                      </Col>
-                    </Row>
-                  </Card.Body>
-                </Card>
+              {workouts.map((workout, i) => (
+                <Workout key={i} workout={workout} warriors={warriors} />
               ))}
             </Col>
             <Col lg={2} className="p-4 bg-transparent"></Col>
@@ -562,151 +293,16 @@ function BattleOfFyetnas() {
               </p>
               <h3 style={{ fontFamily: "MedievalSharp" }}>
                 Warriors:{"  "}
-                {totalWarriors - Object.keys(warriors).length} more needed
+                {totalAllowedWarriors - Object.keys(warriors).length} more
+                needed
               </h3>
-              <Table className="border-bottom border-top border-dark">
-                <tbody>
-                  <tr>
-                    {Object.keys(warriors)
-                      .slice(0, 5)
-                      .map((warrior, i) => (
-                        <td align="center" className="border-0" key={i}>
-                          <div style={circular}>
-                            <Image
-                              src={warriors[warrior].image}
-                              roundedCircle
-                              style={circularImage}
-                              title={warriors[warrior].phoneNumber}
-                            />
-                          </div>
-                          <div>{warriors[warrior].name}</div>
-                          <div style={{ lineHeight: "1em", color: "#bd1818" }}>
-                            <small>{warriors[warrior].skill}</small>
-                          </div>
-                        </td>
-                      ))}
-                  </tr>
-                  <tr>
-                    {Object.keys(warriors)
-                      .slice(5, 9)
-                      .map((warrior, i) => (
-                        <td align="center" className="border-0" key={i}>
-                          <div style={circular}>
-                            <Image
-                              src={warriors[warrior].image}
-                              roundedCircle
-                              style={circularImage}
-                              title={warriors[warrior].phoneNumber}
-                            />
-                          </div>
-                          <div>{warriors[warrior].name}</div>
-                          <div style={{ lineHeight: "1em", color: "#bd1818" }}>
-                            <small>{warriors[warrior].skill}</small>
-                          </div>
-                        </td>
-                      ))}
-                    <td className="border-0"></td>
-                  </tr>
-                </tbody>
-              </Table>
+
+              <WarriorTable warriors={warriors} />
 
               <div className="py-2" />
 
-              {submitSuccess ? (
-                <div
-                  className="p-3 text-center"
-                  style={{ backgroundColor: "green", color: "white" }}
-                >
-                  <h1 style={{ fontFamily: "MedievalSharp" }}>
-                    You have enlisted!
-                  </h1>
-                  <p className="mb-0">
-                    You will be added to the warriors list today.
-                  </p>
-                </div>
-              ) : (
-                <Form id="enlist-form" onSubmit={sendEmail}>
-                  <Card
-                    style={{
-                      backgroundColor: "#212529",
-                      border: "4px solid #bd1818",
-                    }}
-                  >
-                    <Card.Body>
-                      <Form.Label className="mb-1 text-light">Name</Form.Label>
-                      <Form.Control type="text" name="name" />
-                      <div className="py-2" />
-                      <Form.Label className="mb-1 text-light">
-                        Phone Number
-                      </Form.Label>
-                      <Form.Control type="text" name="phone" />
-                      <div className="py-2" />
-                      <Form.Label className="mb-0 text-light">
-                        Primary Skill
-                      </Form.Label>
-                      <small className="text-muted d-block mb-2">
-                        Select a skill...
-                      </small>
-                      <Form.Control as="select" name="skill">
-                        <option></option>
-                        <option>Archer (runner)</option>
-                        <option>Knight (bicyclist)</option>
-                        <option>Gladiator (weights/calisthenics)</option>
-                        <option>Sorcerer (multiple)</option>
-                      </Form.Control>
-                      <div className="py-2" />
-                      <Form.Label className="mb-0 text-light">
-                        Avatar
-                      </Form.Label>
-                      <small className="text-muted d-block mb-2">
-                        Max image size: 500kb
-                      </small>
-                      <ImageUploader
-                        images={[]}
-                        afterEdit={() => {}}
-                        fieldId="avatar"
-                        fieldName="avatar_attachment"
-                        fieldLabel="Avatar"
-                        multiple={false}
-                        imageDisplayName="avatar"
-                        fileSizeLimit={0.5}
-                      />
-                      <div className="py-1" />
-                      <Form.Label className="text-light mb-0">
-                        Address
-                      </Form.Label>
-                      <small className="text-muted d-block mb-2">
-                        For a small victory gift
-                      </small>
-                      <Form.Control
-                        type="text"
-                        className="mb-2"
-                        name="address"
-                      />
-                    </Card.Body>
-                    <Card.Footer className="p-0">
-                      <Button
-                        size="lg"
-                        className="submit-btn"
-                        block
-                        style={{
-                          borderRadius: "0px",
-                          backgroundColor: "#bd1818",
-                          borderColor: "#bd1818",
-                        }}
-                        type="submit"
-                      >
-                        <h1
-                          className="pt-2"
-                          style={{ fontFamily: "MedievalSharp" }}
-                        >
-                          Join the Battle
-                        </h1>
-                      </Button>
-                    </Card.Footer>
-                  </Card>
-                </Form>
-              )}
+              <EnlistForm />
+
               <div className="py-3" />
             </>
           </Col>
@@ -735,90 +331,7 @@ function BattleOfFyetnas() {
             lg={6}
             className="hidden-xs bg-transparent"
           >
-            <p>
-              <strong>What was the original motivation behind this?</strong>
-            </p>
-            <p>
-              It was clear that many people in my circles (Josh) are desiring to
-              be healthier and put in place workout habits. I'm hoping that a
-              month of 5+ workouts a week, and some peer accountability will
-              help kick-off this habit for people.
-            </p>
-            <p>
-              <strong>How many hits does it take to kill a warlord?</strong>
-            </p>
-            <ul>
-              <li>Vilkyu: 60</li>
-              <li>Muldur: 65</li>
-              <li>Ziir: 70</li>
-              <li>Bradock: 75</li>
-            </ul>
-            <p>
-              <strong>How many warriors will enlist?</strong>
-            </p>
-            <p>15 maximum</p>
-            <p>
-              <strong>Does my goal have to be 5 days of the week?</strong>
-            </p>
-            <p>
-              Yes. That is how a reasonable number of required hits is
-              determined to defeat each warlord.
-            </p>
-            <p>
-              <strong>How will we keep track of our progress?</strong>
-            </p>
-            <p>
-              Each warrior will visit this page daily to check off that they
-              completed their workout. Future battles will include integrations
-              with apps like Strava and Nike+ for automated logging.
-            </p>
-            <p>
-              <strong>What kind of workouts can I do?</strong>
-            </p>
-            <p>Any kind you want!</p>
-            <p>
-              <strong>Are joint workouts worth more?</strong>
-            </p>
-            <p>
-              Yes, joint workouts will earn 2 hits per person that attended. For
-              example: 3 people ran together = 3 * 2 = 6 hits.
-            </p>
-            <p>
-              <strong>
-                Do I have to input my progress on the desktop version of this
-                page?
-              </strong>
-            </p>
-            <p>
-              Yes, for now. Josh is also working on a mobile version of this
-              page, but it's unclear when that will be ready.
-            </p>
-            <p>
-              <strong>What happens if we fall behind?</strong>
-            </p>
-            <p>
-              If you are not able to do a workout, this needs to be communicated
-              to the others so that they can do joint workouts to recuperate
-              hits. If you hover over people's avatars, you will see their phone
-              number.
-            </p>
-            <p>
-              <strong>
-                Do joint workouts count for 2 hits if they are done with someone
-                that is not in the warriors list?
-              </strong>
-            </p>
-            <p>No, just 1 hit</p>
-            <p>
-              <strong>
-                If I do more than one workout in a day, can I count all of them?
-              </strong>
-            </p>
-            <p>
-              No, just one workout will count for that day. If that was allowed,
-              one person could do 5 workouts in a day and it would defeat the
-              purpose of collaboration.
-            </p>
+            <FAQ warlords={warlords} />
           </Col>
           <Col
             xs={12}
@@ -862,10 +375,12 @@ function BattleOfFyetnas() {
             checked={joint}
             onChange={() => setJoint(!joint)}
           />
+          <div className="py-2" />
+          <span>*NOTE - Max: 1 workout/day, 5 workouts/wk</span>
         </Modal.Body>
 
         <Modal.Footer className="bg-dark border-dark text-light">
-          <span className="mr-2">Max: 1 workout/day, 5 workouts/wk</span>
+          <span className="mr-2">Refresh after saving</span>
           <Button variant="secondary" onClick={() => setShow(false)}>
             Close
           </Button>
@@ -877,3 +392,481 @@ function BattleOfFyetnas() {
     </Col>
   );
 }
+
+/**
+ * Helper components
+ */
+
+const WarriorTable = () => {
+  return (
+    <Table className="border-bottom border-top border-dark">
+      <tbody>
+        <tr>
+          {Object.keys(warriors)
+            .slice(0, 5)
+            .map((warrior, i) => (
+              <td align="center" className="border-0" key={i}>
+                <div style={circular}>
+                  <Image
+                    src={warriors[warrior].image}
+                    roundedCircle
+                    style={circularImage}
+                    title={warriors[warrior].phoneNumber}
+                  />
+                </div>
+                <div>{warriors[warrior].name}</div>
+                <div style={{ lineHeight: "1em", color: "#bd1818" }}>
+                  <small>{warriors[warrior].skill}</small>
+                </div>
+              </td>
+            ))}
+        </tr>
+        <tr>
+          {Object.keys(warriors)
+            .slice(5, 9)
+            .map((warrior, i) => (
+              <td align="center" className="border-0" key={i}>
+                <div style={circular}>
+                  <Image
+                    src={warriors[warrior].image}
+                    roundedCircle
+                    style={circularImage}
+                    title={warriors[warrior].phoneNumber}
+                  />
+                </div>
+                <div>{warriors[warrior].name}</div>
+                <div style={{ lineHeight: "1em", color: "#bd1818" }}>
+                  <small>{warriors[warrior].skill}</small>
+                </div>
+              </td>
+            ))}
+          <td className="border-0"></td>
+        </tr>
+      </tbody>
+    </Table>
+  );
+};
+
+const WarlordPast = ({ warlord }) => {
+  const { name, defeated } = warlord;
+  return (
+    <Card className={`bg-${defeated ? "success" : "danger"} text-light mb-2`}>
+      <Card.Body className="mt-2 align-middle text-center p-1">
+        <h3>{defeated ? `Defeated ${name}` : `${name} survived`}</h3>
+      </Card.Body>
+    </Card>
+  );
+};
+const WarlordActive = ({ warlord, progress, weekNum }) => {
+  const { name, description, image, sayings } = warlord;
+  const saying = sayings[moment(currentDate).day()];
+  return (
+    <Card className="text-center bg-dark text-light mb-2">
+      <div className="position-absolute ml-2 mt-1">
+        <small className="float-left text-muted">Week {weekNum}</small>
+      </div>
+      <Card.Body>
+        <h4 className="mb-0">{name}</h4>
+        <div className="mb-2">{description}</div>
+        <Image
+          src={image}
+          roundedCircle
+          style={{
+            width: "260px",
+            height: "260px",
+          }}
+        />
+        <div className="mb-3">"{saying}"</div>
+        <ProgressBar now={progress} />
+        <small>STRENGTH</small>
+      </Card.Body>
+    </Card>
+  );
+};
+
+const WarlordFuture = ({ warlord, weekNum }) => {
+  const { image, name, description } = warlord;
+  return (
+    <Card className="bg-dark text-light mb-2">
+      <div className="position-absolute ml-2 mt-1 d-block">
+        <small className="float-left text-muted">Week {weekNum}</small>
+      </div>
+      <Card.Body className="mt-2 align-middle">
+        <Row>
+          <Col lg="3" className="pr-0">
+            <Image
+              src={image}
+              roundedCircle
+              style={{
+                width: "60px",
+                height: "60px",
+              }}
+            />
+          </Col>
+          <Col lg="9" className="pl-2">
+            <h4 className="mb-0">{name}</h4>
+            <div className="mb-2">{description}</div>
+          </Col>
+        </Row>
+      </Card.Body>
+    </Card>
+  );
+};
+
+const Workout = ({ workout }) => {
+  const { warrior, date, description, joint } = workout;
+  return (
+    <Card className="bg-dark text-light mb-2">
+      <Card.Body>
+        <Row>
+          <Col lg="2" className="pr-0">
+            <Image
+              src={warriors[warrior].image}
+              roundedCircle
+              style={{
+                width: "60px",
+                height: "60px",
+              }}
+            />
+          </Col>
+          <Col lg="8" className="pl-2">
+            <div>
+              <small className="text-muted">
+                {moment(date).format("dddd, MMMM Do")}
+              </small>
+            </div>
+            <div>{description}</div>
+          </Col>
+          <Col lg="2" className="text-right text-success font-weight-bold">
+            +{joint ? "2 hits" : "1 hit"}
+          </Col>
+        </Row>
+      </Card.Body>
+    </Card>
+  );
+};
+
+const FAQ = () => {
+  return (
+    <>
+      <p>
+        <strong>What was the original motivation behind this?</strong>
+      </p>
+      <p>
+        It was clear that many people in my circles (Josh) are desiring to be
+        healthier and put in place workout habits. I'm hoping that a month of 5+
+        workouts a week, and some peer accountability will help kick-off this
+        habit for people.
+      </p>
+      <p>
+        <strong>How many hits does it take to kill a warlord?</strong>
+      </p>
+      <ul>
+        {warlords.map(({ name, health }) => (
+          <li key={name}>
+            {name}: {health}
+          </li>
+        ))}
+      </ul>
+      <p>
+        <strong>How many warriors will enlist?</strong>
+      </p>
+      <p>15 maximum</p>
+      <p>
+        <strong>Does my goal have to be 5 days of the week?</strong>
+      </p>
+      <p>
+        Yes. That is how a reasonable number of required hits is determined to
+        defeat each warlord.
+      </p>
+      <p>
+        <strong>How will we keep track of our progress?</strong>
+      </p>
+      <p>
+        Each warrior will visit this page daily to check off that they completed
+        their workout. Future battles will include integrations with apps like
+        Strava and Nike+ for automated logging.
+      </p>
+      <p>
+        <strong>What kind of workouts can I do?</strong>
+      </p>
+      <p>Any kind you want!</p>
+      <p>
+        <strong>Are joint workouts worth more?</strong>
+      </p>
+      <p>
+        Yes, joint workouts will earn 2 hits per person that attended. For
+        example: 3 people ran together = 3 * 2 = 6 hits.
+      </p>
+      <p>
+        <strong>
+          Do I have to input my progress on the desktop version of this page?
+        </strong>
+      </p>
+      <p>
+        Yes, for now. Josh is also working on a mobile version of this page, but
+        it's unclear when that will be ready.
+      </p>
+      <p>
+        <strong>What happens if we fall behind?</strong>
+      </p>
+      <p>
+        If you are not able to do a workout, this needs to be communicated to
+        the others so that they can do joint workouts to recuperate hits. If you
+        hover over people's avatars, you will see their phone number.
+      </p>
+      <p>
+        <strong>
+          Do joint workouts count for 2 hits if they are done with someone that
+          is not in the warriors list?
+        </strong>
+      </p>
+      <p>No, just 1 hit</p>
+      <p>
+        <strong>
+          If I do more than one workout in a day, can I count all of them?
+        </strong>
+      </p>
+      <p>
+        No, just one workout will count for that day. If that was allowed, one
+        person could do 5 workouts in a day and it would defeat the purpose of
+        collaboration.
+      </p>
+    </>
+  );
+};
+
+const EnlistForm = () => {
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  function sendEmail(e) {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_pwc7pql",
+        "template_b21nihq",
+        e.target,
+        "user_YmjT0y9RWFvhcFf32gw1i"
+      )
+      .then(
+        () => setSubmitSuccess(true),
+        (error) => {
+          alert(
+            "Could not send your submission. Please make sure your avatar is smaller than 500kb. If the issue continues, call/text Josh at 541-368-8091."
+          );
+          console.log(error.text);
+        }
+      );
+  }
+
+  return submitSuccess ? (
+    <div
+      className="p-3 text-center"
+      style={{ backgroundColor: "green", color: "white" }}
+    >
+      <h1 style={{ fontFamily: "MedievalSharp" }}>You have enlisted!</h1>
+      <p className="mb-0">You will be added to the warriors list today.</p>
+    </div>
+  ) : (
+    <Form id="enlist-form" onSubmit={sendEmail}>
+      <Card
+        style={{
+          backgroundColor: "#212529",
+          border: "4px solid #bd1818",
+        }}
+      >
+        <Card.Body>
+          <Form.Label className="mb-1 text-light">Name</Form.Label>
+          <Form.Control type="text" name="name" />
+          <div className="py-2" />
+          <Form.Label className="mb-1 text-light">Phone Number</Form.Label>
+          <Form.Control type="text" name="phone" />
+          <div className="py-2" />
+          <Form.Label className="mb-0 text-light">Primary Skill</Form.Label>
+          <small className="text-muted d-block mb-2">Select a skill...</small>
+          <Form.Control as="select" name="skill">
+            <option></option>
+            <option>Archer (runner)</option>
+            <option>Knight (bicyclist)</option>
+            <option>Gladiator (weights/calisthenics)</option>
+            <option>Sorcerer (multiple)</option>
+          </Form.Control>
+          <div className="py-2" />
+          <Form.Label className="mb-0 text-light">Avatar</Form.Label>
+          <small className="text-muted d-block mb-2">
+            Max image size: 500kb
+          </small>
+          <ImageUploader
+            images={[]}
+            afterEdit={() => {}}
+            fieldId="avatar"
+            fieldName="avatar_attachment"
+            fieldLabel="Avatar"
+            multiple={false}
+            imageDisplayName="avatar"
+            fileSizeLimit={0.5}
+          />
+          <div className="py-1" />
+          <Form.Label className="text-light mb-0">Address</Form.Label>
+          <small className="text-muted d-block mb-2">
+            For a small victory gift
+          </small>
+          <Form.Control type="text" className="mb-2" name="address" />
+        </Card.Body>
+        <Card.Footer className="p-0">
+          <Button
+            size="lg"
+            className="submit-btn"
+            block
+            style={{
+              borderRadius: "0px",
+              backgroundColor: "#bd1818",
+              borderColor: "#bd1818",
+            }}
+            type="submit"
+          >
+            <h1 className="pt-2" style={{ fontFamily: "MedievalSharp" }}>
+              Join the Battle
+            </h1>
+          </Button>
+        </Card.Footer>
+      </Card>
+    </Form>
+  );
+};
+
+/**
+ * Data
+ */
+
+const warlordStyles = { width: "180px", height: "180px" };
+const circular = {
+  width: "80px",
+  height: "80px",
+  borderRadius: "50%",
+  position: "relative",
+  overflow: "hidden",
+};
+const circularImage = {
+  maxWidth: "100%",
+  width: "auto",
+  height: "auto",
+  position: "absolute",
+  left: "50%",
+  top: "50%",
+  transform: "translate(-50%, -50%)",
+};
+
+const warriors = {
+  "Riah Knapp": {
+    name: "Riah Knapp",
+    skill: "sorcerer",
+    image: riah,
+    phoneNumber: "+1 541-231-8973",
+  },
+  "Ben Tissell": {
+    name: "Ben Tissell",
+    skill: "archer",
+    image: ben,
+    phoneNumber: "+1 503-307-6484",
+  },
+  "Josh Knapp": {
+    name: "Josh Knapp",
+    skill: "sorcerer",
+    image: josh,
+    phoneNumber: "+1 541-368-8091",
+  },
+  "Taylor Rassi": {
+    name: "Taylor Rassi",
+    skill: "gladiator",
+    image: taylor,
+    phoneNumber: "+1 503-593-8657",
+  },
+  Natalie: {
+    name: "Natalie",
+    skill: "huntress",
+    image: natalie,
+    phoneNumber: "+1 541-760-9656",
+  },
+  "Garrett Tams": {
+    name: "Garrett Tams",
+    skill: "sorcerer",
+    image: garrett,
+    phoneNumber: "+1 775-830-2345",
+  },
+  "Lilly Tams": {
+    name: "Lilly Tams",
+    skill: "sorcerer",
+    image: lilly,
+    phoneNumber: "+1 503-544-6116",
+  },
+  "Nathan A Walker": {
+    name: "Nathan A Walker",
+    skill: "sorcerer",
+    image: nathan,
+    phoneNumber: "+1 503-914-8148",
+  },
+  "James Sheu": {
+    name: "James Sheu",
+    skill: "sorcerer",
+    image: james,
+    phoneNumber: "+1 559-283-3584",
+  },
+};
+
+const warlords = [
+  {
+    name: "Vilkyu",
+    health: 39,
+    description: "demon of loneliness",
+    image: warlord1,
+    start: "2021-02-07",
+    end: "2021-02-13",
+    sayings: [
+      "No one really cares!",
+      "You don't need anyone else",
+      "Everyone else is happy",
+      "You're the only one who feels that way",
+      "What's wrong with you?",
+      "You deserve to be alone",
+      "No one can give you what you need",
+    ],
+    defeated: false,
+  },
+  {
+    name: "Muldur",
+    health: 41,
+    description: "demon of shame",
+    image: warlord2,
+    start: "2021-02-14",
+    end: "2021-02-20",
+    sayings: ["You'll never have the body you want", "Self-care is selfish!"],
+    defeated: false,
+  },
+  {
+    name: "Ziir",
+    health: 43,
+    description: "demon of purposelessness",
+    image: warlord3,
+    start: "2021-02-21",
+    end: "2021-02-27",
+    sayings: [
+      "What's the point of all this?!",
+      "Doing things for yourself takes away time for socializing",
+    ],
+    defeated: false,
+  },
+  {
+    name: "Bradock",
+    health: 45,
+    description: "demon of fear",
+    image: warlord4,
+    start: "2021-02-28",
+    end: "2021-03-06",
+    sayings: [
+      "What if you get hurt?",
+      "Doing things for yourself takes away time for socializing",
+    ],
+    defeated: false,
+  },
+];
