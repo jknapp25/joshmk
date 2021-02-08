@@ -36,6 +36,7 @@ import nathan from "../assets/nathan2.jpg";
 import james from "../assets/james.jpg";
 import simon from "../assets/simon.jpg";
 import caleb from "../assets/caleb.jpg";
+import isaac from "../assets/isaac.png";
 import emailjs, { init } from "emailjs-com";
 import { API, graphqlOperation } from "aws-amplify";
 import * as queries from "../graphql/queries";
@@ -217,7 +218,7 @@ function BattleOfFyetnas() {
                     Vilkyu off-guard. Many hits were dealt, including one highly
                     effective blow in which sorcerers Garrett and Lilly combined
                     their powers and obliterated his active spell working to
-                    convince the warriors that no ones cares.
+                    convince the warriors that no one cares.
                   </p>
                   <p className="mb-0">An epic start to a crucial battle!</p>
                 </Card.Body>
@@ -348,8 +349,8 @@ function BattleOfFyetnas() {
               </p>
               <h3 style={{ fontFamily: "MedievalSharp" }}>
                 Warriors:{"  "}
-                {totalAllowedWarriors - Object.keys(warriors).length} more
-                needed
+                {totalAllowedWarriors - Object.keys(warriors).length} positions
+                left
               </h3>
 
               <WarriorTable warriors={warriors} />
@@ -498,7 +499,7 @@ const WarriorTable = () => {
         </tr>
         <tr>
           {Object.keys(warriors)
-            .slice(10, 11)
+            .slice(10, 12)
             .map((warrior, i) => (
               <td align="center" className="border-0" key={i}>
                 <div style={circular}>
@@ -515,7 +516,6 @@ const WarriorTable = () => {
                 </div>
               </td>
             ))}
-          <td className="border-0"></td>
           <td className="border-0"></td>
           <td className="border-0"></td>
           <td className="border-0"></td>
@@ -697,9 +697,9 @@ const FAQ = () => {
         ))}
       </ul>
       <p>
-        <strong>How many warriors will enlist?</strong>
+        <strong>How many warriors can enlist?</strong>
       </p>
-      <p>15 maximum</p>
+      <p>{totalAllowedWarriors} maximum</p>
       <p>
         <strong>Does my goal have to be 5 days of the week?</strong>
       </p>
@@ -963,6 +963,12 @@ const warriors = {
     skill: "gladiator",
     image: caleb,
     phoneNumber: "+1 603-852-1248",
+  },
+  "Isaac Bardone": {
+    name: "Isaac Bardone",
+    skill: "gladiator",
+    image: isaac,
+    phoneNumber: "+1 559-679-9662",
   },
 };
 
