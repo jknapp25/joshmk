@@ -34,6 +34,7 @@ import garrett from "../assets/garrett.jpg";
 import lilly from "../assets/lilly.jpg";
 import nathan from "../assets/nathan2.jpg";
 import james from "../assets/james.jpg";
+import simon from "../assets/simon.jpg";
 import emailjs, { init } from "emailjs-com";
 import { API, graphqlOperation } from "aws-amplify";
 import * as queries from "../graphql/queries";
@@ -476,7 +477,7 @@ const WarriorTable = () => {
         </tr>
         <tr>
           {Object.keys(warriors)
-            .slice(5, 9)
+            .slice(5, 10)
             .map((warrior, i) => (
               <td align="center" className="border-0" key={i}>
                 <div style={circular}>
@@ -493,7 +494,6 @@ const WarriorTable = () => {
                 </div>
               </td>
             ))}
-          <td className="border-0"></td>
         </tr>
       </tbody>
     </Table>
@@ -913,6 +913,12 @@ const warriors = {
     name: "James Sheu",
     skill: "sorcerer",
     image: james,
+    phoneNumber: "+1 559-283-3584",
+  },
+  "Simon Bardone": {
+    name: "Simon Bardone",
+    skill: "gladiator",
+    image: simon,
     phoneNumber: "+1 559-283-3584",
   },
 };
