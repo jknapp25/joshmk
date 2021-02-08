@@ -35,6 +35,7 @@ import lilly from "../assets/lilly.jpg";
 import nathan from "../assets/nathan2.jpg";
 import james from "../assets/james.jpg";
 import simon from "../assets/simon.jpg";
+import caleb from "../assets/caleb.jpg";
 import emailjs, { init } from "emailjs-com";
 import { API, graphqlOperation } from "aws-amplify";
 import * as queries from "../graphql/queries";
@@ -495,6 +496,30 @@ const WarriorTable = () => {
               </td>
             ))}
         </tr>
+        <tr>
+          {Object.keys(warriors)
+            .slice(10, 11)
+            .map((warrior, i) => (
+              <td align="center" className="border-0" key={i}>
+                <div style={circular}>
+                  <Image
+                    src={warriors[warrior].image}
+                    roundedCircle
+                    style={circularImage}
+                    title={warriors[warrior].phoneNumber}
+                  />
+                </div>
+                <div>{warriors[warrior].name}</div>
+                <div style={{ lineHeight: "1em", color: "#bd1818" }}>
+                  <small>{warriors[warrior].skill}</small>
+                </div>
+              </td>
+            ))}
+          <td className="border-0"></td>
+          <td className="border-0"></td>
+          <td className="border-0"></td>
+          <td className="border-0"></td>
+        </tr>
       </tbody>
     </Table>
   );
@@ -735,6 +760,18 @@ const FAQ = () => {
         person could do 5 workouts in a day and it would defeat the purpose of
         collaboration.
       </p>
+      <p>
+        <strong>What features are Josh working on?</strong>
+      </p>
+      <ul>
+        <li>Update a workout</li>
+        <li>Delete a workout</li>
+        <li>Add one joint workout for multiple warriors</li>
+        <li>Mini calendar - better tracking of team progress</li>
+        <li>
+          Request back-up - in case you are going to miss a workout for the week
+        </li>
+      </ul>
     </>
   );
 };
@@ -920,6 +957,12 @@ const warriors = {
     skill: "gladiator",
     image: simon,
     phoneNumber: "+1 559-283-3584",
+  },
+  "Caleb Werntz": {
+    name: "Caleb Werntz",
+    skill: "gladiator",
+    image: caleb,
+    phoneNumber: "+1 603-852-1248",
   },
 };
 
