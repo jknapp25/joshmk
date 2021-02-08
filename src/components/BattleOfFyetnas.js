@@ -50,9 +50,9 @@ const currentDate = moment();
 /* <Card className="bg-dark text-light mb-3">
     <Card.Body>
       <p>
-        Day one proved to be an incredible success for the warriors.
-        Many hits were dealt against Vilkyu including two powerful
-        blows from  The brave Riah and Natalie performed
+        Day on, the warrior launched a surprise attack, leaving Vilkyu off-guard.
+        Many hits were dealt, including two powerful blows in which Garrett and Lilly combined their skills of sorcery together. 
+        The brave Riah and Natalie performed
         reconnaissance on Sunday that has provided the group with
         useful information. They released one of Natalie's highly
         trained hawks into the realm of Fyetnas. Garrett was able to
@@ -208,6 +208,18 @@ function BattleOfFyetnas() {
             </Col>
             <Col lg={5} className="bg-transparent">
               {/* <Calendar /> */}
+              <Card className="bg-dark text-light mb-3">
+                <Card.Body>
+                  <p>
+                    Day one, the warriors launched a surprise attack, taking
+                    Vilkyu off-guard. Many hits were dealt, including two highly
+                    effective blows in which sorcerers Garrett and Lilly
+                    combined their powers and obliterated his active spell
+                    working to convince the warriors that no ones cares.
+                  </p>
+                  <p className="mb-0">An epic start to a crucial battle!</p>
+                </Card.Body>
+              </Card>
               <div className="d-block mb-4">
                 <h5 className="d-inline">Activity</h5>
                 <Button
