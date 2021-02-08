@@ -15,6 +15,12 @@ import {
 } from "react-bootstrap";
 import Calendar from "./Calendar";
 import ImageUploader from "./ImageUploader";
+import {
+  GiMoebiusStar,
+  GiSharpAxe,
+  GiPocketBow,
+  GiThrownKnife,
+} from "react-icons/gi";
 import warlord1 from "../assets/warlord1.jpg";
 import warlord2 from "../assets/warlord2.jpg";
 import warlord3 from "../assets/warlord3.jpg";
@@ -40,6 +46,29 @@ init("user_YmjT0y9RWFvhcFf32gw1i");
 
 const totalAllowedWarriors = 15;
 const currentDate = moment();
+
+/* <Card className="bg-dark text-light mb-3">
+    <Card.Body>
+      <p>
+        Day one proved to be an incredible success for the warriors.
+        Many hits were dealt against Vilkyu including two powerful
+        blows from  The brave Riah and Natalie performed
+        reconnaissance on Sunday that has provided the group with
+        useful information. They released one of Natalie's highly
+        trained hawks into the realm of Fyetnas. Garrett was able to
+        open a portal into the realm for the hawk to pass through
+        and using Riah's skills in sorcery they were able to cloak
+        the hawk with invisibility. They discovered that Vilkyu is
+        highly skilled in the art of isolation and is planning on
+        using that tactic to influence the warrriors.
+      </p>
+      <p>
+        Ben has advised to stay cautious and use your communication
+        windows to connect with others if feelings of isolation
+        start to creep in.
+      </p>
+    </Card.Body>
+  </Card> */
 
 function BattleOfFyetnas() {
   const [activePage, setActivePage] = useState("Battle");
@@ -299,7 +328,9 @@ function BattleOfFyetnas() {
               <h3 style={{ fontFamily: "MedievalSharp" }}>When</h3>
               <p>
                 February 7 - March 6{" "}
-                <strong>*last minute enlistments are allowed on Feb 7</strong>
+                <strong>
+                  *last minute enlistments are allowed until Feb 8
+                </strong>
               </p>
               <h3 style={{ fontFamily: "MedievalSharp" }}>
                 Warriors:{"  "}
@@ -549,6 +580,42 @@ const Workout = ({ workout }) => {
           </Col>
           <Col lg="8" className="pl-2">
             <div>
+              {warriors[warrior].skill === "sorcerer" ? (
+                <GiMoebiusStar
+                  className="mr-1"
+                  style={{
+                    display: "inline",
+                    color: "#2feca7",
+                  }}
+                />
+              ) : null}
+              {warriors[warrior].skill === "gladiator" ? (
+                <GiSharpAxe
+                  className="mr-1"
+                  style={{
+                    display: "inline",
+                    color: "#ec6d2f",
+                  }}
+                />
+              ) : null}
+              {warriors[warrior].skill === "archer" ? (
+                <GiPocketBow
+                  className="mr-1"
+                  style={{
+                    display: "inline",
+                    color: "#ecdf2f",
+                  }}
+                />
+              ) : null}
+              {warriors[warrior].skill === "huntress" ? (
+                <GiThrownKnife
+                  className="mr-1"
+                  style={{
+                    display: "inline",
+                    color: "#ecdf2f",
+                  }}
+                />
+              ) : null}
               <small className="text-muted">
                 <strong className="text-light">{warrior}</strong>
                 &ensp;
