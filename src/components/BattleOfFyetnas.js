@@ -71,6 +71,16 @@ function BattleOfFyetnas() {
     fetchData();
   }, [isMounted]);
 
+  const sortedWorkouts = workouts.sort((a, b) => {
+    if (a.createdAt < b.createdAt) {
+      return 1;
+    } else if (b.createdAt < a.createdAt) {
+      return -1;
+    } else {
+      return 0;
+    }
+  });
+
   return (
     <Col className="px-0">
       <Row style={{ backgroundColor: "#e2b065" }}>
@@ -170,7 +180,7 @@ function BattleOfFyetnas() {
             <Col lg={5} className="bg-transparent">
               {/* <Calendar /> */}
               <div className="d-block mb-4">
-                <h5 className="d-inline">Workouts</h5>
+                <h5 className="d-inline">Activity</h5>
                 <Button
                   variant="success"
                   className="float-right"
@@ -182,7 +192,7 @@ function BattleOfFyetnas() {
               {!workouts || workouts.length === 0 ? (
                 <div>No workouts</div>
               ) : null}
-              {workouts.map((workout, i) => (
+              {sortedWorkouts.map((workout, i) => (
                 <Workout key={i} workout={workout} warriors={warriors} />
               ))}
             </Col>
