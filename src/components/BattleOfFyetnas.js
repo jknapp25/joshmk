@@ -540,6 +540,8 @@ const Workout = ({ workout }) => {
           <Col lg="8" className="pl-2">
             <div>
               <small className="text-muted">
+                <strong className="text-light">{warrior}</strong>
+                &ensp;
                 {moment(createdAt).format("dddd, MMMM Do")}
               </small>
             </div>
