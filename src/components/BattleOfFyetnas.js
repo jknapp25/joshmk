@@ -47,7 +47,6 @@ export default BattleOfFyetnas;
 
 init("user_YmjT0y9RWFvhcFf32gw1i");
 
-const totalAllowedWarriors = 15;
 const currentDate = moment();
 
 /* <Card className="bg-dark text-light mb-3">
@@ -347,11 +346,7 @@ function BattleOfFyetnas() {
                   *last minute enlistments are allowed until Feb 8
                 </strong>
               </p>
-              <h3 style={{ fontFamily: "MedievalSharp" }}>
-                Warriors:{"  "}
-                {totalAllowedWarriors - Object.keys(warriors).length} positions
-                left
-              </h3>
+              <h3 style={{ fontFamily: "MedievalSharp" }}>Warriors</h3>
 
               <WarriorTable warriors={warriors} />
 
@@ -696,10 +691,6 @@ const FAQ = () => {
           </li>
         ))}
       </ul>
-      <p>
-        <strong>How many warriors can enlist?</strong>
-      </p>
-      <p>{totalAllowedWarriors} maximum</p>
       <p>
         <strong>Does my goal have to be 5 days of the week?</strong>
       </p>
