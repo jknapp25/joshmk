@@ -23,6 +23,7 @@ import {
   GiBlackKnightHelm,
 } from "react-icons/gi";
 import { FaTrashAlt } from "react-icons/fa";
+import { IoIosArrowBack } from "react-icons/io";
 import warlord1 from "../assets/warlord1.jpg";
 import warlord2 from "../assets/warlord2.jpg";
 import warlord3 from "../assets/warlord3.jpg";
@@ -249,14 +250,15 @@ function BattleOfFyetnas() {
             </Col>
             <Col lg={5} className="bg-transparent">
               {/* <Calendar /> */}
-              <Card className="bg-dark text-light mb-3">
+              <UpdateCard />
+              {/* <Card className="bg-dark text-light mb-3">
                 <Card.Header className="font-weight-bold">
                   {moment(updates[1].date).format("dddd, MMMM Do")}
                 </Card.Header>
                 <Card.Body className="bg-update-header">
                   {updates[1].description}
                 </Card.Body>
-              </Card>
+              </Card> */}
               <div className="d-block mb-4">
                 <h5 className="d-inline">Activity</h5>
                 <Button
@@ -585,6 +587,55 @@ const WarriorTable = () => {
         </tr>
       </tbody>
     </Table>
+  );
+};
+
+const UpdateCard = () => {
+  const [updateIdx, setUpdateIdx] = useState(1);
+  const dateFormatted = moment(updates[updateIdx].date).format("dddd, MMMM Do");
+  const description = updates[updateIdx].description;
+
+  const increment = () => {
+    const updIdx = updateIdx + 1;
+    if (updIdx > updates.length - 1) return;
+    setUpdateIdx(updIdx);
+  };
+  const decrement = () => {
+    const updIdx = updateIdx - 1;
+    if (updIdx < 0) return;
+    setUpdateIdx(updIdx);
+  };
+
+  const forwardPossible = !(updateIdx + 1 > updates.length - 1);
+  const backwardPossible = !(updateIdx - 1 < 0);
+
+  return (
+    <div className="d-flex" style={{ alignItems: "center" }}>
+      {backwardPossible ? (
+        <div
+          className="text-dark cursor-pointer position-absolute"
+          style={{ zIndex: 10000, transform: "translateX(-25px)" }}
+        >
+          <IoIosArrowBack size="1.5em" onClick={decrement} />
+        </div>
+      ) : null}
+      {forwardPossible ? (
+        <div
+          className="text-dark cursor-pointer position-absolute"
+          style={{
+            zIndex: 10000,
+            transform: "translateX(10px) scale(-1, 1)",
+            right: "0px",
+          }}
+        >
+          <IoIosArrowBack size="1.5em" onClick={increment} />
+        </div>
+      ) : null}
+      <Card className="bg-dark text-light mb-3">
+        <Card.Header className="font-weight-bold">{dateFormatted}</Card.Header>
+        <Card.Body className="bg-update-header">{description}</Card.Body>
+      </Card>
+    </div>
   );
 };
 
@@ -1180,7 +1231,7 @@ const updates = [
         </p>
         <p className="mb-0">
           In the end, the small fellowship took another big stride toward
-          victory.
+          victory!
         </p>
       </>
     ),
