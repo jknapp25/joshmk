@@ -140,7 +140,16 @@ function BattleOfFyetnas() {
         >
           <h1 className="mt-3 mb-0" style={{ fontFamily: "MedievalSharp" }}>
             <span>The Battle of Fyetna&#347;</span>{" "}
-            <Badge variant="success">Active</Badge>
+            <Badge
+              style={{
+                lineHeight: "1.4rem",
+                paddingTop: "20px",
+                backgroundColor: "#bd1818",
+                color: "white",
+              }}
+            >
+              Feb 7 - Mar 6
+            </Badge>
           </h1>
           <div style={{ transform: "translateY(-10px)" }}>
             <small className="text-muted">
