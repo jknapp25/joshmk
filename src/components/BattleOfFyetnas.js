@@ -387,7 +387,7 @@ function BattleOfFyetnas() {
 
               <div className="py-2" />
 
-              <div>Enlisting has closed</div>
+              <div>Enlisting has closed. The battle has commenced!</div>
 
               <div className="py-3" />
             </>
