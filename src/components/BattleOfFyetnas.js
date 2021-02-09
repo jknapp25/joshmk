@@ -92,13 +92,19 @@ function BattleOfFyetnas() {
 
   async function addWorkout() {
     setShow(false);
+    clearAddWorkoutForm();
 
     const data = { warrior, description, joint };
     await API.graphql(graphqlOperation(createWorkout, { input: data }));
   }
 
+  function clearAddWorkoutForm() {
+    setWarrior("");
+    setDescription("");
+    setJoint(false);
+  }
+
   async function deleteWrkout(workoutId) {
-    console.log(workoutId);
     const shouldDelete = window.confirm(
       "Are you sure you want to delete this workout?"
     );
@@ -460,10 +466,20 @@ function BattleOfFyetnas() {
 
         <Modal.Footer className="bg-dark border-dark text-light">
           <span className="mr-2">Refresh after saving</span>
-          <Button variant="secondary" onClick={() => setShow(false)}>
-            Close
+          <Button
+            variant="secondary"
+            onClick={() => {
+              setShow(false);
+              clearAddWorkoutForm();
+            }}
+          >
+            Cancel
           </Button>
-          <Button variant="success" onClick={addWorkout}>
+          <Button
+            variant="success"
+            disabled={!warrior || !description}
+            onClick={addWorkout}
+          >
             Save
           </Button>
         </Modal.Footer>
