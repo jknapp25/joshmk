@@ -629,13 +629,12 @@ const WarlordActive = ({ warlord, progress, weekNum }) => {
         <div className="mb-2">{description}</div>
         <Image
           src={image}
-          roundedCircle
           style={{
-            width: "260px",
-            height: "260px",
+            width: "100%",
+            height: "auto",
           }}
         />
-        <div className="mb-3">"{saying}"</div>
+        <div className="mb-3 mt-1">"{saying}"</div>
         <ProgressBar now={progress} />
         <small>STRENGTH</small>
       </Card.Body>
