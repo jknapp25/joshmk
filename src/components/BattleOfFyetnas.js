@@ -21,6 +21,7 @@ import {
   GiPocketBow,
   GiThrownKnife,
 } from "react-icons/gi";
+import { FaTrashAlt } from "react-icons/fa";
 import warlord1 from "../assets/warlord1.jpg";
 import warlord2 from "../assets/warlord2.jpg";
 import warlord3 from "../assets/warlord3.jpg";
@@ -40,7 +41,7 @@ import isaac from "../assets/isaac.png";
 import emailjs, { init } from "emailjs-com";
 import { API, graphqlOperation } from "aws-amplify";
 import * as queries from "../graphql/queries";
-import { createWorkout } from "../graphql/mutations";
+import { createWorkout, deleteWorkout } from "../graphql/mutations";
 import { useIsMounted } from "../lib/utils";
 import "./BattleOfFyetnas.css";
 export default BattleOfFyetnas;
@@ -89,6 +90,19 @@ function BattleOfFyetnas() {
 
     const data = { warrior, description, joint };
     await API.graphql(graphqlOperation(createWorkout, { input: data }));
+  }
+
+  async function deleteWrkout(workoutId) {
+    console.log(workoutId);
+    const shouldDelete = window.confirm(
+      "Are you sure you want to delete this workout?"
+    );
+
+    if (shouldDelete) {
+      await API.graphql(
+        graphqlOperation(deleteWorkout, { input: { id: workoutId } })
+      );
+    }
   }
 
   useEffect(() => {
@@ -236,7 +250,7 @@ function BattleOfFyetnas() {
                 <div>No workouts</div>
               ) : null}
               {sortedWorkouts.map((workout, i) => (
-                <Workout key={i} workout={workout} warriors={warriors} />
+                <Workout key={i} workout={workout} deleteWkt={deleteWrkout} />
               ))}
             </Col>
             <Col lg={2} className="p-4 bg-transparent"></Col>
@@ -586,10 +600,15 @@ const WarlordFuture = ({ warlord, weekNum }) => {
   );
 };
 
-const Workout = ({ workout }) => {
-  const { warrior, createdAt, description, joint } = workout;
+const Workout = ({ workout, deleteWkt }) => {
+  const { warrior, createdAt, description, joint, id } = workout;
+  const [showActions, setShowActions] = useState(false);
   return (
-    <Card className="bg-dark text-light mb-2">
+    <Card
+      className="bg-dark text-light mb-2"
+      onMouseEnter={() => setShowActions(true)}
+      onMouseLeave={() => setShowActions(false)}
+    >
       <Card.Body>
         <Row>
           <Col lg="2" className="pr-0">
@@ -648,7 +667,7 @@ const Workout = ({ workout }) => {
                   title="huntress"
                   style={{
                     display: "inline",
-                    color: "#ecdf2f",
+                    color: "#ec2fb9",
                   }}
                 />
               ) : null}
@@ -662,6 +681,13 @@ const Workout = ({ workout }) => {
           </Col>
           <Col lg="2" className="text-right text-success font-weight-bold">
             +{joint ? "2 hits" : "1 hit"}
+            {showActions ? (
+              <FaTrashAlt
+                className="text-danger cursor-pointer mt-auto position-absolute"
+                style={{ bottom: "0px", right: "13px" }}
+                onClick={() => deleteWkt(id)}
+              />
+            ) : null}
           </Col>
         </Row>
       </Card.Body>
