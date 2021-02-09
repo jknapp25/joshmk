@@ -250,6 +250,7 @@ function BattleOfFyetnas() {
             <Col lg={5} className="bg-transparent">
               {/* <Calendar /> */}
               <Card className="bg-dark text-light mb-3">
+                <Card.Header>Update</Card.Header>
                 <Card.Body>
                   <small className="text-muted">
                     {moment(updates[1].date).format("dddd, MMMM Do")}
@@ -387,7 +388,9 @@ function BattleOfFyetnas() {
 
               <div className="py-2" />
 
-              <div>Enlisting has closed. The battle has commenced!</div>
+              <div>
+                Enlisting has closed. <strong>The battle has commenced!</strong>
+              </div>
 
               <div className="py-3" />
             </>
@@ -1172,7 +1175,7 @@ const updates = [
         </p>
         <p>
           Though effective for a while, it was only temporary. The bug was slain
-          by Sorcerer Josh using a simple death spell. Then a pretection spell
+          by Sorcerer Josh using a simple death spell. Then a protection spell
           evoked through a sequence of numbers and letters was put in place to
           prohibit more from returning.
         </p>
