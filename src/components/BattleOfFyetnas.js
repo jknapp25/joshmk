@@ -251,29 +251,10 @@ function BattleOfFyetnas() {
               {/* <Calendar /> */}
               <Card className="bg-dark text-light mb-3">
                 <Card.Body>
-                  <p>Day two, the hits fell like rain.</p>
-                  <p>
-                    The battle re-commenced with gladiator Simon summoning
-                    hoards of small but strong comrades to attack with full
-                    force. Vilkyu noticing his strength quickly eroding, decided
-                    to get more clever.
-                  </p>
-                  <p>
-                    He released a Nyde, a small sound-absorbing bug, into their
-                    midst. This disrupted the warriors main communication
-                    channel and created the illusion that the certain powerful
-                    hits were not happening.
-                  </p>
-                  <p>
-                    But it was only temporary. The bug was slain by Sorcerer
-                    Josh using a simple death spell. Then a pretection spell
-                    evoked through a sequence of numbers and letters was put in
-                    place to prohibit more from returning.
-                  </p>
-                  <p className="mb-0">
-                    In the end, the small fellowship took another big stride
-                    toward victory.
-                  </p>
+                  <small className="text-muted">
+                    {moment(updates[1].date).format("dddd, MMMM Do")}
+                  </small>
+                  {updates[1].description}
                 </Card.Body>
               </Card>
               <div className="d-block mb-4">
@@ -1149,5 +1130,51 @@ const warlords = [
       "Doing things for yourself takes away time for socializing",
     ],
     defeated: false,
+  },
+];
+
+const updates = [
+  {
+    description: (
+      <>
+        <p>
+          Day one, the warriors launched a surprise attack, taking Vilkyu
+          off-guard. Many hits were dealt, including one highly effective blow
+          in which sorcerers Garrett and Lilly combined their powers and
+          obliterated his active spell working to convince the warriors that no
+          one cares.
+        </p>
+        <p className="mb-0">An epic start to a crucial battle!</p>
+      </>
+    ),
+    date: "2021-02-08",
+  },
+  {
+    description: (
+      <>
+        <p>Day two, the hits fell like rain.</p>
+        <p>
+          The battle re-commenced with gladiator Simon summoning hoards of small
+          but strong comrades to attack with full force. Vilkyu noticing his
+          strength quickly eroding, decided to get more clever.
+        </p>
+        <p>
+          He released a Nyde, a small sound-absorbing bug, into their midst.
+          This disrupted the warriors main communication channel and created the
+          illusion that the certain powerful hits were not happening.
+        </p>
+        <p>
+          But it was only temporary. The bug was slain by Sorcerer Josh using a
+          simple death spell. Then a pretection spell evoked through a sequence
+          of numbers and letters was put in place to prohibit more from
+          returning.
+        </p>
+        <p className="mb-0">
+          In the end, the small fellowship took another big stride toward
+          victory.
+        </p>
+      </>
+    ),
+    date: "2021-02-09",
   },
 ];
