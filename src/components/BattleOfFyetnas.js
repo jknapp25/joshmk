@@ -12,6 +12,7 @@ import {
   Nav,
   ProgressBar,
   Modal,
+  Dropdown,
 } from "react-bootstrap";
 import Calendar from "./Calendar";
 import ImageUploader from "./ImageUploader";
@@ -22,7 +23,7 @@ import {
   GiThrownKnife,
   GiBlackKnightHelm,
 } from "react-icons/gi";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt, FaEllipsisV } from "react-icons/fa";
 import { IoIosArrowBack } from "react-icons/io";
 import warlord1 from "../assets/warlord1.jpg";
 import warlord2 from "../assets/warlord2.jpg";
@@ -55,34 +56,6 @@ export default BattleOfFyetnas;
 init("user_YmjT0y9RWFvhcFf32gw1i");
 
 const currentDate = moment();
-
-/* <Card className="bg-dark text-light mb-3">
-    <Card.Body>
-      <p>
-        Day on, the warrior launched a surprise attack, leaving Vilkyu off-guard.
-        Many hits were dealt, including two powerful blows in which Garrett and Lilly combined their skills of sorcery together. 
-        The brave Riah and Natalie performed
-        reconnaissance on Sunday that has provided the group with
-        useful information. They released one of Natalie's highly
-        trained hawks into the realm of Fyetnas. Garrett was able to
-        open a portal into the realm for the hawk to pass through
-        and using Riah's skills in sorcery they were able to cloak
-        the hawk with invisibility. They discovered that Vilkyu is
-        highly skilled in the art of isolation and is planning on
-        using that tactic to influence the warrriors.
-      </p>
-      <p>
-        Ben has advised to stay cautious and use your communication
-        windows to connect with others if feelings of isolation
-        start to creep in.
-      </p>
-    </Card.Body>
-  </Card> */
-
-/**
- * Day two, the battle got tricky. Vilkyu noticing the warriors were gaining ground quickly.
- * Decided to launch a clever attack on their communication systems. This confuse
- */
 
 function BattleOfFyetnas() {
   const [activePage, setActivePage] = useState("Battle");
@@ -792,11 +765,23 @@ const Workout = ({ workout, deleteWkt }) => {
           <Col lg="2" className="text-right text-success font-weight-bold">
             +{joint ? "2 hits" : "1 hit"}
             {showActions ? (
-              <FaTrashAlt
-                className="text-danger cursor-pointer mt-auto position-absolute"
+              <Dropdown
+                className="position-absolute"
                 style={{ bottom: "0px", right: "13px" }}
-                onClick={() => deleteWkt(id)}
-              />
+              >
+                <Dropdown.Toggle
+                  caret={false}
+                  className="bg-transparent border-0 pr-0 hide-dropdown-caret"
+                >
+                  <FaEllipsisV className="text-secondary" />
+                </Dropdown.Toggle>
+                <Dropdown.Menu className="bg-dark">
+                  <Dropdown.Item href="#" onClick={() => deleteWkt(id)}>
+                    <FaTrashAlt className="text-danger mr-2" />
+                    Delete
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             ) : null}
           </Col>
         </Row>

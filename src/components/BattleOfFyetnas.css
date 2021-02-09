@@ -12,3 +12,7 @@ select {
 .bg-update-header {
   background-color: #41474c !important;
 }
+
+.hide-dropdown-caret.dropdown-toggle:after {
+  content: none;
+}
