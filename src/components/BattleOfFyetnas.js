@@ -619,6 +619,12 @@ const WarlordPast = ({ warlord }) => {
 const WarlordActive = ({ warlord, progress, weekNum }) => {
   const { name, description, image, sayings } = warlord;
   const saying = sayings[moment(currentDate).day()];
+
+  let progressColor;
+  if (66 < progress && progress <= 100) progressColor = "success";
+  if (33 < progress && progress <= 66) progressColor = "warning";
+  if (0 < progress && progress <= 33) progressColor = "danger";
+
   return (
     <Card className="text-center bg-dark text-light mb-2">
       <div className="position-absolute ml-2 mt-1">
@@ -635,7 +641,13 @@ const WarlordActive = ({ warlord, progress, weekNum }) => {
           }}
         />
         <div className="mb-3 mt-1">"{saying}"</div>
-        <ProgressBar now={progress} />
+        <ProgressBar
+          animated
+          variant={progressColor}
+          now={progress}
+          label={`${Math.round(progress)}%`}
+          style={{ backgroundColor: "#6c757d" }}
+        />
         <small>STRENGTH</small>
       </Card.Body>
     </Card>
