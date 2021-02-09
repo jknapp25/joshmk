@@ -78,6 +78,11 @@ const currentDate = moment();
     </Card.Body>
   </Card> */
 
+/**
+ * Day two, the battle got tricky. Vilkyu noticing the warriors were gaining ground quickly.
+ * Decided to launch a clever attack on their communication systems. This confuse
+ */
+
 function BattleOfFyetnas() {
   const [activePage, setActivePage] = useState("Battle");
   const [show, setShow] = useState(false);
@@ -386,7 +391,7 @@ function BattleOfFyetnas() {
 
               <div className="py-2" />
 
-              <EnlistForm />
+              <div>Enlisting has closed</div>
 
               <div className="py-3" />
             </>
