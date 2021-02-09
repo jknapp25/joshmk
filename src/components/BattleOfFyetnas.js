@@ -20,6 +20,7 @@ import {
   GiSharpAxe,
   GiPocketBow,
   GiThrownKnife,
+  GiBlackKnightHelm,
 } from "react-icons/gi";
 import { FaTrashAlt } from "react-icons/fa";
 import warlord1 from "../assets/warlord1.jpg";
@@ -637,6 +638,7 @@ const WarlordFuture = ({ warlord, weekNum }) => {
 const Workout = ({ workout, deleteWkt }) => {
   const { warrior, createdAt, description, joint, id } = workout;
   const [showActions, setShowActions] = useState(false);
+  if (!warrior) return null;
   return (
     <Card
       className="bg-dark text-light mb-2"
@@ -702,6 +704,16 @@ const Workout = ({ workout, deleteWkt }) => {
                   style={{
                     display: "inline",
                     color: "#ec2fb9",
+                  }}
+                />
+              ) : null}
+              {warriors[warrior].skill === "knight" ? (
+                <GiBlackKnightHelm
+                  className="mr-1"
+                  title="knight"
+                  style={{
+                    display: "inline",
+                    color: "#2f9cec",
                   }}
                 />
               ) : null}
