@@ -1062,7 +1062,7 @@ const warriors = {
 const warlords = [
   {
     name: "Vilkyu",
-    health: 55,
+    health: 58,
     description: "demon of loneliness",
     image: warlord1,
     start: "2021-02-07",
@@ -1080,7 +1080,7 @@ const warlords = [
   },
   {
     name: "Muldur",
-    health: 60,
+    health: 62,
     description: "demon of shame",
     image: warlord2,
     start: "2021-02-14",
@@ -1090,7 +1090,7 @@ const warlords = [
   },
   {
     name: "Ziir",
-    health: 65,
+    health: 66,
     description: "demon of purposelessness",
     image: warlord3,
     start: "2021-02-21",
