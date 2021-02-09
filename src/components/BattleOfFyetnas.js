@@ -251,14 +251,6 @@ function BattleOfFyetnas() {
             <Col lg={5} className="bg-transparent">
               {/* <Calendar /> */}
               <UpdateCard />
-              {/* <Card className="bg-dark text-light mb-3">
-                <Card.Header className="font-weight-bold">
-                  {moment(updates[1].date).format("dddd, MMMM Do")}
-                </Card.Header>
-                <Card.Body className="bg-update-header">
-                  {updates[1].description}
-                </Card.Body>
-              </Card> */}
               <div className="d-block mb-4">
                 <h5 className="d-inline">Activity</h5>
                 <Button
@@ -615,6 +607,7 @@ const UpdateCard = () => {
         <div
           className="text-dark cursor-pointer position-absolute"
           style={{ zIndex: 10000, transform: "translateX(-25px)" }}
+          title="View previous update"
         >
           <IoIosArrowBack size="1.5em" onClick={decrement} />
         </div>
@@ -627,6 +620,7 @@ const UpdateCard = () => {
             transform: "translateX(10px) scale(-1, 1)",
             right: "0px",
           }}
+          title="View next update"
         >
           <IoIosArrowBack size="1.5em" onClick={increment} />
         </div>
@@ -898,7 +892,6 @@ const FAQ = () => {
       </p>
       <ul>
         <li>Update a workout</li>
-        <li>Delete a workout</li>
         <li>Add one joint workout for multiple warriors</li>
         <li>Mini calendar - better tracking of team progress</li>
         <li>
@@ -1205,7 +1198,7 @@ const updates = [
   {
     description: (
       <>
-        <p>Day two, the hits fell like rain.</p>
+        <p>Day two, hits fell like rain.</p>
         <p>
           The battle re-commenced with gladiator Simon summoning hoards of small
           but strong mercenaries to attack with full force. Vilkyu noticing his
