@@ -1155,19 +1155,26 @@ const updates = [
         <p>Day two, the hits fell like rain.</p>
         <p>
           The battle re-commenced with gladiator Simon summoning hoards of small
-          but strong comrades to attack with full force. Vilkyu noticing his
+          but strong mercenaries to attack with full force. Vilkyu noticing his
           strength quickly eroding, decided to get more clever.
         </p>
         <p>
-          He released a Nyde, a small sound-absorbing bug, into their midst.
-          This disrupted the warriors main communication channel and created the
-          illusion that the certain powerful hits were not happening.
+          He released a{" "}
+          <a
+            href="https://www.joshmk.com/post/3b30d082-d1d4-413a-b850-d384ae794864"
+            target="_blank"
+          >
+            Nyde
+          </a>
+          , a small sound-absorbing insect, into their midst. This disrupted the
+          warriors main communication channel and created the illusion that
+          certain powerful hits were not happening.
         </p>
         <p>
-          But it was only temporary. The bug was slain by Sorcerer Josh using a
-          simple death spell. Then a pretection spell evoked through a sequence
-          of numbers and letters was put in place to prohibit more from
-          returning.
+          Though effective for a while, it was only temporary. The bug was slain
+          by Sorcerer Josh using a simple death spell. Then a pretection spell
+          evoked through a sequence of numbers and letters was put in place to
+          prohibit more from returning.
         </p>
         <p className="mb-0">
           In the end, the small fellowship took another big stride toward
