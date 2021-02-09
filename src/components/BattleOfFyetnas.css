@@ -8,3 +8,7 @@ select {
   color: white !important;
   border-color: #6c757d !important;
 }
+
+.bg-update-header {
+  background-color: #41474c !important;
+}

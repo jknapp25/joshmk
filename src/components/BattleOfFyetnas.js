@@ -250,11 +250,10 @@ function BattleOfFyetnas() {
             <Col lg={5} className="bg-transparent">
               {/* <Calendar /> */}
               <Card className="bg-dark text-light mb-3">
-                <Card.Header>Update</Card.Header>
-                <Card.Body>
-                  <small className="text-muted">
-                    {moment(updates[1].date).format("dddd, MMMM Do")}
-                  </small>
+                <Card.Header className="font-weight-bold">
+                  {moment(updates[1].date).format("dddd, MMMM Do")}
+                </Card.Header>
+                <Card.Body className="bg-update-header">
                   {updates[1].description}
                 </Card.Body>
               </Card>
