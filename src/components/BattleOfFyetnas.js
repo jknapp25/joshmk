@@ -39,6 +39,9 @@ import simon from "../assets/simon.jpg";
 import caleb from "../assets/caleb.jpg";
 import isaac from "../assets/isaac.png";
 import dave from "../assets/dave.jpg";
+import drew from "../assets/drew.jpg";
+import clay from "../assets/clay.jpg";
+import alex from "../assets/alex.jpg";
 import emailjs, { init } from "emailjs-com";
 import { API, graphqlOperation } from "aws-amplify";
 import * as queries from "../graphql/queries";
@@ -518,7 +521,7 @@ const WarriorTable = () => {
         </tr>
         <tr>
           {Object.keys(warriors)
-            .slice(10, 13)
+            .slice(10, 15)
             .map((warrior, i) => (
               <td align="center" className="border-0" key={i}>
                 <div style={circular}>
@@ -535,6 +538,28 @@ const WarriorTable = () => {
                 </div>
               </td>
             ))}
+        </tr>
+        <tr>
+          {Object.keys(warriors)
+            .slice(15, 16)
+            .map((warrior, i) => (
+              <td align="center" className="border-0" key={i}>
+                <div style={circular}>
+                  <Image
+                    src={warriors[warrior].image}
+                    roundedCircle
+                    style={circularImage}
+                    title={warriors[warrior].phoneNumber}
+                  />
+                </div>
+                <div>{warriors[warrior].name}</div>
+                <div style={{ lineHeight: "1em", color: "#bd1818" }}>
+                  <small>{warriors[warrior].skill}</small>
+                </div>
+              </td>
+            ))}
+          <td className="border-0"></td>
+          <td className="border-0"></td>
           <td className="border-0"></td>
           <td className="border-0"></td>
         </tr>
@@ -1002,12 +1027,30 @@ const warriors = {
     image: dave,
     phoneNumber: "+1 503-880-2734",
   },
+  "Drew Walters": {
+    name: "Drew Walters",
+    skill: "archer",
+    image: drew,
+    phoneNumber: "+1 971-275-5896",
+  },
+  Clay: {
+    name: "Clay",
+    skill: "gladiator",
+    image: clay,
+    phoneNumber: "+1 208-791-1784",
+  },
+  "Alex Nutter": {
+    name: "Alex Nutter",
+    skill: "gladiator",
+    image: alex,
+    phoneNumber: "+1 503-927-7176",
+  },
 };
 
 const warlords = [
   {
     name: "Vilkyu",
-    health: 54,
+    health: 55,
     description: "demon of loneliness",
     image: warlord1,
     start: "2021-02-07",
@@ -1025,7 +1068,7 @@ const warlords = [
   },
   {
     name: "Muldur",
-    health: 57,
+    health: 60,
     description: "demon of shame",
     image: warlord2,
     start: "2021-02-14",
@@ -1035,7 +1078,7 @@ const warlords = [
   },
   {
     name: "Ziir",
-    health: 60,
+    health: 65,
     description: "demon of purposelessness",
     image: warlord3,
     start: "2021-02-21",
@@ -1048,7 +1091,7 @@ const warlords = [
   },
   {
     name: "Bradock",
-    health: 63,
+    health: 70,
     description: "demon of fear",
     image: warlord4,
     start: "2021-02-28",
