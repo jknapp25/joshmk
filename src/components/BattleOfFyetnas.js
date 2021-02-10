@@ -1422,7 +1422,7 @@ const training = [
   {
     details: (
       <>
-        <h5>Great at-home yoga classes</h5>
+        <h5>Short at-home yoga classes</h5>
         <p>
           <a
             href="https://www.youtube.com/user/yogawithadriene"
