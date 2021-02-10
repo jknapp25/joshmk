@@ -165,7 +165,7 @@ function BattleOfFyetnas() {
               activeKey={activePage}
               onSelect={(selectedKey) => setActivePage(selectedKey)}
             >
-              {["Details", "Battle", "FAQ"].map((page) => (
+              {["Details", "Battle", "Training", "FAQ"].map((page) => (
                 <Nav.Item key={page}>
                   <Nav.Link eventKey={page} className="pl-0">
                     <h4
@@ -267,6 +267,58 @@ function BattleOfFyetnas() {
               <Col lg={2} className="p-4 bg-transparent"></Col>
             </Row>
           </>
+        ) : null}
+        {activePage === "Training" ? (
+          <Row style={{ backgroundColor: "#e2b065" }}>
+            <Col
+              xs={12}
+              sm={3}
+              md={3}
+              lg={3}
+              className="p-4 bg-transparent"
+            ></Col>
+            <Col
+              xs={12}
+              sm={6}
+              md={6}
+              lg={6}
+              className="hidden-xs bg-transparent"
+            >
+              <p>
+                To add more workouts, ideas, tips, or anything, just send it
+                over to Josh.
+              </p>
+              <Card className="bg-dark mb-3 text-light">
+                <Card.Body>
+                  <p>
+                    Great at-home, approachable yoga classes....{" "}
+                    <a
+                      href="https://www.youtube.com/user/yogawithadriene"
+                      target="_blank"
+                    >
+                      https://www.youtube.com/user/yogawithadriene
+                    </a>
+                  </p>
+                  <p>
+                    I did the 30-day yoga journey, it was fun and super
+                    approachable for someone that rarely get's to classes.
+                    Adrienne is pretty funny too, so that kept me engaged and
+                    made me feel comfortable.
+                  </p>
+                  <p className="mb-0">
+                    <small className="text-muted">Shared by Josh</small>
+                  </p>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col
+              xs={12}
+              sm={3}
+              md={3}
+              lg={3}
+              className="p-4 bg-transparent"
+            ></Col>
+          </Row>
         ) : null}
         {activePage === "Details" ? (
           <Row style={{ backgroundColor: "#e2b065" }}>
@@ -1284,10 +1336,15 @@ const updates = [
           churning the atmosphere. He plans on conjuring a blanket of snow over
           the area to isolate and hinder the warriors.
         </p>
+        <p>
+          Natalie schemed up the idea for a training area{" "}
+          <strong>(new tab above)</strong> in which we can share ideas and
+          helpful tips.
+        </p>
 
         <p className="mb-0">
-          Wise archer Ben advises extra communication and a watchful eye in this
-          time.
+          Wise archer Ben advises extra communication, sharing of ideas, and a
+          watchful eye in this time.
         </p>
       </>
     ),
