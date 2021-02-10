@@ -291,28 +291,73 @@ function BattleOfFyetnas() {
                 To add more workouts, ideas, tips, or anything, just send it
                 over to Josh.
               </p>
-              <Card className="bg-dark mb-3 text-light">
-                <Card.Body>
-                  <h5>Great at-home yoga classes</h5>
-                  <p>
-                    <a
-                      href="https://www.youtube.com/user/yogawithadriene"
-                      target="_blank"
-                    >
-                      https://www.youtube.com/user/yogawithadriene
-                    </a>
-                  </p>
-                  <p>
-                    I did the "Home" 30-day yoga journey, it was fun and
-                    approachable for someone that rarely get's to classes.
-                    Adrienne is pretty funny, that kept me engaged and made me
-                    feel comfortable.
-                  </p>
-                  <p className="mb-0">
-                    <small className="text-muted">Shared by Josh</small>
-                  </p>
-                </Card.Body>
-              </Card>
+              {training.map((tr) => (
+                <Card className="bg-dark mb-3 text-light">
+                  <Card.Body>
+                    {tr.details}
+                    <p className="mb-0">
+                      <small className="text-muted">
+                        Type:{" "}
+                        <span className="text-light text-capitalize">
+                          {tr.type}
+                        </span>
+                        , Shared by{" "}
+                        {warriors[tr.warrior].skill === "sorcerer" ? (
+                          <GiMoebiusStar
+                            className="mr-1"
+                            title="sorcerer"
+                            style={{
+                              display: "inline",
+                              color: "#2feca7",
+                            }}
+                          />
+                        ) : null}
+                        {warriors[tr.warrior].skill === "gladiator" ? (
+                          <GiSharpAxe
+                            className="mr-1"
+                            title="gladiator"
+                            style={{
+                              display: "inline",
+                              color: "#ec6d2f",
+                            }}
+                          />
+                        ) : null}
+                        {warriors[tr.warrior].skill === "archer" ? (
+                          <GiPocketBow
+                            className="mr-1"
+                            title="archer"
+                            style={{
+                              display: "inline",
+                              color: "#ecdf2f",
+                            }}
+                          />
+                        ) : null}
+                        {warriors[tr.warrior].skill === "huntress" ? (
+                          <GiThrownKnife
+                            className="mr-1"
+                            title="huntress"
+                            style={{
+                              display: "inline",
+                              color: "#ec2fb9",
+                            }}
+                          />
+                        ) : null}
+                        {warriors[tr.warrior].skill === "knight" ? (
+                          <GiBlackKnightHelm
+                            className="mr-1"
+                            title="knight"
+                            style={{
+                              display: "inline",
+                              color: "#2f9cec",
+                            }}
+                          />
+                        ) : null}
+                        <strong className="text-light">{tr.warrior}</strong>
+                      </small>
+                    </p>
+                  </Card.Body>
+                </Card>
+              ))}
             </Col>
             <Col
               xs={12}
@@ -1352,5 +1397,30 @@ const updates = [
       </>
     ),
     date: "2021-02-10",
+  },
+];
+
+const training = [
+  {
+    details: (
+      <>
+        <h5>Great at-home yoga classes</h5>
+        <p>
+          <a
+            href="https://www.youtube.com/user/yogawithadriene"
+            target="_blank"
+          >
+            https://www.youtube.com/user/yogawithadriene
+          </a>
+        </p>
+        <p>
+          I did the "Home" 30-day yoga journey, it was fun and approachable for
+          someone that rarely get's to classes. Adrienne is pretty funny, that
+          kept me engaged and made me feel comfortable.
+        </p>
+      </>
+    ),
+    type: "yoga",
+    warrior: "Josh Knapp",
   },
 ];
