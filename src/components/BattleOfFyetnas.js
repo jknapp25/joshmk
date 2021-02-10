@@ -1383,7 +1383,7 @@ const updates = [
           Day three kicked off with the Honorable Knight Scriven leading the
           way. Tactical by nature, Scriven devised a plan to create a diversion
           to gain visibility into the realm of Fyetna&#347; and determine
-          Vilkyu's next step.
+          Vilkyu's next move.
         </p>
         <p>
           Joined by the sheer strength of gladiators Caleb, Isaac and Simon they
