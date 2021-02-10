@@ -60,7 +60,7 @@ export default BattleOfFyetnas;
 
 init("user_YmjT0y9RWFvhcFf32gw1i");
 
-const currentDate = "2021-03-02"; //moment();
+const currentDate = moment();
 
 function BattleOfFyetnas() {
   const [activePage, setActivePage] = useState("Battle");
