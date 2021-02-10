@@ -1225,7 +1225,7 @@ const updates = [
   {
     description: (
       <>
-        <p>Day two, hits landed like rain.</p>
+        <p>Day two, hits rained down upon Vilkyu.</p>
         <p>
           The battle re-commenced with gladiator Simon summoning hoards of small
           but strong mercenaries to attack with full force. Vilkyu noticing his
