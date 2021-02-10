@@ -284,10 +284,12 @@ function BattleOfFyetnas() {
               lg={6}
               className="hidden-xs bg-transparent"
             >
+              <p className="mb-0">
+                <strong>Improve your skills, and learn new ones!</strong>
+              </p>
               <p>
-                <strong>Improve your skills, and gather new ones!</strong> To
-                add more workouts, ideas, tips, or anything, just send it over
-                to Josh.
+                To add more workouts, ideas, tips, or anything, just send it
+                over to Josh.
               </p>
               <Card className="bg-dark mb-3 text-light">
                 <Card.Body>
