@@ -620,10 +620,10 @@ const WarlordActive = ({ warlord, progress, weekNum }) => {
   const { name, description, image, sayings } = warlord;
   const saying = sayings[moment(currentDate).day()];
 
-  let progressColor;
+  let progressColor = 0;
   if (66 < progress && progress <= 100) progressColor = "success";
   if (33 < progress && progress <= 66) progressColor = "warning";
-  if (0 < progress && progress <= 33) progressColor = "danger";
+  if (0 <= progress && progress <= 33) progressColor = "danger";
 
   return (
     <Card className="text-center bg-dark text-light mb-2">
