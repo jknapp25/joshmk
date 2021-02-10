@@ -1333,13 +1333,13 @@ const updates = [
         </p>
         <p>
           It appears that Vilkyu, now desparate, is taking to the skies and
-          churning the atmosphere. He plans on conjuring a blanket of snow over
+          churning the atmosphere. He plans on conjuring a layer of snow over
           the area to isolate and hinder the warriors.
         </p>
         <p>
           Natalie schemed up the idea for a training area{" "}
-          <strong>(new tab above)</strong> in which we can share ideas and
-          helpful tips.
+          <strong>(see above)</strong> so the warriors can share ideas and
+          helpful tips to stay active.
         </p>
 
         <p className="mb-0">
