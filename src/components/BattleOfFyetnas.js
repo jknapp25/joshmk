@@ -1343,7 +1343,7 @@ const updates = [
         </p>
 
         <p className="mb-0">
-          Wise archer Ben, noticing the shifting skies, advises extra
+          Noticing the shifting skies, Wise archer Ben advises extra
           communication, sharing of ideas, and a watchful eye.
         </p>
       </>
