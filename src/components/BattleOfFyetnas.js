@@ -290,8 +290,8 @@ function BattleOfFyetnas() {
               </p>
               <Card className="bg-dark mb-3 text-light">
                 <Card.Body>
+                  <h5>Great at-home yoga classes</h5>
                   <p>
-                    Great at-home, approachable yoga classes....{" "}
                     <a
                       href="https://www.youtube.com/user/yogawithadriene"
                       target="_blank"
@@ -300,10 +300,10 @@ function BattleOfFyetnas() {
                     </a>
                   </p>
                   <p>
-                    I did the 30-day yoga journey, it was fun and super
+                    I did the "Home" 30-day yoga journey, it was fun and
                     approachable for someone that rarely get's to classes.
-                    Adrienne is pretty funny too, so that kept me engaged and
-                    made me feel comfortable.
+                    Adrienne is pretty funny, that kept me engaged and made me
+                    feel comfortable.
                   </p>
                   <p className="mb-0">
                     <small className="text-muted">Shared by Josh</small>
