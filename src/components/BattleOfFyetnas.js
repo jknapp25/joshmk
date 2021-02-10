@@ -60,7 +60,7 @@ export default BattleOfFyetnas;
 
 init("user_YmjT0y9RWFvhcFf32gw1i");
 
-const currentDate = moment();
+const currentDate = "2021-03-02"; //moment();
 
 function BattleOfFyetnas() {
   const [activePage, setActivePage] = useState("Battle");
@@ -121,14 +121,36 @@ function BattleOfFyetnas() {
     }
   });
 
+  let bgColor = "#e2b065"; // old one e2b065
+  if (
+    moment(currentDate).isBetween(moment("2021-02-07"), moment("2021-02-13"))
+  ) {
+    bgColor = "#68808a";
+  }
+  if (
+    moment(currentDate).isBetween(moment("2021-02-13"), moment("2021-02-21"))
+  ) {
+    bgColor = "#d8d3b8";
+  }
+  if (
+    moment(currentDate).isBetween(moment("2021-02-21"), moment("2021-02-27"))
+  ) {
+    bgColor = "#4495ac";
+  }
+  if (
+    moment(currentDate).isBetween(moment("2021-02-27"), moment("2021-03-06"))
+  ) {
+    bgColor = "#6e655f";
+  }
+
   return (
-    <Container fluid style={{ backgroundColor: "#68808a" }}>
+    <Container fluid style={{ backgroundColor: bgColor }}>
       <Helmet>
         <title>Battle of Fyetna&#347;</title>
         <link rel="icon" type="image/png" href={battleAxe} sizes="16x16" />
       </Helmet>
       <Col className="px-0">
-        <Row style={{ backgroundColor: "#e2b065" }}>
+        <Row>
           <Col
             xs={12}
             sm={3}
@@ -157,7 +179,7 @@ function BattleOfFyetnas() {
               </Badge>
             </h1>
             <div style={{ transform: "translateY(-10px)" }}>
-              <small className="text-muted">
+              <small className="text-dark">
                 [Fee-et-noz] Translated Fitness in English
               </small>
             </div>
@@ -171,7 +193,9 @@ function BattleOfFyetnas() {
                   <Nav.Link eventKey={page} className="pl-0">
                     <h4
                       className={`${
-                        page === activePage ? "border-bottom border-dark" : ""
+                        page === activePage
+                          ? "border-bottom border-dark"
+                          : "text-dark"
                       }`}
                       style={{ fontFamily: "MedievalSharp" }}
                     >
@@ -192,7 +216,7 @@ function BattleOfFyetnas() {
         </Row>
         {activePage === "Battle" ? (
           <>
-            <Row style={{ backgroundColor: "#e2b065" }}>
+            <Row>
               <Col lg={2} className="p-4 bg-transparent"></Col>
               <Col lg={8} className="bg-transparent">
                 <Alert
@@ -208,7 +232,7 @@ function BattleOfFyetnas() {
               </Col>
               <Col lg={2} className="p-4 bg-transparent"></Col>
             </Row>
-            <Row style={{ backgroundColor: "#e2b065" }}>
+            <Row>
               <Col lg={2} className="p-4 bg-transparent"></Col>
               <Col lg={3} className="bg-transparent">
                 {warlords.map((warlord, i) => {
@@ -287,7 +311,7 @@ function BattleOfFyetnas() {
           </>
         ) : null}
         {activePage === "Training" ? (
-          <Row style={{ backgroundColor: "#e2b065" }}>
+          <Row>
             <Col
               xs={12}
               sm={3}
@@ -309,8 +333,8 @@ function BattleOfFyetnas() {
                 To add more workouts, ideas, tips, or anything, just send it
                 over to Josh.
               </p>
-              {training.map((tr) => (
-                <Card className="bg-dark mb-3 text-light">
+              {training.map((tr, i) => (
+                <Card key={i} className="bg-dark mb-3 text-light">
                   <Card.Body>
                     {tr.details}
                     <p className="mb-0">
@@ -387,7 +411,7 @@ function BattleOfFyetnas() {
           </Row>
         ) : null}
         {activePage === "Details" ? (
-          <Row style={{ backgroundColor: "#e2b065" }}>
+          <Row>
             <Col
               xs={12}
               sm={3}
@@ -514,7 +538,7 @@ function BattleOfFyetnas() {
           </Row>
         ) : null}
         {activePage === "FAQ" ? (
-          <Row style={{ backgroundColor: "#e2b065" }}>
+          <Row>
             <Col
               xs={12}
               sm={3}
@@ -924,10 +948,7 @@ const Workout = ({ workout, deleteWkt }) => {
                 className="position-absolute"
                 style={{ bottom: "0px", right: "13px" }}
               >
-                <Dropdown.Toggle
-                  caret={false}
-                  className="bg-transparent border-0 pr-0 hide-dropdown-caret"
-                >
+                <Dropdown.Toggle className="bg-transparent border-0 pr-0 hide-dropdown-caret">
                   <FaEllipsisV className="text-secondary" />
                 </Dropdown.Toggle>
                 <Dropdown.Menu className="bg-dark">
@@ -1355,6 +1376,7 @@ const updates = [
           <a
             href="https://www.joshmk.com/post/3b30d082-d1d4-413a-b850-d384ae794864"
             target="_blank"
+            rel="noopener noreferrer"
           >
             Nyde
           </a>
@@ -1427,6 +1449,7 @@ const training = [
           <a
             href="https://www.youtube.com/user/yogawithadriene"
             target="_blank"
+            rel="noopener noreferrer"
           >
             https://www.youtube.com/user/yogawithadriene
           </a>
