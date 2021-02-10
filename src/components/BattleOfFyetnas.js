@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import {
+  Container,
   Image,
   Table,
   Row,
@@ -25,6 +26,7 @@ import {
 } from "react-icons/gi";
 import { FaTrashAlt, FaEllipsisV } from "react-icons/fa";
 import { IoIosArrowBack } from "react-icons/io";
+import { Helmet } from "react-helmet";
 import warlord1 from "../assets/warlord1.jpg";
 import warlord2 from "../assets/warlord2.jpg";
 import warlord3 from "../assets/warlord3.jpg";
@@ -45,12 +47,14 @@ import dave from "../assets/dave.jpg";
 import drew from "../assets/drew.jpg";
 import clay from "../assets/clay.jpg";
 import alex from "../assets/alex.jpg";
+import battleAxe from "../assets/battle-axe.png";
 import emailjs, { init } from "emailjs-com";
 import { API, graphqlOperation } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import { createWorkout, deleteWorkout } from "../graphql/mutations";
 import { useIsMounted } from "../lib/utils";
 import "./BattleOfFyetnas.css";
+
 export default BattleOfFyetnas;
 
 init("user_YmjT0y9RWFvhcFf32gw1i");
@@ -117,344 +121,366 @@ function BattleOfFyetnas() {
   });
 
   return (
-    <Col className="px-0">
-      <Row style={{ backgroundColor: "#e2b065" }}>
-        <Col xs={12} sm={3} md={3} lg={3} className="p-4 bg-transparent"></Col>
-        <Col
-          xs={12}
-          sm={6}
-          md={6}
-          lg={6}
-          className="pt-4 hidden-xs bg-transparent"
-        >
-          <h1 className="mt-3 mb-0" style={{ fontFamily: "MedievalSharp" }}>
-            <span>The Battle of Fyetna&#347;</span>{" "}
-            <Badge
-              style={{
-                lineHeight: "1.4rem",
-                paddingTop: "20px",
-                backgroundColor: "#bd1818",
-                color: "white",
-              }}
-            >
-              Feb 7 - Mar 6
-            </Badge>
-          </h1>
-          <div style={{ transform: "translateY(-10px)" }}>
-            <small className="text-muted">
-              [Fee-et-noz] Translated Fitness in English
-            </small>
-          </div>
-          <div className="my-2" />
-          <Nav
-            activeKey={activePage}
-            onSelect={(selectedKey) => setActivePage(selectedKey)}
+    <Container fluid style={{ backgroundColor: "#68808a" }}>
+      <Helmet>
+        <title>Battle of Fyetna&#347;</title>
+        <link rel="icon" type="image/png" href={battleAxe} sizes="16x16" />
+      </Helmet>
+      <Col className="px-0">
+        <Row style={{ backgroundColor: "#e2b065" }}>
+          <Col
+            xs={12}
+            sm={3}
+            md={3}
+            lg={3}
+            className="p-4 bg-transparent"
+          ></Col>
+          <Col
+            xs={12}
+            sm={6}
+            md={6}
+            lg={6}
+            className="pt-4 hidden-xs bg-transparent"
           >
-            {["Details", "Battle", "FAQ"].map((page) => (
-              <Nav.Item key={page}>
-                <Nav.Link eventKey={page} className="pl-0">
-                  <h4
-                    className={`${
-                      page === activePage ? "border-bottom border-dark" : ""
-                    }`}
-                    style={{ fontFamily: "MedievalSharp" }}
-                  >
-                    {page}
-                  </h4>
-                </Nav.Link>
-              </Nav.Item>
-            ))}
-          </Nav>
-        </Col>
-        <Col xs={12} sm={3} md={3} lg={3} className="p-4 bg-transparent"></Col>
-      </Row>
-      {activePage === "Battle" ? (
-        <>
-          <Row style={{ backgroundColor: "#e2b065" }}>
-            <Col lg={2} className="p-4 bg-transparent"></Col>
-            <Col lg={3} className="bg-transparent">
-              {warlords.map((warlord, i) => {
-                if (
-                  moment(currentDate).isBetween(
-                    moment(warlord.start),
-                    moment(warlord.end)
-                  )
-                ) {
-                  const workoutsDuringTimeframe = workouts.filter((wo) =>
-                    moment(wo.createdAt).isBetween(
+            <h1 className="mt-3 mb-0" style={{ fontFamily: "MedievalSharp" }}>
+              <span>The Battle of Fyetna&#347;</span>{" "}
+              <Badge
+                style={{
+                  lineHeight: "1.4rem",
+                  paddingTop: "20px",
+                  backgroundColor: "#bd1818",
+                  color: "white",
+                }}
+              >
+                Feb 7 - Mar 6
+              </Badge>
+            </h1>
+            <div style={{ transform: "translateY(-10px)" }}>
+              <small className="text-muted">
+                [Fee-et-noz] Translated Fitness in English
+              </small>
+            </div>
+            <div className="my-2" />
+            <Nav
+              activeKey={activePage}
+              onSelect={(selectedKey) => setActivePage(selectedKey)}
+            >
+              {["Details", "Battle", "FAQ"].map((page) => (
+                <Nav.Item key={page}>
+                  <Nav.Link eventKey={page} className="pl-0">
+                    <h4
+                      className={`${
+                        page === activePage ? "border-bottom border-dark" : ""
+                      }`}
+                      style={{ fontFamily: "MedievalSharp" }}
+                    >
+                      {page}
+                    </h4>
+                  </Nav.Link>
+                </Nav.Item>
+              ))}
+            </Nav>
+          </Col>
+          <Col
+            xs={12}
+            sm={3}
+            md={3}
+            lg={3}
+            className="p-4 bg-transparent"
+          ></Col>
+        </Row>
+        {activePage === "Battle" ? (
+          <>
+            <Row style={{ backgroundColor: "#e2b065" }}>
+              <Col lg={2} className="p-4 bg-transparent"></Col>
+              <Col lg={3} className="bg-transparent">
+                {warlords.map((warlord, i) => {
+                  if (
+                    moment(currentDate).isBetween(
                       moment(warlord.start),
                       moment(warlord.end)
                     )
-                  );
-                  const totalHits = workoutsDuringTimeframe.reduce(
-                    (acc, curr) => {
-                      if (curr.joint) {
-                        return acc + 2;
-                      } else {
-                        return acc + 1;
-                      }
-                    },
-                    0
-                  );
-                  const progress =
-                    ((warlord.health - totalHits) / warlord.health) * 100;
-                  return (
-                    <WarlordActive
-                      key={warlord.name}
-                      warlord={warlord}
-                      progress={progress}
-                      weekNum={i + 1}
-                    />
-                  );
-                } else {
-                  if (moment(currentDate).isAfter(moment(warlord.end))) {
-                    return <WarlordPast key={warlord.name} warlord={warlord} />;
+                  ) {
+                    const workoutsDuringTimeframe = workouts.filter((wo) =>
+                      moment(wo.createdAt).isBetween(
+                        moment(warlord.start),
+                        moment(warlord.end)
+                      )
+                    );
+                    const totalHits = workoutsDuringTimeframe.reduce(
+                      (acc, curr) => {
+                        if (curr.joint) {
+                          return acc + 2;
+                        } else {
+                          return acc + 1;
+                        }
+                      },
+                      0
+                    );
+                    const progress =
+                      ((warlord.health - totalHits) / warlord.health) * 100;
+                    return (
+                      <WarlordActive
+                        key={warlord.name}
+                        warlord={warlord}
+                        progress={progress}
+                        weekNum={i + 1}
+                      />
+                    );
+                  } else {
+                    if (moment(currentDate).isAfter(moment(warlord.end))) {
+                      return (
+                        <WarlordPast key={warlord.name} warlord={warlord} />
+                      );
+                    }
+
+                    return (
+                      <WarlordFuture
+                        key={warlord.name}
+                        warlord={warlord}
+                        weekNum={i + 1}
+                      />
+                    );
                   }
+                })}
+              </Col>
+              <Col lg={5} className="bg-transparent">
+                {/* <Calendar /> */}
+                <UpdateCard />
+                <div className="d-block mb-4">
+                  <h5 className="d-inline">Activity</h5>
+                  <Button
+                    variant="success"
+                    className="float-right"
+                    onClick={() => setShow(true)}
+                  >
+                    Add workout
+                  </Button>
+                </div>
+                {!workouts || workouts.length === 0 ? (
+                  <div>No workouts</div>
+                ) : null}
+                {sortedWorkouts.map((workout, i) => (
+                  <Workout key={i} workout={workout} deleteWkt={deleteWrkout} />
+                ))}
+              </Col>
+              <Col lg={2} className="p-4 bg-transparent"></Col>
+            </Row>
+          </>
+        ) : null}
+        {activePage === "Details" ? (
+          <Row style={{ backgroundColor: "#e2b065" }}>
+            <Col
+              xs={12}
+              sm={3}
+              md={3}
+              lg={3}
+              className="p-4 bg-transparent"
+            ></Col>
+            <Col
+              xs={12}
+              sm={6}
+              md={6}
+              lg={6}
+              className="hidden-xs bg-transparent"
+            >
+              <>
+                <p>
+                  Four overseers of the realm of light were ensnared by the evil
+                  ones lies and dragged down into darkness where they were
+                  tortured for millenia and corrupted beyond repair. He made
+                  them warlords and trained them in the dark arts, each with
+                  their own specialty.
+                </p>
 
-                  return (
-                    <WarlordFuture
-                      key={warlord.name}
-                      warlord={warlord}
-                      weekNum={i + 1}
-                    />
-                  );
-                }
-              })}
-            </Col>
-            <Col lg={5} className="bg-transparent">
-              {/* <Calendar /> */}
-              <UpdateCard />
-              <div className="d-block mb-4">
-                <h5 className="d-inline">Activity</h5>
-                <Button
-                  variant="success"
-                  className="float-right"
-                  onClick={() => setShow(true)}
+                <div
+                  style={{
+                    marginLeft: "-100px",
+                    marginRight: "-100px",
+                    zIndex: 10,
+                  }}
                 >
-                  Add workout
-                </Button>
-              </div>
-              {!workouts || workouts.length === 0 ? (
-                <div>No workouts</div>
-              ) : null}
-              {sortedWorkouts.map((workout, i) => (
-                <Workout key={i} workout={workout} deleteWkt={deleteWrkout} />
-              ))}
+                  <Table style={{ backgroundColor: "#212529", color: "white" }}>
+                    <tbody>
+                      <tr>
+                        {warlords.map(
+                          ({ image, name, description, health }, i) => (
+                            <td
+                              align="center"
+                              className="px-0"
+                              style={{ borderTop: "0px" }}
+                              key={name}
+                            >
+                              <Image
+                                src={image}
+                                roundedCircle
+                                style={warlordStyles}
+                              />
+                              <div className="font-weight-bold">
+                                {name}{" "}
+                                <Badge
+                                  style={{
+                                    backgroundColor: "#bd1818",
+                                    color: "white",
+                                  }}
+                                >
+                                  {health}H
+                                </Badge>
+                              </div>
+                              <div>{description}</div>
+                              <div>
+                                <span className="text-muted">Week {i + 1}</span>
+                              </div>
+                            </td>
+                          )
+                        )}
+                      </tr>
+                    </tbody>
+                  </Table>
+                </div>
+                <p>
+                  The warlords have now been released into the realm of
+                  Fyetna&#347;, an in-between space where they are wreaking
+                  havoc on humanity, hidden under the guise of shapelessness.{" "}
+                  <strong>
+                    If allowed to continue, the ramifications will be
+                    irreparable.
+                  </strong>
+                </p>
+                <div className="my-4" />
+                <h3 style={{ fontFamily: "MedievalSharp" }}>The Goal</h3>
+                <p>Defeat the 4 warlords of Fyetna&#347;.</p>
+                <h3 style={{ fontFamily: "MedievalSharp" }}>How</h3>
+                <p>
+                  The warlords exist to separate, so they can only be defeated
+                  by unity. Each warrior will commit to working out 5 days of
+                  the week and together we will defeat the warlords by rising to
+                  the fitness challenge for one month (4 weeks).
+                </p>
+                <p>
+                  <strong>
+                    Each warlord takes a certain amount of hits to defeat. One
+                    workout = one hit.
+                  </strong>{" "}
+                  Every day that someone does not workout, it will weaken the
+                  collective ability to defeat the warlord.
+                </p>
+                <h3 style={{ fontFamily: "MedievalSharp" }}>When</h3>
+                <p>
+                  February 7 - March 6{" "}
+                  <strong>
+                    *last minute enlistments are allowed until Feb 8
+                  </strong>
+                </p>
+                <h3 style={{ fontFamily: "MedievalSharp" }}>Warriors</h3>
+
+                <WarriorTable warriors={warriors} />
+
+                <div className="py-2" />
+
+                <div>
+                  Enlisting has closed.{" "}
+                  <strong>The battle has commenced!</strong>
+                </div>
+
+                <div className="py-3" />
+              </>
             </Col>
-            <Col lg={2} className="p-4 bg-transparent"></Col>
+            <Col
+              xs={12}
+              sm={3}
+              md={3}
+              lg={3}
+              className="pt-4 hidden-xs bg-transparent"
+            ></Col>
           </Row>
-        </>
-      ) : null}
-      {activePage === "Details" ? (
-        <Row style={{ backgroundColor: "#e2b065" }}>
-          <Col
-            xs={12}
-            sm={3}
-            md={3}
-            lg={3}
-            className="p-4 bg-transparent"
-          ></Col>
-          <Col
-            xs={12}
-            sm={6}
-            md={6}
-            lg={6}
-            className="hidden-xs bg-transparent"
-          >
-            <>
-              <p>
-                Four overseers of the realm of light were ensnared by the evil
-                ones lies and dragged down into darkness where they were
-                tortured for millenia and corrupted beyond repair. He made them
-                warlords and trained them in the dark arts, each with their own
-                specialty.
-              </p>
+        ) : null}
+        {activePage === "FAQ" ? (
+          <Row style={{ backgroundColor: "#e2b065" }}>
+            <Col
+              xs={12}
+              sm={3}
+              md={3}
+              lg={3}
+              className="p-4 bg-transparent"
+            ></Col>
+            <Col
+              xs={12}
+              sm={6}
+              md={6}
+              lg={6}
+              className="hidden-xs bg-transparent"
+            >
+              <FAQ warlords={warlords} />
+            </Col>
+            <Col
+              xs={12}
+              sm={3}
+              md={3}
+              lg={3}
+              className="p-4 bg-transparent"
+            ></Col>
+          </Row>
+        ) : null}
+        <Modal show={show} onHide={() => setShow(false)}>
+          <Modal.Body className="bg-dark text-light">
+            <Form.Label className="mb-0 text-light">Your name</Form.Label>
+            <Form.Control
+              as="select"
+              rows={2}
+              name="skill"
+              value={warrior}
+              onChange={(e) => setWarrior(e.target.value)}
+            >
+              <option></option>
+              {Object.keys(warriors).map((warr) => (
+                <option key={warr}>{warr}</option>
+              ))}
+            </Form.Control>
+            <div className="py-2" />
+            <Form.Label className="mb-1 text-light">
+              Workout description
+            </Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={2}
+              className="bg-dark border-secondary text-light"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+            <div className="py-2" />
+            <Form.Check
+              type="checkbox"
+              label="Worked out with other warriors"
+              checked={joint}
+              onChange={() => setJoint(!joint)}
+            />
+            <div className="py-2" />
+            <span>*NOTE - Max: 1 workout/day, 5 workouts/wk</span>
+          </Modal.Body>
 
-              <div
-                style={{
-                  marginLeft: "-100px",
-                  marginRight: "-100px",
-                  zIndex: 10,
-                }}
-              >
-                <Table style={{ backgroundColor: "#212529", color: "white" }}>
-                  <tbody>
-                    <tr>
-                      {warlords.map(
-                        ({ image, name, description, health }, i) => (
-                          <td
-                            align="center"
-                            className="px-0"
-                            style={{ borderTop: "0px" }}
-                            key={name}
-                          >
-                            <Image
-                              src={image}
-                              roundedCircle
-                              style={warlordStyles}
-                            />
-                            <div className="font-weight-bold">
-                              {name}{" "}
-                              <Badge
-                                style={{
-                                  backgroundColor: "#bd1818",
-                                  color: "white",
-                                }}
-                              >
-                                {health}H
-                              </Badge>
-                            </div>
-                            <div>{description}</div>
-                            <div>
-                              <span className="text-muted">Week {i + 1}</span>
-                            </div>
-                          </td>
-                        )
-                      )}
-                    </tr>
-                  </tbody>
-                </Table>
-              </div>
-              <p>
-                The warlords have now been released into the realm of
-                Fyetna&#347;, an in-between space where they are wreaking havoc
-                on humanity, hidden under the guise of shapelessness.{" "}
-                <strong>
-                  If allowed to continue, the ramifications will be irreparable.
-                </strong>
-              </p>
-              <div className="my-4" />
-              <h3 style={{ fontFamily: "MedievalSharp" }}>The Goal</h3>
-              <p>Defeat the 4 warlords of Fyetna&#347;.</p>
-              <h3 style={{ fontFamily: "MedievalSharp" }}>How</h3>
-              <p>
-                The warlords exist to separate, so they can only be defeated by
-                unity. Each warrior will commit to working out 5 days of the
-                week and together we will defeat the warlords by rising to the
-                fitness challenge for one month (4 weeks).
-              </p>
-              <p>
-                <strong>
-                  Each warlord takes a certain amount of hits to defeat. One
-                  workout = one hit.
-                </strong>{" "}
-                Every day that someone does not workout, it will weaken the
-                collective ability to defeat the warlord.
-              </p>
-              <h3 style={{ fontFamily: "MedievalSharp" }}>When</h3>
-              <p>
-                February 7 - March 6{" "}
-                <strong>
-                  *last minute enlistments are allowed until Feb 8
-                </strong>
-              </p>
-              <h3 style={{ fontFamily: "MedievalSharp" }}>Warriors</h3>
-
-              <WarriorTable warriors={warriors} />
-
-              <div className="py-2" />
-
-              <div>
-                Enlisting has closed. <strong>The battle has commenced!</strong>
-              </div>
-
-              <div className="py-3" />
-            </>
-          </Col>
-          <Col
-            xs={12}
-            sm={3}
-            md={3}
-            lg={3}
-            className="pt-4 hidden-xs bg-transparent"
-          ></Col>
-        </Row>
-      ) : null}
-      {activePage === "FAQ" ? (
-        <Row style={{ backgroundColor: "#e2b065" }}>
-          <Col
-            xs={12}
-            sm={3}
-            md={3}
-            lg={3}
-            className="p-4 bg-transparent"
-          ></Col>
-          <Col
-            xs={12}
-            sm={6}
-            md={6}
-            lg={6}
-            className="hidden-xs bg-transparent"
-          >
-            <FAQ warlords={warlords} />
-          </Col>
-          <Col
-            xs={12}
-            sm={3}
-            md={3}
-            lg={3}
-            className="p-4 bg-transparent"
-          ></Col>
-        </Row>
-      ) : null}
-      <Modal show={show} onHide={() => setShow(false)}>
-        <Modal.Body className="bg-dark text-light">
-          <Form.Label className="mb-0 text-light">Your name</Form.Label>
-          <Form.Control
-            as="select"
-            rows={2}
-            name="skill"
-            value={warrior}
-            onChange={(e) => setWarrior(e.target.value)}
-          >
-            <option></option>
-            {Object.keys(warriors).map((warr) => (
-              <option key={warr}>{warr}</option>
-            ))}
-          </Form.Control>
-          <div className="py-2" />
-          <Form.Label className="mb-1 text-light">
-            Workout description
-          </Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={2}
-            className="bg-dark border-secondary text-light"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-          <div className="py-2" />
-          <Form.Check
-            type="checkbox"
-            label="Worked out with other warriors"
-            checked={joint}
-            onChange={() => setJoint(!joint)}
-          />
-          <div className="py-2" />
-          <span>*NOTE - Max: 1 workout/day, 5 workouts/wk</span>
-        </Modal.Body>
-
-        <Modal.Footer className="bg-dark border-dark text-light">
-          <span className="mr-2">Refresh after saving</span>
-          <Button
-            variant="secondary"
-            onClick={() => {
-              setShow(false);
-              clearAddWorkoutForm();
-            }}
-          >
-            Cancel
-          </Button>
-          <Button
-            variant="success"
-            disabled={!warrior || !description}
-            onClick={addWorkout}
-          >
-            Save
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </Col>
+          <Modal.Footer className="bg-dark border-dark text-light">
+            <span className="mr-2">Refresh after saving</span>
+            <Button
+              variant="secondary"
+              onClick={() => {
+                setShow(false);
+                clearAddWorkoutForm();
+              }}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="success"
+              disabled={!warrior || !description}
+              onClick={addWorkout}
+            >
+              Save
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </Col>
+    </Container>
   );
 }
 
@@ -1129,10 +1155,10 @@ const warlords = [
     sayings: [
       "No one really cares!",
       "You don't need anyone else",
-      "Everyone else is happy",
+      "Everyone ELSE is happy",
       "You're the only one who feels that way",
-      "What's wrong with you?",
-      "You deserve to be alone",
+      "What's wrong with you?!",
+      "You deserve to be alone!",
       "No one can give you what you need",
     ],
     defeated: false,
@@ -1144,7 +1170,14 @@ const warlords = [
     image: warlord2,
     start: "2021-02-14",
     end: "2021-02-20",
-    sayings: ["You'll never have the body you want", "Self-care is selfish!"],
+    sayings: [
+      "You'll never have the body you want",
+      "Self-care is selfish!",
+      "You'll always be this way!",
+      "HA! You ARE as bad as they say.",
+      "Once a loser, always a loser",
+      "You're not worth the time anyway!",
+    ],
     defeated: false,
   },
   {
@@ -1155,8 +1188,9 @@ const warlords = [
     start: "2021-02-21",
     end: "2021-02-27",
     sayings: [
-      "What's the point of all this?!",
+      "What's the point of all this anyway!",
       "Doing things for yourself takes away time for socializing",
+      "You'll never be what you want to!",
     ],
     defeated: false,
   },
@@ -1167,10 +1201,7 @@ const warlords = [
     image: warlord4,
     start: "2021-02-28",
     end: "2021-03-06",
-    sayings: [
-      "What if you get hurt?",
-      "Doing things for yourself takes away time for socializing",
-    ],
+    sayings: ["What if you get hurt?", "What if this is all just pointless?"],
     defeated: false,
   },
 ];
@@ -1194,7 +1225,7 @@ const updates = [
   {
     description: (
       <>
-        <p>Day two, hits fell like rain.</p>
+        <p>Day two, hits landed like rain.</p>
         <p>
           The battle re-commenced with gladiator Simon summoning hoards of small
           but strong mercenaries to attack with full force. Vilkyu noticing his

@@ -57,17 +57,7 @@ function Home({ children }) {
     );
   }
 
-  if (pathname === "/battle-of-fyetnas") {
-    return (
-      <Container fluid>
-        <Helmet>
-          <title>Battle of Fyetna&#347;</title>
-          <link rel="icon" type="image/png" href={battleAxe} sizes="16x16" />
-        </Helmet>
-        {children}
-      </Container>
-    );
-  }
+  if (pathname === "/battle-of-fyetnas") return children;
 
   if (pathname === "/gallery") {
     return (
