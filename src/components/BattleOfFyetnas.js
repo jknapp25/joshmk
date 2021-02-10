@@ -1316,8 +1316,8 @@ const updates = [
         <p>
           Day three kicked off with the Honorable Knight Scriven leading the
           way. Tactical by nature, Scriven devised a plan to create a diversion
-          to gain visibility into the realm of Fyetnas and determine Vilkyu's
-          next step.
+          to gain visibility into the realm of Fyetna&#347; and determine
+          Vilkyu's next step.
         </p>
         <p>
           Joined by the sheer strength of gladiators Caleb, Isaac and Simon they
@@ -1328,7 +1328,7 @@ const updates = [
         <p>
           While chaos ensued, sorcerer Riah cloaked one of Natalie's trained
           hawks in invisibility, and James opened a portal to the realm of
-          Fyetnas. The hawk was able to enter and return to Natalie with
+          Fyetna&#347;. The hawk was able to enter and return to Natalie with
           valuable information.
         </p>
         <p>
