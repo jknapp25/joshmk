@@ -1227,9 +1227,10 @@ const updates = [
       <>
         <p>Day two, hits rained down upon Vilkyu.</p>
         <p>
-          The battle re-commenced with gladiator Simon summoning hoards of small
-          but strong mercenaries to attack with full force. Vilkyu noticing his
-          strength quickly eroding, decided to get more clever.
+          The battle re-commenced with experienced gladiator Simon summoning
+          hoards of small but strong mercenaries to attack with full force.
+          Vilkyu noticing his strength quickly eroding, decided to get more
+          clever.
         </p>
         <p>
           He released a{" "}
