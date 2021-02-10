@@ -14,6 +14,7 @@ import {
   ProgressBar,
   Modal,
   Dropdown,
+  Alert,
 } from "react-bootstrap";
 import Calendar from "./Calendar";
 import ImageUploader from "./ImageUploader";
@@ -257,6 +258,16 @@ function BattleOfFyetnas() {
                     Add workout
                   </Button>
                 </div>
+                <Alert
+                  className="bg-danger text-light"
+                  style={{ borderRadius: "0px" }}
+                >
+                  <strong className="text-dark">WOUNDED WARRIOR ALERT</strong>{" "}
+                  Yesterday evening, Sorcerer Nathan injured his knee on the
+                  battlefield. He seems to be okay, but may need back-up while
+                  he recuperates. Please consider doing a group workout to aid
+                  our fellow warrior!
+                </Alert>
                 {!workouts || workouts.length === 0 ? (
                   <div>No workouts</div>
                 ) : null}
