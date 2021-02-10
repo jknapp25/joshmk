@@ -582,7 +582,7 @@ const WarriorTable = () => {
 };
 
 const UpdateCard = () => {
-  const [updateIdx, setUpdateIdx] = useState(1);
+  const [updateIdx, setUpdateIdx] = useState(updates.length - 1);
   const dateFormatted = moment(updates[updateIdx].date).format("dddd, MMMM Do");
   const description = updates[updateIdx].description;
 
@@ -1257,5 +1257,40 @@ const updates = [
       </>
     ),
     date: "2021-02-09",
+  },
+  {
+    description: (
+      <>
+        <p>
+          Day three kicked off with the Honorable Knight Scriven leading the
+          way. Tactical by nature, Scriven devised a plan to create a diversion
+          to gain visibility into the realm of Fyetnas and determine Vilkyu's
+          next step.
+        </p>
+        <p>
+          Joined by the sheer strength of gladiators Caleb, Isaac and Simon they
+          created quite a stir as axes banged, swords clanged and horse hooves
+          kicked up dust. Vilkyu's active lie-spell against happiness was
+          clearly not going to survive.
+        </p>
+        <p>
+          While chaos ensued, sorcerer Riah cloaked one of Natalie's trained
+          hawks in invisibility, and James opened a portal to the realm of
+          Fyetnas. The hawk was able to enter and return to Natalie with
+          valuable information.
+        </p>
+        <p>
+          It appears that Vilkyu, now desparate, is taking to the skies and
+          churning the atmosphere. He plans on conjuring a blanket of snow over
+          the area to isolate and hinder the warriors.
+        </p>
+
+        <p className="mb-0">
+          Wise archer Ben advises extra communication and a watchful eye in this
+          time.
+        </p>
+      </>
+    ),
+    date: "2021-02-10",
   },
 ];
