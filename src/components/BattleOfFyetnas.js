@@ -1327,24 +1327,24 @@ const updates = [
         </p>
         <p>
           While chaos ensued, sorcerer Riah cloaked one of Natalie's trained
-          hawks in invisibility, and James opened a portal to the realm of
+          hawks in invisibility, and James opened a portal into the realm of
           Fyetna&#347;. The hawk was able to enter and return to Natalie with
           valuable information.
         </p>
         <p>
-          It appears that Vilkyu, now desparate, is taking to the skies and
+          It appears that Vilkyu, now desperate, is taking to the skies and
           churning the atmosphere. He plans on conjuring a layer of snow over
           the area to isolate and hinder the warriors.
         </p>
         <p>
           Natalie schemed up the idea for a training area{" "}
           <strong>(see above)</strong> so the warriors can share ideas and
-          helpful tips to stay active.
+          helpful tips to stay active in this time.
         </p>
 
         <p className="mb-0">
-          Wise archer Ben advises extra communication, sharing of ideas, and a
-          watchful eye in this time.
+          Wise archer Ben, noticing the shifting skies, advises extra
+          communication, sharing of ideas, and a watchful eye.
         </p>
       </>
     ),
