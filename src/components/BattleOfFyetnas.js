@@ -1240,9 +1240,9 @@ const updates = [
           >
             Nyde
           </a>
-          , a small sound-absorbing insect, into their midst. This disrupted the
-          warriors main communication channel and created the illusion that
-          certain powerful hits were not happening.
+          , a small sound-absorbing insect, amidst the warriors. This disrupted
+          the main communication channel and created the illusion that certain
+          powerful hits were not happening.
         </p>
         <p>
           Though effective for a while, it was only temporary. The bug was slain
