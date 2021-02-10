@@ -1229,7 +1229,7 @@ const updates = [
         <p>
           The battle re-commenced with experienced gladiator Simon summoning
           hoards of small but strong mercenaries to attack with full force.
-          Vilkyu noticing his strength quickly eroding, decided to get more
+          Vilkyu, noticing his strength eroding quickly, decided to get more
           clever.
         </p>
         <p>
