@@ -123,22 +123,22 @@ function BattleOfFyetnas() {
 
   let bgColor = "#e2b065"; // old one e2b065
   if (
-    moment(currentDate).isBetween(moment("2021-02-07"), moment("2021-02-13"))
+    moment(currentDate).isBetween(moment("2021-02-07"), moment("2021-02-14"))
   ) {
     bgColor = "#68808a";
   }
   if (
-    moment(currentDate).isBetween(moment("2021-02-13"), moment("2021-02-21"))
+    moment(currentDate).isBetween(moment("2021-02-14"), moment("2021-02-21"))
   ) {
     bgColor = "#d8d3b8";
   }
   if (
-    moment(currentDate).isBetween(moment("2021-02-21"), moment("2021-02-27"))
+    moment(currentDate).isBetween(moment("2021-02-21"), moment("2021-02-28"))
   ) {
     bgColor = "#4495ac";
   }
   if (
-    moment(currentDate).isBetween(moment("2021-02-27"), moment("2021-03-06"))
+    moment(currentDate).isBetween(moment("2021-02-28"), moment("2021-03-07"))
   ) {
     bgColor = "#6e655f";
   }
