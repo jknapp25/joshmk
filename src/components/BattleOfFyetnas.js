@@ -1467,11 +1467,13 @@ const updates = [
         <p>But an ember still burned inside him that left his spirit intact.</p>
         <p>
           At night, injured sorcer Nathan was walking the battlefield alone.
-          Noticing a stir, he took the axe he borrowed from the gladiators and
-          enriched it with a spell. It lit up, and became so sharp it could
-          divide spirit from soul. The lingering evil, unable to take the light,
-          attacked. And Nathan dealt the final blow that sent Vilkyu into
-          nothingness. A come-back for the history books!
+          Noticing a stir in his soul and hearing faint whispers repeating
+          "You'll always be alone", he took the axe he borrowed from the
+          gladiators and enriched it with a spell of illumination. It lit up,
+          and became sharp enough to divide spirit from soul. The lingering
+          evil, unable to take the light, attacked. And Nathan dealt the final
+          blow that sent the last of Vilkyu into obscurity. A come-back for the
+          history books!
         </p>
         <p>
           All in all, a spectacular effort from every warrior. Vilkyu was
