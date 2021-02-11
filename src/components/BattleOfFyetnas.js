@@ -1454,9 +1454,12 @@ const updates = [
           In a dramatic come-back, injured sorcerer Nathan returned to deal the
           final blow that sent Vilkyu to the grave.
         </p>
+        <p>
+          A spectacular effort from every warrior. Vilkyu was defeated much
+          earlier than was considered possible!
+        </p>
         <p className="mb-0">
-          A valiant effort from every warrior. Now to celebrate and prepare for
-          our next battle!
+          Now to celebrate and prepare for our next battle.
         </p>
       </>
     ),
