@@ -1452,9 +1452,9 @@ const updates = [
         </p>
         <p>
           In a dramatic come-back, injured sorcerer Nathan returned at night
-          alone to the battlefield. And with an axe borrowed from the gladiators
-          he dealt the final blow that sent Vilkyu to the grave. A monumental
-          act of courage!
+          alone to the battlefield. And with an axe borrowed from the
+          gladiators, he dealt the final blow that sent Vilkyu to the grave. A
+          monumental act of courage!
         </p>
         <p>
           All in all, a spectacular effort from every warrior. Vilkyu was
