@@ -1461,12 +1461,12 @@ const updates = [
         <p>
           The battle raged until the very end. Caleb valiantly lead the charge
           early in the morning, followed up with a total manhandling from
-          gladiators Alex and Caleb. Then the pummeling continued until it was
-          thought that Vilkyu was no more.
+          gladiators Alex and Caleb. The pummeling continued all of Vilkyu's
+          forces were defeated and it was thought that he was no more.
         </p>
         <p>But an ember still burned inside him that left his spirit intact.</p>
         <p>
-          At night, injured sorcer Nathan was walking the battlefield alone.
+          At night, injured sorcerer Nathan was walking the battlefield alone.
           Noticing a stir in his soul and hearing faint whispers repeating
           "You'll always be alone", he took the axe he borrowed from the
           gladiators and enriched it with a spell of illumination. It lit up,
