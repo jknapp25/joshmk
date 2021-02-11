@@ -216,7 +216,7 @@ function BattleOfFyetnas() {
         </Row>
         {activePage === "Battle" ? (
           <>
-            <Row>
+            {/* <Row>
               <Col lg={2} className="p-4 bg-transparent"></Col>
               <Col lg={8} className="bg-transparent">
                 <Alert
@@ -224,14 +224,14 @@ function BattleOfFyetnas() {
                   style={{ borderRadius: "0px" }}
                 >
                   <strong className="text-dark">WOUNDED WARRIOR ALERT:</strong>{" "}
-                  Yesterday evening, Sorcerer Nathan injured his knee on the
+                  Tuesday evening, Sorcerer Nathan injured his knee on the
                   battlefield. He seems to be okay, but may need back-up while
                   he recuperates. Please consider doing a group workout to aid
                   our brother!
                 </Alert>
               </Col>
               <Col lg={2} className="p-4 bg-transparent"></Col>
-            </Row>
+            </Row> */}
             <Row>
               <Col lg={2} className="p-4 bg-transparent"></Col>
               <Col lg={3} className="bg-transparent">
@@ -260,14 +260,20 @@ function BattleOfFyetnas() {
                     );
                     const progress =
                       ((warlord.health - totalHits) / warlord.health) * 100;
-                    return (
-                      <WarlordActive
-                        key={warlord.name}
-                        warlord={warlord}
-                        progress={progress}
-                        weekNum={i + 1}
-                      />
-                    );
+                    if (progress === 0) {
+                      return (
+                        <WarlordPast key={warlord.name} warlord={warlord} />
+                      );
+                    } else {
+                      return (
+                        <WarlordActive
+                          key={warlord.name}
+                          warlord={warlord}
+                          progress={progress}
+                          weekNum={i + 1}
+                        />
+                      );
+                    }
                   } else {
                     if (moment(currentDate).isAfter(moment(warlord.end))) {
                       return (
@@ -779,7 +785,7 @@ const WarlordPast = ({ warlord }) => {
   return (
     <Card className={`bg-${defeated ? "success" : "danger"} text-light mb-2`}>
       <Card.Body className="mt-2 align-middle text-center p-1">
-        <h3>{defeated ? `Defeated ${name}` : `${name} survived`}</h3>
+        <h3>{defeated ? `Defeated ${name}!` : `${name} survived`}</h3>
       </Card.Body>
     </Card>
   );
@@ -801,6 +807,7 @@ const WarlordActive = ({ warlord, progress, weekNum }) => {
       <Card.Body>
         <h4 className="mb-0">{name}</h4>
         <div className="mb-2">{description}</div>
+
         <Image
           src={image}
           style={{
@@ -1300,7 +1307,7 @@ const warlords = [
       "You deserve to be alone!",
       "No one can give you what you need",
     ],
-    defeated: false,
+    defeated: true,
   },
   {
     name: "Muldur",
