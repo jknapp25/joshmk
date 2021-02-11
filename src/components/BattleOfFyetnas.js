@@ -260,20 +260,14 @@ function BattleOfFyetnas() {
                     );
                     const progress =
                       ((warlord.health - totalHits) / warlord.health) * 100;
-                    if (progress === 0) {
-                      return (
-                        <WarlordPast key={warlord.name} warlord={warlord} />
-                      );
-                    } else {
-                      return (
-                        <WarlordActive
-                          key={warlord.name}
-                          warlord={warlord}
-                          progress={progress}
-                          weekNum={i + 1}
-                        />
-                      );
-                    }
+                    return (
+                      <WarlordActive
+                        key={warlord.name}
+                        warlord={warlord}
+                        progress={progress}
+                        weekNum={i + 1}
+                      />
+                    );
                   } else {
                     if (moment(currentDate).isAfter(moment(warlord.end))) {
                       return (
@@ -807,23 +801,28 @@ const WarlordActive = ({ warlord, progress, weekNum }) => {
       <Card.Body>
         <h4 className="mb-0">{name}</h4>
         <div className="mb-2">{description}</div>
-
-        <Image
-          src={image}
-          style={{
-            width: "100%",
-            height: "auto",
-          }}
-        />
-        <div className="mb-3 mt-1">"{saying}"</div>
-        <ProgressBar
-          animated
-          variant={progressColor}
-          now={progress}
-          label={`${Math.round(progress)}%`}
-          style={{ backgroundColor: "#6c757d" }}
-        />
-        <small>STRENGTH</small>
+        {warlord.defeated ? (
+          <h2 className="text-success">DEFEATED</h2>
+        ) : (
+          <>
+            <Image
+              src={image}
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
+            />
+            <div className="mb-3 mt-1">"{saying}"</div>
+            <ProgressBar
+              animated
+              variant={progressColor}
+              now={progress}
+              label={`${Math.round(progress)}%`}
+              style={{ backgroundColor: "#6c757d" }}
+            />
+            <small>STRENGTH</small>
+          </>
+        )}
       </Card.Body>
     </Card>
   );
@@ -1444,6 +1443,24 @@ const updates = [
       </>
     ),
     date: "2021-02-10",
+  },
+  {
+    description: (
+      <>
+        <p>
+          <strong>WE DEFEATED VILKYU!</strong>
+        </p>
+        <p>
+          In a dramatic come-back, injured sorcerer Nathan returned to deal the
+          final blow that sent Vilkyu to the grave.
+        </p>
+        <p className="mb-0">
+          A valiant effort from every warrior. Now to celebrate and prepare for
+          our next battle!
+        </p>
+      </>
+    ),
+    date: "2021-02-11",
   },
 ];
 
