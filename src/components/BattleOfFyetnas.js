@@ -343,58 +343,8 @@ function BattleOfFyetnas() {
                         <span className="text-light text-capitalize">
                           {tr.type}
                         </span>
-                        , Shared by{" "}
-                        {warriors[tr.warrior].skill === "sorcerer" ? (
-                          <GiMoebiusStar
-                            className="mr-1"
-                            title="sorcerer"
-                            style={{
-                              display: "inline",
-                              color: "#2feca7",
-                            }}
-                          />
-                        ) : null}
-                        {warriors[tr.warrior].skill === "gladiator" ? (
-                          <GiSharpAxe
-                            className="mr-1"
-                            title="gladiator"
-                            style={{
-                              display: "inline",
-                              color: "#ec6d2f",
-                            }}
-                          />
-                        ) : null}
-                        {warriors[tr.warrior].skill === "archer" ? (
-                          <GiPocketBow
-                            className="mr-1"
-                            title="archer"
-                            style={{
-                              display: "inline",
-                              color: "#ecdf2f",
-                            }}
-                          />
-                        ) : null}
-                        {warriors[tr.warrior].skill === "huntress" ? (
-                          <GiThrownKnife
-                            className="mr-1"
-                            title="huntress"
-                            style={{
-                              display: "inline",
-                              color: "#ec2fb9",
-                            }}
-                          />
-                        ) : null}
-                        {warriors[tr.warrior].skill === "knight" ? (
-                          <GiBlackKnightHelm
-                            className="mr-1"
-                            title="knight"
-                            style={{
-                              display: "inline",
-                              color: "#2f9cec",
-                            }}
-                          />
-                        ) : null}
-                        <strong className="text-light">{tr.warrior}</strong>
+                        , Shared by <Name warrior={tr.warriors[0]} />,{" "}
+                        <Name warrior={tr.warriors[1]} />
                       </small>
                     </p>
                   </Card.Body>
@@ -854,6 +804,64 @@ const WarlordFuture = ({ warlord, weekNum }) => {
         </Row>
       </Card.Body>
     </Card>
+  );
+};
+
+const Name = ({ warrior }) => {
+  return (
+    <>
+      {warriors[warrior].skill === "sorcerer" ? (
+        <GiMoebiusStar
+          className="mr-1"
+          title="sorcerer"
+          style={{
+            display: "inline",
+            color: "#2feca7",
+          }}
+        />
+      ) : null}
+      {warriors[warrior].skill === "gladiator" ? (
+        <GiSharpAxe
+          className="mr-1"
+          title="gladiator"
+          style={{
+            display: "inline",
+            color: "#ec6d2f",
+          }}
+        />
+      ) : null}
+      {warriors[warrior].skill === "archer" ? (
+        <GiPocketBow
+          className="mr-1"
+          title="archer"
+          style={{
+            display: "inline",
+            color: "#ecdf2f",
+          }}
+        />
+      ) : null}
+      {warriors[warrior].skill === "huntress" ? (
+        <GiThrownKnife
+          className="mr-1"
+          title="huntress"
+          style={{
+            display: "inline",
+            color: "#ec2fb9",
+          }}
+        />
+      ) : null}
+      {warriors[warrior].skill === "knight" ? (
+        <GiBlackKnightHelm
+          className="mr-1"
+          title="knight"
+          style={{
+            display: "inline",
+            color: "#2f9cec",
+          }}
+        />
+      ) : null}
+      <strong className="text-light">{warrior}</strong>
+    </>
   );
 };
 
@@ -1486,9 +1494,20 @@ const training = [
           someone that rarely get's to classes. Adrienne is pretty funny, that
           kept me engaged and made me feel comfortable.
         </p>
+        <p>Here's one of Adriene's videos, suggested by Huntress Natalie...</p>
+        <div>
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/7yOtsZNU4Us"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
       </>
     ),
     type: "yoga",
-    warrior: "Josh Knapp",
+    warriors: ["Josh Knapp", "Natalie"],
   },
 ];
