@@ -1471,7 +1471,7 @@ const updates = [
           enriched it with a spell. It lit up, and became so sharp it could
           divide spirit from soul. The lingering evil, unable to take the light,
           attacked. And Nathan dealt the final blow that sent Vilkyu into
-          nothingness. A monumental act of courage!
+          nothingness. A come-back for the history books!
         </p>
         <p>
           All in all, a spectacular effort from every warrior. Vilkyu was
