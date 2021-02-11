@@ -1459,10 +1459,10 @@ const updates = [
           <strong>WE DEFEATED VILKYU!</strong>
         </p>
         <p>
-          The battle raged until the very end. Caleb valiantly lead the charge
-          early in the morning, followed up with a total manhandling from
-          gladiators Alex and Caleb. The pummeling continued all of Vilkyu's
-          forces were defeated and it was thought that he was no more.
+          The battle raged until the very end. Gladiator Caleb valiantly lead
+          the charge early in the morning, followed up with a total manhandling
+          from gladiators Alex and Caleb. The pummeling continued all of
+          Vilkyu's forces were defeated and it was thought that he was no more.
         </p>
         <p>But an ember still burned inside him that left his spirit intact.</p>
         <p>
