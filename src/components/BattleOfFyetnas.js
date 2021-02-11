@@ -1490,9 +1490,9 @@ const training = [
           </a>
         </p>
         <p>
-          I did the "Home" 30-day yoga journey, it was fun and approachable for
-          someone that rarely get's to classes. Adrienne is pretty funny, that
-          kept me engaged and made me feel comfortable.
+          I (Josh) did the "Home" 30-day yoga journey, it was fun and
+          approachable for someone that rarely get's to classes. Adrienne is
+          pretty funny, that kept me engaged and made me feel comfortable.
         </p>
         <p>Here's one of Adriene's videos, suggested by Huntress Natalie...</p>
         <div>
