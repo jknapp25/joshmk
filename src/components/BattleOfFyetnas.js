@@ -125,7 +125,7 @@ function BattleOfFyetnas() {
   if (
     moment(currentDate).isBetween(moment("2021-02-07"), moment("2021-02-14"))
   ) {
-    bgColor = "#68808a";
+    bgColor = "#79919a";
   }
   if (
     moment(currentDate).isBetween(moment("2021-02-14"), moment("2021-02-21"))
