@@ -1451,15 +1451,16 @@ const updates = [
           <strong>WE DEFEATED VILKYU!</strong>
         </p>
         <p>
-          In a dramatic come-back, injured sorcerer Nathan returned to the
-          battlefield with an axe borrowed from the gladiators to deal the final
-          blow that sent Vilkyu to the grave.
+          In a dramatic come-back, injured sorcerer Nathan returned at night
+          alone to the battlefield. And with an axe borrowed from the gladiators
+          he dealt the final blow that sent Vilkyu to the grave. A monumental
+          act of courage!
         </p>
         <p>
-          A spectacular effort from every warrior. Vilkyu was defeated much
-          earlier than was considered possible!
+          All in all, a spectacular effort from every warrior. Vilkyu was
+          defeated much earlier than was considered possible!
         </p>
-        <p className="mb-0">Now to rest up and prepare for our next battle.</p>
+        <p className="mb-0">Now to rest up and train for our next battle.</p>
       </>
     ),
     date: "2021-02-11",
