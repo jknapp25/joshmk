@@ -1451,8 +1451,9 @@ const updates = [
           <strong>WE DEFEATED VILKYU!</strong>
         </p>
         <p>
-          In a dramatic come-back, injured sorcerer Nathan returned to deal the
-          final blow that sent Vilkyu to the grave.
+          In a dramatic come-back, injured sorcerer Nathan returned to the
+          battlefield with an axe borrowed from the gladiators to deal the final
+          blow that sent Vilkyu to the grave.
         </p>
         <p>
           A spectacular effort from every warrior. Vilkyu was defeated much
