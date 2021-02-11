@@ -1458,9 +1458,7 @@ const updates = [
           A spectacular effort from every warrior. Vilkyu was defeated much
           earlier than was considered possible!
         </p>
-        <p className="mb-0">
-          Now to celebrate and prepare for our next battle.
-        </p>
+        <p className="mb-0">Now to rest up and prepare for our next battle.</p>
       </>
     ),
     date: "2021-02-11",
