@@ -1459,10 +1459,19 @@ const updates = [
           <strong>WE DEFEATED VILKYU!</strong>
         </p>
         <p>
-          In a dramatic come-back, injured sorcerer Nathan returned at night
-          alone to the battlefield. And with an axe borrowed from the
-          gladiators, he dealt the final blow that sent Vilkyu to the grave. A
-          monumental act of courage!
+          The battle raged until the very end. Caleb valiantly lead the charge
+          early in the morning, followed up with a total manhandling from
+          gladiators Alex and Caleb. Then the pummeling continued until it was
+          thought that Vilkyu was no more.
+        </p>
+        <p>But an ember still burned inside him that left his spirit intact.</p>
+        <p>
+          At night, injured sorcer Nathan was walking the battlefield alone.
+          Noticing a stir, he took the axe he borrowed from the gladiators and
+          enriched it with a spell. It lit up, and became so sharp it could
+          divide spirit from soul. The lingering evil, unable to take the light,
+          attacked. And Nathan dealt the final blow that sent Vilkyu into
+          nothingness. A monumental act of courage!
         </p>
         <p>
           All in all, a spectacular effort from every warrior. Vilkyu was
