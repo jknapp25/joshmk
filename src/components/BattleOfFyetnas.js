@@ -1516,7 +1516,7 @@ const training = [
   {
     details: (
       <>
-        <h5>Why I fight</h5>
+        <h5>Why I'm fighting</h5>
         <p>
           Here's a short video where I talk about why I'm in this battle and
           what I hope to get out of being a more fit/healthier person.
