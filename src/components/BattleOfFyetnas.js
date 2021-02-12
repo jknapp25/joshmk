@@ -286,7 +286,7 @@ function BattleOfFyetnas() {
                 })}
               </Col>
               <Col lg={5} className="bg-transparent">
-                {/* <Calendar /> */}
+                {/* <Calendar workouts={workouts} mini={true} showDayNum={false} /> */}
                 <UpdateCard />
                 <div className="d-block mb-4">
                   <h5 className="d-inline">Activity</h5>
@@ -343,8 +343,13 @@ function BattleOfFyetnas() {
                         <span className="text-light text-capitalize">
                           {tr.type}
                         </span>
-                        , Shared by <Name warrior={tr.warriors[0]} />,{" "}
-                        <Name warrior={tr.warriors[1]} />
+                        , Shared by{" "}
+                        {tr.warriors.map((warr, i) => (
+                          <Name
+                            warrior={warr}
+                            comma={tr.warriors.length - 1 !== i}
+                          />
+                        ))}
                       </small>
                     </p>
                   </Card.Body>
@@ -716,7 +721,7 @@ const UpdateCard = () => {
           <IoIosArrowBack size="1.5em" onClick={increment} />
         </div>
       ) : null}
-      <Card className="bg-dark text-light mb-3">
+      <Card className="bg-dark text-light mb-3 w-100">
         <Card.Header className="font-weight-bold">{dateFormatted}</Card.Header>
         <Card.Body className="bg-update-header">{description}</Card.Body>
       </Card>
@@ -807,7 +812,7 @@ const WarlordFuture = ({ warlord, weekNum }) => {
   );
 };
 
-const Name = ({ warrior }) => {
+const Name = ({ warrior, comma }) => {
   return (
     <>
       {warriors[warrior].skill === "sorcerer" ? (
@@ -861,6 +866,7 @@ const Name = ({ warrior }) => {
         />
       ) : null}
       <strong className="text-light">{warrior}</strong>
+      {comma ? ", " : ""}
     </>
   );
 };
@@ -1461,8 +1467,8 @@ const updates = [
         <p>
           The battle raged until the very end. Gladiator Caleb valiantly lead
           the charge early in the morning, followed up with a total manhandling
-          from gladiators Alex and Clay. The pummeling continued all of Vilkyu's
-          forces were defeated and it was thought that he was no more.
+          from gladiators Alex and Clay. The pummeling continued until all of
+          Vilkyu's forces were defeated and it was thought that he was no more.
         </p>
         <p>But an ember still burned inside him that left his spirit intact.</p>
         <p>
@@ -1484,9 +1490,53 @@ const updates = [
     ),
     date: "2021-02-11",
   },
+  {
+    description: (
+      <>
+        <p>Day 5, many warriors rested and celebrated the recent success.</p>
+        <p>
+          Behind the scenes, a few of them are working on training material to
+          understand why each other are fighting and how to fight better.
+        </p>
+        <p>
+          Take a look at the training area to discover why sorcerer Josh is
+          actively fighting.
+        </p>
+        <p className="mb-0">
+          Please consider sharing your own story to strengthen the bonds within
+          the fellowship.
+        </p>
+      </>
+    ),
+    date: "2021-02-12",
+  },
 ];
 
 const training = [
+  {
+    details: (
+      <>
+        <h5>Why I fight</h5>
+        <p>
+          Here's a short video where I talk about why I'm in this battle and
+          what I hope to get out of being a more fit/healthier person.
+        </p>
+        <div>
+          <iframe
+            title="Why I'm fighting by Josh Knapp"
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/GI3Xd4-42m0"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </>
+    ),
+    type: "testimony",
+    warriors: ["Josh Knapp"],
+  },
   {
     details: (
       <>
@@ -1508,6 +1558,7 @@ const training = [
         <p>Here's one of Adriene's videos, suggested by Huntress Natalie...</p>
         <div>
           <iframe
+            title="Yoga for climbers by Yoga with Adriene"
             width="560"
             height="315"
             src="https://www.youtube.com/embed/7yOtsZNU4Us"
