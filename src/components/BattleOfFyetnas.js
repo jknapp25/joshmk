@@ -1331,11 +1331,13 @@ const warlords = [
     end: "2021-02-20",
     sayings: [
       "You'll never have the body you want",
+      "You're a failure and a screw-up!",
       "Self-care is selfish!",
+      "The only way you'll defeat me is by cheating!",
       "You'll always be this way!",
       "HA! You ARE as bad as they say.",
       "Once a loser, always a loser",
-      "You're not worth the time anyway!",
+      // "You're not worth the time anyway!",
     ],
     defeated: false,
   },
@@ -1493,7 +1495,10 @@ const updates = [
   {
     description: (
       <>
-        <p>Day 5, many warriors rested and celebrated the recent success.</p>
+        <p>
+          Day 5, the warriors rested and celebrated the recent success and some
+          even continued training in preparation for the next battle.
+        </p>
         <p>
           Behind the scenes, a few of them are working on training material to
           understand why each other are fighting and how to fight better.
