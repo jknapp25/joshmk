@@ -24,6 +24,7 @@ import {
   GiPocketBow,
   GiThrownKnife,
   GiBlackKnightHelm,
+  GiSpeaker,
 } from "react-icons/gi";
 import { FaTrashAlt, FaEllipsisV } from "react-icons/fa";
 import { IoIosArrowBack } from "react-icons/io";
@@ -49,13 +50,20 @@ import drew from "../assets/drew.jpg";
 import clay from "../assets/clay.jpg";
 import alex from "../assets/alex.jpg";
 import battleAxe from "../assets/battle-axe.png";
+import muldur1 from "../assets/Muldur1.m4a";
+import muldur2 from "../assets/Muldur2.m4a";
+import muldur3 from "../assets/Muldur3.m4a";
+import muldur4 from "../assets/Muldur4.m4a";
+import muldur5 from "../assets/Muldur5.m4a";
+import muldur6 from "../assets/Muldur6.m4a";
+import muldur7 from "../assets/Muldur7.m4a";
 import emailjs, { init } from "emailjs-com";
 import { API, graphqlOperation } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import { createWorkout, deleteWorkout } from "../graphql/mutations";
 import { useIsMounted } from "../lib/utils";
+import useSound from "use-sound";
 import "./BattleOfFyetnas.css";
-
 export default BattleOfFyetnas;
 
 init("user_YmjT0y9RWFvhcFf32gw1i");
@@ -216,22 +224,6 @@ function BattleOfFyetnas() {
         </Row>
         {activePage === "Battle" ? (
           <>
-            {/* <Row>
-              <Col lg={2} className="p-4 bg-transparent"></Col>
-              <Col lg={8} className="bg-transparent">
-                <Alert
-                  className="bg-danger text-light"
-                  style={{ borderRadius: "0px" }}
-                >
-                  <strong className="text-dark">WOUNDED WARRIOR ALERT:</strong>{" "}
-                  Tuesday evening, Sorcerer Nathan injured his knee on the
-                  battlefield. He seems to be okay, but may need back-up while
-                  he recuperates. Please consider doing a group workout to aid
-                  our brother!
-                </Alert>
-              </Col>
-              <Col lg={2} className="p-4 bg-transparent"></Col>
-            </Row> */}
             <Row>
               <Col lg={2} className="p-4 bg-transparent"></Col>
               <Col lg={3} className="bg-transparent">
@@ -286,8 +278,8 @@ function BattleOfFyetnas() {
                 })}
               </Col>
               <Col lg={5} className="bg-transparent">
-                {/* <Calendar workouts={workouts} mini={true} showDayNum={false} /> */}
                 <UpdateCard />
+                <hr />
                 <div className="d-block mb-4">
                   <h5 className="d-inline">Activity</h5>
                   <Button
@@ -298,6 +290,8 @@ function BattleOfFyetnas() {
                     Add workout
                   </Button>
                 </div>
+
+                <Calendar workouts={workouts} mini={true} showDayNum={false} />
 
                 {!workouts || workouts.length === 0 ? (
                   <div>No workouts</div>
@@ -678,6 +672,23 @@ const WarriorTable = () => {
   );
 };
 
+const WoundedWarriorAlert = () => {
+  return (
+    <Row>
+      <Col lg={2} className="p-4 bg-transparent"></Col>
+      <Col lg={8} className="bg-transparent">
+        <Alert className="bg-danger text-light" style={{ borderRadius: "0px" }}>
+          <strong className="text-dark">WOUNDED WARRIOR ALERT:</strong> Tuesday
+          evening, Sorcerer Nathan injured his knee on the battlefield. He seems
+          to be okay, but may need back-up while he recuperates. Please consider
+          doing a group workout to aid our brother!
+        </Alert>
+      </Col>
+      <Col lg={2} className="p-4 bg-transparent"></Col>
+    </Row>
+  );
+};
+
 const UpdateCard = () => {
   const [updateIdx, setUpdateIdx] = useState(updates.length - 1);
   const dateFormatted = moment(updates[updateIdx].date).format("dddd, MMMM Do");
@@ -721,7 +732,7 @@ const UpdateCard = () => {
           <IoIosArrowBack size="1.5em" onClick={increment} />
         </div>
       ) : null}
-      <Card className="bg-dark text-light mb-3 w-100">
+      <Card className="bg-dark text-light w-100">
         <Card.Header className="font-weight-bold">{dateFormatted}</Card.Header>
         <Card.Body className="bg-update-header">{description}</Card.Body>
       </Card>
@@ -741,7 +752,8 @@ const WarlordPast = ({ warlord }) => {
 };
 const WarlordActive = ({ warlord, progress, weekNum }) => {
   const { name, description, image, sayings } = warlord;
-  const saying = sayings[moment(currentDate).day()];
+  const { text: saying, audio } = sayings[moment(currentDate).day()];
+  const [play, { stop, isPlaying }] = useSound(audio);
 
   let progressColor = 0;
   if (66 < progress && progress <= 100) progressColor = "success";
@@ -767,7 +779,18 @@ const WarlordActive = ({ warlord, progress, weekNum }) => {
                 height: "auto",
               }}
             />
-            <div className="mb-3 mt-1">"{saying}"</div>
+            <div className="mb-3 mt-1">
+              "{saying}"
+              {audio ? (
+                <GiSpeaker
+                  className="ml-1"
+                  title="Listen to Muldur"
+                  size="1.75em"
+                  style={{ display: "inline", color: "darkgray" }}
+                  onClick={() => (isPlaying ? stop() : play())}
+                />
+              ) : null}
+            </div>
             <ProgressBar
               animated
               variant={progressColor}
@@ -1312,13 +1335,13 @@ const warlords = [
     start: "2021-02-07",
     end: "2021-02-13",
     sayings: [
-      "No one really cares!",
-      "You don't need anyone else",
-      "Everyone ELSE is happy",
-      "You're the only one who feels that way",
-      "What's wrong with you?!",
-      "You deserve to be alone!",
-      "No one can give you what you need",
+      { text: "No one really cares!" },
+      { text: "You don't need anyone else" },
+      { text: "Everyone ELSE is happy" },
+      { text: "You're the only one who feels that way" },
+      { text: "What's wrong with you?!" },
+      { text: "You deserve to be alone!" },
+      { text: "No one can give you what you need" },
     ],
     defeated: true,
   },
@@ -1330,13 +1353,13 @@ const warlords = [
     start: "2021-02-14",
     end: "2021-02-20",
     sayings: [
-      "You'll never have the body you want",
-      "You're a failure and a screw-up!",
-      "Self-care is selfish!",
-      "The only way you'll defeat me is by cheating!",
-      "You'll always be this way!",
-      "HA! You ARE as bad as they say.",
-      "Once a loser, always a loser",
+      { text: "You'll never have the body you want", audio: muldur2 },
+      { text: "You're a failure and a screw-up!", audio: muldur1 },
+      { text: "Self-care is selfish!", audio: muldur3 },
+      { text: "The only way you'll defeat me is by cheating!", audio: muldur4 },
+      { text: "You'll always be this way!" },
+      { text: "HA! You ARE as bad as they say.", audio: muldur6 },
+      { text: "Once a loser, always a loser", audio: muldur7 },
       // "You're not worth the time anyway!",
     ],
     defeated: false,
@@ -1349,9 +1372,11 @@ const warlords = [
     start: "2021-02-21",
     end: "2021-02-27",
     sayings: [
-      "What's the point of all this anyway!",
-      "Doing things for yourself takes away time for socializing",
-      "You'll never be what you want to!",
+      { text: "What's the point of all this anyway!" },
+      {
+        text: "Doing this takes time from what's ACTUALLY important",
+      },
+      { text: "You'll never be what you want to!" },
     ],
     defeated: false,
   },
@@ -1362,7 +1387,10 @@ const warlords = [
     image: warlord4,
     start: "2021-02-28",
     end: "2021-03-06",
-    sayings: ["What if you get hurt?", "What if this is all just pointless?"],
+    sayings: [
+      { text: "What if you get hurt?" },
+      { text: "What if this is all just pointless?" },
+    ],
     defeated: false,
   },
 ];
@@ -1521,7 +1549,27 @@ const training = [
   {
     details: (
       <>
-        <h5>Why I'm fighting</h5>
+        <h5>Why I'm fighting (Ben)</h5>
+        <div>
+          <iframe
+            title="Ben's why i'm fighting"
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/s79y-zxerRE"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </>
+    ),
+    type: "testimony",
+    warriors: ["Ben Tissell"],
+  },
+  {
+    details: (
+      <>
+        <h5>Why I'm fighting (Josh)</h5>
         <p>
           Here's a short video where I talk about why I'm in this battle and
           what I hope to get out of being a more fit/healthier person.

@@ -31,7 +31,7 @@ function Calendar({
   mini = false,
   workouts = [],
 }) {
-  const currentDayOfWeek = moment().day();
+  const currentDayOfWeek = moment().date();
   const currentWeekIdx = weeks.findIndex((week) =>
     week.includes(currentDayOfWeek)
   );
@@ -49,7 +49,7 @@ function Calendar({
         {days ? (
           <tr align="center">
             {["S", "M", "T", "W", "TH", "F", "SA"].map((day) => (
-              <th key={day} className="font-weight-bold p-0">
+              <th key={day} className="p-0 text-muted">
                 {day}
               </th>
             ))}
@@ -58,13 +58,32 @@ function Calendar({
       </thead>
       <tbody>
         {mini ? (
-          weeks[currentWeekIdx].map((dayNum) => (
-            <CalendarCell
-              dayNum={showDayNum ? dayNum : null}
-              val={"6/15"}
-              isCurrentDay={dayNum === currentDayOfWeek}
-            />
-          ))
+          weeks[currentWeekIdx].map((dayNum) => {
+            const workoutsDuringTimeframe = workouts.filter((wo) =>
+              moment(wo.createdAt).isBetween(
+                moment(`2021-02-${dayNum}`).startOf("day"),
+                moment(`2021-02-${dayNum}`).endOf("day")
+              )
+            );
+            const totalHits = workoutsDuringTimeframe.reduce((acc, curr) => {
+              if (curr.joint) {
+                return acc + 2;
+              } else {
+                return acc + 1;
+              }
+            }, 0);
+
+            const cellVal =
+              workoutsDuringTimeframe.length > 0 ? totalHits : null;
+
+            return (
+              <CalendarCell
+                dayNum={showDayNum ? dayNum : null}
+                val={cellVal}
+                isCurrentDay={dayNum === currentDayOfWeek}
+              />
+            );
+          })
         ) : (
           <>
             <tr className="border-bottom" style={calTdStyles}>
