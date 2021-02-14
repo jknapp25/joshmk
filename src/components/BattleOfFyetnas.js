@@ -788,7 +788,7 @@ const WarlordActive = ({ warlord, progress, weekNum }) => {
             />
             <div className="mb-3 mt-1">
               "{saying}"
-              {audio ? (
+              {/* {audio ? (
                 <GiSpeaker
                   className="ml-1 cursor-pointer"
                   title={`Listen to ${name}`}
@@ -796,7 +796,7 @@ const WarlordActive = ({ warlord, progress, weekNum }) => {
                   style={{ display: "inline", color: "darkgray" }}
                   onClick={() => play()}
                 />
-              ) : null}
+              ) : null} */}
             </div>
             <ProgressBar
               animated
