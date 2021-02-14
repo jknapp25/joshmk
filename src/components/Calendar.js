@@ -58,7 +58,7 @@ function Calendar({
       </thead>
       <tbody>
         {mini ? (
-          weeks[currentWeekIdx].map((dayNum) => {
+          weeks[currentWeekIdx].map((dayNum, i) => {
             const workoutsDuringTimeframe = workouts.filter((wo) =>
               moment(wo.createdAt).isBetween(
                 moment(`2021-02-${dayNum}`).startOf("day"),
@@ -78,6 +78,7 @@ function Calendar({
 
             return (
               <CalendarCell
+                key={i}
                 dayNum={showDayNum ? dayNum : null}
                 val={cellVal}
                 isCurrentDay={dayNum === currentDayOfWeek}

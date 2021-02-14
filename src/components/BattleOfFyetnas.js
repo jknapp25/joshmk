@@ -346,6 +346,7 @@ function BattleOfFyetnas() {
                         , Shared by{" "}
                         {tr.warriors.map((warr, i) => (
                           <Name
+                            key={warr}
                             warrior={warr}
                             comma={tr.warriors.length - 1 !== i}
                           />
@@ -1579,8 +1580,9 @@ const updates = [
           playing and enjoying it's novelty, Muldur schemed in the background.
         </p>
         <p>
-          He poured over the faults of his successor Vilkyu and plotted how to
-          attack the warriors in their unguarded state.
+          He poured over the faults of his predecessor Vilkyu, looking for a leg
+          up on the warriors. Then plotted how to attack them in their
+          unguarded state.
         </p>
         <p>
           Always one to strike first, he seized the opportunity and is now
@@ -1608,9 +1610,9 @@ const training = [
             width="560"
             height="315"
             src="https://www.youtube.com/embed/s79y-zxerRE"
-            frameborder="0"
+            frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
+            allowFullScreen
           ></iframe>
         </div>
       </>
@@ -1632,9 +1634,9 @@ const training = [
             width="560"
             height="315"
             src="https://www.youtube.com/embed/GI3Xd4-42m0"
-            frameborder="0"
+            frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
+            allowFullScreen
           ></iframe>
         </div>
       </>
