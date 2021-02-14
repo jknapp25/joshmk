@@ -790,11 +790,11 @@ const WarlordActive = ({ warlord, progress, weekNum }) => {
               "{saying}"
               {audio ? (
                 <GiSpeaker
-                  className="ml-1"
+                  className="ml-1 cursor-pointer"
                   title={`Listen to ${name}`}
                   size="1.75em"
                   style={{ display: "inline", color: "darkgray" }}
-                  onClick={() => (isPlaying ? stop() : play())}
+                  onClick={() => play()}
                 />
               ) : null}
             </div>
@@ -1581,8 +1581,8 @@ const updates = [
         </p>
         <p>
           He poured over the faults of his predecessor Vilkyu, looking for a leg
-          up on the warriors. Then plotted how to attack them in their
-          unguarded state.
+          up on the warriors. Then plotted how to attack them in their unguarded
+          state.
         </p>
         <p>
           Always one to strike first, he seized the opportunity and is now

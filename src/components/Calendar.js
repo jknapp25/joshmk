@@ -58,33 +58,35 @@ function Calendar({
       </thead>
       <tbody>
         {mini ? (
-          weeks[currentWeekIdx].map((dayNum, i) => {
-            const workoutsDuringTimeframe = workouts.filter((wo) =>
-              moment(wo.createdAt).isBetween(
-                moment(`2021-02-${dayNum}`).startOf("day"),
-                moment(`2021-02-${dayNum}`).endOf("day")
-              )
-            );
-            const totalHits = workoutsDuringTimeframe.reduce((acc, curr) => {
-              if (curr.joint) {
-                return acc + 2;
-              } else {
-                return acc + 1;
-              }
-            }, 0);
+          <tr className="border-bottom">
+            {weeks[currentWeekIdx].map((dayNum, i) => {
+              const workoutsDuringTimeframe = workouts.filter((wo) =>
+                moment(wo.createdAt).isBetween(
+                  moment(`2021-02-${dayNum}`).startOf("day"),
+                  moment(`2021-02-${dayNum}`).endOf("day")
+                )
+              );
+              const totalHits = workoutsDuringTimeframe.reduce((acc, curr) => {
+                if (curr.joint) {
+                  return acc + 2;
+                } else {
+                  return acc + 1;
+                }
+              }, 0);
 
-            const cellVal =
-              workoutsDuringTimeframe.length > 0 ? totalHits : null;
+              const cellVal =
+                workoutsDuringTimeframe.length > 0 ? totalHits : null;
 
-            return (
-              <CalendarCell
-                key={i}
-                dayNum={showDayNum ? dayNum : null}
-                val={cellVal}
-                isCurrentDay={dayNum === currentDayOfWeek}
-              />
-            );
-          })
+              return (
+                <CalendarCell
+                  key={i}
+                  dayNum={showDayNum ? dayNum : null}
+                  val={cellVal}
+                  isCurrentDay={dayNum === currentDayOfWeek}
+                />
+              );
+            })}
+          </tr>
         ) : (
           <>
             <tr className="border-bottom" style={calTdStyles}>
