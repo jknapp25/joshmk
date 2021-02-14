@@ -1,3 +1,9 @@
+/**
+ * Ensure calendar working and correct dates for showing warlords
+ * Voice for muldur day 4
+ * Update past updates for better story
+ */
+
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import {
@@ -1354,8 +1360,8 @@ const warlords = [
     end: "2021-02-20",
     sayings: [
       { text: "You'll never have the body you want", audio: muldur2 },
-      { text: "You're a failure and a screw-up!", audio: muldur1 },
       { text: "Self-care is selfish!", audio: muldur3 },
+      { text: "You're a failure and a screw-up!", audio: muldur1 },
       { text: "The only way you'll defeat me is by cheating!", audio: muldur4 },
       { text: "You'll always be this way!" },
       { text: "HA! You ARE as bad as they say.", audio: muldur6 },
@@ -1376,7 +1382,7 @@ const warlords = [
       {
         text: "Doing this takes time from what's ACTUALLY important",
       },
-      { text: "You'll never be what you want to!" },
+      { text: "You're too old to follow your dreams" },
     ],
     defeated: false,
   },
@@ -1532,8 +1538,8 @@ const updates = [
           understand why each other are fighting and how to fight better.
         </p>
         <p>
-          Take a look at the training area to discover why sorcerer Josh is
-          actively fighting.
+          Take a look at the training area to discover why archer Ben and
+          sorcerer Josh are in the fight.
         </p>
         <p className="mb-0">
           Please consider sharing your own story to strengthen the bonds within
@@ -1542,6 +1548,52 @@ const updates = [
       </>
     ),
     date: "2021-02-12",
+  },
+  {
+    description: (
+      <>
+        <p>
+          Day 6, the tiny white flakes began to trickle from the dark clouds.
+          What was intended as a strategic battle move by the evil forces of
+          Vilkyu, now feels like a beautiful token of victory.
+        </p>
+        <p>
+          The warriors danced and sang with joy as the white robe blanketed the
+          ground. A tool for isolation, is now bringing them together with
+          laughter and joy.
+        </p>
+        <p className="mb-0">
+          Many warriors even chose to use the snow to aid in their training,
+          making long treks from village to village.
+        </p>
+      </>
+    ),
+    date: "2021-02-13",
+  },
+  {
+    description: (
+      <>
+        <p>The battle commences against Muldur!</p>
+        <p>
+          As the warriors and their villages rejoiced in the pure white snow,
+          playing and enjoying it's novelty, Muldur schemed in the background.
+        </p>
+        <p>
+          He poured over the faults of his successor Vilkyu and plotted how to
+          attack the warriors in their unguarded state.
+        </p>
+        <p>
+          Always one to strike first, he seized the opportunity and is now
+          whispering into their ears lies telling them they will never reach the
+          level of fitness they desire.
+        </p>
+        <p className="mb-0">
+          Will the warriors be able to launch a counter-attack before the lies
+          take root?
+        </p>
+      </>
+    ),
+    date: "2021-02-14",
   },
 ];
 
