@@ -57,7 +57,7 @@ import clay from "../assets/clay.jpg";
 import alex from "../assets/alex.jpg";
 import battleAxe from "../assets/battle-axe.png";
 import muldur1 from "../assets/Muldur1.m4a";
-import muldur2 from "../assets/Muldur2.m4a";
+import muldur2 from "../assets/Muldur2.mp3";
 import muldur3 from "../assets/Muldur3.m4a";
 import muldur4 from "../assets/Muldur4.m4a";
 import muldur5 from "../assets/Muldur5.m4a";
@@ -790,7 +790,7 @@ const WarlordActive = ({ warlord, progress, weekNum }) => {
               {audio ? (
                 <GiSpeaker
                   className="ml-1"
-                  title="Listen to Muldur"
+                  title={`Listen to ${name}`}
                   size="1.75em"
                   style={{ display: "inline", color: "darkgray" }}
                   onClick={() => (isPlaying ? stop() : play())}
