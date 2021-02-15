@@ -208,7 +208,7 @@ export const updates = [
             target="_blank"
             rel="noopener noreferrer"
           >
-            Golesh
+            G&ouml;lesh
           </a>
           .
         </p>
