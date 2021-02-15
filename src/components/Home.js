@@ -5,7 +5,6 @@ import ProfileCard from "./ProfileCard";
 import { Helmet } from "react-helmet";
 import { Storage } from "aws-amplify";
 import goatFavicon from "../assets/goat-favicon.png";
-import battleAxe from "../assets/battle-axe.png";
 import { useIsMounted } from "../lib/utils";
 import { ConfigContext } from "../App";
 export default Home;

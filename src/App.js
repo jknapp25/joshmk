@@ -18,7 +18,7 @@ import { API } from "aws-amplify";
 import "react-vertical-timeline-component/style.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import BattleOfFyetnas from "./components/BattleOfFyetnas";
+import BattleOfFyetnas from "./components/BattleOfFyetnas/BattleOfFyetnas";
 export default App;
 
 Amplify.configure(awsExports);
