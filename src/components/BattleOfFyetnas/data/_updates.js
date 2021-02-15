@@ -201,11 +201,21 @@ export const updates = [
         <p>
           To complement his psychological attack against the warriors hope,
           Muldur fashioned a spell to wield the elements and build on the work
-          of his predecessor.
+          of his predecessor. And out of the mountain emerged a rare ice dragon
+          known as a{" "}
+          <a
+            href="https://www.joshmk.com/post/01b1a782-0fc5-48d4-bf6a-e3ee1a3b54c8"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Golesh
+          </a>
+          .
         </p>
         <p>
-          Trees and shrubbery bent low as moisture froze across their limbs. And
-          the roads hardened over and became nearly frictionless.
+          In the midst of the Golesh's presence, trees and shrubbery bent low as
+          moisture froze across their limbs. And the roads hardened over and
+          became nearly frictionless.
         </p>
         <p>But that wasn't the end.</p>
         <p>
@@ -213,7 +223,8 @@ export const updates = [
           and James, recognizing an opportunity to drive the flag of hope deep
           into the ground, ventured out into the wilderness. Their delight,
           stripped the attack of it's power. Leaving Muldur extremely vulnerable
-          to more blows from other eager warriors.
+          to more blows from other eager warriors, and driving the Golesh back
+          toward the mountain. And hope for thawing returned.
         </p>
         <p className="mb-0">
           The day closed, proving to the warriors and others that they CAN reach
