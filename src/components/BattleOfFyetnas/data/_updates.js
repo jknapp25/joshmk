@@ -221,10 +221,10 @@ export const updates = [
         <p>
           Brave Archer Ben, Great Gladiator Nathan, and Skilled Sorcerers Josh
           and James, recognizing an opportunity to drive the flag of hope deep
-          into the ground, ventured out into the wilderness. Their delight,
-          stripped the attack of it's power. Leaving Muldur extremely vulnerable
-          to more blows from other eager warriors, and driving the Golesh back
-          toward the mountain. And hope for thawing returned.
+          into the frozen ground, ventured out into the wilderness. Their
+          delight, stripped the attack of it's power. Leaving Muldur extremely
+          vulnerable to more blows from other eager warriors, and driving the
+          Golesh back toward the mountain. Hope for thawing returned.
         </p>
         <p className="mb-0">
           The day closed, proving to the warriors and others that they CAN reach
