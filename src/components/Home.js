@@ -57,6 +57,7 @@ function Home({ children }) {
   }
 
   if (pathname === "/battle-of-fyetnas") return children;
+  // if (pathname === "/test") return children;
 
   if (pathname === "/gallery") {
     return (

@@ -2,6 +2,11 @@
  * Ensure calendar working and correct dates for showing warlords
  * Voice for muldur day 4
  * Update past updates for better story
+ *
+ * Ideas:
+ * Add workouts people can RSVP to
+ * Add responses to workouts
+ * Have a start of the battle and end of the battle adventure
  */
 
 import React, { useState, useEffect } from "react";

@@ -10,6 +10,7 @@ import Configure from "./components/Configure.js";
 import Bio from "./components/Bio.js";
 import Gallery from "./components/Gallery.js";
 import RideWithGoats from "./components/RideWithGoats.js";
+// import Test from "./components/Test.js";
 import Amplify from "aws-amplify";
 import awsExports from "./aws-exports";
 import * as queries from "./graphql/queries";
@@ -63,6 +64,7 @@ function App() {
             <Bio path="about" bio={config.bio} />
             <RideWithGoats path="rwg" />
             <BattleOfFyetnas path="battle-of-fyetnas" />
+            {/* <Test path="test" /> */}
           </Home>
         </Router>
       </div>

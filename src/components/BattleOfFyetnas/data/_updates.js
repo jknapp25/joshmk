@@ -199,7 +199,7 @@ export const updates = [
     description: (
       <>
         <p>
-          To complement his psychological attack against the warriors hope,
+          To reinforce his psychological attack against the warriors hope,
           Muldur fashioned a spell to wield the elements and build on the work
           of his predecessor. And out of the mountain emerged a rare ice dragon
           known as a{" "}
@@ -213,7 +213,7 @@ export const updates = [
           .
         </p>
         <p>
-          In the midst of the Golesh's presence, trees and shrubbery bent low as
+          In the presence of the G&ouml;lesh, trees and shrubbery bent low as
           moisture froze across their limbs. And the roads hardened over and
           became nearly frictionless.
         </p>
@@ -224,7 +224,7 @@ export const updates = [
           into the frozen ground, ventured out into the wilderness. Their
           delight, stripped the attack of it's power. Leaving Muldur extremely
           vulnerable to more blows from other eager warriors, and driving the
-          Golesh back toward the mountain. Hope for thawing returned.
+          G&ouml;lesh back toward the mountain. Hope for thawing returned.
         </p>
         <p className="mb-0">
           The day closed, proving to the warriors and others that they CAN reach
@@ -235,6 +235,48 @@ export const updates = [
       </>
     ),
     date: "2021-02-15",
+  },
+  {
+    description: (
+      <>
+        <p>
+          The absence of the{" "}
+          <a
+            href="https://www.joshmk.com/post/01b1a782-0fc5-48d4-bf6a-e3ee1a3b54c8"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            G&ouml;lesh
+          </a>{" "}
+          proved almost more powerful than it's presence.
+        </p>
+        <p>
+          As the villages thawed and foliage regained it's levity. The
+          ramifications of a heavy freeze showed their effect. Sorcerer Josh
+          examined the damage in the morning, seeing fallen tree limbs across
+          carriages and homes, massive sheets of ice slide off of rooftops and
+          rain down through tree canopies. It was clear Muldur had more in mind
+          when he summoned the G&ouml;lesh.
+        </p>
+        <p>
+          But the warriors relentless to the end, continued their work cleaning
+          up the wreckage.
+        </p>
+        <p>
+          Muldur observing intently, stepped back to rethink his strategy. "What
+          is this spirit inside them that moves them to continue in spite of my
+          attacks!" He roared to himself. "They seem to actually believe that
+          self-care is important and that can achieve what they desire..."
+        </p>
+        <p>A deathly smirk crawling across his face. "It's time to hit low."</p>
+        <p className="mb-0">
+          The demon recalibrated and initiated a broader attack on the warriors
+          souls, calling them failures. Will the warriors listen, or will they
+          stand firm?
+        </p>
+      </>
+    ),
+    date: "2021-02-16",
   },
 ];
 
