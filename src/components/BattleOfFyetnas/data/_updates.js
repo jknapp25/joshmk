@@ -259,7 +259,7 @@ export const updates = [
           when he summoned the G&ouml;lesh.
         </p>
         <p>
-          But the warriors relentless to the end, continued their work cleaning
+          But the warriors, relentless to the end, continued their work cleaning
           up the wreckage.
         </p>
         <p>

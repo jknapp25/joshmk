@@ -4,6 +4,26 @@ export const training = [
   {
     details: (
       <>
+        <h5>Why I'm fighting (Drew)</h5>
+        <div>
+          <iframe
+            title="Drew's why i'm fighting"
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/KE9tOemNIDY"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </>
+    ),
+    type: "testimony",
+    warriors: ["Ben Tissell"],
+  },
+  {
+    details: (
+      <>
         <h5>Why I'm fighting (Ben)</h5>
         <div>
           <iframe
