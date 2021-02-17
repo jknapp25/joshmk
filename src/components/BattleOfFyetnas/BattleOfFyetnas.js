@@ -196,6 +196,16 @@ function BattleOfFyetnas() {
                       style={{ fontFamily: "MedievalSharp" }}
                     >
                       {page}
+                      {page === "Training" ? (
+                        <Badge
+                          className="ml-1 bg-success"
+                          style={{
+                            color: "white",
+                          }}
+                        >
+                          1
+                        </Badge>
+                      ) : null}
                     </h4>
                   </Nav.Link>
                 </Nav.Item>
