@@ -212,6 +212,8 @@ function BattleOfFyetnas() {
         </Row>
         {activePage === "Battle" ? (
           <>
+            <EmergencyAttack />
+
             <Row>
               <Col lg={2} className="p-4 bg-transparent"></Col>
               <Col lg={3} className="bg-transparent">
@@ -658,6 +660,21 @@ const WarriorTable = () => {
         </tr>
       </tbody>
     </Table>
+  );
+};
+
+const EmergencyAttack = () => {
+  return (
+    <Row>
+      <Col lg={2} className="p-4 bg-transparent"></Col>
+      <Col lg={8} className="bg-transparent">
+        <Alert className="bg-danger text-light" style={{ borderRadius: "0px" }}>
+          <strong className="text-dark">EMERGENCY:</strong> See today's
+          update...
+        </Alert>
+      </Col>
+      <Col lg={2} className="p-4 bg-transparent"></Col>
+    </Row>
   );
 };
 
