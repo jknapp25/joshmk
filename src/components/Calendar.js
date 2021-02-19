@@ -11,8 +11,8 @@ const CalendarCell = ({ dayNum, val, isCurrentDay }) => (
     className={`p-1 ${isCurrentDay ? "bg-secondary" : ""}`}
     style={{ width: "auto", height: 0 }}
   >
-    {dayNum ? <span className="text-muted float-left">{dayNum}</span> : null}
-    {val}
+    {dayNum ? <span className="float-left text-muted">{dayNum}</span> : null}
+    <span className="text-success">{val ? `+${val}` : ""}</span>
   </td>
 );
 
