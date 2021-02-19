@@ -300,6 +300,36 @@ export const updates = [
     ),
     date: "2021-02-18",
   },
+  {
+    description: (
+      <>
+        <p>ATTENTION WARRRIORS!</p>
+        <p>
+          Yesterday, as gladiators Alex and Clay were slashing Muldur's minions
+          left and right, Clay heard the dying whispers of one of the tortured
+          souls speaking to it's master over the wind.
+        </p>
+        <p>
+          It was a language so broken and obscured by the tendrils of shame and
+          evil that it needed deciphering. But he remembered a few phrases.
+          Later in the day, he mentioned the words to sorcerer Josh who was able
+          to decipher the corrupted language.
+        </p>
+        <p>
+          Apparently, Muldur is using himself as a decoy while Bradock (demon of
+          fear), is preparing a spell to combine with Muldur's forces! If
+          allowed to initiate, the combination of shame and fear could be
+          unstoppable! It sounds like the attack will be ready by tomorrow,
+          unless Muldur is defeated TODAY!
+        </p>
+        <p className="mb-0">
+          All warriors are being called to the battlefield to defeat Muldur
+          TODAY, before the attack commences!
+        </p>
+      </>
+    ),
+    date: "2021-02-19",
+  },
 ];
 
 // snow froze

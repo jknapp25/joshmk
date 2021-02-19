@@ -1,15 +1,41 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { navigate } from "@reach/router";
 import { Container, Row, Col, Badge, Card } from "react-bootstrap";
 import ProfileCard from "./ProfileCard";
 import ItemList from "./ItemList";
+import NavBar from "./NavBar";
 import { RiArrowUpSLine } from "react-icons/ri";
 import { Helmet } from "react-helmet";
 import image from "./BattleOfFyetnas/assets/warlord1.jpg";
 import coffee from "../assets/hot-cup.png";
+import { Storage } from "aws-amplify";
+import { ConfigContext } from "../App";
+import { useIsMounted } from "../lib/utils";
 export default Dashboard;
 
 function Dashboard({ config, faviconUrl, avatarUrl, popularTags }) {
+  const { galleryImages } = useContext(ConfigContext);
+
+  const [imageUrls, setImageUrls] = useState([]);
+  const [fsImageIdx, setFSImageIdx] = useState(null);
+  const isMounted = useIsMounted();
+
+  useEffect(() => {
+    async function fetchData() {
+      const imagesCalls = galleryImages.map((url) => Storage.get(url));
+      const resImageUrls = await Promise.all(imagesCalls);
+
+      if (isMounted.current) setImageUrls(resImageUrls);
+    }
+    if (galleryImages && galleryImages.length) {
+      fetchData();
+    } else {
+      if (isMounted.current) setImageUrls([]);
+    }
+  }, [galleryImages, isMounted]);
+
+  if (!imageUrls || imageUrls.length === 0) return null;
+
   return (
     <Container
       fluid
@@ -20,25 +46,7 @@ function Dashboard({ config, faviconUrl, avatarUrl, popularTags }) {
         <title>{config.fullName || ""}</title>
         <link rel="icon" type="image/png" href={faviconUrl} sizes="16x16" />
       </Helmet>
-      <Row>
-        <Col className="pb-3">
-          <div className="d-inline">
-            <h2 className="mb-0 d-inline">{config.fullName || ""}</h2>
-          </div>
-          <div className="float-right d-inline mt-2 text-dark">
-            {config.pages.map((page, i) => (
-              <h4
-                className={`mb-0 d-inline ${
-                  i !== config.pages.length - 1 ? "mr-4" : ""
-                }`}
-                onClick={() => navigate(`/${page}`)}
-              >
-                {page}
-              </h4>
-            ))}
-          </div>
-        </Col>
-      </Row>
+      <NavBar config={config} />
       <Row>
         <Col lg={4} className="bg-light">
           <ProfileCard avatarUrl={avatarUrl} config={config} />
@@ -72,32 +80,33 @@ function Dashboard({ config, faviconUrl, avatarUrl, popularTags }) {
         <Col lg={4} className="bg-light hidden-sm">
           <small className="text-dark">RECENT CREATIONS</small>
           <Row className="mt-1">
-            <Col className="text-center pr-1">
-              <Card.Img variant="top" src={image} />
-              <small className="text-muted">Drawing</small>
-            </Col>
-            <Col className="text-center pr-1 pl-1">
-              <Card.Img variant="top" src={image} />
-              <small className="text-muted">Drawing</small>
-            </Col>
-            <Col className="text-center pl-1">
-              <Card.Img variant="top" src={image} />
-              <small className="text-muted">Drawing</small>
-            </Col>
+            {[1, 2, 3].map((num) => (
+              <Col
+                className={`text-center ${num === 1 ? "pr-1" : ""} ${
+                  num === 2 ? "px-1" : ""
+                } ${num === 3 ? "pl-1" : ""}`}
+              >
+                <Card.Img
+                  variant="top"
+                  src={imageUrls[imageUrls.length - num]}
+                />
+                {/* <small className="text-muted">Drawing</small> */}
+              </Col>
+            ))}
           </Row>
           <Row className="mt-3">
-            <Col className="text-center pr-1">
-              <Card.Img variant="top" src={image} />
-              <small className="text-muted">Drawing</small>
-            </Col>
-            <Col className="text-center pr-1 pl-1">
-              <Card.Img variant="top" src={image} />
-              <small className="text-muted">Drawing</small>
-            </Col>
-            <Col className="text-center pl-1">
-              <Card.Img variant="top" src={image} />
-              <small className="text-muted">Drawing</small>
-            </Col>
+            {[4, 5, 6].map((num) => (
+              <Col
+                className={`text-center ${num === 4 ? "pr-1" : ""} ${
+                  num === 5 ? "px-1" : ""
+                } ${num === 6 ? "pl-1" : ""}`}
+              >
+                <Card.Img
+                  variant="top"
+                  src={imageUrls[imageUrls.length - num]}
+                />
+              </Col>
+            ))}
           </Row>
           <div className="my-3" />
           <small className="text-dark">POPULAR CATEGORIES</small>

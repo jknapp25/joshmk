@@ -12,6 +12,7 @@ import {
 } from "react-bootstrap";
 import ItemList from "./ItemList";
 import ProfileCard from "./ProfileCard";
+import NavBar from "./NavBar";
 import Dashboard from "./Dashboard";
 import { RiArrowUpSLine } from "react-icons/ri";
 import { Helmet } from "react-helmet";
@@ -94,15 +95,28 @@ function Home({ children }) {
     );
   }
 
+  // if (pathname === "/") {
+  //   return (
+  //     <>
+  //       <Dashboard
+  //         config={config}
+  //         faviconUrl={faviconUrl}
+  //         avatarUrl={avatarUrl}
+  //         popularTags={popularTags}
+  //         children={children}
+  //       />
+  //       <Row className="mt-5">
+  //         <Col lg={3}></Col>
+  //         <Col lg={6}>{children}</Col>
+  //         <Col lg={3}></Col>
+  //       </Row>
+  //     </>
+  //   );
+  // }
+
   // return (
   //   <>
-  //     <Dashboard
-  //       config={config}
-  //       faviconUrl={faviconUrl}
-  //       avatarUrl={avatarUrl}
-  //       popularTags={popularTags}
-  //       children={children}
-  //     />
+  //     <NavBar config={config} />
   //     <Row className="mt-5">
   //       <Col lg={3}></Col>
   //       <Col lg={6}>{children}</Col>
@@ -110,6 +124,7 @@ function Home({ children }) {
   //     </Row>
   //   </>
   // );
+
   return (
     <Container fluid>
       <Helmet>

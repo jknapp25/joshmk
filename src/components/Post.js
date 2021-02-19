@@ -149,7 +149,7 @@ function Post({
             overflowX: "scroll",
             boxShadow: "",
           }}
-          className="mt-1"
+          className="border-0 py-0"
         >
           {tags.map((tag, i) => (
             <Badge
