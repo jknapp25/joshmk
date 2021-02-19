@@ -13,9 +13,11 @@ import Education from "./Education";
 import { FaTimes } from "react-icons/fa";
 import { ConfigContext } from "../App";
 import { Fragment } from "react";
+import moment from "moment";
+import image from "./BattleOfFyetnas/assets/caleb.jpg";
 export default ItemList;
 
-function ItemList() {
+function ItemList({ mini = false }) {
   const { pathname, search } = useLocation();
   const config = useContext(ConfigContext);
   const searchParams = parse(search);
@@ -134,13 +136,16 @@ function ItemList() {
       ) : null}
       {preppedItems.map((item, i) => (
         <Fragment key={i}>
-          {item.type === "post" ? <Post post={item} /> : null}
+          {item.type === "post" && mini && i < 5 ? (
+            <Post post={item} mini />
+          ) : null}
+          {item.type === "post" && !mini ? <Post post={item} /> : null}
           {item.type === "job" ? <Job job={item} /> : null}
           {item.type === "project" ? <Project project={item} /> : null}
           {item.type === "education" && !pageName === "work" ? (
             <Education education={item} />
           ) : null}
-          {i !== preppedItems.length - 1 ? (
+          {!mini && i !== preppedItems.length - 1 ? (
             <div style={{ height: "35px" }} />
           ) : null}
         </Fragment>

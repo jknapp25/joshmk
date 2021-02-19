@@ -10,6 +10,7 @@ import { API, graphqlOperation } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import { deletePost } from "../graphql/mutations";
 import RichTextEditor from "./RichTextEditor/RichTextEditor";
+import MiniImage from "./MiniImage";
 export default Post;
 
 function Post({
@@ -17,6 +18,7 @@ function Post({
   setEditingItemId,
   setItemType,
   showEdit = false,
+  mini = false,
   ...props
 }) {
   const [realPost, setRealPost] = useState(post);
@@ -53,9 +55,30 @@ function Post({
 
   richContent = richContent ? JSON.parse(richContent) : richContent;
 
+  if (mini) {
+    return (
+      <div class="card mt-1 mb-2 cursor-pointer">
+        <div class="row no-gutters">
+          <div class="col">
+            <div class="card-block px-3 py-2">
+              <small className="text-capitalize">{tags[0]}</small>
+              <h5 class="card-title mb-0">{title}</h5>
+              <small className="text-muted">
+                {moment(createdAt).format("MMM D")}
+              </small>
+            </div>
+          </div>
+          <div class="col-auto">
+            <MiniImage images={images} />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
-      <Card>
+      <Card className="">
         <Card.Body>
           <Card.Title>
             <h2>

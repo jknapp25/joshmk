@@ -278,6 +278,28 @@ export const updates = [
     ),
     date: "2021-02-16",
   },
+  {
+    description: (
+      <>
+        <p>The fellowship is UNSTOPPABLE.</p>
+        <p>
+          Their collective strength is just too much for Muldur. He has been
+          finding it hard to keep his head above water as the epic blows have
+          weakened him one after the other.
+        </p>
+        <p>
+          It's clear that the warriors hatred of shame runs deep and the lies
+          will not be tolerated within their midst.
+        </p>
+        <p className="mb-0">
+          Given their historic fight thus far, they are anything but failures
+          and they are defeating the powerful dark arts of shame fair and
+          square.
+        </p>
+      </>
+    ),
+    date: "2021-02-18",
+  },
 ];
 
 // snow froze
