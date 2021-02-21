@@ -339,10 +339,13 @@ export const updates = [
           broken! And their plan has disintegrated. Bradock cast back into the
           shadows and Muldur no more.
         </p>
-        <p className="mb-0">
+        <p>
           The deep roots of shame have been dug out by the warriors through a
-          spectacular effort on all accounts. It was an incredible effort by the
-          warriors and
+          spectacular effort on all accounts.
+        </p>
+        <p className="mb-0">
+          Unfortunately, there is little time to celebrate as Ziir's forces are
+          already emerging from deep within the earth. The Battle goes on!
         </p>
       </>
     ),
