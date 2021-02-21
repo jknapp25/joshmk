@@ -339,8 +339,11 @@ export const createWorkout = /* GraphQL */ `
     createWorkout(input: $input, condition: $condition) {
       id
       warrior
+      otherWarriors
       description
       joint
+      plannedStart
+      replies
       createdAt
       updatedAt
     }
@@ -354,8 +357,11 @@ export const updateWorkout = /* GraphQL */ `
     updateWorkout(input: $input, condition: $condition) {
       id
       warrior
+      otherWarriors
       description
       joint
+      plannedStart
+      replies
       createdAt
       updatedAt
     }
@@ -369,8 +375,11 @@ export const deleteWorkout = /* GraphQL */ `
     deleteWorkout(input: $input, condition: $condition) {
       id
       warrior
+      otherWarriors
       description
       joint
+      plannedStart
+      replies
       createdAt
       updatedAt
     }

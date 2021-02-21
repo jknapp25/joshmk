@@ -38,7 +38,8 @@ import {
   GiSpeaker,
 } from "react-icons/gi";
 import { FaTrashAlt, FaEllipsisV } from "react-icons/fa";
-import { IoIosArrowBack } from "react-icons/io";
+import DatePicker from "react-datepicker";
+import { IoIosArrowBack, IoMdCalendar } from "react-icons/io";
 import { Helmet } from "react-helmet";
 import battleAxe from "./assets/battle-axe.png";
 import emailjs, { init } from "emailjs-com";
@@ -51,37 +52,62 @@ import { updates } from "./data/_updates.js";
 import { training } from "./data/_training.js";
 import { warriors } from "./data/_warriors.js";
 import { warlords } from "./data/_warlords.js";
+import "react-datepicker/dist/react-datepicker.css";
 import "./BattleOfFyetnas.css";
 export default BattleOfFyetnas;
 
 init("user_YmjT0y9RWFvhcFf32gw1i");
 
+const DateTimePicker = React.forwardRef(
+  ({ inputValue, onClick, buttonText }, ref) => {
+    const btnText = inputValue
+      ? moment(inputValue).format("MMMM d, yyyy h:mm aa")
+      : buttonText;
+    return (
+      <Button ref={ref} onClick={onClick} role="button">
+        {btnText}
+      </Button>
+    );
+  }
+);
+
 const currentDate = moment();
 
 function BattleOfFyetnas() {
   const [activePage, setActivePage] = useState("Battle");
-  const [show, setShow] = useState(false);
+  const [showWorkoutModal, setShowWorkoutModal] = useState(false);
+  const [showPlannedWorkoutModal, setShowPlannedWorkoutModal] = useState(false);
   const [workouts, setWorkouts] = useState([]);
 
   //workout stuff
   const [warrior, setWarrior] = useState("");
   const [description, setDescription] = useState("");
   const [joint, setJoint] = useState(false);
+  const [dateTime, setDateTime] = useState(new Date());
 
   const isMounted = useIsMounted();
 
   async function addWorkout() {
-    setShow(false);
-    clearAddWorkoutForm();
+    setShowWorkoutModal(false);
+    clearModals();
 
     const data = { warrior, description, joint };
-    await API.graphql(graphqlOperation(createWorkout, { input: data }));
+    const resp = await API.graphql(
+      graphqlOperation(createWorkout, { input: data })
+    );
+
+    if (resp) {
+      let updWorkouts = JSON.parse(JSON.stringify(workouts));
+      updWorkouts.push(resp.data.createWorkout);
+      setWorkouts(updWorkouts);
+    }
   }
 
-  function clearAddWorkoutForm() {
+  function clearModals() {
     setWarrior("");
     setDescription("");
     setJoint(false);
+    setDateTime("");
   }
 
   async function deleteWrkout(workoutId) {
@@ -90,9 +116,14 @@ function BattleOfFyetnas() {
     );
 
     if (shouldDelete) {
-      await API.graphql(
+      const resp = await API.graphql(
         graphqlOperation(deleteWorkout, { input: { id: workoutId } })
       );
+
+      if (resp) {
+        const updWorkouts = workouts.filter((wkt) => wkt.id !== workoutId);
+        setWorkouts(updWorkouts);
+      }
     }
   }
 
@@ -212,7 +243,7 @@ function BattleOfFyetnas() {
         </Row>
         {activePage === "Battle" ? (
           <>
-            <EmergencyAttack />
+            {/* <EmergencyAttack /> */}
 
             <Row>
               <Col lg={2} className="p-4 bg-transparent"></Col>
@@ -275,10 +306,19 @@ function BattleOfFyetnas() {
                   <Button
                     variant="success"
                     className="float-right"
-                    onClick={() => setShow(true)}
+                    onClick={() => setShowWorkoutModal(true)}
                   >
                     Add workout
                   </Button>
+                  {/* <div
+                    className="text-dark cursor-pointer d-inline float-right mt-1 mr-2"
+                    title="Plan a group workout"
+                  >
+                    <IoMdCalendar
+                      size="2em"
+                      onClick={() => setShowPlannedWorkoutModal(true)}
+                    />
+                  </div> */}
                 </div>
 
                 <Calendar workouts={workouts} mini={true} showDayNum={false} />
@@ -504,63 +544,31 @@ function BattleOfFyetnas() {
             ></Col>
           </Row>
         ) : null}
-        <Modal show={show} onHide={() => setShow(false)}>
-          <Modal.Body className="bg-dark text-light">
-            <Form.Label className="mb-0 text-light">Your name</Form.Label>
-            <Form.Control
-              as="select"
-              rows={2}
-              name="skill"
-              value={warrior}
-              onChange={(e) => setWarrior(e.target.value)}
-            >
-              <option></option>
-              {Object.keys(warriors).map((warr) => (
-                <option key={warr}>{warr}</option>
-              ))}
-            </Form.Control>
-            <div className="py-2" />
-            <Form.Label className="mb-1 text-light">
-              Workout description
-            </Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={2}
-              className="bg-dark border-secondary text-light"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-            <div className="py-2" />
-            <Form.Check
-              type="checkbox"
-              label="Worked out with other warriors"
-              checked={joint}
-              onChange={() => setJoint(!joint)}
-            />
-            <div className="py-2" />
-            <span>*NOTE - Max: 1 workout/day, 5 workouts/wk</span>
-          </Modal.Body>
-
-          <Modal.Footer className="bg-dark border-dark text-light">
-            <span className="mr-2">Refresh after saving</span>
-            <Button
-              variant="secondary"
-              onClick={() => {
-                setShow(false);
-                clearAddWorkoutForm();
-              }}
-            >
-              Cancel
-            </Button>
-            <Button
-              variant="success"
-              disabled={!warrior || !description}
-              onClick={addWorkout}
-            >
-              Save
-            </Button>
-          </Modal.Footer>
-        </Modal>
+        <WorkoutModal
+          showWorkoutModal={showWorkoutModal}
+          setShowWorkoutModal={setShowWorkoutModal}
+          showPlannedWorkoutModal={showPlannedWorkoutModal}
+          setShowPlannedWorkoutModal={setShowPlannedWorkoutModal}
+          warrior={warrior}
+          setWarrior={setWarrior}
+          description={description}
+          setDescription={setDescription}
+          joint={joint}
+          setJoint={setJoint}
+          clearModals={clearModals}
+          addWorkout={addWorkout}
+        />
+        <PlannedWorkoutModal
+          showPlannedWorkoutModal={showPlannedWorkoutModal}
+          setShowPlannedWorkoutModal={setShowPlannedWorkoutModal}
+          warrior={warrior}
+          setWarrior={setWarrior}
+          description={description}
+          setDescription={setDescription}
+          dateTime={dateTime}
+          setDateTime={setDateTime}
+          clearModals={clearModals}
+        />
       </Col>
     </Container>
   );
@@ -899,6 +907,150 @@ const Name = ({ warrior, comma }) => {
       <strong className="text-light">{warrior}</strong>
       {comma ? ", " : ""}
     </>
+  );
+};
+
+const WorkoutModal = ({
+  showWorkoutModal,
+  setShowWorkoutModal,
+  warrior,
+  setWarrior,
+  description,
+  setDescription,
+  joint,
+  setJoint,
+  clearModals,
+  addWorkout,
+}) => {
+  return (
+    <Modal show={showWorkoutModal} onHide={() => setShowWorkoutModal(false)}>
+      <Modal.Body className="bg-dark text-light pb-0">
+        <Form.Label className="mb-0 text-light">Your name</Form.Label>
+        <Form.Control
+          as="select"
+          rows={2}
+          name="skill"
+          value={warrior}
+          onChange={(e) => setWarrior(e.target.value)}
+        >
+          <option></option>
+          {Object.keys(warriors).map((warr) => (
+            <option key={warr}>{warr}</option>
+          ))}
+        </Form.Control>
+        <div className="py-2" />
+        <Form.Label className="mb-1 text-light">Workout description</Form.Label>
+        <Form.Control
+          as="textarea"
+          rows={2}
+          className="bg-dark border-secondary text-light"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+        <div className="py-2" />
+        <Form.Check
+          type="checkbox"
+          label="Worked out with other warriors"
+          checked={joint}
+          onChange={() => setJoint(!joint)}
+        />
+      </Modal.Body>
+
+      <Modal.Footer className="bg-dark border-dark text-light">
+        <Button
+          variant="secondary"
+          onClick={() => {
+            setShowWorkoutModal(false);
+            clearModals();
+          }}
+        >
+          Cancel
+        </Button>
+        <Button
+          variant="success"
+          disabled={!warrior || !description}
+          onClick={addWorkout}
+        >
+          Save
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  );
+};
+
+const PlannedWorkoutModal = ({
+  showPlannedWorkoutModal,
+  setShowPlannedWorkoutModal,
+  warrior,
+  setWarrior,
+  description,
+  setDescription,
+  dateTime,
+  setDateTime,
+  clearModals,
+  addWorkout,
+}) => {
+  return (
+    <Modal
+      show={showPlannedWorkoutModal}
+      onHide={() => setShowPlannedWorkoutModal(false)}
+    >
+      <Modal.Body className="bg-dark text-light">
+        <Form.Label className="mb-0 text-light">Your name</Form.Label>
+        <Form.Control
+          as="select"
+          rows={2}
+          name="skill"
+          value={warrior}
+          onChange={(e) => setWarrior(e.target.value)}
+        >
+          <option></option>
+          {Object.keys(warriors).map((warr) => (
+            <option key={warr}>{warr}</option>
+          ))}
+        </Form.Control>
+        <div className="py-2" />
+        <Form.Label className="mb-1 text-light">Workout description</Form.Label>
+        <Form.Control
+          as="textarea"
+          rows={2}
+          className="bg-dark border-secondary text-light"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+        <div className="py-2" />
+        <Form.Label className="mb-1 text-light">When</Form.Label>
+        <DatePicker
+          selected={dateTime}
+          onChange={(date) => setDateTime(date)}
+          showTimeSelect
+          timeFormat="HH:mm"
+          timeIntervals={15}
+          timeCaption="Time"
+          dateFormat="MMMM d, yyyy h:mm aa"
+          inline
+        />
+      </Modal.Body>
+
+      <Modal.Footer className="bg-dark border-dark text-light">
+        <Button
+          variant="secondary"
+          onClick={() => {
+            setShowPlannedWorkoutModal(false);
+            clearModals();
+          }}
+        >
+          Cancel
+        </Button>
+        <Button
+          variant="success"
+          disabled={!warrior || !description}
+          onClick={addWorkout}
+        >
+          Save
+        </Button>
+      </Modal.Footer>
+    </Modal>
   );
 };
 

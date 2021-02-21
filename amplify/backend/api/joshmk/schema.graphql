@@ -72,6 +72,9 @@ type Configuration @model @auth(rules: [{ allow: public }]) {
 type Workout @model @auth(rules: [{ allow: public }]) {
   id: ID!
   warrior: String
+  otherWarriors: [String]
   description: String
   joint: Boolean
+  plannedStart: String
+  replies: [String]
 }

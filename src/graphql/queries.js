@@ -231,8 +231,11 @@ export const getWorkout = /* GraphQL */ `
     getWorkout(id: $id) {
       id
       warrior
+      otherWarriors
       description
       joint
+      plannedStart
+      replies
       createdAt
       updatedAt
     }
@@ -248,8 +251,11 @@ export const listWorkouts = /* GraphQL */ `
       items {
         id
         warrior
+        otherWarriors
         description
         joint
+        plannedStart
+        replies
         createdAt
         updatedAt
       }

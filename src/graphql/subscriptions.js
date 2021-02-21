@@ -291,8 +291,11 @@ export const onCreateWorkout = /* GraphQL */ `
     onCreateWorkout {
       id
       warrior
+      otherWarriors
       description
       joint
+      plannedStart
+      replies
       createdAt
       updatedAt
     }
@@ -303,8 +306,11 @@ export const onUpdateWorkout = /* GraphQL */ `
     onUpdateWorkout {
       id
       warrior
+      otherWarriors
       description
       joint
+      plannedStart
+      replies
       createdAt
       updatedAt
     }
@@ -315,8 +321,11 @@ export const onDeleteWorkout = /* GraphQL */ `
     onDeleteWorkout {
       id
       warrior
+      otherWarriors
       description
       joint
+      plannedStart
+      replies
       createdAt
       updatedAt
     }

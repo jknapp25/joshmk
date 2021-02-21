@@ -303,7 +303,7 @@ export const updates = [
   {
     description: (
       <>
-        <p>ATTENTION WARRRIORS!</p>
+        <p>ATTENTION WARRIORS!</p>
         <p>
           Yesterday, as gladiators Alex and Clay were slashing Muldur's minions
           left and right, Clay heard the dying whispers of one of the tortured
@@ -330,7 +330,22 @@ export const updates = [
     ),
     date: "2021-02-19",
   },
+  {
+    description: (
+      <>
+        <p>Muldur is no more!</p>
+        <p>
+          The secret bond of Bradock and Muldur, fear and shame, has been
+          broken! And their plan has disintegrated. Bradock cast back into the
+          shadows and Muldur no more.
+        </p>
+        <p className="mb-0">
+          The deep roots of shame have been dug out by the warriors through a
+          spectacular effort on all accounts. It was an incredible effort by the
+          warriors and
+        </p>
+      </>
+    ),
+    date: "2021-02-20",
+  },
 ];
-
-// snow froze
-// day was success

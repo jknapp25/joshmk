@@ -46,7 +46,7 @@ export const warlords = [
       { text: "Once a loser, always a loser", audio: muldur7 },
       // "You're not worth the time anyway!",
     ],
-    defeated: false,
+    defeated: true,
   },
   {
     name: "Ziir",
