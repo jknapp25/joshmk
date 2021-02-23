@@ -1010,7 +1010,13 @@ const PlannedWorkoutModal = ({
           ))}
         </Form.Control>
         <div className="py-2" />
-        <Form.Label className="mb-1 text-light">Workout description</Form.Label>
+        <Form.Label className="mb-0 text-light">Workout description</Form.Label>
+        <p className="mb-1">
+          <small className="text-muted">
+            Please include where and when this workout will be so others can
+            join
+          </small>
+        </p>
         <Form.Control
           as="textarea"
           rows={2}
@@ -1018,7 +1024,7 @@ const PlannedWorkoutModal = ({
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-        <div className="py-2" />
+        {/* <div className="py-2" />
         <Form.Label className="mb-1 text-light">When</Form.Label>
         <DatePicker
           selected={dateTime}
@@ -1029,7 +1035,7 @@ const PlannedWorkoutModal = ({
           timeCaption="Time"
           dateFormat="MMMM d, yyyy h:mm aa"
           inline
-        />
+        /> */}
       </Modal.Body>
 
       <Modal.Footer className="bg-dark border-dark text-light">

@@ -351,4 +351,28 @@ export const updates = [
     ),
     date: "2021-02-20",
   },
+  {
+    description: (
+      <>
+        <p>
+          Ziir's forces emerged from the within the earth, attacking the
+          warriors during their fatigue.
+        </p>
+        <p>
+          It's going to be a challenging week to recover from, given the
+          powerful hits that Ziir has already dealt to the warriors, but hope is
+          not lost!
+        </p>
+        <p>
+          Gladiator Caleb and Huntress Natalie have reacted quickly and started
+          holding off Ziir to the best of their ability.
+        </p>
+        <p className="mb-0">
+          Will other warriors join them? Or will they be overcome by Ziir's sly
+          whispers of purposelessness?
+        </p>
+      </>
+    ),
+    date: "2021-02-22",
+  },
 ];

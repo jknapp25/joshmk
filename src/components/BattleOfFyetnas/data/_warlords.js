@@ -61,6 +61,9 @@ export const warlords = [
         text: "Doing this takes time from what's ACTUALLY important",
       },
       { text: "You're too old to follow your dreams" },
+      {
+        text: "You've never been able to workout habits this to reach a goal!",
+      },
     ],
     defeated: false,
   },
