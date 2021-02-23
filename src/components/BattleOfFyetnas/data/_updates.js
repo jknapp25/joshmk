@@ -375,4 +375,42 @@ export const updates = [
     ),
     date: "2021-02-22",
   },
+  {
+    description: (
+      <>
+        <p>
+          With a bit of a time buffer from the fighting Natalie and Caleb had
+          done the day before, they consulted wise and strategic Knight Scriven
+          to devise a plan.
+        </p>
+        <p>
+          Ziir's forces were emerging from the realm of Fyetna&#347; into the
+          mortal world through the rocky, muddy slimy earth. And quickly!
+        </p>
+        <p>
+          Scriven, quickly scanning the earth, called to mind years and years of
+          focused healing work for men and women of all ages, and the purpose
+          that emerged out of that dirt and grime. And he knew exactly what to
+          do.
+        </p>
+        <p>
+          Sorcerer's Josh, Lilly, Riah, James, Nathan and Archers Ben and Drew
+          were called to edge of the giant crevass where the evil beings were
+          clawing their way into reality. Scriven told them to cast a spell of
+          multiplication and guidance over the air.
+        </p>
+        <p>
+          Like the loaves and fishes, the few arrows Ben and drew had, were shot
+          high into the air, but when they fell, they became countless, blotting
+          out the sky. And as they fell, they arced in different directions,
+          landing EXACTLY where needed.
+        </p>
+        <p className="mb-0">
+          An unparalleled sight for the eye and truly masterful teamwork by the
+          fellowship.
+        </p>
+      </>
+    ),
+    date: "2021-02-23",
+  },
 ];
