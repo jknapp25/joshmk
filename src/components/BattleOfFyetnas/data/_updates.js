@@ -385,13 +385,13 @@ export const updates = [
         </p>
         <p>
           Ziir's forces were emerging from the realm of Fyetna&#347; into the
-          mortal world through the rocky, muddy slimy earth. And quickly!
+          mortal world through an enormous, rocky, muddy, slimy crater. And
+          quickly!
         </p>
         <p>
-          Scriven, quickly scanning the earth, called to mind years and years of
-          focused healing work for men and women of all ages, and the purpose
-          that emerged out of that dirt and grime. And he knew exactly what to
-          do.
+          Scriven, calm and focused, called to mind years of healing work for
+          men and women of all ages, and the purpose that emerged out of that
+          dirt and grime. And he knew exactly what to do.
         </p>
         <p>
           Sorcerer's Josh, Lilly, Riah, James, Nathan and Archers Ben and Drew
