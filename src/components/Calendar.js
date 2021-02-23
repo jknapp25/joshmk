@@ -67,6 +67,7 @@ function Calendar({
                 )
               );
               const totalHits = workoutsDuringTimeframe.reduce((acc, curr) => {
+                if (!!curr.plannedStart) return acc;
                 if (curr.joint) {
                   return acc + 2;
                 } else {

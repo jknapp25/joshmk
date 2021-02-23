@@ -37,6 +37,7 @@ import {
   GiBlackKnightHelm,
   GiSpeaker,
 } from "react-icons/gi";
+import { HiUserGroup } from "react-icons/hi";
 import { FaTrashAlt, FaEllipsisV } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import { IoIosArrowBack, IoMdCalendar } from "react-icons/io";
@@ -45,7 +46,11 @@ import battleAxe from "./assets/battle-axe.png";
 import emailjs, { init } from "emailjs-com";
 import { API, graphqlOperation } from "aws-amplify";
 import * as queries from "../../graphql/queries";
-import { createWorkout, deleteWorkout } from "../../graphql/mutations";
+import {
+  createWorkout,
+  deleteWorkout,
+  updateWorkout,
+} from "../../graphql/mutations";
 import { useIsMounted } from "../../lib/utils";
 import useSound from "use-sound";
 import { updates } from "./data/_updates.js";
@@ -103,6 +108,45 @@ function BattleOfFyetnas() {
     }
   }
 
+  async function addPlannedWorkout() {
+    setShowPlannedWorkoutModal(false);
+    clearModals();
+
+    const data = { warrior, description, joint, plannedStart: dateTime };
+    const resp = await API.graphql(
+      graphqlOperation(createWorkout, { input: data })
+    );
+
+    if (resp) {
+      let updWorkouts = JSON.parse(JSON.stringify(workouts));
+      updWorkouts.push(resp.data.createWorkout);
+      setWorkouts(updWorkouts);
+    }
+  }
+
+  async function RSVP(workout, warrName) {
+    const updOtherWarriors = workout.otherWarriors
+      ? [...workout.otherWarriors, warrName]
+      : [warrName];
+    const updWorkout = {
+      ...workout,
+      otherWarriors: updOtherWarriors,
+    };
+    delete updWorkout.createdAt;
+    delete updWorkout.updatedAt;
+
+    const resp = await API.graphql(
+      graphqlOperation(updateWorkout, { input: updWorkout })
+    );
+
+    if (resp) {
+      let updWorkouts = workouts.map((wkt) =>
+        wkt.id === updWorkout.id ? updWorkout : wkt
+      );
+      setWorkouts(updWorkouts);
+    }
+  }
+
   function clearModals() {
     setWarrior("");
     setDescription("");
@@ -138,15 +182,19 @@ function BattleOfFyetnas() {
     fetchData();
   }, [isMounted]);
 
-  const sortedWorkouts = workouts.sort((a, b) => {
-    if (a.createdAt < b.createdAt) {
-      return 1;
-    } else if (b.createdAt < a.createdAt) {
-      return -1;
-    } else {
-      return 0;
-    }
-  });
+  const sortedWorkouts = workouts
+    .sort((a, b) => {
+      if (a.createdAt < b.createdAt) {
+        return 1;
+      } else if (b.createdAt < a.createdAt) {
+        return -1;
+      } else {
+        return 0;
+      }
+    })
+    .filter((wkt) => !wkt.plannedStart);
+
+  const plannedWorkouts = workouts.filter((wkt) => !!wkt.plannedStart);
 
   let bgColor = "#e2b065"; // old one e2b065
   if (
@@ -263,6 +311,7 @@ function BattleOfFyetnas() {
                     );
                     const totalHits = workoutsDuringTimeframe.reduce(
                       (acc, curr) => {
+                        if (!!curr.plannedStart) return acc;
                         if (curr.joint) {
                           return acc + 2;
                         } else {
@@ -310,7 +359,7 @@ function BattleOfFyetnas() {
                   >
                     Add workout
                   </Button>
-                  {/* <div
+                  <div
                     className="text-dark cursor-pointer d-inline float-right mt-1 mr-2"
                     title="Plan a group workout"
                   >
@@ -318,7 +367,7 @@ function BattleOfFyetnas() {
                       size="2em"
                       onClick={() => setShowPlannedWorkoutModal(true)}
                     />
-                  </div> */}
+                  </div>
                 </div>
 
                 <Calendar workouts={workouts} mini={true} showDayNum={false} />
@@ -326,9 +375,27 @@ function BattleOfFyetnas() {
                 {!workouts || workouts.length === 0 ? (
                   <div>No workouts</div>
                 ) : null}
-                {sortedWorkouts.map((workout, i) => (
-                  <Workout key={i} workout={workout} deleteWkt={deleteWrkout} />
-                ))}
+                {plannedWorkouts.map((workout, i) => {
+                  if (moment(workout.plannedStart).isAfter(moment())) {
+                    return (
+                      <PlannedWorkout
+                        key={i}
+                        workout={workout}
+                        deleteWkt={deleteWrkout}
+                        RSVP={RSVP}
+                      />
+                    );
+                  }
+                })}
+                {sortedWorkouts.map((workout, i) => {
+                  return (
+                    <Workout
+                      key={i}
+                      workout={workout}
+                      deleteWkt={deleteWrkout}
+                    />
+                  );
+                })}
               </Col>
               <Col lg={2} className="p-4 bg-transparent"></Col>
             </Row>
@@ -568,6 +635,7 @@ function BattleOfFyetnas() {
           dateTime={dateTime}
           setDateTime={setDateTime}
           clearModals={clearModals}
+          addPlannedWorkout={addPlannedWorkout}
         />
       </Col>
     </Container>
@@ -988,7 +1056,7 @@ const PlannedWorkoutModal = ({
   dateTime,
   setDateTime,
   clearModals,
-  addWorkout,
+  addPlannedWorkout,
 }) => {
   return (
     <Modal
@@ -1013,8 +1081,8 @@ const PlannedWorkoutModal = ({
         <Form.Label className="mb-0 text-light">Workout description</Form.Label>
         <p className="mb-1">
           <small className="text-muted">
-            Please include where and when this workout will be so others can
-            join
+            Please include where this workout will be and other helpful details
+            for joining
           </small>
         </p>
         <Form.Control
@@ -1024,7 +1092,7 @@ const PlannedWorkoutModal = ({
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-        {/* <div className="py-2" />
+        <div className="py-2" />
         <Form.Label className="mb-1 text-light">When</Form.Label>
         <DatePicker
           selected={dateTime}
@@ -1035,7 +1103,7 @@ const PlannedWorkoutModal = ({
           timeCaption="Time"
           dateFormat="MMMM d, yyyy h:mm aa"
           inline
-        /> */}
+        />
       </Modal.Body>
 
       <Modal.Footer className="bg-dark border-dark text-light">
@@ -1051,7 +1119,7 @@ const PlannedWorkoutModal = ({
         <Button
           variant="success"
           disabled={!warrior || !description}
-          onClick={addWorkout}
+          onClick={addPlannedWorkout}
         >
           Save
         </Button>
@@ -1152,6 +1220,148 @@ const Workout = ({ workout, deleteWkt }) => {
           </Col>
           <Col lg="2" className="text-right text-success font-weight-bold">
             +{joint ? "2 hits" : "1 hit"}
+            {showActions ? (
+              <Dropdown
+                className="position-absolute"
+                style={{ bottom: "0px", right: "13px" }}
+              >
+                <Dropdown.Toggle className="bg-transparent border-0 pr-0 hide-dropdown-caret">
+                  <FaEllipsisV className="text-secondary" />
+                </Dropdown.Toggle>
+                <Dropdown.Menu className="bg-dark">
+                  <Dropdown.Item href="#" onClick={() => deleteWkt(id)}>
+                    <FaTrashAlt className="text-danger mr-2" />
+                    Delete
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            ) : null}
+          </Col>
+        </Row>
+      </Card.Body>
+    </Card>
+  );
+};
+
+const PlannedWorkout = ({ workout, deleteWkt, RSVP }) => {
+  const { warrior, description, id, plannedStart, otherWarriors } = workout;
+  const [showActions, setShowActions] = useState(false);
+  if (!warrior || !plannedStart) return null;
+  return (
+    <Card
+      className="bg-dark text-light mb-2 border-light"
+      onMouseEnter={() => setShowActions(true)}
+      onMouseLeave={() => setShowActions(false)}
+    >
+      <Card.Body>
+        <Row>
+          <Col lg="2" className="pr-0 text-center">
+            <div
+              style={{
+                width: "60px",
+                height: "60px",
+                position: "relative",
+                overflow: "hidden",
+              }}
+            >
+              <HiUserGroup
+                title="Group workout"
+                size="3em"
+                style={{
+                  display: "inline",
+                  color: "#2feca7",
+                }}
+              />
+            </div>
+          </Col>
+          <Col lg="8">
+            <div>
+              {warriors[warrior].skill === "sorcerer" ? (
+                <GiMoebiusStar
+                  className="mr-1"
+                  title="sorcerer"
+                  style={{
+                    display: "inline",
+                    color: "#2feca7",
+                  }}
+                />
+              ) : null}
+              {warriors[warrior].skill === "gladiator" ? (
+                <GiSharpAxe
+                  className="mr-1"
+                  title="gladiator"
+                  style={{
+                    display: "inline",
+                    color: "#ec6d2f",
+                  }}
+                />
+              ) : null}
+              {warriors[warrior].skill === "archer" ? (
+                <GiPocketBow
+                  className="mr-1"
+                  title="archer"
+                  style={{
+                    display: "inline",
+                    color: "#ecdf2f",
+                  }}
+                />
+              ) : null}
+              {warriors[warrior].skill === "huntress" ? (
+                <GiThrownKnife
+                  className="mr-1"
+                  title="huntress"
+                  style={{
+                    display: "inline",
+                    color: "#ec2fb9",
+                  }}
+                />
+              ) : null}
+              {warriors[warrior].skill === "knight" ? (
+                <GiBlackKnightHelm
+                  className="mr-1"
+                  title="knight"
+                  style={{
+                    display: "inline",
+                    color: "#2f9cec",
+                  }}
+                />
+              ) : null}
+              <small>
+                <strong className="text-light">{warrior}</strong> is hosting a
+                group workout on{" "}
+                {moment(plannedStart).format("dddd, MMMM Do, h:mm a")}
+              </small>
+            </div>
+            <p className="mt-2 mb-1">{description}</p>
+            {otherWarriors && otherWarriors.length > 0 ? (
+              <div className="mb-2">
+                <small className="text-muted">
+                  Joining: {otherWarriors.join(", ")}
+                </small>
+              </div>
+            ) : null}
+            <div>
+              <Dropdown>
+                <Dropdown.Toggle>RSVP</Dropdown.Toggle>
+                <Dropdown.Menu className="bg-dark text-light">
+                  <Dropdown.Item className="text-muted" disabled href="#">
+                    Select your name...
+                  </Dropdown.Item>
+                  {Object.keys(warriors).map((warr) => (
+                    <Dropdown.Item
+                      key={warriors[warr].name}
+                      className="text-light"
+                      href="#"
+                      onClick={() => RSVP(workout, warriors[warr].name)}
+                    >
+                      {warriors[warr].name}
+                    </Dropdown.Item>
+                  ))}
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
+          </Col>
+          <Col lg="2" className="text-right text-success font-weight-bold">
             {showActions ? (
               <Dropdown
                 className="position-absolute"
