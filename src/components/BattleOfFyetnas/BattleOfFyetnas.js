@@ -1255,91 +1255,36 @@ const PlannedWorkout = ({ workout, deleteWkt, RSVP }) => {
     >
       <Card.Body>
         <Row>
-          <Col lg="2" className="pr-0 text-center">
-            <div
-              style={{
-                width: "60px",
-                height: "60px",
-                position: "relative",
-                overflow: "hidden",
-              }}
-            >
-              <HiUserGroup
-                title="Group workout"
-                size="3em"
-                style={{
-                  display: "inline",
-                  color: "#2feca7",
-                }}
-              />
-            </div>
-          </Col>
-          <Col lg="8">
+          <Col lg="10">
+            <h5>Group workout {moment(plannedStart).fromNow()}!</h5>
+            <p className="mt-2 mb-1">{description}</p>
             <div>
-              {warriors[warrior].skill === "sorcerer" ? (
-                <GiMoebiusStar
-                  className="mr-1"
-                  title="sorcerer"
-                  style={{
-                    display: "inline",
-                    color: "#2feca7",
-                  }}
-                />
-              ) : null}
-              {warriors[warrior].skill === "gladiator" ? (
-                <GiSharpAxe
-                  className="mr-1"
-                  title="gladiator"
-                  style={{
-                    display: "inline",
-                    color: "#ec6d2f",
-                  }}
-                />
-              ) : null}
-              {warriors[warrior].skill === "archer" ? (
-                <GiPocketBow
-                  className="mr-1"
-                  title="archer"
-                  style={{
-                    display: "inline",
-                    color: "#ecdf2f",
-                  }}
-                />
-              ) : null}
-              {warriors[warrior].skill === "huntress" ? (
-                <GiThrownKnife
-                  className="mr-1"
-                  title="huntress"
-                  style={{
-                    display: "inline",
-                    color: "#ec2fb9",
-                  }}
-                />
-              ) : null}
-              {warriors[warrior].skill === "knight" ? (
-                <GiBlackKnightHelm
-                  className="mr-1"
-                  title="knight"
-                  style={{
-                    display: "inline",
-                    color: "#2f9cec",
-                  }}
-                />
-              ) : null}
-              <small>
-                <strong className="text-light">{warrior}</strong> is hosting a
-                group workout on{" "}
-                {moment(plannedStart).format("dddd, MMMM Do, h:mm a")}
+              <small className="text-muted">
+                When:{" "}
+                <strong className="text-light">
+                  {moment(plannedStart).format("dddd, MMMM Do, h:mm a")}
+                </strong>
               </small>
             </div>
-            <p className="mt-2 mb-1">{description}</p>
-            {otherWarriors && otherWarriors.length > 0 ? (
-              <div className="mb-2">
-                <small className="text-muted">
-                  Joining: {otherWarriors.join(", ")}
-                </small>
-              </div>
-            ) : null}
+            <div className="mb-2">
+              <small className="text-muted">
+                Host: <Name key={warrior} warrior={warrior} comma={false} />{" "}
+                &bull;{" "}
+                {otherWarriors && otherWarriors.length > 0 ? (
+                  <>
+                    Joining:{" "}
+                    {otherWarriors.map((warr, i) => (
+                      <Name
+                        key={warr}
+                        warrior={warr}
+                        comma={otherWarriors.length - 1 !== i}
+                      />
+                    ))}
+                  </>
+                ) : null}
+              </small>
+            </div>
+
             <div>
               <Dropdown>
                 <Dropdown.Toggle>RSVP</Dropdown.Toggle>
