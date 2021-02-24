@@ -293,11 +293,56 @@ function BattleOfFyetnas() {
         </Row>
         {activePage === "Battle" ? (
           <>
-            {/* <EmergencyAttack /> */}
-
             <Row>
               <Col lg={2} className="p-4 bg-transparent"></Col>
               <Col lg={3} className="bg-transparent">
+                <Table className="text-light bg-dark">
+                  <tbody>
+                    <tr>
+                      {warlords.map(({ image, name, start, end }, i) => {
+                        const isActive = moment(currentDate).isBetween(
+                          moment(start),
+                          moment(end)
+                        );
+                        return (
+                          <td
+                            key={name}
+                            align="center"
+                            className="px-0"
+                            style={{ borderTop: "0px" }}
+                          >
+                            <div
+                              style={{
+                                width: "4em",
+                                height: "4em",
+                                borderRadius: "50%",
+                                position: "relative",
+                                overflow: "hidden",
+                              }}
+                            >
+                              <Image
+                                src={image}
+                                roundedCircle
+                                title={`Week ${i}: ${name}`}
+                                style={{
+                                  maxWidth: "100%",
+                                  width: "auto",
+                                  height: "auto",
+                                  position: "absolute",
+                                  left: "50%",
+                                  top: "50%",
+                                  transform: "translate(-50%, -50%)",
+                                  border: isActive ? "2px solid #adb5bd" : "",
+                                  padding: isActive ? "3px" : "",
+                                }}
+                              />
+                            </div>
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  </tbody>
+                </Table>
                 {warlords.map((warlord, i) => {
                   if (
                     moment(currentDate).isBetween(
@@ -332,21 +377,8 @@ function BattleOfFyetnas() {
                         weekNum={i + 1}
                       />
                     );
-                  } else {
-                    if (moment(currentDate).isAfter(moment(warlord.end))) {
-                      return (
-                        <WarlordPast key={warlord.name} warlord={warlord} />
-                      );
-                    }
-
-                    return (
-                      <WarlordFuture
-                        key={warlord.name}
-                        warlord={warlord}
-                        weekNum={i + 1}
-                      />
-                    );
                   }
+                  return null;
                 })}
               </Col>
               <Col lg={5} className="bg-transparent">
@@ -491,7 +523,7 @@ function BattleOfFyetnas() {
                     zIndex: 10,
                   }}
                 >
-                  <Table style={{ backgroundColor: "#212529", color: "white" }}>
+                  <Table className="text-light bg-dark">
                     <tbody>
                       <tr>
                         {warlords.map(

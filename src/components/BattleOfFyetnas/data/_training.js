@@ -19,7 +19,7 @@ export const training = [
       </>
     ),
     type: "testimony",
-    warriors: ["Ben Tissell"],
+    warriors: ["Drew Walters"],
   },
   {
     details: (
