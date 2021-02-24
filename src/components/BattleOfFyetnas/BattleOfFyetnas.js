@@ -299,7 +299,7 @@ function BattleOfFyetnas() {
                 <Table className="text-light bg-dark">
                   <tbody>
                     <tr>
-                      {warlords.map(({ image, name, start, end }, i) => {
+                      {warlords.map(({ miniImage, name, start, end }, i) => {
                         const isActive = moment(currentDate).isBetween(
                           moment(start),
                           moment(end)
@@ -318,12 +318,14 @@ function BattleOfFyetnas() {
                                 borderRadius: "50%",
                                 position: "relative",
                                 overflow: "hidden",
+                                padding: isActive ? "3px" : "",
+                                border: isActive ? "2px solid #adb5bd" : "",
                               }}
                             >
                               <Image
-                                src={image}
+                                src={miniImage}
                                 roundedCircle
-                                title={`Week ${i}: ${name}`}
+                                title={`Week ${i + 1}: ${name}`}
                                 style={{
                                   maxWidth: "100%",
                                   width: "auto",
@@ -332,8 +334,6 @@ function BattleOfFyetnas() {
                                   left: "50%",
                                   top: "50%",
                                   transform: "translate(-50%, -50%)",
-                                  border: isActive ? "2px solid #adb5bd" : "",
-                                  padding: isActive ? "3px" : "",
                                 }}
                               />
                             </div>

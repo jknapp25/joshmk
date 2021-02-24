@@ -2,6 +2,10 @@ import warlord1 from "../assets/warlord1.jpg";
 import warlord2 from "../assets/warlord2.jpg";
 import warlord3 from "../assets/warlord3.jpg";
 import warlord4 from "../assets/warlord4.jpg";
+import mini1 from "../assets/mini1.jpg";
+import mini2 from "../assets/mini2.jpg";
+import mini3 from "../assets/mini3.jpg";
+import mini4 from "../assets/mini4.jpg";
 import muldur1 from "../assets/Muldur1.m4a";
 import muldur2 from "../assets/Muldur2.mp3";
 import muldur3 from "../assets/Muldur3.m4a";
@@ -16,6 +20,7 @@ export const warlords = [
     health: 58,
     description: "demon of loneliness",
     image: warlord1,
+    miniImage: mini4,
     start: "2021-02-07",
     end: "2021-02-13",
     sayings: [
@@ -34,6 +39,7 @@ export const warlords = [
     health: 62,
     description: "demon of shame",
     image: warlord2,
+    miniImage: mini3,
     start: "2021-02-14",
     end: "2021-02-20",
     sayings: [
@@ -53,6 +59,7 @@ export const warlords = [
     health: 66,
     description: "demon of purposelessness",
     image: warlord3,
+    miniImage: mini2,
     start: "2021-02-21",
     end: "2021-02-27",
     sayings: [
@@ -81,6 +88,7 @@ export const warlords = [
     health: 70,
     description: "demon of fear",
     image: warlord4,
+    miniImage: mini1,
     start: "2021-02-28",
     end: "2021-03-06",
     sayings: [
