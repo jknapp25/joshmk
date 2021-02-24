@@ -62,7 +62,16 @@ export const warlords = [
       },
       { text: "You're too old to follow your dreams" },
       {
-        text: "You've never been able to workout habits this to reach a goal!",
+        text: "You always stop before you reach that goal!",
+      },
+      {
+        text: "IF you're going to do this, you'll be doing it alone...",
+      },
+      {
+        text: "You always stop before you reach that goal!",
+      },
+      {
+        text: "You always stop before you reach that goal!",
       },
     ],
     defeated: false,
