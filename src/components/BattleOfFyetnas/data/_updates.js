@@ -379,9 +379,8 @@ export const updates = [
     description: (
       <>
         <p>
-          With a bit of a time buffer from the fighting Natalie and Caleb had
-          done the day before, they consulted wise and strategic Knight Scriven
-          to devise a plan.
+          With a time buffer from the fighting they had done the day before,
+          Natalie and Caleb consulted wise Knight Scriven to devise a plan.
         </p>
         <p>
           Ziir's forces were emerging from the realm of Fyetna&#347; into the
