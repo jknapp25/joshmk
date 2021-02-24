@@ -173,7 +173,9 @@ function BattleOfFyetnas() {
 
   useEffect(() => {
     async function fetchData() {
-      const items = await API.graphql({ query: queries.listWorkouts });
+      const items = await API.graphql(
+        graphqlOperation(queries.listWorkouts, { limit: 1000 })
+      );
 
       const fetchedWorkouts = items.data.listWorkouts.items;
       if (isMounted.current) setWorkouts(fetchedWorkouts);
