@@ -296,53 +296,6 @@ function BattleOfFyetnas() {
             <Row>
               <Col lg={2} className="p-4 bg-transparent"></Col>
               <Col lg={3} className="bg-transparent">
-                <Table className="text-light bg-dark">
-                  <tbody>
-                    <tr>
-                      {warlords.map(({ miniImage, name, start, end }, i) => {
-                        const isActive = moment(currentDate).isBetween(
-                          moment(start),
-                          moment(end)
-                        );
-                        return (
-                          <td
-                            key={name}
-                            align="center"
-                            className="px-0"
-                            style={{ borderTop: "0px" }}
-                          >
-                            <div
-                              style={{
-                                width: "4em",
-                                height: "4em",
-                                borderRadius: "50%",
-                                position: "relative",
-                                overflow: "hidden",
-                                padding: isActive ? "3px" : "",
-                                border: isActive ? "2px solid #adb5bd" : "",
-                              }}
-                            >
-                              <Image
-                                src={miniImage}
-                                roundedCircle
-                                title={`Week ${i + 1}: ${name}`}
-                                style={{
-                                  maxWidth: "100%",
-                                  width: "auto",
-                                  height: "auto",
-                                  position: "absolute",
-                                  left: "50%",
-                                  top: "50%",
-                                  transform: "translate(-50%, -50%)",
-                                }}
-                              />
-                            </div>
-                          </td>
-                        );
-                      })}
-                    </tr>
-                  </tbody>
-                </Table>
                 {warlords.map((warlord, i) => {
                   if (
                     moment(currentDate).isBetween(
@@ -380,6 +333,55 @@ function BattleOfFyetnas() {
                   }
                   return null;
                 })}
+                <Table className="text-light bg-dark">
+                  <tbody>
+                    <tr>
+                      {warlords.map(
+                        ({ miniImage, name, description, start, end }, i) => {
+                          const isActive = moment(currentDate).isBetween(
+                            moment(start),
+                            moment(end)
+                          );
+                          return (
+                            <td
+                              key={name}
+                              align="center"
+                              className="px-0"
+                              style={{ borderTop: "0px" }}
+                              title={`Week ${i + 1}: ${name}, ${description}`}
+                            >
+                              <div
+                                style={{
+                                  width: "4em",
+                                  height: "4em",
+                                  borderRadius: "50%",
+                                  position: "relative",
+                                  overflow: "hidden",
+                                  padding: isActive ? "3px" : "",
+                                  border: isActive ? "2px solid #adb5bd" : "",
+                                }}
+                              >
+                                <Image
+                                  src={miniImage}
+                                  roundedCircle
+                                  style={{
+                                    maxWidth: "100%",
+                                    width: "auto",
+                                    height: "auto",
+                                    position: "absolute",
+                                    left: "50%",
+                                    top: "50%",
+                                    transform: "translate(-50%, -50%)",
+                                  }}
+                                />
+                              </div>
+                            </td>
+                          );
+                        }
+                      )}
+                    </tr>
+                  </tbody>
+                </Table>
               </Col>
               <Col lg={5} className="bg-transparent">
                 <UpdateCard />
