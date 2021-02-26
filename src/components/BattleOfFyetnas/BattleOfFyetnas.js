@@ -1353,7 +1353,7 @@ const Workout = ({
                         comma={false}
                       />
                       &ensp;
-                      {moment(createdAt).format("dddd, MMMM Do")}
+                      {moment(replyWkt.createdAt).format("dddd, MMMM Do")}
                     </small>
                   </div>
                   <div>{replyWkt.description}</div>
