@@ -8,6 +8,7 @@ export const onCreatePost = /* GraphQL */ `
       title
       content
       richContent
+      category
       tags
       images
       createdAt
@@ -22,6 +23,7 @@ export const onUpdatePost = /* GraphQL */ `
       title
       content
       richContent
+      category
       tags
       images
       createdAt
@@ -36,6 +38,7 @@ export const onDeletePost = /* GraphQL */ `
       title
       content
       richContent
+      category
       tags
       images
       createdAt

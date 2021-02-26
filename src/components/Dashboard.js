@@ -3,22 +3,75 @@ import { navigate } from "@reach/router";
 import { Container, Row, Col, Badge, Card } from "react-bootstrap";
 import ProfileCard from "./ProfileCard";
 import ItemList from "./ItemList";
-import NavBar from "./NavBar";
 import { RiArrowUpSLine } from "react-icons/ri";
 import { Helmet } from "react-helmet";
-import image from "./BattleOfFyetnas/assets/warlord1.jpg";
-import coffee from "../assets/hot-cup.png";
+import coffee from "../assets/coffee.png";
 import { Storage } from "aws-amplify";
 import { ConfigContext } from "../App";
 import { useIsMounted } from "../lib/utils";
+import { API } from "aws-amplify";
 export default Dashboard;
 
-function Dashboard({ config, faviconUrl, avatarUrl, popularTags }) {
+function sortByFrequencyAndRemoveDuplicates(array) {
+  let frequency = {};
+  let value;
+
+  // compute frequencies of each value
+  for (var i = 0; i < array.length; i++) {
+    value = array[i];
+    if (value in frequency) {
+      frequency[value]++;
+    } else {
+      frequency[value] = 1;
+    }
+  }
+
+  // make array from the frequency object to de-duplicate
+  var uniques = [];
+  for (value in frequency) {
+    uniques.push(value);
+  }
+
+  // sort the uniques array in descending order by frequency
+  function compareFrequency(a, b) {
+    return frequency[b] - frequency[a];
+  }
+
+  return uniques.sort(compareFrequency);
+}
+
+function Dashboard({ config, faviconUrl, avatarUrl }) {
   const { galleryImages } = useContext(ConfigContext);
 
   const [imageUrls, setImageUrls] = useState([]);
   const [fsImageIdx, setFSImageIdx] = useState(null);
+  const [tags, setTags] = useState(null);
   const isMounted = useIsMounted();
+
+  useEffect(() => {
+    async function fetchData() {
+      const categories = await API.graphql({
+        query: `query ListTags {
+          listPosts(filter: {tags: {size: {gt: 0}}}) {
+            items {
+              tags
+            }
+          }
+        }        
+      `,
+      });
+      const preppedTags = categories.data.listPosts.items.reduce(
+        (acc, curr) => [...acc, ...curr.tags],
+        []
+      );
+      const sorted = sortByFrequencyAndRemoveDuplicates(preppedTags);
+      const topTen = sorted.slice(0, 10);
+
+      setTags(topTen);
+    }
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
     async function fetchData() {
@@ -39,49 +92,48 @@ function Dashboard({ config, faviconUrl, avatarUrl, popularTags }) {
   return (
     <Container
       fluid
-      className="pt-3"
+      className="pt-3 bg-light"
       style={{ paddingLeft: "100px", paddingRight: "100px" }}
     >
       <Helmet>
         <title>{config.fullName || ""}</title>
         <link rel="icon" type="image/png" href={faviconUrl} sizes="16x16" />
       </Helmet>
-      <NavBar config={config} />
       <Row>
-        <Col lg={4} className="bg-light">
+        <Col lg={4}>
           <ProfileCard avatarUrl={avatarUrl} config={config} />
-          <div
-            class="card mt-2 mb-2 cursor-pointer"
+          <Card
+            className="my-2 cursor-pointer"
             onClick={() => window.open("https://www.buymeacoffee.com/joshmk")}
           >
-            <div class="row no-gutters">
-              <div class="col-auto p-3">
+            <Row className="no-gutters">
+              <div className="col-auto p-3">
                 <img
                   src={coffee}
-                  class="img-fluid"
+                  className="img-fluid"
                   alt=""
-                  style={{ width: "60px", height: "60px" }}
+                  style={{ width: "50px", height: "50px" }}
                 />
               </div>
-              <div class="col">
-                <div class="card-block px-3 py-2">
-                  <h5 class="card-title mb-1">Buy Josh a coffee</h5>
-                  <p class="card-text">MMMMMM delish!</p>
+              <Col className="d-flex" style={{ alignItems: "center" }}>
+                <div className="card-block px-3">
+                  <h4 className="card-title mb-1">Buy Josh a coffee!</h4>
                 </div>
-              </div>
-            </div>
-          </div>
+              </Col>
+            </Row>
+          </Card>
         </Col>
 
-        <Col lg={4} className="bg-light">
+        <Col lg={4}>
           <small className="text-dark">RECENT WRITINGS</small>
           <ItemList mini />
         </Col>
-        <Col lg={4} className="bg-light hidden-sm">
+        <Col lg={4} className="hidden-sm">
           <small className="text-dark">RECENT CREATIONS</small>
           <Row className="mt-1">
             {[1, 2, 3].map((num) => (
               <Col
+                key={num}
                 className={`text-center ${num === 1 ? "pr-1" : ""} ${
                   num === 2 ? "px-1" : ""
                 } ${num === 3 ? "pl-1" : ""}`}
@@ -97,6 +149,7 @@ function Dashboard({ config, faviconUrl, avatarUrl, popularTags }) {
           <Row className="mt-3">
             {[4, 5, 6].map((num) => (
               <Col
+                key={num}
                 className={`text-center ${num === 4 ? "pr-1" : ""} ${
                   num === 5 ? "px-1" : ""
                 } ${num === 6 ? "pl-1" : ""}`}
@@ -109,21 +162,24 @@ function Dashboard({ config, faviconUrl, avatarUrl, popularTags }) {
             ))}
           </Row>
           <div className="my-3" />
-          <small className="text-dark">POPULAR CATEGORIES</small>
-          <p>
-            {popularTags.map((tag) => (
-              <h4 className="d-inline">
-                <Badge
-                  key={"popular-tag-" + tag}
-                  variant="lightgray"
-                  className="mr-2 cursor-pointer hover"
-                  onClick={() => navigate(`/search?tag=${tag}`)}
-                >
-                  {tag}
-                </Badge>
-              </h4>
-            ))}
-          </p>
+          {tags && tags.length > 0 ? (
+            <>
+              <small className="text-dark">POPULAR TAGS</small>
+              <div>
+                {tags.map((tag) => (
+                  <h4 className="d-inline" key={"popular-tag-" + tag}>
+                    <Badge
+                      variant="lightgray"
+                      className="mr-2 cursor-pointer hover"
+                      onClick={() => navigate(`/search?tag=${tag}`)}
+                    >
+                      {tag}
+                    </Badge>
+                  </h4>
+                ))}
+              </div>
+            </>
+          ) : null}
         </Col>
       </Row>
       <Row>

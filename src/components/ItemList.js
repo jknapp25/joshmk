@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
-import { Alert, Badge } from "react-bootstrap";
+import { Alert, Badge, Row, Col } from "react-bootstrap";
 import Resume from "./Resume";
 import { useLocation, navigate } from "@reach/router";
 import { parse } from "query-string";
@@ -13,8 +13,6 @@ import Education from "./Education";
 import { FaTimes } from "react-icons/fa";
 import { ConfigContext } from "../App";
 import { Fragment } from "react";
-import moment from "moment";
-import image from "./BattleOfFyetnas/assets/caleb.jpg";
 export default ItemList;
 
 function ItemList({ mini = false }) {
@@ -123,16 +121,22 @@ function ItemList({ mini = false }) {
         </Alert>
       ) : null}
       {pageName === "search" ? (
-        <h3 className="mb-4 mt-1">
-          {preppedItems.length} item{preppedItems.length > 1 ? "s" : ""} tagged{" "}
-          <Badge variant="lightgray">{searchParams.tag}</Badge>
-          <span
-            className="text-muted ml-2 cursor-pointer"
-            onClick={() => navigate("/")}
-          >
-            <FaTimes color="#dc3545" title="clear search" />
-          </span>
-        </h3>
+        <Row>
+          <Col lg={3}></Col>
+          <Col lg={6}>
+            <h3 className="mb-4 mt-1">
+              {preppedItems.length} item{preppedItems.length > 1 ? "s" : ""}{" "}
+              tagged <Badge variant="lightgray">{searchParams.tag}</Badge>
+              <span
+                className="text-muted ml-2 cursor-pointer"
+                onClick={() => navigate("/")}
+              >
+                <FaTimes color="#dc3545" title="clear search" />
+              </span>
+            </h3>
+          </Col>
+          <Col lg={3}></Col>
+        </Row>
       ) : null}
       {preppedItems.map((item, i) => (
         <Fragment key={i}>

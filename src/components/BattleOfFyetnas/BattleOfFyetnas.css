@@ -2,7 +2,7 @@
   opacity: 0.9;
 }
 
-input,
+#battle input,
 select {
   background-color: transparent !important;
   color: white !important;

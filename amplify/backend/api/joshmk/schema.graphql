@@ -3,6 +3,7 @@ type Post @model @auth(rules: [{ allow: public }]) {
   title: String
   content: String
   richContent: AWSJSON
+  category: String
   tags: [String]
   images: [String]
   createdAt: String

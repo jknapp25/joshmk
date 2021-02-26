@@ -1,28 +1,41 @@
 import React from "react";
-import { navigate } from "@reach/router";
-import { Row, Col } from "react-bootstrap";
+import { navigate, useLocation } from "@reach/router";
+import { Row, Col, Container } from "react-bootstrap";
 export default NavBar;
 
-function NavBar({ config }) {
+function NavBar({ config, bgClass = "bg-white" }) {
+  const { pathname } = useLocation();
   return (
-    <Row>
-      <Col className="pb-3">
-        <div className="d-inline">
-          <h2 className="mb-0 d-inline">{config.fullName || ""}</h2>
-        </div>
-        <div className="float-right d-inline mt-2 text-dark">
-          {config.pages.map((page, i) => (
-            <h4
-              className={`mb-0 d-inline ${
-                i !== config.pages.length - 1 ? "mr-4" : ""
-              }`}
-              onClick={() => navigate(`/${page}`)}
+    <Container
+      fluid
+      className={`pt-3 ${bgClass}`}
+      style={{ paddingLeft: "100px", paddingRight: "100px" }}
+    >
+      <Row>
+        <Col className="pb-3">
+          <div className="d-inline">
+            <h2
+              className="mb-0 d-inline cursor-pointer"
+              onClick={() => navigate("/")}
             >
-              {page}
-            </h4>
-          ))}
-        </div>
-      </Col>
-    </Row>
+              {config.fullName || ""}
+            </h2>
+          </div>
+          <div className="float-right d-inline mt-2">
+            {config.pages.map((page, i) => (
+              <h4
+                key={page}
+                className={`mb-0 d-inline cursor-pointer ${
+                  i !== config.pages.length - 1 ? "mr-4" : ""
+                } ${pathname === "/" + page ? "text-danger" : "text-dark"}`}
+                onClick={() => navigate(`/${page}`)}
+              >
+                {page}
+              </h4>
+            ))}
+          </div>
+        </Col>
+      </Row>
+    </Container>
   );
 }

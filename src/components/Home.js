@@ -21,7 +21,6 @@ import goatFavicon from "../assets/goat-favicon.png";
 import { useIsMounted } from "../lib/utils";
 import { ConfigContext } from "../App";
 import image from "./BattleOfFyetnas/assets/warlord1.jpg";
-import coffee from "../assets/hot-cup.png";
 export default Home;
 
 function Home({ children }) {
@@ -55,10 +54,6 @@ function Home({ children }) {
 
   if (!config.pages || config.pages.length === 0) return null;
 
-  const popularTags = window.location.href.includes("joshmk")
-    ? ["poetry", "drawing", "creature", "Exogenesis", "God", "book notes"]
-    : ["painting", "art studio", "art", "writing"];
-
   if (pathname === "/rwg") {
     return (
       <Container fluid className="px-0">
@@ -75,110 +70,77 @@ function Home({ children }) {
 
   if (pathname === "/gallery") {
     return (
-      <Container fluid>
-        <Helmet>
-          <title>{config.fullName || ""}</title>
-          <link rel="icon" type="image/png" href={faviconUrl} sizes="16x16" />
-        </Helmet>
-        <Row>
-          <Col xs={12} sm={10} md={10} lg={11} className="p-4 bg-light">
-            <div className="hidden-md mb-3">
-              <NavButtons pages={config.pages} />
-            </div>
-            {children}
-          </Col>
-          <Col sm={2} md={2} lg={1} className="pt-4 hidden-xs bg-light">
-            <NavButtons pages={config.pages} classes="float-right" />
-          </Col>
-        </Row>
-      </Container>
+      <>
+        <NavBar config={config} bgClass="bg-white" />
+        <Container fluid>
+          <Helmet>
+            <title>{config.fullName || ""}</title>
+            <link rel="icon" type="image/png" href={faviconUrl} sizes="16x16" />
+          </Helmet>
+          <Row>
+            <Col xs={12} sm={12} md={12} lg={12} className="p-4">
+              {/* <div className="hidden-md mb-3">
+                <NavButtons pages={config.pages} />
+              </div> */}
+              {children}
+            </Col>
+            {/* <Col sm={2} md={2} className="pt-4 hidden-xs bg-light">
+              <NavButtons pages={config.pages} classes="float-right" />
+            </Col> */}
+          </Row>
+        </Container>
+      </>
     );
   }
 
-  // if (pathname === "/") {
-  //   return (
-  //     <>
-  //       <Dashboard
-  //         config={config}
-  //         faviconUrl={faviconUrl}
-  //         avatarUrl={avatarUrl}
-  //         popularTags={popularTags}
-  //         children={children}
-  //       />
-  //       <Row className="mt-5">
-  //         <Col lg={3}></Col>
-  //         <Col lg={6}>{children}</Col>
-  //         <Col lg={3}></Col>
-  //       </Row>
-  //     </>
-  //   );
-  // }
+  if (pathname === "/") {
+    return (
+      <>
+        <NavBar config={config} bgClass="bg-light" />
+        <Dashboard
+          config={config}
+          faviconUrl={faviconUrl}
+          avatarUrl={avatarUrl}
+          children={children}
+        />
+        <div className="my-5" />
+        {children}
+      </>
+    );
+  }
 
-  // return (
-  //   <>
-  //     <NavBar config={config} />
-  //     <Row className="mt-5">
-  //       <Col lg={3}></Col>
-  //       <Col lg={6}>{children}</Col>
-  //       <Col lg={3}></Col>
-  //     </Row>
-  //   </>
-  // );
+  if (pathname === "/blog" || pathname === "/about") {
+    return (
+      <>
+        <NavBar config={config} />
+        <div className="my-3" />
+        {children}
+      </>
+    );
+  }
+
+  if (pathname === "/work" || pathname === "/projects") {
+    return (
+      <>
+        <NavBar config={config} bgClass="bg-light" />
+        <Row className="bg-light">
+          <Col lg={3}></Col>
+          <Col lg={6}>
+            <div className="mt-3" />
+            {children}
+          </Col>
+          <Col lg={3}></Col>
+        </Row>
+      </>
+    );
+  }
 
   return (
-    <Container fluid>
-      <Helmet>
-        <title>{config.fullName || ""}</title>
-        <link rel="icon" type="image/png" href={faviconUrl} sizes="16x16" />
-      </Helmet>
-      <Row>
-        <Col sm={5} md={4} lg={3} className="pt-4 bg-light">
-          <div className="hidden-md">
-            <NavButtons pages={config.pages} />
-          </div>
-          <ProfileCard avatarUrl={avatarUrl} config={config} />
-          <div className="pt-4 hidden-lg hidden-xs">
-            <NavButtons pages={config.pages} />
-            <div className="my-3 hidden-xs" />
-            <small className="text-muted hidden-xs">Popular tags</small>
-            <p className="hidden-xs">
-              {popularTags.map((tag) => (
-                <Badge
-                  key={pathname + tag}
-                  variant="lightgray"
-                  className="mr-2 cursor-pointer"
-                  onClick={() => navigate(`/search?tag=${tag}`)}
-                >
-                  {tag}
-                </Badge>
-              ))}
-            </p>
-          </div>
-        </Col>
-        <Col sm={7} md={8} lg={6} className="py-4 bg-light float">
-          {children}
-        </Col>
-        <Col md={4} lg={3} className="py-4 bg-light hidden-sm">
-          <div className="position-fixed">
-            <NavButtons pages={config.pages} />
-            <div className="my-3" />
-            <small className="text-muted">Popular tags</small>
-            <p>
-              {popularTags.map((tag) => (
-                <Badge
-                  key={"popular-tag-" + tag}
-                  variant="lightgray"
-                  className="mr-2 cursor-pointer hover"
-                  onClick={() => navigate(`/search?tag=${tag}`)}
-                >
-                  {tag}
-                </Badge>
-              ))}
-            </p>
-          </div>
-        </Col>
-      </Row>
-    </Container>
+    <>
+      <NavBar config={config} />
+      <div className="mt-3" />
+      {children}
+    </>
   );
 }
 

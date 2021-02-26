@@ -20,6 +20,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
   const [content, setContent] = useState("");
   const [richContent, setRichContent] = useState(blankEditorValue);
   const [tags, setTags] = useState([]);
+  const [category, setCategory] = useState("");
   const [images, setImages] = useState([]);
   const [createdAt, setCreatedAt] = useState("");
 
@@ -42,6 +43,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
           setRichContent(richContentResponse);
         }
         setTags(postData.data.getPost.tags);
+        setCategory(postData.data.getPost.category);
         setImages(postData.data.getPost.images);
         setCreatedAt(postData.data.getPost.createdAt);
       }
@@ -56,6 +58,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
     setContent("");
     setRichContent(blankEditorValue);
     setTags([]);
+    setCategory("");
     setImages([]);
     setCreatedAt("");
   }
@@ -66,6 +69,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
       content,
       richContent: JSON.stringify(richContent),
       tags,
+      category,
       images,
       createdAt: createdAt || undefined,
     };
@@ -110,6 +114,15 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
           "video",
         ]}
         classes="bg-white"
+      />
+
+      <Form.Label className="mb-0">Category</Form.Label>
+      <FormControl
+        id="category"
+        className="mb-2"
+        aria-describedby="category"
+        value={category || ""}
+        onChange={(e) => setCategory(e.target.value)}
       />
 
       <TagEditor tags={tags} onChange={(updTags) => setTags(updTags)} />

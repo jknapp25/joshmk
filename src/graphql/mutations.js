@@ -11,6 +11,7 @@ export const createPost = /* GraphQL */ `
       title
       content
       richContent
+      category
       tags
       images
       createdAt
@@ -28,6 +29,7 @@ export const updatePost = /* GraphQL */ `
       title
       content
       richContent
+      category
       tags
       images
       createdAt
@@ -45,6 +47,7 @@ export const deletePost = /* GraphQL */ `
       title
       content
       richContent
+      category
       tags
       images
       createdAt

@@ -263,9 +263,9 @@ const Element = ({ attributes, children, element }) => {
               height="100%"
               style={{ position: "absolute", top: 0, left: 0 }}
               src={element.url}
-              frameborder="0"
+              frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
+              allowFullScreen
             ></iframe>
           </div>
           {children}

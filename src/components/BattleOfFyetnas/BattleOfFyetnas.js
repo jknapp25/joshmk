@@ -11,6 +11,7 @@
 
 import React, { useState, useEffect } from "react";
 import moment from "moment";
+import { navigate } from "@reach/router";
 import {
   Container,
   Image,
@@ -26,6 +27,10 @@ import {
   Modal,
   Dropdown,
   Alert,
+  InputGroup,
+  DropdownButton,
+  FormControl,
+  ListGroup,
 } from "react-bootstrap";
 import Calendar from "../Calendar";
 import ImageUploader from "../ImageUploader";
@@ -35,12 +40,19 @@ import {
   GiPocketBow,
   GiThrownKnife,
   GiBlackKnightHelm,
-  GiSpeaker,
+  GiEnergyArrow,
 } from "react-icons/gi";
 import { HiUserGroup } from "react-icons/hi";
-import { FaTrashAlt, FaEllipsisV } from "react-icons/fa";
+import {
+  FaTrashAlt,
+  FaEllipsisV,
+  FaComment,
+  FaArrowCircleUp,
+  FaArrowLeft,
+} from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import { IoIosArrowBack, IoMdCalendar } from "react-icons/io";
+import { MdSubdirectoryArrowRight } from "react-icons/md";
 import { Helmet } from "react-helmet";
 import battleAxe from "./assets/battle-axe.png";
 import emailjs, { init } from "emailjs-com";
@@ -83,6 +95,9 @@ function BattleOfFyetnas() {
   const [showWorkoutModal, setShowWorkoutModal] = useState(false);
   const [showPlannedWorkoutModal, setShowPlannedWorkoutModal] = useState(false);
   const [workouts, setWorkouts] = useState([]);
+  const [commentWorkoutId, setCommentWorkoutId] = useState("");
+  const [commentingWarriorName, setCommentingWarriorName] = useState("");
+  const [activeComment, setActiveComment] = useState("");
 
   //workout stuff
   const [warrior, setWarrior] = useState("");
@@ -105,6 +120,8 @@ function BattleOfFyetnas() {
       let updWorkouts = JSON.parse(JSON.stringify(workouts));
       updWorkouts.push(resp.data.createWorkout);
       setWorkouts(updWorkouts);
+
+      return resp.data.createWorkout.id;
     }
   }
 
@@ -121,6 +138,44 @@ function BattleOfFyetnas() {
       let updWorkouts = JSON.parse(JSON.stringify(workouts));
       updWorkouts.push(resp.data.createWorkout);
       setWorkouts(updWorkouts);
+    }
+  }
+
+  async function comment() {
+    // add new workout
+    const data = {
+      warrior: commentingWarriorName,
+      description: activeComment,
+      joint: false,
+    };
+    const resp = await API.graphql(
+      graphqlOperation(createWorkout, { input: data })
+    );
+
+    if (resp) {
+      let updWorkouts = JSON.parse(JSON.stringify(workouts));
+      updWorkouts.push(resp.data.createWorkout);
+
+      const newWorkoutId = resp.data.createWorkout.id;
+
+      // add new workout id to commentWorkoutId replies
+      updWorkouts = updWorkouts.map((wkt) => {
+        if (wkt.id === commentWorkoutId) {
+          let updWorkout = JSON.parse(JSON.stringify(wkt));
+          if (updWorkout.replies) {
+            updWorkout.replies = [...updWorkout.replies, newWorkoutId];
+          } else {
+            updWorkout.replies = [newWorkoutId];
+          }
+          return updWorkout;
+        }
+        return wkt;
+      });
+
+      // update workouts locally
+      setWorkouts(updWorkouts);
+
+      clearModals();
     }
   }
 
@@ -150,6 +205,9 @@ function BattleOfFyetnas() {
   function clearModals() {
     setWarrior("");
     setDescription("");
+    setCommentWorkoutId("");
+    setCommentingWarriorName("");
+    setActiveComment("");
     setJoint(false);
     setDateTime("");
   }
@@ -184,6 +242,14 @@ function BattleOfFyetnas() {
     fetchData();
   }, [isMounted]);
 
+  const replyIds = workouts.reduce((acc, curr) => {
+    if (curr.replies && curr.replies.length > 0) {
+      return [...acc, ...curr.replies];
+    } else {
+      return acc;
+    }
+  }, []);
+
   const sortedWorkouts = workouts
     .sort((a, b) => {
       if (a.createdAt < b.createdAt) {
@@ -194,7 +260,7 @@ function BattleOfFyetnas() {
         return 0;
       }
     })
-    .filter((wkt) => !wkt.plannedStart);
+    .filter((wkt) => !wkt.plannedStart && !replyIds.includes(wkt.id));
 
   const plannedWorkouts = workouts.filter((wkt) => !!wkt.plannedStart);
 
@@ -221,20 +287,22 @@ function BattleOfFyetnas() {
   }
 
   return (
-    <Container fluid style={{ backgroundColor: bgColor }}>
+    <Container fluid id="battle" style={{ backgroundColor: bgColor }}>
       <Helmet>
         <title>Battle of Fyetna&#347;</title>
         <link rel="icon" type="image/png" href={battleAxe} sizes="16x16" />
       </Helmet>
       <Col className="px-0">
         <Row>
-          <Col
-            xs={12}
-            sm={3}
-            md={3}
-            lg={3}
-            className="p-4 bg-transparent"
-          ></Col>
+          <Col xs={12} sm={3} md={3} lg={3} className="p-4 bg-transparent">
+            <GiEnergyArrow
+              size="2em"
+              className="text-dark cursor-pointer"
+              title="Back to the homeland"
+              style={{ transform: "rotate(165deg)" }}
+              onClick={() => navigate("/")}
+            />
+          </Col>
           <Col
             xs={12}
             sm={6}
@@ -303,11 +371,12 @@ function BattleOfFyetnas() {
                       moment(warlord.end)
                     )
                   ) {
-                    const workoutsDuringTimeframe = workouts.filter((wo) =>
-                      moment(wo.createdAt).isBetween(
-                        moment(warlord.start),
-                        moment(warlord.end)
-                      )
+                    const workoutsDuringTimeframe = sortedWorkouts.filter(
+                      (wo) =>
+                        moment(wo.createdAt).isBetween(
+                          moment(warlord.start),
+                          moment(warlord.end)
+                        )
                     );
                     const totalHits = workoutsDuringTimeframe.reduce(
                       (acc, curr) => {
@@ -406,7 +475,11 @@ function BattleOfFyetnas() {
                   </div>
                 </div>
 
-                <Calendar workouts={workouts} mini={true} showDayNum={false} />
+                <Calendar
+                  workouts={sortedWorkouts}
+                  mini={true}
+                  showDayNum={false}
+                />
 
                 {!workouts || workouts.length === 0 ? (
                   <div>No workouts</div>
@@ -429,6 +502,14 @@ function BattleOfFyetnas() {
                       key={i}
                       workout={workout}
                       deleteWkt={deleteWrkout}
+                      setCommentWorkoutId={setCommentWorkoutId}
+                      commentWorkoutId={commentWorkoutId}
+                      commentingWarriorName={commentingWarriorName}
+                      setCommentingWarriorName={setCommentingWarriorName}
+                      activeComment={activeComment}
+                      setActiveComment={setActiveComment}
+                      comment={comment}
+                      workouts={workouts}
                     />
                   );
                 })}
@@ -1164,8 +1245,19 @@ const PlannedWorkoutModal = ({
   );
 };
 
-const Workout = ({ workout, deleteWkt }) => {
-  const { warrior, createdAt, description, joint, id } = workout;
+const Workout = ({
+  workout,
+  deleteWkt,
+  setCommentWorkoutId,
+  commentWorkoutId,
+  commentingWarriorName,
+  setCommentingWarriorName,
+  comment,
+  activeComment,
+  setActiveComment,
+  workouts,
+}) => {
+  const { warrior, createdAt, description, joint, id, replies } = workout;
   const [showActions, setShowActions] = useState(false);
   if (!warrior) return null;
   return (
@@ -1196,58 +1288,8 @@ const Workout = ({ workout, deleteWkt }) => {
           </Col>
           <Col lg="8" className="pl-2">
             <div>
-              {warriors[warrior].skill === "sorcerer" ? (
-                <GiMoebiusStar
-                  className="mr-1"
-                  title="sorcerer"
-                  style={{
-                    display: "inline",
-                    color: "#2feca7",
-                  }}
-                />
-              ) : null}
-              {warriors[warrior].skill === "gladiator" ? (
-                <GiSharpAxe
-                  className="mr-1"
-                  title="gladiator"
-                  style={{
-                    display: "inline",
-                    color: "#ec6d2f",
-                  }}
-                />
-              ) : null}
-              {warriors[warrior].skill === "archer" ? (
-                <GiPocketBow
-                  className="mr-1"
-                  title="archer"
-                  style={{
-                    display: "inline",
-                    color: "#ecdf2f",
-                  }}
-                />
-              ) : null}
-              {warriors[warrior].skill === "huntress" ? (
-                <GiThrownKnife
-                  className="mr-1"
-                  title="huntress"
-                  style={{
-                    display: "inline",
-                    color: "#ec2fb9",
-                  }}
-                />
-              ) : null}
-              {warriors[warrior].skill === "knight" ? (
-                <GiBlackKnightHelm
-                  className="mr-1"
-                  title="knight"
-                  style={{
-                    display: "inline",
-                    color: "#2f9cec",
-                  }}
-                />
-              ) : null}
               <small className="text-muted">
-                <strong className="text-light">{warrior}</strong>
+                <Name key={warrior} warrior={warrior} comma={false} />
                 &ensp;
                 {moment(createdAt).format("dddd, MMMM Do")}
               </small>
@@ -1257,24 +1299,118 @@ const Workout = ({ workout, deleteWkt }) => {
           <Col lg="2" className="text-right text-success font-weight-bold">
             +{joint ? "2 hits" : "1 hit"}
             {showActions ? (
-              <Dropdown
+              <div
                 className="position-absolute"
                 style={{ bottom: "0px", right: "13px" }}
               >
-                <Dropdown.Toggle className="bg-transparent border-0 pr-0 hide-dropdown-caret">
-                  <FaEllipsisV className="text-secondary" />
-                </Dropdown.Toggle>
-                <Dropdown.Menu className="bg-dark">
-                  <Dropdown.Item href="#" onClick={() => deleteWkt(id)}>
-                    <FaTrashAlt className="text-danger mr-2" />
-                    Delete
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
+                <Dropdown className="d-inline">
+                  <Dropdown.Toggle className="bg-transparent border-0 pr-0 hide-dropdown-caret">
+                    <FaEllipsisV className="text-secondary" />
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu className="bg-dark">
+                    <Dropdown.Item href="#" onClick={() => deleteWkt(id)}>
+                      <FaTrashAlt className="text-danger mr-2" />
+                      Delete
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
             ) : null}
           </Col>
         </Row>
       </Card.Body>
+      {replies && replies.length > 0 ? (
+        <ListGroup variant="flush" className="text-light">
+          {replies.map((replyId) => {
+            const replyWkt = workouts.find((wkt) => wkt.id === replyId);
+            if (replyWkt) {
+              return (
+                <ListGroup.Item
+                  className="text-light"
+                  style={{ backgroundColor: "#41474c" }}
+                >
+                  <div>
+                    <small className="text-muted">
+                      <Name
+                        key={replyWkt.warrior}
+                        warrior={replyWkt.warrior}
+                        comma={false}
+                      />
+                      &ensp;
+                      {moment(createdAt).format("dddd, MMMM Do")}
+                    </small>
+                  </div>
+                  <div>{replyWkt.description}</div>
+                </ListGroup.Item>
+              );
+            }
+            return null;
+          })}
+        </ListGroup>
+      ) : null}
+      <Card.Footer
+        className={`${
+          commentWorkoutId && commentWorkoutId === id ? "p-0" : "py-1"
+        } text-muted cursor-pointer bg-update-header`}
+        onClick={() => setCommentWorkoutId(id)}
+      >
+        {!commentWorkoutId || (commentWorkoutId && commentWorkoutId !== id) ? (
+          <small>
+            <MdSubdirectoryArrowRight
+              className="mr-1"
+              style={{ verticalAlign: "text-top" }}
+            />
+            Comment
+          </small>
+        ) : null}
+        {commentWorkoutId && commentWorkoutId === id ? (
+          <InputGroup size="sm" className="border-0">
+            <DropdownButton
+              as={InputGroup.Prepend}
+              variant="link"
+              title={commentingWarriorName || "Select name"}
+              id="input-group-dropdown-1"
+              className="border-left-0 border-top-0 border-bottom-0"
+              style={{ borderRight: "1px solid rgba(0,0,0,.125)" }}
+            >
+              {Object.keys(warriors).map((warr) => (
+                <Dropdown.Item
+                  key={warriors[warr].name}
+                  className="text-light bg-dark"
+                  href="#"
+                  onClick={() => setCommentingWarriorName(warriors[warr].name)}
+                >
+                  {warriors[warr].name}
+                </Dropdown.Item>
+              ))}
+            </DropdownButton>
+            <FormControl
+              disabled={!commentingWarriorName}
+              placeholder="Type..."
+              className="border-0"
+              value={activeComment}
+              onChange={(e) => setActiveComment(e.target.value)}
+            />
+            <InputGroup.Append
+              className="bg-transparent border-0"
+              onClick={() => {
+                if (commentWorkoutId && activeComment) comment();
+              }}
+            >
+              <InputGroup.Text className="bg-transparent border-0">
+                <FaArrowCircleUp
+                  className={
+                    commentWorkoutId && activeComment
+                      ? "text-primary"
+                      : "text-muted"
+                  }
+                  size="1.5em"
+                />
+              </InputGroup.Text>
+            </InputGroup.Append>
+          </InputGroup>
+        ) : null}
+      </Card.Footer>
     </Card>
   );
 };

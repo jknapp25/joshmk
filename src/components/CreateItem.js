@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Row, Col } from "react-bootstrap";
 import Post from "./Post";
 import Job from "./Job";
 import Project from "./Project";
@@ -107,59 +107,65 @@ function CreateItem() {
 
   return (
     <>
-      <div className="mb-4">
-        <AmplifySignOut />
-      </div>
+      <Row>
+        <Col lg={3}></Col>
+        <Col lg={6}>
+          <div className="mb-4">
+            <AmplifySignOut />
+          </div>
 
-      <div className="my-4">
-        {["post", "job", "project", "education", "gallery"].map((type) => (
-          <Button
-            key={type}
-            variant={type === itemType ? "primary" : "secondary"}
-            className="mr-2 mb-2"
-            size="lg"
-            onClick={() => setItemType(type)}
-          >
-            {type === "post" ? "Write a post" : null}
-            {type === "job" ? "Add work experience" : null}
-            {type === "project" ? "Start a project" : null}
-            {type === "education" ? "Add education" : null}
-            {type === "gallery" ? "Add images to gallery" : null}
-          </Button>
-        ))}
-      </div>
+          <div className="my-4">
+            {["post", "job", "project", "education", "gallery"].map((type) => (
+              <Button
+                key={type}
+                variant={type === itemType ? "primary" : "secondary"}
+                className="mr-2 mb-2"
+                size="lg"
+                onClick={() => setItemType(type)}
+              >
+                {type === "post" ? "Write a post" : null}
+                {type === "job" ? "Add work experience" : null}
+                {type === "project" ? "Start a project" : null}
+                {type === "education" ? "Add education" : null}
+                {type === "gallery" ? "Add images to gallery" : null}
+              </Button>
+            ))}
+          </div>
 
-      {itemType === "post" ? (
-        <PostEditor
-          id={editingItemId}
-          onCreate={handleCreate}
-          onUpdate={handleUpdate}
-        />
-      ) : null}
-      {itemType === "job" ? (
-        <JobEditor
-          id={editingItemId}
-          onCreate={handleCreate}
-          onUpdate={handleUpdate}
-        />
-      ) : null}
-      {itemType === "project" ? (
-        <ProjectEditor
-          id={editingItemId}
-          onCreate={handleCreate}
-          onUpdate={handleUpdate}
-        />
-      ) : null}
-      {itemType === "education" ? (
-        <EducationEditor
-          id={editingItemId}
-          onCreate={handleCreate}
-          onUpdate={handleUpdate}
-        />
-      ) : null}
-      {itemType === "gallery" ? (
-        <GalleryEditor onUpdate={handleUpdate} />
-      ) : null}
+          {itemType === "post" ? (
+            <PostEditor
+              id={editingItemId}
+              onCreate={handleCreate}
+              onUpdate={handleUpdate}
+            />
+          ) : null}
+          {itemType === "job" ? (
+            <JobEditor
+              id={editingItemId}
+              onCreate={handleCreate}
+              onUpdate={handleUpdate}
+            />
+          ) : null}
+          {itemType === "project" ? (
+            <ProjectEditor
+              id={editingItemId}
+              onCreate={handleCreate}
+              onUpdate={handleUpdate}
+            />
+          ) : null}
+          {itemType === "education" ? (
+            <EducationEditor
+              id={editingItemId}
+              onCreate={handleCreate}
+              onUpdate={handleUpdate}
+            />
+          ) : null}
+          {itemType === "gallery" ? (
+            <GalleryEditor onUpdate={handleUpdate} />
+          ) : null}
+        </Col>
+        <Col lg={3}></Col>
+      </Row>
       <div className="mb-5" />
       {sortedItems.length > 0 ? (
         sortedItems.map((item, i) => {
