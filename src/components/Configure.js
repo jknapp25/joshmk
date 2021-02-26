@@ -36,6 +36,7 @@ function Configure() {
   const [tagline, setTagline] = useState("");
   const [instagramUrl, setInstagramUrl] = useState("");
   const [youtubeUrl, setYoutubeUrl] = useState("");
+  const [supportUrl, setSupportUrl] = useState("");
   const [bio, setBio] = useState(blankEditorValue);
   const [avatar, setAvatar] = useState("");
   const [favicon, setFavicon] = useState("");
@@ -57,6 +58,7 @@ function Configure() {
       bio: JSON.stringify(bio),
       instagramUrl,
       youtubeUrl,
+      supportUrl,
       avatar,
       pages,
       favicon,
@@ -96,6 +98,7 @@ function Configure() {
         setAvatar(configData.data.getConfiguration.avatar);
         setInstagramUrl(configData.data.getConfiguration.instagramUrl);
         setYoutubeUrl(configData.data.getConfiguration.youtubeUrl);
+        setSupportUrl(configData.data.getConfiguration.supportUrl);
         setPages(configData.data.getConfiguration.pages);
         setFavicon(configData.data.getConfiguration.favicon);
         setResumeGeneratorEnabled(
@@ -193,6 +196,18 @@ function Configure() {
           value={youtubeUrl || ""}
           onChange={(e) => {
             setYoutubeUrl(e.target.value);
+            setEdited(true);
+          }}
+        />
+
+        <Form.Label className="mb-1">Support URL</Form.Label>
+        <FormControl
+          id="supportUrl"
+          className="mb-3"
+          aria-describedby="supportUrl"
+          value={supportUrl || ""}
+          onChange={(e) => {
+            setSupportUrl(e.target.value);
             setEdited(true);
           }}
         />

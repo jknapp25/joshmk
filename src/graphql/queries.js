@@ -193,6 +193,7 @@ export const getConfiguration = /* GraphQL */ `
       favicon
       instagramUrl
       youtubeUrl
+      supportUrl
       pages
       resumeGeneratorEnabled
       galleryImages
@@ -218,6 +219,7 @@ export const listConfigurations = /* GraphQL */ `
         favicon
         instagramUrl
         youtubeUrl
+        supportUrl
         pages
         resumeGeneratorEnabled
         galleryImages

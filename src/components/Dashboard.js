@@ -102,27 +102,29 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
       <Row>
         <Col lg={4}>
           <ProfileCard avatarUrl={avatarUrl} config={config} />
-          <Card
-            className="my-2 cursor-pointer"
-            onClick={() => window.open("https://www.buymeacoffee.com/joshmk")}
-          >
-            <Row className="no-gutters">
-              <div className="col-auto p-3">
-                <img
-                  src={coffee}
-                  className="img-fluid"
-                  alt=""
-                  style={{ width: "50px", height: "50px" }}
-                />
-              </div>
-              <Col className="d-flex" style={{ alignItems: "center" }}>
-                <div className="card-block px-3">
-                  <h4 className="card-title mb-1">Buy Josh a coffee!</h4>
-                  <p className="mb-0">AKA creative jet fuel</p>
+          {config && config.supportUrl ? (
+            <Card
+              className="my-2 cursor-pointer"
+              onClick={() => window.open(config.supportUrl)}
+            >
+              <Row className="no-gutters">
+                <div className="col-auto p-3">
+                  <img
+                    src={coffee}
+                    className="img-fluid"
+                    alt=""
+                    style={{ width: "50px", height: "50px" }}
+                  />
                 </div>
-              </Col>
-            </Row>
-          </Card>
+                <Col className="d-flex" style={{ alignItems: "center" }}>
+                  <div className="card-block px-3">
+                    <h4 className="card-title mb-1">Buy me a coffee!</h4>
+                    <p className="mb-0">AKA creative jet fuel</p>
+                  </div>
+                </Col>
+              </Row>
+            </Card>
+          ) : null}
         </Col>
 
         <Col lg={4}>

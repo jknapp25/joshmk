@@ -65,6 +65,7 @@ type Configuration @model @auth(rules: [{ allow: public }]) {
   favicon: String
   instagramUrl: String
   youtubeUrl: String
+  supportUrl: String
   pages: [String]
   resumeGeneratorEnabled: Boolean
   galleryImages: [String]

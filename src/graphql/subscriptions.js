@@ -241,6 +241,7 @@ export const onCreateConfiguration = /* GraphQL */ `
       favicon
       instagramUrl
       youtubeUrl
+      supportUrl
       pages
       resumeGeneratorEnabled
       galleryImages
@@ -261,6 +262,7 @@ export const onUpdateConfiguration = /* GraphQL */ `
       favicon
       instagramUrl
       youtubeUrl
+      supportUrl
       pages
       resumeGeneratorEnabled
       galleryImages
@@ -281,6 +283,7 @@ export const onDeleteConfiguration = /* GraphQL */ `
       favicon
       instagramUrl
       youtubeUrl
+      supportUrl
       pages
       resumeGeneratorEnabled
       galleryImages
