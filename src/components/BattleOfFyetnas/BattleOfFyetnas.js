@@ -941,9 +941,9 @@ const UpdateCard = () => {
   let title;
   if (hasUpdateForToday) {
     if (open) {
-      title = "Today's update";
+      title = <span className="font-weight-bold">Today's update</span>;
     } else {
-      title = "View today's update";
+      title = <span className="font-weight-bold">View today's update</span>;
     }
   } else {
     if (open) {

@@ -412,4 +412,19 @@ export const updates = [
     ),
     date: "2021-02-23",
   },
+  {
+    description: (
+      <>
+        <p>
+          Ziir landed an enormous on attack on the warriors leaving many injured
+          and left on the battlefield.
+        </p>
+        <p className="mb-0">
+          It would be the comeback of the century, can the warriors still pull
+          together a list minute victory?
+        </p>
+      </>
+    ),
+    date: "2021-02-26",
+  },
 ];
