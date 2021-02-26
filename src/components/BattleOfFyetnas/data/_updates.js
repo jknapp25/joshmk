@@ -417,7 +417,7 @@ export const updates = [
       <>
         <p>
           Mist emerged from cracks within the earth and completely encapsulated
-          the warriors in the midst of a sure success. Visibility was
+          the warriors in the midst of a sure success. Visibility became
           non-existent.
         </p>
         <p>
