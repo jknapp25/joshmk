@@ -53,7 +53,7 @@ import {
   FaCaretUp,
 } from "react-icons/fa";
 import DatePicker from "react-datepicker";
-import { IoIosArrowBack, IoMdCalendar } from "react-icons/io";
+import { IoIosArrowBack, IoMdCalendar, IoIosPeople } from "react-icons/io";
 import { MdSubdirectoryArrowRight } from "react-icons/md";
 import { Helmet } from "react-helmet";
 import battleAxe from "./assets/battle-axe.png";
@@ -481,11 +481,12 @@ function BattleOfFyetnas() {
 
                 <hr />
 
-                <Dropdown className="mb-3">
+                <Dropdown className="mb-2">
                   <Dropdown.Toggle
                     size="lg"
-                    variant="dark"
-                    className="btn-block mb-2 text-success"
+                    variant="success"
+                    className="btn-block mb-1 border-dark rounded-0 text-dark font-weight-bold"
+                    style={{ borderWidth: "2px" }}
                   >
                     <GiPunchBlast size="1.5em" /> Attack!{"  "}
                   </Dropdown.Toggle>
@@ -1479,14 +1480,21 @@ const PlannedWorkout = ({ workout, deleteWkt, RSVP }) => {
   if (!warrior || !plannedStart) return null;
   return (
     <Card
-      className="bg-dark text-light mb-2 border-light"
+      className="bg-dark text-light mb-2"
       onMouseEnter={() => setShowActions(true)}
       onMouseLeave={() => setShowActions(false)}
     >
       <Card.Body>
         <Row>
           <Col lg="10">
-            <h5>Group workout {moment(plannedStart).fromNow()}!</h5>
+            <h5>
+              <IoIosPeople
+                size="2em"
+                className="mr-2"
+                style={{ color: "rgb(47, 236, 167)" }}
+              />
+              Group workout {moment(plannedStart).fromNow()}!
+            </h5>
             <p className="mt-2 mb-1">{description}</p>
             <div>
               <small className="text-muted">
