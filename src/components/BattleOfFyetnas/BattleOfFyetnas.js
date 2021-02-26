@@ -42,13 +42,14 @@ import {
   GiBlackKnightHelm,
   GiEnergyArrow,
 } from "react-icons/gi";
-import { HiUserGroup } from "react-icons/hi";
 import {
   FaTrashAlt,
   FaEllipsisV,
   FaComment,
   FaArrowCircleUp,
   FaArrowLeft,
+  FaCaretDown,
+  FaCaretUp,
 } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import { IoIosArrowBack, IoMdCalendar } from "react-icons/io";
@@ -470,7 +471,6 @@ function BattleOfFyetnas() {
               </Col>
               <Col lg={5} className="bg-transparent">
                 <UpdateCard />
-                <hr />
                 <div className="d-block mb-4">
                   <h5 className="d-inline">Activity</h5>
                   <Button
@@ -906,6 +906,11 @@ const WoundedWarriorAlert = () => {
 
 const UpdateCard = () => {
   const [updateIdx, setUpdateIdx] = useState(updates.length - 1);
+  const hasUpdateForToday = moment(updates[updateIdx].date).isSame(
+    Date.now(),
+    "day"
+  );
+  const [open, setOpen] = useState(hasUpdateForToday);
   const dateFormatted = moment(updates[updateIdx].date).format("dddd, MMMM Do");
   const description = updates[updateIdx].description;
 
@@ -920,11 +925,31 @@ const UpdateCard = () => {
     setUpdateIdx(updIdx);
   };
 
-  const forwardPossible = !(updateIdx + 1 > updates.length - 1);
-  const backwardPossible = !(updateIdx - 1 < 0);
+  const forwardPossible = open && !(updateIdx + 1 > updates.length - 1);
+  const backwardPossible = open && !(updateIdx - 1 < 0);
+
+  let title;
+  if (hasUpdateForToday) {
+    if (open) {
+      title = "Today's update";
+    } else {
+      title = "View today's update";
+    }
+  } else {
+    if (open) {
+      title = (
+        <>
+          <span className="text-muted">Update for</span>{" "}
+          <span className="font-weight-bold">{dateFormatted}</span>
+        </>
+      );
+    } else {
+      title = <span className="text-muted">View past updates</span>;
+    }
+  }
 
   return (
-    <div className="d-flex" style={{ alignItems: "center" }}>
+    <div className="d-flex mb-3" style={{ alignItems: "center" }}>
       {backwardPossible ? (
         <div
           className="text-dark cursor-pointer position-absolute"
@@ -948,10 +973,15 @@ const UpdateCard = () => {
         </div>
       ) : null}
       <Card className="bg-dark text-light w-100">
-        <Card.Header className="font-weight-bold">
-          <span className="text-muted">Update:</span> {dateFormatted}
+        <Card.Header className="cursor-pointer" onClick={() => setOpen(!open)}>
+          {title}{" "}
+          <span className="text-muted">
+            {open ? <FaCaretUp /> : <FaCaretDown />}
+          </span>
         </Card.Header>
-        <Card.Body className="bg-update-header">{description}</Card.Body>
+        {open ? (
+          <Card.Body className="bg-update-header">{description}</Card.Body>
+        ) : null}
       </Card>
     </div>
   );
@@ -1366,7 +1396,7 @@ const Workout = ({
       ) : null}
       <Card.Footer
         className={`${
-          commentWorkoutId && commentWorkoutId === id ? "p-0" : "py-1"
+          commentWorkoutId && commentWorkoutId === id ? "p-0" : "py-0"
         } text-muted cursor-pointer bg-update-header`}
         onClick={() => setCommentWorkoutId(id)}
       >
