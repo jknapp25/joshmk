@@ -1348,7 +1348,7 @@ const Workout = ({
           })}
         </ListGroup>
       ) : null}
-      <Card.Footer
+      {/* <Card.Footer
         className={`${
           commentWorkoutId && commentWorkoutId === id ? "p-0" : "py-1"
         } text-muted cursor-pointer bg-update-header`}
@@ -1410,7 +1410,7 @@ const Workout = ({
             </InputGroup.Append>
           </InputGroup>
         ) : null}
-      </Card.Footer>
+      </Card.Footer> */}
     </Card>
   );
 };
