@@ -416,12 +416,17 @@ export const updates = [
     description: (
       <>
         <p>
-          Ziir landed an enormous on attack on the warriors leaving many injured
-          and left on the battlefield.
+          Mist emerged from cracks within the earth and completely encapsulated
+          the warriors in the midst of a sure success. Visibility was
+          non-existent.
+        </p>
+        <p>
+          Ziir released his forces into the midst, guided by heat, they were
+          able to attack the warriors one-by-one. Needless to say, many were
+          injured and left on the battlefield.
         </p>
         <p className="mb-0">
-          It would be the comeback of the century, can the warriors still pull
-          together a list minute victory?
+          How will the warriors be able to recover from such a powerful attack?
         </p>
       </>
     ),
