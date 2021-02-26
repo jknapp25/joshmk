@@ -41,6 +41,7 @@ import {
   GiThrownKnife,
   GiBlackKnightHelm,
   GiEnergyArrow,
+  GiPunchBlast,
 } from "react-icons/gi";
 import {
   FaTrashAlt,
@@ -471,31 +472,40 @@ function BattleOfFyetnas() {
               </Col>
               <Col lg={5} className="bg-transparent">
                 <UpdateCard />
-                <div className="d-block mb-4">
-                  <h5 className="d-inline">Activity</h5>
-                  <Button
-                    variant="success"
-                    className="float-right"
-                    onClick={() => setShowWorkoutModal(true)}
-                  >
-                    Add workout
-                  </Button>
-                  <div
-                    className="text-dark cursor-pointer d-inline float-right mt-1 mr-2"
-                    title="Plan a group workout"
-                  >
-                    <IoMdCalendar
-                      size="2em"
-                      onClick={() => setShowPlannedWorkoutModal(true)}
-                    />
-                  </div>
-                </div>
 
                 <Calendar
                   workouts={sortedWorkouts}
                   mini={true}
                   showDayNum={false}
                 />
+
+                <hr />
+
+                <Dropdown className="mb-3">
+                  <Dropdown.Toggle
+                    size="lg"
+                    variant="dark"
+                    className="btn-block float-right mb-2"
+                  >
+                    <GiPunchBlast size="1.5em" /> Attack!{"  "}
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu className="bg-dark">
+                    <Dropdown.Item
+                      href="#"
+                      className="text-light"
+                      onClick={() => {}}
+                    >
+                      <GiPunchBlast size="1.5em" /> Add workout
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      href="#"
+                      className="text-light"
+                      onClick={() => {}}
+                    >
+                      <IoMdCalendar size="1.5em" /> Plan a group workout
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
 
                 {!workouts || workouts.length === 0 ? (
                   <div>No workouts</div>
@@ -949,7 +959,7 @@ const UpdateCard = () => {
   }
 
   return (
-    <div className="d-flex mb-3" style={{ alignItems: "center" }}>
+    <div className="d-flex mb-2" style={{ alignItems: "center" }}>
       {backwardPossible ? (
         <div
           className="text-dark cursor-pointer position-absolute"
@@ -1008,27 +1018,28 @@ const WarlordActive = ({ warlord, progress, weekNum }) => {
   if (0 <= progress && progress <= 33) progressColor = "danger";
 
   return (
-    <Card className="text-center bg-dark text-light mb-2">
-      <div className="position-absolute ml-2 mt-1">
-        <small className="float-left text-muted">Week {weekNum}</small>
-      </div>
-      <Card.Body>
-        <h4 className="mb-0">{name}</h4>
-        <div className="mb-2">{description}</div>
-        {warlord.defeated ? (
-          <h2 className="text-success">DEFEATED</h2>
-        ) : (
-          <>
-            <Image
-              src={image}
-              style={{
-                width: "100%",
-                height: "auto",
-              }}
-            />
-            <div className="mb-3 mt-1">
-              "{saying}"
-              {/* {audio ? (
+    <>
+      <Card className="text-center bg-dark text-light mb-2">
+        <div className="position-absolute ml-2 mt-1">
+          <small className="float-left text-muted">Week {weekNum}</small>
+        </div>
+        <Card.Body>
+          <h4 className="mb-0">{name}</h4>
+          <div className="mb-2">{description}</div>
+          {warlord.defeated ? (
+            <h2 className="text-success">DEFEATED</h2>
+          ) : (
+            <>
+              <Image
+                src={image}
+                style={{
+                  width: "100%",
+                  height: "auto",
+                }}
+              />
+              <div className="mb-3 mt-1">
+                "{saying}"
+                {/* {audio ? (
                 <GiSpeaker
                   className="ml-1 cursor-pointer"
                   title={`Listen to ${name}`}
@@ -1037,19 +1048,20 @@ const WarlordActive = ({ warlord, progress, weekNum }) => {
                   onClick={() => play()}
                 />
               ) : null} */}
-            </div>
-            <ProgressBar
-              animated
-              variant={progressColor}
-              now={progress}
-              label={`${Math.round(progress)}%`}
-              style={{ backgroundColor: "#6c757d" }}
-            />
-            <small>STRENGTH</small>
-          </>
-        )}
-      </Card.Body>
-    </Card>
+              </div>
+              <ProgressBar
+                animated
+                variant={progressColor}
+                now={progress}
+                label={`${Math.round(progress)}%`}
+                style={{ backgroundColor: "#6c757d" }}
+              />
+              <small>STRENGTH</small>
+            </>
+          )}
+        </Card.Body>
+      </Card>
+    </>
   );
 };
 
