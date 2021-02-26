@@ -485,7 +485,7 @@ function BattleOfFyetnas() {
                   <Dropdown.Toggle
                     size="lg"
                     variant="dark"
-                    className="btn-block float-right mb-2"
+                    className="btn-block mb-2 text-success"
                   >
                     <GiPunchBlast size="1.5em" /> Attack!{"  "}
                   </Dropdown.Toggle>
