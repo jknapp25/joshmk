@@ -493,14 +493,14 @@ function BattleOfFyetnas() {
                     <Dropdown.Item
                       href="#"
                       className="text-light"
-                      onClick={() => {}}
+                      onClick={() => setShowWorkoutModal(true)}
                     >
                       <GiPunchBlast size="1.5em" /> Add workout
                     </Dropdown.Item>
                     <Dropdown.Item
                       href="#"
                       className="text-light"
-                      onClick={() => {}}
+                      onClick={() => setShowPlannedWorkoutModal(true)}
                     >
                       <IoMdCalendar size="1.5em" /> Plan a group workout
                     </Dropdown.Item>

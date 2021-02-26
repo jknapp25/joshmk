@@ -16,7 +16,20 @@ function Bio({ bio }) {
               value={bio}
               onChange={() => {}}
               readOnly={true}
-              buttons={["bold", "italic", "underline", "link"]}
+              buttons={[
+                "bold",
+                "italic",
+                "underline",
+                "code",
+                "strikethrough",
+                "heading-one",
+                "heading-two",
+                "block-quote",
+                "numbered-list",
+                "bulleted-list",
+                "link",
+                "video",
+              ]}
             />
           </Card.Body>
         </Card>

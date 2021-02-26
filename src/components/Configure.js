@@ -152,12 +152,25 @@ function Configure() {
         <Form.Label className="mb-1">Bio</Form.Label>
         <RichTextEditor
           value={bio}
-          classes="mb-3 bg-white"
-          buttons={["bold", "italic", "underline", "link"]}
           onChange={(updBio) => {
             setBio(updBio);
             setEdited(true);
           }}
+          buttons={[
+            "bold",
+            "italic",
+            "underline",
+            "code",
+            "strikethrough",
+            "heading-one",
+            "heading-two",
+            "block-quote",
+            "numbered-list",
+            "bulleted-list",
+            "link",
+            "video",
+          ]}
+          classes="mb-3 bg-white"
         />
 
         <Form.Label className="mb-1">Instagram URL</Form.Label>
