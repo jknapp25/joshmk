@@ -153,22 +153,38 @@ function BattleOfFyetnas() {
     );
 
     if (resp) {
+      const newWorkoutId = resp.data.createWorkout.id;
+
+      // update commentWorkout w/ reply
+      let updCommentWorkout = workouts.find(
+        (wkt) => wkt.id === commentWorkoutId
+      );
+      if (updCommentWorkout.replies) {
+        updCommentWorkout.replies = [
+          ...updCommentWorkout.replies,
+          newWorkoutId,
+        ];
+      } else {
+        updCommentWorkout.replies = [newWorkoutId];
+      }
+
+      delete updCommentWorkout.createdAt;
+      delete updCommentWorkout.updatedAt;
+
+      const respCommentWorkout = await API.graphql(
+        graphqlOperation(updateWorkout, { input: updCommentWorkout })
+      );
+
+      // add new workout locally
       let updWorkouts = JSON.parse(JSON.stringify(workouts));
       updWorkouts.push(resp.data.createWorkout);
 
-      const newWorkoutId = resp.data.createWorkout.id;
-
-      // add new workout id to commentWorkoutId replies
+      // update local commentWorkout
       updWorkouts = updWorkouts.map((wkt) => {
         if (wkt.id === commentWorkoutId) {
-          let updWorkout = JSON.parse(JSON.stringify(wkt));
-          if (updWorkout.replies) {
-            updWorkout.replies = [...updWorkout.replies, newWorkoutId];
-          } else {
-            updWorkout.replies = [newWorkoutId];
-          }
-          return updWorkout;
+          return respCommentWorkout.data.updateWorkout;
         }
+
         return wkt;
       });
 
@@ -1348,7 +1364,7 @@ const Workout = ({
           })}
         </ListGroup>
       ) : null}
-      {/* <Card.Footer
+      <Card.Footer
         className={`${
           commentWorkoutId && commentWorkoutId === id ? "p-0" : "py-1"
         } text-muted cursor-pointer bg-update-header`}
@@ -1410,7 +1426,7 @@ const Workout = ({
             </InputGroup.Append>
           </InputGroup>
         ) : null}
-      </Card.Footer> */}
+      </Card.Footer>
     </Card>
   );
 };
