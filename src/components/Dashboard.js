@@ -92,8 +92,8 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
   return (
     <Container
       fluid
-      className="pt-3 bg-light"
-      style={{ paddingLeft: "100px", paddingRight: "100px" }}
+      className="pt-3 bg-light dashboard-container hidden-xs"
+      // style={{ paddingLeft: "100px", paddingRight: "100px" }}
     >
       <Helmet>
         <title>{config.fullName || ""}</title>
@@ -105,6 +105,7 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
           {config && config.supportUrl ? (
             <Card
               className="my-2 cursor-pointer"
+              style={{ maxHeight: "110px" }}
               onClick={() => window.open(config.supportUrl)}
             >
               <Row className="no-gutters">

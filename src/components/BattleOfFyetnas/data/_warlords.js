@@ -61,7 +61,7 @@ export const warlords = [
     image: warlord3,
     miniImage: mini2,
     start: "2021-02-21",
-    end: "2021-02-27",
+    end: "2021-02-28",
     sayings: [
       { text: "What's the point of all this anyway!" },
       {
