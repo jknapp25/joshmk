@@ -81,7 +81,7 @@ export const warlords = [
         text: "You always stop before you reach that goal!",
       },
     ],
-    defeated: false,
+    defeated: true,
   },
   {
     name: "Bradock",
