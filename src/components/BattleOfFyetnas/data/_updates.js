@@ -450,20 +450,24 @@ export const updates = [
           opposite valley wall. Within the valley, the warriors still lie
           asleep.
         </p>
-        <p>He started sprinting down the steep rockface as fast as he could.</p>
         <p>
-          Seering rocks started to rain down upon their camp, and even pierced
-          Sorcerer James' tent, lighting it afire. Just in time, Caleb got his
-          tent and pulled him out, barely awake. They stood and saw the vibrant
-          red/organge quickly rolling down the steep wall. Thinking quickly, he
-          they also woke Sorcerer Josh and they devised a quick spell.
+          Immediately, he started sprinting down the steep rockface as fast as
+          he could.
         </p>
         <p>
-          With no time to save everything in the camp, and too much lava to
-          summon a force-field, they saw the one horse for Knight Scriven
-          standing nearby. Consulting Scriven, they replicated the horses spirit
-          and thrust it into the rocks below and out of the rock emerged a fleet
-          of horses made completely of stone.
+          Seering rocks started to rain down upon the camp, and even pierced
+          Sorcerer James' tent, lighting it afire. Just in time, Caleb dove into
+          his tent and pulled him out, only barely awake. They stood and saw the
+          vibrant red/organge quickly rolling down the steep wall. With no time
+          to waste, they also woke Sorcerer Josh and they devised a quick spell.
+        </p>
+        <p>
+          The lava was closing in too quickly to save everything in the camp,
+          and there was too much of it to summon a force-field. But there by
+          them stood the one horse in the camp, Knight Scriven's valiant
+          warhorse. Consulting Scriven, they replicated the horses spirit and
+          thrust it into the rocks below and out of the rock emerged a fleet of
+          horses made completely of stone.
         </p>
         <p>
           They woke the others, and Natalie, Alex and Clay rounded up as much
