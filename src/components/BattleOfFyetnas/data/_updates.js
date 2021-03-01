@@ -445,21 +445,20 @@ export const updates = [
       <>
         <p>
           Gladiator Caleb awoke early in his cave high above the valley to enjoy
-          the sunrise. Looking out across the camp below, he noticed afar off,
-          fire, lava and ash spewed forth from the earth, high up on the
-          opposite valley wall. Within the valley, the warriors still lie
-          asleep.
+          the sunrise. Looking out across the camp below, he noticed high up on
+          the opposite valley wall, fire, lava and ash spewing forth from the
+          earth. Within the valley, the warriors still lying asleep.
         </p>
         <p>
-          Immediately, he started sprinting down the steep rockface as fast as
+          Immediately, he started sprinting down the steep rock-face as fast as
           he could.
         </p>
         <p>
-          Seering rocks started to rain down upon the camp, and even pierced
+          Seering rocks started raining down upon the camp, and even pierced
           Sorcerer James' tent, lighting it afire. Just in time, Caleb dove into
-          his tent and pulled him out, only barely awake. They stood and saw the
-          vibrant red/organge quickly rolling down the steep wall. With no time
-          to waste, they also woke Sorcerer Josh and they devised a quick spell.
+          the tent and pulled James out, only barely awake. They stood and saw
+          the vibrant red/orange mass quickly rolling down the steep wall. With
+          no time to waste, they awoke Sorcerer Josh and devised a unique spell.
         </p>
         <p>
           The lava was closing in too quickly to save everything in the camp,
@@ -475,7 +474,7 @@ export const updates = [
         </p>
         <p className="mb-0">
           By a narrow margin the warriors escaped by horseback. Only slightly
-          burnt and bruised. But strong in the face what could have been
+          burnt and bruised. But strong in the face of what could have been
           crippling terror.
         </p>
       </>
