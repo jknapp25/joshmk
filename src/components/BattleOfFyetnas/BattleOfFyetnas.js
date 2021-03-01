@@ -1385,6 +1385,7 @@ const Workout = ({
             if (replyWkt) {
               return (
                 <ListGroup.Item
+                  key={replyId}
                   className="text-light"
                   style={{ backgroundColor: "#41474c" }}
                 >

@@ -16,13 +16,24 @@ const CalendarCell = ({ dayNum, val, isCurrentDay }) => (
   </td>
 );
 
-const weeks = [
-  [null, 1, 2, 3, 4, 5, 6],
-  [7, 8, 9, 10, 11, 12, 13],
-  [14, 15, 16, 17, 18, 19, 20],
-  [21, 22, 23, 24, 25, 26, 27],
-  [28, 1, 2, 3, 4, 5, 6],
-];
+// const weeks = [
+//   [null, 1, 2, 3, 4, 5, 6],
+//   [7, 8, 9, 10, 11, 12, 13],
+//   [14, 15, 16, 17, 18, 19, 20],
+//   [21, 22, 23, 24, 25, 26, 27],
+//   [28, 1, 2, 3, 4, 5, 6],
+// ];
+
+function getDates(startDate, stopDate) {
+  let dateArray = [];
+  let currentDate = moment(startDate);
+  stopDate = moment(stopDate);
+  while (currentDate <= stopDate) {
+    dateArray.push(moment(currentDate).format("YYYY-MM-DD"));
+    currentDate = moment(currentDate).add(1, "days");
+  }
+  return dateArray;
+}
 
 function Calendar({
   month = false,
@@ -31,10 +42,10 @@ function Calendar({
   mini = false,
   workouts = [],
 }) {
-  const currentDayOfWeek = moment().date();
-  const currentWeekIdx = weeks.findIndex((week) =>
-    week.includes(currentDayOfWeek)
-  );
+  const currentDayOfWeek = moment();
+  const startOfCurrentWeek = moment(currentDayOfWeek).startOf("week");
+  const endOfCurrentWeek = moment(currentDayOfWeek).endOf("week");
+  const currentWeekBattleDays = getDates(startOfCurrentWeek, endOfCurrentWeek);
 
   return (
     <Table bordered variant="dark">
@@ -59,14 +70,21 @@ function Calendar({
       <tbody>
         {mini ? (
           <tr className="border-bottom">
-            {weeks[currentWeekIdx].map((dayNum, i) => {
-              const workoutsDuringTimeframe = workouts.filter((wo) =>
+            {currentWeekBattleDays.map((day, i) => {
+              const workoutsDuringDay = workouts.filter((wo) =>
                 moment(wo.createdAt).isBetween(
-                  moment(`2021-02-${dayNum}`).startOf("day"),
-                  moment(`2021-02-${dayNum}`).endOf("day")
+                  moment(day).startOf("day"),
+                  moment(day).endOf("day")
                 )
               );
-              const totalHits = workoutsDuringTimeframe.reduce((acc, curr) => {
+
+              // console.log(
+              //   day,
+              //   moment(day).startOf("day"),
+              //   moment(day).endOf("day")
+              // );
+
+              const totalHits = workoutsDuringDay.reduce((acc, curr) => {
                 if (!!curr.plannedStart) return acc;
                 if (curr.joint) {
                   return acc + 2;
@@ -75,15 +93,14 @@ function Calendar({
                 }
               }, 0);
 
-              const cellVal =
-                workoutsDuringTimeframe.length > 0 ? totalHits : null;
+              const cellVal = workoutsDuringDay.length > 0 ? totalHits : null;
 
               return (
                 <CalendarCell
                   key={i}
-                  dayNum={showDayNum ? dayNum : null}
+                  dayNum={showDayNum ? moment(day).date() : null}
                   val={cellVal}
-                  isCurrentDay={dayNum === currentDayOfWeek}
+                  isCurrentDay={moment(day).isSame(currentDayOfWeek, "day")}
                 />
               );
             })}
