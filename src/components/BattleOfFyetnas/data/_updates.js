@@ -432,4 +432,50 @@ export const updates = [
     ),
     date: "2021-02-26",
   },
+  {
+    description: (
+      <>
+        <p className="mb-0">Ziir is no more!</p>
+      </>
+    ),
+    date: "2021-02-28",
+  },
+  {
+    description: (
+      <>
+        <p>
+          Gladiator Caleb awoke early in his cave high above the valley to enjoy
+          the sunrise. Looking out across the camp below, he noticed afar off,
+          fire, lava and ash spewed forth from the earth, high up on the
+          opposite valley wall. Within the valley, the warriors still lie
+          asleep.
+        </p>
+        <p>He started sprinting down the steep rockface as fast as he could.</p>
+        <p>
+          Seering rocks started to rain down upon their camp, and even pierced
+          Sorcerer James' tent, lighting it afire. Just in time, Caleb got his
+          tent and pulled him out, barely awake. They stood and saw the vibrant
+          red/organge quickly rolling down the steep wall. Thinking quickly, he
+          they also woke Sorcerer Josh and they devised a quick spell.
+        </p>
+        <p>
+          With no time to save everything in the camp, and too much lava to
+          summon a force-field, they saw the one horse for Knight Scriven
+          standing nearby. Consulting Scriven, they replicated the horses spirit
+          and thrust it into the rocks below and out of the rock emerged a fleet
+          of horses made completely of stone.
+        </p>
+        <p>
+          They woke the others, and Natalie, Alex and Clay rounded up as much
+          weapons and resources as possible.
+        </p>
+        <p className="mb-0">
+          By a narrow margin the warriors escaped by horseback. Only slightly
+          burnt and bruised. But strong in the face what could have been
+          crippling terror.
+        </p>
+      </>
+    ),
+    date: "2021-03-01",
+  },
 ];
