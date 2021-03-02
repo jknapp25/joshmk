@@ -90,17 +90,13 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
   if (!imageUrls || imageUrls.length === 0) return null;
 
   return (
-    <Container
-      fluid
-      className="pt-3 bg-light dashboard-container hidden-xs"
-      // style={{ paddingLeft: "100px", paddingRight: "100px" }}
-    >
+    <Container fluid className="pt-3 bg-light dashboard-container hidden-xs">
       <Helmet>
         <title>{config.fullName || ""}</title>
         <link rel="icon" type="image/png" href={faviconUrl} sizes="16x16" />
       </Helmet>
       <Row>
-        <Col lg={4}>
+        <Col lg={4} className="hidden-sm">
           <ProfileCard avatarUrl={avatarUrl} config={config} />
           {config && config.supportUrl ? (
             <Card
@@ -113,14 +109,13 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
                   <img
                     src={coffee}
                     className="img-fluid"
-                    alt=""
+                    alt="Coffee cup"
                     style={{ width: "50px", height: "50px" }}
                   />
                 </div>
                 <Col className="d-flex" style={{ alignItems: "center" }}>
                   <div className="card-block px-3">
-                    <h4 className="card-title mb-1">Buy me a coffee!</h4>
-                    <p className="mb-0">AKA creative jet fuel</p>
+                    <h4 className="card-title">Buy me a coffee!</h4>
                   </div>
                 </Col>
               </Row>
@@ -128,7 +123,7 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
           ) : null}
         </Col>
 
-        <Col lg={4}>
+        <Col lg={4} className="hidden-sm">
           <small className="text-dark">RECENT WRITINGS</small>
           <ItemList mini />
         </Col>
@@ -186,7 +181,7 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
           ) : null}
         </Col>
       </Row>
-      <Row>
+      <Row className="hidden-sm">
         <Col className="py-2 text-center">
           <div className="d-block">Start reading</div>
           <div>

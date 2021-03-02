@@ -84,7 +84,7 @@ function Post({
   return (
     <Row>
       <Col lg={3} className="text-right pr-0 bg-white">
-        <div className="text-muted border-right mt-4 pr-2">
+        <div className="text-muted border-right mt-4 pr-2 hidden-sm">
           <div className="mb-0" style={{ lineHeight: "normal" }}>
             <small>{date || "No date"}</small>
             <br />
@@ -139,6 +139,9 @@ function Post({
                   </>
                 ) : null}
               </h2>
+              <small className="hidden-lg text-muted">
+                {moment(createdAt).format("MMMM D, Y") || "No date"}
+              </small>
             </Card.Title>
             {/* <Card.Subtitle className="text-muted">
               {date || "No date"}

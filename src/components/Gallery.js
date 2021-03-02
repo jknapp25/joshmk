@@ -33,7 +33,7 @@ function Gallery() {
     <>
       <CardColumns>
         {imageUrls.map((imageUrl, i) => (
-          <Card className="border-0">
+          <Card key={imageUrl} className="border-0">
             <Card.Img
               variant="top"
               style={{ cursor: "zoom-in" }}

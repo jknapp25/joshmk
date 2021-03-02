@@ -8,8 +8,8 @@ function NavBar({ config, bgClass = "bg-white" }) {
   return (
     <Container
       fluid
-      className={`pt-3 ${bgClass}`}
-      style={{ paddingLeft: "100px", paddingRight: "100px" }}
+      className={`pt-3 ${bgClass} dashboard-container`}
+      // style={{ paddingLeft: "100px", paddingRight: "100px" }}
     >
       <Row>
         <Col className="pb-3">
