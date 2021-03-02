@@ -55,6 +55,7 @@ import {
 import DatePicker from "react-datepicker";
 import { IoIosArrowBack, IoMdCalendar, IoIosPeople } from "react-icons/io";
 import { MdSubdirectoryArrowRight } from "react-icons/md";
+import { VscChromeClose } from "react-icons/vsc";
 import { Helmet } from "react-helmet";
 import battleAxe from "./assets/battle-axe.png";
 import emailjs, { init } from "emailjs-com";
@@ -424,7 +425,17 @@ function BattleOfFyetnas() {
                   <tbody>
                     <tr>
                       {warlords.map(
-                        ({ miniImage, name, description, start, end }, i) => {
+                        (
+                          {
+                            miniImage,
+                            name,
+                            description,
+                            start,
+                            end,
+                            defeated,
+                          },
+                          i
+                        ) => {
                           const isActive = moment(currentDate).isBetween(
                             moment(start),
                             moment(end)
@@ -435,7 +446,9 @@ function BattleOfFyetnas() {
                               align="center"
                               className="px-0"
                               style={{ borderTop: "0px" }}
-                              title={`Week ${i + 1}: ${name}, ${description}`}
+                              title={`Week ${i + 1}: ${name}, ${description} ${
+                                defeated ? "(Defeated)" : ""
+                              }`}
                             >
                               <div
                                 style={{
@@ -448,6 +461,20 @@ function BattleOfFyetnas() {
                                   border: isActive ? "2px solid #adb5bd" : "",
                                 }}
                               >
+                                {defeated ? (
+                                  <VscChromeClose
+                                    size="3.5em"
+                                    className="text-danger"
+                                    style={{
+                                      zIndex: 10000000,
+                                      position: "absolute",
+                                      left: "50%",
+                                      top: "50%",
+                                      transform: "translate(-50%,-50%)",
+                                    }}
+                                  />
+                                ) : null}
+
                                 <Image
                                   src={miniImage}
                                   roundedCircle

@@ -481,4 +481,49 @@ export const updates = [
     ),
     date: "2021-03-01",
   },
+  {
+    description: (
+      <>
+        <p>Bradock was not going to be evaded that easily.</p>
+        <p>
+          Out of the flowing lava emerged two dozen ornuphs. Massive bear-like
+          creatures made of rock and lava, with dinner-plate size scales lining
+          their entire body.
+        </p>
+        <p>
+          In hot pursuit, the ornuphs barreled through the camp like low
+          shrubbery, spewing lava, and smoke streaming from their gnarled jaws.
+          They scaled the valley side with ease, only seconds behind their prey
+          and entered the forest behind the warriors.
+        </p>
+        <p>
+          The chase was long and tiresome, Caleb, Ben, Riah, Nat and Lilly were
+          dropping supplies left and right to stay light. All the while, the
+          terrifying sound of ornuphs running straight through trees like butter
+          was always on their tail.
+        </p>
+        <p>
+          Sorcerer Riah got an idea and bolted far ahead of the group, using her
+          years of horseback experience. After distancing herself quite a bit,
+          she jumped off and initiating a spell, a rain dance like none other.
+          And a flash flood roared toward her and filled a ravine, 20 feet high.
+        </p>
+        <p>
+          As the others neared, Riah yelled, "ride into the water!" And with
+          enormous courage, each warrior road their stone horse into the water
+          and clung to them as they walked the river bottom. The ornuphs
+          followed directly into the water and froze as their lava solidified
+          inside them.
+        </p>
+        <p className="mb-0">
+          The warriors escaped the ornuph! But strangely, as they emerged from
+          the water, none could find any of the others.
+        </p>
+      </>
+    ),
+    date: "2021-03-02",
+  },
 ];
+
+// ian fire cloud in sky, rains down upon them
+// re-animates the lifeless shapes of the other warlords
