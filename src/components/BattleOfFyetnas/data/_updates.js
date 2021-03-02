@@ -505,7 +505,7 @@ export const updates = [
         <p>
           Sorcerer Riah got an idea and bolted far ahead of the group, using her
           years of horseback experience. After distancing herself quite a bit,
-          she jumped off and initiating a spell, a rain dance like none other.
+          she jumped off and initiated a spell, a rain dance like none other.
           And a flash flood roared toward her and filled a ravine, 20 feet high.
         </p>
         <p>
