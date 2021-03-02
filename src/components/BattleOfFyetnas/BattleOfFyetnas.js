@@ -458,7 +458,7 @@ function BattleOfFyetnas() {
                                   position: "relative",
                                   overflow: "hidden",
                                   padding: isActive ? "3px" : "",
-                                  border: isActive ? "2px solid #adb5bd" : "",
+                                  border: isActive ? "2px solid #28a745" : "",
                                 }}
                               >
                                 {defeated ? (

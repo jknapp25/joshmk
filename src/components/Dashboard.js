@@ -115,7 +115,7 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
                 </div>
                 <Col className="d-flex" style={{ alignItems: "center" }}>
                   <div className="card-block px-3">
-                    <h4 className="card-title">Buy me a coffee!</h4>
+                    <h4 className="card-title mb-0">Buy me a coffee!</h4>
                   </div>
                 </Col>
               </Row>
