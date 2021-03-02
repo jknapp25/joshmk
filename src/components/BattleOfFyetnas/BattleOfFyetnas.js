@@ -1052,7 +1052,12 @@ const WarlordActive = ({ warlord, progress, weekNum }) => {
           <small className="float-left text-muted">Week {weekNum}</small>
         </div>
         <Card.Body>
-          <h4 className="mb-0">{name}</h4>
+          <h3
+            className="mb-0"
+            style={{ fontFamily: "MedievalSharp", fontWeight: "bolder" }}
+          >
+            {name}
+          </h3>
           <div className="mb-2">{description}</div>
           {warlord.defeated ? (
             <h2 className="text-success">DEFEATED</h2>
@@ -1060,6 +1065,7 @@ const WarlordActive = ({ warlord, progress, weekNum }) => {
             <>
               <Image
                 src={image}
+                className="mb-2"
                 style={{
                   width: "100%",
                   height: "auto",
