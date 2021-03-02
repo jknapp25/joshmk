@@ -486,12 +486,19 @@ export const updates = [
       <>
         <p>Bradock was not going to be evaded that easily.</p>
         <p>
-          Out of the flowing lava emerged two dozen ornuphs. Massive bear-like
-          creatures made of rock and lava, with dinner-plate size scales lining
-          their entire body.
+          Out of the flowing lava emerged two dozen{" "}
+          <a
+            href="https://www.joshmk.com/post/12001b37-8591-4cd2-a951-0fa7dbd52f46"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            orn&uuml;phs
+          </a>{" "}
+          (pronounced or-noov). Massive bear-like creatures made of rock and
+          lava, with dinner-plate size scales lining their entire body.
         </p>
         <p>
-          In hot pursuit, the ornuphs barreled through the camp like low
+          In hot pursuit, the orn&uuml;phs barreled through the camp like low
           shrubbery, spewing lava, and smoke streaming from their gnarled jaws.
           They scaled the valley side with ease, only seconds behind their prey
           and entered the forest behind the warriors.
@@ -511,13 +518,13 @@ export const updates = [
         <p>
           As the others neared, Riah yelled, "ride into the water!" And with
           enormous courage, each warrior road their stone horse into the water
-          and clung to them as they walked the river bottom. The ornuphs
+          and clung to them as they walked the river bottom. The orn&uuml;phs
           followed directly into the water and froze as their lava solidified
           inside them.
         </p>
         <p className="mb-0">
-          The warriors escaped the ornuph! But strangely, as they emerged from
-          the water, none could find any of the others.
+          The warriors escaped the orn&uuml;phs! But strangely, as they emerged
+          from the water, none could find any of the others.
         </p>
       </>
     ),
