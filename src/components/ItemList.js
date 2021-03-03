@@ -87,8 +87,10 @@ function ItemList({ mini = false }) {
 
   // sort items by date
   preppedItems = items.sort((a, b) => {
-    const aSortVal = pageName === "blog" ? a.createdAt : a.start;
-    const bSortVal = pageName === "blog" ? b.createdAt : b.start;
+    const aSortVal =
+      pageName === "blog" || pageName === "search" ? a.createdAt : a.start;
+    const bSortVal =
+      pageName === "blog" || pageName === "search" ? b.createdAt : b.start;
     if (aSortVal < bSortVal) {
       return 1;
     } else if (bSortVal < aSortVal) {
