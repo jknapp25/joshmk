@@ -23,6 +23,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
   const [category, setCategory] = useState("");
   const [images, setImages] = useState([]);
   const [createdAt, setCreatedAt] = useState("");
+  const [hidden, setHidden] = useState(false);
 
   const isMounted = useIsMounted();
 
@@ -46,6 +47,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
         setCategory(postData.data.getPost.category);
         setImages(postData.data.getPost.images);
         setCreatedAt(postData.data.getPost.createdAt);
+        setHidden(postData.data.getPost.hidden);
       }
     }
     if (id) {
@@ -61,6 +63,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
     setCategory("");
     setImages([]);
     setCreatedAt("");
+    setHidden(false);
   }
 
   function handleButtonClick() {
@@ -72,6 +75,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
       category,
       images,
       createdAt: createdAt || undefined,
+      hidden,
     };
 
     if (id) {
@@ -146,6 +150,13 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
         aria-describedby="createdAt"
         value={createdAt || ""}
         onChange={(e) => setCreatedAt(e.target.value)}
+      />
+
+      <Form.Check
+        type="checkbox"
+        label="Hidden"
+        checked={hidden}
+        onChange={() => setHidden(!hidden)}
       />
 
       <Button className="mt-2" onClick={handleButtonClick}>

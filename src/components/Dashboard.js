@@ -11,7 +11,7 @@ import { ConfigContext } from "../App";
 import { useIsMounted } from "../lib/utils";
 import { API } from "aws-amplify";
 import FullScreenImageCarousel from "./FullScreenImageCarousel";
-import { MdImageAspectRatio } from "react-icons/md";
+// import InfiniteScroll from "react-infinite-scroll-component";
 export default Dashboard;
 
 function sortByFrequencyAndRemoveDuplicates(array) {
@@ -206,7 +206,7 @@ const ImageGallery = ({ images }) => {
           </Col>
         ))}
       </Row>
-      <Row className="mt-3">
+      <Row className="mt-2">
         {[4, 5, 6].map((num) => (
           <Col
             key={num}

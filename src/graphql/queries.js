@@ -12,6 +12,7 @@ export const getPost = /* GraphQL */ `
       tags
       images
       createdAt
+      hidden
       updatedAt
     }
   }
@@ -32,6 +33,7 @@ export const listPosts = /* GraphQL */ `
         tags
         images
         createdAt
+        hidden
         updatedAt
       }
       nextToken
@@ -195,6 +197,10 @@ export const getConfiguration = /* GraphQL */ `
       youtubeUrl
       supportUrl
       pages
+      pagesCustom {
+        name
+        link
+      }
       resumeGeneratorEnabled
       galleryImages
       createdAt
@@ -221,6 +227,10 @@ export const listConfigurations = /* GraphQL */ `
         youtubeUrl
         supportUrl
         pages
+        pagesCustom {
+          name
+          link
+        }
         resumeGeneratorEnabled
         galleryImages
         createdAt

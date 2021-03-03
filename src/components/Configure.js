@@ -21,7 +21,7 @@ import * as queries from "../graphql/queries";
 import { useIsMounted } from "../lib/utils";
 export default Configure;
 
-const pageOptions = ["blog", "work", "projects", "gallery", "about"];
+const pageOptions = ["blog", "work", "projects", "gallery", "about", "other"];
 
 const blankEditorValue = [
   {
@@ -41,6 +41,7 @@ function Configure() {
   const [avatar, setAvatar] = useState("");
   const [favicon, setFavicon] = useState("");
   const [pages, setPages] = useState([]);
+  const [pagesCustom, setPagesCustom] = useState([]);
   const [edited, setEdited] = useState(false);
   const [resumeGeneratorEnabled, setResumeGeneratorEnabled] = useState(false);
 
@@ -61,6 +62,7 @@ function Configure() {
       supportUrl,
       avatar,
       pages,
+      pagesCustom,
       favicon,
       resumeGeneratorEnabled,
     };
@@ -100,6 +102,7 @@ function Configure() {
         setYoutubeUrl(configData.data.getConfiguration.youtubeUrl);
         setSupportUrl(configData.data.getConfiguration.supportUrl);
         setPages(configData.data.getConfiguration.pages);
+        setPagesCustom(configData.data.getConfiguration.pagesCustom);
         setFavicon(configData.data.getConfiguration.favicon);
         setResumeGeneratorEnabled(
           configData.data.getConfiguration.resumeGeneratorEnabled
@@ -110,6 +113,8 @@ function Configure() {
       fetchData();
     }
   }, [isMounted, configIdName]);
+
+  console.log(pagesCustom);
 
   return (
     <Row>
@@ -252,57 +257,112 @@ function Configure() {
 
         <Form.Label className="mb-1">Pages</Form.Label>
         <Table bordered className="mb-3">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Link</th>
+              <th></th>
+            </tr>
+          </thead>
           <tbody>
-            {pages.map((page, i) => (
-              <tr key={i}>
-                <td>
-                  {page} {i === 0 ? "(home)" : ""}
-                </td>
-                <td className="text-right" style={{ width: "100px" }}>
-                  {i !== 0 ? (
-                    <AiOutlineArrowUp
-                      className="cursor-pointer"
-                      title="up"
-                      onClick={() => {
-                        const updPages = [...pages];
-                        updPages.splice(i, 1);
-                        updPages.splice(i - 1, 0, page);
-                        setPages(updPages);
-                        setEdited(true);
-                      }}
-                    />
-                  ) : null}
-                  {i !== pages.length - 1 ? (
-                    <AiOutlineArrowDown
-                      className="cursor-pointer"
-                      title="down"
-                      onClick={() => {
-                        const updPages = [...pages];
-                        updPages.splice(i, 1);
-                        updPages.splice(i + 1, 0, page);
-                        setPages(updPages);
-                        setEdited(true);
-                      }}
-                    />
-                  ) : null}
-                  <FaTimes
-                    color="#dc3545"
-                    className="cursor-pointer ml-2"
-                    title="delete page"
-                    onClick={() => {
-                      const updPages = [...pages];
-                      updPages.splice(i, 1);
-                      setPages(updPages);
-                      setEdited(true);
-                    }}
-                  />
-                </td>
-              </tr>
-            ))}
+            {pagesCustom && pagesCustom.length > 0
+              ? pagesCustom.map((page, i) => (
+                  <tr key={i}>
+                    <td>
+                      <FormControl
+                        // id="fullName"
+                        // className="mb-3"
+                        // aria-describedby="fullName"
+                        // value={fullName || ""}
+                        value={page.name}
+                        onChange={(e) => {
+                          let updPages = [];
+                          if (pagesCustom && pagesCustom.length > 0) {
+                            updPages = JSON.parse(JSON.stringify(pagesCustom));
+                          }
+                          updPages[i].name = e.target.value;
+                          setPagesCustom(updPages);
+                          setEdited(true);
+                        }}
+                      />
+                    </td>
+                    <td>
+                      <FormControl
+                        // id="fullName"
+                        // className="mb-3"
+                        // aria-describedby="fullName"
+                        // value={fullName || ""}
+                        value={page.link}
+                        onChange={(e) => {
+                          let updPages = [];
+                          if (pagesCustom && pagesCustom.length > 0) {
+                            updPages = JSON.parse(JSON.stringify(pagesCustom));
+                          }
+                          updPages[i].link = e.target.value;
+                          setPagesCustom(updPages);
+                          setEdited(true);
+                        }}
+                      />
+                    </td>
+                    <td className="text-right" style={{ width: "100px" }}>
+                      {i !== 0 ? (
+                        <AiOutlineArrowUp
+                          className="cursor-pointer"
+                          title="up"
+                          onClick={() => {
+                            let updPages = [];
+                            if (pagesCustom && pagesCustom.length > 0) {
+                              updPages = JSON.parse(
+                                JSON.stringify(pagesCustom)
+                              );
+                            }
+                            updPages.splice(i, 1);
+                            updPages.splice(i - 1, 0, page);
+                            setPagesCustom(updPages);
+                            setEdited(true);
+                          }}
+                        />
+                      ) : null}
+                      {i !== pagesCustom.length - 1 ? (
+                        <AiOutlineArrowDown
+                          className="cursor-pointer"
+                          title="down"
+                          onClick={() => {
+                            let updPages = [];
+                            if (pagesCustom && pagesCustom.length > 0) {
+                              updPages = JSON.parse(
+                                JSON.stringify(pagesCustom)
+                              );
+                            }
+                            updPages.splice(i, 1);
+                            updPages.splice(i + 1, 0, page);
+                            setPagesCustom(updPages);
+                            setEdited(true);
+                          }}
+                        />
+                      ) : null}
+                      <FaTimes
+                        color="#dc3545"
+                        className="cursor-pointer ml-2"
+                        title="delete page"
+                        onClick={() => {
+                          let updPages = [];
+                          if (pagesCustom && pagesCustom.length > 0) {
+                            updPages = JSON.parse(JSON.stringify(pagesCustom));
+                          }
+                          updPages.splice(i, 1);
+                          setPagesCustom(updPages);
+                          setEdited(true);
+                        }}
+                      />
+                    </td>
+                  </tr>
+                ))
+              : null}
           </tbody>
         </Table>
 
-        {pages.length !== pageOptions.length ? (
+        {!pagesCustom || pagesCustom.length !== pageOptions.length ? (
           <Dropdown className="mt-2">
             <Dropdown.Toggle variant="link" size="sm" className="pl-0 pt-0">
               Add page
@@ -312,11 +372,17 @@ function Configure() {
                 <Fragment key={i}>
                   <Dropdown.Item
                     onClick={() => {
-                      const updPages = [...pages, option];
-                      setPages(updPages);
+                      // const updPages = [...pages, option];
+                      let updPages = [];
+                      if (pagesCustom && pagesCustom.length > 0) {
+                        updPages = JSON.parse(JSON.stringify(pagesCustom));
+                      }
+                      // const updPages = JSON.parse(JSON.stringify(pagesCustom));
+                      updPages.push({ name: option, link: option });
+                      setPagesCustom(updPages);
                       setEdited(true);
                     }}
-                    disabled={pages.includes(option)}
+                    // disabled={pages.includes(option)}
                   >
                     {option}
                   </Dropdown.Item>

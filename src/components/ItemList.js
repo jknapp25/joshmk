@@ -108,6 +108,8 @@ function ItemList({ mini = false }) {
     );
   }
 
+  preppedItems = preppedItems.filter((itm) => !itm.hidden);
+
   return (
     <>
       {pageName === "work" && config?.resumeGeneratorEnabled ? (

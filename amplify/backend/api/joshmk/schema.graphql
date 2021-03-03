@@ -7,6 +7,7 @@ type Post @model @auth(rules: [{ allow: public }]) {
   tags: [String]
   images: [String]
   createdAt: String
+  hidden: Boolean
 }
 
 type Project @model @auth(rules: [{ allow: public }]) {
@@ -55,6 +56,11 @@ type Education @model @auth(rules: [{ allow: public }]) {
   tagUsage: [Float]
 }
 
+type Page {
+  name: String!
+  link: String!
+}
+
 type Configuration @model @auth(rules: [{ allow: public }]) {
   id: ID!
   fullName: String
@@ -67,6 +73,7 @@ type Configuration @model @auth(rules: [{ allow: public }]) {
   youtubeUrl: String
   supportUrl: String
   pages: [String]
+  pagesCustom: [Page!]
   resumeGeneratorEnabled: Boolean
   galleryImages: [String]
 }

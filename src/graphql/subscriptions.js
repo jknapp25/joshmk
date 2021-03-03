@@ -12,6 +12,7 @@ export const onCreatePost = /* GraphQL */ `
       tags
       images
       createdAt
+      hidden
       updatedAt
     }
   }
@@ -27,6 +28,7 @@ export const onUpdatePost = /* GraphQL */ `
       tags
       images
       createdAt
+      hidden
       updatedAt
     }
   }
@@ -42,6 +44,7 @@ export const onDeletePost = /* GraphQL */ `
       tags
       images
       createdAt
+      hidden
       updatedAt
     }
   }
@@ -243,6 +246,10 @@ export const onCreateConfiguration = /* GraphQL */ `
       youtubeUrl
       supportUrl
       pages
+      pagesCustom {
+        name
+        link
+      }
       resumeGeneratorEnabled
       galleryImages
       createdAt
@@ -264,6 +271,10 @@ export const onUpdateConfiguration = /* GraphQL */ `
       youtubeUrl
       supportUrl
       pages
+      pagesCustom {
+        name
+        link
+      }
       resumeGeneratorEnabled
       galleryImages
       createdAt
@@ -285,6 +296,10 @@ export const onDeleteConfiguration = /* GraphQL */ `
       youtubeUrl
       supportUrl
       pages
+      pagesCustom {
+        name
+        link
+      }
       resumeGeneratorEnabled
       galleryImages
       createdAt
