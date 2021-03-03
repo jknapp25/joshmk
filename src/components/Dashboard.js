@@ -10,6 +10,8 @@ import { Storage } from "aws-amplify";
 import { ConfigContext } from "../App";
 import { useIsMounted } from "../lib/utils";
 import { API } from "aws-amplify";
+import FullScreenImageCarousel from "./FullScreenImageCarousel";
+import { MdImageAspectRatio } from "react-icons/md";
 export default Dashboard;
 
 function sortByFrequencyAndRemoveDuplicates(array) {
@@ -44,7 +46,6 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
   const { galleryImages } = useContext(ConfigContext);
 
   const [imageUrls, setImageUrls] = useState([]);
-  const [fsImageIdx, setFSImageIdx] = useState(null);
   const [tags, setTags] = useState(null);
   const isMounted = useIsMounted();
 
@@ -65,7 +66,7 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
         []
       );
       const sorted = sortByFrequencyAndRemoveDuplicates(preppedTags);
-      const topTen = sorted.slice(0, 10);
+      const topTen = sorted.slice(0, 12);
 
       setTags(topTen);
     }
@@ -75,7 +76,14 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
 
   useEffect(() => {
     async function fetchData() {
-      const imagesCalls = galleryImages.map((url) => Storage.get(url));
+      let imgs = galleryImages;
+      if (galleryImages.length >= 6) {
+        imgs = galleryImages.slice(
+          galleryImages.length - 7,
+          galleryImages.length - 1
+        );
+      }
+      const imagesCalls = imgs.map((url) => Storage.get(url));
       const resImageUrls = await Promise.all(imagesCalls);
 
       if (isMounted.current) setImageUrls(resImageUrls);
@@ -99,27 +107,7 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
         <Col lg={4} className="hidden-sm">
           <ProfileCard avatarUrl={avatarUrl} config={config} />
           {config && config.supportUrl ? (
-            <Card
-              className="my-2 cursor-pointer"
-              style={{ maxHeight: "110px" }}
-              onClick={() => window.open(config.supportUrl)}
-            >
-              <Row className="no-gutters">
-                <div className="col-auto p-3">
-                  <img
-                    src={coffee}
-                    className="img-fluid"
-                    alt="Coffee cup"
-                    style={{ width: "50px", height: "50px" }}
-                  />
-                </div>
-                <Col className="d-flex" style={{ alignItems: "center" }}>
-                  <div className="card-block px-3">
-                    <h4 className="card-title mb-0">Buy me a coffee!</h4>
-                  </div>
-                </Col>
-              </Row>
-            </Card>
+            <BuyMeACoffee url={config.supportUrl} />
           ) : null}
         </Col>
 
@@ -129,37 +117,8 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
         </Col>
         <Col lg={4} className="hidden-sm">
           <small className="text-dark">RECENT CREATIONS</small>
-          <Row className="mt-1">
-            {[1, 2, 3].map((num) => (
-              <Col
-                key={num}
-                className={`text-center ${num === 1 ? "pr-1" : ""} ${
-                  num === 2 ? "px-1" : ""
-                } ${num === 3 ? "pl-1" : ""}`}
-              >
-                <Card.Img
-                  variant="top"
-                  src={imageUrls[imageUrls.length - num]}
-                />
-                {/* <small className="text-muted">Drawing</small> */}
-              </Col>
-            ))}
-          </Row>
-          <Row className="mt-3">
-            {[4, 5, 6].map((num) => (
-              <Col
-                key={num}
-                className={`text-center ${num === 4 ? "pr-1" : ""} ${
-                  num === 5 ? "px-1" : ""
-                } ${num === 6 ? "pl-1" : ""}`}
-              >
-                <Card.Img
-                  variant="top"
-                  src={imageUrls[imageUrls.length - num]}
-                />
-              </Col>
-            ))}
-          </Row>
+          <ImageGallery images={imageUrls} />
+
           <div className="my-3" />
           {tags && tags.length > 0 ? (
             <>
@@ -196,3 +155,80 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
     </Container>
   );
 }
+
+const BuyMeACoffee = ({ url }) => {
+  return (
+    <Card
+      className="my-2 cursor-pointer"
+      style={{ maxHeight: "110px" }}
+      onClick={() => window.open(url)}
+    >
+      <Row className="no-gutters">
+        <div className="col-auto p-3">
+          <img
+            src={coffee}
+            className="img-fluid"
+            alt="Coffee cup"
+            style={{ width: "50px", height: "50px" }}
+          />
+        </div>
+        <Col className="d-flex" style={{ alignItems: "center" }}>
+          <div className="card-block px-3">
+            <h4 className="card-title mb-0">Buy me a coffee!</h4>
+          </div>
+        </Col>
+      </Row>
+    </Card>
+  );
+};
+
+const ImageGallery = ({ images }) => {
+  const [fsImageIdx, setFSImageIdx] = useState(null);
+
+  return (
+    <>
+      <Row className="mt-1">
+        {[1, 2, 3].map((num) => (
+          <Col
+            key={num}
+            className={`text-center ${num === 1 ? "pr-1" : ""} ${
+              num === 2 ? "px-1" : ""
+            } ${num === 3 ? "pl-1" : ""}`}
+          >
+            <Card.Img
+              variant="top"
+              src={images[images.length - num]}
+              className="cursor-pointer"
+              style={{ cursor: "zoom-in" }}
+              onClick={() => setFSImageIdx(images.length - num)}
+            />
+            {/* <small className="text-muted">Drawing</small> */}
+          </Col>
+        ))}
+      </Row>
+      <Row className="mt-3">
+        {[4, 5, 6].map((num) => (
+          <Col
+            key={num}
+            className={`text-center ${num === 4 ? "pr-1" : ""} ${
+              num === 5 ? "px-1" : ""
+            } ${num === 6 ? "pl-1" : ""}`}
+          >
+            <Card.Img
+              variant="top"
+              src={images[images.length - num]}
+              className="cursor-pointer"
+              style={{ cursor: "zoom-in" }}
+              onClick={() => setFSImageIdx(images.length - num)}
+            />
+          </Col>
+        ))}
+      </Row>
+      <FullScreenImageCarousel
+        initialImageIdx={fsImageIdx}
+        imageUrls={images}
+        onClose={() => setFSImageIdx(null)}
+      />
+    </>
+  );
+};
