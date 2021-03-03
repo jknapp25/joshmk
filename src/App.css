@@ -275,3 +275,7 @@ button:focus {
 .premium {
   background-color: #a8a8a8;
 }
+
+.nav-item-hover:hover {
+  color: #dc3545;
+}

@@ -6,16 +6,14 @@ export default NavBar;
 function NavBar({ config, bgClass = "bg-white" }) {
   const { pathname } = useLocation();
   return (
-    <Container
-      fluid
-      className={`pt-3 ${bgClass} dashboard-container`}
-      // style={{ paddingLeft: "100px", paddingRight: "100px" }}
-    >
+    <Container fluid className={`pt-3 ${bgClass} dashboard-container`}>
       <Row>
         <Col className="pb-3">
           <div className="d-inline">
             <h2
-              className="mb-0 d-inline cursor-pointer"
+              className={`mb-0 d-inline cursor-pointer nav-item-hover ${
+                pathname === "/" ? "text-danger" : ""
+              }`}
               onClick={() => navigate("/")}
             >
               {config.fullName || ""}
@@ -30,7 +28,7 @@ function NavBar({ config, bgClass = "bg-white" }) {
                 } ${pathname === "/" + page ? "text-danger" : "text-dark"}`}
                 onClick={() => navigate(`/${page}`)}
               >
-                {page}
+                <span className="nav-item-hover">{page}</span>
               </h4>
             ))}
           </div>
