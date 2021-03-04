@@ -556,7 +556,10 @@ export const updates = [
             allowFullScreen
           ></iframe>
         </div>
-        <p>Brave archer Drew, advises the others to stay strong and alert!</p>
+        <p>
+          Archer Ben, advises everyone to not believe Bradock's lies! And archer
+          Drew also encourages everyone to stay strong and alert!
+        </p>
         <p className="mb-0">Where is Bradock and what is he plotting?!</p>
       </>
     ),
