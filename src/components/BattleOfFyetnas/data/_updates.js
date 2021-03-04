@@ -598,7 +598,7 @@ export const updates = [
         <p className="mb-0">
           <span className="font-weight-bold">Archer Drew:</span> Good wisdom
           Ben. Stay strong and alert everyone! We don't know where Bradock is,
-          or what he might be plotting!
+          or what he might be plotting. We need to find the others!
         </p>
       </>
     ),
