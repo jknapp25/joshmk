@@ -95,8 +95,10 @@ export const warlords = [
       { text: "What if you get hurt?" },
       { text: "What if this is all just pointless?" },
       { text: "You think you've faced your fears, you have no idea!" },
-      { text: "Accept the fear, you're use to it." },
       { text: "The only thing you'll get out of fitness is wasted time." },
+      {
+        text: "Accept the fear, it's always been there for you.",
+      },
       { text: "You know these people don't ACTUALLY care." },
       { text: "What if you AREN'T enough?" },
       // { text: "What if you fail...again!" },

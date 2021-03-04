@@ -534,11 +534,46 @@ export const updates = [
     description: (
       <>
         <p>
+          Simon emerged from the water, still on the back of his stone horse.
+          But when he looked back across the still waters, there was no one. No
+          sign of any of the other warriors. Something felt fishy.
+        </p>
+        <p>
+          One by one, each of them experienced the same phenomenon, none of them
+          could see or hear any of the others at all. Many wandered in search of
+          others into the forest, along the bank, or even stayed put.
+        </p>
+        <p>
+          Sorcerer James, sensing a heaviness upon his soul, as though fear was
+          blurring his vision. But he wasn't going to let that stop him.
+          Kneeling down, he created a mixture of earth, herbs, saliva, and rock.
+          He threw it high into the sky and pointed his staff directly at it.
+          The material lit up, multiplied and disintegrated into the air,
+          spreading all around.
+        </p>
+        <p>
+          The voices of others emerged. He ran back down to the water and saw,
+          scattered around the bank, many others.
+        </p>
+        <p>
+          They re-convened, some utterly exhausted, were lifted out of the
+          shallows by Gladiators alex and caleb, and fed wild berries to regain
+          strength.
+        </p>
+        <p className="mb-0">But a few others, were still missing.</p>
+      </>
+    ),
+    date: "2021-03-03",
+  },
+  {
+    description: (
+      <>
+        <p>
           Bradock, frustrated by the evasions, entered into the realm of
           mortals.
         </p>
         <p>
-          As the warriors regained their strength from a few very strenuous days
+          As the warriors regained some strength from a few very strenuous days
           of battle, his face appeared in the sky amidst glowing red clouds...
         </p>
         <div
@@ -557,11 +592,14 @@ export const updates = [
           ></iframe>
         </div>
         <p>
-          Archer Ben: Do not believe his lies! He's only trying to intimidate
-          us.
+          <span className="font-weight-bold">Archer Ben:</span> Do not believe
+          his lies! He's only trying to intimidate us.
         </p>
-        <p>Archer Drew: Good word Ben. Stay strong and alert everyone!</p>
-        <p className="mb-0">Where is Bradock and what is he plotting?!</p>
+        <p className="mb-0">
+          <span className="font-weight-bold">Archer Drew:</span> Good wisdom
+          Ben. Stay strong and alert everyone! We don't know where Bradock is,
+          or what he might be plotting!
+        </p>
       </>
     ),
     date: "2021-03-04",
@@ -570,3 +608,9 @@ export const updates = [
 
 // ian fire cloud in sky, rains down upon them
 // re-animates the lifeless shapes of the other warlords
+
+// isolated by spell can't see or hear each other
+// josh lifts spell
+// a few reconvene, simon, natalie climbs tree, caleb, ben travels far
+// fear that the others are dead
+// james logic spell, sees through missing warriors eyes, they're alive
