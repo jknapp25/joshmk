@@ -557,9 +557,10 @@ export const updates = [
           ></iframe>
         </div>
         <p>
-          Archer Ben, advises everyone to not believe Bradock's lies! And archer
-          Drew also encourages everyone to stay strong and alert!
+          Archer Ben: Do not believe his lies! He's only trying to intimidate
+          us.
         </p>
+        <p>Archer Drew: Good word Ben. Stay strong and alert everyone!</p>
         <p className="mb-0">Where is Bradock and what is he plotting?!</p>
       </>
     ),
