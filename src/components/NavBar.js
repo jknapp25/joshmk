@@ -8,7 +8,7 @@ function NavBar({ config, bgClass = "bg-white" }) {
 
   if (!config.pagesCustom || config.pagesCustom.length === 0) return null;
   return (
-    <Container fluid className={`pt-3 ${bgClass} dashboard-container`}>
+    <Container fluid className={`pt-0 ${bgClass} dashboard-container`}>
       <Row>
         <Col className="px-0">
           <Navbar>

@@ -98,7 +98,7 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
   if (!imageUrls || imageUrls.length === 0) return null;
 
   return (
-    <Container fluid className="pt-3 bg-light dashboard-container hidden-xs">
+    <Container fluid className="pt-2 bg-light dashboard-container hidden-xs">
       <Helmet>
         <title>{config.fullName || ""}</title>
         <link rel="icon" type="image/png" href={faviconUrl} sizes="16x16" />

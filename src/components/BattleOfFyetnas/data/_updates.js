@@ -604,6 +604,35 @@ export const updates = [
     ),
     date: "2021-03-04",
   },
+  // {
+  //   description: (
+  //     <>
+  //       <p>
+  //         Bradock, frustrated by the evasions, entered into the realm of
+  //         mortals.
+  //       </p>
+  //       <div
+  //         className="mb-3"
+  //         style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}
+  //       >
+  //         <iframe
+  //           title="Battle of Fyetnas, Bradock, part 1"
+  //           width="100%"
+  //           height="100%"
+  //           style={{ position: "absolute", top: 0, left: 0 }}
+  //           src="https://www.youtube.com/embed/x5UIaeBukLg"
+  //           frameBorder="0"
+  //           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  //           allowFullScreen
+  //         ></iframe>
+  //       </div>
+  //       <p className="mb-0">
+  //         text
+  //       </p>
+  //     </>
+  //   ),
+  //   date: "2021-03-05",
+  // },
 ];
 
 // ian fire cloud in sky, rains down upon them
