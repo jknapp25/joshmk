@@ -5,6 +5,7 @@ import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 export default ProfileCard;
 
 function ProfileCard({ avatarUrl, config }) {
+  if (!avatarUrl) return null;
   return (
     <Card className="hidden-xs">
       <Card.Img variant="top" src={avatarUrl} onClick={() => navigate("/")} />
