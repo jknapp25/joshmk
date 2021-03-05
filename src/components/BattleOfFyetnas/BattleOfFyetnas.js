@@ -1,14 +1,3 @@
-/**
- * Ensure calendar working and correct dates for showing warlords
- * Voice for muldur day 4
- * Update past updates for better story
- *
- * Ideas:
- * Add workouts people can RSVP to
- * Add responses to workouts
- * Have a start of the battle and end of the battle adventure
- */
-
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import { navigate } from "@reach/router";
@@ -46,9 +35,7 @@ import {
 import {
   FaTrashAlt,
   FaEllipsisV,
-  FaComment,
   FaArrowCircleUp,
-  FaArrowLeft,
   FaCaretDown,
   FaCaretUp,
 } from "react-icons/fa";
@@ -77,19 +64,6 @@ import "./BattleOfFyetnas.css";
 export default BattleOfFyetnas;
 
 init("user_YmjT0y9RWFvhcFf32gw1i");
-
-const DateTimePicker = React.forwardRef(
-  ({ inputValue, onClick, buttonText }, ref) => {
-    const btnText = inputValue
-      ? moment(inputValue).format("MMMM d, yyyy h:mm aa")
-      : buttonText;
-    return (
-      <Button ref={ref} onClick={onClick} role="button">
-        {btnText}
-      </Button>
-    );
-  }
-);
 
 const currentDate = moment();
 

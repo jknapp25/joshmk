@@ -144,6 +144,7 @@ function Job({ job, setEditingItemId, setItemType, showEdit = false }) {
         >
           {tags.map((tag) => (
             <Badge
+              key={tag}
               variant="lightgray"
               className="mr-2 cursor-pointer hover"
               onClick={() => navigate(`/search?tag=${tag}`)}

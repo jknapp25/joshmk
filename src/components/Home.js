@@ -1,26 +1,13 @@
 import React, { useEffect, useState, useContext } from "react";
-import { navigate, useLocation } from "@reach/router";
-import {
-  Button,
-  Container,
-  Row,
-  Col,
-  Badge,
-  Card,
-  CardDeck,
-  CardColumns,
-} from "react-bootstrap";
-import ItemList from "./ItemList";
-import ProfileCard from "./ProfileCard";
+import { useLocation } from "@reach/router";
+import { Container, Row, Col } from "react-bootstrap";
 import NavBar from "./NavBar";
 import Dashboard from "./Dashboard";
-import { RiArrowUpSLine } from "react-icons/ri";
 import { Helmet } from "react-helmet";
 import { Storage } from "aws-amplify";
 import goatFavicon from "../assets/goat-favicon.png";
 import { useIsMounted } from "../lib/utils";
 import { ConfigContext } from "../App";
-import image from "./BattleOfFyetnas/assets/warlord1.jpg";
 export default Home;
 
 function Home({ children }) {
@@ -79,14 +66,8 @@ function Home({ children }) {
           </Helmet>
           <Row>
             <Col xs={12} sm={12} md={12} lg={12} className="p-4">
-              {/* <div className="hidden-md mb-3">
-                <NavButtons pages={config.pages} />
-              </div> */}
               {children}
             </Col>
-            {/* <Col sm={2} md={2} className="pt-4 hidden-xs bg-light">
-              <NavButtons pages={config.pages} classes="float-right" />
-            </Col> */}
           </Row>
         </Container>
       </>
@@ -142,21 +123,4 @@ function Home({ children }) {
       {children}
     </>
   );
-}
-
-function NavButtons({ pages, classes = "" }) {
-  const { pathname } = useLocation();
-  const activePage = pathname === "/" ? `/${pages[0]}` : pathname;
-  return pages.map((page) => (
-    <Button
-      key={pathname + page}
-      variant={`/${page}` === activePage ? "danger" : "light"}
-      size="md"
-      className={`d-inline mr-2 mb-2 ${classes}`}
-      style={{ borderRadius: "0px" }}
-      onClick={() => navigate(`/${page}`)}
-    >
-      {page}
-    </Button>
-  ));
 }

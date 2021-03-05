@@ -5,6 +5,7 @@ import * as queries from "../graphql/queries";
 import RichTextEditor from "./RichTextEditor/RichTextEditor";
 import ImageUploader from "./ImageUploader";
 import TagEditor from "./TagEditor";
+import CreatableSelect from "react-select/creatable";
 import { useIsMounted } from "../lib/utils";
 export default PostEditor;
 
@@ -19,7 +20,9 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [richContent, setRichContent] = useState(blankEditorValue);
+  const [tagsOptions, setTagsOptions] = useState([]);
   const [tags, setTags] = useState([]);
+  const [categoryOptions, setCategoryOptions] = useState([]);
   const [category, setCategory] = useState("");
   const [images, setImages] = useState([]);
   const [createdAt, setCreatedAt] = useState("");
@@ -55,6 +58,73 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
     }
   }, [id, isMounted]);
 
+  useEffect(() => {
+    async function fetchData() {
+      const categories = await API.graphql({
+        query: `query ListCategories {
+          listPosts(filter: {category: {attributeType: string}}) {
+            items {
+              category
+            }
+          }
+        }     
+      `,
+      });
+
+      const preppedCats = categories.data.listPosts.items.reduce(
+        (acc, curr) => {
+          if (curr.category) {
+            return [...acc, curr.category];
+          } else {
+            return acc;
+          }
+        },
+        []
+      );
+
+      function onlyUnique(value, index, self) {
+        return self.indexOf(value) === index;
+      }
+      const uniqueCats = preppedCats.filter(onlyUnique);
+
+      setCategoryOptions(uniqueCats);
+    }
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      const tags = await API.graphql({
+        query: `query ListTags {
+          listPosts(filter: {tags: {attributeType: list, size: {gt: 0}}}) {
+            items {
+              tags
+            }
+          }
+        }   
+      `,
+      });
+
+      const preppedTags = tags.data.listPosts.items.reduce((acc, curr) => {
+        if (curr.tags && curr.tags.length > 0) {
+          return [...acc, ...curr.tags];
+        } else {
+          return acc;
+        }
+      }, []);
+
+      function onlyUnique(value, index, self) {
+        return self.indexOf(value) === index;
+      }
+      const uniqueTags = preppedTags.filter(onlyUnique);
+
+      setTagsOptions(uniqueTags);
+    }
+
+    fetchData();
+  }, []);
+
   function clearEditor() {
     setTitle("");
     setContent("");
@@ -88,6 +158,12 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
     if (isMounted.current) clearEditor();
   }
 
+  const selectCategory = category ? { label: category, value: category } : null;
+  const selectCategoryOptions = categoryOptions.map((opt) => ({
+    label: opt,
+    value: opt,
+  }));
+
   return (
     <>
       <Form.Label className="mb-0">Title</Form.Label>
@@ -117,19 +193,8 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
           "link",
           "video",
         ]}
-        classes="bg-white"
+        classes="bg-white mb-2"
       />
-
-      <Form.Label className="mb-0">Category</Form.Label>
-      <FormControl
-        id="category"
-        className="mb-2"
-        aria-describedby="category"
-        value={category || ""}
-        onChange={(e) => setCategory(e.target.value)}
-      />
-
-      <TagEditor tags={tags} onChange={(updTags) => setTags(updTags)} />
 
       <FormFile.Label className="mb-1">Images</FormFile.Label>
       <ImageUploader
@@ -139,6 +204,20 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
         }}
         fieldId="images"
         fileSizeLimit={5}
+      />
+
+      <Form.Label className="mb-0">Category</Form.Label>
+      <CreatableSelect
+        isClearable
+        onChange={(newVal) => setCategory(newVal?.value)}
+        value={selectCategory}
+        options={selectCategoryOptions}
+      />
+
+      <TagEditor
+        tags={tags}
+        tagsOptions={tagsOptions}
+        onChange={(updTags) => setTags(updTags)}
       />
 
       <Form.Label className="mb-0">

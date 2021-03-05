@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Card } from "react-bootstrap";
 import { Link } from "@reach/router";
 import { createTimeInfo } from "../lib/utils";
@@ -74,17 +74,17 @@ function Education({
           </Card.Text>
         ) : null}
         {details && details.length > 0 ? (
-          <Card.Text
+          <div
             className={`${
               tags && tags.length > 0 ? "mb-2" : ""
             } font-weight-normal`}
           >
             <ul>
-              {details.map((detail) => (
-                <li>{detail}</li>
+              {details.map((detail, i) => (
+                <li key={i}>{detail}</li>
               ))}
             </ul>
-          </Card.Text>
+          </div>
         ) : null}
         <Card.Text>
           <small className="text-muted">{timeInfo}</small>
@@ -105,14 +105,14 @@ function Education({
             }}
           />
           {tags.map((tag, i) => (
-            <>
+            <Fragment key={tag}>
               <Link to={`/search?tag=${tag}`}>{tag}</Link>
               {i !== tags.length - 1 ? (
                 <span style={{ color: "rgba(108, 117, 125, 0.7)" }}>, </span>
               ) : (
                 ""
               )}
-            </>
+            </Fragment>
           ))}
         </Card.Footer>
       )}

@@ -1,58 +1,30 @@
-import React, { useState } from "react";
-import { Button, Form, FormControl } from "react-bootstrap";
-import { FaTimes } from "react-icons/fa";
+import React from "react";
+import { Form } from "react-bootstrap";
+import CreatableSelect from "react-select/creatable";
 export default TagEditor;
 
-function TagEditor({ tags, onChange }) {
-  const [activeTag, setActiveTag] = useState("");
-
-  function addTag() {
-    if (!activeTag) return;
-
-    const updTags = [...tags, activeTag];
-    setActiveTag("");
-    onChange(updTags);
-  }
-
-  function deleteTag(i) {
-    const updTags = [...tags];
-    updTags.splice(i, 1);
-    onChange(updTags);
-  }
+function TagEditor({ tags = [], tagsOptions = [], onChange }) {
+  const selectTags =
+    tags && tags.length > 0
+      ? tags.map((tag) => ({ label: tag, value: tag }))
+      : null;
+  const selectTagsOptions =
+    tagsOptions && tagsOptions.length > 0
+      ? tagsOptions.map((tag) => ({ label: tag, value: tag }))
+      : null;
 
   return (
     <>
       <Form.Label className="mb-0 mt-2">Tags</Form.Label>
-      <FormControl
-        id="activetag"
-        aria-describedby="activetag"
-        value={activeTag || ""}
-        onChange={(e) => setActiveTag(e.target.value)}
+      <CreatableSelect
+        isMulti
+        onChange={(newVal) => {
+          const updTags = newVal.map((val) => val.value);
+          onChange(updTags);
+        }}
+        value={selectTags}
+        options={selectTagsOptions}
       />
-      {activeTag.length ? (
-        <Button
-          variant="link"
-          size="sm"
-          className="mt-2 mb-1 pl-0 pt-0"
-          onClick={addTag}
-        >
-          Add
-        </Button>
-      ) : null}
-      <ul>
-        {tags.map((tag, i) => (
-          <li key={i}>
-            {tag}{" "}
-            <span onClick={() => deleteTag(i)}>
-              <FaTimes
-                className="ml-1 d-inline cursor-pointer"
-                color="#dc3545"
-                title="delete tag"
-              />
-            </span>
-          </li>
-        ))}
-      </ul>
     </>
   );
 }

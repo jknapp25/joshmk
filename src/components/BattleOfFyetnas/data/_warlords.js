@@ -10,7 +10,6 @@ import muldur1 from "../assets/Muldur1.m4a";
 import muldur2 from "../assets/Muldur2.mp3";
 import muldur3 from "../assets/Muldur3.m4a";
 import muldur4 from "../assets/Muldur4.m4a";
-import muldur5 from "../assets/Muldur5.m4a";
 import muldur6 from "../assets/Muldur6.m4a";
 import muldur7 from "../assets/Muldur7.m4a";
 
@@ -50,7 +49,6 @@ export const warlords = [
       { text: "You'll always be this way!" },
       { text: "HA! You ARE as bad as they say.", audio: muldur6 },
       { text: "Once a loser, always a loser", audio: muldur7 },
-      // "You're not worth the time anyway!",
     ],
     defeated: true,
   },
