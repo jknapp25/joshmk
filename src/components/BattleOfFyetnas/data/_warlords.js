@@ -88,7 +88,7 @@ export const warlords = [
     image: warlord4,
     miniImage: mini1,
     start: "2021-02-28",
-    end: "2021-03-06",
+    end: "2021-03-07",
     sayings: [
       { text: "What if you get hurt?" },
       { text: "What if this is all just pointless?" },
