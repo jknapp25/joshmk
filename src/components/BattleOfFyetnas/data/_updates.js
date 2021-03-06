@@ -633,6 +633,22 @@ export const updates = [
   //   ),
   //   date: "2021-03-05",
   // },
+  {
+    description: (
+      <>
+        <p>
+          Bradock, has used an unparalleled spell to revive the forms of the
+          other three warlords and divided his spirit between them!
+        </p>
+        <p>They must all be defeated to fully kill Bradock.</p>
+        <p className="mb-0">
+          The warriors, now surrounded by all four of these terrible beings, can
+          they defeat them?
+        </p>
+      </>
+    ),
+    date: "2021-03-06",
+  },
 ];
 
 // ian fire cloud in sky, rains down upon them
