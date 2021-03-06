@@ -637,9 +637,25 @@ export const updates = [
     description: (
       <>
         <p>
-          Bradock, has used an unparalleled spell to revive the forms of the
-          other three warlords and divided his spirit between them!
+          Bradock, has used a very dark spell of old to revive the forms of the
+          other three warlords and divide his spirit between them!
         </p>
+        <div
+          className="mb-3"
+          style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}
+        >
+          <iframe
+            title="Battle of Fyetnas, Bradock, part 3"
+            width="100%"
+            height="100%"
+            style={{ position: "absolute", top: 0, left: 0 }}
+            src="https://www.youtube.com/embed/peT71PS21GU"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </div>
+
         <p>They must all be defeated to fully kill Bradock.</p>
         <p className="mb-0">
           The warriors, now surrounded by all four of these terrible beings, can
