@@ -415,7 +415,7 @@ function BattleOfFyetnas() {
               <Col lg={3} className="p-4 bg-transparent"></Col>
               <Col lg={6} className="p-4 bg-transparent text-light">
                 <p>
-                  If you consider this adventure to have been one of the good
+                  If you consider this adventure to have been one of those good
                   things in life, you can show your love and support for future
                   adventures by{" "}
                   <a
