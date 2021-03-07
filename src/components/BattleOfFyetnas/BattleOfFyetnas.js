@@ -59,6 +59,7 @@ import { updates } from "./data/_updates.js";
 import { training } from "./data/_training.js";
 import { warriors } from "./data/_warriors.js";
 import { warlords } from "./data/_warlords.js";
+import stickerSorcerer from "./assets/stickerSorcerer.png";
 import "react-datepicker/dist/react-datepicker.css";
 import "./BattleOfFyetnas.css";
 export default BattleOfFyetnas;
@@ -75,6 +76,7 @@ function BattleOfFyetnas() {
   const [commentWorkoutId, setCommentWorkoutId] = useState("");
   const [commentingWarriorName, setCommentingWarriorName] = useState("");
   const [activeComment, setActiveComment] = useState("");
+  const [showBattleSummary, setShowBattleSummary] = useState(true);
 
   //workout stuff
   const [warrior, setWarrior] = useState("");
@@ -321,7 +323,132 @@ function BattleOfFyetnas() {
                 [Fee-et-noz] Translated Fitness in English
               </small>
             </div>
-            <div className="my-2" />
+          </Col>
+          <Col
+            xs={12}
+            sm={3}
+            md={3}
+            lg={3}
+            className="p-4 bg-transparent"
+          ></Col>
+        </Row>
+        {showBattleSummary ? (
+          <>
+            <Row className="bg-dark">
+              <Col
+                xs={12}
+                sm={3}
+                md={3}
+                lg={3}
+                className="p-4 bg-transparent"
+              ></Col>
+              <Col
+                xs={12}
+                sm={6}
+                md={6}
+                lg={6}
+                className="pt-4 hidden-xs bg-transparent text-light"
+              >
+                <h5>
+                  <strong className="font-weight-bold">
+                    The Battle has ended.
+                  </strong>
+                </h5>
+                <p>
+                  The four evil warlords are no more! Together we pressed into
+                  the pain and learned that we <strong>are</strong> capable. And
+                  our lives no longer have to be tormented by these things.
+                </p>
+                <p>Warrior, YOU ARE POWERFUL. You are STRONG. You are FREE!</p>
+                <p>
+                  It's time to celebrate! Enjoy your day, enjoy your week, enjoy
+                  your life, free from fear, loneliness, shame and
+                  purposelessness. Revel in it!
+                </p>
+                <p>
+                  I invite you to celebrate with me (Sorcerer Josh) this{" "}
+                  <strong className="text-danger">monday night at 7</strong>.
+                  Bring your drink of choice, and your stories. We'll have a
+                  virtual happy hour (via Zoom) and just unpack the experience
+                  for the fun of it.
+                </p>
+                <p>
+                  I sincerely thank you for having the courage to join this
+                  adventure. And I hope to see you monday night!
+                </p>
+              </Col>
+              <Col xs={12} sm={3} md={3} lg={3} className="p-4 bg-transparent">
+                <VscChromeClose
+                  title="close"
+                  size="2em"
+                  className="text-light cursor-pointer"
+                  onClick={() => setShowBattleSummary(false)}
+                />
+              </Col>
+            </Row>
+            <Row className="bg-dark">
+              <Col lg={3} className="p-4 bg-transparent"></Col>
+              <Col lg={3} className="pt-4  bg-transparent text-light">
+                <img
+                  src={stickerSorcerer}
+                  style={{ width: "100%" }}
+                  alt="Sorcerer sticker"
+                />
+              </Col>
+              <Col lg={3} className="p-4 bg-transparent text-light">
+                <p>
+                  To commemorate our success, I have had these emblems
+                  commissioned by the finest craftsmen in all the land.
+                </p>
+                <p>
+                  Using a special spell of adhesion developed by Sorcerer James,
+                  they are able to stick to most surfaces!
+                </p>
+                <p>
+                  You will receive one with your respective skill denoted on it,
+                  either in the mail or in person.
+                </p>
+              </Col>
+              <Col lg={3} className="p-4 bg-transparent"></Col>
+            </Row>
+            <Row className="bg-dark mb-3">
+              <Col lg={3} className="p-4 bg-transparent"></Col>
+              <Col lg={6} className="p-4 bg-transparent text-light">
+                <p>
+                  If you consider this adventure to have been one of the good
+                  things in life, you can show your love and support future
+                  adventures by{" "}
+                  <a
+                    href="https://www.buymeacoffee.com/joshmk"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    buying me a coffee
+                  </a>
+                  , and/or by sharing a jumping high-five next time we cross
+                  paths.
+                </p>
+                <p className="mb-0">Cheers!</p>
+              </Col>
+              <Col lg={3} className="p-4 bg-transparent"></Col>
+            </Row>
+          </>
+        ) : null}
+        <Row>
+          <Col
+            xs={12}
+            sm={3}
+            md={3}
+            lg={3}
+            className="p-4 bg-transparent"
+          ></Col>
+          <Col
+            xs={12}
+            sm={6}
+            md={6}
+            lg={6}
+            className="hidden-xs bg-transparent"
+          >
             <Nav
               activeKey={activePage}
               onSelect={(selectedKey) => setActivePage(selectedKey)}
@@ -353,201 +480,191 @@ function BattleOfFyetnas() {
           ></Col>
         </Row>
         {activePage === "Battle" ? (
-          <>
-            <Row>
-              <Col lg={2} className="p-4 bg-transparent"></Col>
-              <Col lg={3} className="bg-transparent">
-                {warlords.map((warlord, i) => {
-                  if (
-                    moment(currentDate).isBetween(
+          <Row>
+            <Col lg={2} className="p-4 bg-transparent"></Col>
+            <Col lg={3} className="bg-transparent">
+              {warlords.map((warlord, i) => {
+                if (
+                  moment(currentDate).isBetween(
+                    moment(warlord.start),
+                    moment(warlord.end)
+                  )
+                ) {
+                  const workoutsDuringTimeframe = sortedWorkouts.filter((wo) =>
+                    moment(wo.createdAt).isBetween(
                       moment(warlord.start),
                       moment(warlord.end)
                     )
-                  ) {
-                    const workoutsDuringTimeframe = sortedWorkouts.filter(
-                      (wo) =>
-                        moment(wo.createdAt).isBetween(
-                          moment(warlord.start),
-                          moment(warlord.end)
-                        )
-                    );
-                    const totalHits = workoutsDuringTimeframe.reduce(
-                      (acc, curr) => {
-                        if (!!curr.plannedStart) return acc;
-                        if (curr.joint) {
-                          return acc + 2;
-                        } else {
-                          return acc + 1;
-                        }
-                      },
-                      0
-                    );
-                    const progress =
-                      ((warlord.health - totalHits) / warlord.health) * 100;
-                    return (
-                      <WarlordActive
-                        key={warlord.name}
-                        warlord={warlord}
-                        progress={progress}
-                        weekNum={i + 1}
-                      />
-                    );
-                  }
-                  return null;
-                })}
-                <Table className="text-light bg-dark">
-                  <tbody>
-                    <tr>
-                      {warlords.map(
-                        (
-                          {
-                            miniImage,
-                            name,
-                            description,
-                            start,
-                            end,
-                            defeated,
-                          },
-                          i
-                        ) => {
-                          const isActive = moment(currentDate).isBetween(
-                            moment(start),
-                            moment(end)
-                          );
-                          return (
-                            <td
-                              key={name}
-                              align="center"
-                              className="px-0"
-                              style={{ borderTop: "0px" }}
-                              title={`Week ${i + 1}: ${name}, ${description} ${
-                                defeated ? "(Defeated)" : ""
-                              }`}
+                  );
+                  const totalHits = workoutsDuringTimeframe.reduce(
+                    (acc, curr) => {
+                      if (!!curr.plannedStart) return acc;
+                      if (curr.joint) {
+                        return acc + 2;
+                      } else {
+                        return acc + 1;
+                      }
+                    },
+                    0
+                  );
+                  const progress =
+                    ((warlord.health - totalHits) / warlord.health) * 100;
+                  return (
+                    <WarlordActive
+                      key={warlord.name}
+                      warlord={warlord}
+                      progress={progress}
+                      weekNum={i + 1}
+                    />
+                  );
+                }
+                return null;
+              })}
+              <Table className="text-light bg-dark">
+                <tbody>
+                  <tr>
+                    {warlords.map(
+                      (
+                        { miniImage, name, description, start, end, defeated },
+                        i
+                      ) => {
+                        const isActive = moment(currentDate).isBetween(
+                          moment(start),
+                          moment(end)
+                        );
+                        return (
+                          <td
+                            key={name}
+                            align="center"
+                            className="px-0"
+                            style={{ borderTop: "0px" }}
+                            title={`Week ${i + 1}: ${name}, ${description} ${
+                              defeated ? "(Defeated)" : ""
+                            }`}
+                          >
+                            <div
+                              style={{
+                                width: "4em",
+                                height: "4em",
+                                borderRadius: "50%",
+                                position: "relative",
+                                overflow: "hidden",
+                                padding: isActive && !defeated ? "3px" : "",
+                                border:
+                                  isActive && !defeated
+                                    ? "2px solid #28a745"
+                                    : "",
+                              }}
                             >
-                              <div
-                                style={{
-                                  width: "4em",
-                                  height: "4em",
-                                  borderRadius: "50%",
-                                  position: "relative",
-                                  overflow: "hidden",
-                                  padding: isActive && !defeated ? "3px" : "",
-                                  border:
-                                    isActive && !defeated
-                                      ? "2px solid #28a745"
-                                      : "",
-                                }}
-                              >
-                                {defeated ? (
-                                  <VscChromeClose
-                                    size="3.5em"
-                                    className="text-danger"
-                                    style={{
-                                      zIndex: 10000000,
-                                      position: "absolute",
-                                      left: "50%",
-                                      top: "50%",
-                                      transform: "translate(-50%,-50%)",
-                                    }}
-                                  />
-                                ) : null}
-
-                                <Image
-                                  src={miniImage}
-                                  roundedCircle
+                              {defeated ? (
+                                <VscChromeClose
+                                  size="3.5em"
+                                  className="text-danger"
                                   style={{
-                                    maxWidth: "100%",
-                                    width: "auto",
-                                    height: "auto",
+                                    zIndex: 10000000,
                                     position: "absolute",
                                     left: "50%",
                                     top: "50%",
-                                    transform: "translate(-50%, -50%)",
+                                    transform: "translate(-50%,-50%)",
                                   }}
                                 />
-                              </div>
-                            </td>
-                          );
-                        }
-                      )}
-                    </tr>
-                  </tbody>
-                </Table>
-              </Col>
-              <Col lg={5} className="bg-transparent">
-                <UpdateCard />
+                              ) : null}
 
-                <Calendar
-                  workouts={sortedWorkouts}
-                  mini={true}
-                  showDayNum={false}
-                />
+                              <Image
+                                src={miniImage}
+                                roundedCircle
+                                style={{
+                                  maxWidth: "100%",
+                                  width: "auto",
+                                  height: "auto",
+                                  position: "absolute",
+                                  left: "50%",
+                                  top: "50%",
+                                  transform: "translate(-50%, -50%)",
+                                }}
+                              />
+                            </div>
+                          </td>
+                        );
+                      }
+                    )}
+                  </tr>
+                </tbody>
+              </Table>
+            </Col>
+            <Col lg={5} className="bg-transparent">
+              <UpdateCard />
 
-                <hr />
+              <Calendar
+                workouts={sortedWorkouts}
+                mini={true}
+                showDayNum={false}
+              />
 
-                <Dropdown className="mb-2">
-                  <Dropdown.Toggle
-                    size="lg"
-                    variant="success"
-                    className="btn-block mb-1 border-dark rounded-0 text-dark font-weight-bold"
-                    style={{ borderWidth: "2px" }}
+              <hr />
+
+              <Dropdown className="mb-2">
+                <Dropdown.Toggle
+                  size="lg"
+                  variant="success"
+                  className="btn-block mb-1 border-dark rounded-0 text-dark font-weight-bold"
+                  style={{ borderWidth: "2px" }}
+                >
+                  <GiPunchBlast size="1.5em" /> Attack!{"  "}
+                </Dropdown.Toggle>
+                <Dropdown.Menu className="bg-dark">
+                  <Dropdown.Item
+                    href="#"
+                    className="text-light"
+                    onClick={() => setShowWorkoutModal(true)}
                   >
-                    <GiPunchBlast size="1.5em" /> Attack!{"  "}
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu className="bg-dark">
-                    <Dropdown.Item
-                      href="#"
-                      className="text-light"
-                      onClick={() => setShowWorkoutModal(true)}
-                    >
-                      <GiPunchBlast size="1.5em" /> Add workout
-                    </Dropdown.Item>
-                    <Dropdown.Item
-                      href="#"
-                      className="text-light"
-                      onClick={() => setShowPlannedWorkoutModal(true)}
-                    >
-                      <IoMdCalendar size="1.5em" /> Plan a group workout
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
+                    <GiPunchBlast size="1.5em" /> Add workout
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    href="#"
+                    className="text-light"
+                    onClick={() => setShowPlannedWorkoutModal(true)}
+                  >
+                    <IoMdCalendar size="1.5em" /> Plan a group workout
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
 
-                {!workouts || workouts.length === 0 ? (
-                  <div>No workouts</div>
-                ) : null}
-                {plannedWorkouts.map((workout, i) => {
-                  if (moment(workout.plannedStart).isAfter(moment())) {
-                    return (
-                      <PlannedWorkout
-                        key={i}
-                        workout={workout}
-                        deleteWkt={deleteWrkout}
-                        RSVP={RSVP}
-                      />
-                    );
-                  }
-                })}
-                {sortedWorkouts.map((workout, i) => {
+              {!workouts || workouts.length === 0 ? (
+                <div>No workouts</div>
+              ) : null}
+              {plannedWorkouts.map((workout, i) => {
+                if (moment(workout.plannedStart).isAfter(moment())) {
                   return (
-                    <Workout
+                    <PlannedWorkout
                       key={i}
                       workout={workout}
                       deleteWkt={deleteWrkout}
-                      setCommentWorkoutId={setCommentWorkoutId}
-                      commentWorkoutId={commentWorkoutId}
-                      commentingWarriorName={commentingWarriorName}
-                      setCommentingWarriorName={setCommentingWarriorName}
-                      activeComment={activeComment}
-                      setActiveComment={setActiveComment}
-                      comment={comment}
-                      workouts={workouts}
+                      RSVP={RSVP}
                     />
                   );
-                })}
-              </Col>
-              <Col lg={2} className="p-4 bg-transparent"></Col>
-            </Row>
-          </>
+                }
+              })}
+              {sortedWorkouts.map((workout, i) => {
+                return (
+                  <Workout
+                    key={i}
+                    workout={workout}
+                    deleteWkt={deleteWrkout}
+                    setCommentWorkoutId={setCommentWorkoutId}
+                    commentWorkoutId={commentWorkoutId}
+                    commentingWarriorName={commentingWarriorName}
+                    setCommentingWarriorName={setCommentingWarriorName}
+                    activeComment={activeComment}
+                    setActiveComment={setActiveComment}
+                    comment={comment}
+                    workouts={workouts}
+                  />
+                );
+              })}
+            </Col>
+            <Col lg={2} className="p-4 bg-transparent"></Col>
+          </Row>
         ) : null}
         {activePage === "Training" ? (
           <Row>
