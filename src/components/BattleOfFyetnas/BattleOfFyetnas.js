@@ -347,7 +347,7 @@ function BattleOfFyetnas() {
                 sm={6}
                 md={6}
                 lg={6}
-                className="pt-4 hidden-xs bg-transparent text-light"
+                className="pt-4 bg-transparent text-light"
               >
                 <h5>
                   <strong className="font-weight-bold">
