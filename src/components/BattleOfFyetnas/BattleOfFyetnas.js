@@ -431,8 +431,11 @@ function BattleOfFyetnas() {
                                   borderRadius: "50%",
                                   position: "relative",
                                   overflow: "hidden",
-                                  padding: isActive ? "3px" : "",
-                                  border: isActive ? "2px solid #28a745" : "",
+                                  padding: isActive && !defeated ? "3px" : "",
+                                  border:
+                                    isActive && !defeated
+                                      ? "2px solid #28a745"
+                                      : "",
                                 }}
                               >
                                 {defeated ? (

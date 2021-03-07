@@ -103,6 +103,6 @@ export const warlords = [
       // { text: "What if this is actually hurting you?" },
       // { text: "People will judge you if you stick to this." },
     ],
-    defeated: false,
+    defeated: true,
   },
 ];
