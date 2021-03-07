@@ -397,8 +397,8 @@ function BattleOfFyetnas() {
               </Col>
               <Col lg={3} className="p-4 bg-transparent text-light">
                 <p>
-                  To commemorate our success, I have had these emblems
-                  commissioned by the finest craftsmen in all the land.
+                  Also, to commemorate our success, I have had these emblems
+                  commissioned by the finest craftsmen in all the mortal realm.
                 </p>
                 <p>
                   Using a special spell of adhesion developed by Sorcerer James,
@@ -416,7 +416,7 @@ function BattleOfFyetnas() {
               <Col lg={6} className="p-4 bg-transparent text-light">
                 <p>
                   If you consider this adventure to have been one of the good
-                  things in life, you can show your love and support future
+                  things in life, you can show your love and support for future
                   adventures by{" "}
                   <a
                     href="https://www.buymeacoffee.com/joshmk"
