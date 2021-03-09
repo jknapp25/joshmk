@@ -11,7 +11,6 @@ import { ConfigContext } from "../App";
 import { useIsMounted } from "../lib/utils";
 import { API } from "aws-amplify";
 import FullScreenImageCarousel from "./FullScreenImageCarousel";
-// import InfiniteScroll from "react-infinite-scroll-component";
 export default Dashboard;
 
 function sortByFrequencyAndRemoveDuplicates(array) {
@@ -78,10 +77,7 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
     async function fetchData() {
       let imgs = galleryImages;
       if (galleryImages.length >= 6) {
-        imgs = galleryImages.slice(
-          galleryImages.length - 7,
-          galleryImages.length - 1
-        );
+        imgs = galleryImages.slice(galleryImages.length - 6);
       }
       const imagesCalls = imgs.map((url) => Storage.get(url));
       const resImageUrls = await Promise.all(imagesCalls);
