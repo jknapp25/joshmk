@@ -94,7 +94,6 @@ function Home({ children }) {
     return (
       <>
         <NavBar config={config} />
-        <div className="my-3" />
         {children}
       </>
     );
@@ -106,10 +105,7 @@ function Home({ children }) {
         <NavBar config={config} bgClass="bg-light" />
         <Row className="bg-light">
           <Col lg={3}></Col>
-          <Col lg={6}>
-            <div className="mt-3" />
-            {children}
-          </Col>
+          <Col lg={6}>{children}</Col>
           <Col lg={3}></Col>
         </Row>
       </>
@@ -119,7 +115,6 @@ function Home({ children }) {
   return (
     <>
       <NavBar config={config} />
-      <div className="mt-3" />
       {children}
     </>
   );
