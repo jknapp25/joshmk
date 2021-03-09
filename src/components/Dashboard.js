@@ -5,7 +5,6 @@ import ProfileCard from "./ProfileCard";
 import ItemList from "./ItemList";
 import { RiArrowUpSLine } from "react-icons/ri";
 import { Helmet } from "react-helmet";
-import coffee from "../assets/coffee.png";
 import { Storage } from "aws-amplify";
 import { ConfigContext } from "../App";
 import { useIsMounted } from "../lib/utils";
@@ -102,17 +101,14 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
       <Row>
         <Col lg={4} className="hidden-sm">
           <ProfileCard avatarUrl={avatarUrl} config={config} />
-          {config && config.supportUrl ? (
-            <BuyMeACoffee url={config.supportUrl} />
-          ) : null}
         </Col>
 
         <Col lg={4} className="hidden-sm">
-          <small className="text-dark">RECENT WRITINGS</small>
+          <small className="text-dark">LATEST WRITINGS</small>
           <ItemList mini />
         </Col>
         <Col lg={4} className="hidden-sm">
-          <small className="text-dark">RECENT CREATIONS</small>
+          <small className="text-dark">LATEST CREATIONS</small>
           <ImageGallery images={imageUrls} />
 
           <div className="my-3" />
@@ -151,32 +147,6 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
     </Container>
   );
 }
-
-const BuyMeACoffee = ({ url }) => {
-  return (
-    <Card
-      className="my-2 cursor-pointer"
-      style={{ maxHeight: "110px" }}
-      onClick={() => window.open(url)}
-    >
-      <Row className="no-gutters">
-        <div className="col-auto p-3">
-          <img
-            src={coffee}
-            className="img-fluid"
-            alt="Coffee cup"
-            style={{ width: "50px", height: "50px" }}
-          />
-        </div>
-        <Col className="d-flex" style={{ alignItems: "center" }}>
-          <div className="card-block px-3">
-            <h4 className="card-title mb-0">Buy me a coffee!</h4>
-          </div>
-        </Col>
-      </Row>
-    </Card>
-  );
-};
 
 const ImageGallery = ({ images }) => {
   const [fsImageIdx, setFSImageIdx] = useState(null);

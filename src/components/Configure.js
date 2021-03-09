@@ -33,6 +33,7 @@ const blankEditorValue = [
 function Configure() {
   const [fullName, setFullName] = useState("");
   const [nickName, setNickName] = useState("");
+  const [emailAddress, setEmailAddress] = useState("");
   const [tagline, setTagline] = useState("");
   const [instagramUrl, setInstagramUrl] = useState("");
   const [youtubeUrl, setYoutubeUrl] = useState("");
@@ -55,6 +56,7 @@ function Configure() {
     let inpData = {
       fullName,
       nickName,
+      emailAddress,
       tagline,
       bio: JSON.stringify(bio),
       instagramUrl,
@@ -90,6 +92,7 @@ function Configure() {
       if (configData && isMounted.current) {
         setFullName(configData.data.getConfiguration.fullName);
         setNickName(configData.data.getConfiguration.nickName);
+        setEmailAddress(configData.data.getConfiguration.emailAddress);
         setTagline(configData.data.getConfiguration.tagline);
         if (configData.data.getConfiguration.bio) {
           const richContentResponse = JSON.parse(
@@ -141,6 +144,18 @@ function Configure() {
           value={nickName || ""}
           onChange={(e) => {
             setNickName(e.target.value);
+            setEdited(true);
+          }}
+        />
+
+        <Form.Label className="mb-1">Email Address</Form.Label>
+        <FormControl
+          id="emailAddress"
+          className="mb-3"
+          aria-describedby="emailAddress"
+          value={emailAddress || ""}
+          onChange={(e) => {
+            setEmailAddress(e.target.value);
             setEdited(true);
           }}
         />
