@@ -1,8 +1,8 @@
 import React from "react";
 import { navigate } from "@reach/router";
-import { Card } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
-import { FiCoffee, FiInstagram, FiMail } from "react-icons/fi";
+import { FiCoffee, FiInstagram, FiMail, FiYoutube } from "react-icons/fi";
 export default ProfileCard;
 
 function ProfileCard({ avatarUrl, config }) {
@@ -12,9 +12,13 @@ function ProfileCard({ avatarUrl, config }) {
       <Card.Img variant="top" src={avatarUrl} onClick={() => navigate("/")} />
       <Card.Body>
         <Card.Text>
-          {config.tagline}
-          {"  "}
-          <span className="text-danger">
+          {config.tagline}{" "}
+          <Button
+            variant="link"
+            onClick={() => navigate("/about")}
+            className="text-danger p-0"
+            style={{ lineHeight: ".8em" }}
+          >
             More{" "}
             <HiOutlineArrowNarrowRight
               size="1em"
@@ -22,7 +26,7 @@ function ProfileCard({ avatarUrl, config }) {
               color=""
               style={{ transform: "scaleY(-1)" }}
             />
-          </span>
+          </Button>
         </Card.Text>
       </Card.Body>
       <Card.Footer>
@@ -49,7 +53,7 @@ function ProfileCard({ avatarUrl, config }) {
               rel="noopener noreferrer"
               className="text-dark"
             >
-              <FiInstagram className="d-inline mr-3" />
+              <FiYoutube className="d-inline mr-3" />
               <span className="d-inline">YouTube Channel</span>
             </a>
           </div>

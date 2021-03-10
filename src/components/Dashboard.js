@@ -64,9 +64,9 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
         []
       );
       const sorted = sortByFrequencyAndRemoveDuplicates(preppedTags);
-      const topTen = sorted.slice(0, 12);
+      const topTags = sorted.slice(0, 12);
 
-      setTags(topTen);
+      setTags(topTags);
     }
 
     fetchData();
