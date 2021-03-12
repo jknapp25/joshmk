@@ -19,7 +19,8 @@ import { API, graphqlOperation } from "aws-amplify";
 import { createConfiguration, updateConfiguration } from "../graphql/mutations";
 import * as queries from "../graphql/queries";
 import { useIsMounted } from "../lib/utils";
-export default Configure;
+import { withAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
+export default withAuthenticator(Configure);
 
 const pageOptions = ["blog", "work", "projects", "gallery", "about", "other"];
 
@@ -123,6 +124,10 @@ function Configure() {
     <Row>
       <Col lg={3}></Col>
       <Col lg={6}>
+        <div className="mb-4">
+          <AmplifySignOut />
+        </div>
+
         <h4 className="mb-3">Configure</h4>
         <Form.Label className="mb-1">Full Name</Form.Label>
         <FormControl

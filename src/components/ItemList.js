@@ -138,7 +138,7 @@ function ItemList({ mini = false }) {
   //   fetchData();
   // }, [pageName]);
 
-  // if (items.length === 0) return null;
+  if (items.length === 0) return null;
 
   let preppedItems = [];
   let education = [];
