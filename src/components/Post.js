@@ -143,14 +143,9 @@ function Post({
                 {moment(createdAt).format("MMMM D, Y") || "No date"}
               </small>
             </Card.Title>
-            {/* <Card.Subtitle className="text-muted">
-              {date || "No date"}
-            </Card.Subtitle> */}
-            {/* </Card.Body> */}
 
             <ImageCarousel images={images} classes="mb-3" />
 
-            {/* <Card.Body className="pt-0"> */}
             {richContent ? (
               <RichTextEditor
                 value={richContent}

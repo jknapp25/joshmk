@@ -90,6 +90,38 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
     }
   }, [galleryImages, isMounted]);
 
+  // useEffect(() => {
+  //   if (isMounted.current) {
+  //     let script = document.createElement("script");
+  //     script.setAttribute("data-name", "BMC-Widget");
+  //     script.src = "https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js";
+  //     script.setAttribute("data-id", "joshmk");
+  //     script.setAttribute("data-description", "Thank you for your support!");
+  //     script.setAttribute(
+  //       "data-message",
+  //       "This site is free to use. Do you want to help supporting it?"
+  //     );
+  //     script.setAttribute("data-color", "#dc3545");
+  //     script.setAttribute("data-position", "right");
+  //     script.setAttribute("data-x_margin", "18");
+  //     script.setAttribute("data-y-margin", "18");
+  //     script.async = true;
+  //     //Call window on load to show the image
+  //     script.onload = function () {
+  //       let evt = document.createEvent("Event");
+  //       evt.initEvent("DOMContentLoaded", false, false);
+  //       window.dispatchEvent(evt);
+  //     };
+
+  //     document.head.appendChild(script);
+  //   }
+
+  //   // return () => {
+  //   //   document.head.removeChild(this.script);
+  //   //   document.body.removeChild(document.getElementById("bmc-wbtn"));
+  //   // };
+  // }, [isMounted]);
+
   if (!imageUrls || imageUrls.length === 0) return null;
 
   return (
