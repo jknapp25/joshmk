@@ -16,7 +16,11 @@ function Gallery() {
   useEffect(() => {
     async function fetchData() {
       const imagesCalls = galleryImages.map((url) => Storage.get(url));
-      const resImageUrls = await Promise.all(imagesCalls);
+      let resImageUrls = await Promise.all(imagesCalls);
+
+      if (resImageUrls && resImageUrls.length > 0) {
+        resImageUrls = resImageUrls.reverse();
+      }
 
       if (isMounted.current) setImageUrls(resImageUrls);
     }
