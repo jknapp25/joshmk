@@ -84,7 +84,7 @@ function Home({ children }) {
           avatarUrl={avatarUrl}
           children={children}
         />
-        <div className="my-5" />
+        <div className="my-5 hidden-above-mlg hidden-md hidden-xs" />
         {children}
       </>
     );

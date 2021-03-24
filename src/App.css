@@ -224,6 +224,18 @@ button:focus {
   }
 }
 
+@media (max-width: 766px) {
+  .hidden-mlg {
+    display: none !important;
+  }
+}
+
+@media (min-width: 766px) {
+  .hidden-above-mlg {
+    display: none !important;
+  }
+}
+
 @media (min-width: 574px) {
   .hidden-md {
     display: none !important;
@@ -278,4 +290,8 @@ button:focus {
 
 .nav-item-hover:hover {
   color: #dc3545;
+}
+
+.bm-burger-button {
+  display: none;
 }
