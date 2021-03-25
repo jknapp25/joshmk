@@ -65,7 +65,7 @@ function Post({
           <div className="col">
             <div className="card-block px-3 py-2">
               {category ? (
-                <small className="text-danger">{category}</small>
+                <small className="text-dark text-uppercase">{category}</small>
               ) : null}
               <h5 className="card-title mb-0">{title}</h5>
               <small className="text-muted">
@@ -95,8 +95,11 @@ function Post({
       <Col lg={6} className="bg-white">
         <Card className="border-0">
           <Card.Body>
+            {category ? (
+              <small className="text-dark text-uppercase">{category}</small>
+            ) : null}
             <Card.Title>
-              <h2 className="mb-0">
+              <h1 className="mb-0">
                 <span className="cursor-pointer">
                   <Link to={`/post/${id}`} className="hidden-link">
                     {title}
@@ -138,7 +141,7 @@ function Post({
                     </span>
                   </>
                 ) : null}
-              </h2>
+              </h1>
               <small className="hidden-lg text-muted">
                 {moment(createdAt).format("MMMM D, Y") || "No date"}
               </small>
