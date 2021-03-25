@@ -223,6 +223,11 @@ button:focus {
     display: none !important;
   }
 }
+@media (max-width: 992px) {
+  .hidden-below-lg {
+    display: none !important;
+  }
+}
 
 @media (max-width: 766px) {
   .hidden-mlg {
@@ -238,6 +243,12 @@ button:focus {
 
 @media (min-width: 574px) {
   .hidden-md {
+    display: none !important;
+  }
+}
+
+@media (max-width: 574px) {
+  .hidden-above-md {
     display: none !important;
   }
 }
