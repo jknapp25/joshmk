@@ -149,11 +149,6 @@ html {
   overflow: scroll;
   overflow-x: hidden;
 }
-::-webkit-scrollbar {
-  width: 0px;
-  background: transparent;
-  height: 0px;
-}
 
 .cursor-pointer {
   cursor: pointer;
