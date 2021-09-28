@@ -61,8 +61,8 @@ function App() {
             <CreateItem path="create" />
             <Configure path="configure" />
             <Bio path="about" bio={config.bio} />
-            <RideWithGoats path="rwg" />
-            <BattleOfFyetnas path="battle-of-fyetnas" />
+            {/* <RideWithGoats path="rwg" /> */}
+            {/* <BattleOfFyetnas path="battle-of-fyetnas" /> */}
           </Home>
         </Router>
       </div>
