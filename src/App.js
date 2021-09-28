@@ -9,7 +9,6 @@ import CreateItem from "./components/CreateItem.js";
 import Configure from "./components/Configure.js";
 import Bio from "./components/Bio.js";
 import Gallery from "./components/Gallery.js";
-import RideWithGoats from "./components/RideWithGoats.js";
 import Amplify from "aws-amplify";
 import awsExports from "./aws-exports";
 import * as queries from "./graphql/queries";
@@ -18,7 +17,6 @@ import { API } from "aws-amplify";
 import "react-vertical-timeline-component/style.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import BattleOfFyetnas from "./components/BattleOfFyetnas/BattleOfFyetnas";
 export default App;
 
 Amplify.configure(awsExports);
@@ -61,6 +59,8 @@ function App() {
             <CreateItem path="create" />
             <Configure path="configure" />
             <Bio path="about" bio={config.bio} />
+
+            {/* Old stuff */}
             {/* <RideWithGoats path="rwg" /> */}
             {/* <BattleOfFyetnas path="battle-of-fyetnas" /> */}
           </Home>
