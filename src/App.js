@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Router } from "@reach/router";
 import ItemList from "./components/ItemList";
-import Skills from "./components/Skills";
 import GoalHours from "./components/GoalHours";
 import Home from "./components/Home.js";
 import Post from "./components/Post.js";
@@ -54,15 +53,10 @@ function App() {
             <ItemList default />
             <Gallery path="gallery" />
             <Post path="post/:id" />
-            <Skills path="skills" />
             <GoalHours path="goal-hours" />
             <CreateItem path="create" />
             <Configure path="configure" />
             <Bio path="about" bio={config.bio} />
-
-            {/* Old stuff */}
-            {/* <RideWithGoats path="rwg" /> */}
-            {/* <BattleOfFyetnas path="battle-of-fyetnas" /> */}
           </Home>
         </Router>
       </div>

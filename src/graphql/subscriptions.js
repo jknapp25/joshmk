@@ -238,6 +238,7 @@ export const onCreateConfiguration = /* GraphQL */ `
       id
       fullName
       nickName
+      emailAddress
       tagline
       bio
       avatar
@@ -263,6 +264,7 @@ export const onUpdateConfiguration = /* GraphQL */ `
       id
       fullName
       nickName
+      emailAddress
       tagline
       bio
       avatar
@@ -288,6 +290,7 @@ export const onDeleteConfiguration = /* GraphQL */ `
       id
       fullName
       nickName
+      emailAddress
       tagline
       bio
       avatar

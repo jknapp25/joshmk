@@ -277,6 +277,7 @@ export const createConfiguration = /* GraphQL */ `
       id
       fullName
       nickName
+      emailAddress
       tagline
       bio
       avatar
@@ -305,6 +306,7 @@ export const updateConfiguration = /* GraphQL */ `
       id
       fullName
       nickName
+      emailAddress
       tagline
       bio
       avatar
@@ -333,6 +335,7 @@ export const deleteConfiguration = /* GraphQL */ `
       id
       fullName
       nickName
+      emailAddress
       tagline
       bio
       avatar

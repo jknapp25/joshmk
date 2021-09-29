@@ -189,6 +189,7 @@ export const getConfiguration = /* GraphQL */ `
       id
       fullName
       nickName
+      emailAddress
       tagline
       bio
       avatar
@@ -219,6 +220,7 @@ export const listConfigurations = /* GraphQL */ `
         id
         fullName
         nickName
+        emailAddress
         tagline
         bio
         avatar
