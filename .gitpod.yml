@@ -1,12 +1,15 @@
 # List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
 tasks:
-  - init: npm install
+  - init: |
+      npm install
+      npm install -g @aws-amplify/cli
+      amplify env pull
     command: npm start
 
 # List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
 ports:
   - port: 3000
-    onOpen: open-preview
+    onOpen: open-browser
 
 github:
   prebuilds:
