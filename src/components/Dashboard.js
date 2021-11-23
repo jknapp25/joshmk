@@ -93,7 +93,7 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
   if (!imageUrls || imageUrls.length === 0) return null;
 
   return (
-    <Container fluid className="pt-2 bg-light dashboard-container hidden-xs">
+    <Container fluid className="pt-2 dashboard-container hidden-xs">
       <Helmet>
         <title>{config.fullName || ""}</title>
         <link rel="icon" type="image/png" href={faviconUrl} sizes="16x16" />
@@ -130,18 +130,6 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
               </div>
             </>
           ) : null}
-        </Col>
-      </Row>
-      <Row className="hidden-sm">
-        <Col className="py-2 text-center">
-          <div className="d-block">Start reading</div>
-          <div>
-            <RiArrowUpSLine
-              size="2em"
-              className="d-block"
-              style={{ transform: "scaleY(-1)", margin: "0 auto" }}
-            />
-          </div>
         </Col>
       </Row>
     </Container>
