@@ -74,17 +74,12 @@ function Home({ children }) {
 
   if (pathname === "/") {
     return (
-      <>
-        <NavBar config={config} />
-        <Dashboard
-          config={config}
-          faviconUrl={faviconUrl}
-          avatarUrl={avatarUrl}
-          children={children}
-        />
-        {/* <div className="my-5 hidden-below-lg" />
-        {children} */}
-      </>
+      <Dashboard
+        config={config}
+        faviconUrl={faviconUrl}
+        avatarUrl={avatarUrl}
+        children={children}
+      />
     );
   }
 

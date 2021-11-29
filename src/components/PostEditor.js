@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Form, FormControl, FormFile } from "react-bootstrap";
+import { Button, Form, FormControl } from "react-bootstrap";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import RichTextEditor from "./RichTextEditor/RichTextEditor";
@@ -196,7 +196,7 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
         classes="bg-white mb-2"
       />
 
-      <FormFile.Label className="mb-1">Images</FormFile.Label>
+      <Form.Label className="mb-1">Images</Form.Label>
       <ImageUploader
         images={images || []}
         afterEdit={(imgs) => {

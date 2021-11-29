@@ -10,6 +10,7 @@ import Post from "./Post";
 import Project from "./Project";
 import Job from "./Job";
 import Education from "./Education";
+import PostPreview from "./PostPreview";
 import { FaTimes } from "react-icons/fa";
 import { ConfigContext } from "../App";
 import { Fragment } from "react";
@@ -144,10 +145,8 @@ function ItemList({ mini = false }) {
       ) : null}
 
       {preppedItems.map((item, i) => (
-        <Fragment key={i}>
-          {item.type === "post" && mini && i < 5 ? (
-            <Post post={item} mini />
-          ) : null}
+        <div key={i}>
+          {item.type === "post" && mini ? <PostPreview post={item} /> : null}
           {item.type === "post" && !mini ? <Post post={item} /> : null}
           {item.type === "job" ? <Job job={item} /> : null}
           {item.type === "project" ? <Project project={item} /> : null}
@@ -157,7 +156,7 @@ function ItemList({ mini = false }) {
           {!mini && i !== preppedItems.length - 1 ? (
             <div style={{ height: "35px" }} />
           ) : null}
-        </Fragment>
+        </div>
       ))}
     </>
   );

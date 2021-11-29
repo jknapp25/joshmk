@@ -161,7 +161,7 @@ function ProjectEditor({ id = null, onCreate, onUpdate }) {
 
       <TagEditor tags={tags} onChange={(updTags) => setTags(updTags)} />
 
-      <FormFile.Label className="mb-1">Images</FormFile.Label>
+      <Form.Label className="mb-1">Images</Form.Label>
       <ImageUploader
         images={images || []}
         afterEdit={(imgs) => {

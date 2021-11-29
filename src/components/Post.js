@@ -57,25 +57,20 @@ function Post({
 
   if (mini) {
     return (
-      <div
-        className="card mt-1 mb-2 cursor-pointer"
-        onClick={() => navigate(`/post/${id}`)}
-      >
-        <div className="row no-gutters">
-          <div className="col">
-            <div className="card-block px-3 py-2">
-              {category ? (
-                <small className="text-dark text-uppercase">{category}</small>
-              ) : null}
-              <h5 className="card-title mb-0">{title}</h5>
-              <small className="text-muted">
-                {moment(createdAt).format("MMM D")}
-              </small>
-            </div>
+      <div className="row no-gutters" onClick={() => navigate(`/post/${id}`)}>
+        <div className="col">
+          <div className="px-3 py-2">
+            {category ? (
+              <small className="text-dark text-uppercase">{category}</small>
+            ) : null}
+            <h5 className="mb-0">{title}</h5>
+            <small className="text-muted">
+              {moment(createdAt).format("MMM D")}
+            </small>
           </div>
-          <div className="col-auto">
-            <MiniImage images={images} />
-          </div>
+        </div>
+        <div className="col-auto">
+          <MiniImage images={images} />
         </div>
       </div>
     );

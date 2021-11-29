@@ -35,7 +35,7 @@ function Gallery() {
 
   return (
     <>
-      <CardColumns>
+      {/* <CardColumns>
         {imageUrls.map((imageUrl, i) => (
           <Card key={imageUrl} className="border-0">
             <Card.Img
@@ -46,7 +46,7 @@ function Gallery() {
             />
           </Card>
         ))}
-      </CardColumns>
+      </CardColumns> */}
       <FullScreenImageCarousel
         initialImageIdx={fsImageIdx}
         imageUrls={imageUrls}

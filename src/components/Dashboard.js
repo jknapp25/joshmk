@@ -1,9 +1,15 @@
 import React, { useContext, useState, useEffect } from "react";
-import { navigate } from "@reach/router";
-import { Container, Row, Col, Badge, Card } from "react-bootstrap";
-import ProfileCard from "./ProfileCard";
+import { navigate, useLocation } from "@reach/router";
+import {
+  Button,
+  Container,
+  Row,
+  Col,
+  Badge,
+  Card,
+  Image,
+} from "react-bootstrap";
 import ItemList from "./ItemList";
-import { RiArrowUpSLine } from "react-icons/ri";
 import { Helmet } from "react-helmet";
 import { Storage } from "aws-amplify";
 import { ConfigContext } from "../App";
@@ -42,6 +48,7 @@ function sortByFrequencyAndRemoveDuplicates(array) {
 
 function Dashboard({ config, faviconUrl, avatarUrl }) {
   const { galleryImages } = useContext(ConfigContext);
+  const { pathname } = useLocation();
 
   const [imageUrls, setImageUrls] = useState([]);
   const [tags, setTags] = useState(null);
@@ -93,43 +100,77 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
   if (!imageUrls || imageUrls.length === 0) return null;
 
   return (
-    <Container fluid className="pt-2 dashboard-container hidden-xs">
+    <Container fluid className="dashboard-container hidden-xs">
       <Helmet>
         <title>{config.fullName || ""}</title>
         <link rel="icon" type="image/png" href={faviconUrl} sizes="16x16" />
       </Helmet>
       <Row>
-        <Col lg={4} className="hidden-sm">
-          <ProfileCard avatarUrl={avatarUrl} config={config} />
+        <Col lg={3} className="hidden-sm p-0">
+          <div className="border-bottom bg-light">
+            <div className="p-5">
+              <Image
+                className="w-100"
+                src={avatarUrl}
+                fluid
+                onClick={() => navigate("/")}
+              />
+              <br />
+              <br />
+              <h2
+                className="mb-0"
+                active={pathname === "/"}
+                onClick={() => navigate("/")}
+              >
+                {config.fullName || ""}
+              </h2>
+              <br />
+              {config.tagline}
+            </div>
+          </div>
+          <div className="p-5">
+            {config.pagesCustom.map((page) => (
+              <Button
+                variant="link"
+                key={page.name}
+                active={pathname === `/${page.link}`}
+                onClick={() => navigate(`/${page.link}`)}
+                className="p-0 d-block fs-4 text-capitalize text-decoration-none text-dark"
+              >
+                {page.name}
+              </Button>
+            ))}
+          </div>
         </Col>
-
-        <Col lg={4} className="hidden-sm">
+        <Col lg={6} className="hidden-sm p-5 border-start border-end">
           <small className="text-dark">LATEST WRITINGS</small>
+          <div className="border-bottom"></div>
           <ItemList mini />
         </Col>
-        <Col lg={4} className="hidden-sm">
-          <small className="text-dark">LATEST CREATIONS</small>
-          <ImageGallery images={imageUrls} />
-
-          <div className="my-3" />
+        <Col lg={3} className="hidden-sm p-5">
           {tags && tags.length > 0 ? (
             <>
-              <small className="text-dark">POPULAR TAGS</small>
+              <small className="text-dark mb-3">POPULAR TAGS</small>
               <div>
                 {tags.map((tag) => (
-                  <h4 className="d-inline" key={"popular-tag-" + tag}>
-                    <Badge
-                      variant="lightgray"
-                      className="mr-2 cursor-pointer hover"
-                      onClick={() => navigate(`/search?tag=${tag}`)}
-                    >
-                      {tag}
-                    </Badge>
-                  </h4>
+                  <Button
+                    key={"popular-tag-" + tag}
+                    variant="light"
+                    size="sm"
+                    className="me-2 mb-2 d-inline"
+                    onClick={() => navigate(`/search?tag=${tag}`)}
+                  >
+                    {tag}
+                  </Button>
                 ))}
               </div>
             </>
           ) : null}
+
+          <div className="my-3" />
+
+          <small className="text-dark mb-3">LATEST CREATIONS</small>
+          <ImageGallery images={imageUrls} />
         </Col>
       </Row>
     </Container>
