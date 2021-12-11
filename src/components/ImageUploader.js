@@ -85,7 +85,7 @@ function ImageUploader({
 
   return (
     <>
-      {!reachedImageLimit ? (
+      {/* {!reachedImageLimit ? (
         <Form.File
           id={fieldId}
           className="mb-2"
@@ -93,7 +93,7 @@ function ImageUploader({
           onChange={handleImageUpload}
           name={fieldName}
         />
-      ) : null}
+      ) : null} */}
       {images.length ? (
         <div className="mb-2">
           {imageUrls.map((url, i) => (
