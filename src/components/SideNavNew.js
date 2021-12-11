@@ -16,7 +16,9 @@ function SideNavNew({ pages }) {
       key={page.name}
       active={pathname === `/${page.link}`}
       onClick={() => navigate(`/${page.link}`)}
-      className="p-0 d-block fs-4 text-capitalize text-decoration-none text-dark"
+      className={`p-0 d-block fs-4 text-capitalize text-decoration-none ${
+        pathname === `/${page.link}` ? "text-dark" : "text-muted"
+      }`}
     >
       {page.name}
     </Button>
