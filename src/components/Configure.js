@@ -414,31 +414,24 @@ function Configure() {
         <hr className="my-4" />
 
         <Accordion>
-          <Card className="bg-transparent">
-            <Card.Header className="p-0 bg-transparent border-bottom-0">
-              <Accordion.Toggle
-                as={Button}
-                variant="link"
-                eventKey="0"
-                className="pl-0"
-              >
-                Advanced
-              </Accordion.Toggle>
-            </Card.Header>
-            <Accordion.Collapse eventKey="0">
-              <Card.Body className="bg-transparent px-0">
-                <Form.Check
-                  type="checkbox"
-                  label="Enable resume generator"
-                  checked={resumeGeneratorEnabled}
-                  onChange={() => {
-                    setResumeGeneratorEnabled(!resumeGeneratorEnabled);
-                    setEdited(true);
-                  }}
-                />
-              </Card.Body>
-            </Accordion.Collapse>
-          </Card>
+          <Accordion.Item className="bg-transparent">
+            <Accordion.Header className="p-0 bg-transparent border-bottom-0">
+              Advanced
+            </Accordion.Header>
+            <Accordion.Body>
+              {/* <Card.Body className="bg-transparent px-0"> */}
+              <Form.Check
+                type="checkbox"
+                label="Enable resume generator"
+                checked={resumeGeneratorEnabled}
+                onChange={() => {
+                  setResumeGeneratorEnabled(!resumeGeneratorEnabled);
+                  setEdited(true);
+                }}
+              />
+              {/* </Card.Body> */}
+            </Accordion.Body>
+          </Accordion.Item>
         </Accordion>
 
         {edited ? (
