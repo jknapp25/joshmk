@@ -34,7 +34,7 @@ function PostPreview({ post = {}, ...props }) {
 
   return (
     <div
-      className="row gx-0 cursor-pointer py-3"
+      className="row gx-0 cursor-pointer py-3 border-bottom"
       onClick={() => navigate(`/post/${id}`)}
     >
       <div className="col my-auto">

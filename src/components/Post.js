@@ -58,27 +58,6 @@ function Post({
 
   richContent = richContent ? JSON.parse(richContent) : richContent;
 
-  if (mini) {
-    return (
-      <div className="row no-gutters" onClick={() => navigate(`/post/${id}`)}>
-        <div className="col">
-          <div className="px-3 py-2">
-            {category ? (
-              <small className="text-dark text-uppercase">{category}</small>
-            ) : null}
-            <h5 className="mb-0">{title}</h5>
-            <small className="text-muted">
-              {moment(createdAt).format("MMM D")}
-            </small>
-          </div>
-        </div>
-        <div className="col-auto">
-          <MiniImage images={images} />
-        </div>
-      </div>
-    );
-  }
-
   return (
     <Row>
       <Col lg={3} className="pr-0 bg-white">
