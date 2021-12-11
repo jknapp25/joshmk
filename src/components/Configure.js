@@ -5,8 +5,6 @@ import {
   Form,
   FormControl,
   Table,
-  Accordion,
-  Card,
   Row,
   Col,
 } from "react-bootstrap";
@@ -127,11 +125,11 @@ function Configure() {
           <AmplifySignOut />
         </div>
 
-        <h4 className="mb-3">Configure</h4>
+        <h3 className="mb-4">Configure</h3>
         <Form.Label className="mb-1">Full Name</Form.Label>
         <FormControl
           id="fullName"
-          className="mb-3"
+          className="mb-4"
           aria-describedby="fullName"
           value={fullName || ""}
           onChange={(e) => {
@@ -143,7 +141,7 @@ function Configure() {
         <Form.Label className="mb-1">Nickname</Form.Label>
         <FormControl
           id="nickName"
-          className="mb-3"
+          className="mb-4"
           aria-describedby="nickName"
           value={nickName || ""}
           onChange={(e) => {
@@ -155,7 +153,7 @@ function Configure() {
         <Form.Label className="mb-1">Email Address</Form.Label>
         <FormControl
           id="emailAddress"
-          className="mb-3"
+          className="mb-4"
           aria-describedby="emailAddress"
           value={emailAddress || ""}
           onChange={(e) => {
@@ -167,7 +165,7 @@ function Configure() {
         <Form.Label className="mb-1">Tagline</Form.Label>
         <FormControl
           id="tagline"
-          className="mb-3"
+          className="mb-4"
           aria-describedby="tagline"
           value={tagline || ""}
           onChange={(e) => {
@@ -197,13 +195,13 @@ function Configure() {
             "link",
             "video",
           ]}
-          classes="mb-3 bg-white"
+          classes="mb-4 bg-white"
         />
 
         <Form.Label className="mb-1">Instagram URL</Form.Label>
         <FormControl
           id="instagramUrl"
-          className="mb-3"
+          className="mb-4"
           aria-describedby="instagramUrl"
           value={instagramUrl || ""}
           onChange={(e) => {
@@ -215,7 +213,7 @@ function Configure() {
         <Form.Label className="mb-1">YouTube URL</Form.Label>
         <FormControl
           id="youtubeUrl"
-          className="mb-3"
+          className="mb-4"
           aria-describedby="youtubeUrl"
           value={youtubeUrl || ""}
           onChange={(e) => {
@@ -227,7 +225,7 @@ function Configure() {
         <Form.Label className="mb-1">Support URL</Form.Label>
         <FormControl
           id="supportUrl"
-          className="mb-3"
+          className="mb-4"
           aria-describedby="supportUrl"
           value={supportUrl || ""}
           onChange={(e) => {
@@ -235,8 +233,6 @@ function Configure() {
             setEdited(true);
           }}
         />
-
-        <hr className="my-4" />
 
         <Form.Label className="mb-1">Avatar</Form.Label>
         <ImageUploader
@@ -272,10 +268,10 @@ function Configure() {
           imageDisplayName="Favicon"
         />
 
-        <hr className="my-4" />
+        {/* <hr className="my-4" /> */}
 
         <Form.Label className="mb-1">Pages</Form.Label>
-        <Table bordered className="mb-3">
+        <Table bordered className="mb-1">
           <thead>
             <tr>
               <th>Name</th>
@@ -382,7 +378,7 @@ function Configure() {
         </Table>
 
         {!pagesCustom || pagesCustom.length !== pageOptions.length ? (
-          <Dropdown className="mt-2">
+          <Dropdown className="mb-4">
             <Dropdown.Toggle variant="link" size="sm" className="pl-0 pt-0">
               Add page
             </Dropdown.Toggle>
@@ -411,34 +407,30 @@ function Configure() {
           </Dropdown>
         ) : null}
 
-        <hr className="my-4" />
+        <Form.Label className="mb-1">Advanced</Form.Label>
+        <Form.Check
+          type="checkbox"
+          label="Enable resume generator"
+          className="mb-4"
+          checked={resumeGeneratorEnabled}
+          onChange={() => {
+            setResumeGeneratorEnabled(!resumeGeneratorEnabled);
+            setEdited(true);
+          }}
+        />
 
-        <Accordion>
-          <Accordion.Item className="bg-transparent">
-            <Accordion.Header className="p-0 bg-transparent border-bottom-0">
-              Advanced
-            </Accordion.Header>
-            <Accordion.Body>
-              {/* <Card.Body className="bg-transparent px-0"> */}
-              <Form.Check
-                type="checkbox"
-                label="Enable resume generator"
-                checked={resumeGeneratorEnabled}
-                onChange={() => {
-                  setResumeGeneratorEnabled(!resumeGeneratorEnabled);
-                  setEdited(true);
-                }}
-              />
-              {/* </Card.Body> */}
-            </Accordion.Body>
-          </Accordion.Item>
-        </Accordion>
-
-        {edited ? (
-          <Button className="mt-2" variant="primary" onClick={handleSave}>
-            Save
-          </Button>
-        ) : null}
+        <Button
+          className="mb-4"
+          variant="primary"
+          onClick={() => {
+            if (edited) {
+              handleSave();
+            }
+          }}
+          disabled={!edited}
+        >
+          Save
+        </Button>
       </Col>
       <Col lg={3}></Col>
     </Row>
