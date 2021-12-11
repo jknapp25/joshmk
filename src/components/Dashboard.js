@@ -132,7 +132,9 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
         <Col lg={3} className="hidden-sm p-5">
           {tags && tags.length > 0 ? (
             <>
-              <small className="text-dark mb-3">POPULAR TAGS</small>
+              <div className="mb-1">
+                <small className="text-dark">POPULAR TAGS</small>
+              </div>
               <div>
                 {tags.map((tag) => (
                   <Tag key={`tag-${tag}`} tag={tag} />
@@ -143,7 +145,9 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
 
           <div className="my-3" />
 
-          <small className="text-dark mb-3">LATEST CREATIONS</small>
+          <div className="mb-1">
+            <small className="text-dark">LATEST CREATIONS</small>
+          </div>
           <ImageGallery images={imageUrls} />
         </Col>
       </Row>
