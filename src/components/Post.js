@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
-import { Badge, Card, Row, Col } from "react-bootstrap";
+import { Card, Row, Col } from "react-bootstrap";
 import { Link, navigate } from "@reach/router";
 import ImageCarousel from "./ImageCarousel";
+import Tag from "./Tag";
+import SideNavNew from "./SideNavNew";
 import { useIsMounted } from "../lib/utils";
 import { GoPencil } from "react-icons/go";
 import { FaTrashAlt } from "react-icons/fa";
@@ -19,6 +21,7 @@ function Post({
   setItemType,
   showEdit = false,
   mini = false,
+  pages,
   ...props
 }) {
   const [realPost, setRealPost] = useState(post);
@@ -51,7 +54,7 @@ function Post({
   if (!realPost) return null;
 
   let { id, title, richContent, tags, category, images, createdAt } = realPost;
-  const date = createdAt ? moment(createdAt).format("dddd") : null;
+  // const date = createdAt ? moment(createdAt).format("dddd") : null;
 
   richContent = richContent ? JSON.parse(richContent) : richContent;
 
@@ -78,14 +81,8 @@ function Post({
 
   return (
     <Row>
-      <Col lg={3} className="text-right pr-0 bg-white">
-        <div className="text-muted border-right mt-4 pr-2 hidden-sm">
-          <div className="mb-0" style={{ lineHeight: "normal" }}>
-            <small>{date || "No date"}</small>
-            <br />
-            <small>{moment(createdAt).format("MMMM D, Y") || "No date"}</small>
-          </div>
-        </div>
+      <Col lg={3} className="pr-0 bg-white">
+        <SideNavNew pages={pages} />
       </Col>
       <Col lg={6} className="bg-white">
         <Card className="border-0">
@@ -161,15 +158,8 @@ function Post({
               }}
               className="border-0 py-0"
             >
-              {tags.map((tag, i) => (
-                <Badge
-                  key={i}
-                  variant="lightgray"
-                  className="mr-2 cursor-pointer hover"
-                  onClick={() => navigate(`/search?tag=${tag}`)}
-                >
-                  {tag}
-                </Badge>
+              {tags.map((tag) => (
+                <Tag key={`tag-${tag}`} tag={tag} />
               ))}
             </Card.Footer>
           )}

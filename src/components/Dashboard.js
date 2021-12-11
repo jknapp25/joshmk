@@ -1,15 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
-import { navigate, useLocation } from "@reach/router";
-import {
-  Button,
-  Container,
-  Row,
-  Col,
-  Badge,
-  Card,
-  Image,
-} from "react-bootstrap";
+import { navigate } from "@reach/router";
+import { Container, Row, Col, Card, Image } from "react-bootstrap";
 import ItemList from "./ItemList";
+import Tag from "./Tag";
+import SideNavNew from "./SideNavNew";
 import { Helmet } from "react-helmet";
 import { Storage } from "aws-amplify";
 import { ConfigContext } from "../App";
@@ -48,7 +42,6 @@ function sortByFrequencyAndRemoveDuplicates(array) {
 
 function Dashboard({ config, faviconUrl, avatarUrl }) {
   const { galleryImages } = useContext(ConfigContext);
-  const { pathname } = useLocation();
 
   const [imageUrls, setImageUrls] = useState([]);
   const [tags, setTags] = useState(null);
@@ -117,11 +110,7 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
               />
               <br />
               <br />
-              <h2
-                className="mb-0"
-                active={pathname === "/"}
-                onClick={() => navigate("/")}
-              >
+              <h2 className="mb-0" onClick={() => navigate("/")}>
                 {config.fullName || ""}
               </h2>
               <br />
@@ -129,20 +118,13 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
             </div>
           </div>
           <div className="p-5">
-            {config.pagesCustom.map((page) => (
-              <Button
-                variant="link"
-                key={page.name}
-                active={pathname === `/${page.link}`}
-                onClick={() => navigate(`/${page.link}`)}
-                className="p-0 d-block fs-4 text-capitalize text-decoration-none text-dark"
-              >
-                {page.name}
-              </Button>
-            ))}
+            <SideNavNew pages={config.pagesCustom} />
           </div>
         </Col>
-        <Col lg={6} className="hidden-sm p-5 border-start border-end">
+        <Col
+          lg={6}
+          className="hidden-sm p-5 border-start border-end vh-100 overflow-scroll"
+        >
           <small className="text-dark">LATEST WRITINGS</small>
           <div className="border-bottom"></div>
           <ItemList mini />
@@ -153,15 +135,7 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
               <small className="text-dark mb-3">POPULAR TAGS</small>
               <div>
                 {tags.map((tag) => (
-                  <Button
-                    key={"popular-tag-" + tag}
-                    variant="light"
-                    size="sm"
-                    className="me-2 mb-2 d-inline"
-                    onClick={() => navigate(`/search?tag=${tag}`)}
-                  >
-                    {tag}
-                  </Button>
+                  <Tag key={`tag-${tag}`} tag={tag} />
                 ))}
               </div>
             </>
@@ -197,7 +171,6 @@ const ImageGallery = ({ images }) => {
               style={{ cursor: "zoom-in" }}
               onClick={() => setFSImageIdx(images.length - num)}
             />
-            {/* <small className="text-muted">Drawing</small> */}
           </Col>
         ))}
       </Row>

@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Card, CardColumns } from "react-bootstrap";
+import { Card } from "react-bootstrap";
+import Masonry from "react-masonry-css";
 import FullScreenImageCarousel from "./FullScreenImageCarousel";
 import { Storage } from "aws-amplify";
 import { ConfigContext } from "../App";
@@ -35,7 +36,11 @@ function Gallery() {
 
   return (
     <>
-      {/* <CardColumns>
+      <Masonry
+        breakpointCols={3}
+        className="my-masonry-grid"
+        columnClassName="my-masonry-grid_column"
+      >
         {imageUrls.map((imageUrl, i) => (
           <Card key={imageUrl} className="border-0">
             <Card.Img
@@ -46,7 +51,7 @@ function Gallery() {
             />
           </Card>
         ))}
-      </CardColumns> */}
+      </Masonry>
       <FullScreenImageCarousel
         initialImageIdx={fsImageIdx}
         imageUrls={imageUrls}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
-import { Alert, Badge, Row, Col } from "react-bootstrap";
+import { Alert, Row, Col } from "react-bootstrap";
 import Resume from "./Resume";
+import Tag from "./Tag";
 import { useLocation, navigate } from "@reach/router";
 import { parse } from "query-string";
 import { PDFDownloadLink } from "@react-pdf/renderer";
@@ -13,7 +14,6 @@ import Education from "./Education";
 import PostPreview from "./PostPreview";
 import { FaTimes } from "react-icons/fa";
 import { ConfigContext } from "../App";
-import { Fragment } from "react";
 export default ItemList;
 
 function ItemList({ mini = false }) {
@@ -131,7 +131,8 @@ function ItemList({ mini = false }) {
           <Col lg={6}>
             <h3 className="mb-4 mt-1">
               {preppedItems.length} item{preppedItems.length > 1 ? "s" : ""}{" "}
-              tagged <Badge variant="lightgray">{searchParams.tag}</Badge>
+              tagged <Tag tag={searchParams.tag} />
+              {/* <Badge variant="lightgray">{searchParams.tag}</Badge> */}
               <span
                 className="text-muted ml-2 cursor-pointer"
                 onClick={() => navigate("/")}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Dropdown, Form, FormControl, FormFile } from "react-bootstrap";
+import { Button, Dropdown, Form, FormControl } from "react-bootstrap";
 import ImageUploader from "./ImageUploader";
 import TagEditor from "./TagEditor";
 import { statusColorLookup } from "../lib/utils";

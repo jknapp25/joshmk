@@ -52,11 +52,11 @@ function App() {
           <Home path="/">
             <ItemList default />
             <Gallery path="gallery" />
-            <Post path="post/:id" />
+            <Post path="post/:id" pages={config.pagesCustom} />
             <GoalHours path="goal-hours" />
             <CreateItem path="create" />
             <Configure path="configure" />
-            <Bio path="about" bio={config.bio} />
+            <Bio path="about" bio={config.bio} pages={config.pagesCustom} />
           </Home>
         </Router>
       </div>
