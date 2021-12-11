@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { navigate } from "@reach/router";
-import { Container, Row, Col, Badge, Card } from "react-bootstrap";
-import ProfileCard from "./ProfileCard";
+import { Container, Row, Col, Card, Image } from "react-bootstrap";
 import ItemList from "./ItemList";
-import { RiArrowUpSLine } from "react-icons/ri";
+import Tag from "./Tag";
+import SideNavNew from "./SideNavNew";
 import { Helmet } from "react-helmet";
 import { Storage } from "aws-amplify";
 import { ConfigContext } from "../App";
@@ -93,55 +93,58 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
   if (!imageUrls || imageUrls.length === 0) return null;
 
   return (
-    <Container fluid className="pt-2 bg-light dashboard-container hidden-xs">
+    <Container fluid className="dashboard-container hidden-xs">
       <Helmet>
         <title>{config.fullName || ""}</title>
         <link rel="icon" type="image/png" href={faviconUrl} sizes="16x16" />
       </Helmet>
       <Row>
-        <Col lg={4} className="hidden-sm">
-          <ProfileCard avatarUrl={avatarUrl} config={config} />
+        <Col lg={3} className="hidden-sm p-0">
+          <div className="border-bottom bg-light">
+            <div className="p-5">
+              <Image
+                className="w-100"
+                src={avatarUrl}
+                fluid
+                onClick={() => navigate("/")}
+              />
+              <br />
+              <br />
+              <h2 className="mb-0" onClick={() => navigate("/")}>
+                {config.fullName || ""}
+              </h2>
+              <br />
+              {config.tagline}
+            </div>
+          </div>
+          <div className="p-5">
+            <SideNavNew pages={config.pagesCustom} />
+          </div>
         </Col>
-
-        <Col lg={4} className="hidden-sm">
+        <Col
+          lg={6}
+          className="hidden-sm p-5 border-start border-end vh-100 overflow-scroll"
+        >
           <small className="text-dark">LATEST WRITINGS</small>
+          <div className="border-bottom"></div>
           <ItemList mini />
         </Col>
-        <Col lg={4} className="hidden-sm">
-          <small className="text-dark">LATEST CREATIONS</small>
-          <ImageGallery images={imageUrls} />
-
-          <div className="my-3" />
+        <Col lg={3} className="hidden-sm p-5">
           {tags && tags.length > 0 ? (
             <>
-              <small className="text-dark">POPULAR TAGS</small>
+              <small className="text-dark mb-3">POPULAR TAGS</small>
               <div>
                 {tags.map((tag) => (
-                  <h4 className="d-inline" key={"popular-tag-" + tag}>
-                    <Badge
-                      variant="lightgray"
-                      className="mr-2 cursor-pointer hover"
-                      onClick={() => navigate(`/search?tag=${tag}`)}
-                    >
-                      {tag}
-                    </Badge>
-                  </h4>
+                  <Tag key={`tag-${tag}`} tag={tag} />
                 ))}
               </div>
             </>
           ) : null}
-        </Col>
-      </Row>
-      <Row className="hidden-sm">
-        <Col className="py-2 text-center">
-          <div className="d-block">Start reading</div>
-          <div>
-            <RiArrowUpSLine
-              size="2em"
-              className="d-block"
-              style={{ transform: "scaleY(-1)", margin: "0 auto" }}
-            />
-          </div>
+
+          <div className="my-3" />
+
+          <small className="text-dark mb-3">LATEST CREATIONS</small>
+          <ImageGallery images={imageUrls} />
         </Col>
       </Row>
     </Container>
@@ -168,7 +171,6 @@ const ImageGallery = ({ images }) => {
               style={{ cursor: "zoom-in" }}
               onClick={() => setFSImageIdx(images.length - num)}
             />
-            {/* <small className="text-muted">Drawing</small> */}
           </Col>
         ))}
       </Row>

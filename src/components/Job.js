@@ -104,28 +104,40 @@ function Job({ job, setEditingItemId, setItemType, showEdit = false }) {
             </Card.Text>
           ) : null}
           {details && details.length > 0 ? (
-            <Accordion className="mt-3 border-0">
-              <Card id="accordion-card-header-hide" className="border-0">
-                <Card.Header className="p-0 border-bottom-0 bg-transparent border-0">
-                  <Accordion.Toggle
-                    as={Button}
-                    variant="link"
-                    eventKey="0"
-                    className="pl-0 py-0 text-danger"
-                  >
-                    View details
-                  </Accordion.Toggle>
-                </Card.Header>
-                <Accordion.Collapse eventKey="0">
-                  <Card.Body className="bg-transparent px-0 pb-0">
-                    <ul>
-                      {details.map((detail, i) => (
-                        <li key={i}>{detail}</li>
-                      ))}
-                    </ul>
-                  </Card.Body>
-                </Accordion.Collapse>
-              </Card>
+            // <Accordion className="mt-3 border-0">
+            //   <Card id="accordion-card-header-hide" className="border-0">
+            //     <Card.Header className="p-0 border-bottom-0 bg-transparent border-0">
+            //       <Accordion.Toggle
+            //         as={Button}
+            //         variant="link"
+            //         eventKey="0"
+            //         className="pl-0 py-0 text-danger"
+            //       >
+            //         View details
+            //       </Accordion.Toggle>
+            //     </Card.Header>
+            //     <Accordion.Collapse eventKey="0">
+            //       <Card.Body className="bg-transparent px-0 pb-0">
+            //         <ul>
+            //           {details.map((detail, i) => (
+            //             <li key={i}>{detail}</li>
+            //           ))}
+            //         </ul>
+            //       </Card.Body>
+            //     </Accordion.Collapse>
+            //   </Card>
+            // </Accordion>
+            <Accordion>
+              <Accordion.Item>
+                <Accordion.Header>View details</Accordion.Header>
+                <Accordion.Body>
+                  <ul>
+                    {details.map((detail, i) => (
+                      <li key={i}>{detail}</li>
+                    ))}
+                  </ul>
+                </Accordion.Body>
+              </Accordion.Item>
             </Accordion>
           ) : null}
           <Card.Text>

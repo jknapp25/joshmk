@@ -7,7 +7,6 @@ import {
   Table,
   Accordion,
   Card,
-  FormFile,
   Row,
   Col,
 } from "react-bootstrap";
@@ -239,7 +238,7 @@ function Configure() {
 
         <hr className="my-4" />
 
-        <FormFile.Label className="mb-1">Avatar</FormFile.Label>
+        <Form.Label className="mb-1">Avatar</Form.Label>
         <ImageUploader
           images={avatar ? [avatar] : []}
           afterEdit={(imgs) => {
@@ -256,7 +255,7 @@ function Configure() {
           imageDisplayName="Avatar"
         />
 
-        <FormFile.Label className="mb-1">Favicon</FormFile.Label>
+        <Form.Label className="mb-1">Favicon</Form.Label>
         <ImageUploader
           images={favicon ? [favicon] : []}
           afterEdit={(imgs) => {
