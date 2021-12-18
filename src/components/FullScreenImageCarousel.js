@@ -1,41 +1,46 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Image } from "react-bootstrap";
 import { FaTimes, FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import { ImageContext } from "../App";
 export default FullScreenImageCarousel;
 
-function FullScreenImageCarousel({
-  initialImageIdx = null,
-  imageUrls = [],
-  onClose,
-}) {
-  const [activeImageIdx, setActiveImageIdx] = useState(null);
-
-  useEffect(() => {
-    if (initialImageIdx !== null) {
-      setActiveImageIdx(initialImageIdx);
-    }
-  }, [initialImageIdx]);
+function FullScreenImageCarousel() {
+  const imageContext = useContext(ImageContext);
 
   function handleClose() {
-    setActiveImageIdx(null);
-    onClose();
+    imageContext.setImageContext({
+      isOpen: false,
+      index: null,
+      imageUrls: [],
+    });
   }
 
   function handleLeft() {
     const updImgIdx =
-      activeImageIdx - 1 >= 0 ? activeImageIdx - 1 : imageUrls.length - 1;
+      imageContext.index - 1 >= 0
+        ? imageContext.index - 1
+        : imageContext.imageUrls.length - 1;
 
-    setActiveImageIdx(updImgIdx);
+    imageContext.setImageContext({
+      ...imageContext,
+      index: updImgIdx,
+    });
   }
 
   function handleRight() {
     const updImgIdx =
-      activeImageIdx < imageUrls.length - 1 ? activeImageIdx + 1 : 0;
+      imageContext.index < imageContext.imageUrls.length - 1
+        ? imageContext.index + 1
+        : 0;
 
-    setActiveImageIdx(updImgIdx);
+    imageContext.setImageContext({
+      ...imageContext,
+      index: updImgIdx,
+    });
   }
 
-  if (imageUrls.length === 0 || activeImageIdx === null) return null;
+  if (imageContext.imageUrls.length === 0 || imageContext.index === null)
+    return null;
 
   return (
     <div
@@ -51,7 +56,7 @@ function FullScreenImageCarousel({
       className="noSelect"
     >
       <Image
-        src={imageUrls[activeImageIdx]}
+        src={imageContext.imageUrls[imageContext.index]}
         className="h-100 w-auto d-block mx-auto"
       />
       <FaTimes
@@ -64,7 +69,7 @@ function FullScreenImageCarousel({
           right: "10px",
         }}
       />
-      {imageUrls.length > 1 ? (
+      {imageContext.imageUrls.length > 1 ? (
         <>
           <FaAngleLeft
             className="ml-2 position-absolute cursor-pointer"

@@ -1,17 +1,16 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Card } from "react-bootstrap";
 import Masonry from "react-masonry-css";
-import FullScreenImageCarousel from "./FullScreenImageCarousel";
 import { Storage } from "aws-amplify";
-import { ConfigContext } from "../App";
+import { ConfigContext, ImageContext } from "../App";
 import { useIsMounted } from "../lib/utils";
 export default Gallery;
 
 function Gallery() {
   const { galleryImages } = useContext(ConfigContext);
+  const imageContext = useContext(ImageContext);
 
   const [imageUrls, setImageUrls] = useState([]);
-  const [fsImageIdx, setFSImageIdx] = useState(null);
   const isMounted = useIsMounted();
 
   useEffect(() => {
@@ -35,28 +34,27 @@ function Gallery() {
   if (!imageUrls || imageUrls.length === 0) return null;
 
   return (
-    <>
-      <Masonry
-        breakpointCols={3}
-        className="my-masonry-grid"
-        columnClassName="my-masonry-grid_column"
-      >
-        {imageUrls.map((imageUrl, i) => (
-          <Card key={imageUrl} className="border-0">
-            <Card.Img
-              variant="top"
-              style={{ cursor: "zoom-in" }}
-              src={imageUrl}
-              onClick={() => setFSImageIdx(i)}
-            />
-          </Card>
-        ))}
-      </Masonry>
-      <FullScreenImageCarousel
-        initialImageIdx={fsImageIdx}
-        imageUrls={imageUrls}
-        onClose={() => setFSImageIdx(null)}
-      />
-    </>
+    <Masonry
+      breakpointCols={3}
+      className="my-masonry-grid"
+      columnClassName="my-masonry-grid_column"
+    >
+      {imageUrls.map((imageUrl, i) => (
+        <Card key={imageUrl} className="border-0">
+          <Card.Img
+            variant="top"
+            style={{ cursor: "zoom-in" }}
+            src={imageUrl}
+            onClick={() =>
+              imageContext.setImageContext({
+                ...imageContext,
+                index: i,
+                imageUrls,
+              })
+            }
+          />
+        </Card>
+      ))}
+    </Masonry>
   );
 }

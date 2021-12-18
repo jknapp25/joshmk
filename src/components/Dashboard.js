@@ -9,7 +9,6 @@ import { Storage } from "aws-amplify";
 import { ConfigContext } from "../App";
 import { useIsMounted } from "../lib/utils";
 import { API } from "aws-amplify";
-import FullScreenImageCarousel from "./FullScreenImageCarousel";
 export default Dashboard;
 
 function sortByFrequencyAndRemoveDuplicates(array) {
@@ -142,65 +141,8 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
               </div>
             </>
           ) : null}
-
-          <div className="my-3" />
-
-          <div className="mb-1">
-            <small className="text-dark">LATEST CREATIONS</small>
-          </div>
-          <ImageGallery images={imageUrls} />
         </Col>
       </Row>
     </Container>
   );
 }
-
-const ImageGallery = ({ images }) => {
-  const [fsImageIdx, setFSImageIdx] = useState(null);
-
-  return (
-    <>
-      <Row className="mt-1">
-        {[1, 2, 3].map((num) => (
-          <Col
-            key={num}
-            className={`text-center ${num === 1 ? "pr-1" : ""} ${
-              num === 2 ? "px-1" : ""
-            } ${num === 3 ? "pl-1" : ""}`}
-          >
-            <Card.Img
-              variant="top"
-              src={images[images.length - num]}
-              className="cursor-pointer"
-              style={{ cursor: "zoom-in" }}
-              onClick={() => setFSImageIdx(images.length - num)}
-            />
-          </Col>
-        ))}
-      </Row>
-      <Row className="mt-2">
-        {[4, 5, 6].map((num) => (
-          <Col
-            key={num}
-            className={`text-center ${num === 4 ? "pr-1" : ""} ${
-              num === 5 ? "px-1" : ""
-            } ${num === 6 ? "pl-1" : ""}`}
-          >
-            <Card.Img
-              variant="top"
-              src={images[images.length - num]}
-              className="cursor-pointer"
-              style={{ cursor: "zoom-in" }}
-              onClick={() => setFSImageIdx(images.length - num)}
-            />
-          </Col>
-        ))}
-      </Row>
-      <FullScreenImageCarousel
-        initialImageIdx={fsImageIdx}
-        imageUrls={images}
-        onClose={() => setFSImageIdx(null)}
-      />
-    </>
-  );
-};

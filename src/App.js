@@ -13,6 +13,7 @@ import awsExports from "./aws-exports";
 import * as queries from "./graphql/queries";
 import { useIsMounted } from "./lib/utils";
 import { API } from "aws-amplify";
+import FullScreenImageCarousel from "./components/FullScreenImageCarousel";
 import "react-vertical-timeline-component/style.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -21,10 +22,17 @@ export default App;
 Amplify.configure(awsExports);
 
 export const ConfigContext = React.createContext({});
+export const ImageContext = React.createContext({});
 
 function App() {
   const [config, setConfig] = useState({});
+  const [imageContext, setImageContext] = useState({
+    isOpen: false,
+    index: null,
+    imageUrls: [],
+  });
   const configContextValue = { ...config, setConfig };
+  const imageContextValue = { ...imageContext, setImageContext };
 
   const isMounted = useIsMounted();
   const configIdName = window.location.href.includes("joshmk")
@@ -47,19 +55,22 @@ function App() {
 
   return (
     <ConfigContext.Provider value={configContextValue}>
-      <div className="App">
-        <Router primary={false}>
-          <Home path="/">
-            <ItemList default />
-            <Gallery path="gallery" />
-            <Post path="post/:id" pages={config.pagesCustom} />
-            <GoalHours path="goal-hours" />
-            <CreateItem path="create" />
-            <Configure path="configure" />
-            <Bio path="about" bio={config.bio} pages={config.pagesCustom} />
-          </Home>
-        </Router>
-      </div>
+      <ImageContext.Provider value={imageContextValue}>
+        <div className="App">
+          <Router primary={false}>
+            <Home path="/">
+              <ItemList default />
+              <Gallery path="gallery" />
+              <Post path="post/:id" pages={config.pagesCustom} />
+              <GoalHours path="goal-hours" />
+              <CreateItem path="create" />
+              <Configure path="configure" />
+              <Bio path="about" bio={config.bio} pages={config.pagesCustom} />
+            </Home>
+          </Router>
+          <FullScreenImageCarousel />
+        </div>
+      </ImageContext.Provider>
     </ConfigContext.Provider>
   );
 }
