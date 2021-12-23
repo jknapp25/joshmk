@@ -90,7 +90,7 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
     }
   }, [galleryImages, isMounted]);
 
-  if (!imageUrls || imageUrls.length === 0) return null;
+  // if (!imageUrls || imageUrls.length === 0) return null;
 
   return (
     <Container fluid className="dashboard-container hidden-xs">
