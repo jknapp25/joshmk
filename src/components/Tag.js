@@ -7,9 +7,9 @@ function Tag({ tag }) {
   return (
     <Button
       key={"popular-tag-" + tag}
-      variant="light"
+      variant="outline-primary"
       size="sm"
-      className="me-2 mb-2 d-inline"
+      className="me-2 mb-2 d-inline rounded-pill"
       onClick={() => navigate(`/search?tag=${tag}`)}
     >
       {tag}

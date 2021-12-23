@@ -12,6 +12,7 @@ import Project from "./Project";
 import Job from "./Job";
 import Education from "./Education";
 import PostPreview from "./PostPreview";
+import ItemPreview from "./ItemPreview";
 import { FaTimes } from "react-icons/fa";
 import { ConfigContext } from "../App";
 export default ItemList;
@@ -132,7 +133,6 @@ function ItemList({ mini = false }) {
             <h3 className="mb-4 mt-1">
               {preppedItems.length} item{preppedItems.length > 1 ? "s" : ""}{" "}
               tagged <Tag tag={searchParams.tag} />
-              {/* <Badge variant="lightgray">{searchParams.tag}</Badge> */}
               <span
                 className="text-muted ml-2 cursor-pointer"
                 onClick={() => navigate("/")}
@@ -144,6 +144,10 @@ function ItemList({ mini = false }) {
           <Col lg={3}></Col>
         </Row>
       ) : null}
+
+      {/* <div>
+        <ItemPreview />
+      </div> */}
 
       {preppedItems.map((item, i) => (
         <div key={i}>
