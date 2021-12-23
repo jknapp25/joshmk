@@ -1,14 +1,11 @@
-import React, { useContext, useState, useEffect } from "react";
-import { navigate } from "@reach/router";
-import { Container, Row, Col, Card, Image } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Container, Row, Col } from "react-bootstrap";
 import ItemList from "./ItemList";
-import Tag from "./Tag";
 import SideNavNew from "./SideNavNew";
+import DashboardUserSummary from "./DashboardUserSummary";
 import { Helmet } from "react-helmet";
-import { Storage } from "aws-amplify";
-import { ConfigContext } from "../App";
-import { useIsMounted } from "../lib/utils";
 import { API } from "aws-amplify";
+import DashboardTags from "./DashboardTags";
 export default Dashboard;
 
 function sortByFrequencyAndRemoveDuplicates(array) {
@@ -40,11 +37,7 @@ function sortByFrequencyAndRemoveDuplicates(array) {
 }
 
 function Dashboard({ config, faviconUrl, avatarUrl }) {
-  const { galleryImages } = useContext(ConfigContext);
-
-  const [imageUrls, setImageUrls] = useState([]);
   const [tags, setTags] = useState(null);
-  const isMounted = useIsMounted();
 
   useEffect(() => {
     async function fetchData() {
@@ -71,26 +64,6 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    async function fetchData() {
-      let imgs = galleryImages;
-      if (galleryImages.length >= 6) {
-        imgs = galleryImages.slice(galleryImages.length - 6);
-      }
-      const imagesCalls = imgs.map((url) => Storage.get(url));
-      const resImageUrls = await Promise.all(imagesCalls);
-
-      if (isMounted.current) setImageUrls(resImageUrls);
-    }
-    if (galleryImages && galleryImages.length) {
-      fetchData();
-    } else {
-      if (isMounted.current) setImageUrls([]);
-    }
-  }, [galleryImages, isMounted]);
-
-  // if (!imageUrls || imageUrls.length === 0) return null;
-
   return (
     <Container fluid className="dashboard-container hidden-xs">
       <Helmet>
@@ -100,21 +73,7 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
       <Row>
         <Col lg={3} className="hidden-sm p-0">
           <div className="border-bottom bg-light">
-            <div className="p-5">
-              <Image
-                className="w-100"
-                src={avatarUrl}
-                fluid
-                onClick={() => navigate("/")}
-              />
-              <br />
-              <br />
-              <h2 className="mb-0" onClick={() => navigate("/")}>
-                {config.fullName || ""}
-              </h2>
-              <br />
-              {config.tagline}
-            </div>
+            <DashboardUserSummary config={config} avatarUrl={avatarUrl} />
           </div>
           <div className="p-5">
             <SideNavNew pages={config.pagesCustom} />
@@ -129,18 +88,7 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
           <ItemList mini />
         </Col>
         <Col lg={3} className="hidden-sm p-5">
-          {tags && tags.length > 0 ? (
-            <>
-              <div className="mb-1">
-                <small className="text-dark">POPULAR TAGS</small>
-              </div>
-              <div>
-                {tags.map((tag) => (
-                  <Tag key={`tag-${tag}`} tag={tag} />
-                ))}
-              </div>
-            </>
-          ) : null}
+          <DashboardTags tags={tags} />
         </Col>
       </Row>
     </Container>
