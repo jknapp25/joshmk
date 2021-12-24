@@ -10,17 +10,21 @@ function SideNavNew({ pages }) {
 
   if (!pages || pages.length === 0) return null;
 
-  return pages.map((page) => (
-    <Button
-      variant="link"
-      key={page.name}
-      active={pathname === `/${page.link}`}
-      onClick={() => navigate(`/${page.link}`)}
-      className={`p-0 d-block fs-4 text-capitalize text-decoration-none ${
-        pathname === `/${page.link}` ? "text-dark" : "text-muted"
-      }`}
-    >
-      {page.name}
-    </Button>
-  ));
+  return (
+    <div className="p-5">
+      {pages.map((page) => (
+        <Button
+          variant="link"
+          key={page.name}
+          active={pathname === `/${page.link}`}
+          onClick={() => navigate(`/${page.link}`)}
+          className={`p-0 d-block fs-4 text-capitalize text-decoration-none ${
+            pathname === `/${page.link}` ? "text-dark" : "text-muted"
+          }`}
+        >
+          {page.name}
+        </Button>
+      ))}
+    </div>
+  );
 }

@@ -75,9 +75,7 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
           <div className="border-bottom bg-light">
             <DashboardUserSummary config={config} avatarUrl={avatarUrl} />
           </div>
-          <div className="p-5">
-            <SideNavNew pages={config.pagesCustom} />
-          </div>
+          <SideNavNew pages={config.pagesCustom} />
         </Col>
         <Col
           lg={6}

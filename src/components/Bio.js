@@ -9,7 +9,7 @@ function Bio({ bio, pages }) {
   bio = JSON.parse(bio);
   return (
     <Row>
-      <Col lg={3}>
+      <Col lg={3} className="vh-100 overflow-scroll">
         <SideNavNew pages={pages} />
       </Col>
       <Col>

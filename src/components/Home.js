@@ -41,16 +41,16 @@ function Home({ children }) {
 
   if (pathname === "/gallery") {
     return (
-      <>
-        <Container fluid>
-          <Row>
-            <Col lg={3}>
-              <SideNavNew pages={config.pagesCustom} />
-            </Col>
-            <Col lg={9}>{children}</Col>
-          </Row>
-        </Container>
-      </>
+      <Container fluid>
+        <Row>
+          <Col lg={3}>
+            <SideNavNew pages={config.pagesCustom} />
+          </Col>
+          <Col lg={9} className="vh-100 overflow-scroll">
+            {children}
+          </Col>
+        </Row>
+      </Container>
     );
   }
 
@@ -71,15 +71,15 @@ function Home({ children }) {
 
   if (pathname === "/work" || pathname === "/projects") {
     return (
-      <>
-        <Row className="bg-light">
-          <Col lg={3}>
-            <SideNavNew pages={config.pagesCustom} />
-          </Col>
-          <Col lg={6}>{children}</Col>
-          <Col lg={3}></Col>
-        </Row>
-      </>
+      <Row>
+        <Col lg={3}>
+          <SideNavNew pages={config.pagesCustom} />
+        </Col>
+        <Col lg={6} className="vh-100 overflow-scroll">
+          {children}
+        </Col>
+        <Col lg={3}></Col>
+      </Row>
     );
   }
 
