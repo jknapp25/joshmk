@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import { Card, Row, Col } from "react-bootstrap";
-import { Link, navigate } from "@reach/router";
+import { Link } from "@reach/router";
 import ImageCarousel from "./ImageCarousel";
 import Tag from "./Tag";
 import SideNavNew from "./SideNavNew";
@@ -12,7 +12,6 @@ import { API, graphqlOperation } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import { deletePost } from "../graphql/mutations";
 import RichTextEditor from "./RichTextEditor/RichTextEditor";
-import MiniImage from "./MiniImage";
 export default Post;
 
 function Post({

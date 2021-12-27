@@ -25,13 +25,18 @@ function MiniImage({ images = [], classes = "" }) {
   if (images.length === 0) return null;
 
   return (
-    <div className="ratio ratio-4x3" style={{ width: "150px" }}>
-      <Image
-        style={{ objectFit: "cover" }}
-        src={imageUrls[0]}
-        alt={imageUrls[0]}
-        fluid
-      />
+    <div
+      className="ratio ratio-4x3 bg-secondary bg-opacity-10"
+      style={{ width: "150px" }}
+    >
+      {imageUrls[0] ? (
+        <Image
+          style={{ objectFit: "cover" }}
+          src={imageUrls[0]}
+          alt={imageUrls[0]}
+          fluid
+        />
+      ) : null}
     </div>
   );
 }
