@@ -65,7 +65,7 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
   }, []);
 
   return (
-    <Container fluid className="dashboard-container hidden-xs">
+    <Container fluid>
       <Helmet>
         <title>{config.fullName || ""}</title>
         <link rel="icon" type="image/png" href={faviconUrl} sizes="16x16" />
@@ -79,7 +79,7 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
         </Col>
         <Col
           lg={6}
-          className="hidden-sm p-5 border-start border-end vh-100 overflow-scroll"
+          className="p-5 border-start border-end vh-100 overflow-scroll"
         >
           <small className="text-dark">LATEST WRITINGS</small>
           <div className="border-bottom"></div>
