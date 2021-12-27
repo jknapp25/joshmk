@@ -32,8 +32,6 @@ function CreateItem({ pages }) {
   const [itemType, setItemType] = useState("post");
   const [editingItemId, setEditingItemId] = useState("");
 
-  console.log(pages);
-
   const isMounted = useIsMounted();
 
   async function handleCreate(type, data) {

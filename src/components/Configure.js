@@ -70,8 +70,6 @@ function Configure() {
     if (process.env[configIdName]) {
       inpData.id = process.env[configIdName];
 
-      console.log(inpData);
-
       await API.graphql(
         graphqlOperation(updateConfiguration, { input: inpData })
       );
