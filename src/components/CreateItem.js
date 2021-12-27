@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Button, Row, Col } from "react-bootstrap";
+import moment from "moment";
+import { Button, Container, Row, Col, Table } from "react-bootstrap";
 import Post from "./Post";
 import Job from "./Job";
 import Project from "./Project";
 import Education from "./Education";
+import { GoPencil } from "react-icons/go";
+import { FaTrashAlt } from "react-icons/fa";
 import PostEditor from "./PostEditor";
 import JobEditor from "./JobEditor";
 import ProjectEditor from "./ProjectEditor";
@@ -15,6 +18,7 @@ import {
   createJob,
   createProject,
   createEducation,
+  deletePost,
   updatePost,
   updateJob,
   updateProject,
@@ -95,6 +99,14 @@ function CreateItem() {
     fetchData();
   }, [isMounted]);
 
+  async function deletePst(postId) {
+    if (postId) {
+      await API.graphql(
+        graphqlOperation(deletePost, { input: { id: postId } })
+      );
+    }
+  }
+
   let sortedItems = items.sort(function (a, b) {
     if (a.createdAt < b.createdAt) {
       return 1;
@@ -106,7 +118,7 @@ function CreateItem() {
   });
 
   return (
-    <>
+    <Container fluid>
       <Row>
         <Col lg={3}></Col>
         <Col lg={6}>
@@ -167,7 +179,87 @@ function CreateItem() {
         <Col lg={3}></Col>
       </Row>
       <div className="mb-5" />
-      {sortedItems.length > 0 ? (
+      <Row>
+        <Col lg={2}></Col>
+        <Col lg={8}>
+          <Table>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Created At</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {sortedItems.length > 0 ? (
+                sortedItems.map((item, i) => {
+                  if (item.type === "post")
+                    return (
+                      <tr key={i}>
+                        <td>{item.title}</td>
+                        <td>{item.category}</td>
+                        <td>
+                          {item.createdAt
+                            ? moment(item.createdAt).format("MMMM D, Y")
+                            : null}
+                        </td>
+                        <td>
+                          <span
+                            className="me-2"
+                            onClick={() => {
+                              setItemType("post");
+                              setEditingItemId(item.id);
+                              window.scrollTo(0, 0);
+                            }}
+                          >
+                            <GoPencil
+                              style={{
+                                display: "inline",
+                                cursor: "pointer",
+                                color: "#6c757d",
+                              }}
+                            />
+                          </span>
+                          <span
+                            onClick={() => {
+                              const shouldDelete =
+                                window.confirm("Delete the item?");
+                              if (shouldDelete) {
+                                deletePst(item.id);
+                              }
+                            }}
+                          >
+                            <FaTrashAlt
+                              className="ml-2"
+                              style={{
+                                display: "inline",
+                                cursor: "pointer",
+                                color: "#dc3545",
+                              }}
+                            />
+                          </span>
+                        </td>
+                      </tr>
+                      // <Post
+                      //   key={i}
+                      //   post={item}
+                      //   setEditingItemId={setEditingItemId}
+                      //   setItemType={setItemType}
+                      //   showEdit={true}
+                      // />
+                    );
+                  return null;
+                })
+              ) : (
+                <div>No items</div>
+              )}
+            </tbody>
+          </Table>
+        </Col>
+        <Col lg={2}></Col>
+      </Row>
+      {/* {sortedItems.length > 0 ? (
         sortedItems.map((item, i) => {
           if (item.type === "post")
             return (
@@ -213,7 +305,7 @@ function CreateItem() {
         })
       ) : (
         <div>No items</div>
-      )}
-    </>
+      )} */}
+    </Container>
   );
 }
