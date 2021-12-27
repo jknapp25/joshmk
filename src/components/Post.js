@@ -53,97 +53,96 @@ function Post({
   if (!realPost) return null;
 
   let { id, title, richContent, tags, category, images, createdAt } = realPost;
-  // const date = createdAt ? moment(createdAt).format("dddd") : null;
+  const date = createdAt ? moment(createdAt).format("MMMM D, Y") : null;
 
   richContent = richContent ? JSON.parse(richContent) : richContent;
 
   return (
     <Row>
-      <Col lg={3} className="pr-0 bg-white">
+      <Col lg={3}>
         <SideNavNew pages={pages} />
       </Col>
-      <Col lg={6} className="bg-white">
-        <Card className="border-0">
-          <Card.Body>
+      <Col lg={6} className="p-5 vh-100 overflow-scroll">
+        <div>
+          <h1 className="mb-0">
+            <span className="cursor-pointer">
+              <Link to={`/post/${id}`} className="hidden-link">
+                {title}
+              </Link>
+            </span>{" "}
+            {showEdit ? (
+              <>
+                <span
+                  onClick={() => {
+                    setItemType("post");
+                    setEditingItemId(id);
+                    window.scrollTo(0, 0);
+                  }}
+                >
+                  <GoPencil
+                    style={{
+                      display: "inline",
+                      cursor: "pointer",
+                      color: "#6c757d",
+                    }}
+                  />
+                </span>
+                <span
+                  onClick={() => {
+                    const shouldDelete = window.confirm("Delete the item?");
+                    if (shouldDelete) {
+                      deletePst();
+                    }
+                  }}
+                >
+                  <FaTrashAlt
+                    className="ml-2"
+                    style={{
+                      display: "inline",
+                      cursor: "pointer",
+                      color: "#dc3545",
+                    }}
+                  />
+                </span>
+              </>
+            ) : null}
+          </h1>
+          <div className="mb-3">
             {category ? (
-              <small className="text-dark text-uppercase">{category}</small>
-            ) : null}
-            <Card.Title>
-              <h1 className="mb-0">
-                <span className="cursor-pointer">
-                  <Link to={`/post/${id}`} className="hidden-link">
-                    {title}
-                  </Link>
-                </span>{" "}
-                {showEdit ? (
-                  <>
-                    <span
-                      onClick={() => {
-                        setItemType("post");
-                        setEditingItemId(id);
-                        window.scrollTo(0, 0);
-                      }}
-                    >
-                      <GoPencil
-                        style={{
-                          display: "inline",
-                          cursor: "pointer",
-                          color: "#6c757d",
-                        }}
-                      />
-                    </span>
-                    <span
-                      onClick={() => {
-                        const shouldDelete = window.confirm("Delete the item?");
-                        if (shouldDelete) {
-                          deletePst();
-                        }
-                      }}
-                    >
-                      <FaTrashAlt
-                        className="ml-2"
-                        style={{
-                          display: "inline",
-                          cursor: "pointer",
-                          color: "#dc3545",
-                        }}
-                      />
-                    </span>
-                  </>
-                ) : null}
-              </h1>
-              <small className="hidden-lg text-muted">
-                {moment(createdAt).format("MMMM D, Y") || "No date"}
+              <small className="text-muted text-capitalize">
+                {category} &bull;{" "}
               </small>
-            </Card.Title>
-
-            <ImageCarousel images={images} classes="mb-3" />
-
-            {richContent ? (
-              <RichTextEditor
-                value={richContent}
-                onChange={() => {}}
-                readOnly={true}
-              />
             ) : null}
-          </Card.Body>
-          {tags && tags.length > 0 && (
-            <Card.Footer
-              style={{
-                whiteSpace: "nowrap",
-                overflowX: "scroll",
-                boxShadow: "",
-              }}
-              className="border-0 py-0"
-            >
-              {tags.map((tag) => (
-                <Tag key={`tag-${tag}`} tag={tag} />
-              ))}
-            </Card.Footer>
-          )}
-        </Card>
+            <small className="text-muted">{date}</small>
+          </div>
+        </div>
+
+        <ImageCarousel images={images} classes="mb-3" />
+
+        {richContent ? (
+          <RichTextEditor
+            value={richContent}
+            onChange={() => {}}
+            readOnly={true}
+          />
+        ) : null}
+
+        {tags && tags.length > 0 && (
+          <div
+            style={{
+              whiteSpace: "nowrap",
+              overflowX: "scroll",
+              boxShadow: "",
+            }}
+            className="border-0 py-0 mt-4"
+          >
+            {tags.map((tag) => (
+              <Tag key={`tag-${tag}`} tag={tag} />
+            ))}
+          </div>
+        )}
       </Col>
-      <Col lg={3} className="bg-white"></Col>
+      <Col lg={3}></Col>
     </Row>
   );
 }

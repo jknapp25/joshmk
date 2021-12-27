@@ -46,7 +46,7 @@ function Home({ children }) {
           <Col lg={3}>
             <SideNavNew pages={config.pagesCustom} />
           </Col>
-          <Col lg={9} className="vh-100 overflow-scroll">
+          <Col lg={9} className="vh-100 overflow-scroll p-5">
             {children}
           </Col>
         </Row>
@@ -71,15 +71,17 @@ function Home({ children }) {
 
   if (pathname === "/work" || pathname === "/projects") {
     return (
-      <Row>
-        <Col lg={3}>
-          <SideNavNew pages={config.pagesCustom} />
-        </Col>
-        <Col lg={6} className="vh-100 overflow-scroll">
-          {children}
-        </Col>
-        <Col lg={3}></Col>
-      </Row>
+      <Container fluid>
+        <Row>
+          <Col lg={3}>
+            <SideNavNew pages={config.pagesCustom} />
+          </Col>
+          <Col lg={6} className="vh-100 overflow-scroll p-5">
+            {children}
+          </Col>
+          <Col lg={3}></Col>
+        </Row>
+      </Container>
     );
   }
 
