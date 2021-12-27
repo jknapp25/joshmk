@@ -197,14 +197,14 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
       />
 
       <Form.Label className="mb-1">Images</Form.Label>
-      {/* <ImageUploader
+      <ImageUploader
         images={images || []}
         afterEdit={(imgs) => {
           setImages(imgs);
         }}
         fieldId="images"
         fileSizeLimit={5}
-      /> */}
+      />
 
       <Form.Label className="mb-0">Category</Form.Label>
       <CreatableSelect
