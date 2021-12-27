@@ -12,6 +12,7 @@ import { FaTimes } from "react-icons/fa";
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 import ImageUploader from "./ImageUploader";
 import RichTextEditor from "./RichTextEditor/RichTextEditor";
+import SideNavNew from "./SideNavNew";
 import { API, graphqlOperation } from "aws-amplify";
 import { createConfiguration, updateConfiguration } from "../graphql/mutations";
 import * as queries from "../graphql/queries";
@@ -117,7 +118,9 @@ function Configure() {
 
   return (
     <Row>
-      <Col lg={3}></Col>
+      <Col lg={3}>
+        <SideNavNew />
+      </Col>
       <Col lg={6}>
         <div className="mb-4">
           <AmplifySignOut />

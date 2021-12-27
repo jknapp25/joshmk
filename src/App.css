@@ -175,13 +175,6 @@ html {
   text-decoration: none !important;
 }
 
-a {
-  color: #dc3545 !important;
-}
-a:hover {
-  color: #dc3545 !important;
-}
-
 button:focus {
   box-shadow: none !important;
 }

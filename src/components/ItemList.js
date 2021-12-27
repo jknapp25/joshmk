@@ -115,13 +115,13 @@ function ItemList({ mini = false }) {
   return (
     <>
       {pageName === "work" && config?.resumeGeneratorEnabled ? (
-        <Alert variant="light" className="border">
+        <Alert variant="primary" className="border">
           Click{" "}
           <PDFDownloadLink
             document={<Resume items={preppedItems} education={education} />}
             fileName={`${config.fullName.replace(" ", "_")}_Resume.pdf`}
           >
-            <span className="alert-link text-danger">here</span>
+            <span className="alert-link">here</span>
           </PDFDownloadLink>{" "}
           for {config.nickName}'s resume
         </Alert>
@@ -145,9 +145,9 @@ function ItemList({ mini = false }) {
         </Row>
       ) : null}
 
-      {/* <div>
+      <div>
         <ItemPreview />
-      </div> */}
+      </div>
 
       {preppedItems.map((item, i) => (
         <div key={i}>
