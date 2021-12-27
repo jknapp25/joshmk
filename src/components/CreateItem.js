@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import { Button, Container, Row, Col, Table } from "react-bootstrap";
-import Post from "./Post";
-import Job from "./Job";
-import Project from "./Project";
-import Education from "./Education";
+import SideNavNew from "./SideNavNew";
 import { GoPencil } from "react-icons/go";
 import { FaTrashAlt } from "react-icons/fa";
 import PostEditor from "./PostEditor";
@@ -30,10 +27,12 @@ import { withAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
 import { useIsMounted } from "../lib/utils";
 export default withAuthenticator(CreateItem);
 
-function CreateItem() {
+function CreateItem({ pages }) {
   const [items, setItems] = useState([]);
   const [itemType, setItemType] = useState("post");
   const [editingItemId, setEditingItemId] = useState("");
+
+  console.log(pages);
 
   const isMounted = useIsMounted();
 
@@ -120,7 +119,9 @@ function CreateItem() {
   return (
     <Container fluid>
       <Row>
-        <Col lg={3}></Col>
+        <Col lg={3}>
+          <SideNavNew />
+        </Col>
         <Col lg={6}>
           <div className="mb-4">
             <AmplifySignOut />

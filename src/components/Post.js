@@ -61,7 +61,7 @@ function Post({
     <Container fluid>
       <Row>
         <Col lg={3}>
-          <SideNavNew pages={pages} />
+          <SideNavNew />
         </Col>
         <Col lg={6} className="p-5 vh-100 overflow-scroll">
           <div>

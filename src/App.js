@@ -63,7 +63,7 @@ function App() {
               <Gallery path="gallery" />
               <Post path="post/:id" pages={config.pagesCustom} />
               <GoalHours path="goal-hours" />
-              <CreateItem path="create" />
+              <CreateItem path="create" pages={config.pagesCustom} />
               <Configure path="configure" />
               <Bio path="about" bio={config.bio} pages={config.pagesCustom} />
             </Home>

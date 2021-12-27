@@ -44,7 +44,7 @@ function Home({ children }) {
       <Container fluid>
         <Row>
           <Col lg={3}>
-            <SideNavNew pages={config.pagesCustom} />
+            <SideNavNew />
           </Col>
           <Col lg={9} className="vh-100 overflow-scroll p-5">
             {children}
@@ -74,7 +74,7 @@ function Home({ children }) {
       <Container fluid>
         <Row>
           <Col lg={3}>
-            <SideNavNew pages={config.pagesCustom} />
+            <SideNavNew />
           </Col>
           <Col lg={6} className="vh-100 overflow-scroll p-5">
             {children}

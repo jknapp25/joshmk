@@ -1,17 +1,17 @@
 import React from "react";
 import RichTextEditor from "./RichTextEditor/RichTextEditor";
 import SideNavNew from "./SideNavNew";
-import { Card, Row, Col, Container } from "react-bootstrap";
+import { Row, Col, Container } from "react-bootstrap";
 export default Bio;
 
-function Bio({ bio, pages }) {
+function Bio({ bio }) {
   if (!bio) return null;
   bio = JSON.parse(bio);
   return (
     <Container fluid>
       <Row>
         <Col lg={3}>
-          <SideNavNew pages={pages} />
+          <SideNavNew />
         </Col>
         <Col className="vh-100 overflow-scroll p-5">
           <RichTextEditor
