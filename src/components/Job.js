@@ -100,7 +100,7 @@ function Job({ job, setEditingItemId, setItemType, showEdit = false }) {
       {details && details.length > 0 ? (
         <ul>
           {details.map((detail, i) => (
-            <li key={i}>{detail}</li>
+            <li key={`detail-${i}`}>{detail}</li>
           ))}
         </ul>
       ) : null}
@@ -116,8 +116,8 @@ function Job({ job, setEditingItemId, setItemType, showEdit = false }) {
           }}
           className="mt-1"
         >
-          {tags.map((tag) => (
-            <Tag tag={tag} />
+          {tags.map((tag, i) => (
+            <Tag tag={tag} key={`tag-${i}`} />
           ))}
         </div>
       )}
