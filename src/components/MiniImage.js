@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Image } from "react-bootstrap";
 import { useIsMounted } from "../lib/utils";
 import { Storage } from "aws-amplify";
 export default MiniImage;
@@ -24,11 +25,13 @@ function MiniImage({ images = [], classes = "" }) {
   if (images.length === 0) return null;
 
   return (
-    <img
-      src={imageUrls[0]}
-      alt={imageUrls[0]}
-      className="img-fluid"
-      style={{ width: "110px" }}
-    />
+    <div className="ratio ratio-4x3" style={{ width: "150px" }}>
+      <Image
+        style={{ objectFit: "cover" }}
+        src={imageUrls[0]}
+        alt={imageUrls[0]}
+        fluid
+      />
+    </div>
   );
 }

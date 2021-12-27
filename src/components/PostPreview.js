@@ -34,22 +34,22 @@ function PostPreview({ post = {}, ...props }) {
 
   return (
     <div
-      className="row gx-0 cursor-pointer py-3 border-bottom"
+      className="row gx-0 cursor-pointer py-4 border-bottom"
       onClick={() => navigate(`/post/${id}`)}
     >
       <div className="col my-auto">
         <div>
-          {category ? (
-            <small className="text-muted text-uppercase">{category}</small>
-          ) : null}
           <h4 className="mb-0 fw-bold">{title}</h4>
+          {category ? (
+            <small className="text-muted text-capitalize">
+              {category} &bull;{" "}
+            </small>
+          ) : null}
           <small className="text-muted">{date}</small>
         </div>
       </div>
       <div className="col-auto">
-        <div className="py-2">
-          <MiniImage images={images} />
-        </div>
+        <MiniImage images={images} />
       </div>
     </div>
   );
