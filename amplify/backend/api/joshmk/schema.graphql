@@ -10,6 +10,18 @@ type Post @model @auth(rules: [{ allow: public }]) {
   hidden: Boolean
 }
 
+type Item @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  name: String
+  description: AWSJSON
+  category: String
+  tags: [String]
+  images: [String]
+  isForSale: Boolean
+  isSold: Boolean
+  price: Float
+}
+
 type Project @model @auth(rules: [{ allow: public }]) {
   id: ID!
   name: String

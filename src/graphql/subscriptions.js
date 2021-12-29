@@ -49,6 +49,57 @@ export const onDeletePost = /* GraphQL */ `
     }
   }
 `;
+export const onCreateItem = /* GraphQL */ `
+  subscription OnCreateItem {
+    onCreateItem {
+      id
+      name
+      description
+      category
+      tags
+      images
+      isForSale
+      isSold
+      price
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateItem = /* GraphQL */ `
+  subscription OnUpdateItem {
+    onUpdateItem {
+      id
+      name
+      description
+      category
+      tags
+      images
+      isForSale
+      isSold
+      price
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteItem = /* GraphQL */ `
+  subscription OnDeleteItem {
+    onDeleteItem {
+      id
+      name
+      description
+      category
+      tags
+      images
+      isForSale
+      isSold
+      price
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateProject = /* GraphQL */ `
   subscription OnCreateProject {
     onCreateProject {
