@@ -19,6 +19,7 @@ function Home({ children }) {
   const isJobRoute = useMatch("/job/*");
   const isEducationRoute = useMatch("/education/*");
   const isProjectRoute = useMatch("/project/*");
+  const isProjectsRoute = useMatch("/projects");
   const isAboutRoute = useMatch("/about");
   const isWorkRoute = useMatch("/work");
   const isGalleryRoute = useMatch("/gallery");
@@ -81,6 +82,7 @@ function Home({ children }) {
     isJobRoute ||
     isEducationRoute ||
     isProjectRoute ||
+    isProjectsRoute ||
     isAboutRoute ||
     isSettingsRoute ||
     isWorkRoute ||
