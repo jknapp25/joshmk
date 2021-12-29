@@ -1,16 +1,17 @@
-import React from "react";
-import { Accordion, Badge, Button, Card } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Badge } from "react-bootstrap";
 import { createTimeInfo } from "../lib/utils";
 import Tag from "./Tag";
-import { GoPencil } from "react-icons/go";
-import { FaTrashAlt } from "react-icons/fa";
-import { API, graphqlOperation } from "aws-amplify";
-import { deleteJob } from "../graphql/mutations";
+import { useIsMounted } from "../lib/utils";
+import { API } from "aws-amplify";
+import * as queries from "../graphql/queries";
 export default Job;
 
-function Job({ job, setEditingItemId, setItemType, showEdit = false }) {
+function Job({ job = {}, ...props }) {
+  const [realJob, setRealJob] = useState(job);
+  const isMounted = useIsMounted();
+
   const {
-    id,
     company,
     role,
     location,
@@ -21,63 +22,37 @@ function Job({ job, setEditingItemId, setItemType, showEdit = false }) {
     type,
     start,
     end,
-  } = job;
-  const timeInfo = createTimeInfo(start, end, null, false);
+  } = realJob;
 
-  async function deleteJb() {
-    if (id) {
-      await API.graphql(graphqlOperation(deleteJob, { input: { id } }));
+  useEffect(() => {
+    async function fetchData() {
+      const postData = await API.graphql({
+        query: queries.getJob,
+        variables: { id: props.id },
+      });
+
+      if (postData && isMounted.current) {
+        setRealJob(postData.data.getJob);
+      }
     }
-  }
+    if (props.id) {
+      fetchData();
+    }
+  }, [props.id, isMounted]);
+
+  const timeInfo = createTimeInfo(start, end, null, false);
 
   return (
     <>
-      <Card.Title>
+      <h4>
         {role}
         {type === "contract" ? (
           <Badge variant="secondary" className="ml-2">
             Contract
           </Badge>
-        ) : null}{" "}
-        {showEdit ? (
-          <>
-            <span
-              onClick={() => {
-                setItemType("job");
-                setEditingItemId(id);
-                window.scrollTo(0, 0);
-              }}
-            >
-              <GoPencil
-                color="secondary"
-                style={{
-                  display: "inline",
-                  cursor: "pointer",
-                  color: "#6c757d",
-                }}
-              />
-            </span>
-            <span
-              onClick={() => {
-                const shouldDelete = window.confirm("Delete the item?");
-                if (shouldDelete) {
-                  deleteJb();
-                }
-              }}
-            >
-              <FaTrashAlt
-                className="ml-2"
-                style={{
-                  display: "inline",
-                  cursor: "pointer",
-                  color: "#dc3545",
-                }}
-              />
-            </span>
-          </>
         ) : null}
-      </Card.Title>
-      <Card.Subtitle className="text-muted mb-2">
+      </h4>
+      <h5 className="text-muted mb-2">
         {companyUrl ? (
           <a href={companyUrl || ""} target="_blank" rel="noreferrer noopener">
             {company}
@@ -87,15 +62,15 @@ function Job({ job, setEditingItemId, setItemType, showEdit = false }) {
         )}{" "}
         {companyUrl && location ? " - " : null}
         {location || null}
-      </Card.Subtitle>
+      </h5>
       {summary ? (
-        <Card.Text
+        <div
           className={`${
             tags && tags.length > 0 ? "mb-2" : ""
           } font-weight-normal`}
         >
           {summary}
-        </Card.Text>
+        </div>
       ) : null}
       {details && details.length > 0 ? (
         <ul>
@@ -104,9 +79,9 @@ function Job({ job, setEditingItemId, setItemType, showEdit = false }) {
           ))}
         </ul>
       ) : null}
-      <Card.Text>
+      <div>
         <small className="text-muted">{timeInfo}</small>
-      </Card.Text>
+      </div>
       {tags && tags.length > 0 && (
         <div
           style={{

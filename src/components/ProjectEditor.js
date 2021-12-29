@@ -3,8 +3,10 @@ import { Button, Dropdown, Form, FormControl } from "react-bootstrap";
 import ImageUploader from "./ImageUploader";
 import TagEditor from "./TagEditor";
 import { statusColorLookup } from "../lib/utils";
-import { API } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
+import { createProject, updateProject } from "../graphql/mutations";
 import * as queries from "../graphql/queries";
+import { navigate } from "@reach/router";
 export default ProjectEditor;
 
 function ProjectEditor({ id = null, onCreate, onUpdate }) {
@@ -76,12 +78,22 @@ function ProjectEditor({ id = null, onCreate, onUpdate }) {
 
     if (id) {
       data.id = id;
-      onUpdate("project", data);
+      handleUpdate(data);
     } else {
-      onCreate("project", data);
+      handleCreate(data);
     }
 
     clearEditor();
+  }
+
+  async function handleCreate(data) {
+    await API.graphql(graphqlOperation(createProject, { input: data }));
+    navigate("/create");
+  }
+
+  async function handleUpdate(data) {
+    await API.graphql(graphqlOperation(updateProject, { input: data }));
+    navigate("/create");
   }
 
   return (

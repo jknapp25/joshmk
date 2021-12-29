@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Button, ButtonGroup, Form, FormControl } from "react-bootstrap";
-import { API } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
+import { createJob, updateJob } from "../graphql/mutations";
 import TagEditor from "./TagEditor";
 import * as queries from "../graphql/queries";
 import { useIsMounted } from "../lib/utils";
+import { navigate } from "@reach/router";
 export default JobEditor;
 
-function JobEditor({ id = null, onCreate, onUpdate }) {
+function JobEditor({ id = null }) {
   const [company, setCompany] = useState("");
   const [role, setRole] = useState("");
   const [location, setLocation] = useState("");
@@ -83,9 +85,19 @@ function JobEditor({ id = null, onCreate, onUpdate }) {
 
     if (id) {
       data.id = id;
-      onUpdate("job", data);
+      handleUpdate(data);
     } else {
-      onCreate("job", data);
+      handleCreate(data);
+    }
+
+    async function handleCreate(data) {
+      await API.graphql(graphqlOperation(createJob, { input: data }));
+      navigate("/create");
+    }
+
+    async function handleUpdate(data) {
+      await API.graphql(graphqlOperation(updateJob, { input: data }));
+      navigate("/create");
     }
 
     if (isMounted.current) clearEditor();

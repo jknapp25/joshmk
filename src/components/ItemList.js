@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
-import { Alert, Row, Col } from "react-bootstrap";
+import { Alert } from "react-bootstrap";
 import Resume from "./Resume";
 import Tag from "./Tag";
 import { useLocation, navigate } from "@reach/router";
@@ -12,7 +12,6 @@ import Project from "./Project";
 import Job from "./Job";
 import Education from "./Education";
 import PostPreview from "./PostPreview";
-import ItemPreview from "./ItemPreview";
 import { FaTimes } from "react-icons/fa";
 import { ConfigContext } from "../App";
 export default ItemList;
@@ -115,7 +114,7 @@ function ItemList({ mini = false }) {
   return (
     <>
       {pageName === "work" && config?.resumeGeneratorEnabled ? (
-        <Alert variant="primary" className="border">
+        <Alert variant="primary" className="border mb-3">
           Click{" "}
           <PDFDownloadLink
             document={<Resume items={preppedItems} education={education} />}
@@ -127,27 +126,21 @@ function ItemList({ mini = false }) {
         </Alert>
       ) : null}
       {pageName === "search" ? (
-        <Row>
-          <Col lg={3}></Col>
-          <Col lg={6}>
-            <h3 className="mb-4 mt-1">
-              {preppedItems.length} item{preppedItems.length > 1 ? "s" : ""}{" "}
-              tagged <Tag tag={searchParams.tag} />
-              <span
-                className="text-muted ml-2 cursor-pointer"
-                onClick={() => navigate("/")}
-              >
-                <FaTimes color="#dc3545" title="clear search" />
-              </span>
-            </h3>
-          </Col>
-          <Col lg={3}></Col>
-        </Row>
+        <h3 className="mb-4 mt-1">
+          {preppedItems.length} item{preppedItems.length > 1 ? "s" : ""} tagged{" "}
+          <Tag tag={searchParams.tag} />
+          <span
+            className="text-muted ml-2 cursor-pointer"
+            onClick={() => navigate("/")}
+          >
+            <FaTimes color="#dc3545" title="clear search" />
+          </span>
+        </h3>
       ) : null}
 
-      <div>
+      {/* <div>
         <ItemPreview />
-      </div>
+      </div> */}
 
       {preppedItems.map((item, i) => (
         <div key={i}>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useLocation } from "@reach/router";
+import { useLocation, useMatch } from "@reach/router";
 import { Container, Row, Col } from "react-bootstrap";
 import SideNavNew from "./SideNavNew";
 import Dashboard from "./Dashboard";
@@ -14,6 +14,17 @@ function Home({ children }) {
 
   const [avatarUrl, setAvatarUrl] = useState("");
   const [faviconUrl, setFaviconUrl] = useState("");
+
+  const isPostRoute = useMatch("/post/*");
+  const isJobRoute = useMatch("/job/*");
+  const isEducationRoute = useMatch("/education/*");
+  const isProjectRoute = useMatch("/project/*");
+  const isAboutRoute = useMatch("/about");
+  const isWorkRoute = useMatch("/work");
+  const isGalleryRoute = useMatch("/gallery");
+  const isCreateRoute = useMatch("/create");
+  const isSettingsRoute = useMatch("/settings");
+  const isSearchRoute = useMatch("/search");
 
   const isMounted = useIsMounted();
 
@@ -39,14 +50,14 @@ function Home({ children }) {
 
   if (!config.pages || config.pages.length === 0) return null;
 
-  if (pathname === "/gallery") {
+  if (isGalleryRoute || isCreateRoute) {
     return (
       <Container fluid>
         <Row>
           <Col lg={3}>
             <SideNavNew />
           </Col>
-          <Col lg={9} className="vh-100 overflow-scroll p-5">
+          <Col lg={9} className="vh-100 overflow-scroll p-5 border-start">
             {children}
           </Col>
         </Row>
@@ -65,18 +76,26 @@ function Home({ children }) {
     );
   }
 
-  if (pathname === "/about") {
-    return <>{children}</>;
-  }
-
-  if (pathname === "/work" || pathname === "/projects") {
+  if (
+    isPostRoute ||
+    isJobRoute ||
+    isEducationRoute ||
+    isProjectRoute ||
+    isAboutRoute ||
+    isSettingsRoute ||
+    isWorkRoute ||
+    isSearchRoute
+  ) {
     return (
       <Container fluid>
         <Row>
           <Col lg={3}>
             <SideNavNew />
           </Col>
-          <Col lg={6} className="vh-100 overflow-scroll p-5">
+          <Col
+            lg={6}
+            className="vh-100 overflow-scroll p-5 border-start border-end"
+          >
             {children}
           </Col>
           <Col lg={3}></Col>

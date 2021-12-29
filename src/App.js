@@ -4,8 +4,15 @@ import ItemList from "./components/ItemList";
 import GoalHours from "./components/GoalHours";
 import Home from "./components/Home.js";
 import Post from "./components/Post.js";
-import CreateItem from "./components/CreateItem.js";
-import Configure from "./components/Configure.js";
+import PostEditor from "./components/PostEditor.js";
+import Job from "./components/Job.js";
+import JobEditor from "./components/JobEditor.js";
+import Project from "./components/Project.js";
+import ProjectEditor from "./components/ProjectEditor.js";
+import Education from "./components/Education.js";
+import EducationEditor from "./components/EducationEditor.js";
+import Create from "./components/Create.js";
+import Settings from "./components/Settings.js";
 import Bio from "./components/Bio.js";
 import Gallery from "./components/Gallery.js";
 import Amplify from "aws-amplify";
@@ -61,11 +68,22 @@ function App() {
             <Home path="/">
               <ItemList default />
               <Gallery path="gallery" />
-              <Post path="post/:id" pages={config.pagesCustom} />
+              <Post path="post/:id" />
+              <PostEditor path="post/:id/edit" />
+              <PostEditor path="post/create" />
+              <Job path="job/:id" />
+              <JobEditor path="job/:id/edit" />
+              <JobEditor path="job/create" />
+              <Project path="project/:id" />
+              <ProjectEditor path="project/:id/edit" />
+              <ProjectEditor path="project/create" />
+              <Education path="education/:id" />
+              <EducationEditor path="education/:id/edit" />
+              <EducationEditor path="education/create" />
               <GoalHours path="goal-hours" />
-              <CreateItem path="create" pages={config.pagesCustom} />
-              <Configure path="configure" />
-              <Bio path="about" bio={config.bio} pages={config.pagesCustom} />
+              <Create path="create" />
+              <Settings path="settings" />
+              <Bio path="about" bio={config.bio} />
             </Home>
           </Router>
           <FullScreenImageCarousel />

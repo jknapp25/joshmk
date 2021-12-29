@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, FormControl } from "react-bootstrap";
-import { API } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
 import * as queries from "../graphql/queries";
+import { createPost, updatePost } from "../graphql/mutations";
 import RichTextEditor from "./RichTextEditor/RichTextEditor";
 import ImageUploader from "./ImageUploader";
 import TagEditor from "./TagEditor";
 import CreatableSelect from "react-select/creatable";
 import { useIsMounted } from "../lib/utils";
+import { navigate } from "@reach/router";
 export default PostEditor;
 
 const blankEditorValue = [
@@ -16,7 +18,7 @@ const blankEditorValue = [
   },
 ];
 
-function PostEditor({ id = null, onCreate, onUpdate }) {
+function PostEditor({ id = null }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [richContent, setRichContent] = useState(blankEditorValue);
@@ -150,12 +152,22 @@ function PostEditor({ id = null, onCreate, onUpdate }) {
 
     if (id) {
       data.id = id;
-      onUpdate("post", data);
+      handleUpdate(data);
     } else {
-      onCreate("post", data);
+      handleCreate(data);
     }
 
     if (isMounted.current) clearEditor();
+  }
+
+  async function handleCreate(data) {
+    await API.graphql(graphqlOperation(createPost, { input: data }));
+    navigate("/create");
+  }
+
+  async function handleUpdate(data) {
+    await API.graphql(graphqlOperation(updatePost, { input: data }));
+    navigate("/create");
   }
 
   const selectCategory = category ? { label: category, value: category } : null;

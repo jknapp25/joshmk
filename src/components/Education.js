@@ -1,19 +1,34 @@
-import React, { Fragment } from "react";
-import { Card } from "react-bootstrap";
-import { Link } from "@reach/router";
+import React, { useState, useEffect } from "react";
+import Tag from "./Tag";
 import { createTimeInfo } from "../lib/utils";
-import { GoPencil } from "react-icons/go";
-import { FaTag } from "react-icons/fa";
+import { useIsMounted } from "../lib/utils";
+import { API } from "aws-amplify";
+import * as queries from "../graphql/queries";
 export default Education;
 
-function Education({
-  education,
-  setEditingItemId,
-  setItemType,
-  showEdit = false,
-}) {
+function Education({ education, ...props }) {
+  const [realEducation, setRealEducation] = useState(education);
+  const isMounted = useIsMounted();
+
+  useEffect(() => {
+    async function fetchData() {
+      const educationData = await API.graphql({
+        query: queries.getEducation,
+        variables: { id: props.id },
+      });
+
+      if (educationData && isMounted.current) {
+        setRealEducation(educationData.data.getEducation);
+      }
+    }
+    if (props.id) {
+      fetchData();
+    }
+  }, [props.id, isMounted]);
+
+  if (!realEducation) return null;
+
   const {
-    id,
     organization,
     degree,
     location,
@@ -23,99 +38,55 @@ function Education({
     tags,
     start,
     end,
-  } = education;
+  } = realEducation;
+
   const timeInfo = createTimeInfo(start, end, null, false);
 
   return (
-    <Card className="mb-2">
-      <Card.Body>
-        <Card.Title>
-          {degree}{" "}
-          {showEdit ? (
-            <span
-              onClick={() => {
-                setItemType("education");
-                setEditingItemId(id);
-                window.scrollTo(0, 0);
-              }}
-            >
-              <GoPencil
-                color="secondary"
-                style={{
-                  display: "inline",
-                  cursor: "pointer",
-                  color: "#6c757d",
-                }}
-              />
-            </span>
-          ) : null}
-        </Card.Title>
-        <Card.Subtitle className="text-muted mb-2">
-          {organization ? (
-            <a
-              href={organizationUrl || ""}
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              {organization}
-            </a>
-          ) : (
-            organization
-          )}{" "}
-          {location && `- ${location}`}
-        </Card.Subtitle>
-        {summary ? (
-          <Card.Text
-            className={`${
-              tags && tags.length > 0 ? "mb-2" : ""
-            } font-weight-normal`}
+    <>
+      <h4>{degree}</h4>
+      <h5 className="text-muted mb-2">
+        {organization ? (
+          <a
+            href={organizationUrl || ""}
+            target="_blank"
+            rel="noreferrer noopener"
           >
-            {summary}
-          </Card.Text>
-        ) : null}
-        {details && details.length > 0 ? (
-          <div
-            className={`${
-              tags && tags.length > 0 ? "mb-2" : ""
-            } font-weight-normal`}
-          >
-            <ul>
-              {details.map((detail, i) => (
-                <li key={i}>{detail}</li>
-              ))}
-            </ul>
-          </div>
-        ) : null}
-        <Card.Text>
-          <small className="text-muted">{timeInfo}</small>
-        </Card.Text>
-      </Card.Body>
-      {tags && tags.length > 0 && (
-        <Card.Footer
-          style={{
-            whiteSpace: "nowrap",
-            overflowX: "scroll",
-            boxShadow: "",
-          }}
+            {organization}
+          </a>
+        ) : (
+          organization
+        )}{" "}
+        {location && `- ${location}`}
+      </h5>
+      {summary ? (
+        <div
+          className={`${
+            tags && tags.length > 0 ? "mb-2" : ""
+          } font-weight-normal`}
         >
-          <FaTag
-            className="mr-2 d-inline"
-            style={{
-              color: "rgba(108, 117, 125, 0.7)",
-            }}
-          />
-          {tags.map((tag, i) => (
-            <Fragment key={tag}>
-              <Link to={`/search?tag=${tag}`}>{tag}</Link>
-              {i !== tags.length - 1 ? (
-                <span style={{ color: "rgba(108, 117, 125, 0.7)" }}>, </span>
-              ) : (
-                ""
-              )}
-            </Fragment>
-          ))}
-        </Card.Footer>
-      )}
-    </Card>
+          {summary}
+        </div>
+      ) : null}
+      {details && details.length > 0 ? (
+        <div
+          className={`${
+            tags && tags.length > 0 ? "mb-2" : ""
+          } font-weight-normal`}
+        >
+          <ul>
+            {details.map((detail, i) => (
+              <li key={i}>{detail}</li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+      <div className="mb-2">
+        <small className="text-muted">{timeInfo}</small>
+      </div>
+      {tags &&
+        tags.length > 0 &&
+        tags.map((tag, i) => <Tag key={tag} tag={tag} />)}
+    </>
   );
 }

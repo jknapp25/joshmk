@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, FormControl } from "react-bootstrap";
 import TagEditor from "./TagEditor";
-import { API } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
+import { createEducation, updateEducation } from "../graphql/mutations";
 import * as queries from "../graphql/queries";
 import { useIsMounted } from "../lib/utils";
+import { navigate } from "@reach/router";
 export default EducationEditor;
 
-function EducationEditor({ id = null, onCreate, onUpdate }) {
+function EducationEditor({ id = null }) {
   const [organization, setOrganization] = useState("");
   const [degree, setDegree] = useState("");
   const [location, setLocation] = useState("");
@@ -71,12 +73,22 @@ function EducationEditor({ id = null, onCreate, onUpdate }) {
 
     if (id) {
       data.id = id;
-      onUpdate("education", data);
+      handleUpdate(data);
     } else {
-      onCreate("education", data);
+      handleCreate(data);
     }
 
     if (isMounted.current) clearEditor();
+  }
+
+  async function handleCreate(data) {
+    await API.graphql(graphqlOperation(createEducation, { input: data }));
+    navigate("/create");
+  }
+
+  async function handleUpdate(data) {
+    await API.graphql(graphqlOperation(updateEducation, { input: data }));
+    navigate("/create");
   }
 
   return (

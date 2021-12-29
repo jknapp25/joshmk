@@ -1,89 +1,60 @@
-import React from "react";
-import { Badge, Card } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Badge } from "react-bootstrap";
 import ImageCarousel from "./ImageCarousel";
-import { navigate } from "@reach/router";
+import Tag from "./Tag";
 import { createTimeInfo, statusColorLookup } from "../lib/utils";
-import { GoPencil } from "react-icons/go";
-import { FaTrashAlt } from "react-icons/fa";
-import { API, graphqlOperation } from "aws-amplify";
-import { deleteProject } from "../graphql/mutations";
+import { useIsMounted } from "../lib/utils";
+import { API } from "aws-amplify";
+import * as queries from "../graphql/queries";
 export default Project;
 
-function Project({ project, setEditingItemId, setItemType, showEdit = false }) {
-  const { id, name, tags, summary, status, link, images, start, end } = project;
-  const timeInfo = createTimeInfo(start, end, null, false);
+function Project({ project = {}, ...props }) {
+  const [realProject, setRealProject] = useState(project);
+  const isMounted = useIsMounted();
 
-  async function deleteProjekt() {
-    if (id) {
-      await API.graphql(graphqlOperation(deleteProject, { input: { id } }));
+  useEffect(() => {
+    async function fetchData() {
+      const projectData = await API.graphql({
+        query: queries.getProject,
+        variables: { id: props.id },
+      });
+
+      if (projectData && isMounted.current) {
+        setRealProject(projectData.data.getProject);
+      }
     }
-  }
+    if (props.id) {
+      fetchData();
+    }
+  }, [props.id, isMounted]);
+
+  if (!realProject) return null;
+
+  const { name, tags, summary, status, link, images, start, end } = realProject;
+  const timeInfo = createTimeInfo(start, end, null, false);
 
   return (
     <>
-      <Card>
-        <ImageCarousel images={images} />
+      <ImageCarousel images={images} />
 
-        <Card.Body>
-          <Card.Title>
-            {link ? (
-              <a href={link} target="_blank" rel="noreferrer noopener">
-                {name}
-              </a>
-            ) : (
-              name
-            )}
-            {status ? (
-              <Badge variant={statusColorLookup[status]} className="ml-2">
-                {status}
-              </Badge>
-            ) : null}{" "}
-            {showEdit ? (
-              <>
-                <span
-                  onClick={() => {
-                    setItemType("project");
-                    setEditingItemId(id);
-                    window.scrollTo(0, 0);
-                  }}
-                >
-                  <GoPencil
-                    color="secondary"
-                    style={{
-                      display: "inline",
-                      cursor: "pointer",
-                      color: "#6c757d",
-                    }}
-                  />
-                </span>
-                <span
-                  onClick={() => {
-                    const shouldDelete = window.confirm("Delete the item?");
-                    if (shouldDelete) {
-                      deleteProjekt();
-                    }
-                  }}
-                >
-                  <FaTrashAlt
-                    className="ml-2"
-                    style={{
-                      display: "inline",
-                      cursor: "pointer",
-                      color: "#dc3545",
-                    }}
-                  />
-                </span>
-              </>
-            ) : null}
-          </Card.Title>
-          {summary ? (
-            <Card.Text className="font-weight-normal">{summary}</Card.Text>
-          ) : null}
-          <Card.Text className="mt-2">
-            <small className="text-muted">{timeInfo}</small>
-          </Card.Text>
-        </Card.Body>
-      </Card>
+      <h4>
+        {link ? (
+          <a href={link} target="_blank" rel="noreferrer noopener">
+            {name}
+          </a>
+        ) : (
+          name
+        )}
+        {status ? (
+          <Badge bg={statusColorLookup[status]} className="ms-2">
+            {status}
+          </Badge>
+        ) : null}{" "}
+      </h4>
+      {summary ? <div className="font-weight-normal">{summary}</div> : null}
+      <div className="mt-2">
+        <small className="text-muted">{timeInfo}</small>
+      </div>
       {tags && tags.length > 0 && (
         <div
           style={{
@@ -94,13 +65,7 @@ function Project({ project, setEditingItemId, setItemType, showEdit = false }) {
           className="mt-1"
         >
           {tags.map((tag) => (
-            <Badge
-              variant="lightgray"
-              className="mr-2 cursor-pointer hover"
-              onClick={() => navigate(`/search?tag=${tag}`)}
-            >
-              {tag}
-            </Badge>
+            <Tag key={tag} tag={tag} />
           ))}
         </div>
       )}
