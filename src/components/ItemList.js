@@ -12,6 +12,7 @@ import Project from "./Project";
 import Job from "./Job";
 import Education from "./Education";
 import PostPreview from "./PostPreview";
+import ItemPreview from "./ItemPreview";
 import { FaTimes } from "react-icons/fa";
 import { ConfigContext } from "../App";
 export default ItemList;
@@ -43,7 +44,15 @@ function ItemList({ mini = false }) {
           ...post,
           type: "post",
         }));
-        items = [...items, ...posts];
+        // items = [...items, ...posts];
+        const prodItemsData = await API.graphql({ query: queries.listItems });
+        const prodItems = prodItemsData.data.listItems.items.map(
+          (prodItem) => ({
+            ...prodItem,
+            type: "item",
+          })
+        );
+        items = [...items, ...posts, ...prodItems];
       }
 
       if (pageName === "work" || pageName === "search") {
@@ -146,6 +155,7 @@ function ItemList({ mini = false }) {
         <div key={i}>
           {item.type === "post" && mini ? <PostPreview post={item} /> : null}
           {item.type === "post" && !mini ? <Post post={item} /> : null}
+          {item.type === "item" ? <ItemPreview item={item} /> : null}
           {item.type === "job" ? <Job job={item} /> : null}
           {item.type === "project" ? <Project project={item} /> : null}
           {item.type === "education" && !pageName === "work" ? (

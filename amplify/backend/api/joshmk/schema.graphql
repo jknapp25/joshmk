@@ -20,6 +20,7 @@ type Item @model @auth(rules: [{ allow: public }]) {
   isForSale: Boolean
   isSold: Boolean
   price: Float
+  createdAt: String
 }
 
 type Project @model @auth(rules: [{ allow: public }]) {

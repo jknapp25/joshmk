@@ -16,6 +16,7 @@ function Home({ children }) {
   const [faviconUrl, setFaviconUrl] = useState("");
 
   const isPostRoute = useMatch("/post/*");
+  const isItemRoute = useMatch("/item/*");
   const isJobRoute = useMatch("/job/*");
   const isEducationRoute = useMatch("/education/*");
   const isProjectRoute = useMatch("/project/*");
@@ -86,7 +87,8 @@ function Home({ children }) {
     isAboutRoute ||
     isSettingsRoute ||
     isWorkRoute ||
-    isSearchRoute
+    isSearchRoute ||
+    isItemRoute
   ) {
     return (
       <Container fluid>

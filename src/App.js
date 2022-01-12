@@ -5,6 +5,8 @@ import GoalHours from "./components/GoalHours";
 import Home from "./components/Home.js";
 import Post from "./components/Post.js";
 import PostEditor from "./components/PostEditor.js";
+import Item from "./components/Item.js";
+import ItemEditor from "./components/ItemEditor.js";
 import Job from "./components/Job.js";
 import JobEditor from "./components/JobEditor.js";
 import Project from "./components/Project.js";
@@ -71,6 +73,9 @@ function App() {
               <Post path="post/:id" />
               <PostEditor path="post/:id/edit" />
               <PostEditor path="post/create" />
+              <Item path="item/:id" />
+              <ItemEditor path="item/:id/edit" />
+              <ItemEditor path="item/create" />
               <Job path="job/:id" />
               <JobEditor path="job/:id/edit" />
               <JobEditor path="job/create" />

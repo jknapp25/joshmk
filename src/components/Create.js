@@ -6,6 +6,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import { API, graphqlOperation } from "aws-amplify";
 import {
   deletePost,
+  deleteItem,
   deleteJob,
   deleteProject,
   deleteEducation,
@@ -17,6 +18,7 @@ export default withAuthenticator(Create);
 
 const TABLE_FIELDS = {
   post: ["title", "category", "createdAt"],
+  item: ["name", "category", "createdAt"],
   job: ["role", "company", "location"],
   project: ["name", "status"],
   education: ["organization", "degree"],
@@ -28,12 +30,14 @@ function Create() {
 
   const isMounted = useIsMounted();
 
-  async function deleteItem(type, id) {
+  async function deleteEntity(type, id) {
     if (!type || !id) return;
 
     let mutation = null;
     if (itemType === "post") {
       mutation = deletePost;
+    } else if (itemType === "item") {
+      mutation = deleteItem;
     } else if (itemType === "job") {
       mutation = deleteJob;
     } else if (itemType === "project") {
@@ -53,6 +57,8 @@ function Create() {
 
       if (itemType === "post") {
         query = "listPosts";
+      } else if (itemType === "item") {
+        query = "listItems";
       } else if (itemType === "job") {
         query = "listJobs";
       } else if (itemType === "project") {
@@ -90,17 +96,17 @@ function Create() {
             className="bg-transparent p-0 text-capitalize border-0"
           >
             {itemType}
-            {["post", "job", "project"].includes(itemType) ? "s" : ""}
+            {["post", "item", "job", "project"].includes(itemType) ? "s" : ""}
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            {["post", "job", "project", "education"].map((type) => (
+            {["post", "item", "job", "project", "education"].map((type) => (
               <Dropdown.Item
                 onClick={() => setItemType(type)}
                 className="text-capitalize"
               >
                 {type}
-                {["post", "job", "project"].includes(type) ? "s" : ""}
+                {["post", "item", "job", "project"].includes(type) ? "s" : ""}
               </Dropdown.Item>
             ))}
           </Dropdown.Menu>
@@ -110,10 +116,7 @@ function Create() {
           className="float-end"
           onClick={() => navigate(`/${itemType}/create`)}
         >
-          {itemType === "post" ? "Write a post" : null}
-          {itemType === "job" ? "Add work experience" : null}
-          {itemType === "project" ? "Start a project" : null}
-          {itemType === "education" ? "Add education" : null}
+          Create
         </Button>
       </div>
 
@@ -157,7 +160,7 @@ function Create() {
                         e.stopPropagation();
                         const shouldDelete = window.confirm("Delete the item?");
                         if (shouldDelete) {
-                          deleteItem(itemType, item.id);
+                          deleteEntity(itemType, item.id);
                         }
                       }}
                     >

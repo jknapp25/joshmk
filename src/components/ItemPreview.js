@@ -1,63 +1,55 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
-import { Image, Button } from "react-bootstrap";
-import { navigate } from "@reach/router";
+import { Button } from "react-bootstrap";
 import { useIsMounted } from "../lib/utils";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
-import MiniImage from "./MiniImage";
-import drawing from "../assets/drawing_pic.jpeg";
+import ImageSlider from "./ImageSlider";
+import RichTextEditor from "./RichTextEditor/RichTextEditor";
+import BuyModal from "./BuyModal";
 export default ItemPreview;
 
 /**
  *
  * Add item previewing to images
- * Add DB fields
  * Add image description
  * Hide scroller
  * Add scroll arrows
- * Remove click to go to post
- * Hide/show buying
  */
 
-function ItemPreview() {
-  // const [realPost, setRealPost] = useState(post);
-  // const isMounted = useIsMounted();
+function ItemPreview({ item = {}, ...props }) {
+  const [realItem, setRealItem] = useState(item);
 
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const postData = await API.graphql({
-  //       query: queries.getPost,
-  //       variables: { id: props.id },
-  //     });
+  const [showModal, setShowModal] = useState(false);
 
-  //     if (postData && isMounted.current) {
-  //       setRealPost(postData.data.getPost);
-  //     }
-  //   }
-  //   if (props.id) {
-  //     fetchData();
-  //   }
-  // }, [props.id, isMounted]);
+  const isMounted = useIsMounted();
 
-  // if (!realPost) return null;
+  useEffect(() => {
+    async function fetchData() {
+      const itemData = await API.graphql({
+        query: queries.getItem,
+        variables: { id: props.id },
+      });
 
-  const realPost = {
-    id: "vr54brthbrwhg",
-    title: "The Goat in the Monkey Cheese",
-    category: "Drawing",
-    images: [],
-    createdAt: "",
-  };
+      if (itemData && isMounted.current) {
+        setRealItem(itemData.data.getItem);
+      }
+    }
+    if (props.id) {
+      fetchData();
+    }
+  }, [props.id, isMounted]);
 
-  let { id, title, category, images, createdAt } = realPost;
-  const date = "Dec 25";
+  if (!realItem) return null;
+
+  let { id, name, description, category, images, createdAt, price, isForSale } =
+    realItem;
+  const date = createdAt;
+
+  description = description ? JSON.parse(description) : description;
 
   return (
-    <div
-      className="row gx-0 cursor-pointer py-3 border-bottom"
-      onClick={() => navigate(`/post/${id}`)}
-    >
+    <div className="row gx-0 py-3 border-bottom">
       <div className="col my-auto">
         <div>
           {category ? (
@@ -65,34 +57,32 @@ function ItemPreview() {
               <small className="text-muted text-uppercase">{category}</small>
             </div>
           ) : null}
-          <div
-            className="d-block mb-2"
-            style={{
-              whiteSpace: "nowrap",
-              overflowX: "scroll",
-            }}
-          >
-            {[1, 2, 3, 4, 5].map(() => {
-              return (
-                <Image
-                  src={drawing}
-                  style={{
-                    width: "175px",
-                  }}
-                  className="me-2"
-                />
-              );
-            })}
-          </div>
-          <h4 className="mb-2 fw-bold">{title}</h4>
-          <div className="mb-2">
-            <Button variant="success" className="d-inline me-2">
-              Buy
-            </Button>
-            <div className="text-success d-inline align-middle">$249</div>
-          </div>
+          <ImageSlider images={images} classes="mb-3" />
+          <h4 className="mb-2 fw-bold">{name}</h4>
+          {/* <p className="mb-2">{description}</p> */}
+          {description ? (
+            <RichTextEditor
+              value={description}
+              onChange={() => {}}
+              readOnly={true}
+            />
+          ) : null}
+
+          {isForSale ? (
+            <div className="my-2">
+              <Button
+                variant="success"
+                className="d-inline me-2"
+                onClick={() => setShowModal(true)}
+              >
+                Buy
+              </Button>
+              <div className="text-success d-inline align-middle">${price}</div>
+            </div>
+          ) : null}
         </div>
       </div>
+      <BuyModal showModal={showModal} setShowModal={setShowModal} />
     </div>
   );
 }
