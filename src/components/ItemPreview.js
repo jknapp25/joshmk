@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import moment from "moment";
 import { Button } from "react-bootstrap";
 import { useIsMounted } from "../lib/utils";
 import { API } from "aws-amplify";
@@ -59,7 +58,6 @@ function ItemPreview({ item = {}, ...props }) {
           ) : null}
           <ImageSlider images={images} classes="mb-3" />
           <h4 className="mb-2 fw-bold">{name}</h4>
-          {/* <p className="mb-2">{description}</p> */}
           {description ? (
             <RichTextEditor
               value={description}

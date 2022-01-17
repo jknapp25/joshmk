@@ -44,7 +44,6 @@ function ItemList({ mini = false }) {
           ...post,
           type: "post",
         }));
-        // items = [...items, ...posts];
         const prodItemsData = await API.graphql({ query: queries.listItems });
         const prodItems = prodItemsData.data.listItems.items.map(
           (prodItem) => ({

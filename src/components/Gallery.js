@@ -1,37 +1,30 @@
-import React, { useContext, useState, useEffect } from "react";
-import { Card } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Card, Button } from "react-bootstrap";
 import Masonry from "react-masonry-css";
-import { Storage } from "aws-amplify";
-import { ConfigContext, ImageContext } from "../App";
+import { API } from "aws-amplify";
+import * as queries from "../graphql/queries";
 import { useIsMounted } from "../lib/utils";
+import ImageCarousel from "./ImageCarousel";
+import BuyModal from "./BuyModal";
 export default Gallery;
 
 function Gallery() {
-  const { galleryImages } = useContext(ConfigContext);
-  const imageContext = useContext(ImageContext);
+  const [items, setItems] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
-  const [imageUrls, setImageUrls] = useState([]);
   const isMounted = useIsMounted();
 
   useEffect(() => {
     async function fetchData() {
-      const imagesCalls = galleryImages.map((url) => Storage.get(url));
-      let resImageUrls = await Promise.all(imagesCalls);
+      const itemsData = await API.graphql({ query: queries.listItems });
+      const items = itemsData.data.listItems.items;
 
-      if (resImageUrls && resImageUrls.length > 0) {
-        resImageUrls = resImageUrls.reverse();
-      }
-
-      if (isMounted.current) setImageUrls(resImageUrls);
+      if (isMounted.current) setItems(items);
     }
-    if (galleryImages && galleryImages.length) {
-      fetchData();
-    } else {
-      if (isMounted.current) setImageUrls([]);
-    }
-  }, [galleryImages, isMounted]);
+    fetchData();
+  }, [isMounted]);
 
-  if (!imageUrls || imageUrls.length === 0) return null;
+  if (!items || items.length === 0) return null;
 
   return (
     <Masonry
@@ -39,22 +32,27 @@ function Gallery() {
       className="my-masonry-grid"
       columnClassName="my-masonry-grid_column"
     >
-      {imageUrls.map((imageUrl, i) => (
-        <Card key={imageUrl} className="border-0">
-          <Card.Img
-            variant="top"
-            style={{ cursor: "zoom-in" }}
-            src={imageUrl}
-            onClick={() =>
-              imageContext.setImageContext({
-                ...imageContext,
-                index: i,
-                imageUrls,
-              })
-            }
-          />
+      {items.map((item, i) => (
+        <Card key={i} className="border-0">
+          <ImageCarousel images={item.images} />
+          <h4 className="my-2 fw-bold">{item.name}</h4>
+          {item.isForSale ? (
+            <div className="mb-2">
+              <Button
+                variant="success"
+                className="d-inline me-2"
+                onClick={() => setShowModal(true)}
+              >
+                Buy
+              </Button>
+              <div className="text-success d-inline align-middle">
+                ${item.price}
+              </div>
+            </div>
+          ) : null}
         </Card>
       ))}
+      <BuyModal showModal={showModal} setShowModal={setShowModal} />
     </Masonry>
   );
 }

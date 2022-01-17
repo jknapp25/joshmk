@@ -1,13 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
-import { ImageContext } from "../App";
+import React, { useState, useEffect } from "react";
 import { Image } from "react-bootstrap";
 import { useIsMounted } from "../lib/utils";
 import { Storage } from "aws-amplify";
 export default ImageSlider;
 
-function ImageSlider({ images = [], classes = "" }) {
+function ImageSlider({ images = [] }) {
   const [imageUrls, setImageUrls] = useState([]);
-  const imageContext = useContext(ImageContext);
 
   const isMounted = useIsMounted();
 
@@ -27,34 +25,7 @@ function ImageSlider({ images = [], classes = "" }) {
 
   if (images.length === 0) return null;
 
-  // const isOneImage = images.length === 1;
-
   return (
-    // <Carousel
-    //   className={classes}
-    //   interval={1000000}
-    //   controls={!isOneImage}
-    //   indicators={!isOneImage}
-    //   slide={false}
-    // >
-    //   {imageUrls.map((url, i) => (
-    //     <Carousel.Item
-    //       key={i}
-    //       onClick={() =>
-    //         imageContext.setImageContext({
-    //           ...imageContext,
-    //           isOpen: true,
-    //           index: i,
-    //           imageUrls: imageUrls,
-    //         })
-    //       }
-    //       style={{ cursor: "zoom-in" }}
-    //     >
-    //       <img className="w-100" src={url} alt={url} />
-    //     </Carousel.Item>
-    //   ))}
-    // </Carousel>
-
     <div
       className="d-block mb-2"
       style={{
