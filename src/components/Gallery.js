@@ -35,7 +35,7 @@ function Gallery() {
       {items.map((item, i) => (
         <Card key={i} className="border-0">
           <ImageCarousel images={item.images} />
-          <h4 className="my-2 fw-bold">{item.name}</h4>
+          <h5 className="my-2">{item.name}</h5>
           {item.isForSale ? (
             <div className="mb-2">
               <Button
