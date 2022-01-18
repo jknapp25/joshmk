@@ -48,7 +48,7 @@ function ItemPreview({ item = {}, ...props }) {
   description = description ? JSON.parse(description) : description;
 
   return (
-    <div className="row gx-0 py-3 border-bottom">
+    <div className="row gx-0 py-3">
       <div className="col my-auto">
         <div>
           {category ? (

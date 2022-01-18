@@ -35,7 +35,10 @@ function Project({ project = {}, ...props }) {
 
   return (
     <>
-      <ImageCarousel images={images} />
+      <ImageCarousel
+        images={images}
+        classes="rounded bg-secondary bg-opacity-10 shadow-lg"
+      />
 
       <h4>
         {link ? (

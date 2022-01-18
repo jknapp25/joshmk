@@ -266,6 +266,7 @@ const Element = ({ attributes, children, element }) => {
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
+              className="rounded bg-secondary bg-opacity-10 shadow-lg"
             ></iframe>
           </div>
           {children}
