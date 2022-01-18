@@ -5,11 +5,14 @@ export default DashboardUserSummary;
 
 function DashboardUserSummary({ config, avatarUrl }) {
   return (
-    <div className="p-5">
-      <div className="ratio ratio-1x1 mb-4 bg-secondary bg-opacity-10">
+    <>
+      <div className="mb-2">
+        <small className="text-dark">ABOUT THE AUTHOR</small>
+      </div>
+      <div className="ratio ratio-1x1 mb-3 bg-secondary bg-opacity-10">
         {avatarUrl ? (
           <Image
-            className="w-100"
+            className="w-100 shadow rounded"
             style={{ objectFit: "cover" }}
             src={avatarUrl}
             fluid
@@ -17,11 +20,7 @@ function DashboardUserSummary({ config, avatarUrl }) {
           />
         ) : null}
       </div>
-      <h2 className="mb-0" onClick={() => navigate("/")}>
-        {config.fullName || ""}
-      </h2>
-      <br />
       {config.tagline}
-    </div>
+    </>
   );
 }

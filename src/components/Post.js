@@ -37,10 +37,10 @@ function Post({ post = {}, ...props }) {
   richContent = richContent ? JSON.parse(richContent) : richContent;
 
   return (
-    <>
+    <div className="pb-3">
       <div>
         <h1 className="mb-0">
-          <span className="cursor-pointer">
+          <span className="cursor-pointer fw-bold">
             <Link to={`/post/${id}`} className="hidden-link">
               {title}
             </Link>
@@ -56,7 +56,10 @@ function Post({ post = {}, ...props }) {
         </div>
       </div>
 
-      <ImageCarousel images={images} classes="mb-3" />
+      <ImageCarousel
+        images={images}
+        classes="mb-4 rounded bg-secondary bg-opacity-10 shadow-lg"
+      />
 
       {richContent ? (
         <RichTextEditor
@@ -80,6 +83,6 @@ function Post({ post = {}, ...props }) {
           ))}
         </div>
       )}
-    </>
+    </div>
   );
 }

@@ -5,7 +5,7 @@ import Tag from "./Tag";
 import { useLocation, navigate } from "@reach/router";
 import { parse } from "query-string";
 import { PDFDownloadLink } from "@react-pdf/renderer";
-import { API } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import Post from "./Post";
 import Project from "./Project";
@@ -17,11 +17,12 @@ import { FaTimes } from "react-icons/fa";
 import { ConfigContext } from "../App";
 export default ItemList;
 
-function ItemList({ mini = false }) {
+function ItemList({ mini = false, displayMore, setDisplayMore }) {
   const { pathname, search } = useLocation();
   const config = useContext(ConfigContext);
   const searchParams = parse(search);
   const [items, setItems] = useState([]);
+  const [renderedItems, setRenderedItems] = useState(1);
 
   let pageName = pathname.substring(1) || "blog";
 
@@ -31,6 +32,13 @@ function ItemList({ mini = false }) {
       isMounted.current = false;
     };
   }, []);
+
+  useEffect(() => {
+    if (displayMore) {
+      setRenderedItems(renderedItems + 2);
+      setDisplayMore(false);
+    }
+  }, [displayMore, renderedItems, setDisplayMore]);
 
   useEffect(() => {
     setItems([]);
@@ -146,25 +154,43 @@ function ItemList({ mini = false }) {
         </h3>
       ) : null}
 
-      {/* <div>
-        <ItemPreview />
-      </div> */}
-
-      {preppedItems.map((item, i) => (
-        <div key={i}>
-          {item.type === "post" && mini ? <PostPreview post={item} /> : null}
-          {item.type === "post" && !mini ? <Post post={item} /> : null}
-          {item.type === "item" ? <ItemPreview item={item} /> : null}
-          {item.type === "job" ? <Job job={item} /> : null}
-          {item.type === "project" ? <Project project={item} /> : null}
-          {item.type === "education" && !pageName === "work" ? (
-            <Education education={item} />
-          ) : null}
-          {!mini && i !== preppedItems.length - 1 ? (
-            <div style={{ height: "35px" }} />
-          ) : null}
-        </div>
-      ))}
+      {pageName === "blog"
+        ? preppedItems.map((item, i) =>
+            i <= renderedItems ? (
+              <div key={i}>
+                {item.type === "post" && mini ? (
+                  <PostPreview post={item} />
+                ) : null}
+                {item.type === "post" && !mini ? <Post post={item} /> : null}
+                {item.type === "item" ? <ItemPreview item={item} /> : null}
+                {item.type === "job" ? <Job job={item} /> : null}
+                {item.type === "project" ? <Project project={item} /> : null}
+                {item.type === "education" && !pageName === "work" ? (
+                  <Education education={item} />
+                ) : null}
+                {!mini && i !== preppedItems.length - 1 ? (
+                  <div style={{ height: "35px" }} />
+                ) : null}
+              </div>
+            ) : null
+          )
+        : (preppedItems.map((item, i) => (
+            <div key={i}>
+              {item.type === "post" && mini ? (
+                <PostPreview post={item} />
+              ) : null}
+              {item.type === "post" && !mini ? <Post post={item} /> : null}
+              {item.type === "item" ? <ItemPreview item={item} /> : null}
+              {item.type === "job" ? <Job job={item} /> : null}
+              {item.type === "project" ? <Project project={item} /> : null}
+              {item.type === "education" && !pageName === "work" ? (
+                <Education education={item} />
+              ) : null}
+              {!mini && i !== preppedItems.length - 1 ? (
+                <div style={{ height: "35px" }} />
+              ) : null}
+            </div>
+          )): null)}
     </>
   );
 }

@@ -50,7 +50,7 @@ function ImageCarousel({ images = [], classes = "" }) {
           }
           style={{ cursor: "zoom-in" }}
         >
-          <img className="w-100" src={url} alt={url} />
+          <img className="w-100 rounded" src={url} alt={url} />
         </Carousel.Item>
       ))}
     </Carousel>

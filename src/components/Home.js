@@ -56,10 +56,12 @@ function Home({ children }) {
     return (
       <Container fluid>
         <Row>
-          <Col lg={3}>
-            <SideNavNew />
+          <Col lg={3} className="p-0">
+            <div className="p-5 sticky-top">
+              <SideNavNew />
+            </div>
           </Col>
-          <Col lg={9} className="vh-100 overflow-scroll p-5 border-start">
+          <Col lg={9} className="p-5">
             {children}
           </Col>
         </Row>
@@ -93,16 +95,15 @@ function Home({ children }) {
     return (
       <Container fluid>
         <Row>
-          <Col lg={3}>
-            <SideNavNew />
+          <Col lg={3} className="p-0">
+            <div className="p-5 sticky-top">
+              <SideNavNew />
+            </div>
           </Col>
-          <Col
-            lg={6}
-            className="vh-100 overflow-scroll p-5 border-start border-end"
-          >
+          <Col lg={6} className="p-5">
             {children}
           </Col>
-          <Col lg={3}></Col>
+          <Col lg={3} className="p-0"></Col>
         </Row>
       </Container>
     );

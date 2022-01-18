@@ -7,7 +7,7 @@ import "react-vertical-timeline-component/style.min.css";
 import "../App.css";
 export default SideNavNew;
 
-function SideNavNew() {
+function SideNavNew({ classes }) {
   const [isSignedIn, setIsSignedIn] = useState(false);
   const { pathname } = useLocation();
 
@@ -30,7 +30,7 @@ function SideNavNew() {
   if (!config.pagesCustom || config.pagesCustom.length === 0) return null;
 
   return (
-    <div className="p-5">
+    <div className={classes}>
       {config.pagesCustom.map((page) => (
         <Button
           variant="link"
@@ -46,6 +46,7 @@ function SideNavNew() {
       ))}
       {isSignedIn ? (
         <>
+          -
           <Button
             variant="link"
             onClick={() => navigate("/create")}

@@ -6,7 +6,7 @@ function DashboardTags({ tags }) {
   if (!tags || tags.length === 0) return null;
   return (
     <>
-      <div className="mb-1">
+      <div className="mb-2">
         <small className="text-dark">POPULAR TAGS</small>
       </div>
       <div>

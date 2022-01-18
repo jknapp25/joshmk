@@ -6,6 +6,7 @@ import DashboardUserSummary from "./DashboardUserSummary";
 import { Helmet } from "react-helmet";
 import { API } from "aws-amplify";
 import DashboardTags from "./DashboardTags";
+import { useScroll } from "../lib/useScroll";
 export default Dashboard;
 
 function sortByFrequencyAndRemoveDuplicates(array) {
@@ -38,6 +39,8 @@ function sortByFrequencyAndRemoveDuplicates(array) {
 
 function Dashboard({ config, faviconUrl, avatarUrl }) {
   const [tags, setTags] = useState(null);
+  const [displayMore, setDisplayMore] = useState(null);
+  const { scrollY } = useScroll();
 
   useEffect(() => {
     async function fetchData() {
@@ -64,6 +67,24 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const bottom =
+      window.pageYOffset + document.documentElement.clientHeight >=
+      document.documentElement.scrollHeight;
+
+    if (bottom) {
+      setDisplayMore(true);
+    }
+  }, [scrollY]);
+
+  // console.log('window inner height: ', window.innerHeight);
+  // console.log('document Element client hieght: ', document.documentElement.clientHeight);
+  // console.log('document Element scroll hieght: ', document.documentElement.scrollHeight);
+  // console.log('document Element offset height: ', document.documentElement.offsetHeight);
+  // console.log('document element scrolltop: ', document.documentElement.scrollTop);
+  // console.log('window page Y Offset: ', window.pageYOffset);
+  // console.log('window document body offsetheight: ', window.document.body.offsetHeight);
+
   return (
     <Container fluid>
       <Helmet>
@@ -72,21 +93,18 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
       </Helmet>
       <Row>
         <Col lg={3} className="hidden-sm p-0">
-          <div className="border-bottom bg-light">
+          <div className="p-5 sticky-top">
+            <SideNavNew classes="mb-5" />
+            <DashboardTags tags={tags} />
+          </div>
+        </Col>
+        <Col lg={6} className="p-5">
+          <ItemList displayMore={displayMore} setDisplayMore={setDisplayMore} />
+        </Col>
+        <Col lg={3} className="hidden-sm p-0">
+          <div className="p-5 sticky-top">
             <DashboardUserSummary config={config} avatarUrl={avatarUrl} />
           </div>
-          <SideNavNew />
-        </Col>
-        <Col
-          lg={6}
-          className="p-5 border-start border-end vh-100 overflow-scroll"
-        >
-          <small className="text-dark">LATEST WRITINGS</small>
-          <div className="border-bottom"></div>
-          <ItemList mini />
-        </Col>
-        <Col lg={3} className="hidden-sm p-5">
-          <DashboardTags tags={tags} />
         </Col>
       </Row>
     </Container>
