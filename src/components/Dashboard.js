@@ -92,8 +92,11 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
         <link rel="icon" type="image/png" href={faviconUrl} sizes="16x16" />
       </Helmet>
       <Row>
-        <Col lg={3} className="hidden-sm p-0">
-          <div className="p-5 sticky-top">
+        <Col
+          lg={3}
+          className="hidden-sm p-0 vh-100 d-flex align-items-center sticky"
+        >
+          <div className="p-5">
             <SideNavNew classes="mb-5" />
             <DashboardTags tags={tags} />
           </div>
@@ -101,8 +104,11 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
         <Col lg={6} className="p-5">
           <ItemList displayMore={displayMore} setDisplayMore={setDisplayMore} />
         </Col>
-        <Col lg={3} className="hidden-sm p-0">
-          <div className="p-5 sticky-top">
+        <Col
+          lg={3}
+          className="hidden-sm p-0 vh-100 d-flex align-items-center sticky"
+        >
+          <div className="p-5">
             <DashboardUserSummary config={config} avatarUrl={avatarUrl} />
           </div>
         </Col>

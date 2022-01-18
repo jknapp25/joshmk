@@ -56,8 +56,8 @@ function Home({ children }) {
     return (
       <Container fluid style={{ maxWidth: "1440px" }}>
         <Row>
-          <Col lg={3} className="p-0">
-            <div className="p-5 sticky-top">
+          <Col lg={3} className="p-0 vh-100 d-flex align-items-center sticky">
+            <div className="p-5">
               <SideNavNew />
             </div>
           </Col>
@@ -95,15 +95,18 @@ function Home({ children }) {
     return (
       <Container fluid style={{ maxWidth: "1440px" }}>
         <Row>
-          <Col lg={3} className="p-0">
-            <div className="p-5 sticky-top">
+          <Col lg={3} className="p-0 vh-100 d-flex align-items-center sticky">
+            <div className="p-5">
               <SideNavNew />
             </div>
           </Col>
           <Col lg={6} className="p-5">
             {children}
           </Col>
-          <Col lg={3} className="p-0"></Col>
+          <Col
+            lg={3}
+            className="p-0 vh-100 d-flex align-items-center sticky"
+          ></Col>
         </Row>
       </Container>
     );
