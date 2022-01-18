@@ -54,7 +54,7 @@ function Home({ children }) {
 
   if (isGalleryRoute || isCreateRoute) {
     return (
-      <Container fluid>
+      <Container fluid style={{ maxWidth: "1440px" }}>
         <Row>
           <Col lg={3} className="p-0">
             <div className="p-5 sticky-top">
@@ -93,7 +93,7 @@ function Home({ children }) {
     isItemRoute
   ) {
     return (
-      <Container fluid>
+      <Container fluid style={{ maxWidth: "1440px" }}>
         <Row>
           <Col lg={3} className="p-0">
             <div className="p-5 sticky-top">

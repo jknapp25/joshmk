@@ -86,7 +86,7 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
   // console.log('window document body offsetheight: ', window.document.body.offsetHeight);
 
   return (
-    <Container fluid>
+    <Container fluid style={{ maxWidth: "1440px" }}>
       <Helmet>
         <title>{config.fullName || ""}</title>
         <link rel="icon" type="image/png" href={faviconUrl} sizes="16x16" />
