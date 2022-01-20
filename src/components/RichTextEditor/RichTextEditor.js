@@ -224,7 +224,7 @@ const Element = ({ attributes, children, element }) => {
   switch (element.type) {
     case "block-quote":
       return (
-        <blockquote {...attributes} className="border-left pl-2">
+        <blockquote {...attributes} className="border-left pl-2 fs-5">
           {children}
         </blockquote>
       );
@@ -235,9 +235,17 @@ const Element = ({ attributes, children, element }) => {
     case "heading-two":
       return <h5 {...attributes}>{children}</h5>;
     case "list-item":
-      return <li {...attributes}>{children}</li>;
+      return (
+        <li {...attributes} className="fs-5">
+          {children}
+        </li>
+      );
     case "numbered-list":
-      return <ol {...attributes}>{children}</ol>;
+      return (
+        <ol {...attributes} className="fs-5">
+          {children}
+        </ol>
+      );
     case "link":
       return (
         <a
