@@ -246,26 +246,30 @@ function ItemEditor({ id = null }) {
         value={isForSale}
         onChange={() => setIsForSale(!isForSale)}
       />
-      {isForSale ? (
-        <>
-          <Form.Label className="mb-0">Price</Form.Label>
-          <FormControl
-            id="price"
-            className="mb-2"
-            aria-describedby="price"
-            value={price}
-            onChange={(e) => {
-              if (
-                !isNaN(e.target.value) ||
-                e.target.value === "" ||
-                e.target.value === "."
-              ) {
-                setPrice(e.target.value);
-              }
-            }}
-          />
-        </>
-      ) : null}
+      <Form.Label className="mb-0">Price</Form.Label>
+      <FormControl
+        id="price"
+        className="mb-2"
+        aria-describedby="price"
+        value={price}
+        onChange={(e) => {
+          if (
+            !isNaN(e.target.value) ||
+            e.target.value === "" ||
+            e.target.value === "."
+          ) {
+            setPrice(e.target.value);
+          }
+        }}
+      />
+      <Form.Check
+        type="switch"
+        id="isSold"
+        label="Is this item sold?"
+        className="mt-2"
+        value={isSold}
+        onChange={() => setIsSold(!isSold)}
+      />
 
       <Form.Label className="mb-0">
         Created At (ex: 2020-11-21T17:42:34Z)

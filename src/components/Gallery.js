@@ -41,16 +41,33 @@ function Gallery() {
           <h5 className="my-2">{item.name}</h5>
           {item.isForSale ? (
             <div className="mb-2">
-              <Button
-                variant="success"
-                className="d-inline me-2"
-                onClick={() => setShowModal(true)}
-              >
-                Buy
-              </Button>
-              <div className="text-success d-inline align-middle">
-                ${item.price}
-              </div>
+              {item.isSold ? (
+                <>
+                  <Button
+                    variant="secondary"
+                    className="d-inline me-2"
+                    disabled
+                  >
+                    Sold
+                  </Button>
+                  <div className="text-secondary d-inline align-middle">
+                    ${item.price}
+                  </div>
+                </>
+              ) : (
+                <>
+                  <Button
+                    variant="success"
+                    className="d-inline me-2"
+                    onClick={() => setShowModal(true)}
+                  >
+                    Buy
+                  </Button>
+                  <div className="text-success d-inline align-middle">
+                    ${item.price}
+                  </div>
+                </>
+              )}
             </div>
           ) : null}
         </Card>
