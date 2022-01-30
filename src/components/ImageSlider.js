@@ -36,6 +36,7 @@ function ImageSlider({ images = [] }) {
       {imageUrls.map((url, i) => {
         return (
           <Image
+            key={i}
             src={url}
             style={{
               width: "175px",
