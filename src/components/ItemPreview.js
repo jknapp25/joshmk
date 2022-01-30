@@ -1,24 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
 import { useIsMounted } from "../lib/utils";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import ImageSlider from "./ImageSlider";
 import RichTextEditor from "./RichTextEditor/RichTextEditor";
 import BuyModal from "./BuyModal";
+import ItemBuyButton from "./ItemBuyButton";
 export default ItemPreview;
-
-/**
- *
- * Add item previewing to images
- * Add image description
- * Hide scroller
- * Add scroll arrows
- */
 
 function ItemPreview({ item = {}, ...props }) {
   const [realItem, setRealItem] = useState(item);
-
   const [showModal, setShowModal] = useState(false);
 
   const isMounted = useIsMounted();
@@ -41,9 +32,7 @@ function ItemPreview({ item = {}, ...props }) {
 
   if (!realItem) return null;
 
-  let { id, name, description, category, images, createdAt, price, isForSale } =
-    realItem;
-  const date = createdAt;
+  let { name, description, category, images, createdAt } = realItem;
 
   description = description ? JSON.parse(description) : description;
 
@@ -66,18 +55,12 @@ function ItemPreview({ item = {}, ...props }) {
             />
           ) : null}
 
-          {isForSale ? (
-            <div className="my-2">
-              <Button
-                variant="success"
-                className="d-inline me-2"
-                onClick={() => setShowModal(true)}
-              >
-                Buy
-              </Button>
-              <div className="text-success d-inline align-middle">${price}</div>
-            </div>
-          ) : null}
+          <ItemBuyButton
+            isForSale={item.isForSale}
+            isSold={item.isSold}
+            price={item.price}
+            classes="my-2"
+          />
         </div>
       </div>
       <BuyModal showModal={showModal} setShowModal={setShowModal} />
