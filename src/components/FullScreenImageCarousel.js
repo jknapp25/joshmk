@@ -57,7 +57,18 @@ function FullScreenImageCarousel() {
     >
       <Image
         src={imageContext.imageUrls[imageContext.index]}
-        className="h-100 w-auto d-block mx-auto"
+        style={{
+          maxHeight: "100%",
+          maxWidth: "100%",
+          width: "auto",
+          height: "auto",
+          position: "absolute",
+          top: "0",
+          bottom: "0",
+          left: "0",
+          right: "0",
+          margin: "auto",
+        }}
       />
       <FaTimes
         className="position-absolute cursor-pointer"
