@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { ImageContext } from "../App";
 import { Image } from "react-bootstrap";
 import { useIsMounted } from "../lib/utils";
 import { Storage } from "aws-amplify";
@@ -6,6 +7,7 @@ export default ImageSlider;
 
 function ImageSlider({ images = [] }) {
   const [imageUrls, setImageUrls] = useState([]);
+  const imageContext = useContext(ImageContext);
 
   const isMounted = useIsMounted();
 
@@ -40,8 +42,17 @@ function ImageSlider({ images = [] }) {
             src={url}
             style={{
               width: "175px",
+              cursor: "zoom-in",
             }}
             className="me-2"
+            onClick={() =>
+              imageContext.setImageContext({
+                ...imageContext,
+                isOpen: true,
+                index: i,
+                imageUrls: imageUrls,
+              })
+            }
           />
         );
       })}
