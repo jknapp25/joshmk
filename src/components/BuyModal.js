@@ -10,6 +10,7 @@ function BuyModal({ showModal, setShowModal }) {
   const displayContactEmail = config.emailAddress
     ? ` at ${config.emailAddress}`
     : "";
+
   return (
     <Modal show={showModal} onHide={() => setShowModal(false)}>
       <Modal.Body>

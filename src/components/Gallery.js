@@ -5,7 +5,6 @@ import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import { useIsMounted } from "../lib/utils";
 import ImageCarousel from "./ImageCarousel";
-import BuyModal from "./BuyModal";
 import ItemBuyButton from "./ItemBuyButton";
 export default Gallery;
 
@@ -48,7 +47,6 @@ function Gallery() {
           />
         </Card>
       ))}
-      <BuyModal showModal={showModal} setShowModal={setShowModal} />
     </Masonry>
   );
 }

@@ -4,13 +4,11 @@ import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import ImageSlider from "./ImageSlider";
 import RichTextEditor from "./RichTextEditor/RichTextEditor";
-import BuyModal from "./BuyModal";
 import ItemBuyButton from "./ItemBuyButton";
 export default ItemPreview;
 
 function ItemPreview({ item = {}, ...props }) {
   const [realItem, setRealItem] = useState(item);
-  const [showModal, setShowModal] = useState(false);
 
   const isMounted = useIsMounted();
 
@@ -63,7 +61,6 @@ function ItemPreview({ item = {}, ...props }) {
           />
         </div>
       </div>
-      <BuyModal showModal={showModal} setShowModal={setShowModal} />
     </div>
   );
 }
