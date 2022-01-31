@@ -71,8 +71,8 @@ function FullScreenImageCarousel() {
         }}
       />
       <FaTimes
-        className="position-absolute cursor-pointer"
-        size="2em"
+        className="position-absolute cursor-pointer bg-secondary rounded-circle p-1"
+        size="3em"
         color="white"
         onClick={handleClose}
         style={{
