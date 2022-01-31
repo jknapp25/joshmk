@@ -8,6 +8,7 @@ function ItemBuyButton({ isForSale, isSold, price, classes }) {
   const buttonVariant = isSold ? "secondary" : "success";
   const isDisabled = !!isSold;
   const priceColorClass = isSold ? "text-secondary" : "text-success";
+  const buttonText = isSold ? "Sold" : "Buy";
 
   return (
     <div className={classes}>
@@ -16,7 +17,7 @@ function ItemBuyButton({ isForSale, isSold, price, classes }) {
         className="d-inline me-2"
         disabled={isDisabled}
       >
-        Sold
+        {buttonText}
       </Button>
       <div className={`${priceColorClass} d-inline align-middle`}>${price}</div>
     </div>
