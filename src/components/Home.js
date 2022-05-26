@@ -56,7 +56,7 @@ function Home({ children }) {
     return (
       <Container fluid style={{ maxWidth: "1440px" }}>
         <Row>
-          <Col lg={3} className="p-0 vh-100 d-flex align-items-center sticky">
+          <Col lg={3} className="p-0 vh-100 d-none d-lg-flex align-items-center sticky">
             <div className="p-5">
               <SideNavNew />
             </div>
@@ -95,7 +95,7 @@ function Home({ children }) {
     return (
       <Container fluid style={{ maxWidth: "1440px" }}>
         <Row>
-          <Col lg={3} className="p-0 vh-100 d-flex align-items-center sticky">
+          <Col lg={3} className="p-0 vh-100 d-none d-lg-flex align-items-center sticky">
             <div className="p-5">
               <SideNavNew />
             </div>
@@ -105,7 +105,7 @@ function Home({ children }) {
           </Col>
           <Col
             lg={3}
-            className="p-0 vh-100 d-flex align-items-center sticky"
+            className="p-0 vh-100 d-none d-lg-flex align-items-center sticky"
           ></Col>
         </Row>
       </Container>
@@ -115,7 +115,7 @@ function Home({ children }) {
   return (
     <Container fluid style={{ maxWidth: "1440px" }}>
       <Row>
-        <Col lg={3} className="p-0 vh-100 d-flex align-items-center sticky">
+        <Col lg={3} className="p-0 vh-100 d-none d-lg-flex align-items-center sticky">
           <div className="p-5">
             <SideNavNew />
           </div>
@@ -125,7 +125,7 @@ function Home({ children }) {
         </Col>
         <Col
           lg={3}
-          className="p-0 vh-100 d-flex align-items-center sticky"
+          className="p-0 vh-100 d-none d-lg-flex align-items-center sticky"
         ></Col>
       </Row>
     </Container>

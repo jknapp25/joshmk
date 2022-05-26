@@ -94,7 +94,7 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
       <Row>
         <Col
           lg={3}
-          className="hidden-sm p-0 vh-100 d-flex align-items-center sticky"
+          className="p-0 vh-100 d-none d-lg-flex align-items-center sticky"
         >
           <div className="p-5">
             <SideNavNew classes="mb-5" />
@@ -106,7 +106,7 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
         </Col>
         <Col
           lg={3}
-          className="hidden-sm p-0 vh-100 d-flex align-items-center sticky"
+          className="p-0 vh-100 d-none d-lg-flex align-items-center sticky"
         >
           <div className="p-5">
             <DashboardUserSummary config={config} avatarUrl={avatarUrl} />
