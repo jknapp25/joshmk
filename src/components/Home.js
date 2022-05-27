@@ -1,32 +1,28 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useLocation, useMatch } from "@reach/router";
-import { Container, Row, Col } from "react-bootstrap";
+import { useMatch } from "@reach/router";
+import { Container, Row, Col, Offcanvas } from "react-bootstrap";
 import SideNavNew from "./SideNavNew";
 import Dashboard from "./Dashboard";
+import { Helmet } from "react-helmet";
 import { Storage } from "aws-amplify";
 import { useIsMounted } from "../lib/utils";
 import { ConfigContext } from "../App";
+import { FaBars } from "react-icons/fa";
 export default Home;
 
 function Home({ children }) {
   const config = useContext(ConfigContext);
-  const { pathname } = useLocation();
 
   const [avatarUrl, setAvatarUrl] = useState("");
   const [faviconUrl, setFaviconUrl] = useState("");
 
-  const isPostRoute = useMatch("/post/*");
-  const isItemRoute = useMatch("/item/*");
-  const isJobRoute = useMatch("/job/*");
-  const isEducationRoute = useMatch("/education/*");
-  const isProjectRoute = useMatch("/project/*");
-  const isProjectsRoute = useMatch("/projects");
-  const isAboutRoute = useMatch("/about");
-  const isWorkRoute = useMatch("/work");
+  const [showOffcanvas, setShowOffcanvas] = useState(false);
+
+  const handleClose = () => setShowOffcanvas(false);
+  const handleShow = () => setShowOffcanvas(true);
+
+  const isHomeRoute = useMatch("/");
   const isGalleryRoute = useMatch("/gallery");
-  const isCreateRoute = useMatch("/create");
-  const isSettingsRoute = useMatch("/settings");
-  const isSearchRoute = useMatch("/search");
 
   const isMounted = useIsMounted();
 
@@ -52,24 +48,7 @@ function Home({ children }) {
 
   if (!config.pages || config.pages.length === 0) return null;
 
-  if (isGalleryRoute || isCreateRoute) {
-    return (
-      <Container fluid style={{ maxWidth: "1440px" }}>
-        <Row>
-          <Col lg={3} className="p-0 vh-100 d-none d-lg-flex align-items-center sticky">
-            <div className="p-5">
-              <SideNavNew />
-            </div>
-          </Col>
-          <Col lg={9} className="p-5">
-            {children}
-          </Col>
-        </Row>
-      </Container>
-    );
-  }
-
-  if (pathname === "/") {
+  if (isHomeRoute) {
     return (
       <Dashboard
         config={config}
@@ -80,53 +59,39 @@ function Home({ children }) {
     );
   }
 
-  if (
-    isPostRoute ||
-    isJobRoute ||
-    isEducationRoute ||
-    isProjectRoute ||
-    isProjectsRoute ||
-    isAboutRoute ||
-    isSettingsRoute ||
-    isWorkRoute ||
-    isSearchRoute ||
-    isItemRoute
-  ) {
-    return (
-      <Container fluid style={{ maxWidth: "1440px" }}>
-        <Row>
-          <Col lg={3} className="p-0 vh-100 d-none d-lg-flex align-items-center sticky">
-            <div className="p-5">
-              <SideNavNew />
-            </div>
-          </Col>
-          <Col lg={6} className="p-5">
-            {children}
-          </Col>
-          <Col
-            lg={3}
-            className="p-0 vh-100 d-none d-lg-flex align-items-center sticky"
-          ></Col>
-        </Row>
-      </Container>
-    );
-  }
+  const mainColWidth = isGalleryRoute ? 9 : 6;
 
   return (
     <Container fluid style={{ maxWidth: "1440px" }}>
+      <Helmet>
+        <title>{config.fullName || ""}</title>
+        <link rel="icon" type="image/png" href={faviconUrl} sizes="16x16" />
+      </Helmet>
+      <Row className="py-2 border-bottom py-3 sticky-top bg-white d-md-block d-lg-none">
+        <span className="cursor-pointer" onClick={handleShow}>
+          <FaBars size="2em" title="clear search" />
+        </span>
+      </Row>
+      <Offcanvas show={showOffcanvas} onHide={handleClose}>
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Pages</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <SideNavNew />
+        </Offcanvas.Body>
+      </Offcanvas>
       <Row>
-        <Col lg={3} className="p-0 vh-100 d-none d-lg-flex align-items-center sticky">
-          <div className="p-5">
-            <SideNavNew />
-          </div>
-        </Col>
-        <Col lg={6} className="p-5">
-          {children}
-        </Col>
         <Col
           lg={3}
           className="p-0 vh-100 d-none d-lg-flex align-items-center sticky"
-        ></Col>
+        >
+          <div className="p-5">
+            <SideNavNew classes="mb-5" />
+          </div>
+        </Col>
+        <Col lg={mainColWidth} className="p-5">
+          {children}
+        </Col>
       </Row>
     </Container>
   );
