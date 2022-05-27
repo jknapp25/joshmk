@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Offcanvas } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import ItemList from "./ItemList";
 import SideNavNew from "./SideNavNew";
 import DashboardUserSummary from "./DashboardUserSummary";
 import { Helmet } from "react-helmet";
 import { API } from "aws-amplify";
 import DashboardTags from "./DashboardTags";
+import MobileNav from "./MobileNav";
 import { useScroll } from "../lib/useScroll";
-import { FaBars } from "react-icons/fa";
 export default Dashboard;
 
 function sortByFrequencyAndRemoveDuplicates(array) {
@@ -39,11 +39,6 @@ function sortByFrequencyAndRemoveDuplicates(array) {
 }
 
 function Dashboard({ config, faviconUrl, avatarUrl }) {
-  const [showOffcanvas, setShowOffcanvas] = useState(false);
-
-  const handleClose = () => setShowOffcanvas(false);
-  const handleShow = () => setShowOffcanvas(true);
-
   const [tags, setTags] = useState(null);
   const [displayMore, setDisplayMore] = useState(null);
   const { scrollY } = useScroll();
@@ -93,19 +88,9 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
 
   return (
     <Container fluid style={{ maxWidth: "1440px" }}>
-      <Row className="py-2 border-bottom py-3 sticky-top bg-white d-md-block d-lg-none">
-        <span className="cursor-pointer" onClick={handleShow}>
-          <FaBars size="2em" title="clear search" />
-        </span>
-      </Row>
-      <Offcanvas show={showOffcanvas} onHide={handleClose}>
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Pages</Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
-          <SideNavNew />
-        </Offcanvas.Body>
-      </Offcanvas>
+      <MobileNav 
+        fullName={config.fullName}
+      />
       <Helmet>
         <title>{config.fullName || ""}</title>
         <link rel="icon" type="image/png" href={faviconUrl} sizes="16x16" />
