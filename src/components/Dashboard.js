@@ -1,42 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import { Helmet } from "react-helmet";
+import { API } from "aws-amplify";
+
+import { useScroll } from "../lib/useScroll";
 import ItemList from "./ItemList";
 import SideNavNew from "./SideNavNew";
 import DashboardUserSummary from "./DashboardUserSummary";
-import { Helmet } from "react-helmet";
-import { API } from "aws-amplify";
 import DashboardTags from "./DashboardTags";
 import MobileNav from "./MobileNav";
-import { useScroll } from "../lib/useScroll";
+import sortByFrequencyAndRemoveDuplicates from '../lib/sortByFrequencyAndRemoveDuplicates';
+
 export default Dashboard;
-
-function sortByFrequencyAndRemoveDuplicates(array) {
-  let frequency = {};
-  let value;
-
-  // compute frequencies of each value
-  for (var i = 0; i < array.length; i++) {
-    value = array[i];
-    if (value in frequency) {
-      frequency[value]++;
-    } else {
-      frequency[value] = 1;
-    }
-  }
-
-  // make array from the frequency object to de-duplicate
-  var uniques = [];
-  for (value in frequency) {
-    uniques.push(value);
-  }
-
-  // sort the uniques array in descending order by frequency
-  function compareFrequency(a, b) {
-    return frequency[b] - frequency[a];
-  }
-
-  return uniques.sort(compareFrequency);
-}
 
 function Dashboard({ config, faviconUrl, avatarUrl }) {
   const [tags, setTags] = useState(null);
@@ -105,7 +80,7 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
             <DashboardTags tags={tags} />
           </div>
         </Col>
-        <Col lg={6} className="p-5">
+        <Col lg={6} className="p-4 p-lg-5">
           <ItemList displayMore={displayMore} setDisplayMore={setDisplayMore} />
         </Col>
         <Col

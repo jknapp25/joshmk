@@ -18,6 +18,7 @@ function Home({ children }) {
 
   const isHomeRoute = useMatch("/");
   const isGalleryRoute = useMatch("/gallery");
+  const isCreateRoute = useMatch("/create");
 
   const isMounted = useIsMounted();
 
@@ -54,7 +55,7 @@ function Home({ children }) {
     );
   }
 
-  const mainColWidth = isGalleryRoute ? 9 : 6;
+  const mainColWidth = isGalleryRoute || isCreateRoute ? 9 : 6;
 
   return (
     <Container fluid style={{ maxWidth: "1440px" }}>
@@ -62,19 +63,15 @@ function Home({ children }) {
         <title>{config.fullName || ""}</title>
         <link rel="icon" type="image/png" href={faviconUrl} sizes="16x16" />
       </Helmet>
-      <MobileNav 
-        fullName={config.fullName}
-      />
+      <MobileNav fullName={config.fullName} />
       <Row>
         <Col
           lg={3}
           className="p-0 vh-100 d-none d-lg-flex align-items-center sticky"
         >
-          <div className="p-5">
-            <SideNavNew classes="mb-5" />
-          </div>
+          <SideNavNew classes="p-5 mb-5" />
         </Col>
-        <Col lg={mainColWidth} className="p-5">
+        <Col lg={mainColWidth} className="p-4 p-lg-5">
           {children}
         </Col>
       </Row>
