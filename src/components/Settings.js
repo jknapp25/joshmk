@@ -7,7 +7,7 @@ import RichTextEditor from "./RichTextEditor/RichTextEditor";
 import { API, graphqlOperation } from "aws-amplify";
 import { createConfiguration, updateConfiguration } from "../graphql/mutations";
 import * as queries from "../graphql/queries";
-import { useIsMounted } from "../lib/utils";
+import useIsMounted from "../lib/useIsMounted";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 export default withAuthenticator(Settings);
 

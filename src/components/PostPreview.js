@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import { navigate } from "@reach/router";
-import { useIsMounted } from "../lib/utils";
+import useIsMounted from "../lib/useIsMounted";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import MiniImage from "./MiniImage";

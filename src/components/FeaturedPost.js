@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useIsMounted } from "../lib/utils";
+import useIsMounted from "../lib/useIsMounted";
 import { Storage } from "aws-amplify";
 import { navigate } from "@reach/router";
 import { Card } from "react-bootstrap";

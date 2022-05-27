@@ -5,7 +5,7 @@ import SideNavNew from "./SideNavNew";
 import Dashboard from "./Dashboard";
 import { Helmet } from "react-helmet";
 import { Storage } from "aws-amplify";
-import { useIsMounted } from "../lib/utils";
+import useIsMounted from "../lib/useIsMounted";
 import { ConfigContext } from "../App";
 import MobileNav from "./MobileNav";
 export default Home;

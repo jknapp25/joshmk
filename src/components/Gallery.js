@@ -3,16 +3,24 @@ import { Card } from "react-bootstrap";
 import Masonry from "react-masonry-css";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
-import { useIsMounted } from "../lib/utils";
+import useIsMounted from "../lib/useIsMounted";
 import ImageCarousel from "./ImageCarousel";
 import ItemBuyButton from "./ItemBuyButton";
 export default Gallery;
+
+const BREAKPOINT_COLS = {
+  default: 3,
+  992: 3,
+  768: 2,
+  576: 1
+};
 
 function Gallery() {
   const [items, setItems] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
   const isMounted = useIsMounted();
+
 
   useEffect(() => {
     async function fetchData() {
@@ -28,7 +36,7 @@ function Gallery() {
 
   return (
     <Masonry
-      breakpointCols={3}
+      breakpointCols={BREAKPOINT_COLS}
       className="my-masonry-grid"
       columnClassName="my-masonry-grid_column"
     >

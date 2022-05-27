@@ -3,7 +3,7 @@ import { Badge } from "react-bootstrap";
 import ImageCarousel from "./ImageCarousel";
 import Tag from "./Tag";
 import { createTimeInfo, statusColorLookup } from "../lib/utils";
-import { useIsMounted } from "../lib/utils";
+import useIsMounted from "../lib/useIsMounted";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 export default Project;

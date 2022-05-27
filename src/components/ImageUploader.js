@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Form, Image } from "react-bootstrap";
 import { Storage } from "aws-amplify";
 import { FaTimes } from "react-icons/fa";
-import { useIsMounted } from "../lib/utils";
+import useIsMounted from "../lib/useIsMounted";
 export default ImageUploader;
 
 function ImageUploader({

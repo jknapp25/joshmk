@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Tag from "./Tag";
 import { createTimeInfo } from "../lib/utils";
-import { useIsMounted } from "../lib/utils";
+import useIsMounted from "../lib/useIsMounted";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 export default Education;
