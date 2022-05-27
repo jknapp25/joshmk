@@ -25,7 +25,7 @@ function MobileNav({ fullName }) {
           <Offcanvas.Title>Pages</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <SideNavNew />
+          <SideNavNew onPageClick={handleClose} />
         </Offcanvas.Body>
       </Offcanvas>
     </>
