@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Helmet } from "react-helmet";
-import { API } from "aws-amplify";
 
 import { useScroll } from "../lib/useScroll";
 import ItemList from "./ItemList";
@@ -9,39 +8,12 @@ import SideNavNew from "./SideNavNew";
 import DashboardUserSummary from "./DashboardUserSummary";
 import DashboardTags from "./DashboardTags";
 import MobileNav from "./MobileNav";
-import sortByFrequencyAndRemoveDuplicates from '../lib/sortByFrequencyAndRemoveDuplicates';
 
 export default Dashboard;
 
 function Dashboard({ config, faviconUrl, avatarUrl }) {
-  const [tags, setTags] = useState(null);
   const [displayMore, setDisplayMore] = useState(null);
   const { scrollY } = useScroll();
-
-  useEffect(() => {
-    async function fetchData() {
-      const categories = await API.graphql({
-        query: `query ListTags {
-          listPosts(filter: {tags: {size: {gt: 0}}}) {
-            items {
-              tags
-            }
-          }
-        }        
-      `,
-      });
-      const preppedTags = categories.data.listPosts.items.reduce(
-        (acc, curr) => [...acc, ...curr.tags],
-        []
-      );
-      const sorted = sortByFrequencyAndRemoveDuplicates(preppedTags);
-      const topTags = sorted.slice(0, 12);
-
-      setTags(topTags);
-    }
-
-    fetchData();
-  }, []);
 
   useEffect(() => {
     const bottom =
@@ -77,7 +49,7 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
         >
           <div className="p-5">
             <SideNavNew classes="mb-5" />
-            <DashboardTags tags={tags} />
+            <DashboardTags />
           </div>
         </Col>
         <Col lg={6} className="p-4 p-lg-5">
