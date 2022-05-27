@@ -63,19 +63,15 @@ function Home({ children }) {
         <title>{config.fullName || ""}</title>
         <link rel="icon" type="image/png" href={faviconUrl} sizes="16x16" />
       </Helmet>
-      <MobileNav 
-        fullName={config.fullName}
-      />
+      <MobileNav fullName={config.fullName} />
       <Row>
         <Col
           lg={3}
           className="p-0 vh-100 d-none d-lg-flex align-items-center sticky"
         >
-          <div className="p-5">
-            <SideNavNew classes="mb-5" />
-          </div>
+          <SideNavNew classes="p-5 mb-5" />
         </Col>
-        <Col lg={mainColWidth} className="p-5">
+        <Col lg={mainColWidth} className="p-4 p-lg-5">
           {children}
         </Col>
       </Row>
