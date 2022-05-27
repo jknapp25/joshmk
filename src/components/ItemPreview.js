@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useIsMounted } from "../lib/utils";
+import useIsMounted from "../lib/useIsMounted";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import ImageSlider from "./ImageSlider";

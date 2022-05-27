@@ -13,7 +13,7 @@ import {
 } from "../graphql/mutations";
 import * as queries from "../graphql/queries";
 import { withAuthenticator } from "@aws-amplify/ui-react";
-import { useIsMounted } from "../lib/utils";
+import useIsMounted from "../lib/useIsMounted";
 export default withAuthenticator(Create);
 
 const TABLE_FIELDS = {

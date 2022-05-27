@@ -3,7 +3,7 @@ import { Card } from "react-bootstrap";
 import Masonry from "react-masonry-css";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
-import { useIsMounted } from "../lib/utils";
+import useIsMounted from "../lib/useIsMounted";
 import ImageCarousel from "./ImageCarousel";
 import BuyModal from "./BuyModal";
 import ItemBuyButton from "./ItemBuyButton";

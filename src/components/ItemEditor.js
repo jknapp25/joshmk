@@ -7,7 +7,7 @@ import RichTextEditor from "./RichTextEditor/RichTextEditor";
 import ImageUploader from "./ImageUploader";
 import TagEditor from "./TagEditor";
 import CreatableSelect from "react-select/creatable";
-import { useIsMounted } from "../lib/utils";
+import useIsMounted from "../lib/useIsMounted";
 import { navigate } from "@reach/router";
 export default ItemEditor;
 

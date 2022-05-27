@@ -20,7 +20,7 @@ import Gallery from "./components/Gallery.js";
 import Amplify from "aws-amplify";
 import awsExports from "./aws-exports";
 import * as queries from "./graphql/queries";
-import { useIsMounted } from "./lib/utils";
+import useIsMounted from "./lib/useIsMounted";
 import { API } from "aws-amplify";
 import FullScreenImageCarousel from "./components/FullScreenImageCarousel";
 import "react-vertical-timeline-component/style.min.css";

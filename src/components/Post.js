@@ -3,7 +3,7 @@ import moment from "moment";
 import { Link } from "@reach/router";
 import ImageCarousel from "./ImageCarousel";
 import Tag from "./Tag";
-import { useIsMounted } from "../lib/utils";
+import useIsMounted from "../lib/useIsMounted";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import RichTextEditor from "./RichTextEditor/RichTextEditor";

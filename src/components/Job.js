@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Badge } from "react-bootstrap";
 import { createTimeInfo } from "../lib/utils";
 import Tag from "./Tag";
-import { useIsMounted } from "../lib/utils";
+import useIsMounted from "../lib/useIsMounted";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 export default Job;

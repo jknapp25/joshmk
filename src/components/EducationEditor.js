@@ -4,7 +4,7 @@ import TagEditor from "./TagEditor";
 import { API, graphqlOperation } from "aws-amplify";
 import { createEducation, updateEducation } from "../graphql/mutations";
 import * as queries from "../graphql/queries";
-import { useIsMounted } from "../lib/utils";
+import useIsMounted from "../lib/useIsMounted";
 import { navigate } from "@reach/router";
 export default EducationEditor;
 

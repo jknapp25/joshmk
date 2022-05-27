@@ -4,7 +4,7 @@ import { API, graphqlOperation } from "aws-amplify";
 import { createJob, updateJob } from "../graphql/mutations";
 import TagEditor from "./TagEditor";
 import * as queries from "../graphql/queries";
-import { useIsMounted } from "../lib/utils";
+import useIsMounted from "../lib/useIsMounted";
 import { navigate } from "@reach/router";
 export default JobEditor;
 
