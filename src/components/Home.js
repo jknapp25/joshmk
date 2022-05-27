@@ -18,6 +18,7 @@ function Home({ children }) {
 
   const isHomeRoute = useMatch("/");
   const isGalleryRoute = useMatch("/gallery");
+  const isCreateRoute = useMatch("/create");
 
   const isMounted = useIsMounted();
 
@@ -54,7 +55,7 @@ function Home({ children }) {
     );
   }
 
-  const mainColWidth = isGalleryRoute ? 9 : 6;
+  const mainColWidth = isGalleryRoute || isCreateRoute ? 9 : 6;
 
   return (
     <Container fluid style={{ maxWidth: "1440px" }}>
