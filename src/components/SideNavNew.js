@@ -29,7 +29,10 @@ function SideNavNew({ classes, onPageClick }) {
 
   function handlePageClick(page) {
     navigate(page);
-    onPageClick();
+
+    if (onPageClick) {
+      onPageClick();
+    }
   }
 
   if (!config.pagesCustom || config.pagesCustom.length === 0) return null;
