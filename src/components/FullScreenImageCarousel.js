@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Image } from "react-bootstrap";
-import { FaTimes, FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import { CgClose} from "react-icons/cg";
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { ImageContext } from "../App";
 export default FullScreenImageCarousel;
 
@@ -70,8 +71,8 @@ function FullScreenImageCarousel() {
           margin: "auto",
         }}
       />
-      <FaTimes
-        className="position-absolute cursor-pointer bg-secondary rounded-circle p-1"
+      <CgClose
+        className="position-absolute cursor-pointer bg-secondary bg-opacity-50 rounded-circle p-1"
         size="3em"
         color="white"
         onClick={handleClose}
@@ -82,7 +83,7 @@ function FullScreenImageCarousel() {
       />
       {imageContext.imageUrls.length > 1 ? (
         <>
-          <FaAngleLeft
+          <BsChevronLeft
             className="ml-2 position-absolute cursor-pointer"
             size="3em"
             color="white"
@@ -92,7 +93,7 @@ function FullScreenImageCarousel() {
               left: "10px",
             }}
           />
-          <FaAngleRight
+          <BsChevronRight
             className="ml-2 position-absolute cursor-pointer"
             size="3em"
             color="white"
