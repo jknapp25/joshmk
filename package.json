@@ -15,7 +15,6 @@
     "aws-amplify": "^3.3.4",
     "bootstrap": "^5.1.0",
     "chart.js": "^2.9.3",
-    "emailjs-com": "^2.6.4",
     "graphql": "^15.0.0",
     "image-extensions": "^1.1.0",
     "is-url": "^1.2.4",
