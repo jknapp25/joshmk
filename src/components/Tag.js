@@ -1,10 +1,12 @@
 import React from "react";
-import { navigate } from "@reach/router";
+import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
 export default Tag;
 
-function Tag({ tag, size="md" }) {
+function Tag({ tag, size = "md" }) {
+  const navigate = useNavigate();
+
   return (
     <Button
       key={`popular-tag-${tag}`}

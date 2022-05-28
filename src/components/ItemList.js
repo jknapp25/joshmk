@@ -1,20 +1,21 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { Alert } from "react-bootstrap";
-import Resume from "./Resume";
-import Tag from "./Tag";
-import { useLocation, navigate } from "@reach/router";
+import { useLocation } from "react-router-dom";
 import { parse } from "query-string";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { API } from "aws-amplify";
-import * as queries from "../graphql/queries";
+
+import Resume from "./Resume";
+import Tag from "./Tag";
 import Post from "./Post";
 import Project from "./Project";
 import Job from "./Job";
 import Education from "./Education";
 import PostPreview from "./PostPreview";
 import ItemPreview from "./ItemPreview";
-import { FaTimes } from "react-icons/fa";
 import { ConfigContext } from "../App";
+import * as queries from "../graphql/queries";
+
 export default ItemList;
 
 function ItemList({ mini = false, displayMore, setDisplayMore }) {

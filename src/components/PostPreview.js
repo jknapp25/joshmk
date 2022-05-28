@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
-import { navigate } from "@reach/router";
-import useIsMounted from "../lib/useIsMounted";
+import { useNavigate } from "react-router-dom";
 import { API } from "aws-amplify";
+
+import useIsMounted from "../lib/useIsMounted";
 import * as queries from "../graphql/queries";
 import MiniImage from "./MiniImage";
+
 export default PostPreview;
 
 function PostPreview({ post = {}, ...props }) {
   const [realPost, setRealPost] = useState(post);
+
   const isMounted = useIsMounted();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {

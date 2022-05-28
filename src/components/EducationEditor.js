@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, FormControl } from "react-bootstrap";
-import TagEditor from "./TagEditor";
 import { API, graphqlOperation } from "aws-amplify";
+import { useNavigate } from "react-router-dom";
+
+import TagEditor from "./TagEditor";
 import { createEducation, updateEducation } from "../graphql/mutations";
 import * as queries from "../graphql/queries";
 import useIsMounted from "../lib/useIsMounted";
-import { navigate } from "@reach/router";
+
 export default EducationEditor;
 
 function EducationEditor({ id = null }) {
@@ -21,6 +23,7 @@ function EducationEditor({ id = null }) {
   const [activeDetail, setActiveDetail] = useState("");
 
   const isMounted = useIsMounted();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {

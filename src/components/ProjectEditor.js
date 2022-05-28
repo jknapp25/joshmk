@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Button, Dropdown, Form, FormControl } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { API, graphqlOperation } from "aws-amplify";
+
 import ImageUploader from "./ImageUploader";
 import TagEditor from "./TagEditor";
 import { statusColorLookup } from "../lib/utils";
-import { API, graphqlOperation } from "aws-amplify";
 import { createProject, updateProject } from "../graphql/mutations";
 import * as queries from "../graphql/queries";
-import { navigate } from "@reach/router";
+
 export default ProjectEditor;
 
 function ProjectEditor({ id = null, onCreate, onUpdate }) {
@@ -22,6 +24,8 @@ function ProjectEditor({ id = null, onCreate, onUpdate }) {
   const [complexity, setComplexity] = useState(0);
   const [tagUsage, setTagUsage] = useState([]);
   const [images, setImages] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {

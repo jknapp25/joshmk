@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Button, ButtonGroup, Form, FormControl } from "react-bootstrap";
 import { API, graphqlOperation } from "aws-amplify";
+import { useNavigate } from "react-router-dom";
+
 import { createJob, updateJob } from "../graphql/mutations";
 import TagEditor from "./TagEditor";
 import * as queries from "../graphql/queries";
 import useIsMounted from "../lib/useIsMounted";
-import { navigate } from "@reach/router";
+
 export default JobEditor;
 
 function JobEditor({ id = null }) {
@@ -24,6 +26,7 @@ function JobEditor({ id = null }) {
   const [tagUsage, setTagUsage] = useState([]);
 
   const isMounted = useIsMounted();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {

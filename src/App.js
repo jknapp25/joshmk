@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Router } from "@reach/router";
+import { Routes, Route } from "react-router-dom";
 import ItemList from "./components/ItemList";
 import Home from "./components/Home.js";
 import Post from "./components/Post.js";
@@ -24,7 +24,7 @@ import { API } from "aws-amplify";
 import FullScreenImageCarousel from "./components/FullScreenImageCarousel";
 import "react-vertical-timeline-component/style.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import '@aws-amplify/ui-react/styles.css';
+import "@aws-amplify/ui-react/styles.css";
 import "./App.css";
 export default App;
 
@@ -66,30 +66,30 @@ function App() {
     <ConfigContext.Provider value={configContextValue}>
       <ImageContext.Provider value={imageContextValue}>
         <div className="App">
-          <Router primary={false}>
-            <Home path="/">
-              <ItemList default />
-              <Gallery path="gallery" />
-              <Post path="post/:id" />
-              <PostEditor path="post/:id/edit" />
-              <PostEditor path="post/create" />
-              <Item path="item/:id" />
-              <ItemEditor path="item/:id/edit" />
-              <ItemEditor path="item/create" />
-              <Job path="job/:id" />
-              <JobEditor path="job/:id/edit" />
-              <JobEditor path="job/create" />
-              <Project path="project/:id" />
-              <ProjectEditor path="project/:id/edit" />
-              <ProjectEditor path="project/create" />
-              <Education path="education/:id" />
-              <EducationEditor path="education/:id/edit" />
-              <EducationEditor path="education/create" />
-              <Create path="create" />
-              <Settings path="settings" />
-              <Bio path="about" bio={config.bio} />
-            </Home>
-          </Router>
+          <Routes primary={false}>
+            <Route path="/" element={<Home />}>
+              <Route path="*" element={<ItemList />} />
+              <Route path="gallery" element={<Gallery />} />
+              <Route path="post/:id" element={<Post />} />
+              <Route path="post/:id/edit" element={<PostEditor />} />
+              <Route path="post/create" element={<PostEditor />} />
+              <Route path="item/:id" element={<Item />} />
+              <Route path="item/:id/edit" element={<ItemEditor />} />
+              <Route path="item/create" element={<ItemEditor />} />
+              <Route path="job/:id" element={<Job />} />
+              <Route path="job/:id/edit" element={<JobEditor />} />
+              <Route path="job/create" element={<JobEditor />} />
+              <Route path="project/:id" element={<Project />} />
+              <Route path="project/:id/edit" element={<ProjectEditor />} />
+              <Route path="project/create" element={<ProjectEditor />} />
+              <Route path="education/:id" element={<Education />} />
+              <Route path="education/:id/edit" element={<EducationEditor />} />
+              <Route path="education/create" element={<EducationEditor />} />
+              <Route path="create" element={<Create />} />
+              <Route path="settings" element={<Settings />} />
+              <Route path="about" element={<Bio bio={config.bio} />}  />
+            </Route>
+          </Routes>
           <FullScreenImageCarousel />
         </div>
       </ImageContext.Provider>

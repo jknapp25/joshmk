@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, FormControl } from "react-bootstrap";
 import { API, graphqlOperation } from "aws-amplify";
+import CreatableSelect from "react-select/creatable";
+import { useNavigate } from "react-router-dom";
+
 import * as queries from "../graphql/queries";
 import { createItem, updateItem } from "../graphql/mutations";
 import RichTextEditor from "./RichTextEditor/RichTextEditor";
 import ImageUploader from "./ImageUploader";
 import TagEditor from "./TagEditor";
-import CreatableSelect from "react-select/creatable";
 import useIsMounted from "../lib/useIsMounted";
-import { navigate } from "@reach/router";
+
 export default ItemEditor;
 
 const blankEditorValue = [
@@ -32,6 +34,7 @@ function ItemEditor({ id = null }) {
   const [price, setPrice] = useState(0);
 
   const isMounted = useIsMounted();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {

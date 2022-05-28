@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, FormControl } from "react-bootstrap";
 import { API, graphqlOperation } from "aws-amplify";
+import { useNavigate } from "react-router-dom";
+import CreatableSelect from "react-select/creatable";
+
 import * as queries from "../graphql/queries";
 import { createPost, updatePost } from "../graphql/mutations";
 import RichTextEditor from "./RichTextEditor/RichTextEditor";
 import ImageUploader from "./ImageUploader";
 import TagEditor from "./TagEditor";
-import CreatableSelect from "react-select/creatable";
 import useIsMounted from "../lib/useIsMounted";
-import { navigate } from "@reach/router";
+
 export default PostEditor;
 
 const blankEditorValue = [
@@ -31,6 +33,7 @@ function PostEditor({ id = null }) {
   const [hidden, setHidden] = useState(false);
 
   const isMounted = useIsMounted();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
