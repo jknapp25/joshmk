@@ -1,13 +1,15 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useMatch } from "@reach/router";
 import { Container, Row, Col } from "react-bootstrap";
-import SideNavNew from "./SideNavNew";
-import Dashboard from "./Dashboard";
 import { Helmet } from "react-helmet";
 import { Storage } from "aws-amplify";
-import useIsMounted from "../lib/useIsMounted";
-import { ConfigContext } from "../App";
+
+import SideNavNew from "./SideNavNew";
+import Dashboard from "./Dashboard";
 import MobileNav from "./MobileNav";
+import { ConfigContext } from "../App";
+import useIsMounted from "../lib/useIsMounted";
+
 export default Home;
 
 function Home({ children }) {
