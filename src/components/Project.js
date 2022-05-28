@@ -1,32 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { Badge } from "react-bootstrap";
+import { API } from "aws-amplify";
+import { useParams } from "react-router-dom";
+
 import ImageCarousel from "./ImageCarousel";
 import Tag from "./Tag";
 import { createTimeInfo, statusColorLookup } from "../lib/utils";
 import useIsMounted from "../lib/useIsMounted";
-import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
+
 export default Project;
 
-function Project({ project = {}, ...props }) {
+function Project({ project = {} }) {
   const [realProject, setRealProject] = useState(project);
   const isMounted = useIsMounted();
+  const params = useParams();
 
   useEffect(() => {
     async function fetchData() {
       const projectData = await API.graphql({
         query: queries.getProject,
-        variables: { id: props.id },
+        variables: { id: params.id },
       });
 
       if (projectData && isMounted.current) {
         setRealProject(projectData.data.getProject);
       }
     }
-    if (props.id) {
+    if (params.id) {
       fetchData();
     }
-  }, [props.id, isMounted]);
+  }, [params.id, isMounted]);
 
   if (!realProject) return null;
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { API } from "aws-amplify";
 
 import ImageCarousel from "./ImageCarousel";
@@ -11,25 +11,26 @@ import RichTextEditor from "./RichTextEditor/RichTextEditor";
 
 export default Post;
 
-function Post({ post = {}, ...props }) {
+function Post({ post = {} }) {
   const [realPost, setRealPost] = useState(post);
   const isMounted = useIsMounted();
+  const params = useParams();
 
   useEffect(() => {
     async function fetchData() {
       const postData = await API.graphql({
         query: queries.getPost,
-        variables: { id: props.id },
+        variables: { id: params.id },
       });
 
       if (postData && isMounted.current) {
         setRealPost(postData.data.getPost);
       }
     }
-    if (props.id) {
+    if (params.id) {
       fetchData();
     }
-  }, [props.id, isMounted]);
+  }, [params.id, isMounted]);
 
   if (!realPost) return null;
 

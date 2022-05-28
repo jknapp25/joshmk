@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Badge } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import { API } from "aws-amplify";
+
 import { createTimeInfo } from "../lib/utils";
 import Tag from "./Tag";
 import useIsMounted from "../lib/useIsMounted";
-import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
+
 export default Job;
 
-function Job({ job = {}, ...props }) {
+function Job({ job = {} }) {
   const [realJob, setRealJob] = useState(job);
   const isMounted = useIsMounted();
+  const params = useParams();
 
   const {
     company,
@@ -28,17 +32,17 @@ function Job({ job = {}, ...props }) {
     async function fetchData() {
       const postData = await API.graphql({
         query: queries.getJob,
-        variables: { id: props.id },
+        variables: { id: params.id },
       });
 
       if (postData && isMounted.current) {
         setRealJob(postData.data.getJob);
       }
     }
-    if (props.id) {
+    if (params.id) {
       fetchData();
     }
-  }, [props.id, isMounted]);
+  }, [params.id, isMounted]);
 
   const timeInfo = createTimeInfo(start, end, null, false);
 
@@ -47,7 +51,7 @@ function Job({ job = {}, ...props }) {
       <h4>
         {role}
         {type === "contract" ? (
-          <Badge variant="secondary" className="ml-2">
+          <Badge bg="secondary" className="ml-2">
             Contract
           </Badge>
         ) : null}
