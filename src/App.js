@@ -24,6 +24,7 @@ import { API } from "aws-amplify";
 import FullScreenImageCarousel from "./components/FullScreenImageCarousel";
 import "react-vertical-timeline-component/style.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import '@aws-amplify/ui-react/styles.css';
 import "./App.css";
 export default App;
 
