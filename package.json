@@ -28,9 +28,9 @@
     "react-scripts": "3.4.1",
     "react-select": "^5.3.2",
     "react-vertical-timeline-component": "^2.5.0",
-    "slate": "^0.59.0",
-    "slate-history": "^0.59.0",
-    "slate-react": "^0.59.0"
+    "slate": "^0.80.0",
+    "slate-history": "^0.66.0",
+    "slate-react": "^0.80.0"
   },
   "scripts": {
     "predeploy": "npm run build",
