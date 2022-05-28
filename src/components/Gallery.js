@@ -13,7 +13,7 @@ const BREAKPOINT_COLS = {
   default: 3,
   992: 3,
   768: 2,
-  576: 1
+  576: 1,
 };
 
 function Gallery() {
@@ -21,7 +21,6 @@ function Gallery() {
   const [showModal, setShowModal] = useState(false);
 
   const isMounted = useIsMounted();
-
 
   useEffect(() => {
     async function fetchData() {
