@@ -34,13 +34,25 @@ function Gallery() {
 
   if (!items || items.length === 0) return null;
 
+  const sortedItems = items.sort((a, b) => {
+    const aSortVal = a.createdAt;
+    const bSortVal = b.createdAt;
+    if (aSortVal < bSortVal) {
+      return 1;
+    } else if (bSortVal < aSortVal) {
+      return -1;
+    } else {
+      return 0;
+    }
+  });
+
   return (
     <Masonry
       breakpointCols={BREAKPOINT_COLS}
       className="my-masonry-grid"
       columnClassName="my-masonry-grid_column"
     >
-      {items.map((item, i) => (
+      {sortedItems.map((item, i) => (
         <Card key={i} className="border-0">
           <ImageCarousel
             images={item.images}
