@@ -305,3 +305,15 @@ button:focus {
   /* background: grey; */
   margin-bottom: 30px;
 }
+
+.btn-tag {
+  color: rgb(42, 42, 42) !important;
+  --bs-bg-opacity: 0.075;
+  background-color: rgba(var(--bs-secondary-rgb),var(--bs-bg-opacity))!important;
+  padding-left: .8em !important;
+  padding-right: .8em !important;
+}
+.btn-tag:hover {
+  --bs-bg-opacity: 0.05;
+  background-color: rgb(225, 225, 225) !important;
+}
