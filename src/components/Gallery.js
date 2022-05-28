@@ -12,7 +12,7 @@ const BREAKPOINT_COLS = {
   default: 3,
   992: 3,
   768: 2,
-  576: 1
+  576: 1,
 };
 
 function Gallery() {
@@ -20,7 +20,6 @@ function Gallery() {
   const [showModal, setShowModal] = useState(false);
 
   const isMounted = useIsMounted();
-
 
   useEffect(() => {
     async function fetchData() {
@@ -34,13 +33,25 @@ function Gallery() {
 
   if (!items || items.length === 0) return null;
 
+  const sortedItems = items.sort((a, b) => {
+    const aSortVal = a.createdAt;
+    const bSortVal = b.createdAt;
+    if (aSortVal < bSortVal) {
+      return 1;
+    } else if (bSortVal < aSortVal) {
+      return -1;
+    } else {
+      return 0;
+    }
+  });
+
   return (
     <Masonry
       breakpointCols={BREAKPOINT_COLS}
       className="my-masonry-grid"
       columnClassName="my-masonry-grid_column"
     >
-      {items.map((item, i) => (
+      {sortedItems.map((item, i) => (
         <Card key={i} className="border-0">
           <ImageCarousel
             images={item.images}
