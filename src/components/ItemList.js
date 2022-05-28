@@ -142,16 +142,12 @@ function ItemList({ mini = false, displayMore, setDisplayMore }) {
         </Alert>
       ) : null}
       {pageName === "search" ? (
-        <h3 className="mb-4 mt-1">
-          {preppedItems.length} item{preppedItems.length > 1 ? "s" : ""} tagged{" "}
-          <Tag tag={searchParams.tag} />
-          <span
-            className="text-muted ml-2 cursor-pointer"
-            onClick={() => navigate("/")}
-          >
-            <FaTimes color="#dc3545" title="clear search" />
-          </span>
-        </h3>
+        <div className="mb-5 d-flex align-items-center">
+          <Tag tag={searchParams.tag} size="lg" />
+          <div className="mb-2 mt-1 small d-inline">
+            {preppedItems.length} item{preppedItems.length > 1 ? "s" : ""}
+          </div>
+        </div>
       ) : null}
 
       {pageName === "blog"

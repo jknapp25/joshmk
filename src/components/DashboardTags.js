@@ -26,7 +26,7 @@ function DashboardTags() {
         []
       );
       const sorted = sortByFrequencyAndRemoveDuplicates(preppedTags);
-      const topTags = sorted.slice(0, 12);
+      const topTags = sorted.slice(0, 6);
 
       setTags(topTags);
     }
@@ -39,7 +39,7 @@ function DashboardTags() {
   return (
     <>
       <div className="mb-2">
-        <small className="text-dark">POPULAR TAGS</small>
+        <small className="text-dark text-uppercase">popular topics</small>
       </div>
       <div>
         {tags.map((tag) => (
