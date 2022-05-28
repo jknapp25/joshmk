@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, FormControl } from "react-bootstrap";
 import { API, graphqlOperation } from "aws-amplify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CreatableSelect from "react-select/creatable";
 
 import * as queries from "../graphql/queries";
@@ -34,12 +34,13 @@ function PostEditor({ id = null }) {
 
   const isMounted = useIsMounted();
   const navigate = useNavigate();
+  const params = useParams();
 
   useEffect(() => {
     async function fetchData() {
       const postData = await API.graphql({
         query: queries.getPost,
-        variables: { id },
+        variables: { id: params.id },
       });
 
       if (postData && isMounted.current) {
@@ -58,10 +59,10 @@ function PostEditor({ id = null }) {
         setHidden(postData.data.getPost.hidden);
       }
     }
-    if (id) {
+    if (params.id) {
       fetchData();
     }
-  }, [id, isMounted]);
+  }, [params.id, isMounted]);
 
   useEffect(() => {
     async function fetchData() {
@@ -153,8 +154,8 @@ function PostEditor({ id = null }) {
       hidden,
     };
 
-    if (id) {
-      data.id = id;
+    if (params.id) {
+      data.id = params.id;
       handleUpdate(data);
     } else {
       handleCreate(data);
@@ -254,7 +255,7 @@ function PostEditor({ id = null }) {
       />
 
       <Button className="mt-2" onClick={handleButtonClick}>
-        {id ? "Update" : "Create"}
+        {params.id ? "Update" : "Create"}
       </Button>
     </>
   );
