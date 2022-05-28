@@ -41,8 +41,7 @@
     "react-vertical-timeline-component": "^2.5.0",
     "slate": "^0.59.0",
     "slate-history": "^0.59.0",
-    "slate-react": "^0.59.0",
-    "use-sound": "^2.0.1"
+    "slate-react": "^0.59.0"
   },
   "scripts": {
     "predeploy": "npm run build",
