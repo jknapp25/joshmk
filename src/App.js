@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Router } from "@reach/router";
 import ItemList from "./components/ItemList";
-import GoalHours from "./components/GoalHours";
 import Home from "./components/Home.js";
 import Post from "./components/Post.js";
 import PostEditor from "./components/PostEditor.js";
@@ -85,7 +84,6 @@ function App() {
               <Education path="education/:id" />
               <EducationEditor path="education/:id/edit" />
               <EducationEditor path="education/create" />
-              <GoalHours path="goal-hours" />
               <Create path="create" />
               <Settings path="settings" />
               <Bio path="about" bio={config.bio} />
