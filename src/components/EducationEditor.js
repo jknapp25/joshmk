@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, FormControl } from "react-bootstrap";
-import TagEditor from "./TagEditor";
 import { API, graphqlOperation } from "aws-amplify";
+import { useNavigate, useParams } from "react-router-dom";
+
+import TagEditor from "./TagEditor";
 import { createEducation, updateEducation } from "../graphql/mutations";
 import * as queries from "../graphql/queries";
 import useIsMounted from "../lib/useIsMounted";
-import { navigate } from "@reach/router";
+
 export default EducationEditor;
 
-function EducationEditor({ id = null }) {
+function EducationEditor() {
   const [organization, setOrganization] = useState("");
   const [degree, setDegree] = useState("");
   const [location, setLocation] = useState("");
@@ -21,12 +23,14 @@ function EducationEditor({ id = null }) {
   const [activeDetail, setActiveDetail] = useState("");
 
   const isMounted = useIsMounted();
+  const navigate = useNavigate();
+  const params = useParams();
 
   useEffect(() => {
     async function fetchData() {
       const educationData = await API.graphql({
         query: queries.getEducation,
-        variables: { id },
+        variables: { id: params.id },
       });
 
       if (educationData && isMounted.current) {
@@ -41,10 +45,10 @@ function EducationEditor({ id = null }) {
         setEnd(educationData.data.getEducation.end);
       }
     }
-    if (id) {
+    if (params.id) {
       fetchData();
     }
-  }, [id, isMounted]);
+  }, [params.id, isMounted]);
 
   function clearEditor() {
     setOrganization("");
@@ -71,8 +75,8 @@ function EducationEditor({ id = null }) {
       tags,
     };
 
-    if (id) {
-      data.id = id;
+    if (params.id) {
+      data.id = params.id;
       handleUpdate(data);
     } else {
       handleCreate(data);
@@ -187,7 +191,7 @@ function EducationEditor({ id = null }) {
       />
 
       <Button className="mt-2" onClick={handleButtonClick}>
-        {id ? "Update" : "Create"}
+        {params.id ? "Update" : "Create"}
       </Button>
     </>
   );

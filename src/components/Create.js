@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Button, Dropdown, Table } from "react-bootstrap";
-import { navigate } from "@reach/router";
+import { useNavigate } from "react-router-dom";
 import { GoPencil } from "react-icons/go";
 import { FaTrashAlt } from "react-icons/fa";
 import { API, graphqlOperation } from "aws-amplify";
+import { withAuthenticator } from "@aws-amplify/ui-react";
+
 import {
   deletePost,
   deleteItem,
@@ -12,8 +14,8 @@ import {
   deleteEducation,
 } from "../graphql/mutations";
 import * as queries from "../graphql/queries";
-import { withAuthenticator } from "@aws-amplify/ui-react";
 import useIsMounted from "../lib/useIsMounted";
+
 export default withAuthenticator(Create);
 
 const TABLE_FIELDS = {
@@ -29,6 +31,7 @@ function Create() {
   const [itemType, setItemType] = useState("post");
 
   const isMounted = useIsMounted();
+  const navigate = useNavigate();
 
   async function deleteEntity(type, id) {
     if (!type || !id) return;

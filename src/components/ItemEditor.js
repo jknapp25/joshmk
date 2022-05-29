@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, FormControl } from "react-bootstrap";
 import { API, graphqlOperation } from "aws-amplify";
+import CreatableSelect from "react-select/creatable";
+import { useNavigate, useParams } from "react-router-dom";
+
 import * as queries from "../graphql/queries";
 import { createItem, updateItem } from "../graphql/mutations";
 import RichTextEditor from "./RichTextEditor/RichTextEditor";
 import ImageUploader from "./ImageUploader";
 import TagEditor from "./TagEditor";
-import CreatableSelect from "react-select/creatable";
 import useIsMounted from "../lib/useIsMounted";
-import { navigate } from "@reach/router";
+
 export default ItemEditor;
 
 const blankEditorValue = [
@@ -18,7 +20,7 @@ const blankEditorValue = [
   },
 ];
 
-function ItemEditor({ id = null }) {
+function ItemEditor() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState(blankEditorValue);
   const [tagsOptions, setTagsOptions] = useState([]);
@@ -32,12 +34,14 @@ function ItemEditor({ id = null }) {
   const [price, setPrice] = useState(0);
 
   const isMounted = useIsMounted();
+  const navigate = useNavigate();
+  const params = useParams()
 
   useEffect(() => {
     async function fetchData() {
       const itemData = await API.graphql({
         query: queries.getItem,
-        variables: { id },
+        variables: { id: params.id },
       });
 
       if (itemData && isMounted.current) {
@@ -57,10 +61,10 @@ function ItemEditor({ id = null }) {
         setPrice(itemData.data.getItem.price);
       }
     }
-    if (id) {
+    if (params.id) {
       fetchData();
     }
-  }, [id, isMounted]);
+  }, [params.id, isMounted]);
 
   useEffect(() => {
     async function fetchData() {
@@ -154,9 +158,8 @@ function ItemEditor({ id = null }) {
       price,
     };
 
-    if (id) {
-      console.log("here");
-      data.id = id;
+    if (params.id) {
+      data.id = params.id;
       data.price = parseFloat(data.price) || 0;
       handleUpdate(data);
     } else {
@@ -283,7 +286,7 @@ function ItemEditor({ id = null }) {
       />
 
       <Button className="mt-2" onClick={handleButtonClick}>
-        {id ? "Update" : "Create"}
+        {params.id ? "Update" : "Create"}
       </Button>
     </>
   );

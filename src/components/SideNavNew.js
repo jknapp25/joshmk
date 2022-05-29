@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useLocation, navigate } from "@reach/router";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Auth } from "aws-amplify";
 import { Button } from "react-bootstrap";
-import { ConfigContext } from "../App";
 import "react-vertical-timeline-component/style.min.css";
+
+import { ConfigContext } from "../App";
 import "../App.css";
+
 export default SideNavNew;
 
 function SideNavNew({ classes, onPageClick }) {
@@ -12,6 +14,7 @@ function SideNavNew({ classes, onPageClick }) {
   const { pathname } = useLocation();
 
   const config = useContext(ConfigContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function isAuthenticated() {

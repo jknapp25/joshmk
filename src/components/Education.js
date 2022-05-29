@@ -1,30 +1,34 @@
 import React, { useState, useEffect } from "react";
+import { API } from "aws-amplify";
+import { useParams } from "react-router-dom";
+
 import Tag from "./Tag";
 import { createTimeInfo } from "../lib/utils";
 import useIsMounted from "../lib/useIsMounted";
-import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
+
 export default Education;
 
-function Education({ education, ...props }) {
+function Education({ education }) {
   const [realEducation, setRealEducation] = useState(education);
   const isMounted = useIsMounted();
+  const params = useParams();
 
   useEffect(() => {
     async function fetchData() {
       const educationData = await API.graphql({
         query: queries.getEducation,
-        variables: { id: props.id },
+        variables: { id: params.id },
       });
 
       if (educationData && isMounted.current) {
         setRealEducation(educationData.data.getEducation);
       }
     }
-    if (props.id) {
+    if (params.id) {
       fetchData();
     }
-  }, [props.id, isMounted]);
+  }, [params.id, isMounted]);
 
   if (!realEducation) return null;
 

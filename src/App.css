@@ -109,42 +109,6 @@
   word-wrap: no-wrap;
 }
 
-.badge {
-  border-radius: 0px !important;
-}
-.badge-pill {
-  border: 1px solid black;
-  cursor: pointer;
-  border-radius: 0px !important;
-}
-.badge-pill:hover {
-  background-color: black;
-  color: white;
-}
-.badge-pill.active {
-  cursor: default;
-}
-.badge-pill.active:hover {
-  background-color: transparent;
-  color: black;
-}
-
-.badge-transparent {
-  background-color: white;
-  color: black;
-  font-weight: normal !important;
-}
-
-.badge-lightgray {
-  background-color: #dc354613 !important;
-  color: #dc3545 !important;
-  font-weight: 400 !important;
-}
-.badge-lightgray.hover:hover {
-  background-color: #dc3545 !important;
-  color: white !important;
-}
-
 html {
   overflow: scroll;
   overflow-x: hidden;
@@ -304,4 +268,16 @@ button:focus {
   /* change div to reference your elements you put in <Masonry> */
   /* background: grey; */
   margin-bottom: 30px;
+}
+
+.btn-tag {
+  color: rgb(42, 42, 42) !important;
+  --bs-bg-opacity: 0.075;
+  background-color: rgba(var(--bs-secondary-rgb),var(--bs-bg-opacity))!important;
+  padding-left: .8em !important;
+  padding-right: .8em !important;
+}
+.btn-tag:hover {
+  --bs-bg-opacity: 0.05;
+  background-color: rgb(225, 225, 225) !important;
 }

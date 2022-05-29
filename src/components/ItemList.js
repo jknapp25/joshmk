@@ -1,20 +1,18 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
-import { Alert } from "react-bootstrap";
-import Resume from "./Resume";
-import Tag from "./Tag";
-import { useLocation, navigate } from "@reach/router";
+import { useLocation } from "react-router-dom";
 import { parse } from "query-string";
-import { PDFDownloadLink } from "@react-pdf/renderer";
 import { API } from "aws-amplify";
-import * as queries from "../graphql/queries";
+
+import Tag from "./Tag";
 import Post from "./Post";
 import Project from "./Project";
 import Job from "./Job";
 import Education from "./Education";
 import PostPreview from "./PostPreview";
 import ItemPreview from "./ItemPreview";
-import { FaTimes } from "react-icons/fa";
 import { ConfigContext } from "../App";
+import * as queries from "../graphql/queries";
+
 export default ItemList;
 
 function ItemList({ mini = false, displayMore, setDisplayMore }) {
@@ -129,29 +127,13 @@ function ItemList({ mini = false, displayMore, setDisplayMore }) {
 
   return (
     <>
-      {pageName === "work" && config?.resumeGeneratorEnabled ? (
-        <Alert variant="primary" className="border mb-3">
-          Click{" "}
-          <PDFDownloadLink
-            document={<Resume items={preppedItems} education={education} />}
-            fileName={`${config.fullName.replace(" ", "_")}_Resume.pdf`}
-          >
-            <span className="alert-link">here</span>
-          </PDFDownloadLink>{" "}
-          for {config.nickName}'s resume
-        </Alert>
-      ) : null}
       {pageName === "search" ? (
-        <h3 className="mb-4 mt-1">
-          {preppedItems.length} item{preppedItems.length > 1 ? "s" : ""} tagged{" "}
-          <Tag tag={searchParams.tag} />
-          <span
-            className="text-muted ml-2 cursor-pointer"
-            onClick={() => navigate("/")}
-          >
-            <FaTimes color="#dc3545" title="clear search" />
-          </span>
-        </h3>
+        <div className="mb-5 d-flex align-items-center">
+          <Tag tag={searchParams.tag} size="lg" />
+          <div className="mb-2 mt-1 small d-inline">
+            {preppedItems.length} item{preppedItems.length > 1 ? "s" : ""}
+          </div>
+        </div>
       ) : null}
 
       {pageName === "blog"

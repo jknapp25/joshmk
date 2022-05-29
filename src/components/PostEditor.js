@@ -1,27 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, FormControl } from "react-bootstrap";
 import { API, graphqlOperation } from "aws-amplify";
+import { useNavigate, useParams } from "react-router-dom";
+import CreatableSelect from "react-select/creatable";
+
 import * as queries from "../graphql/queries";
 import { createPost, updatePost } from "../graphql/mutations";
 import RichTextEditor from "./RichTextEditor/RichTextEditor";
 import ImageUploader from "./ImageUploader";
 import TagEditor from "./TagEditor";
-import CreatableSelect from "react-select/creatable";
 import useIsMounted from "../lib/useIsMounted";
-import { navigate } from "@reach/router";
+
 export default PostEditor;
 
-const blankEditorValue = [
-  {
-    type: "paragraph",
-    children: [{ text: "" }],
-  },
-];
-
-function PostEditor({ id = null }) {
+function PostEditor() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [richContent, setRichContent] = useState(blankEditorValue);
+  const [richContent, setRichContent] = useState();
   const [tagsOptions, setTagsOptions] = useState([]);
   const [tags, setTags] = useState([]);
   const [categoryOptions, setCategoryOptions] = useState([]);
@@ -31,12 +26,14 @@ function PostEditor({ id = null }) {
   const [hidden, setHidden] = useState(false);
 
   const isMounted = useIsMounted();
+  const navigate = useNavigate();
+  const params = useParams();
 
   useEffect(() => {
     async function fetchData() {
       const postData = await API.graphql({
         query: queries.getPost,
-        variables: { id },
+        variables: { id: params.id },
       });
 
       if (postData && isMounted.current) {
@@ -55,10 +52,10 @@ function PostEditor({ id = null }) {
         setHidden(postData.data.getPost.hidden);
       }
     }
-    if (id) {
+    if (params.id) {
       fetchData();
     }
-  }, [id, isMounted]);
+  }, [params.id, isMounted]);
 
   useEffect(() => {
     async function fetchData() {
@@ -127,16 +124,6 @@ function PostEditor({ id = null }) {
     fetchData();
   }, []);
 
-  function clearEditor() {
-    setTitle("");
-    setContent("");
-    setRichContent(blankEditorValue);
-    setTags([]);
-    setCategory("");
-    setImages([]);
-    setCreatedAt("");
-    setHidden(false);
-  }
 
   function handleButtonClick() {
     const data = {
@@ -150,14 +137,12 @@ function PostEditor({ id = null }) {
       hidden,
     };
 
-    if (id) {
-      data.id = id;
+    if (params.id) {
+      data.id = params.id;
       handleUpdate(data);
     } else {
       handleCreate(data);
     }
-
-    if (isMounted.current) clearEditor();
   }
 
   async function handleCreate(data) {
@@ -251,7 +236,7 @@ function PostEditor({ id = null }) {
       />
 
       <Button className="mt-2" onClick={handleButtonClick}>
-        {id ? "Update" : "Create"}
+        {params.id ? "Update" : "Create"}
       </Button>
     </>
   );
