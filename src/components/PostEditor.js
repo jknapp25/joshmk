@@ -13,17 +13,10 @@ import useIsMounted from "../lib/useIsMounted";
 
 export default PostEditor;
 
-const blankEditorValue = [
-  {
-    type: "paragraph",
-    children: [{ text: "" }],
-  },
-];
-
 function PostEditor() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [richContent, setRichContent] = useState(blankEditorValue);
+  const [richContent, setRichContent] = useState();
   const [tagsOptions, setTagsOptions] = useState([]);
   const [tags, setTags] = useState([]);
   const [categoryOptions, setCategoryOptions] = useState([]);
@@ -131,16 +124,6 @@ function PostEditor() {
     fetchData();
   }, []);
 
-  function clearEditor() {
-    setTitle("");
-    setContent("");
-    setRichContent(blankEditorValue);
-    setTags([]);
-    setCategory("");
-    setImages([]);
-    setCreatedAt("");
-    setHidden(false);
-  }
 
   function handleButtonClick() {
     const data = {
@@ -160,8 +143,6 @@ function PostEditor() {
     } else {
       handleCreate(data);
     }
-
-    if (isMounted.current) clearEditor();
   }
 
   async function handleCreate(data) {

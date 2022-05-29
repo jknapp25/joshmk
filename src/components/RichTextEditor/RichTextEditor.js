@@ -59,6 +59,8 @@ const RichTextEditor = ({
     []
   );
 
+  editor.children = value;
+
   return (
     <Slate editor={editor} value={value} onChange={(value) => onChange(value)}>
       {!readOnly ? (
