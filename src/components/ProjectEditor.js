@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Dropdown, Form, FormControl } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { API, graphqlOperation } from "aws-amplify";
 
 import ImageUploader from "./ImageUploader";
@@ -11,7 +11,7 @@ import * as queries from "../graphql/queries";
 
 export default ProjectEditor;
 
-function ProjectEditor({ id = null, onCreate, onUpdate }) {
+function ProjectEditor({ onCreate, onUpdate }) {
   const [name, setName] = useState("");
   const [summary, setSummary] = useState("");
   const [activeTask, setActiveTask] = useState("");
@@ -26,12 +26,13 @@ function ProjectEditor({ id = null, onCreate, onUpdate }) {
   const [images, setImages] = useState([]);
 
   const navigate = useNavigate();
+  const params = useParams()
 
   useEffect(() => {
     async function fetchData() {
       const projectData = await API.graphql({
         query: queries.getProject,
-        variables: { id },
+        variables: { id: params.id },
       });
 
       if (projectData) {
@@ -46,10 +47,10 @@ function ProjectEditor({ id = null, onCreate, onUpdate }) {
         setEnd(projectData.data.getProject.end);
       }
     }
-    if (id) {
+    if (params.id) {
       fetchData();
     }
-  }, [id]);
+  }, [params.id]);
 
   function clearEditor() {
     setName("");
@@ -80,8 +81,8 @@ function ProjectEditor({ id = null, onCreate, onUpdate }) {
       images,
     };
 
-    if (id) {
-      data.id = id;
+    if (params.id) {
+      data.id = params.id;
       handleUpdate(data);
     } else {
       handleCreate(data);
@@ -206,7 +207,7 @@ function ProjectEditor({ id = null, onCreate, onUpdate }) {
       />
 
       <Button className="mt-2" onClick={handleButtonClick}>
-        {id ? "Update" : "Create"}
+        {params.id ? "Update" : "Create"}
       </Button>
     </>
   );

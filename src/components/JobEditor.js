@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, ButtonGroup, Form, FormControl } from "react-bootstrap";
 import { API, graphqlOperation } from "aws-amplify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { createJob, updateJob } from "../graphql/mutations";
 import TagEditor from "./TagEditor";
@@ -10,7 +10,7 @@ import useIsMounted from "../lib/useIsMounted";
 
 export default JobEditor;
 
-function JobEditor({ id = null }) {
+function JobEditor() {
   const [company, setCompany] = useState("");
   const [role, setRole] = useState("");
   const [location, setLocation] = useState("");
@@ -27,12 +27,13 @@ function JobEditor({ id = null }) {
 
   const isMounted = useIsMounted();
   const navigate = useNavigate();
+  const params = useParams();
 
   useEffect(() => {
     async function fetchData() {
       const jobData = await API.graphql({
         query: queries.getJob,
-        variables: { id },
+        variables: { id: params.id },
       });
 
       if (jobData && isMounted.current) {
@@ -49,10 +50,10 @@ function JobEditor({ id = null }) {
         setActiveDetail("");
       }
     }
-    if (id) {
+    if (params.id) {
       fetchData();
     }
-  }, [id, isMounted]);
+  }, [params.id, isMounted]);
 
   function clearEditor() {
     setCompany("");
@@ -86,8 +87,8 @@ function JobEditor({ id = null }) {
       tagUsage,
     };
 
-    if (id) {
-      data.id = id;
+    if (params.id) {
+      data.id = params.id;
       handleUpdate(data);
     } else {
       handleCreate(data);
@@ -216,7 +217,7 @@ function JobEditor({ id = null }) {
       />
 
       <Button className="mt-2" onClick={handleButtonClick}>
-        {id ? "Update" : "Create"}
+        {params.id ? "Update" : "Create"}
       </Button>
     </>
   );

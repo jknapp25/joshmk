@@ -20,7 +20,7 @@ const blankEditorValue = [
   },
 ];
 
-function PostEditor({ id = null }) {
+function PostEditor() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [richContent, setRichContent] = useState(blankEditorValue);
