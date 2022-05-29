@@ -1,11 +1,8 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
-import { Alert } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import { parse } from "query-string";
-import { PDFDownloadLink } from "@react-pdf/renderer";
 import { API } from "aws-amplify";
 
-import Resume from "./Resume";
 import Tag from "./Tag";
 import Post from "./Post";
 import Project from "./Project";
@@ -130,18 +127,6 @@ function ItemList({ mini = false, displayMore, setDisplayMore }) {
 
   return (
     <>
-      {pageName === "work" && config?.resumeGeneratorEnabled ? (
-        <Alert variant="primary" className="border mb-3">
-          Click{" "}
-          <PDFDownloadLink
-            document={<Resume items={preppedItems} education={education} />}
-            fileName={`${config.fullName.replace(" ", "_")}_Resume.pdf`}
-          >
-            <span className="alert-link">here</span>
-          </PDFDownloadLink>{" "}
-          for {config.nickName}'s resume
-        </Alert>
-      ) : null}
       {pageName === "search" ? (
         <div className="mb-5 d-flex align-items-center">
           <Tag tag={searchParams.tag} size="lg" />
