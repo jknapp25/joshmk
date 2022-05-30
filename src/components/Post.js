@@ -46,7 +46,7 @@ function Post({ post = {} }) {
     <div className="pb-3">
       <div className="mb-4">
         {isToday ? (
-          <Badge bg="success" className="me-2">
+          <Badge bg="success" pill className="me-2">
             New
           </Badge>
         ) : null}
