@@ -4,13 +4,14 @@ import { API } from "aws-amplify";
 
 import ImageCarousel from "./ImageCarousel";
 import Tag from "./Tag";
+import Category from "./Category";
+import RichTextEditor from "./RichTextEditor/RichTextEditor";
 import useIsMounted from "../lib/useIsMounted";
 import * as queries from "../graphql/queries";
-import RichTextEditor from "./RichTextEditor/RichTextEditor";
 
 export default Post;
 
-function Post({ post = {}}) {
+function Post({ post = {} }) {
   const [realPost, setRealPost] = useState(post);
   const isMounted = useIsMounted();
   const params = useParams();
@@ -33,22 +34,14 @@ function Post({ post = {}}) {
 
   if (!realPost) return null;
 
-  let { id, title, richContent, tags, category, images, createdAt } = realPost;
+  let { id, title, richContent, tags, category, images } = realPost;
 
   richContent = richContent ? JSON.parse(richContent) : richContent;
 
   return (
     <div className="pb-3">
       <div className="mb-4">
-        <small
-          className="text-muted text-uppercase"
-          style={{
-            fontSize: ".800em",
-            fontWeight: 600,
-          }}
-        >
-          {category}
-        </small>
+        <Category category={category} />
         <h1 className="mb-1 display-5">
           <span className="cursor-pointer fw-bold">
             <Link to={`/post/${id}`} className="hidden-link">

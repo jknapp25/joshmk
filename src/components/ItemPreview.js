@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import useIsMounted from "../lib/useIsMounted";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
-import ImageSlider from "./ImageSlider";
+
+import ImageCarousel from "./ImageCarousel";
 import RichTextEditor from "./RichTextEditor/RichTextEditor";
 import BuyModal from "./BuyModal";
 import ItemBuyButton from "./ItemBuyButton";
+import Category from "./Category";
+
 export default ItemPreview;
 
 function ItemPreview({ item = {}, ...props }) {
@@ -32,7 +35,7 @@ function ItemPreview({ item = {}, ...props }) {
 
   if (!realItem) return null;
 
-  let { name, description, category, images, createdAt } = realItem;
+  let { name, description, category, images } = realItem;
 
   description = description ? JSON.parse(description) : description;
 
@@ -40,13 +43,18 @@ function ItemPreview({ item = {}, ...props }) {
     <div className="row gx-0 py-3">
       <div className="col my-auto">
         <div>
-          {category ? (
-            <div className="mb-1">
-              <small className="text-muted text-uppercase">{category}</small>
-            </div>
-          ) : null}
-          <ImageSlider images={images} classes="mb-3" />
-          <h4 className="mb-2 fw-bold">{name}</h4>
+          <div className="mb-4">
+            <Category category={category} />
+            <h1 className="mb-1 display-5">
+              <span className="cursor-pointer fw-bold">{name}</span>
+            </h1>
+          </div>
+
+          <ImageCarousel
+            images={images}
+            classes="mb-4 rounded bg-secondary bg-opacity-10 shadow-lg"
+          />
+
           {description ? (
             <RichTextEditor
               value={description}
