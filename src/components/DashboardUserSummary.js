@@ -19,6 +19,7 @@ function DashboardUserSummary({ config, avatarUrl }) {
               cursor: "zoom-in",
             }}
             src={avatarUrl}
+            alt="Author profile image"
             fluid
             onClick={() =>
               imageContext.setImageContext({
