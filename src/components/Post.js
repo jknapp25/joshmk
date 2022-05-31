@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { API } from "aws-amplify";
-import moment from "moment";
-import { Badge } from "react-bootstrap";
 
 import ImageCarousel from "./ImageCarousel";
 import Tag from "./Tag";
 import Category from "./Category";
 import RichTextEditor from "./RichTextEditor/RichTextEditor";
+import NewBadge from "./NewBadge";
 import useIsMounted from "../lib/useIsMounted";
 import * as queries from "../graphql/queries";
 
@@ -40,16 +39,13 @@ function Post({ post = {} }) {
 
   richContent = richContent ? JSON.parse(richContent) : richContent;
 
-  const isToday = moment(createdAt).isSame(new Date(), "day");
 
   return (
     <div className="pb-3">
       <div className="mb-4">
-        {isToday ? (
-          <Badge bg="success" pill className="me-2">
-            New
-          </Badge>
-        ) : null}
+        <NewBadge 
+          createdAt={createdAt}  
+        />
         <Category category={category} />
         <h1 className="mb-1 display-5">
           <span className="cursor-pointer fw-bold">

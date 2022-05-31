@@ -7,6 +7,7 @@ import ImageCarousel from "./ImageCarousel";
 import RichTextEditor from "./RichTextEditor/RichTextEditor";
 import ItemBuyButton from "./ItemBuyButton";
 import Category from "./Category";
+import NewBadge from "./NewBadge";
 
 export default ItemPreview;
 
@@ -33,7 +34,7 @@ function ItemPreview({ item = {}, ...props }) {
 
   if (!realItem) return null;
 
-  let { name, description, category, images } = realItem;
+  let { name, description, category, images, createdAt } = realItem;
 
   description = description ? JSON.parse(description) : description;
 
@@ -42,6 +43,7 @@ function ItemPreview({ item = {}, ...props }) {
       <div className="col my-auto">
         <div>
           <div className="mb-4">
+            <NewBadge createdAt={createdAt} />
             <Category category={category} />
             <h1 className="mb-1 display-5">
               <span className="cursor-pointer fw-bold">{name}</span>
