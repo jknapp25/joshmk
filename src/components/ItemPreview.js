@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import useIsMounted from "../lib/useIsMounted";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
@@ -11,30 +12,31 @@ import NewBadge from "./NewBadge";
 
 export default ItemPreview;
 
-function ItemPreview({ item = {}, ...props }) {
+function ItemPreview({ item = {} }) {
   const [realItem, setRealItem] = useState(item);
 
   const isMounted = useIsMounted();
+  const params = useParams();
 
   useEffect(() => {
     async function fetchData() {
       const itemData = await API.graphql({
         query: queries.getItem,
-        variables: { id: props.id },
+        variables: { id: params.id },
       });
 
       if (itemData && isMounted.current) {
         setRealItem(itemData.data.getItem);
       }
     }
-    if (props.id) {
+    if (params.id) {
       fetchData();
     }
-  }, [props.id, isMounted]);
+  }, [params.id, isMounted]);
 
   if (!realItem) return null;
 
-  let { name, description, category, images, createdAt } = realItem;
+  let { id, name, description, category, images, createdAt } = realItem;
 
   description = description ? JSON.parse(description) : description;
 
@@ -46,7 +48,11 @@ function ItemPreview({ item = {}, ...props }) {
             <NewBadge createdAt={createdAt} />
             <Category category={category} />
             <h1 className="mb-1 display-5">
-              <span className="cursor-pointer fw-bold">{name}</span>
+              <span className="cursor-pointer fw-bold">
+                <Link to={`/item/${id}`} className="hidden-link">
+                  {name}
+                </Link>
+              </span>
             </h1>
           </div>
 

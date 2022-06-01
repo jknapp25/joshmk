@@ -9,7 +9,7 @@ import ItemList from "./components/ItemList";
 import Home from "./components/Home.js";
 import Post from "./components/Post.js";
 import PostEditor from "./components/PostEditor.js";
-import Item from "./components/Item.js";
+import ItemPreview from "./components/ItemPreview.js";
 import ItemEditor from "./components/ItemEditor.js";
 import Job from "./components/Job.js";
 import JobEditor from "./components/JobEditor.js";
@@ -74,7 +74,7 @@ function App() {
               <Route path="post/:id" element={<Post />} />
               <Route path="post/:id/edit" element={<PostEditor />} />
               <Route path="post/create" element={<PostEditor />} />
-              <Route path="item/:id" element={<Item />} />
+              <Route path="item/:id" element={<ItemPreview />} />
               <Route path="item/:id/edit" element={<ItemEditor />} />
               <Route path="item/create" element={<ItemEditor />} />
               <Route path="job/:id" element={<Job />} />
