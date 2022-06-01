@@ -38,30 +38,29 @@ function Project({ project = {} }) {
   const timeInfo = createTimeInfo(start, end, null, false);
 
   return (
-    <>
-      <ImageCarousel
-        images={images}
-        classes="rounded bg-secondary bg-opacity-10 shadow-lg"
-      />
-
-      <h4>
-        {link ? (
-          <a href={link} target="_blank" rel="noreferrer noopener">
-            {name}
-          </a>
-        ) : (
-          name
-        )}
+    <div className="pb-3">
+      <div className="mb-4">
         {status ? (
-          <Badge bg={statusColorLookup[status]} className="ms-2">
+          <Badge bg={statusColorLookup[status]}>
             {status}
           </Badge>
-        ) : null}{" "}
-      </h4>
+        ) : null}
+        <h1 className="mb-1 display-5">
+          <span className="cursor-pointer fw-bold">{name}</span>
+        </h1>
+      </div>
+
+      <ImageCarousel
+        images={images}
+        classes="mb-4 rounded bg-secondary bg-opacity-10 shadow-lg"
+      />
+
       {summary ? <div className="font-weight-normal">{summary}</div> : null}
+
       <div className="mt-2">
         <small className="text-muted">{timeInfo}</small>
       </div>
+
       {tags && tags.length > 0 && (
         <div
           style={{
@@ -76,6 +75,6 @@ function Project({ project = {} }) {
           ))}
         </div>
       )}
-    </>
+    </div>
   );
 }
