@@ -36,7 +36,7 @@ function ItemPreview({ item = {} }) {
 
   if (!realItem) return null;
 
-  let { id, name, description, category, images, createdAt } = realItem;
+  let { id, name, description, category, images, createdAt, isForSale, isSold, price } = realItem;
 
   description = description ? JSON.parse(description) : description;
 
@@ -70,9 +70,9 @@ function ItemPreview({ item = {} }) {
           ) : null}
 
           <ItemBuyButton
-            isForSale={item.isForSale}
-            isSold={item.isSold}
-            price={item.price}
+            isForSale={isForSale}
+            isSold={isSold}
+            price={price}
             classes="my-2"
           />
         </div>
