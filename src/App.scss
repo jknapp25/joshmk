@@ -113,6 +113,15 @@ html {
   overflow: scroll;
   overflow-x: hidden;
 }
+::-webkit-scrollbar {
+  width: 0;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+  width: 0;
+  background: transparent;
+}
 
 .cursor-pointer {
   cursor: pointer;
@@ -273,9 +282,12 @@ button:focus {
 .btn-tag {
   color: rgb(42, 42, 42) !important;
   --bs-bg-opacity: 0.075;
-  background-color: rgba(var(--bs-secondary-rgb),var(--bs-bg-opacity))!important;
-  padding-left: .8em !important;
-  padding-right: .8em !important;
+  background-color: rgba(
+    var(--bs-secondary-rgb),
+    var(--bs-bg-opacity)
+  ) !important;
+  padding-left: 0.8em !important;
+  padding-right: 0.8em !important;
 }
 .btn-tag:hover {
   --bs-bg-opacity: 0.05;

@@ -17,3 +17,16 @@ code {
   src: local("MedievalSharp"),
     url(./fonts/MedievalSharp-Regular.ttf) format("truetype");
 }
+
+// bootstrap customization
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+
+$custom-spacers: (
+  6: $spacer * 5,
+);
+
+$spacers: map-merge($custom-spacers, $spacers);
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+

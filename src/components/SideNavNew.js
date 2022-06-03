@@ -5,7 +5,6 @@ import { Button } from "react-bootstrap";
 import "react-vertical-timeline-component/style.min.css";
 
 import { ConfigContext } from "../App";
-import "../App.css";
 
 export default SideNavNew;
 

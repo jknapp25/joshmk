@@ -1,10 +1,28 @@
-import React, { useContext } from "react";
-import { ImageContext } from "../App";
+import React, { useContext, useState, useEffect } from "react";
 import { Image } from "react-bootstrap";
+import { Storage } from "aws-amplify";
+
+import { ImageContext } from "../App";
+import useIsMounted from "../lib/useIsMounted";
+
 export default DashboardUserSummary;
 
-function DashboardUserSummary({ config, avatarUrl }) {
+function DashboardUserSummary({ config }) {
+  const [avatarUrl, setAvatarUrl] = useState("");
   const imageContext = useContext(ImageContext);
+
+  const isMounted = useIsMounted();
+
+  useEffect(() => {
+    async function fetchData() {
+      const avatarUrl = await Storage.get(config.avatar);
+      if (avatarUrl && isMounted.current) setAvatarUrl(avatarUrl);
+    }
+    if (config.avatar) {
+      fetchData();
+    }
+  }, [config.avatar, isMounted]);
+
   return (
     <>
       <div className="mb-2">

@@ -39,13 +39,10 @@ function Post({ post = {} }) {
 
   richContent = richContent ? JSON.parse(richContent) : richContent;
 
-
   return (
     <div className="pb-3">
-      <div className="mb-4">
-        <NewBadge 
-          createdAt={createdAt}  
-        />
+      <div className="mb-4 mx-lg-5">
+        <NewBadge createdAt={createdAt} />
         <Category category={category} />
         <h1 className="mb-1 display-5">
           <span className="cursor-pointer fw-bold">
@@ -61,13 +58,15 @@ function Post({ post = {} }) {
         classes="mb-4 rounded bg-secondary bg-opacity-10 shadow-lg"
       />
 
-      {richContent ? (
-        <RichTextEditor
-          value={richContent}
-          onChange={() => {}}
-          readOnly={true}
-        />
-      ) : null}
+      <div className="mx-lg-5">
+        {richContent ? (
+          <RichTextEditor
+            value={richContent}
+            onChange={() => {}}
+            readOnly={true}
+          />
+        ) : null}
+      </div>
 
       {tags && tags.length > 0 && (
         <div
@@ -76,7 +75,7 @@ function Post({ post = {} }) {
             overflowX: "scroll",
             boxShadow: "",
           }}
-          className="border-0 py-0 mt-4"
+          className="border-0 py-0 mt-4 mx-lg-5"
         >
           {tags.map((tag) => (
             <Tag key={`tag-${tag}`} tag={tag} size="sm" />

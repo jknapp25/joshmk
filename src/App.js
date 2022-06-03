@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Amplify, { API } from "aws-amplify";
 import "react-vertical-timeline-component/style.min.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "@aws-amplify/ui-react/styles.css";
 
 import ItemList from "./components/ItemList";
@@ -25,7 +24,7 @@ import awsExports from "./aws-exports";
 import * as queries from "./graphql/queries";
 import useIsMounted from "./lib/useIsMounted";
 import FullScreenImageCarousel from "./components/FullScreenImageCarousel";
-import "./App.css";
+import "./App.scss";
 
 export default App;
 
@@ -88,7 +87,7 @@ function App() {
               <Route path="education/create" element={<EducationEditor />} />
               <Route path="create" element={<Create />} />
               <Route path="settings" element={<Settings />} />
-              <Route path="about" element={<Bio bio={config.bio} />}  />
+              <Route path="about" element={<Bio bio={config.bio} />} />
             </Route>
           </Routes>
           <FullScreenImageCarousel />

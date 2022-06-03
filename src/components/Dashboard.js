@@ -35,9 +35,7 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
 
   return (
     <Container fluid style={{ maxWidth: "1440px" }}>
-      <MobileNav 
-        fullName={config.fullName}
-      />
+      <MobileNav fullName={config.fullName} />
       <Helmet>
         <title>{config.fullName || ""}</title>
         <link rel="icon" type="image/png" href={faviconUrl} sizes="16x16" />
@@ -60,7 +58,7 @@ function Dashboard({ config, faviconUrl, avatarUrl }) {
           className="p-0 vh-100 d-none d-lg-flex align-items-center sticky"
         >
           <div className="p-5">
-            <DashboardUserSummary config={config} avatarUrl={avatarUrl} />
+            <DashboardUserSummary config={config} />
           </div>
         </Col>
       </Row>
