@@ -4,12 +4,14 @@ import { Storage } from "aws-amplify";
 
 import { ImageContext } from "../App";
 import useIsMounted from "../lib/useIsMounted";
+import { ConfigContext } from "../App";
 
 export default DashboardUserSummary;
 
-function DashboardUserSummary({ config }) {
+function DashboardUserSummary() {
   const [avatarUrl, setAvatarUrl] = useState("");
   const imageContext = useContext(ImageContext);
+  const config = useContext(ConfigContext);
 
   const isMounted = useIsMounted();
 

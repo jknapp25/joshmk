@@ -13,6 +13,7 @@ function ImageCarousel({ images = [], classes = "" }) {
 
   useEffect(() => {
     async function fetchData() {
+      console.log(images)
       const imagesCalls = images.map((url) => Storage.get(url));
       const resImageUrls = await Promise.all(imagesCalls);
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { parse } from "query-string";
 import { API } from "aws-amplify";
@@ -10,14 +10,12 @@ import Job from "./Job";
 import Education from "./Education";
 import PostPreview from "./PostPreview";
 import ItemPreview from "./ItemPreview";
-import { ConfigContext } from "../App";
 import * as queries from "../graphql/queries";
 
 export default ItemList;
 
 function ItemList({ mini = false, displayMore, setDisplayMore }) {
   const { pathname, search } = useLocation();
-  const config = useContext(ConfigContext);
   const searchParams = parse(search);
   const [items, setItems] = useState([]);
   const [renderedItems, setRenderedItems] = useState(1);
