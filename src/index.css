@@ -18,15 +18,15 @@ code {
     url(./fonts/MedievalSharp-Regular.ttf) format("truetype");
 }
 
-// bootstrap customization
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
+  /* bootstrap customization
+ @import "~bootstrap/scss/functions";
+ @import "~bootstrap/scss/variables";
 
-$custom-spacers: (
-  6: $spacer * 5,
-);
+ $custom-spacers: (
+   6: $spacer * 5,
+ );
 
-$spacers: map-merge($custom-spacers, $spacers);
+ $spacers: map-merge($custom-spacers, $spacers);
 
-@import "~bootstrap/scss/bootstrap";
+ @import "~bootstrap/scss/bootstrap"; */
 

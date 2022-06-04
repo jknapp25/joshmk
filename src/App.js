@@ -4,6 +4,7 @@ import { Container } from "react-bootstrap";
 import { Helmet } from "react-helmet";
 import { Amplify, API, Storage } from "aws-amplify";
 import "react-vertical-timeline-component/style.min.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "@aws-amplify/ui-react/styles.css";
 
 import ItemList from "./components/ItemList.js";
@@ -29,7 +30,7 @@ import useIsMounted from "./lib/useIsMounted";
 import FullScreenImageCarousel from "./components/FullScreenImageCarousel";
 import MobileNav from "./components/MobileNav";
 
-import "./App.scss";
+import "./App.css";
 
 export default App;
 
