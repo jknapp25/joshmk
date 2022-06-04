@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { Helmet } from "react-helmet";
-import Amplify, { API, Storage } from "aws-amplify";
+import { Amplify, API, Storage } from "aws-amplify";
 import "react-vertical-timeline-component/style.min.css";
 import "@aws-amplify/ui-react/styles.css";
 

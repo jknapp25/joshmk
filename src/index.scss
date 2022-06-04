@@ -19,8 +19,8 @@ code {
 }
 
 // bootstrap customization
-@import "../node_modules/bootstrap/scss/functions";
-@import "../node_modules/bootstrap/scss/variables";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
 
 $custom-spacers: (
   6: $spacer * 5,
@@ -28,5 +28,5 @@ $custom-spacers: (
 
 $spacers: map-merge($custom-spacers, $spacers);
 
-@import "../node_modules/bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/bootstrap";
 
