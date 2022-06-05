@@ -122,7 +122,7 @@ function App() {
                 <Route path="create" element={<Create />} />
                 <Route path="settings" element={<Settings />} />
                 <Route path="about" element={<Bio bio={config.bio} />} />
-                <Route path="search" element={<ItemList />} />
+                <Route path="search" element={<ItemList mini />} />
               </Route>
             </Routes>
           </Container>

@@ -3,8 +3,8 @@ import { useMatch, Outlet } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 
 import SideNavNew from "./SideNavNew";
-import DashboardUserSummary from "./DashboardUserSummary";
-import DashboardTags from "./DashboardTags";
+import UserMiniSummary from "./UserMiniSummary";
+import PopularTags from "./PopularTags";
 import { ConfigContext } from "../App";
 
 export default MainView;
@@ -28,7 +28,7 @@ function MainView() {
       >
         <div className="p-5">
           <SideNavNew classes="mb-5" />
-          {isHomeRoute ? <DashboardTags /> : null}
+          {isHomeRoute ? <PopularTags /> : null}
         </div>
       </Col>
       <Col lg={mainColWidth} className="p-4 p-lg-5">
@@ -40,7 +40,7 @@ function MainView() {
           className="p-0 vh-100 d-none d-lg-flex align-items-center sticky"
         >
           <div className="p-5">
-            <DashboardUserSummary />
+            <UserMiniSummary />
           </div>
         </Col>
       ) : null}

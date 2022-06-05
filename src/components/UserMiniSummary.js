@@ -6,9 +6,9 @@ import { ImageContext } from "../App";
 import useIsMounted from "../lib/useIsMounted";
 import { ConfigContext } from "../App";
 
-export default DashboardUserSummary;
+export default UserMiniSummary;
 
-function DashboardUserSummary() {
+function UserMiniSummary() {
   const [avatarUrl, setAvatarUrl] = useState("");
   const imageContext = useContext(ImageContext);
   const config = useContext(ConfigContext);

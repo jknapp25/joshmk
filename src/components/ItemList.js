@@ -91,7 +91,7 @@ function ItemList({ mini = false, displayMore, setDisplayMore }) {
       if (isMounted.current) setItems(items);
     }
     fetchData();
-  }, [pageName]);
+  }, [pageName, searchParams.tag]);
 
   if (items.length === 0) return null;
 
@@ -157,7 +157,7 @@ function ItemList({ mini = false, displayMore, setDisplayMore }) {
         : (preppedItems.map((item, i) => (
             <div key={i}>
               {item.type === "post" && mini ? (
-                <PostPreview post={item} />
+                <PostPreview post={item} borderTop={i === 0 && pageName === "search"} />
               ) : null}
               {item.type === "post" && !mini ? <Post post={item} /> : null}
               {item.type === "item" ? <ItemPreview item={item} /> : null}

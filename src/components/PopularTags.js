@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { API } from "aws-amplify";
 
 import Tag from "./Tag";
-import sortByFrequencyAndRemoveDuplicates from '../lib/sortByFrequencyAndRemoveDuplicates';
+import sortByFrequencyAndRemoveDuplicates from "../lib/sortByFrequencyAndRemoveDuplicates";
 
-export default DashboardTags;
+export default PopularTags;
 
-function DashboardTags() {
+function PopularTags() {
   const [tags, setTags] = useState(null);
 
   useEffect(() => {
@@ -26,7 +26,14 @@ function DashboardTags() {
         []
       );
       const sorted = sortByFrequencyAndRemoveDuplicates(preppedTags);
-      const topTags = sorted.slice(0, 6);
+      
+      const removeList = ["short story", "poetry", "drawing", "fiction"];
+      const withoutRemovedOnes = sorted.filter(
+        (tag) => !removeList.includes(tag)
+      );
+      
+      const topTags = withoutRemovedOnes.slice(0, 6);
+
 
       setTags(topTags);
     }
@@ -35,7 +42,7 @@ function DashboardTags() {
   }, []);
 
   if (!tags || tags.length === 0) return null;
-  
+
   return (
     <>
       <div className="mb-2">
