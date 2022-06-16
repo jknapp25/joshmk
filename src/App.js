@@ -87,6 +87,7 @@ function App() {
           <Container fluid style={{ maxWidth: "1440px" }}>
             <Helmet>
               <title>{config.fullName || ""}</title>
+              <meta name="description" content={config.tagline || `Website for ${config.fullName}`} />
               <link
                 rel="icon"
                 type="image/png"
