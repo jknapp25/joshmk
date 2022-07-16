@@ -33,6 +33,31 @@ const EDITOR_STYLES = {
   paddingRight: "12px",
 };
 
+// function removeSpacesOnEnds(content) {
+//   let updatedContent = content;
+
+//   const isSpace = (val) =>
+//     val.type === "paragraph" &&
+//     val.children.length === 1 &&
+//     val.children.text === "";
+
+//   // remove from start
+//   for (let i = 0; i < content.length; i++) {
+//     if (isSpace(content[i])) {
+//       updatedContent.shift();
+//     }
+//   }
+
+//   // remove from end
+//   for (let i = content.length - 1; i < 0; i--) {
+//     if (isSpace(content[i])) {
+//       updatedContent.pop();
+//     }
+//   }
+
+//   return updatedContent;
+// }
+
 export default function RichTextEditor({
   value = blankEditorValue,
   placeholder = "",
@@ -48,6 +73,10 @@ export default function RichTextEditor({
       withVideos(withLinks(withImages(withHistory(withReact(createEditor()))))),
     []
   );
+
+  // if (readOnly) {
+  //   value = removeSpacesOnEnds(value);
+  // }
 
   editor.children = value;
 
