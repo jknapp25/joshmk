@@ -124,7 +124,6 @@ function PostEditor() {
     fetchData();
   }, []);
 
-
   function handleButtonClick() {
     const data = {
       title,
@@ -175,7 +174,9 @@ function PostEditor() {
       <Form.Label className="mb-0">Content</Form.Label>
       <RichTextEditor
         value={richContent}
-        onChange={(updRichContent) => setRichContent(updRichContent)}
+        onChange={(updRichContent) => {
+          setRichContent(updRichContent);
+        }}
         buttons={[
           "bold",
           "italic",
@@ -188,6 +189,7 @@ function PostEditor() {
           "numbered-list",
           "bulleted-list",
           "link",
+          "image",
           "video",
         ]}
         classes="bg-white mb-2"

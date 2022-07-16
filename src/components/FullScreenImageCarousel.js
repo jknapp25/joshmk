@@ -69,7 +69,9 @@ function FullScreenImageCarousel() {
           left: "0",
           right: "0",
           margin: "auto",
+          cursor: "zoom-out"
         }}
+        onClick={handleClose}
       />
       <CgClose
         className="position-absolute cursor-pointer bg-secondary bg-opacity-50 rounded-circle p-1"

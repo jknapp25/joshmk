@@ -50,11 +50,19 @@ function ImageUploader({
       }
     }
 
+    console.log("uploads", uploads);
+
     const resUploadKeyObjects = await Promise.all(uploads);
+
+    console.log("resUploadKeyObjects", resUploadKeyObjects);
 
     if (resUploadKeyObjects && resUploadKeyObjects.length > 0) {
       const resUploadKeys = resUploadKeyObjects.map((obj) => obj.key);
+      console.log("resUploadKeys", resUploadKeys);
+
       const updImages = [...images, ...resUploadKeys];
+
+      console.log("updImages", updImages);
 
       afterEdit(updImages);
     }

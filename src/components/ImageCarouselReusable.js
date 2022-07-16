@@ -1,35 +1,33 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Carousel } from "react-bootstrap";
-import { Storage } from "aws-amplify";
-
 import { ImageContext } from "../App";
+import { Carousel } from "react-bootstrap";
 import useIsMounted from "../lib/useIsMounted";
+import { Storage } from "aws-amplify";
+export default ImageCarouselReusable;
 
-export default ImageCarousel;
-
-function ImageCarousel({ images = [], classes = "" }) {
-  const [imageUrls, setImageUrls] = useState([]);
+function ImageCarouselReusable({ imageUrls = [], classes = "" }) {
+  // const [imageUrls, setImageUrls] = useState([]);
   const imageContext = useContext(ImageContext);
 
-  const isMounted = useIsMounted();
+  // const isMounted = useIsMounted();
 
-  useEffect(() => {
-    async function fetchData() {
-      const imagesCalls = images.map((url) => Storage.get(url));
-      const resImageUrls = await Promise.all(imagesCalls);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const imagesCalls = images.map((url) => Storage.get(url));
+  //     const resImageUrls = await Promise.all(imagesCalls);
 
-      if (isMounted.current) setImageUrls(resImageUrls);
-    }
-    if (images && images.length) {
-      fetchData();
-    } else {
-      if (isMounted.current) setImageUrls([]);
-    }
-  }, [images, isMounted]);
+  //     if (isMounted.current) setImageUrls(resImageUrls);
+  //   }
+  //   if (images && images.length) {
+  //     fetchData();
+  //   } else {
+  //     if (isMounted.current) setImageUrls([]);
+  //   }
+  // }, [images, isMounted]);
 
-  if (images.length === 0) return null;
+  if (imageUrls.length === 0) return null;
 
-  const isOneImage = images.length === 1;
+  const isOneImage = imageUrls.length === 1;
 
   return (
     <Carousel

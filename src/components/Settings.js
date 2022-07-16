@@ -231,7 +231,7 @@ function Settings() {
         }}
         fieldId="avatar"
         fileSizeLimit={5}
-        multiple={false}
+        allowMultiple={false}
         imageDisplayName="Avatar"
       />
 
@@ -248,7 +248,7 @@ function Settings() {
         }}
         fieldId="favicon"
         fileSizeLimit={0.2}
-        multiple={false}
+        allowMultiple={false}
         imageDisplayName="Favicon"
       />
 

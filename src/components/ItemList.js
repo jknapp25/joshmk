@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { parse } from "query-string";
 import { API } from "aws-amplify";
+import { Button } from "react-bootstrap";
 
 import Tag from "./Tag";
 import Post from "./Post";
@@ -14,11 +15,12 @@ import * as queries from "../graphql/queries";
 
 export default ItemList;
 
-function ItemList({ mini = false, displayMore, setDisplayMore }) {
+function ItemList({ mini = false }) {
   const { pathname, search } = useLocation();
   const searchParams = parse(search);
   const [items, setItems] = useState([]);
-  const [renderedItems, setRenderedItems] = useState(1);
+  const [renderedItems, setRenderedItems] = useState(2);
+  const [displayMore, setDisplayMore] = useState(null);
 
   let pageName = pathname.substring(1) || "blog";
 
@@ -31,7 +33,7 @@ function ItemList({ mini = false, displayMore, setDisplayMore }) {
 
   useEffect(() => {
     if (displayMore) {
-      setRenderedItems(renderedItems + 2);
+      setRenderedItems(renderedItems + 3);
       setDisplayMore(false);
     }
   }, [displayMore, renderedItems, setDisplayMore]);
@@ -154,10 +156,13 @@ function ItemList({ mini = false, displayMore, setDisplayMore }) {
               </div>
             ) : null
           )
-        : (preppedItems.map((item, i) => (
+        : preppedItems.map((item, i) => (
             <div key={i}>
               {item.type === "post" && mini ? (
-                <PostPreview post={item} borderTop={i === 0 && pageName === "search"} />
+                <PostPreview
+                  post={item}
+                  borderTop={i === 0 && pageName === "search"}
+                />
               ) : null}
               {item.type === "post" && !mini ? <Post post={item} /> : null}
               {item.type === "item" ? <ItemPreview item={item} /> : null}
@@ -170,7 +175,15 @@ function ItemList({ mini = false, displayMore, setDisplayMore }) {
                 <div style={{ height: "35px" }} />
               ) : null}
             </div>
-          )): null)}
+          ))}
+
+      {pageName === "blog" ? (
+        <div className="d-grid">
+          <Button variant="dark" size="lg" onClick={() => setDisplayMore(true)}>
+            Load older posts
+          </Button>
+        </div>
+      ) : null}
     </>
   );
 }

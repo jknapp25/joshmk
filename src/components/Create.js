@@ -105,6 +105,7 @@ function Create() {
           <Dropdown.Menu>
             {["post", "item", "job", "project", "education"].map((type) => (
               <Dropdown.Item
+                key={type}
                 onClick={() => setItemType(type)}
                 className="text-capitalize"
               >
@@ -127,7 +128,9 @@ function Create() {
         <thead>
           <tr>
             {TABLE_FIELDS[itemType].map((field) => (
-              <th className="px-0">{field}</th>
+              <th key={`header-${field}`} className="px-0">
+                {field}
+              </th>
             ))}
             <th className="px-0"></th>
           </tr>
@@ -138,7 +141,7 @@ function Create() {
               return (
                 <tr key={i} onClick={() => navigate(`/${itemType}/${item.id}`)}>
                   {TABLE_FIELDS[itemType].map((field) => (
-                    <td className="px-0">{item[field]}</td>
+                    <td key={field} className="px-0">{item[field]}</td>
                   ))}
                   <td className="px-0">
                     <span
@@ -181,7 +184,7 @@ function Create() {
               );
             })
           ) : (
-            <div>No items</div>
+            <tr><td>No items</td></tr>
           )}
         </tbody>
       </Table>
