@@ -5,7 +5,7 @@ export const Element = ({ attributes, children, element }) => {
   switch (element.type) {
     case "block-quote":
       return (
-        <blockquote {...attributes} className="border-left pl-2 fs-5">
+        <blockquote {...attributes} className="border-start border-dark border-2 ps-3 fst-italic fs-5 mb-0">
           {children}
         </blockquote>
       );
