@@ -18,12 +18,13 @@ function MainView() {
 
   if (!config.pages || config.pages.length === 0) return null;
 
-  const mainColWidth = isGalleryRoute || isCreateRoute ? 9 : 6;
+  const mainColWidth = isGalleryRoute || isCreateRoute ? 10 : 6;
+  const secondaryColWidth = isGalleryRoute || isCreateRoute ? 2 : 3;
 
   return (
     <Row>
       <Col
-        lg={3}
+        lg={secondaryColWidth}
         className="p-0 vh-100 d-none d-lg-flex align-items-center sticky"
       >
         <div className="p-5">
