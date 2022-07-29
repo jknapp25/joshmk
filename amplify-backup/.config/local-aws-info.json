@@ -1,0 +1,12 @@
+{
+  "dev": {
+    "configLevel": "project",
+    "useProfile": false,
+    "awsConfigFilePath": "/home/gitpod/.amplify/awscloudformation/DOVlIADip8"
+  },
+  "joshmk": {
+    "configLevel": "project",
+    "useProfile": false,
+    "awsConfigFilePath": "/home/gitpod/.amplify/awscloudformation/FjeAHLdnU7"
+  }
+}
