@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { API } from "aws-amplify";
+import * as queries from "../graphql/queries";
 
 import ImageCarousel from "./ImageCarousel";
 import Tag from "./Tag";
@@ -8,7 +9,6 @@ import Category from "./Category";
 import RichTextEditor from "./RichTextEditor/RichTextEditor";
 import NewBadge from "./NewBadge";
 import useIsMounted from "../lib/useIsMounted";
-import * as queries from "../graphql/queries";
 
 export default Post;
 
@@ -41,7 +41,10 @@ function Post({ post = {} }) {
 
   return (
     <div className="pb-3">
-      <div className="mb-4 ">
+      <div
+        className="mb-4 mx-auto"
+        style={{ maxWidth: "650px" }}
+      >
         <NewBadge createdAt={createdAt} />
         <Category category={category} />
         <h1 className="mb-1 display-5">
@@ -55,7 +58,7 @@ function Post({ post = {} }) {
 
       <ImageCarousel
         images={images}
-        classes="mb-4 rounded bg-secondary bg-opacity-10 shadow-lg"
+        classes="mb-4 bg-secondary bg-opacity-10"
       />
 
       {richContent ? (
@@ -72,8 +75,9 @@ function Post({ post = {} }) {
             whiteSpace: "nowrap",
             overflowX: "scroll",
             boxShadow: "",
+            maxWidth: "650px",
           }}
-          className="border-0 py-0 mt-4"
+          className="border-0 py-0 mt-4 mx-auto"
         >
           {tags.map((tag) => (
             <Tag key={`tag-${tag}`} tag={tag} size="sm" />

@@ -4,12 +4,11 @@ import { Container } from "react-bootstrap";
 import { Helmet } from "react-helmet";
 import { Amplify, API, Storage } from "aws-amplify";
 import "react-vertical-timeline-component/style.min.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import "@aws-amplify/ui-react/styles.css";
 
 import ItemList from "./components/ItemList.js";
 import MainView from "./components/MainView.js";
-import Blog from "./components/Blog.js";
 import Post from "./components/Post.js";
 import PostEditor from "./components/PostEditor.js";
 import ItemPreview from "./components/ItemPreview.js";
@@ -28,7 +27,7 @@ import awsExports from "./aws-exports";
 import * as queries from "./graphql/queries";
 import useIsMounted from "./lib/useIsMounted";
 import FullScreenImageCarousel from "./components/FullScreenImageCarousel";
-import MobileNav from "./components/MobileNav";
+import Nav from "./components/Nav";
 
 import "./App.css";
 
@@ -84,10 +83,13 @@ function App() {
     <ConfigContext.Provider value={configContextValue}>
       <ImageContext.Provider value={imageContextValue}>
         <div className="App">
-          <Container fluid style={{ maxWidth: "1440px" }}>
+          <Container fluid>
             <Helmet>
               <title>{config.fullName || ""}</title>
-              <meta name="description" content={config.tagline || `Website for ${config.fullName}`} />
+              <meta
+                name="description"
+                content={config.tagline || `Website for ${config.fullName}`}
+              />
               <link
                 rel="icon"
                 type="image/png"
@@ -95,10 +97,10 @@ function App() {
                 sizes="16x16"
               />
             </Helmet>
-            <MobileNav fullName={config.fullName} />
+            <Nav fullName={config.fullName} />
             <Routes primary={false}>
               <Route element={<MainView />}>
-                <Route path="/" element={<Blog />} />
+                <Route path="/" element={<ItemList />} />
                 <Route path="work" element={<ItemList />} />
                 <Route path="projects" element={<ItemList />} />
                 <Route path="gallery" element={<Gallery />} />

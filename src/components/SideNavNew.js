@@ -56,12 +56,20 @@ function SideNavNew({ classes, onPageClick }) {
       ))}
       {isSignedIn ? (
         <>
-          -
+          <Button
+            disabled
+            variant="link"
+            className={`p-0 d-block fs-5 text-capitalize text-decoration-none ${
+              pathname === `/create` ? "text-dark" : "text-muted"
+            }`}
+          >
+            Edit
+          </Button>
           <Button
             variant="link"
             onClick={() => handlePageClick("/create")}
             active={pathname === "/create"}
-            className={`p-0 d-block fs-5 text-capitalize text-decoration-none ${
+            className={`p-0 ps-4 d-block fs-5 text-capitalize text-decoration-none ${
               pathname === `/create` ? "text-dark" : "text-muted"
             }`}
           >
@@ -71,7 +79,7 @@ function SideNavNew({ classes, onPageClick }) {
             variant="link"
             onClick={() => handlePageClick("/settings")}
             active={pathname === "/settings"}
-            className={`p-0 d-block fs-5 text-capitalize text-decoration-none ${
+            className={`p-0 ps-4 d-block fs-5 text-capitalize text-decoration-none ${
               pathname === `/settings` ? "text-dark" : "text-muted"
             }`}
           >
@@ -80,7 +88,7 @@ function SideNavNew({ classes, onPageClick }) {
           <Button
             variant="link"
             onClick={handleSignout}
-            className={`p-0 d-block fs-5 text-capitalize text-decoration-none text-muted`}
+            className={`p-0 ps-4 d-block fs-5 text-capitalize text-decoration-none text-muted`}
           >
             Sign out
           </Button>

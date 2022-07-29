@@ -17,7 +17,6 @@ const BREAKPOINT_COLS = {
 
 function Gallery() {
   const [items, setItems] = useState([]);
-  const [showModal, setShowModal] = useState(false);
 
   const isMounted = useIsMounted();
 

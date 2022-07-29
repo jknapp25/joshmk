@@ -340,6 +340,7 @@ export const createConfiguration = /* GraphQL */ `
       emailAddress
       tagline
       bio
+      logo
       avatar
       favicon
       instagramUrl
@@ -352,6 +353,7 @@ export const createConfiguration = /* GraphQL */ `
       }
       resumeGeneratorEnabled
       galleryImages
+      prompts
       createdAt
       updatedAt
     }
@@ -369,6 +371,7 @@ export const updateConfiguration = /* GraphQL */ `
       emailAddress
       tagline
       bio
+      logo
       avatar
       favicon
       instagramUrl
@@ -381,6 +384,7 @@ export const updateConfiguration = /* GraphQL */ `
       }
       resumeGeneratorEnabled
       galleryImages
+      prompts
       createdAt
       updatedAt
     }
@@ -398,6 +402,7 @@ export const deleteConfiguration = /* GraphQL */ `
       emailAddress
       tagline
       bio
+      logo
       avatar
       favicon
       instagramUrl
@@ -410,6 +415,7 @@ export const deleteConfiguration = /* GraphQL */ `
       }
       resumeGeneratorEnabled
       galleryImages
+      prompts
       createdAt
       updatedAt
     }

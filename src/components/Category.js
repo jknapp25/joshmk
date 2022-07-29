@@ -1,17 +1,17 @@
 export default Category;
 
-function Category({ category }) {
+function Category({ attributes, category }) {
   if (!category) return;
 
   return (
-    <small
-      className="text-muted text-uppercase"
+    <div
+      className="text-muted text-uppercase small"
       style={{
-        fontSize: ".800em",
-        fontWeight: 600,
+        fontWeight: 500,
       }}
+      {...attributes}
     >
       {category}
-    </small>
+    </div>
   );
 }

@@ -233,6 +233,7 @@ export const getConfiguration = /* GraphQL */ `
       emailAddress
       tagline
       bio
+      logo
       avatar
       favicon
       instagramUrl
@@ -245,6 +246,7 @@ export const getConfiguration = /* GraphQL */ `
       }
       resumeGeneratorEnabled
       galleryImages
+      prompts
       createdAt
       updatedAt
     }
@@ -264,6 +266,7 @@ export const listConfigurations = /* GraphQL */ `
         emailAddress
         tagline
         bio
+        logo
         avatar
         favicon
         instagramUrl
@@ -276,6 +279,7 @@ export const listConfigurations = /* GraphQL */ `
         }
         resumeGeneratorEnabled
         galleryImages
+        prompts
         createdAt
         updatedAt
       }

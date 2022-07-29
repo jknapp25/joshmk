@@ -2,13 +2,15 @@ import React, { useState, useEffect, Fragment } from "react";
 import { Button, Dropdown, Form, FormControl, Table } from "react-bootstrap";
 import { FaTimes } from "react-icons/fa";
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
-import ImageUploader from "./ImageUploader";
-import RichTextEditor from "./RichTextEditor/RichTextEditor";
 import { API, graphqlOperation } from "aws-amplify";
 import { createConfiguration, updateConfiguration } from "../graphql/mutations";
 import * as queries from "../graphql/queries";
-import useIsMounted from "../lib/useIsMounted";
 import { withAuthenticator } from "@aws-amplify/ui-react";
+
+import ImageUploader from "./ImageUploader";
+import RichTextEditor from "./RichTextEditor/RichTextEditor";
+import useIsMounted from "../lib/useIsMounted";
+
 export default withAuthenticator(Settings);
 
 const pageOptions = ["blog", "work", "projects", "gallery", "about", "other"];
@@ -29,10 +31,12 @@ function Settings() {
   const [youtubeUrl, setYoutubeUrl] = useState("");
   const [supportUrl, setSupportUrl] = useState("");
   const [bio, setBio] = useState(blankEditorValue);
+  const [logo, setLogo] = useState("");
   const [avatar, setAvatar] = useState("");
   const [favicon, setFavicon] = useState("");
   const [pages, setPages] = useState([]);
   const [pagesCustom, setPagesCustom] = useState([]);
+  const [prompts, setPrompts] = useState([]);
   const [edited, setEdited] = useState(false);
   const [resumeGeneratorEnabled, setResumeGeneratorEnabled] = useState(false);
 
@@ -52,9 +56,11 @@ function Settings() {
       instagramUrl,
       youtubeUrl,
       supportUrl,
+      logo,
       avatar,
       pages,
       pagesCustom,
+      prompts,
       favicon,
       resumeGeneratorEnabled,
     };
@@ -90,12 +96,14 @@ function Settings() {
           );
           setBio(richContentResponse);
         }
+        setLogo(configData.data.getConfiguration.logo);
         setAvatar(configData.data.getConfiguration.avatar);
         setInstagramUrl(configData.data.getConfiguration.instagramUrl);
         setYoutubeUrl(configData.data.getConfiguration.youtubeUrl);
         setSupportUrl(configData.data.getConfiguration.supportUrl);
         setPages(configData.data.getConfiguration.pages);
         setPagesCustom(configData.data.getConfiguration.pagesCustom);
+        setPrompts(configData.data.getConfiguration.prompts || []);
         setFavicon(configData.data.getConfiguration.favicon);
         setResumeGeneratorEnabled(
           configData.data.getConfiguration.resumeGeneratorEnabled
@@ -106,6 +114,8 @@ function Settings() {
       fetchData();
     }
   }, [isMounted, configIdName]);
+
+  console.log(prompts);
 
   return (
     <>
@@ -216,6 +226,23 @@ function Settings() {
           setSupportUrl(e.target.value);
           setEdited(true);
         }}
+      />
+
+      <Form.Label className="mb-1">Logo</Form.Label>
+      <ImageUploader
+        images={logo ? [logo] : []}
+        afterEdit={(imgs) => {
+          if (imgs && imgs.length) {
+            setLogo(imgs[0]);
+          } else {
+            setLogo("");
+          }
+          setEdited(true);
+        }}
+        fieldId="logo"
+        fileSizeLimit={5}
+        allowMultiple={false}
+        imageDisplayName="Logo"
       />
 
       <Form.Label className="mb-1">Avatar</Form.Label>
@@ -357,37 +384,63 @@ function Settings() {
         </tbody>
       </Table>
 
-      {!pagesCustom || pagesCustom.length !== pageOptions.length ? (
-        <Dropdown className="mb-4">
-          <Dropdown.Toggle variant="link" size="sm" className="pl-0 pt-0">
-            Add page
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            {pageOptions.map((option, i) => (
-              <Fragment key={i}>
-                <Dropdown.Item
-                  onClick={() => {
-                    // const updPages = [...pages, option];
-                    let updPages = [];
-                    if (pagesCustom && pagesCustom.length > 0) {
-                      updPages = JSON.parse(JSON.stringify(pagesCustom));
-                    }
-                    // const updPages = JSON.parse(JSON.stringify(pagesCustom));
-                    updPages.push({ name: option, link: option });
-                    setPagesCustom(updPages);
-                    setEdited(true);
-                  }}
-                  // disabled={pages.includes(option)}
-                >
-                  {option}
-                </Dropdown.Item>
-              </Fragment>
-            ))}
-          </Dropdown.Menu>
-        </Dropdown>
-      ) : null}
+      <Dropdown className="mb-4">
+        <Dropdown.Toggle variant="link" size="sm" className="pl-0 pt-0">
+          Add page
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+          {pageOptions.map((option, i) => (
+            <Fragment key={i}>
+              <Dropdown.Item
+                onClick={() => {
+                  // const updPages = [...pages, option];
+                  let updPages = [];
+                  if (pagesCustom && pagesCustom.length > 0) {
+                    updPages = JSON.parse(JSON.stringify(pagesCustom));
+                  }
+                  // const updPages = JSON.parse(JSON.stringify(pagesCustom));
+                  updPages.push({ name: option, link: option });
+                  setPagesCustom(updPages);
+                  setEdited(true);
+                }}
+                // disabled={pages.includes(option)}
+              >
+                {option}
+              </Dropdown.Item>
+            </Fragment>
+          ))}
+        </Dropdown.Menu>
+      </Dropdown>
 
-      <Form.Label className="mb-1">Advanced</Form.Label>
+      <Form.Label className="mb-1">Prompts</Form.Label>
+      {prompts && prompts.length > 0
+        ? prompts.map((prompt, i) => (
+            <FormControl
+              key={i}
+              value={prompt}
+              onChange={(e) => {
+                let updPrompts = [...prompts];
+                updPrompts[i] = e.target.value;
+                setPrompts(updPrompts);
+                setEdited(true);
+              }}
+            />
+          ))
+        : null}
+      <Button
+        className="d-block mb-4 pl-0 pt-0"
+        variant="link"
+        size="sm"
+        onClick={() => {
+          let updPrompts = [...prompts];
+          updPrompts.push("");
+          setPrompts(updPrompts);
+        }}
+      >
+        Add prompt
+      </Button>
+
+      <Form.Label className="mb-1 d-block">Advanced</Form.Label>
       <Form.Check
         type="checkbox"
         label="Enable resume generator"

@@ -81,6 +81,7 @@ type Configuration @model @auth(rules: [{ allow: public }]) {
   emailAddress: String
   tagline: String
   bio: AWSJSON
+  logo: String
   avatar: String
   favicon: String
   instagramUrl: String
@@ -90,6 +91,7 @@ type Configuration @model @auth(rules: [{ allow: public }]) {
   pagesCustom: [Page!]
   resumeGeneratorEnabled: Boolean
   galleryImages: [String]
+  prompts: [String]
 }
 
 type Workout @model @auth(rules: [{ allow: public }]) {

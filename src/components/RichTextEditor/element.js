@@ -5,16 +5,45 @@ export const Element = ({ attributes, children, element }) => {
   switch (element.type) {
     case "block-quote":
       return (
-        <blockquote {...attributes} className="border-start border-dark border-2 ps-3 fst-italic fs-5 mb-0">
+        <blockquote
+          {...attributes}
+          className="border-start border-dark border-2 ps-3 fst-italic fs-5 mb-0 mx-auto"
+          style={{ maxWidth: "650px" }}
+        >
           {children}
         </blockquote>
       );
     case "bulleted-list":
-      return <ul {...attributes}>{children}</ul>;
+      return (
+        <ul {...attributes} className="mx-auto" style={{ maxWidth: "650px" }}>
+          {children}
+        </ul>
+      );
+    case "kicker":
+      return (
+        <p
+          className="text-muted text-uppercase small mx-auto"
+          style={{
+            fontWeight: 500,
+            maxWidth: "650px",
+          }}
+          {...attributes}
+        >
+          {children}
+        </p>
+      );
     case "heading-one":
-      return <h3 {...attributes}>{children}</h3>;
+      return (
+        <h3 {...attributes} className="mx-auto" style={{ maxWidth: "650px" }}>
+          {children}
+        </h3>
+      );
     case "heading-two":
-      return <h5 {...attributes}>{children}</h5>;
+      return (
+        <h5 {...attributes} className="mx-auto" style={{ maxWidth: "650px" }}>
+          {children}
+        </h5>
+      );
     case "list-item":
       return (
         <li {...attributes} className="fs-5">
@@ -62,10 +91,16 @@ export const Element = ({ attributes, children, element }) => {
         </div>
       );
     case "images":
-      return <InlineImages attributes={attributes} images={element.filenames} />;
+      return (
+        <InlineImages attributes={attributes} images={element.filenames} />
+      );
     default:
       return (
-        <p className="mb-0 fs-5" {...attributes}>
+        <p
+          className="mb-1 fs-5 mx-auto"
+          style={{ maxWidth: "650px" }}
+          {...attributes}
+        >
           {children}
         </p>
       );

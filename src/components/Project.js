@@ -34,17 +34,13 @@ function Project({ project = {} }) {
 
   if (!realProject) return null;
 
-  const { name, tags, summary, status, link, images, start, end } = realProject;
+  const { name, tags, summary, status, images, start, end } = realProject;
   const timeInfo = createTimeInfo(start, end, null, false);
 
   return (
     <div className="pb-3">
       <div className="mb-4">
-        {status ? (
-          <Badge bg={statusColorLookup[status]}>
-            {status}
-          </Badge>
-        ) : null}
+        {status ? <Badge bg={statusColorLookup[status]}>{status}</Badge> : null}
         <h1 className="mb-1 display-5">
           <span className="cursor-pointer fw-bold">{name}</span>
         </h1>

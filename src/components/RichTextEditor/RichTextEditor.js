@@ -74,10 +74,6 @@ export default function RichTextEditor({
     []
   );
 
-  // if (readOnly) {
-  //   value = removeSpacesOnEnds(value);
-  // }
-
   editor.children = value;
 
   return (

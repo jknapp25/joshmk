@@ -191,6 +191,7 @@ function PostEditor() {
           "link",
           "image",
           "video",
+          "kicker"
         ]}
         classes="bg-white mb-2"
       />

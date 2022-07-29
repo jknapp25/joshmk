@@ -3,6 +3,7 @@ import { API } from "aws-amplify";
 
 import Tag from "./Tag";
 import sortByFrequencyAndRemoveDuplicates from "../lib/sortByFrequencyAndRemoveDuplicates";
+import Category from "./Category";
 
 export default PopularTags;
 
@@ -44,15 +45,15 @@ function PopularTags() {
   if (!tags || tags.length === 0) return null;
 
   return (
-    <>
-      <div className="mb-2">
-        <small className="text-dark text-uppercase">popular topics</small>
+    <div className="mt-5">
+      <div className="mb-3">
+        <Category category="popular topics" />
       </div>
       <div>
         {tags.map((tag) => (
           <Tag key={`tag-${tag}`} tag={tag} />
         ))}
       </div>
-    </>
+    </div>
   );
 }

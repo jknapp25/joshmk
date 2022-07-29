@@ -33,7 +33,7 @@ function PostPreview({ post = {}, ...props }) {
 
   if (!realPost) return null;
 
-  let { id, title, category, images, createdAt } = realPost;
+  let { id, title, images, createdAt } = realPost;
   const date = createdAt ? moment(createdAt).format("MMM D") : null;
 
   return (

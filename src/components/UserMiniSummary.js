@@ -1,17 +1,19 @@
 import React, { useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Image } from "react-bootstrap";
 import { Storage } from "aws-amplify";
 
-import { ImageContext } from "../App";
 import useIsMounted from "../lib/useIsMounted";
 import { ConfigContext } from "../App";
+import Category from "./Category";
 
 export default UserMiniSummary;
 
 function UserMiniSummary() {
   const [avatarUrl, setAvatarUrl] = useState("");
-  const imageContext = useContext(ImageContext);
   const config = useContext(ConfigContext);
+
+  const navigate = useNavigate();
 
   const isMounted = useIsMounted();
 
@@ -27,32 +29,25 @@ function UserMiniSummary() {
 
   return (
     <>
-      <div className="mb-2">
-        <small className="text-dark">ABOUT THE AUTHOR</small>
+      <div className="mb-3">
+        <Category category="ABOUT THE AUTHOR" />
       </div>
       <div className="ratio ratio-1x1 mb-3 bg-secondary bg-opacity-10">
         {avatarUrl ? (
           <Image
-            className="w-100 shadow rounded"
+            className="w-100"
             style={{
               objectFit: "cover",
-              cursor: "zoom-in",
+              cursor: "pointer",
             }}
             src={avatarUrl}
             alt="Author profile image"
             fluid
-            onClick={() =>
-              imageContext.setImageContext({
-                ...imageContext,
-                isOpen: true,
-                index: 0,
-                imageUrls: [avatarUrl],
-              })
-            }
+            onClick={() => navigate("about")}
           />
         ) : null}
       </div>
-      {config.tagline}
+      <p className="fs-5">{config.tagline}</p>
     </>
   );
 }

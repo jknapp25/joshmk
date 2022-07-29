@@ -28,14 +28,14 @@ export default function InlineImages({ attributes, images = [] }) {
   if (!images || images.length === 0) return;
   
   return (
-    <Row {...attributes} className="mb-4 gx-2">
+    <Row {...attributes} className="gx-2">
       {imageUrls.map((url, i) => (
         <Col key={url}>
           <img
             contentEditable={false}
             src={url}
             alt=""
-            className="w-100 rounded bg-secondary bg-opacity-10 shadow-lg"
+            className="w-100 bg-secondary bg-opacity-10"
             onClick={() =>
               imageContext.setImageContext({
                 ...imageContext,

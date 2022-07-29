@@ -63,6 +63,11 @@ export default function ToolBar({ editor, readOnly, buttons }) {
         disabled={!buttons.includes("code")}
       />
       <BlockButton
+        format="kicker"
+        icon={"K"}
+        disabled={!buttons.includes("kicker")}
+      />
+      <BlockButton
         format="heading-one"
         icon={
           <>

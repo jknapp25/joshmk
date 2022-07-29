@@ -12,7 +12,7 @@ function Tag({ tag, size = "md" }) {
       key={`popular-tag-${tag}`}
       size={size}
       variant="tag"
-      className="me-2 mb-2 d-inline rounded-pill text-nowrap"
+      className="me-2 mb-2 d-inline rounded-pill text-nowrap border"
       onClick={() => navigate(`/search?tag=${tag}`)}
     >
       {tag}
