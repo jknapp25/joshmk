@@ -115,8 +115,6 @@ function Settings() {
     }
   }, [isMounted, configIdName]);
 
-  console.log(prompts);
-
   return (
     <>
       <h3 className="mb-4">Settings</h3>
@@ -390,7 +388,7 @@ function Settings() {
         </Dropdown.Toggle>
         <Dropdown.Menu>
           {pageOptions.map((option, i) => (
-            <Fragment key={i}>
+            <Fragment key={`pageOption-${i}`}>
               <Dropdown.Item
                 onClick={() => {
                   // const updPages = [...pages, option];
@@ -415,16 +413,29 @@ function Settings() {
       <Form.Label className="mb-1">Prompts</Form.Label>
       {prompts && prompts.length > 0
         ? prompts.map((prompt, i) => (
-            <FormControl
-              key={i}
-              value={prompt}
-              onChange={(e) => {
-                let updPrompts = [...prompts];
-                updPrompts[i] = e.target.value;
-                setPrompts(updPrompts);
-                setEdited(true);
-              }}
-            />
+            <div key={`prompt-${i}`} className="d-flex mb-2 align-items-center">
+              <FormControl
+                key={i}
+                value={prompt}
+                onChange={(e) => {
+                  let updPrompts = [...prompts];
+                  updPrompts[i] = e.target.value;
+                  setPrompts(updPrompts);
+                  setEdited(true);
+                }}
+              />
+              <FaTimes
+                color="#dc3545"
+                className="cursor-pointer ml-2"
+                title="delete page"
+                onClick={() => {
+                  let updPrompts = [...prompts];
+                  updPrompts.splice(i, 1);
+                  setPrompts(updPrompts);
+                  setEdited(true);
+                }}
+              />
+            </div>
           ))
         : null}
       <Button
