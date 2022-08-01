@@ -1,5 +1,7 @@
 import React from "react";
+
 import RichTextEditor from "./RichTextEditor/RichTextEditor";
+
 export default Bio;
 
 function Bio({ bio }) {

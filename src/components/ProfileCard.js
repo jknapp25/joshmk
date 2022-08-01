@@ -3,6 +3,7 @@ import { navigate } from "@reach/router";
 import { Button, Card } from "react-bootstrap";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { FiCoffee, FiInstagram, FiMail, FiYoutube } from "react-icons/fi";
+
 export default ProfileCard;
 
 function ProfileCard({ avatarUrl, config }) {

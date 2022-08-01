@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { parse } from "query-string";
 import { API } from "aws-amplify";
 import { Button } from "react-bootstrap";
+import * as queries from "../graphql/queries";
 
 import Tag from "./Tag";
 import Post from "./Post";
@@ -11,7 +12,6 @@ import Job from "./Job";
 import Education from "./Education";
 import PostPreview from "./PostPreview";
 import ItemPreview from "./ItemPreview";
-import * as queries from "../graphql/queries";
 
 export default ItemList;
 

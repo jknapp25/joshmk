@@ -2,9 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Auth } from "aws-amplify";
 import { Button } from "react-bootstrap";
-import "react-vertical-timeline-component/style.min.css";
 
 import { ConfigContext } from "../App";
+
+import "react-vertical-timeline-component/style.min.css";
 
 export default SideNavNew;
 

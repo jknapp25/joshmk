@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { Button, Modal } from "react-bootstrap";
+
 import { ConfigContext } from "../App";
+
 export default BuyModal;
 
 function BuyModal({ showModal, setShowModal }) {

@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { Row, Col, Card } from "react-bootstrap";
+
 import { ImageContext } from "../App";
+
 export default MiniImageGallery;
 
 function MiniImageGallery({ images }) {

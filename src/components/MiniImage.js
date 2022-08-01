@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Image } from "react-bootstrap";
-import useIsMounted from "../lib/useIsMounted";
 import { Storage } from "aws-amplify";
+
+import useIsMounted from "../lib/useIsMounted";
+
 export default MiniImage;
 
 function MiniImage({ images = [], classes = "" }) {

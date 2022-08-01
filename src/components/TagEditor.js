@@ -1,6 +1,7 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 import CreatableSelect from "react-select/creatable";
+
 export default TagEditor;
 
 function TagEditor({ tags = [], tagsOptions = [], onChange }) {

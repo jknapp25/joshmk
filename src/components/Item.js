@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import moment from "moment";
 import { Link, useParams } from "react-router-dom";
 import { API } from "aws-amplify";
+import * as queries from "../graphql/queries";
 
 import ImageCarousel from "./ImageCarousel";
 import Tag from "./Tag";
 import useIsMounted from "../lib/useIsMounted";
-import * as queries from "../graphql/queries";
 import RichTextEditor from "./RichTextEditor/RichTextEditor";
 
 export default Post;

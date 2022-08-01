@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
-import { ImageContext } from "../App";
 import { Carousel } from "react-bootstrap";
-import useIsMounted from "../lib/useIsMounted";
 import { Storage } from "aws-amplify";
+
+import { ImageContext } from "../App";
+import useIsMounted from "../lib/useIsMounted";
+
 export default ImageCarouselReusable;
 
 function ImageCarouselReusable({ imageUrls = [], classes = "" }) {

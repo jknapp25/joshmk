@@ -5,7 +5,9 @@ import { Storage } from "aws-amplify";
 import useIsMounted from "../lib/useIsMounted";
 import { ImageContext } from "../App";
 
-export default function InlineImages({ attributes, images = [] }) {
+export default InlineImages;
+
+function InlineImages({ attributes, images = [] }) {
   const [imageUrls, setImageUrls] = useState([]);
   const imageContext = useContext(ImageContext);
 
@@ -26,7 +28,7 @@ export default function InlineImages({ attributes, images = [] }) {
   }, [images, isMounted]);
 
   if (!images || images.length === 0) return;
-  
+
   return (
     <Row {...attributes} className="gx-2">
       {imageUrls.map((url, i) => (

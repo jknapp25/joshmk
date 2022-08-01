@@ -1,8 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
+
 import ImageUploader from "./ImageUploader";
 import useIsMounted from "../lib/useIsMounted";
 import { ConfigContext } from "../App";
+
 export default GalleryEditor;
 
 function GalleryEditor({ onUpdate }) {

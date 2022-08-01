@@ -4,9 +4,12 @@ import {
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
 import { FaReact } from "react-icons/fa";
+
 import Job from "./Job";
+
 import "react-vertical-timeline-component/style.min.css";
 import "../App.css";
+
 export default Work;
 
 function Work({ items }) {

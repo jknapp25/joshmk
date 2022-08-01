@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Row, Col, Offcanvas } from "react-bootstrap";
-import SideNavNew from "./SideNavNew";
 import { FaBars } from "react-icons/fa";
+
+import SideNavNew from "./SideNavNew";
+
 export default MobileNav;
 
 function MobileNav({ fullName }) {

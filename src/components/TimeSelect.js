@@ -1,6 +1,8 @@
 import React from "react";
 import { FormControl } from "react-bootstrap";
+
 import { getHoursOptions } from "../lib/goalHoursUtils";
+
 export default TimeSelect;
 
 function TimeSelect({ type, time, day, handleSelectChange }) {

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import useIsMounted from "../lib/useIsMounted";
 import { Storage } from "aws-amplify";
 import { navigate } from "@reach/router";
 import { Card } from "react-bootstrap";
+
+import useIsMounted from "../lib/useIsMounted";
+
 export default FeaturedPost;
 
 function FeaturedPost(post) {

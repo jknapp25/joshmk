@@ -2,7 +2,9 @@ import React, { useContext } from "react";
 import { Image } from "react-bootstrap";
 import { CgClose} from "react-icons/cg";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
+
 import { ImageContext } from "../App";
+
 export default FullScreenImageCarousel;
 
 function FullScreenImageCarousel() {

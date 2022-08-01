@@ -3,9 +3,11 @@ import { Card } from "react-bootstrap";
 import Masonry from "react-masonry-css";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
+
 import useIsMounted from "../lib/useIsMounted";
 import ImageCarousel from "./ImageCarousel";
 import ItemBuyButton from "./ItemBuyButton";
+
 export default Gallery;
 
 const BREAKPOINT_COLS = {

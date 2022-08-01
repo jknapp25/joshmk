@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Badge } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { API } from "aws-amplify";
+import * as queries from "../graphql/queries";
 
 import { createTimeInfo } from "../lib/utils";
 import Tag from "./Tag";
 import useIsMounted from "../lib/useIsMounted";
-import * as queries from "../graphql/queries";
 
 export default Job;
 

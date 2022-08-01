@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
+
 import BuyModal from "./BuyModal";
+
 export default ItemBuyButton;
 
 function ItemBuyButton({ isForSale, isSold, price, classes }) {
