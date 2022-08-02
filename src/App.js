@@ -51,9 +51,7 @@ function App() {
   const imageContextValue = { ...imageContext, setImageContext };
 
   const isMounted = useIsMounted();
-  const configIdName = window.location.href.includes("joshmk")
-    ? "REACT_APP_JOSHMK_CONFIGURATION_ID"
-    : "REACT_APP_CONFIGURATION_ID";
+  const configIdName = "REACT_APP_CONFIGURATION_ID";
 
   useEffect(() => {
     async function fetchData() {
