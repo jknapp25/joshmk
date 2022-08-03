@@ -14,7 +14,8 @@ function ImageUploader({
   fieldId,
   fieldName = "",
   fileSizeLimit = 5, // MB
-  multiple = true,
+  allowMultiple = true,
+  classes,
 }) {
   const [imageUrls, setImageUrls] = useState([]);
   const isMounted = useIsMounted();
@@ -28,7 +29,7 @@ function ImageUploader({
 
     let uploads = [];
 
-    if (multiple) {
+    if (allowMultiple) {
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
         const fileSizeInMegabytes = (file.size / 1024 / 1024).toFixed(4);
@@ -70,7 +71,7 @@ function ImageUploader({
     }
 
     if (showFileSizeError) {
-      const errorText = multiple
+      const errorText = allowMultiple
         ? `One or more ${imageDisplayName}'s exceeds the size limit of ${fileSizeLimit}MB`
         : `${imageDisplayName} exceeds the size limit of ${fileSizeLimit}MB`;
       alert(errorText);
@@ -91,22 +92,22 @@ function ImageUploader({
     }
   }, [images, isMounted]);
 
-  const reachedImageLimit = !!images && images.length === 1 && !multiple;
+  const reachedImageLimit = images?.length === 1 && !allowMultiple;
 
   return (
-    <>
+    <div className={classes}>
       {!reachedImageLimit ? (
         <Form.Control
           id={fieldId}
           type="file"
           className="mb-2"
-          multiple={multiple}
+          multiple={allowMultiple}
           onChange={handleImageUpload}
           name={fieldName}
         />
       ) : null}
       {images.length ? (
-        <div className="mb-2">
+        <div>
           {imageUrls.map((url, i) => (
             <div key={i} className="d-inline-block pr-2 pb-2">
               <Image key={url} src={url} width="100" height="auto" />
@@ -124,6 +125,6 @@ function ImageUploader({
           ))}
         </div>
       ) : null}
-    </>
+    </div>
   );
 }

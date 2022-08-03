@@ -1,387 +1,245 @@
-import React, { useState, useEffect, Fragment } from "react";
-import { Button, Dropdown, Form, FormControl, Table } from "react-bootstrap";
+import React, { useState, Fragment, useContext } from "react";
+import { Button, Col, Dropdown, Form, FormControl, Row } from "react-bootstrap";
 import { FaTimes } from "react-icons/fa";
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 import { API, graphqlOperation } from "aws-amplify";
 import { createConfiguration, updateConfiguration } from "../graphql/mutations";
-import * as queries from "../graphql/queries";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 
 import ImageUploader from "./ImageUploader";
-import RichTextEditor from "./RichTextEditor/RichTextEditor";
-import useIsMounted from "../lib/useIsMounted";
+import { ConfigContext } from "../App";
 
 export default withAuthenticator(Settings);
 
 const pageOptions = ["blog", "work", "projects", "gallery", "about", "other"];
 
-const blankEditorValue = [
-  {
-    type: "paragraph",
-    children: [{ text: "" }],
-  },
-];
-
 function Settings() {
-  const [fullName, setFullName] = useState("");
-  const [nickName, setNickName] = useState("");
-  const [emailAddress, setEmailAddress] = useState("");
-  const [tagline, setTagline] = useState("");
-  const [instagramUrl, setInstagramUrl] = useState("");
-  const [youtubeUrl, setYoutubeUrl] = useState("");
-  const [supportUrl, setSupportUrl] = useState("");
-  const [bio, setBio] = useState(blankEditorValue);
-  const [logo, setLogo] = useState("");
-  const [avatar, setAvatar] = useState("");
-  const [favicon, setFavicon] = useState("");
-  const [pages, setPages] = useState([]);
-  const [pagesCustom, setPagesCustom] = useState([]);
-  const [prompts, setPrompts] = useState([]);
-  const [edited, setEdited] = useState(false);
-  const [resumeGeneratorEnabled, setResumeGeneratorEnabled] = useState(false);
+  const config = useContext(ConfigContext);
 
-  const isMounted = useIsMounted();
+  const [settings, setSettings] = useState(config);
+  const [edited, setEdited] = useState(false);
 
   const configIdName = "REACT_APP_CONFIGURATION_ID";
 
   async function handleSave() {
-    let inpData = {
-      fullName,
-      nickName,
-      emailAddress,
-      tagline,
-      bio: JSON.stringify(bio),
-      instagramUrl,
-      youtubeUrl,
-      supportUrl,
-      logo,
-      avatar,
-      pages,
-      pagesCustom,
-      prompts,
-      favicon,
-      resumeGeneratorEnabled,
-    };
+    let { setConfig, createdAt, updatedAt, ...payload } = settings;
+    payload.bio = JSON.stringify(payload.bio);
 
+    let action = createConfiguration;
     if (process.env[configIdName]) {
-      inpData.id = process.env[configIdName];
+      action = updateConfiguration;
+      payload.id = process.env[configIdName];
+    }
 
-      await API.graphql(
-        graphqlOperation(updateConfiguration, { input: inpData })
-      );
-    } else {
-      await API.graphql(
-        graphqlOperation(createConfiguration, { input: inpData })
-      );
+    const success = await API.graphql(
+      graphqlOperation(action, { input: payload })
+    );
+
+    if (success) {
+      config.setConfig(settings);
     }
   }
 
-  useEffect(() => {
-    async function fetchData() {
-      const configData = await API.graphql({
-        query: queries.getConfiguration,
-        variables: { id: process.env[configIdName] },
-      });
+  function handleUpdate(field, val, triggerEdit = true) {
+    let updSettings = { ...settings };
+    updSettings[field] = val;
+    setSettings(updSettings);
 
-      if (configData && isMounted.current) {
-        setFullName(configData.data.getConfiguration.fullName);
-        setNickName(configData.data.getConfiguration.nickName);
-        setEmailAddress(configData.data.getConfiguration.emailAddress);
-        setTagline(configData.data.getConfiguration.tagline);
-        if (configData.data.getConfiguration.bio) {
-          const richContentResponse = JSON.parse(
-            configData.data.getConfiguration.bio
-          );
-          setBio(richContentResponse);
-        }
-        setLogo(configData.data.getConfiguration.logo);
-        setAvatar(configData.data.getConfiguration.avatar);
-        setInstagramUrl(configData.data.getConfiguration.instagramUrl);
-        setYoutubeUrl(configData.data.getConfiguration.youtubeUrl);
-        setSupportUrl(configData.data.getConfiguration.supportUrl);
-        setPages(configData.data.getConfiguration.pages);
-        setPagesCustom(configData.data.getConfiguration.pagesCustom);
-        setPrompts(configData.data.getConfiguration.prompts || []);
-        setFavicon(configData.data.getConfiguration.favicon);
-        setResumeGeneratorEnabled(
-          configData.data.getConfiguration.resumeGeneratorEnabled
-        );
-      }
-    }
-    if (process.env[configIdName]) {
-      fetchData();
-    }
-  }, [isMounted, configIdName]);
+    if (triggerEdit) setEdited(true);
+  }
 
   return (
     <>
-      <h3 className="mb-4">Settings</h3>
-      <Form.Label className="mb-1">Full Name</Form.Label>
+      <h1 className="mb-5">Settings</h1>
+
+      <h5 className="mb-0">
+        <Form.Label>Full Name</Form.Label>
+      </h5>
+      <p className="small">
+        Your full name will appear in the top left of the navbar if you haven't
+        added a logo.
+      </p>
       <FormControl
         id="fullName"
-        className="mb-4"
+        className="mb-5"
         aria-describedby="fullName"
-        value={fullName || ""}
-        onChange={(e) => {
-          setFullName(e.target.value);
-          setEdited(true);
-        }}
+        value={settings.fullName || ""}
+        onChange={(e) => handleUpdate("fullName", e.target.value)}
       />
 
-      <Form.Label className="mb-1">Nickname</Form.Label>
-      <FormControl
-        id="nickName"
-        className="mb-4"
-        aria-describedby="nickName"
-        value={nickName || ""}
-        onChange={(e) => {
-          setNickName(e.target.value);
-          setEdited(true);
-        }}
-      />
-
-      <Form.Label className="mb-1">Email Address</Form.Label>
-      <FormControl
-        id="emailAddress"
-        className="mb-4"
-        aria-describedby="emailAddress"
-        value={emailAddress || ""}
-        onChange={(e) => {
-          setEmailAddress(e.target.value);
-          setEdited(true);
-        }}
-      />
-
-      <Form.Label className="mb-1">Tagline</Form.Label>
-      <FormControl
-        id="tagline"
-        className="mb-4"
-        aria-describedby="tagline"
-        value={tagline || ""}
-        onChange={(e) => {
-          setTagline(e.target.value);
-          setEdited(true);
-        }}
-      />
-
-      <Form.Label className="mb-1">Bio</Form.Label>
-      <RichTextEditor
-        value={bio}
-        onChange={(updBio) => {
-          setBio(updBio);
-          setEdited(true);
-        }}
-        buttons={[
-          "bold",
-          "italic",
-          "underline",
-          "code",
-          "strikethrough",
-          "heading-one",
-          "heading-two",
-          "block-quote",
-          "numbered-list",
-          "bulleted-list",
-          "link",
-          "video",
-        ]}
-        classes="mb-4 bg-white"
-      />
-
-      <Form.Label className="mb-1">Instagram URL</Form.Label>
-      <FormControl
-        id="instagramUrl"
-        className="mb-4"
-        aria-describedby="instagramUrl"
-        value={instagramUrl || ""}
-        onChange={(e) => {
-          setInstagramUrl(e.target.value);
-          setEdited(true);
-        }}
-      />
-
-      <Form.Label className="mb-1">YouTube URL</Form.Label>
-      <FormControl
-        id="youtubeUrl"
-        className="mb-4"
-        aria-describedby="youtubeUrl"
-        value={youtubeUrl || ""}
-        onChange={(e) => {
-          setYoutubeUrl(e.target.value);
-          setEdited(true);
-        }}
-      />
-
-      <Form.Label className="mb-1">Support URL</Form.Label>
-      <FormControl
-        id="supportUrl"
-        className="mb-4"
-        aria-describedby="supportUrl"
-        value={supportUrl || ""}
-        onChange={(e) => {
-          setSupportUrl(e.target.value);
-          setEdited(true);
-        }}
-      />
-
-      <Form.Label className="mb-1">Logo</Form.Label>
+      <h5 className="mb-0">
+        <Form.Label>Avatar</Form.Label>
+      </h5>
+      <p className="small">
+        Your avatar is an image that represents you. It will likely be the first
+        place that visitors see you.
+      </p>
       <ImageUploader
-        images={logo ? [logo] : []}
+        images={settings.avatar ? [settings.avatar] : []}
         afterEdit={(imgs) => {
-          if (imgs && imgs.length) {
-            setLogo(imgs[0]);
-          } else {
-            setLogo("");
-          }
-          setEdited(true);
-        }}
-        fieldId="logo"
-        fileSizeLimit={5}
-        allowMultiple={false}
-        imageDisplayName="Logo"
-      />
-
-      <Form.Label className="mb-1">Avatar</Form.Label>
-      <ImageUploader
-        images={avatar ? [avatar] : []}
-        afterEdit={(imgs) => {
-          if (imgs && imgs.length) {
-            setAvatar(imgs[0]);
-          } else {
-            setAvatar("");
-          }
-          setEdited(true);
+          const updAvatar = imgs?.length > 0 ? imgs[0] : "";
+          handleUpdate("avatar", updAvatar);
         }}
         fieldId="avatar"
         fileSizeLimit={5}
         allowMultiple={false}
         imageDisplayName="Avatar"
+        classes="mb-5"
       />
 
-      <Form.Label className="mb-1">Favicon</Form.Label>
+      <h5 className="mb-0">
+        <Form.Label>Tagline</Form.Label>
+      </h5>
+      <p className="small">
+        Your tagline will show under your avatar on the homepage.
+      </p>
+      <FormControl
+        id="tagline"
+        className="mb-5"
+        aria-describedby="tagline"
+        value={settings.tagline || ""}
+        onChange={(e) => handleUpdate("tagline", e.target.value)}
+      />
+
+      <h5 className="mb-0">
+        <Form.Label>Logo</Form.Label>
+      </h5>
+      <p className="small">
+        Add a descriptive image that represents this site. It's often a
+        handwritten version of your name.
+      </p>
       <ImageUploader
-        images={favicon ? [favicon] : []}
+        images={settings.logo ? [settings.logo] : []}
         afterEdit={(imgs) => {
-          if (imgs && imgs.length) {
-            setFavicon(imgs[0]);
-          } else {
-            setFavicon("");
-          }
-          setEdited(true);
+          const updLogo = imgs?.length > 0 ? imgs[0] : "";
+          handleUpdate("logo", updLogo);
+        }}
+        fieldId="logo"
+        fileSizeLimit={5}
+        allowMultiple={false}
+        imageDisplayName="Logo"
+        classes="mb-5"
+      />
+
+      <h5 className="mb-0">
+        <Form.Label>Favicon</Form.Label>
+      </h5>
+      <p className="small">
+        A favicon is the tiny image that shows in your browsers tab. The max
+        size is <b>200kb</b>.
+      </p>
+      <ImageUploader
+        images={settings.favicon ? [settings.favicon] : []}
+        afterEdit={(imgs) => {
+          const updFavicon = imgs?.length > 0 ? imgs[0] : "";
+          handleUpdate("favicon", updFavicon);
         }}
         fieldId="favicon"
         fileSizeLimit={0.2}
         allowMultiple={false}
         imageDisplayName="Favicon"
+        classes="mb-5"
       />
 
-      {/* <hr className="my-4" /> */}
-
-      <Form.Label className="mb-1">Pages</Form.Label>
-      <Table bordered className="mb-1">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Link</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {pagesCustom && pagesCustom.length > 0
-            ? pagesCustom.map((page, i) => (
-                <tr key={i}>
-                  <td>
-                    <FormControl
-                      // id="fullName"
-                      // className="mb-3"
-                      // aria-describedby="fullName"
-                      // value={fullName || ""}
-                      value={page.name}
-                      onChange={(e) => {
-                        let updPages = [];
-                        if (pagesCustom && pagesCustom.length > 0) {
-                          updPages = JSON.parse(JSON.stringify(pagesCustom));
-                        }
-                        updPages[i].name = e.target.value;
-                        setPagesCustom(updPages);
-                        setEdited(true);
-                      }}
-                    />
-                  </td>
-                  <td>
-                    <FormControl
-                      // id="fullName"
-                      // className="mb-3"
-                      // aria-describedby="fullName"
-                      // value={fullName || ""}
-                      value={page.link}
-                      onChange={(e) => {
-                        let updPages = [];
-                        if (pagesCustom && pagesCustom.length > 0) {
-                          updPages = JSON.parse(JSON.stringify(pagesCustom));
-                        }
-                        updPages[i].link = e.target.value;
-                        setPagesCustom(updPages);
-                        setEdited(true);
-                      }}
-                    />
-                  </td>
-                  <td className="text-right" style={{ width: "100px" }}>
-                    {i !== 0 ? (
-                      <AiOutlineArrowUp
-                        className="cursor-pointer"
-                        title="up"
-                        onClick={() => {
-                          let updPages = [];
-                          if (pagesCustom && pagesCustom.length > 0) {
-                            updPages = JSON.parse(JSON.stringify(pagesCustom));
-                          }
-                          updPages.splice(i, 1);
-                          updPages.splice(i - 1, 0, page);
-                          setPagesCustom(updPages);
-                          setEdited(true);
-                        }}
-                      />
-                    ) : null}
-                    {i !== pagesCustom.length - 1 ? (
-                      <AiOutlineArrowDown
-                        className="cursor-pointer"
-                        title="down"
-                        onClick={() => {
-                          let updPages = [];
-                          if (pagesCustom && pagesCustom.length > 0) {
-                            updPages = JSON.parse(JSON.stringify(pagesCustom));
-                          }
-                          updPages.splice(i, 1);
-                          updPages.splice(i + 1, 0, page);
-                          setPagesCustom(updPages);
-                          setEdited(true);
-                        }}
-                      />
-                    ) : null}
-                    <FaTimes
-                      color="#dc3545"
-                      className="cursor-pointer ml-2"
-                      title="delete page"
+      <h5 className="mb-0">
+        <Form.Label>Pages</Form.Label>
+      </h5>
+      <p className="small">
+        These are the pages that will show in the top navbar.
+      </p>
+      {settings.pagesCustom?.length > 0
+        ? settings.pagesCustom.map((page, i) => (
+            <Row key={`page-${i}`} className="d-flex mb-2 align-items-center">
+              <Col>
+                <FormControl
+                  id={`pagesCustom-name-${i}`}
+                  aria-describedby={`pagesCustom name ${i}`}
+                  value={page.name}
+                  placeholder="Add page name"
+                  onChange={(e) => {
+                    let updPages =
+                      settings.pagesCustom?.length > 0
+                        ? JSON.parse(JSON.stringify(settings.pagesCustom))
+                        : [];
+                    updPages[i].name = e.target.value;
+                    handleUpdate("pagesCustom", updPages);
+                  }}
+                />
+              </Col>
+              <Col>
+                <FormControl
+                  id={`pagesCustom-link-${i}`}
+                  aria-describedby={`pagesCustom link ${i}`}
+                  value={page.link}
+                  placeholder="Add link"
+                  onChange={(e) => {
+                    let updPages =
+                      settings.pagesCustom?.length > 0
+                        ? JSON.parse(JSON.stringify(settings.pagesCustom))
+                        : [];
+                    updPages[i].link = e.target.value;
+                    handleUpdate("pagesCustom", updPages);
+                  }}
+                />
+              </Col>
+              <Col
+                className="text-right d-flex justify-content-between"
+                style={{ maxWidth: "100px", width: "100px" }}
+              >
+                <div>
+                  {i !== 0 ? (
+                    <AiOutlineArrowUp
+                      className="cursor-pointer"
+                      title="up"
                       onClick={() => {
-                        let updPages = [];
-                        if (pagesCustom && pagesCustom.length > 0) {
-                          updPages = JSON.parse(JSON.stringify(pagesCustom));
-                        }
+                        let updPages =
+                          settings.pagesCustom?.length > 0
+                            ? JSON.parse(JSON.stringify(settings.pagesCustom))
+                            : [];
                         updPages.splice(i, 1);
-                        setPagesCustom(updPages);
-                        setEdited(true);
+                        updPages.splice(i - 1, 0, page);
+                        handleUpdate("pagesCustom", updPages);
                       }}
                     />
-                  </td>
-                </tr>
-              ))
-            : null}
-        </tbody>
-      </Table>
+                  ) : null}
+                  {i !== settings.pagesCustom.length - 1 ? (
+                    <AiOutlineArrowDown
+                      className="cursor-pointer"
+                      title="down"
+                      onClick={() => {
+                        let updPages =
+                          settings.pagesCustom?.length > 0
+                            ? JSON.parse(JSON.stringify(settings.pagesCustom))
+                            : [];
+                        updPages.splice(i, 1);
+                        updPages.splice(i + 1, 0, page);
+                        handleUpdate("pagesCustom", updPages);
+                      }}
+                    />
+                  ) : null}
+                </div>
+                <div>
+                  <FaTimes
+                    color="#dc3545"
+                    className="cursor-pointer ms-2 float-right"
+                    title="delete page"
+                    onClick={() => {
+                      let updPages =
+                        settings.pagesCustom?.length > 0
+                          ? JSON.parse(JSON.stringify(settings.pagesCustom))
+                          : [];
+                      updPages.splice(i, 1);
+                      handleUpdate("pagesCustom", updPages);
+                    }}
+                  />
+                </div>
+              </Col>
+            </Row>
+          ))
+        : null}
 
-      <Dropdown className="mb-4">
-        <Dropdown.Toggle variant="link" size="sm" className="pl-0 pt-0">
+      <Dropdown className="mb-5">
+        <Dropdown.Toggle variant="link" size="sm" className="ps-0">
           Add page
         </Dropdown.Toggle>
         <Dropdown.Menu>
@@ -389,17 +247,13 @@ function Settings() {
             <Fragment key={`pageOption-${i}`}>
               <Dropdown.Item
                 onClick={() => {
-                  // const updPages = [...pages, option];
-                  let updPages = [];
-                  if (pagesCustom && pagesCustom.length > 0) {
-                    updPages = JSON.parse(JSON.stringify(pagesCustom));
-                  }
-                  // const updPages = JSON.parse(JSON.stringify(pagesCustom));
+                  let updPages =
+                    settings.pagesCustom?.length > 0
+                      ? JSON.parse(JSON.stringify(settings.pagesCustom))
+                      : [];
                   updPages.push({ name: option, link: option });
-                  setPagesCustom(updPages);
-                  setEdited(true);
+                  handleUpdate("pagesCustom", updPages);
                 }}
-                // disabled={pages.includes(option)}
               >
                 {option}
               </Dropdown.Item>
@@ -408,58 +262,56 @@ function Settings() {
         </Dropdown.Menu>
       </Dropdown>
 
-      <Form.Label className="mb-1">Prompts</Form.Label>
-      {prompts && prompts.length > 0
-        ? prompts.map((prompt, i) => (
-            <div key={`prompt-${i}`} className="d-flex mb-2 align-items-center">
-              <FormControl
-                key={i}
-                value={prompt}
-                onChange={(e) => {
-                  let updPrompts = [...prompts];
-                  updPrompts[i] = e.target.value;
-                  setPrompts(updPrompts);
-                  setEdited(true);
-                }}
-              />
-              <FaTimes
-                color="#dc3545"
-                className="cursor-pointer ml-2"
-                title="delete page"
-                onClick={() => {
-                  let updPrompts = [...prompts];
-                  updPrompts.splice(i, 1);
-                  setPrompts(updPrompts);
-                  setEdited(true);
-                }}
-              />
-            </div>
+      <h5 className="mb-0">
+        <Form.Label>Prompts</Form.Label>
+      </h5>
+      <p className="small">
+        Prompts are important items that you want visitors to see. They appear
+        on the left of the homepage at the top. It is a full post that is loaded
+        in the sidebar, so keep it short.
+      </p>
+      {settings.prompts?.length > 0
+        ? settings.prompts.map((prompt, i) => (
+            <Row key={`prompt-${i}`} className="d-flex mb-2 align-items-center">
+              <Col>
+                <FormControl
+                  key={i}
+                  value={prompt}
+                  onChange={(e) => {
+                    let updPrompts = [...settings.prompts];
+                    updPrompts[i] = e.target.value;
+                    handleUpdate("prompts", updPrompts);
+                  }}
+                />
+              </Col>
+              <Col md="auto" style={{ maxWidth: "50px" }}>
+                <FaTimes
+                  color="#dc3545"
+                  className="cursor-pointer ml-2"
+                  title="delete page"
+                  onClick={() => {
+                    let updPrompts = [...settings.prompts];
+                    updPrompts.splice(i, 1);
+                    handleUpdate("prompts", updPrompts);
+                  }}
+                />
+              </Col>
+            </Row>
           ))
         : null}
+
       <Button
-        className="d-block mb-4 pl-0 pt-0"
+        className="d-block mb-5 ps-0"
         variant="link"
         size="sm"
         onClick={() => {
-          let updPrompts = [...prompts];
+          let updPrompts = [...settings.prompts];
           updPrompts.push("");
-          setPrompts(updPrompts);
+          handleUpdate("prompts", updPrompts, false);
         }}
       >
         Add prompt
       </Button>
-
-      <Form.Label className="mb-1 d-block">Advanced</Form.Label>
-      <Form.Check
-        type="checkbox"
-        label="Enable resume generator"
-        className="mb-4"
-        checked={resumeGeneratorEnabled}
-        onChange={() => {
-          setResumeGeneratorEnabled(!resumeGeneratorEnabled);
-          setEdited(true);
-        }}
-      />
 
       <Button
         className="mb-4"

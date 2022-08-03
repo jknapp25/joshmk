@@ -1,7 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Auth } from "aws-amplify";
-import { Button, Col, Dropdown, Offcanvas, Row } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  Dropdown,
+  Offcanvas,
+  Row,
+  ButtonGroup,
+} from "react-bootstrap";
 import { FaBars } from "react-icons/fa";
 
 import SideNavNew from "./SideNavNew";
@@ -12,7 +19,7 @@ import "react-vertical-timeline-component/style.min.css";
 
 export default Nav;
 
-function Nav({ fullName }) {
+function Nav() {
   const [isSignedIn, setIsSignedIn] = useState(false);
   const { pathname } = useLocation();
   const [showOffcanvas, setShowOffcanvas] = useState(false);
@@ -74,10 +81,11 @@ function Nav({ fullName }) {
                   </Button>
                 ))}
                 {isSignedIn ? (
-                  <Dropdown className="ms-4">
-                    <Dropdown.Toggle variant="primary" id="dropdown-edit">
-                      EDIT
-                    </Dropdown.Toggle>
+                  <Dropdown as={ButtonGroup} className="ms-4">
+                    <Button onClick={() => navigate(`/post/create`)} className="text-nowrap">
+                      WRITE A STORY
+                    </Button>
+                    <Dropdown.Toggle split id="dropdown-toggle-write-a-story" />
                     <Dropdown.Menu>
                       <Dropdown.Item onClick={() => handlePageClick("/create")}>
                         CREATE

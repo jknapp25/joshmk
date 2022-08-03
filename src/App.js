@@ -21,7 +21,6 @@ import Education from "./components/Education.js";
 import EducationEditor from "./components/EducationEditor.js";
 import Create from "./components/Create.js";
 import Settings from "./components/Settings.js";
-import Bio from "./components/Bio.js";
 import Gallery from "./components/Gallery.js";
 import awsExports from "./aws-exports";
 import * as queries from "./graphql/queries";
@@ -59,8 +58,13 @@ function App() {
         query: queries.getConfiguration,
         variables: { id: process.env[configIdName] },
       });
-      if (configData && isMounted.current)
-        setConfig(configData.data.getConfiguration || {});
+      if (configData && isMounted.current) {
+        let newConfig = configData.data.getConfiguration;
+        if (newConfig?.bio) {
+          newConfig.bio = JSON.parse(newConfig.bio);
+        }
+        setConfig(newConfig || {});
+      }
     }
     if (process.env[configIdName]) {
       fetchData();
@@ -122,7 +126,6 @@ function App() {
                 <Route path="education/create" element={<EducationEditor />} />
                 <Route path="create" element={<Create />} />
                 <Route path="settings" element={<Settings />} />
-                <Route path="about" element={<Bio bio={config.bio} />} />
                 <Route path="search" element={<ItemList mini />} />
               </Route>
             </Routes>

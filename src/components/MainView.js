@@ -18,7 +18,7 @@ function MainView() {
 
   if (!config.pages || config.pages.length === 0) return null;
 
-  let mainColWidth = isGalleryRoute || isCreateRoute ? 10 : 6;
+  let mainColWidth = isGalleryRoute || isCreateRoute ? 10 : 5;
   const secondaryColWidth = isGalleryRoute || isCreateRoute ? 2 : 3;
 
   if (isHomeRoute) mainColWidth = undefined;
