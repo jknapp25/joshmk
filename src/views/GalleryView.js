@@ -45,7 +45,7 @@ function GalleryView() {
               <Card key={i} className="border-0">
                 <ImageCarousel
                   images={item.images}
-                  classes="rounded bg-secondary bg-opacity-10 shadow-lg"
+                  classes="bg-secondary bg-opacity-10"
                 />
                 <h5 className="my-2">{item.name}</h5>
                 <ItemBuyButton

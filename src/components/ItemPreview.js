@@ -58,7 +58,7 @@ function ItemPreview({ item = {} }) {
 
           <ImageCarousel
             images={images}
-            classes="mb-4 rounded bg-secondary bg-opacity-10 shadow-lg"
+            classes="mb-4 bg-secondary bg-opacity-10"
           />
 
           {description ? (

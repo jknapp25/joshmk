@@ -6,7 +6,7 @@ export default FullWidthHomePageImage;
 function FullWidthHomePageImage() {
   return (
     <div
-      className="bg-secondary bg-opacity-10 shadow-lg ps-5 pe-5 pt-5 pb-3 m-0 bg-white that-thing d-flex align-items-start flex-column-reverse"
+      className="bg-secondary bg-opacity-10 ps-5 pe-5 pt-5 pb-3 m-0 bg-white that-thing d-flex align-items-start flex-column-reverse"
       style={{
         height: "840px",
       }}
