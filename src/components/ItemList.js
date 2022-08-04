@@ -50,6 +50,10 @@ function ItemList({ mini = false }) {
           ...post,
           type: "post",
         }));
+        items = [...items, ...posts];
+      }
+
+      if (pageName === "search") {
         const prodItemsData = await API.graphql({ query: queries.listItems });
         const prodItems = prodItemsData.data.listItems.items.map(
           (prodItem) => ({
@@ -57,7 +61,7 @@ function ItemList({ mini = false }) {
             type: "item",
           })
         );
-        items = [...items, ...posts, ...prodItems];
+        items = [...items, ...prodItems];
       }
 
       if (pageName === "work" || pageName === "search") {
