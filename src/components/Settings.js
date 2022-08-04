@@ -68,44 +68,10 @@ function Settings() {
       />
 
       <h5 className="mb-0">
-        <Form.Label>Avatar</Form.Label>
-      </h5>
-      <p className="small">
-        Your avatar is an image that represents you. It will likely be the first
-        place that visitors see you.
-      </p>
-      <ImageUploader
-        images={settings.avatar ? [settings.avatar] : []}
-        afterEdit={(imgs) => {
-          const updAvatar = imgs?.length > 0 ? imgs[0] : "";
-          handleUpdate("avatar", updAvatar);
-        }}
-        fieldId="avatar"
-        fileSizeLimit={5}
-        allowMultiple={false}
-        imageDisplayName="Avatar"
-        classes="mb-5"
-      />
-
-      <h5 className="mb-0">
-        <Form.Label>Tagline</Form.Label>
-      </h5>
-      <p className="small">
-        Your tagline will show under your avatar on the homepage.
-      </p>
-      <FormControl
-        id="tagline"
-        className="mb-5"
-        aria-describedby="tagline"
-        value={settings.tagline || ""}
-        onChange={(e) => handleUpdate("tagline", e.target.value)}
-      />
-
-      <h5 className="mb-0">
         <Form.Label>Logo</Form.Label>
       </h5>
       <p className="small">
-        Add a descriptive image that represents this site. It's often a
+        Add a descriptive image that represents this site. It's common to use a
         handwritten version of your name.
       </p>
       <ImageUploader
@@ -139,6 +105,40 @@ function Settings() {
         allowMultiple={false}
         imageDisplayName="Favicon"
         classes="mb-5"
+      />
+
+      <h5 className="mb-0">
+        <Form.Label>Avatar</Form.Label>
+      </h5>
+      <p className="small">
+        Your avatar is an image that represents you. It will appear at the top
+        of the right sidebar on the homepage.
+      </p>
+      <ImageUploader
+        images={settings.avatar ? [settings.avatar] : []}
+        afterEdit={(imgs) => {
+          const updAvatar = imgs?.length > 0 ? imgs[0] : "";
+          handleUpdate("avatar", updAvatar);
+        }}
+        fieldId="avatar"
+        fileSizeLimit={5}
+        allowMultiple={false}
+        imageDisplayName="Avatar"
+        classes="mb-5"
+      />
+
+      <h5 className="mb-0">
+        <Form.Label>Tagline</Form.Label>
+      </h5>
+      <p className="small">
+        Your tagline will show under your avatar on the homepage.
+      </p>
+      <FormControl
+        id="tagline"
+        className="mb-5"
+        aria-describedby="tagline"
+        value={settings.tagline || ""}
+        onChange={(e) => handleUpdate("tagline", e.target.value)}
       />
 
       <h5 className="mb-0">
