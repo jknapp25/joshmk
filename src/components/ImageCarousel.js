@@ -20,10 +20,8 @@ function ImageCarousel({ images = [], classes = "" }) {
 
       if (isMounted.current) setImageUrls(resImageUrls);
     }
-    if (images && images.length) {
+    if (images?.length > 0) {
       fetchData();
-    } else {
-      if (isMounted.current) setImageUrls([]);
     }
   }, [images, isMounted]);
 

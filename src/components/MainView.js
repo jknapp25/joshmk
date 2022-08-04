@@ -15,6 +15,7 @@ function MainView() {
   const isHomeRoute = useMatch("/");
   const isGalleryRoute = useMatch("/gallery");
   const isCreateRoute = useMatch("/create");
+  const isPostRoute = useMatch("/post/:postId");
 
   if (!config.pages || config.pages.length === 0) return null;
 
@@ -22,6 +23,7 @@ function MainView() {
   const secondaryColWidth = isGalleryRoute || isCreateRoute ? 2 : 3;
 
   if (isHomeRoute) mainColWidth = undefined;
+  if (isPostRoute) mainColWidth = 8;
 
   return (
     <Row
