@@ -145,8 +145,13 @@ function Settings() {
         <Form.Label>Pages</Form.Label>
       </h5>
       <p className="small">
-        These are the pages that will show in the top navbar.
+        These are the pages that will show in the top navbar. Here are examples of how this can be set up...
       </p>
+      <ul>
+        <li><b>gallery | gallery</b> - This is a basic page.</li>
+        <li><b>poetry | search?tag=poetry</b> - This will direct the user to a tag search.</li>
+        <li><b>about | post/f4ec738a-65e2-4cf9-9696-dd8c83d7763d</b> - This will direct the user to a specific post.</li>
+      </ul>
       {settings.pagesCustom?.length > 0
         ? settings.pagesCustom.map((page, i) => (
             <Row key={`page-${i}`} className="d-flex mb-2 align-items-center">
