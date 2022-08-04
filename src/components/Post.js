@@ -41,10 +41,7 @@ function Post({ post = {} }) {
 
   return (
     <div className="pb-3">
-      <div
-        className="mb-4 mx-auto"
-        style={{ maxWidth: "650px" }}
-      >
+      <div className="mb-4 mx-auto" style={{ maxWidth: "650px" }}>
         <NewBadge createdAt={createdAt} />
         <Category category={category} />
         <h1 className="mb-1 display-5">
@@ -69,7 +66,7 @@ function Post({ post = {} }) {
         />
       ) : null}
 
-      {tags && tags.length > 0 && (
+      {tags?.length > 0 ? (
         <div
           style={{
             whiteSpace: "nowrap",
@@ -83,7 +80,7 @@ function Post({ post = {} }) {
             <Tag key={`tag-${tag}`} tag={tag} size="sm" />
           ))}
         </div>
-      )}
+      ) : null}
     </div>
   );
 }
