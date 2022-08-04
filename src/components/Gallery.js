@@ -53,12 +53,12 @@ function Gallery() {
       columnClassName="my-masonry-grid_column"
     >
       {sortedItems.map((item, i) => (
-        <Card key={i} className="border-0">
+        <Card key={i} className="border-0 text-center">
           <ImageCarousel
             images={item.images}
             classes="bg-secondary bg-opacity-10"
           />
-          <h5 className="my-2">{item.name}</h5>
+          <h5 className="my-3">{item.name}</h5>
           <ItemBuyButton
             isForSale={item.isForSale}
             isSold={item.isSold}
