@@ -181,7 +181,7 @@ function ItemList({ mini = false }) {
             </div>
           ))}
 
-      {pageName === "blog" ? (
+      {pageName === "blog" && preppedItems?.length > 3 ? (
         <div className="d-grid">
           <Button variant="dark" size="lg" onClick={() => setDisplayMore(true)}>
             Load older posts

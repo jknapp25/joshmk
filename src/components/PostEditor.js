@@ -233,7 +233,7 @@ function PostEditor() {
 
       <Form.Check
         type="checkbox"
-        label="Hidden"
+        label="Hidden from blog"
         checked={hidden}
         onChange={() => setHidden(!hidden)}
       />
