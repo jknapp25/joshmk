@@ -30,17 +30,13 @@ function ImagePrompt({ postId, bottomSpace }) {
 
   if (!post) return;
 
-  const richContent = post.richContent ? JSON.parse(post.richContent) : post.richContent;
+  const richContent = post.richContent
+    ? JSON.parse(post.richContent)
+    : post.richContent;
+
+  if (!richContent) return;
 
   return (
-    <div className={bottomSpace ? "mb-5" : ""}>
-      {richContent ? (
-        <RichTextEditor
-          value={richContent}
-          onChange={() => {}}
-          readOnly={true}
-        />
-      ) : null}
-    </div>
+    <RichTextEditor value={richContent} onChange={() => {}} readOnly={true} />
   );
 }

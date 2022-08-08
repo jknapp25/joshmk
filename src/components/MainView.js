@@ -39,7 +39,7 @@ function MainView() {
             className="py-5 ps-3 pe-5 vh-auto border-end"
             style={{ height: "fit-content" }}
           >
-            {config.prompts && config.prompts.length > 0
+            {config?.prompts.length > 0
               ? config.prompts.map((postId, i) => (
                   <ImagePrompt
                     key={i}
