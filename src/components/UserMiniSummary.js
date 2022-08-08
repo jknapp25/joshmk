@@ -27,6 +27,10 @@ function UserMiniSummary() {
     }
   }, [config.avatar, isMounted]);
 
+  const aboutLink = config.pagesCustom.find(
+    (page) => page.name === "about"
+  )?.link;
+
   return (
     <>
       <div className="mb-3">
@@ -38,12 +42,14 @@ function UserMiniSummary() {
             className="w-100"
             style={{
               objectFit: "cover",
-              cursor: "pointer",
+              cursor: aboutLink ? "pointer" : "default",
             }}
             src={avatarUrl}
             alt="Author profile image"
             fluid
-            onClick={() => navigate("about")}
+            onClick={() => {
+              if (aboutLink) navigate(aboutLink);
+            }}
           />
         ) : null}
       </div>
