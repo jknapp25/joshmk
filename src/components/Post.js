@@ -68,12 +68,7 @@ function Post({ post = {} }) {
 
       {tags?.length > 0 ? (
         <div
-          style={{
-            whiteSpace: "nowrap",
-            overflowX: "scroll",
-            boxShadow: "",
-            maxWidth: "650px",
-          }}
+          style={{ maxWidth: "650px" }}
           className="border-0 py-0 mt-4 mx-auto"
         >
           {tags.map((tag) => (

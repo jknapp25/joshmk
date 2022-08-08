@@ -58,14 +58,7 @@ function Project({ project = {} }) {
       </div>
 
       {tags && tags.length > 0 && (
-        <div
-          style={{
-            whiteSpace: "nowrap",
-            overflowX: "scroll",
-            boxShadow: "",
-          }}
-          className="mt-1"
-        >
+        <div className="mt-1">
           {tags.map((tag) => (
             <Tag key={tag} tag={tag} />
           ))}

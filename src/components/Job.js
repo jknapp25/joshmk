@@ -87,14 +87,7 @@ function Job({ job = {} }) {
         <small className="text-muted">{timeInfo}</small>
       </div>
       {tags && tags.length > 0 && (
-        <div
-          style={{
-            whiteSpace: "nowrap",
-            overflowX: "scroll",
-            boxShadow: "",
-          }}
-          className="mt-1"
-        >
+        <div className="mt-1">
           {tags.map((tag, i) => (
             <Tag tag={tag} key={`tag-${i}`} />
           ))}

@@ -70,14 +70,7 @@ function Post({ post = {} }) {
       ) : null}
 
       {tags && tags.length > 0 && (
-        <div
-          style={{
-            whiteSpace: "nowrap",
-            overflowX: "scroll",
-            boxShadow: "",
-          }}
-          className="border-0 py-0 mt-4"
-        >
+        <div className="border-0 py-0 mt-4">
           {tags.map((tag) => (
             <Tag key={`tag-${tag}`} tag={tag} />
           ))}

@@ -88,9 +88,7 @@ function Education({ education }) {
       <div className="mb-2">
         <small className="text-muted">{timeInfo}</small>
       </div>
-      {tags &&
-        tags.length > 0 &&
-        tags.map((tag, i) => <Tag key={tag} tag={tag} />)}
+      {tags?.length > 0 && tags.map((tag, i) => <Tag key={tag} tag={tag} />)}
     </>
   );
 }
