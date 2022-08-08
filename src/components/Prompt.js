@@ -5,9 +5,9 @@ import * as queries from "../graphql/queries";
 import RichTextEditor from "./RichTextEditor/RichTextEditor";
 import useIsMounted from "../lib/useIsMounted";
 
-export default ImagePrompt;
+export default Prompt;
 
-function ImagePrompt({ postId, bottomSpace }) {
+function Prompt({ postId, bottomSpace }) {
   const [post, setPost] = useState();
 
   const isMounted = useIsMounted();

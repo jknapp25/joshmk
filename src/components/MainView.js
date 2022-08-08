@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useMatch, Outlet } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 
-import ImagePrompt from "./ImagePrompt";
+import Prompt from "./Prompt";
 import UserMiniSummary from "./UserMiniSummary";
 import PopularTags from "./PopularTags";
 import { ConfigContext } from "../App";
@@ -41,7 +41,7 @@ function MainView() {
           >
             {config?.prompts.length > 0
               ? config.prompts.map((postId, i) => (
-                  <ImagePrompt
+                  <Prompt
                     key={i}
                     bottomSpace={i === config.prompts.length - 1}
                     postId={postId}
