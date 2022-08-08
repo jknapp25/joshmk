@@ -1,4 +1,4 @@
-import { Editor, Transforms, Element as SlateElement } from "slate";
+import { Editor, Transforms, Element as SlateElement, Range } from "slate";
 import { useSlate } from "slate-react";
 import { Button } from "react-bootstrap";
 import { FaLink } from "react-icons/fa";
