@@ -129,8 +129,6 @@ function ItemList({ mini = false }) {
 
   preppedItems = preppedItems.filter((itm) => !itm.hidden);
 
-  console.log("renderedItems: ", renderedItems);
-
   return (
     <>
       {pageName === "search" ? (
@@ -150,10 +148,7 @@ function ItemList({ mini = false }) {
                   <PostPreview post={item} />
                 ) : null}
                 {item.type === "post" && !mini ? (
-                  <Post
-                    post={item}
-                    bottomBorder={i < renderedItems}
-                  />
+                  <Post post={item} bottomBorder={i < renderedItems} />
                 ) : null}
                 {item.type === "item" ? <ItemPreview item={item} /> : null}
                 {item.type === "job" ? <Job job={item} /> : null}
