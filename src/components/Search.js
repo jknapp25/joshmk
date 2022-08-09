@@ -91,15 +91,20 @@ function Search() {
 
   return (
     <>
-      <div className="mb-5 d-flex align-items-center">
-        <Tag tag={searchParams.tag} size="lg" />
-        <div className="mb-2 mt-1 small d-inline">
+      <div className="mb-5 text-center">
+        <h1 className="mb-2 display-4 fw-bold">{searchParams.tag}</h1>
+        <div className="mb-2 mt-1 small d-block">
           {preppedItems.length} item{preppedItems.length > 1 ? "s" : ""}
         </div>
       </div>
 
       {preppedItems.map((item, i) => (
-        <SearchPreview key={`search-item-${i}`} type={item.type} thing={item} borderTop={i === 0} />
+        <SearchPreview
+          key={`search-item-${i}`}
+          type={item.type}
+          thing={item}
+          borderTop={i === 0}
+        />
       ))}
     </>
   );
