@@ -142,7 +142,7 @@ function ItemList({ mini = false }) {
           ))}
 
       {pageName === "blog" && preppedItems?.length > 3 ? (
-        <div className="d-grid">
+        <div className="d-flex justify-content-center">
           <Button variant="dark" size="lg" onClick={() => setDisplayMore(true)}>
             Load older posts
           </Button>
