@@ -161,7 +161,7 @@ function ItemList({ mini = false }) {
                 {item.type === "education" && !pageName === "work" ? (
                   <Education education={item} />
                 ) : null}
-                {!mini && i !== preppedItems.length - 1 ? (
+                {!mini && i < renderedItems ? (
                   <div style={{ height: "35px" }} />
                 ) : null}
               </div>

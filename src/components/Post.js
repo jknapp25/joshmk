@@ -40,7 +40,7 @@ function Post({ post = {}, bottomBorder = false }) {
   richContent = richContent ? JSON.parse(richContent) : richContent;
 
   return (
-    <div className={`pb-5 mb-4 ${bottomBorder ? "border-bottom" : ""}`}>
+    <div className={`pb-5 ${bottomBorder ? "border-bottom mb-4" : ""}`}>
       <div className="mb-4 mx-auto" style={{ maxWidth: "650px" }}>
         <NewBadge createdAt={createdAt} />
         <Category category={category} />
