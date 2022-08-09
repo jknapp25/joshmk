@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Card } from "react-bootstrap";
 import Masonry from "react-masonry-css";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 
 import useIsMounted from "../lib/useIsMounted";
-import ImageCarousel from "./ImageCarousel";
-import ItemBuyButton from "./ItemBuyButton";
+import GalleryImage from "./GalleryImage";
 
 export default Gallery;
 
@@ -20,6 +20,7 @@ const BREAKPOINT_COLS = {
 function Gallery() {
   const [items, setItems] = useState([]);
 
+  const navigate = useNavigate();
   const isMounted = useIsMounted();
 
   useEffect(() => {
@@ -53,18 +54,13 @@ function Gallery() {
       columnClassName="my-masonry-grid_column"
     >
       {sortedItems.map((item, i) => (
-        <Card key={i} className="border-0 text-center">
-          <ImageCarousel
-            images={item.images}
-            classes="bg-secondary bg-opacity-10"
-          />
-          <h5 className="my-3">{item.name}</h5>
-          <ItemBuyButton
-            isForSale={item.isForSale}
-            isSold={item.isSold}
-            price={item.price}
-            classes="mb-2"
-          />
+        <Card
+          key={i}
+          className="border-0 text-center cursor-pointer"
+          onClick={() => navigate(`/item/${item.id}`)}
+        >
+          <GalleryImage image={item.images[0]} />
+          <h4 className="mt-3">{item.name}</h4>
         </Card>
       ))}
     </Masonry>

@@ -12,8 +12,8 @@ function ItemBuyButton({ isForSale, isSold, price, classes }) {
 
   const buttonVariant = isSold ? "secondary" : "success";
   const isDisabled = !!isSold;
-  const priceColorClass = isSold ? "text-secondary" : "text-success";
-  const buttonText = isSold ? "Sold" : "Buy";
+  const priceColorClass = isSold ? "text-secondary" : "text-dark";
+  const buttonText = isSold ? "Sold" : "Buy now";
 
   function handleButtonClick() {
     if (isSold) return;
@@ -25,9 +25,10 @@ function ItemBuyButton({ isForSale, isSold, price, classes }) {
     <div className={classes}>
       <Button
         variant={buttonVariant}
-        className="d-inline me-2"
+        className="d-inline me-2 px-4"
         disabled={isDisabled}
         onClick={handleButtonClick}
+        size="lg"
       >
         {buttonText}
       </Button>

@@ -1,30 +1,32 @@
 import React, { useState, useEffect } from "react";
-import moment from "moment";
-import { Link, useParams } from "react-router-dom";
+import { Col, Row } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import useIsMounted from "../lib/useIsMounted";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 
 import ImageCarousel from "./ImageCarousel";
-import Tag from "./Tag";
-import useIsMounted from "../lib/useIsMounted";
 import RichTextEditor from "./RichTextEditor/RichTextEditor";
+import ItemBuyButton from "./ItemBuyButton";
+import Tag from "./Tag";
 
-export default Post;
+export default Item;
 
-function Post({ post = {} }) {
-  const [realPost, setRealPost] = useState(post);
+function Item({ item = {} }) {
+  const [realItem, setRealItem] = useState(item);
+
   const isMounted = useIsMounted();
   const params = useParams();
 
   useEffect(() => {
     async function fetchData() {
-      const postData = await API.graphql({
-        query: queries.getPost,
+      const itemData = await API.graphql({
+        query: queries.getItem,
         variables: { id: params.id },
       });
 
-      if (postData && isMounted.current) {
-        setRealPost(postData.data.getPost);
+      if (itemData && isMounted.current) {
+        setRealItem(itemData.data.getItem);
       }
     }
     if (params.id) {
@@ -32,50 +34,63 @@ function Post({ post = {} }) {
     }
   }, [params.id, isMounted]);
 
-  if (!realPost) return null;
+  if (!realItem) return null;
 
-  let { id, title, richContent, tags, category, images, createdAt } = realPost;
-  const date = createdAt ? moment(createdAt).format("MMMM D, Y") : null;
+  let {
+    name,
+    description,
+    images,
+    isForSale,
+    isSold,
+    price,
+    tags,
+  } = realItem;
 
-  richContent = richContent ? JSON.parse(richContent) : richContent;
+  description = description ? JSON.parse(description) : description;
 
   return (
-    <>
-      <div>
-        <h1 className="mb-0">
-          <span className="cursor-pointer">
-            <Link to={`/post/${id}`} className="hidden-link">
-              {title}
-            </Link>
-          </span>
-        </h1>
-        <div className="mb-3">
-          {category ? (
-            <small className="text-muted text-capitalize">
-              {category} &bull;{" "}
-            </small>
-          ) : null}
-          <small className="text-muted">{date}</small>
-        </div>
-      </div>
+    <Row className="gx-5 d-flex justify-content-center">
+      <Col md="10">
+        <Row className="mb-5">
+          <Col className="d-flex justify-content-center">
+            <ImageCarousel images={images} isItem />
+          </Col>
+        </Row>
+        <Row className="mb-2 d-flex justify-content-center">
+          <Col md="6">
+            <h1 className="mb-4 text-center">{name}</h1>
 
-      <ImageCarousel images={images} classes="mb-3" />
+            <ItemBuyButton
+              isForSale={isForSale}
+              isSold={isSold}
+              price={price}
+              classes="mt-2 text-center mb-5"
+            />
 
-      {richContent ? (
-        <RichTextEditor
-          value={richContent}
-          onChange={() => {}}
-          readOnly={true}
-        />
-      ) : null}
+            {description ? (
+              <>
+                <h4>Description</h4>
+                <RichTextEditor
+                  value={description}
+                  onChange={() => {}}
+                  readOnly={true}
+                />
+              </>
+            ) : null}
 
-      {tags && tags.length > 0 && (
-        <div className="border-0 py-0 mt-4">
-          {tags.map((tag) => (
-            <Tag key={`tag-${tag}`} tag={tag} />
-          ))}
-        </div>
-      )}
-    </>
+            {tags?.length > 0 ? (
+              <>
+                <h4 className="mt-4">Tags</h4>
+                <div className="border-0 py-0">
+                  {tags.map((tag) => (
+                    <Tag key={`tag-${tag}`} tag={tag} size="sm" />
+                  ))}
+                </div>
+              </>
+            ) : null}
+          </Col>
+        </Row>
+      </Col>
+    </Row>
   );
 }

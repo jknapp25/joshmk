@@ -7,7 +7,7 @@ import useIsMounted from "../lib/useIsMounted";
 
 export default ImageCarousel;
 
-function ImageCarousel({ images = [], classes = "" }) {
+function ImageCarousel({ images = [], classes = "", isItem = false }) {
   const [imageUrls, setImageUrls] = useState([]);
   const imageContext = useContext(ImageContext);
 
@@ -50,7 +50,12 @@ function ImageCarousel({ images = [], classes = "" }) {
           }
           style={{ cursor: "zoom-in" }}
         >
-          <img className="w-100" src={url} alt={url} />
+          <img
+            className={!isItem ? "w-100" : ""}
+            style={{ maxHeight: isItem ? "85vh" : undefined }}
+            src={url}
+            alt={url}
+          />
         </Carousel.Item>
       ))}
     </Carousel>
