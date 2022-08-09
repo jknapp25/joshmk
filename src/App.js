@@ -27,6 +27,7 @@ import * as queries from "./graphql/queries";
 import useIsMounted from "./lib/useIsMounted";
 import FullScreenImageCarousel from "./components/FullScreenImageCarousel";
 import Nav from "./components/Nav";
+import Search from "./components/Search";
 
 import "./App.css";
 
@@ -126,7 +127,7 @@ function App() {
                 <Route path="education/create" element={<EducationEditor />} />
                 <Route path="create" element={<Create />} />
                 <Route path="settings" element={<Settings />} />
-                <Route path="search" element={<ItemList mini />} />
+                <Route path="search" element={<Search />} />
               </Route>
             </Routes>
           </Container>

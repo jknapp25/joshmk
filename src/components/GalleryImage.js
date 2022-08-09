@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { Storage } from "aws-amplify";
 
 import useIsMounted from "../lib/useIsMounted";
@@ -8,8 +7,6 @@ export default GalleryImage;
 
 function GalleryImage({ image = "" }) {
   const [imageUrl, setImageUrl] = useState("");
-
-  const navigate = useNavigate();
 
   const isMounted = useIsMounted();
 
