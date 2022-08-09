@@ -32,8 +32,14 @@ function ItemBuyButton({ isForSale, isSold, price, classes }) {
       >
         {buttonText}
       </Button>
-      <div className={`${priceColorClass} d-inline align-middle`}>${price}</div>
-      <BuyModal showModal={showModal} setShowModal={setShowModal} />
+      {!isSold ? (
+        <>
+          <div className={`${priceColorClass} d-inline align-middle`}>
+            ${price}
+          </div>
+          <BuyModal showModal={showModal} setShowModal={setShowModal} />
+        </>
+      ) : null}
     </div>
   );
 }

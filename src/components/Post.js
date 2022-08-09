@@ -12,7 +12,7 @@ import useIsMounted from "../lib/useIsMounted";
 
 export default Post;
 
-function Post({ post = {} }) {
+function Post({ post = {}, bottomBorder = false }) {
   const [realPost, setRealPost] = useState(post);
   const isMounted = useIsMounted();
   const params = useParams();
@@ -40,7 +40,7 @@ function Post({ post = {} }) {
   richContent = richContent ? JSON.parse(richContent) : richContent;
 
   return (
-    <div className="pb-3">
+    <div className={`pb-5 mb-4 ${bottomBorder ? "border-bottom" : ""}`}>
       <div className="mb-4 mx-auto" style={{ maxWidth: "650px" }}>
         <NewBadge createdAt={createdAt} />
         <Category category={category} />
