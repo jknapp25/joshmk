@@ -10,7 +10,7 @@ function ItemBuyButton({ isForSale, isSold, price, classes }) {
 
   if (!isForSale) return null;
 
-  const buttonVariant = isSold ? "secondary" : "success";
+  const buttonVariant = isSold ? "secondary" : "primary";
   const isDisabled = !!isSold;
   const priceColorClass = isSold ? "text-secondary" : "text-dark";
   const buttonText = isSold ? "Sold" : "Buy now";
