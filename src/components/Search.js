@@ -99,7 +99,7 @@ function Search() {
       </div>
 
       {preppedItems.map((item, i) => (
-        <SearchPreview type={item.type} thing={item} borderTop={i === 0} />
+        <SearchPreview key={`search-item-${i}`} type={item.type} thing={item} borderTop={i === 0} />
       ))}
     </>
   );
