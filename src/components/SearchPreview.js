@@ -10,7 +10,8 @@ function SearchPreview({ thing = {}, type, borderTop }) {
   const navigate = useNavigate();
 
   let { id, title, images, createdAt } = thing;
-  const date = createdAt ? moment(createdAt).format("MMM D") : null;
+  const date= moment(createdAt).format("dddd, MMM D, YYYY");
+
 
   return (
     <div
@@ -19,11 +20,11 @@ function SearchPreview({ thing = {}, type, borderTop }) {
     >
       <div className="col my-auto">
         <div>
-          <h4 className="mb-0 fw-bold">{title}</h4>
+          <h3 className="mb-1 fw-bold">{title}</h3>
           <small className="text-muted">{date}</small>
         </div>
       </div>
-      <div className="col-auto">
+      <div className="col-auto ms-2">
         <MiniImage images={images} />
       </div>
     </div>
