@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useMatch } from "react-router-dom";
 import moment from "moment";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
+import Helmet from "react-helmet";
 
 import ImageCarousel from "./ImageCarousel";
 import Tag from "./Tag";
@@ -16,6 +17,8 @@ function Post({ post = {}, bottomBorder = false }) {
   const [realPost, setRealPost] = useState(post);
   const isMounted = useIsMounted();
   const params = useParams();
+
+  const isBlog = useMatch("");
 
   useEffect(() => {
     async function fetchData() {
@@ -42,6 +45,7 @@ function Post({ post = {}, bottomBorder = false }) {
 
   return (
     <div className={`pb-5 ${bottomBorder ? "border-bottom mb-4" : ""}`}>
+      <Helmet>{!isBlog && title ? <title>{title}</title> : null}</Helmet>
       <div className="mb-5 mx-auto" style={{ maxWidth: "650px" }}>
         <NewBadge createdAt={createdAt} />
         <h1 className="mb-2 display-4 text-center">

@@ -3,8 +3,8 @@ import { useLocation } from "react-router-dom";
 import { parse } from "query-string";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
+import Helmet from "react-helmet";
 
-import Tag from "./Tag";
 import SearchPreview from "./SearchPreview";
 
 export default Search;
@@ -13,6 +13,7 @@ function Search() {
   const { search } = useLocation();
   const searchParams = parse(search);
   const [items, setItems] = useState([]);
+
 
   const isMounted = useRef(true);
   useEffect(() => {
@@ -91,6 +92,12 @@ function Search() {
 
   return (
     <>
+      <Helmet>
+        <title>
+          {searchParams.tag}
+        </title>
+      </Helmet>
+
       <div className="mb-5 text-center">
         <h1 className="mb-2 display-4 fw-bold">{searchParams.tag}</h1>
         <div className="mb-2 mt-1 small d-block">

@@ -5,6 +5,7 @@ import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 import { API, graphqlOperation } from "aws-amplify";
 import { createConfiguration, updateConfiguration } from "../graphql/mutations";
 import { withAuthenticator } from "@aws-amplify/ui-react";
+import Helmet from "react-helmet";
 
 import ImageUploader from "./ImageUploader";
 import { ConfigContext } from "../App";
@@ -50,6 +51,10 @@ function Settings() {
 
   return (
     <>
+      <Helmet>
+        <title>Settings</title>
+      </Helmet>
+
       <h1 className="mb-5">Settings</h1>
 
       <h5 className="mb-0">

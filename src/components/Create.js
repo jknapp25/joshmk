@@ -5,6 +5,7 @@ import { GoPencil } from "react-icons/go";
 import { FaTrashAlt } from "react-icons/fa";
 import { API, graphqlOperation } from "aws-amplify";
 import { withAuthenticator } from "@aws-amplify/ui-react";
+import Helmet from "react-helmet";
 
 import {
   deletePost,
@@ -91,6 +92,11 @@ function Create() {
 
   return (
     <>
+      <Helmet>
+        <title>
+          Create
+        </title>
+      </Helmet>
       <div className="mb-5">
         <Dropdown size="lg" className="d-inline">
           <Dropdown.Toggle
@@ -141,7 +147,9 @@ function Create() {
               return (
                 <tr key={i} onClick={() => navigate(`/${itemType}/${item.id}`)}>
                   {TABLE_FIELDS[itemType].map((field) => (
-                    <td key={field} className="px-0">{item[field]}</td>
+                    <td key={field} className="px-0">
+                      {item[field]}
+                    </td>
                   ))}
                   <td className="px-0">
                     <span
@@ -184,7 +192,9 @@ function Create() {
               );
             })
           ) : (
-            <tr><td>No items</td></tr>
+            <tr>
+              <td>No items</td>
+            </tr>
           )}
         </tbody>
       </Table>
