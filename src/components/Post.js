@@ -46,7 +46,7 @@ function Post({ post = {}, bottomBorder = false }) {
   return (
     <div className={`pb-5 ${bottomBorder ? "border-bottom mb-4" : ""}`}>
       <Helmet>{!isBlog && title ? <title>{title}</title> : null}</Helmet>
-      <div className="mb-5 mx-auto" style={{ maxWidth: "650px" }}>
+      <div className="mb-5 mx-auto text-center" style={{ maxWidth: "650px" }}>
         <NewBadge createdAt={createdAt} />
         <h1 className="mb-2 display-4 text-center">
           <span className="cursor-pointer fw-bold">

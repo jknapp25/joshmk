@@ -28,7 +28,7 @@ function Logo({ handlePageClick }) {
         <>
           <img
             className="d-none d-lg-inline cursor-pointer"
-            style={{ height: "40px" }}
+            style={{ height: "45px" }}
             alt="Website logo"
             src={logoUrl}
             onClick={() => handlePageClick("/")}
