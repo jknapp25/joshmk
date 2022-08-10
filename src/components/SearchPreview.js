@@ -10,12 +10,13 @@ function SearchPreview({ thing = {}, type, borderTop }) {
   const navigate = useNavigate();
 
   let { id, title, images, createdAt } = thing;
-  const date= moment(createdAt).format("dddd, MMM D, YYYY");
-
+  const date = moment(createdAt).format("dddd, MMM D, YYYY");
 
   return (
     <div
-      className={`row gx-0 cursor-pointer py-4 border-bottom ${borderTop ? 'border-top' : ''}`}
+      className={`row gx-0 cursor-pointer py-4 border-bottom ${
+        borderTop ? "border-top" : ""
+      }`}
       onClick={() => navigate(`/${type}/${id}`)}
     >
       <div className="col my-auto">
