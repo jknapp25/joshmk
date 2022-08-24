@@ -23,10 +23,5 @@ function GalleryImage({ image = "" }) {
 
   if (!imageUrl) return null;
 
-return (
-    <img
-      src={imageUrl}
-      alt={imageUrl}
-    />
-  );
+  return <img src={imageUrl} alt={imageUrl} className="shadow-lg" style={{ maxHeight: "70vh" }}/>;
 }

@@ -35,7 +35,7 @@ function MainView() {
   return (
     <Row
       className="gx-lg-5 d-flex justify-content-center mx-auto"
-      style={{ maxWidth: "1920px" }}
+      style={{ maxWidth: !isGalleryRoute ? "1920px" : undefined }}
     >
       {isHomeRoute ? (
         <Col lg={secondaryColWidth} className="d-none d-lg-grid">

@@ -3,9 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { Helmet } from "react-helmet";
 import { Amplify, API, Storage } from "aws-amplify";
-import "react-vertical-timeline-component/style.min.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "@aws-amplify/ui-react/styles.css";
 
 import ItemList from "./components/ItemList.js";
 import MainView from "./components/MainView.js";
@@ -29,6 +26,9 @@ import FullScreenImageCarousel from "./components/FullScreenImageCarousel";
 import Nav from "./components/Nav";
 import Search from "./components/Search";
 
+import "react-vertical-timeline-component/style.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "@aws-amplify/ui-react/styles.css";
 import "./App.css";
 
 export default App;
