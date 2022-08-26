@@ -53,7 +53,7 @@ function Item({ item = {} }) {
       <Col md="10">
         <Row className="mb-5">
           <Col className="d-flex justify-content-center">
-            <ImageCarousel images={images} isItem />
+            <ImageCarousel images={images} isItem classes="shadow-lg" />
           </Col>
         </Row>
         <Row className="mb-2 d-flex justify-content-center">
