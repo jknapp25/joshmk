@@ -43,6 +43,7 @@ function Post({ post = {}, bottomBorder = false }) {
   const formattedDateTime = moment(createdAt).calendar(null, {
     sameDay: "[Posted Today]",
     lastDay: "[Posted Yesterday]",
+    lastWeek: "dddd, MMM D, YYYY",
     sameElse: "dddd, MMM D, YYYY",
   });
 
