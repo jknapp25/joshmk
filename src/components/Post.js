@@ -8,10 +8,18 @@ import Helmet from "react-helmet";
 import ImageCarousel from "./ImageCarousel";
 import Tag from "./Tag";
 import RichTextEditor from "./RichTextEditor/RichTextEditor";
-import NewBadge from "./NewBadge";
 import useIsMounted from "../lib/useIsMounted";
 
 export default Post;
+
+function formatDateTime(dateTime) {
+  const isSameDay = moment(dateTime).isSame(new Date(), "day");
+  if (isSameDay) {
+    return "Posted today";
+  } else {
+    return moment(dateTime).format("dddd, MMM D, YYYY");
+  }
+}
 
 function Post({ post = {}, bottomBorder = false }) {
   const [realPost, setRealPost] = useState(post);
@@ -41,13 +49,12 @@ function Post({ post = {}, bottomBorder = false }) {
   let { id, title, richContent, tags, images, createdAt } = realPost;
 
   richContent = richContent ? JSON.parse(richContent) : richContent;
-  const dateTime = moment(createdAt).format("dddd, MMM D, YYYY");
+  const formattedDateTime = formatDateTime(createdAt);
 
   return (
     <div className={`pb-5 ${bottomBorder ? "border-bottom mb-4" : ""}`}>
       <Helmet>{!isBlog && title ? <title>{title}</title> : null}</Helmet>
       <div className="mb-5 mx-auto text-center" style={{ maxWidth: "650px" }}>
-        <NewBadge createdAt={createdAt} />
         <h1 className="mb-2 display-4 text-center">
           <span className="cursor-pointer fw-bold">
             <Link to={`/post/${id}`} className="hidden-link">
@@ -59,7 +66,7 @@ function Post({ post = {}, bottomBorder = false }) {
           className="text-muted text-center text-uppercase small"
           style={{ fontWeight: 500 }}
         >
-          {dateTime}
+          {formattedDateTime}
         </div>
       </div>
 
