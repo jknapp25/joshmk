@@ -49,7 +49,7 @@ function Gallery() {
             onClick={() => navigate(`/item/${item.id}`)}
           >
             <GalleryImage image={item.images[0]} />
-            <h5 className="mt-4 mb-4">{item.name}</h5>
+            <h5 className="my-4">{item.name}</h5>
           </Card>
         </Col>
       ))}
