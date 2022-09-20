@@ -74,6 +74,16 @@ type Page {
   link: String!
 }
 
+type PromptImage {
+  imageUrl: String!
+  link: String!
+}
+
+type Prompt {
+  title: String!
+  images: [PromptImage]
+}
+
 type Configuration @model @auth(rules: [{ allow: public }]) {
   id: ID!
   fullName: String
@@ -92,6 +102,7 @@ type Configuration @model @auth(rules: [{ allow: public }]) {
   resumeGeneratorEnabled: Boolean
   galleryImages: [String]
   prompts: [String]
+  promptsNew: [Prompt]
 }
 
 type Workout @model @auth(rules: [{ allow: public }]) {
