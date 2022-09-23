@@ -101,8 +101,7 @@ type Configuration @model @auth(rules: [{ allow: public }]) {
   pagesCustom: [Page!]
   resumeGeneratorEnabled: Boolean
   galleryImages: [String]
-  prompts: [String]
-  promptsNew: [Prompt]
+  prompts: [Prompt]
 }
 
 type Workout @model @auth(rules: [{ allow: public }]) {

@@ -246,7 +246,13 @@ export const getConfiguration = /* GraphQL */ `
       }
       resumeGeneratorEnabled
       galleryImages
-      prompts
+      prompts {
+        title
+        images {
+          imageUrl
+          link
+        }
+      }
       createdAt
       updatedAt
     }
@@ -279,7 +285,9 @@ export const listConfigurations = /* GraphQL */ `
         }
         resumeGeneratorEnabled
         galleryImages
-        prompts
+        prompts {
+          title
+        }
         createdAt
         updatedAt
       }

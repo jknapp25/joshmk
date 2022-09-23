@@ -44,11 +44,11 @@ function MainView() {
             style={{ height: "fit-content" }}
           >
             {config?.prompts.length > 0
-              ? config.prompts.map((postId, i) => (
+              ? config.prompts.map((prompt, i) => (
                   <Prompt
                     key={i}
-                    bottomSpace={i === config.prompts.length - 1}
-                    postId={postId}
+                    bottomSpace={i !== config.prompts.length - 1}
+                    prompt={prompt}
                   />
                 ))
               : null}

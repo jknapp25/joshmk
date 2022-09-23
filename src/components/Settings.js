@@ -1,5 +1,14 @@
 import React, { useState, Fragment, useContext } from "react";
-import { Button, Col, Dropdown, Form, FormControl, Row } from "react-bootstrap";
+import {
+  Button,
+  Card,
+  Col,
+  Dropdown,
+  Form,
+  FormControl,
+  ListGroup,
+  Row,
+} from "react-bootstrap";
 import { FaTimes } from "react-icons/fa";
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 import { API, graphqlOperation } from "aws-amplify";
@@ -7,8 +16,8 @@ import { createConfiguration, updateConfiguration } from "../graphql/mutations";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import Helmet from "react-helmet";
 
-import ImageUploader from "./ImageUploader";
 import { ConfigContext } from "../App";
+import ImageUploader from "./ImageUploader";
 
 export default withAuthenticator(Settings);
 
@@ -289,33 +298,101 @@ function Settings() {
         on the left of the homepage at the top. It is a full post that is loaded
         in the sidebar, so keep it short.
       </p>
+
       {settings.prompts?.length > 0
         ? settings.prompts.map((prompt, i) => (
-            <Row key={`prompt-${i}`} className="d-flex mb-2 align-items-center">
-              <Col>
-                <FormControl
-                  key={i}
-                  value={prompt}
-                  onChange={(e) => {
-                    let updPrompts = [...settings.prompts];
-                    updPrompts[i] = e.target.value;
-                    handleUpdate("prompts", updPrompts);
-                  }}
-                />
-              </Col>
-              <Col md="auto" style={{ maxWidth: "50px" }}>
-                <FaTimes
-                  color="#dc3545"
-                  className="cursor-pointer ml-2"
-                  title="delete page"
-                  onClick={() => {
-                    let updPrompts = [...settings.prompts];
-                    updPrompts.splice(i, 1);
-                    handleUpdate("prompts", updPrompts);
-                  }}
-                />
-              </Col>
-            </Row>
+            <Card key={`prompts-${i}`} className="border rounded mb-3">
+              <Card.Header>Prompt {i + 1}</Card.Header>
+              <ListGroup variant="flush">
+                <ListGroup.Item>
+                  <Form.Label>Title</Form.Label>
+                  <FormControl
+                    className="mb-2"
+                    id={`prompts-title-${i}`}
+                    aria-describedby={`prompts title ${i}`}
+                    value={prompt.title}
+                    onChange={(e) => {
+                      let updPrompts =
+                        settings.prompts?.length > 0
+                          ? JSON.parse(JSON.stringify(settings.prompts))
+                          : [];
+                      updPrompts[i].title = e.target.value;
+                      handleUpdate("prompts", updPrompts);
+                    }}
+                  />
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <Form.Label>Images</Form.Label>
+                  {prompt.images.map((img, j) => (
+                    <Row
+                      key={`prompt-image-${j}`}
+                      className="d-flex mb-2 align-items-center"
+                    >
+                      <Col>
+                        <ImageUploader
+                          images={img.imageUrl ? [img.imageUrl] : []}
+                          afterEdit={(imgs) => {
+                            let updPrompts =
+                              settings.prompts && settings.prompts.length > 0
+                                ? JSON.parse(JSON.stringify(settings.prompts))
+                                : [];
+
+                            updPrompts[i].images[j].imageUrl = imgs[0];
+                            handleUpdate("prompts", updPrompts);
+
+                            setEdited(true);
+                          }}
+                          fieldId={`prompt-image-upload-${i}`}
+                          fileSizeLimit={5}
+                          allowMultiple={false}
+                        />
+                      </Col>
+                      <Col>
+                        <FormControl
+                          id={`prompts-link-${i}`}
+                          aria-describedby={`prompts link ${i}`}
+                          value={img.link}
+                          placeholder="Add link"
+                          onChange={(e) => {
+                            let updPrompts =
+                              settings.prompts?.length > 0
+                                ? JSON.parse(
+                                    JSON.stringify(settings.prompts)
+                                  )
+                                : [];
+
+                            updPrompts[i].images[j].link = e.target.value;
+                            handleUpdate("prompts", updPrompts);
+                          }}
+                        />
+                      </Col>
+                      <Col
+                        className="text-right d-flex justify-content-between"
+                        style={{ maxWidth: "100px", width: "100px" }}
+                      >
+                        <div>
+                          <FaTimes
+                            color="#dc3545"
+                            className="cursor-pointer ms-2 float-right"
+                            title="delete prompts prompt"
+                            onClick={() => {
+                              let updPrompts =
+                                settings.prompts?.length > 0
+                                  ? JSON.parse(
+                                      JSON.stringify(settings.prompts)
+                                    )
+                                  : [];
+                              updPrompts.splice(i, 1);
+                              handleUpdate("prompts", updPrompts);
+                            }}
+                          />
+                        </div>
+                      </Col>
+                    </Row>
+                  ))}
+                </ListGroup.Item>
+              </ListGroup>
+            </Card>
           ))
         : null}
 
@@ -324,8 +401,14 @@ function Settings() {
         variant="link"
         size="sm"
         onClick={() => {
-          let updPrompts = [...settings.prompts];
-          updPrompts.push("");
+          let updPrompts = settings.prompts
+            ? [...settings.prompts]
+            : [];
+          const newPrompt = {
+            title: "",
+            images: [{ imageUrl: "", link: "" }],
+          };
+          updPrompts.push(newPrompt);
           handleUpdate("prompts", updPrompts, false);
         }}
       >

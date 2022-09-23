@@ -1,42 +1,24 @@
-import { useState, useEffect } from "react";
-import { API } from "aws-amplify";
-import * as queries from "../graphql/queries";
-
-import RichTextEditor from "./RichTextEditor/RichTextEditor";
-import useIsMounted from "../lib/useIsMounted";
+import ImageLink from "./ImageLink";
 
 export default Prompt;
 
-function Prompt({ postId, bottomSpace }) {
-  const [post, setPost] = useState();
-
-  const isMounted = useIsMounted();
-
-  useEffect(() => {
-    async function fetchData() {
-      const postData = await API.graphql({
-        query: queries.getPost,
-        variables: { id: postId },
-      });
-
-      if (postData && isMounted.current) {
-        setPost(postData.data.getPost);
-      }
-    }
-    if (postId) {
-      fetchData();
-    }
-  }, [postId, isMounted]);
-
-  if (!post) return;
-
-  const richContent = post.richContent
-    ? JSON.parse(post.richContent)
-    : post.richContent;
-
-  if (!richContent) return;
+function Prompt({ prompt, bottomSpace }) {
+  if (!prompt) return;
 
   return (
-    <RichTextEditor value={richContent} onChange={() => {}} readOnly={true} />
+    <div className={bottomSpace ? "mb-5" : ""}>
+      <p
+        className="text-muted text-uppercase small mx-auto"
+        style={{
+          fontWeight: 500,
+          maxWidth: "650px",
+        }}
+      >
+        {prompt.title}
+      </p>
+      {prompt.images.map((img) => (
+        <ImageLink key={img} image={img.imageUrl} link={img.link} />
+      ))}
+    </div>
   );
 }
