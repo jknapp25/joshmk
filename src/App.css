@@ -289,6 +289,10 @@ button:focus {
   cursor: pointer;
 }
 
-.filter-green:hover{
+.filter-green:hover {
   filter: opacity(100%);
+}
+
+.custom-shadow {
+  filter: drop-shadow(5px 5px 8px lightgray);
 }

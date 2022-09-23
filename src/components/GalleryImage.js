@@ -23,5 +23,14 @@ function GalleryImage({ image = "" }) {
 
   if (!imageUrl) return null;
 
-  return <img src={imageUrl} alt={imageUrl} className="shadow-lg img-fluid" style={{ maxHeight: "70vh" }}/>;
+  return (
+    <img
+      src={imageUrl}
+      alt={imageUrl}
+      className="img-fluid custom-shadow"
+      style={{
+        maxHeight: "70vh",
+      }}
+    />
+  );
 }
