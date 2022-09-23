@@ -59,7 +59,6 @@ function App() {
         query: queries.getConfiguration,
         variables: { id: process.env[configIdName] },
       });
-      console.log(configData);
       if (configData && isMounted.current) {
         let newConfig = configData.data.getConfiguration;
         if (newConfig?.bio) {

@@ -40,7 +40,9 @@ function MainView() {
       {isHomeRoute ? (
         <Col lg={secondaryColWidth} className="d-none d-lg-grid">
           <div
-            className="py-5 ps-3 pe-5 vh-auto border-end"
+            className={`py-5 ps-3 pe-5 vh-auto ${
+              config?.prompts.length > 0 ? "border-end" : ""
+            }`}
             style={{ height: "fit-content" }}
           >
             {config?.prompts.length > 0

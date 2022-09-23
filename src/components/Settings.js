@@ -301,8 +301,23 @@ function Settings() {
 
       {settings.prompts?.length > 0
         ? settings.prompts.map((prompt, i) => (
-            <Card key={`prompts-${i}`} className="border rounded mb-3">
-              <Card.Header>Prompt {i + 1}</Card.Header>
+            <Card key={`prompts-${i}`} className="mb-3">
+              <Card.Header className="d-flex justify-content-between align-items-center">
+                <div>Prompt {i + 1}</div>
+                <FaTimes
+                  color="#dc3545"
+                  className="cursor-pointer"
+                  title="delete prompt"
+                  onClick={() => {
+                    let updPrompts =
+                      settings.prompts?.length > 0
+                        ? JSON.parse(JSON.stringify(settings.prompts))
+                        : [];
+                    updPrompts.splice(i, 1);
+                    handleUpdate("prompts", updPrompts);
+                  }}
+                />
+              </Card.Header>
               <ListGroup variant="flush">
                 <ListGroup.Item>
                   <Form.Label>Title</Form.Label>
@@ -322,13 +337,13 @@ function Settings() {
                   />
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <Form.Label>Images</Form.Label>
                   {prompt.images.map((img, j) => (
                     <Row
                       key={`prompt-image-${j}`}
-                      className="d-flex mb-2 align-items-center"
+                      className="mb-2"
                     >
                       <Col>
+                        <Form.Label>Image</Form.Label>
                         <ImageUploader
                           images={img.imageUrl ? [img.imageUrl] : []}
                           afterEdit={(imgs) => {
@@ -348,6 +363,7 @@ function Settings() {
                         />
                       </Col>
                       <Col>
+                        <Form.Label>Link</Form.Label>
                         <FormControl
                           id={`prompts-link-${i}`}
                           aria-describedby={`prompts link ${i}`}
@@ -356,9 +372,7 @@ function Settings() {
                           onChange={(e) => {
                             let updPrompts =
                               settings.prompts?.length > 0
-                                ? JSON.parse(
-                                    JSON.stringify(settings.prompts)
-                                  )
+                                ? JSON.parse(JSON.stringify(settings.prompts))
                                 : [];
 
                             updPrompts[i].images[j].link = e.target.value;
@@ -366,7 +380,7 @@ function Settings() {
                           }}
                         />
                       </Col>
-                      <Col
+                      {/* <Col
                         className="text-right d-flex justify-content-between"
                         style={{ maxWidth: "100px", width: "100px" }}
                       >
@@ -378,16 +392,14 @@ function Settings() {
                             onClick={() => {
                               let updPrompts =
                                 settings.prompts?.length > 0
-                                  ? JSON.parse(
-                                      JSON.stringify(settings.prompts)
-                                    )
+                                  ? JSON.parse(JSON.stringify(settings.prompts))
                                   : [];
                               updPrompts.splice(i, 1);
                               handleUpdate("prompts", updPrompts);
                             }}
                           />
                         </div>
-                      </Col>
+                      </Col> */}
                     </Row>
                   ))}
                 </ListGroup.Item>
@@ -401,9 +413,7 @@ function Settings() {
         variant="link"
         size="sm"
         onClick={() => {
-          let updPrompts = settings.prompts
-            ? [...settings.prompts]
-            : [];
+          let updPrompts = settings.prompts ? [...settings.prompts] : [];
           const newPrompt = {
             title: "",
             images: [{ imageUrl: "", link: "" }],
