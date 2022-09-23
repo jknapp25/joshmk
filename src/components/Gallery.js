@@ -42,7 +42,14 @@ function Gallery() {
   return (
     <Row className="gx-5">
       {sortedItems.map((item, i) => (
-        <Col xs={12} sm={6} md={4} lg={3} className="d-flex align-self-center mb-5">
+        <Col
+          key={`gallery-item-${i}`}
+          xs={12}
+          sm={6}
+          md={4}
+          lg={3}
+          className="d-flex align-self-center mb-5"
+        >
           <Card
             key={i}
             className="border-0 text-center cursor-pointer mx-auto"
