@@ -51,7 +51,7 @@ function ImageCarousel({ images = [], classes = "", isItem = false }) {
           style={{ cursor: "zoom-in" }}
         >
           <img
-            className={!isItem ? "w-100" : ""}
+            className={!isItem ? "w-100" : "custom-shadow"}
             style={{ maxHeight: isItem ? "85vh" : undefined }}
             src={url}
             alt={url}
