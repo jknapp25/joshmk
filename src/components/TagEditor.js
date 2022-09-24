@@ -6,11 +6,11 @@ export default TagEditor;
 
 function TagEditor({ tags = [], tagsOptions = [], onChange }) {
   const selectTags =
-    tags?.length > 0
+    tags && tags.length > 0
       ? tags.map((tag) => ({ label: tag, value: tag }))
       : null;
   const selectTagsOptions =
-    tagsOptions?.length > 0
+    tagsOptions && tagsOptions.length > 0
       ? tagsOptions.map((tag) => ({ label: tag, value: tag }))
       : null;
 
