@@ -1,4 +1,3 @@
-// import ImageCarouselReusable from "../ImageCarouselReusable";
 import InlineImages from "../InlineImages";
 
 export const Element = ({ attributes, children, element }) => {
