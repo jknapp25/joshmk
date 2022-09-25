@@ -149,6 +149,8 @@ function Settings() {
       </p>
       <FormControl
         id="tagline"
+        as="textarea"
+        rows={2}
         className="mb-5"
         aria-describedby="tagline"
         value={settings.tagline || ""}
@@ -338,10 +340,7 @@ function Settings() {
                 </ListGroup.Item>
                 <ListGroup.Item>
                   {prompt.images.map((img, j) => (
-                    <Row
-                      key={`prompt-image-${j}`}
-                      className="mb-2"
-                    >
+                    <Row key={`prompt-image-${j}`} className="mb-2">
                       <Col>
                         <Form.Label>Image</Form.Label>
                         <ImageUploader
@@ -380,26 +379,6 @@ function Settings() {
                           }}
                         />
                       </Col>
-                      {/* <Col
-                        className="text-right d-flex justify-content-between"
-                        style={{ maxWidth: "100px", width: "100px" }}
-                      >
-                        <div>
-                          <FaTimes
-                            color="#dc3545"
-                            className="cursor-pointer ms-2 float-right"
-                            title="delete prompts prompt"
-                            onClick={() => {
-                              let updPrompts =
-                                settings.prompts?.length > 0
-                                  ? JSON.parse(JSON.stringify(settings.prompts))
-                                  : [];
-                              updPrompts.splice(i, 1);
-                              handleUpdate("prompts", updPrompts);
-                            }}
-                          />
-                        </div>
-                      </Col> */}
                     </Row>
                   ))}
                 </ListGroup.Item>
