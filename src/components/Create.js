@@ -21,11 +21,29 @@ import useIsMounted from "../lib/useIsMounted";
 export default withAuthenticator(Create);
 
 const TABLE_FIELDS = {
-  post: ["title", "category", "createdAt"],
-  item: ["name", "category", "createdAt"],
-  job: ["role", "company", "location"],
-  project: ["name", "status"],
-  education: ["organization", "degree"],
+  post: [
+    { displayName: "Title", field: "title" },
+    { displayName: "Category", field: "category" },
+    { displayName: "Created At", field: "createdAt" },
+  ],
+  item: [
+    { displayName: "Name", field: "name" },
+    { displayName: "Category", field: "category" },
+    { displayName: "Created At", field: "createdAt" },
+  ],
+  job: [
+    { displayName: "Role", field: "role" },
+    { displayName: "Company", field: "company" },
+    { displayName: "Location", field: "location" },
+  ],
+  project: [
+    { displayName: "Name", field: "name" },
+    { displayName: "Status", field: "status" },
+  ],
+  education: [
+    { displayName: "Organization", field: "organization" },
+    { displayName: "Degree", field: "degree" },
+  ],
 };
 
 function Create() {
@@ -132,9 +150,9 @@ function Create() {
       <Table hover className="cursor-pointer">
         <thead>
           <tr>
-            {TABLE_FIELDS[itemType].map((field) => (
+            {TABLE_FIELDS[itemType].map(({ displayName, field }) => (
               <th key={`header-${field}`} className="px-0">
-                {field}
+                {displayName}
               </th>
             ))}
             <th className="px-0"></th>
@@ -145,7 +163,7 @@ function Create() {
             sortedItems.map((item, i) => {
               return (
                 <tr key={i} onClick={() => navigate(`/${itemType}/${item.id}`)}>
-                  {TABLE_FIELDS[itemType].map((field) => (
+                  {TABLE_FIELDS[itemType].map(({ field }) => (
                     <td key={field} className="px-0">
                       {field === "createdAt"
                         ? moment(item[field]).format("dddd, MMM D, YYYY")
