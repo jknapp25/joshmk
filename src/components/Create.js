@@ -6,6 +6,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import { API, graphqlOperation } from "aws-amplify";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import Helmet from "react-helmet";
+import moment from "moment";
 
 import {
   deletePost,
@@ -93,9 +94,7 @@ function Create() {
   return (
     <>
       <Helmet>
-        <title>
-          Create
-        </title>
+        <title>Create</title>
       </Helmet>
       <div className="mb-5">
         <Dropdown size="lg" className="d-inline">
@@ -148,7 +147,9 @@ function Create() {
                 <tr key={i} onClick={() => navigate(`/${itemType}/${item.id}`)}>
                   {TABLE_FIELDS[itemType].map((field) => (
                     <td key={field} className="px-0">
-                      {item[field]}
+                      {field === "createdAt"
+                        ? moment(item[field]).format("dddd, MMM D, YYYY")
+                        : item[field]}
                     </td>
                   ))}
                   <td className="px-0">
