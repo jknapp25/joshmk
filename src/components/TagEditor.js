@@ -7,11 +7,11 @@ function TagEditor({ tags = [], tagsOptions = [], onChange }) {
   const selectTags =
     tags && tags.length > 0
       ? tags.map((tag) => ({ label: tag, value: tag }))
-      : null;
+      : [];
   const selectTagsOptions =
     tagsOptions && tagsOptions.length > 0
       ? tagsOptions.map((tag) => ({ label: tag, value: tag }))
-      : null;
+      : [];
 
   return (
     <>
