@@ -1,10 +1,18 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { Button, ButtonProps } from "react-bootstrap";
 
 export default Tag;
 
-function Tag({ tag, size = "md" }) {
+interface TagProps {
+  tag: string;
+  size: ButtonProps["size"] | undefined;
+}
+
+const defaultProps = {
+  size: "md",
+};
+
+function Tag({ tag, size }: TagProps & typeof defaultProps) {
   const navigate = useNavigate();
 
   return (
