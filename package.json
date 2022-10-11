@@ -11,7 +11,7 @@
     "image-extensions": "^1.1.0",
     "is-url": "^1.2.4",
     "leaflet": "^1.8.0",
-    "moment": "^2.29.3",
+    "moment": "^2.29.4",
     "query-string": "^7.1.1",
     "react": "^18.1.0",
     "react-bootstrap": "^2.4.0",
