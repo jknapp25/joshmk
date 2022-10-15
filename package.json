@@ -5,7 +5,7 @@
   "private": true,
   "dependencies": {
     "@aws-amplify/ui-react": "^2.18.3",
-    "aws-amplify": "^4.3.24",
+    "aws-amplify": "^4.3.39",
     "bootstrap": "^5.2.0-beta1",
     "graphql": "^16.5.0",
     "image-extensions": "^1.1.0",
