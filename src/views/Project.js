@@ -3,7 +3,7 @@ import { Badge } from "react-bootstrap";
 import { API } from "aws-amplify";
 import { useParams, useNavigate } from "react-router-dom";
 
-import ImageCarousel from "./ImageCarousel";
+import ImageCarousel from "../components/ImageCarousel";
 import { Tag } from "@chakra-ui/react";
 import { createTimeInfo, statusColorLookup } from "../lib/utils";
 import useIsMounted from "../lib/useIsMounted";

@@ -6,9 +6,9 @@ import CreatableSelect from "react-select/creatable";
 
 import * as queries from "../graphql/queries";
 import { createPost, updatePost } from "../graphql/mutations";
-import RichTextEditor from "./RichTextEditor/RichTextEditor";
-import ImageUploader from "./ImageUploader";
-import TagEditor from "./TagEditor";
+import RichTextEditor from "../components/RichTextEditor/RichTextEditor";
+import ImageUploader from "../components/ImageUploader";
+import TagEditor from "../components/TagEditor";
 import useIsMounted from "../lib/useIsMounted";
 
 export default PostEditor;
@@ -191,7 +191,7 @@ function PostEditor() {
           "link",
           "image",
           "video",
-          "kicker"
+          "kicker",
         ]}
         classes="bg-white mb-2"
       />

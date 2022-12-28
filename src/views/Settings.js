@@ -17,7 +17,7 @@ import { withAuthenticator } from "@aws-amplify/ui-react";
 import Helmet from "react-helmet";
 
 import { ConfigContext } from "../App";
-import ImageUploader from "./ImageUploader";
+import ImageUploader from "../components/ImageUploader";
 
 export default withAuthenticator(Settings);
 

@@ -4,10 +4,10 @@ import { API } from "aws-amplify";
 import { Button } from "react-bootstrap";
 import * as queries from "../graphql/queries";
 
-import Post from "./Post";
-import Project from "./Project";
-import Job from "./Job";
-import Education from "./Education";
+import Post from "../views/Post";
+import Project from "../views/Project";
+import Job from "../views/Job";
+import Education from "../views/Education";
 import ItemPreview from "./ItemPreview";
 
 export default ItemList;
@@ -90,10 +90,8 @@ function ItemList({ mini = false }) {
 
   // sort items by date
   preppedItems = items.sort((a, b) => {
-    const aSortVal =
-      pageName === "blog" ? a.createdAt : a.start;
-    const bSortVal =
-      pageName === "blog" ? b.createdAt : b.start;
+    const aSortVal = pageName === "blog" ? a.createdAt : a.start;
+    const bSortVal = pageName === "blog" ? b.createdAt : b.start;
     if (aSortVal < bSortVal) {
       return 1;
     } else if (bSortVal < aSortVal) {

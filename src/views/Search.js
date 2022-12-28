@@ -5,7 +5,7 @@ import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import Helmet from "react-helmet";
 
-import SearchPreview from "./SearchPreview";
+import SearchPreview from "../components/SearchPreview";
 
 export default Search;
 
@@ -13,7 +13,6 @@ function Search() {
   const { search } = useLocation();
   const searchParams = parse(search);
   const [items, setItems] = useState([]);
-
 
   const isMounted = useRef(true);
   useEffect(() => {
@@ -93,9 +92,7 @@ function Search() {
   return (
     <>
       <Helmet>
-        <title>
-          {searchParams.tag}
-        </title>
+        <title>{searchParams.tag}</title>
       </Helmet>
 
       <div className="mb-5 text-center">

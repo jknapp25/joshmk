@@ -5,9 +5,9 @@ import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import Helmet from "react-helmet";
 
-import ImageCarousel from "./ImageCarousel";
+import ImageCarousel from "../components/ImageCarousel";
 import { Tag } from "@chakra-ui/react";
-import RichTextEditor from "./RichTextEditor/RichTextEditor";
+import RichTextEditor from "../components/RichTextEditor/RichTextEditor";
 import useIsMounted from "../lib/useIsMounted";
 
 export default Post;

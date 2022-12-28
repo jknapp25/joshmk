@@ -4,7 +4,7 @@ import { API, graphqlOperation } from "aws-amplify";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { createJob, updateJob } from "../graphql/mutations";
-import TagEditor from "./TagEditor";
+import TagEditor from "../components/TagEditor";
 import * as queries from "../graphql/queries";
 import useIsMounted from "../lib/useIsMounted";
 

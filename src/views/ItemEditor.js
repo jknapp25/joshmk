@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Button, Form, FormControl } from "react-bootstrap";
 import { API, graphqlOperation } from "aws-amplify";
 import CreatableSelect from "react-select/creatable";
@@ -6,9 +6,9 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import * as queries from "../graphql/queries";
 import { createItem, updateItem } from "../graphql/mutations";
-import RichTextEditor from "./RichTextEditor/RichTextEditor";
-import ImageUploader from "./ImageUploader";
-import TagEditor from "./TagEditor";
+import RichTextEditor from "../components/RichTextEditor/RichTextEditor";
+import ImageUploader from "../components/ImageUploader";
+import TagEditor from "../components/TagEditor";
 import useIsMounted from "../lib/useIsMounted";
 
 export default ItemEditor;
@@ -35,7 +35,7 @@ function ItemEditor() {
 
   const isMounted = useIsMounted();
   const navigate = useNavigate();
-  const params = useParams()
+  const params = useParams();
 
   useEffect(() => {
     async function fetchData() {

@@ -5,7 +5,7 @@ import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 
 import useIsMounted from "../lib/useIsMounted";
-import GalleryImage from "./GalleryImage";
+import GalleryImage from "../components/GalleryImage";
 
 export default Gallery;
 

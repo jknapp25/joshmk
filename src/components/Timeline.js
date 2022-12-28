@@ -5,7 +5,7 @@ import {
 } from "react-vertical-timeline-component";
 import { FaReact } from "react-icons/fa";
 
-import Job from "./Job";
+import Job from "../views/Job";
 
 import "react-vertical-timeline-component/style.min.css";
 import "../App.css";

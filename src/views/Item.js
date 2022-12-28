@@ -5,9 +5,9 @@ import useIsMounted from "../lib/useIsMounted";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 
-import ImageCarousel from "./ImageCarousel";
-import RichTextEditor from "./RichTextEditor/RichTextEditor";
-import ItemBuyButton from "./ItemBuyButton";
+import ImageCarousel from "../components/ImageCarousel";
+import RichTextEditor from "../components/RichTextEditor/RichTextEditor";
+import ItemBuyButton from "../components/ItemBuyButton";
 import { Tag } from "@chakra-ui/react";
 
 export default Item;

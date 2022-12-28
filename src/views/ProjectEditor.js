@@ -3,8 +3,8 @@ import { Button, Dropdown, Form, FormControl } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { API, graphqlOperation } from "aws-amplify";
 
-import ImageUploader from "./ImageUploader";
-import TagEditor from "./TagEditor";
+import ImageUploader from "../components/ImageUploader";
+import TagEditor from "../components/TagEditor";
 import { statusColorLookup } from "../lib/utils";
 import { createProject, updateProject } from "../graphql/mutations";
 import * as queries from "../graphql/queries";
@@ -26,7 +26,7 @@ function ProjectEditor({ onCreate, onUpdate }) {
   const [images, setImages] = useState([]);
 
   const navigate = useNavigate();
-  const params = useParams()
+  const params = useParams();
 
   useEffect(() => {
     async function fetchData() {
