@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Badge } from "react-bootstrap";
 import { API } from "aws-amplify";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import ImageCarousel from "./ImageCarousel";
-import Tag from "./Tag";
+import { Tag } from "@chakra-ui/react";
 import { createTimeInfo, statusColorLookup } from "../lib/utils";
 import useIsMounted from "../lib/useIsMounted";
 import * as queries from "../graphql/queries";
@@ -13,6 +13,8 @@ export default Project;
 
 function Project({ project = {} }) {
   const [realProject, setRealProject] = useState(project);
+
+  const navigate = useNavigate();
   const isMounted = useIsMounted();
   const params = useParams();
 
@@ -60,7 +62,13 @@ function Project({ project = {} }) {
       {tags && tags.length > 0 && (
         <div className="mt-1">
           {tags.map((tag) => (
-            <Tag key={tag} tag={tag} />
+            <Tag
+              key={tag}
+              cursor="pointer"
+              onClick={() => navigate(`/search?tag=${tag}`)}
+            >
+              {tag}
+            </Tag>
           ))}
         </div>
       )}

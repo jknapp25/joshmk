@@ -2,13 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Auth } from "aws-amplify";
 import {
-  Button,
+  // Button,
   Col,
   Dropdown,
   Offcanvas,
   Row,
   ButtonGroup,
 } from "react-bootstrap";
+import { Button } from "@chakra-ui/react";
 import { FaBars } from "react-icons/fa";
 
 import SideNavNew from "./SideNavNew";
@@ -69,13 +70,11 @@ function Nav() {
               <div className="d-none d-lg-flex">
                 {config.pagesCustom.map((page) => (
                   <Button
-                    variant="link"
                     key={page.name}
-                    active={pathname === `/${page.link}`}
+                    variant="ghost"
                     onClick={() => handlePageClick(`/${page.link}`)}
-                    className={`p-0 ms-4 text-nowrap text-uppercase text-decoration-none ${
-                      pathname === `/${page.link}` ? "text-dark" : "text-muted"
-                    }`}
+                    textTransform="capitalize"
+                    whiteSpace="nowrap"
                   >
                     {page.name}
                   </Button>

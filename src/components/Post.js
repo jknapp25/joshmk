@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { Link, useParams, useMatch } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useParams, useMatch, useNavigate } from "react-router-dom";
 import moment from "moment";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import Helmet from "react-helmet";
 
 import ImageCarousel from "./ImageCarousel";
-import Tag from "./Tag";
+import { Tag } from "@chakra-ui/react";
 import RichTextEditor from "./RichTextEditor/RichTextEditor";
 import useIsMounted from "../lib/useIsMounted";
 
@@ -14,6 +14,8 @@ export default Post;
 
 function Post({ post = {}, bottomBorder = false }) {
   const [realPost, setRealPost] = useState(post);
+
+  const navigate = useNavigate();
   const isMounted = useIsMounted();
   const params = useParams();
 
@@ -85,7 +87,16 @@ function Post({ post = {}, bottomBorder = false }) {
           className="border-0 py-0 mt-4 mx-auto"
         >
           {tags.map((tag) => (
-            <Tag key={`tag-${tag}`} tag={tag} size="sm" />
+            <Tag
+              key={`tag-${tag}`}
+              tag={tag}
+              size="sm"
+              cursor="pointer"
+              me={2}
+              onClick={() => navigate(`/search?tag=${tag}`)}
+            >
+              {tag}
+            </Tag>
           ))}
         </div>
       ) : null}

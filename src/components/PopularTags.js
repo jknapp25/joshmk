@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 import { API } from "aws-amplify";
 
-import Tag from "./Tag";
+import { Tag } from "@chakra-ui/react";
 import sortByFrequencyAndRemoveDuplicates from "../lib/sortByFrequencyAndRemoveDuplicates";
 import Category from "./Category";
 
@@ -9,6 +10,8 @@ export default PopularTags;
 
 function PopularTags() {
   const [tags, setTags] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
@@ -27,14 +30,13 @@ function PopularTags() {
         []
       );
       const sorted = sortByFrequencyAndRemoveDuplicates(preppedTags);
-      
+
       const removeList = ["short story", "poetry", "drawing", "fiction"];
       const withoutRemovedOnes = sorted.filter(
         (tag) => !removeList.includes(tag)
       );
-      
-      const topTags = withoutRemovedOnes.slice(0, 6);
 
+      const topTags = withoutRemovedOnes.slice(0, 6);
 
       setTags(topTags);
     }
@@ -51,7 +53,16 @@ function PopularTags() {
       </div>
       <div>
         {tags.map((tag) => (
-          <Tag key={`tag-${tag}`} tag={tag} />
+          <Tag
+            key={`tag-${tag}`}
+            size="lg"
+            me={2}
+            mb={2}
+            cursor="pointer"
+            onClick={() => navigate(`/search?tag=${tag}`)}
+          >
+            {tag}
+          </Tag>
         ))}
       </div>
     </div>

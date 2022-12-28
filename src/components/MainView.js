@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { useMatch, Outlet } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 
@@ -25,12 +25,8 @@ function MainView() {
 
   if (isHomeRoute) mainColWidth = undefined;
   if (isPostRoute) mainColWidth = 8;
-  if (isGalleryRoute) {
-    mainColWidth = 11;
-  }
-  if (isItemRoute) {
-    mainColWidth = 8;
-  }
+  if (isGalleryRoute) mainColWidth = 11;
+  if (isItemRoute) mainColWidth = 8;
 
   return (
     <Row

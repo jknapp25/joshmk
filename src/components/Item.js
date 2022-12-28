@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import useIsMounted from "../lib/useIsMounted";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
@@ -8,13 +8,14 @@ import * as queries from "../graphql/queries";
 import ImageCarousel from "./ImageCarousel";
 import RichTextEditor from "./RichTextEditor/RichTextEditor";
 import ItemBuyButton from "./ItemBuyButton";
-import Tag from "./Tag";
+import { Tag } from "@chakra-ui/react";
 
 export default Item;
 
 function Item({ item = {} }) {
   const [realItem, setRealItem] = useState(item);
 
+  const navigate = useNavigate();
   const isMounted = useIsMounted();
   const params = useParams();
 
@@ -36,15 +37,7 @@ function Item({ item = {} }) {
 
   if (!realItem) return null;
 
-  let {
-    name,
-    description,
-    images,
-    isForSale,
-    isSold,
-    price,
-    tags,
-  } = realItem;
+  let { name, description, images, isForSale, isSold, price, tags } = realItem;
 
   description = description ? JSON.parse(description) : description;
 
@@ -83,7 +76,14 @@ function Item({ item = {} }) {
                 <h4 className="mt-4">Tags</h4>
                 <div className="border-0 py-0">
                   {tags.map((tag) => (
-                    <Tag key={`tag-${tag}`} tag={tag} size="sm" />
+                    <Tag
+                      key={`tag-${tag}`}
+                      size="sm"
+                      cursor="pointer"
+                      onClick={() => navigate(`/search?tag=${tag}`)}
+                    >
+                      {tag}
+                    </Tag>
                   ))}
                 </div>
               </>

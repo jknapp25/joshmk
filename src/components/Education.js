@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { API } from "aws-amplify";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
-import Tag from "./Tag";
+import { Tag } from "@chakra-ui/react";
 import { createTimeInfo } from "../lib/utils";
 import useIsMounted from "../lib/useIsMounted";
 import * as queries from "../graphql/queries";
@@ -11,6 +11,8 @@ export default Education;
 
 function Education({ education }) {
   const [realEducation, setRealEducation] = useState(education);
+
+  const navigate = useNavigate();
   const isMounted = useIsMounted();
   const params = useParams();
 
@@ -88,7 +90,16 @@ function Education({ education }) {
       <div className="mb-2">
         <small className="text-muted">{timeInfo}</small>
       </div>
-      {tags?.length > 0 && tags.map((tag, i) => <Tag key={tag} tag={tag} />)}
+      {tags?.length > 0 &&
+        tags.map((tag) => (
+          <Tag
+            key={tag}
+            cursor="pointer"
+            onClick={() => navigate(`/search?tag=${tag}`)}
+          >
+            {tag}
+          </Tag>
+        ))}
     </>
   );
 }

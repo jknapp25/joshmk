@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Badge } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 
 import { createTimeInfo } from "../lib/utils";
-import Tag from "./Tag";
 import useIsMounted from "../lib/useIsMounted";
+import { Tag } from "@chakra-ui/react";
 
 export default Job;
 
 function Job({ job = {} }) {
   const [realJob, setRealJob] = useState(job);
+
+  const navigate = useNavigate();
   const isMounted = useIsMounted();
   const params = useParams();
 
@@ -89,7 +91,13 @@ function Job({ job = {} }) {
       {tags && tags.length > 0 && (
         <div className="mt-1">
           {tags.map((tag, i) => (
-            <Tag tag={tag} key={`tag-${i}`} />
+            <Tag
+              key={`tag-${i}`}
+              cursor="pointer"
+              onClick={() => navigate(`/search?tag=${tag}`)}
+            >
+              {tag}
+            </Tag>
           ))}
         </div>
       )}
