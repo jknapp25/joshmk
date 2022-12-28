@@ -1,12 +1,17 @@
 import { useState, useEffect } from "react";
-import { Link, useParams, useMatch, useNavigate } from "react-router-dom";
+import {
+  Link as RouterLink,
+  useParams,
+  useMatch,
+  useNavigate,
+} from "react-router-dom";
 import moment from "moment";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import Helmet from "react-helmet";
 
 import ImageCarousel from "../components/ImageCarousel";
-import { Tag } from "@chakra-ui/react";
+import { Box, Tag, Heading } from "@chakra-ui/react";
 import RichTextEditor from "../components/RichTextEditor/RichTextEditor";
 import useIsMounted from "../lib/useIsMounted";
 
@@ -53,13 +58,11 @@ function Post({ post = {}, bottomBorder = false }) {
     <div className={`pb-5 ${bottomBorder ? "border-bottom mb-4" : ""}`}>
       <Helmet>{!isBlog && title ? <title>{title}</title> : null}</Helmet>
       <div className="mb-5 mx-auto text-center" style={{ maxWidth: "650px" }}>
-        <h1 className="mb-2 display-4 text-center">
-          <span className="cursor-pointer fw-bold">
-            <Link to={`/post/${id}`} className="hidden-link">
-              {title}
-            </Link>
-          </span>
-        </h1>
+        <Box mb={3}>
+          <Heading as={RouterLink} size="3xl" to={`/post/${id}`}>
+            {title}
+          </Heading>
+        </Box>
         <div
           className="text-muted text-center text-uppercase small"
           style={{ fontWeight: 500 }}
