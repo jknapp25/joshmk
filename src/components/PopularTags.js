@@ -4,7 +4,7 @@ import { API } from "aws-amplify";
 
 import { Tag } from "@chakra-ui/react";
 import sortByFrequencyAndRemoveDuplicates from "../lib/sortByFrequencyAndRemoveDuplicates";
-import Category from "./Category";
+import { Category } from "./Category";
 
 export default PopularTags;
 

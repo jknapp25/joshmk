@@ -1,5 +1,5 @@
 import { BsArrowDown } from "react-icons/bs";
-import Category from "./Category";
+import { Category } from "./Category";
 
 export default FullWidthHomePageImage;
 

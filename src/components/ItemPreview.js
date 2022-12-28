@@ -7,7 +7,7 @@ import * as queries from "../graphql/queries";
 import ImageCarousel from "./ImageCarousel";
 import RichTextEditor from "./RichTextEditor/RichTextEditor";
 import ItemBuyButton from "./ItemBuyButton";
-import Category from "./Category";
+import { Category } from "./Category";
 import NewBadge from "./NewBadge";
 
 export default ItemPreview;
@@ -36,7 +36,17 @@ function ItemPreview({ item = {} }) {
 
   if (!realItem) return null;
 
-  let { id, name, description, category, images, createdAt, isForSale, isSold, price } = realItem;
+  let {
+    id,
+    name,
+    description,
+    category,
+    images,
+    createdAt,
+    isForSale,
+    isSold,
+    price,
+  } = realItem;
 
   description = description ? JSON.parse(description) : description;
 

@@ -1,17 +1,17 @@
-export default Category;
+import { Text } from "@chakra-ui/react";
 
-function Category({ attributes, category }) {
+export const Category = ({ attributes, category }) => {
   if (!category) return;
 
   return (
-    <div
-      className="text-muted text-uppercase small d-inline"
-      style={{
-        fontWeight: 500,
-      }}
+    <Text
+      fontSize="sm"
+      display="inline"
+      text="muted"
+      textTransform="uppercase"
       {...attributes}
     >
       {category}
-    </div>
+    </Text>
   );
-}
+};

@@ -1,11 +1,12 @@
-import React, { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Image } from "react-bootstrap";
 import { Storage } from "aws-amplify";
+import { Text, VStack } from "@chakra-ui/react";
 
 import useIsMounted from "../lib/useIsMounted";
 import { ConfigContext } from "../App";
-import Category from "./Category";
+import { Category } from "./Category";
 
 export default UserMiniSummary;
 
@@ -32,11 +33,9 @@ function UserMiniSummary() {
   )?.link;
 
   return (
-    <>
-      <div className="mb-3">
-        <Category category="ABOUT THE AUTHOR" />
-      </div>
-      <div className="ratio ratio-1x1 mb-3 bg-secondary bg-opacity-10">
+    <VStack align="start" spacing={4}>
+      <Category category="ABOUT THE AUTHOR" />
+      <div className="ratio ratio-1x1 bg-secondary bg-opacity-10">
         {avatarUrl ? (
           <Image
             className="w-100"
@@ -53,7 +52,7 @@ function UserMiniSummary() {
           />
         ) : null}
       </div>
-      <p className="fs-5">{config.tagline}</p>
-    </>
+      <Text fontSize="lg">{config.tagline}</Text>
+    </VStack>
   );
 }

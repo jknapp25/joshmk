@@ -6,7 +6,7 @@ import useIsMounted from "../lib/useIsMounted";
 
 export default MiniImage;
 
-function MiniImage({ images = [], classes = "" }) {
+function MiniImage({ images = [] }) {
   const [imageUrls, setImageUrls] = useState([]);
   const isMounted = useIsMounted();
 
