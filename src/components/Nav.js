@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Auth } from "aws-amplify";
 import {
@@ -82,7 +82,10 @@ function Nav() {
                 ))}
                 {isSignedIn ? (
                   <Dropdown as={ButtonGroup} className="ms-4">
-                    <Button onClick={() => navigate(`/post/create`)} className="text-nowrap">
+                    <Button
+                      onClick={() => navigate(`/post/create`)}
+                      className="text-nowrap"
+                    >
                       WRITE A STORY
                     </Button>
                     <Dropdown.Toggle split id="dropdown-toggle-write-a-story" />
