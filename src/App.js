@@ -4,6 +4,8 @@ import { Container } from "react-bootstrap";
 import { Helmet } from "react-helmet";
 import { Amplify, API, Storage } from "aws-amplify";
 
+import { ChakraProvider } from "@chakra-ui/react";
+
 import ItemList from "./components/ItemList.js";
 import MainView from "./components/MainView.js";
 import Post from "./components/Post.js";
@@ -85,54 +87,59 @@ function App() {
   return (
     <ConfigContext.Provider value={configContextValue}>
       <ImageContext.Provider value={imageContextValue}>
-        <div className="App">
-          <Container fluid>
-            <Helmet>
-              <title>{config.fullName || ""}</title>
-              <meta
-                name="description"
-                content={config.tagline || `Website for ${config.fullName}`}
-              />
-              <link
-                rel="icon"
-                type="image/png"
-                href={faviconUrl}
-                sizes="16x16"
-              />
-            </Helmet>
-            <Nav fullName={config.fullName} />
-            <Routes primary={false}>
-              <Route element={<MainView />}>
-                <Route path="/" element={<ItemList />} />
-                <Route path="work" element={<ItemList />} />
-                <Route path="projects" element={<ItemList />} />
-                <Route path="gallery" element={<Gallery />} />
-                <Route path="post/:id" element={<Post />} />
-                <Route path="post/:id/edit" element={<PostEditor />} />
-                <Route path="post/create" element={<PostEditor />} />
-                <Route path="item/:id" element={<Item />} />
-                <Route path="item/:id/edit" element={<ItemEditor />} />
-                <Route path="item/create" element={<ItemEditor />} />
-                <Route path="job/:id" element={<Job />} />
-                <Route path="job/:id/edit" element={<JobEditor />} />
-                <Route path="job/create" element={<JobEditor />} />
-                <Route path="project/:id" element={<Project />} />
-                <Route path="project/:id/edit" element={<ProjectEditor />} />
-                <Route path="project/create" element={<ProjectEditor />} />
-                <Route path="education/:id" element={<Education />} />
-                <Route
-                  path="education/:id/edit"
-                  element={<EducationEditor />}
+        <ChakraProvider>
+          <div className="App">
+            <Container fluid>
+              <Helmet>
+                <title>{config.fullName || ""}</title>
+                <meta
+                  name="description"
+                  content={config.tagline || `Website for ${config.fullName}`}
                 />
-                <Route path="education/create" element={<EducationEditor />} />
-                <Route path="create" element={<Create />} />
-                <Route path="settings" element={<Settings />} />
-                <Route path="search" element={<Search />} />
-              </Route>
-            </Routes>
-          </Container>
-          <FullScreenImageCarousel />
-        </div>
+                <link
+                  rel="icon"
+                  type="image/png"
+                  href={faviconUrl}
+                  sizes="16x16"
+                />
+              </Helmet>
+              <Nav fullName={config.fullName} />
+              <Routes primary={false}>
+                <Route element={<MainView />}>
+                  <Route path="/" element={<ItemList />} />
+                  <Route path="work" element={<ItemList />} />
+                  <Route path="projects" element={<ItemList />} />
+                  <Route path="gallery" element={<Gallery />} />
+                  <Route path="post/:id" element={<Post />} />
+                  <Route path="post/:id/edit" element={<PostEditor />} />
+                  <Route path="post/create" element={<PostEditor />} />
+                  <Route path="item/:id" element={<Item />} />
+                  <Route path="item/:id/edit" element={<ItemEditor />} />
+                  <Route path="item/create" element={<ItemEditor />} />
+                  <Route path="job/:id" element={<Job />} />
+                  <Route path="job/:id/edit" element={<JobEditor />} />
+                  <Route path="job/create" element={<JobEditor />} />
+                  <Route path="project/:id" element={<Project />} />
+                  <Route path="project/:id/edit" element={<ProjectEditor />} />
+                  <Route path="project/create" element={<ProjectEditor />} />
+                  <Route path="education/:id" element={<Education />} />
+                  <Route
+                    path="education/:id/edit"
+                    element={<EducationEditor />}
+                  />
+                  <Route
+                    path="education/create"
+                    element={<EducationEditor />}
+                  />
+                  <Route path="create" element={<Create />} />
+                  <Route path="settings" element={<Settings />} />
+                  <Route path="search" element={<Search />} />
+                </Route>
+              </Routes>
+            </Container>
+            <FullScreenImageCarousel />
+          </div>
+        </ChakraProvider>
       </ImageContext.Provider>
     </ConfigContext.Provider>
   );
