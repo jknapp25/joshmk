@@ -11,7 +11,14 @@ import {
   MenuList,
   MenuItem,
 } from "@chakra-ui/react";
-import { FaBars, FaChevronDown } from "react-icons/fa";
+import {
+  FaBars,
+  FaChevronDown,
+  FaCog,
+  FaDoorClosed,
+  FaPlus,
+  FaSignOutAlt,
+} from "react-icons/fa";
 
 import SideNavNew from "./SideNavNew";
 import Logo from "./Logo";
@@ -91,14 +98,25 @@ function Nav() {
                       </Button>
                       <MenuButton as={IconButton} icon={<FaChevronDown />} />
                     </ButtonGroup>
-                    <MenuList>
-                      <MenuItem onClick={() => handlePageClick("/create")}>
+                    <MenuList minW="fit-content">
+                      <MenuItem
+                        icon={<FaPlus size=".9em" />}
+                        onClick={() => handlePageClick("/create")}
+                      >
                         Create
                       </MenuItem>
-                      <MenuItem onClick={() => handlePageClick("/settings")}>
+                      <MenuItem
+                        icon={<FaCog size=".9em" />}
+                        onClick={() => handlePageClick("/settings")}
+                      >
                         Settings
                       </MenuItem>
-                      <MenuItem onClick={handleSignout}>Sign out</MenuItem>
+                      <MenuItem
+                        icon={<FaSignOutAlt size=".9em" />}
+                        onClick={handleSignout}
+                      >
+                        Sign out
+                      </MenuItem>
                     </MenuList>
                   </Menu>
                 ) : null}
