@@ -1,4 +1,3 @@
-import React from "react";
 import { navigate } from "@reach/router";
 import { Button, Card } from "react-bootstrap";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";

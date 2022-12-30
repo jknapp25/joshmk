@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Button, Modal } from "react-bootstrap";
 
 import { ConfigContext } from "../App";

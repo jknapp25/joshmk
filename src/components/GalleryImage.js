@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Storage } from "aws-amplify";
 
 import useIsMounted from "../lib/useIsMounted";

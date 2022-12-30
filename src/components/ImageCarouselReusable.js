@@ -1,9 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import { Carousel } from "react-bootstrap";
-import { Storage } from "aws-amplify";
 
 import { ImageContext } from "../App";
-import useIsMounted from "../lib/useIsMounted";
 
 export default ImageCarouselReusable;
 

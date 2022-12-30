@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Image } from "react-bootstrap";
-import { CgClose} from "react-icons/cg";
+import { CgClose } from "react-icons/cg";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
 import { ImageContext } from "../App";
@@ -71,7 +71,7 @@ function FullScreenImageCarousel() {
           left: "0",
           right: "0",
           margin: "auto",
-          cursor: "zoom-out"
+          cursor: "zoom-out",
         }}
         onClick={handleClose}
       />

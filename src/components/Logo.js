@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Storage } from "aws-amplify";
 
 import { ConfigContext } from "../App";
@@ -42,7 +42,10 @@ function Logo({ handlePageClick }) {
           />
         </>
       ) : config.fullName && !config.logo ? (
-        <h1 className="mb-0 text-nowrap cursor-pointer" onClick={() => handlePageClick("/")}>
+        <h1
+          className="mb-0 text-nowrap cursor-pointer"
+          onClick={() => handlePageClick("/")}
+        >
           {config.fullName}
         </h1>
       ) : null}

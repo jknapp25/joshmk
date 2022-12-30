@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import useIsMounted from "../lib/useIsMounted";
 import { API } from "aws-amplify";

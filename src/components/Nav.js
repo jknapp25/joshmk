@@ -1,14 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Auth } from "aws-amplify";
-import {
-  // Button,
-  Col,
-  Dropdown,
-  Offcanvas,
-  Row,
-  ButtonGroup,
-} from "react-bootstrap";
+import { Col, Dropdown, Offcanvas, Row, ButtonGroup } from "react-bootstrap";
 import { Button } from "@chakra-ui/react";
 import { FaBars } from "react-icons/fa";
 

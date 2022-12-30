@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Storage } from "aws-amplify";
 import { navigate } from "@reach/router";
 import { Card } from "react-bootstrap";

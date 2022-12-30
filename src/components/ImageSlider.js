@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Image } from "react-bootstrap";
 import { Storage } from "aws-amplify";
 

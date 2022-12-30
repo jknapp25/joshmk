@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 
 import ImageUploader from "../components/ImageUploader";

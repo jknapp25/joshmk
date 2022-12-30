@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import { API } from "aws-amplify";
@@ -38,7 +38,9 @@ function PostPreview({ post = {}, ...props }) {
 
   return (
     <div
-      className={`row gx-0 cursor-pointer py-4 border-bottom ${props.borderTop ? 'border-top' : ''}`}
+      className={`row gx-0 cursor-pointer py-4 border-bottom ${
+        props.borderTop ? "border-top" : ""
+      }`}
       onClick={() => navigate(`/post/${id}`)}
     >
       <div className="col my-auto">
