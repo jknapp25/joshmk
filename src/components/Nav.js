@@ -1,9 +1,17 @@
 import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Auth } from "aws-amplify";
-import { Col, Dropdown, Offcanvas, Row, ButtonGroup } from "react-bootstrap";
-import { Button } from "@chakra-ui/react";
-import { FaBars } from "react-icons/fa";
+import { Col, Offcanvas, Row } from "react-bootstrap";
+import {
+  Button,
+  ButtonGroup,
+  IconButton,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+} from "@chakra-ui/react";
+import { FaBars, FaChevronDown } from "react-icons/fa";
 
 import SideNavNew from "./SideNavNew";
 import Logo from "./Logo";
@@ -73,28 +81,26 @@ function Nav() {
                   </Button>
                 ))}
                 {isSignedIn ? (
-                  <Dropdown as={ButtonGroup} className="ms-4">
-                    <Button
-                      onClick={() => navigate(`/post/create`)}
-                      className="text-nowrap"
-                    >
-                      WRITE A STORY
-                    </Button>
-                    <Dropdown.Toggle split id="dropdown-toggle-write-a-story" />
-                    <Dropdown.Menu>
-                      <Dropdown.Item onClick={() => handlePageClick("/create")}>
-                        CREATE
-                      </Dropdown.Item>
-                      <Dropdown.Item
-                        onClick={() => handlePageClick("/settings")}
+                  <Menu>
+                    <ButtonGroup isAttached>
+                      <Button
+                        onClick={() => navigate(`/post/create`)}
+                        whiteSpace="nowrap"
                       >
-                        SETTINGS
-                      </Dropdown.Item>
-                      <Dropdown.Item onClick={handleSignout}>
-                        SIGN OUT
-                      </Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
+                        Write a story
+                      </Button>
+                      <MenuButton as={IconButton} icon={<FaChevronDown />} />
+                    </ButtonGroup>
+                    <MenuList>
+                      <MenuItem onClick={() => handlePageClick("/create")}>
+                        Create
+                      </MenuItem>
+                      <MenuItem onClick={() => handlePageClick("/settings")}>
+                        Settings
+                      </MenuItem>
+                      <MenuItem onClick={handleSignout}>Sign out</MenuItem>
+                    </MenuList>
+                  </Menu>
                 ) : null}
               </div>
             </Col>
