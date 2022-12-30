@@ -4,6 +4,7 @@ import { parse } from "query-string";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import Helmet from "react-helmet";
+import { Box, Heading, Text, VStack } from "@chakra-ui/react";
 
 import useIsMounted from "../lib/useIsMounted";
 import SearchPreview from "../components/SearchPreview";
@@ -86,26 +87,28 @@ function Search() {
     .filter((item) => item.tags.includes(searchParams.tag));
 
   return (
-    <>
+    <VStack align="stretch" spacing={10}>
       <Helmet>
         <title>{searchParams.tag}</title>
       </Helmet>
 
-      <div className="mb-5 text-center">
-        <h1 className="mb-2 display-4 fw-bold">{searchParams.tag}</h1>
-        <div className="mb-2 mt-1 small d-block">
+      <VStack textAlign="center" spacing={4}>
+        <Heading size="3xl">{searchParams.tag}</Heading>
+        <Text fontSize="sm">
           {preppedItems.length} item{preppedItems.length > 1 ? "s" : ""}
-        </div>
-      </div>
+        </Text>
+      </VStack>
 
-      {preppedItems.map((item, i) => (
-        <SearchPreview
-          key={`search-item-${i}`}
-          type={item.type}
-          thing={item}
-          borderTop={i === 0}
-        />
-      ))}
-    </>
+      <Box>
+        {preppedItems.map((item, i) => (
+          <SearchPreview
+            key={`search-item-${i}`}
+            type={item.type}
+            thing={item}
+            borderTop={i === 0}
+          />
+        ))}
+      </Box>
+    </VStack>
   );
 }
