@@ -1,6 +1,5 @@
 import { useState, Fragment, useContext } from "react";
 import {
-  Button,
   Card,
   Col,
   Dropdown,
@@ -9,7 +8,7 @@ import {
   ListGroup,
   Row,
 } from "react-bootstrap";
-import { Heading, VStack, Text } from "@chakra-ui/react";
+import { Button, Heading, VStack, Text } from "@chakra-ui/react";
 import { FaTimes } from "react-icons/fa";
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 import { API, graphqlOperation } from "aws-amplify";
@@ -384,6 +383,7 @@ function Settings() {
         <Button
           className="d-block ps-0"
           variant="link"
+          colorScheme="blue"
           size="sm"
           onClick={() => {
             let updPrompts = settings.prompts ? [...settings.prompts] : [];
@@ -400,16 +400,15 @@ function Settings() {
       </VStack>
 
       <Button
-        className="mb-4"
-        variant="primary"
+        colorScheme="blue"
         onClick={() => {
           if (edited) {
             handleSave();
           }
         }}
-        disabled={!edited}
+        isDisabled={!edited}
       >
-        Save
+        Save changes
       </Button>
     </VStack>
   );
