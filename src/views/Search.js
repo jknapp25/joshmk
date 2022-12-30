@@ -1,10 +1,11 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { parse } from "query-string";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import Helmet from "react-helmet";
 
+import useIsMounted from "../lib/useIsMounted";
 import SearchPreview from "../components/SearchPreview";
 
 export default Search;
@@ -14,12 +15,7 @@ function Search() {
   const searchParams = parse(search);
   const [items, setItems] = useState([]);
 
-  const isMounted = useRef(true);
-  useEffect(() => {
-    return () => {
-      isMounted.current = false;
-    };
-  }, []);
+  const isMounted = useIsMounted();
 
   useEffect(() => {
     setItems([]);
@@ -68,7 +64,7 @@ function Search() {
       if (isMounted.current) setItems(items);
     }
     fetchData();
-  }, [searchParams.tag]);
+  }, [searchParams.tag, isMounted]);
 
   if (items.length === 0) return null;
 
