@@ -96,7 +96,7 @@ export const Element = ({ attributes, children, element }) => {
     default:
       return (
         <p
-          className="mb-1 fs-5 mx-auto"
+          className="fs-5 mx-auto"
           style={{ maxWidth: "650px" }}
           {...attributes}
         >
