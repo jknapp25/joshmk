@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, Col, Row } from "react-bootstrap";
+import { Heading, VStack } from "@chakra-ui/react";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 
@@ -51,12 +52,13 @@ function Gallery() {
           className="d-flex align-self-center mb-5"
         >
           <Card
-            key={i}
             className="border-0 text-center cursor-pointer mx-auto"
             onClick={() => navigate(`/item/${item.id}`)}
           >
-            <GalleryImage image={item.images[0]} />
-            <h5 className="my-4">{item.name}</h5>
+            <VStack spacing={5}>
+              <GalleryImage image={item.images[0]} />
+              <Heading size="md">{item.name}</Heading>
+            </VStack>
           </Card>
         </Col>
       ))}
