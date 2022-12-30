@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { API } from "aws-amplify";
 
-import { Tag } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import sortByFrequencyAndRemoveDuplicates from "../lib/sortByFrequencyAndRemoveDuplicates";
 import { Category } from "./Category";
 
@@ -36,7 +36,7 @@ function PopularTags() {
         (tag) => !removeList.includes(tag)
       );
 
-      const topTags = withoutRemovedOnes.slice(0, 6);
+      const topTags = withoutRemovedOnes.slice(0, 7);
 
       setTags(topTags);
     }
@@ -53,16 +53,16 @@ function PopularTags() {
       </div>
       <div>
         {tags.map((tag) => (
-          <Tag
+          <Button
             key={`tag-${tag}`}
-            size="lg"
+            size="sm"
+            colorScheme="gray"
             me={2}
             mb={2}
-            cursor="pointer"
             onClick={() => navigate(`/search?tag=${tag}`)}
           >
             {tag}
-          </Tag>
+          </Button>
         ))}
       </div>
     </div>

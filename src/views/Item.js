@@ -8,7 +8,7 @@ import * as queries from "../graphql/queries";
 import ImageCarousel from "../components/ImageCarousel";
 import RichTextEditor from "../components/RichTextEditor/RichTextEditor";
 import ItemBuyButton from "../components/ItemBuyButton";
-import { Tag } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 
 export default Item;
 
@@ -76,14 +76,14 @@ function Item({ item = {} }) {
                 <h4 className="mt-4">Tags</h4>
                 <div className="border-0 py-0">
                   {tags.map((tag) => (
-                    <Tag
+                    <Button
                       key={`tag-${tag}`}
-                      size="sm"
-                      cursor="pointer"
+                      size="xs"
+                      colorScheme="gray"
                       onClick={() => navigate(`/search?tag=${tag}`)}
                     >
                       {tag}
-                    </Tag>
+                    </Button>
                   ))}
                 </div>
               </>

@@ -11,7 +11,7 @@ import * as queries from "../graphql/queries";
 import Helmet from "react-helmet";
 
 import ImageCarousel from "../components/ImageCarousel";
-import { Box, Tag, Heading } from "@chakra-ui/react";
+import { Box, Button, Heading, VStack } from "@chakra-ui/react";
 import RichTextEditor from "../components/RichTextEditor/RichTextEditor";
 import useIsMounted from "../lib/useIsMounted";
 
@@ -55,9 +55,12 @@ function Post({ post = {}, bottomBorder = false }) {
   });
 
   return (
-    <div className={`pb-5 ${bottomBorder ? "border-bottom mb-4" : ""}`}>
+    <VStack
+      className={`pb-5 ${bottomBorder ? "border-bottom mb-4" : ""}`}
+      spacing={10}
+    >
       <Helmet>{!isBlog && title ? <title>{title}</title> : null}</Helmet>
-      <div className="mb-5 mx-auto text-center" style={{ maxWidth: "650px" }}>
+      <div className="mx-auto text-center" style={{ maxWidth: "650px" }}>
         <Box mb={3}>
           <Heading as={RouterLink} size="3xl" to={`/post/${id}`}>
             {title}
@@ -71,10 +74,7 @@ function Post({ post = {}, bottomBorder = false }) {
         </div>
       </div>
 
-      <ImageCarousel
-        images={images}
-        classes="mb-4 bg-secondary bg-opacity-10"
-      />
+      <ImageCarousel images={images} classes="bg-secondary bg-opacity-10" />
 
       {richContent ? (
         <RichTextEditor
@@ -85,24 +85,19 @@ function Post({ post = {}, bottomBorder = false }) {
       ) : null}
 
       {tags?.length > 0 ? (
-        <div
-          style={{ maxWidth: "650px" }}
-          className="border-0 py-0 mt-4 mx-auto"
-        >
+        <div style={{ maxWidth: "650px" }} className="border-0 py-0 mx-auto">
           {tags.map((tag) => (
-            <Tag
+            <Button
               key={`tag-${tag}`}
-              tag={tag}
-              size="sm"
-              cursor="pointer"
+              size="xs"
               me={2}
               onClick={() => navigate(`/search?tag=${tag}`)}
             >
               {tag}
-            </Tag>
+            </Button>
           ))}
         </div>
       ) : null}
-    </div>
+    </VStack>
   );
 }

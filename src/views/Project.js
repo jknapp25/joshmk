@@ -4,7 +4,7 @@ import { API } from "aws-amplify";
 import { useParams, useNavigate } from "react-router-dom";
 
 import ImageCarousel from "../components/ImageCarousel";
-import { Tag } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { createTimeInfo, statusColorLookup } from "../lib/utils";
 import useIsMounted from "../lib/useIsMounted";
 import * as queries from "../graphql/queries";
@@ -62,13 +62,13 @@ function Project({ project = {} }) {
       {tags && tags.length > 0 && (
         <div className="mt-1">
           {tags.map((tag) => (
-            <Tag
+            <Button
               key={tag}
-              cursor="pointer"
+              size="xs"
               onClick={() => navigate(`/search?tag=${tag}`)}
             >
               {tag}
-            </Tag>
+            </Button>
           ))}
         </div>
       )}

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { API } from "aws-amplify";
 import { useParams, useNavigate } from "react-router-dom";
 
-import { Tag } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { createTimeInfo } from "../lib/utils";
 import useIsMounted from "../lib/useIsMounted";
 import * as queries from "../graphql/queries";
@@ -92,13 +92,14 @@ function Education({ education }) {
       </div>
       {tags?.length > 0 &&
         tags.map((tag) => (
-          <Tag
+          <Button
             key={tag}
-            cursor="pointer"
+            size="xs"
+            colorScheme="gray"
             onClick={() => navigate(`/search?tag=${tag}`)}
           >
             {tag}
-          </Tag>
+          </Button>
         ))}
     </>
   );

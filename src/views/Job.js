@@ -6,7 +6,7 @@ import * as queries from "../graphql/queries";
 
 import { createTimeInfo } from "../lib/utils";
 import useIsMounted from "../lib/useIsMounted";
-import { Tag } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 
 export default Job;
 
@@ -91,13 +91,14 @@ function Job({ job = {} }) {
       {tags && tags.length > 0 && (
         <div className="mt-1">
           {tags.map((tag, i) => (
-            <Tag
+            <Button
               key={`tag-${i}`}
-              cursor="pointer"
+              size="xs"
+              colorScheme="gray"
               onClick={() => navigate(`/search?tag=${tag}`)}
             >
               {tag}
-            </Tag>
+            </Button>
           ))}
         </div>
       )}
