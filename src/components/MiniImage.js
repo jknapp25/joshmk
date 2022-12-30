@@ -29,7 +29,7 @@ function MiniImage({ images = [] }) {
   return (
     <div
       className="ratio ratio-4x3 bg-secondary bg-opacity-10"
-      style={{ width: "150px" }}
+      style={{ width: "120px" }}
     >
       {imageUrls[0] ? (
         <Image
