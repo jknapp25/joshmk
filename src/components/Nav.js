@@ -8,14 +8,15 @@ import {
   IconButton,
   Menu,
   MenuButton,
+  MenuDivider,
   MenuList,
   MenuItem,
+  MenuGroup,
 } from "@chakra-ui/react";
 import {
   FaBars,
   FaChevronDown,
   FaCog,
-  FaDoorClosed,
   FaPlus,
   FaSignOutAlt,
 } from "react-icons/fa";
@@ -94,26 +95,60 @@ function Nav() {
                         onClick={() => navigate(`/post/create`)}
                         whiteSpace="nowrap"
                       >
-                        Write a story
+                        New post
                       </Button>
                       <MenuButton as={IconButton} icon={<FaChevronDown />} />
                     </ButtonGroup>
                     <MenuList minW="fit-content">
-                      <MenuItem
-                        icon={<FaPlus size=".9em" />}
-                        onClick={() => handlePageClick("/create")}
-                      >
-                        Create
-                      </MenuItem>
+                      <MenuGroup title="Create shit">
+                        <MenuItem
+                          icon={<FaPlus size=".9em" />}
+                          onClick={() => handlePageClick(`/post/create`)}
+                          px={4}
+                        >
+                          New post
+                        </MenuItem>
+                        <MenuItem
+                          icon={<FaPlus size=".9em" />}
+                          onClick={() => handlePageClick(`/item/create`)}
+                          px={4}
+                        >
+                          New item
+                        </MenuItem>
+                        <MenuItem
+                          icon={<FaPlus size=".9em" />}
+                          onClick={() => handlePageClick(`/job/create`)}
+                          px={4}
+                        >
+                          New job
+                        </MenuItem>
+                        <MenuItem
+                          icon={<FaPlus size=".9em" />}
+                          onClick={() => handlePageClick(`/project/create`)}
+                          px={4}
+                        >
+                          New project
+                        </MenuItem>
+                        <MenuItem
+                          icon={<FaPlus size=".9em" />}
+                          onClick={() => handlePageClick(`/education/create`)}
+                          px={4}
+                        >
+                          New education
+                        </MenuItem>
+                      </MenuGroup>
+                      <MenuDivider />
                       <MenuItem
                         icon={<FaCog size=".9em" />}
                         onClick={() => handlePageClick("/settings")}
+                        px={4}
                       >
                         Settings
                       </MenuItem>
                       <MenuItem
                         icon={<FaSignOutAlt size=".9em" />}
                         onClick={handleSignout}
+                        px={4}
                       >
                         Sign out
                       </MenuItem>
