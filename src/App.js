@@ -7,7 +7,7 @@ import { Amplify, API, Storage } from "aws-amplify";
 import { ChakraProvider } from "@chakra-ui/react";
 
 import ItemList from "./components/ItemList.js";
-import MainView from "./components/MainView.js";
+import MainView from "./views/MainView.js";
 import Post from "./views/Post.js";
 import PostEditor from "./views/PostEditor.js";
 import Item from "./views/Item.js";

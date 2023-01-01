@@ -65,7 +65,7 @@ function Nav() {
 
   return (
     <>
-      <Row className="">
+      <Row>
         <Col className="mx-auto border-bottom" style={{ maxWidth: "1920px" }}>
           <Row className="py-3 d-flex justify-content-between mx-auto">
             <Col className="d-flex align-items-center">
