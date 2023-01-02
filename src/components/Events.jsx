@@ -3,7 +3,7 @@ import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import { Icon, Text, VStack, Link } from "@chakra-ui/react";
 import moment from "moment";
-import { FiExternalLink } from "react-icons/fi";
+import { FaCircle } from "react-icons/fa";
 
 import { Category } from "./Category";
 
@@ -43,9 +43,9 @@ export const Events = () => {
     const aSortVal = a.start;
     const bSortVal = b.start;
     if (aSortVal < bSortVal) {
-      return 1;
-    } else if (bSortVal < aSortVal) {
       return -1;
+    } else if (bSortVal < aSortVal) {
+      return 1;
     } else {
       return 0;
     }
