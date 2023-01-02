@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
 import { HStack, Text, VStack } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import moment from "moment";
 import { Category } from "./Category";
 
@@ -53,7 +54,7 @@ export const Events = () => {
               {end ? ` - ${moment(moment(end)).format("MMM D")}` : ""}
             </b>
             &nbsp;&nbsp;&nbsp;
-            {name}
+            {link ? <a href={link}>{name}</a> : name}
           </Text>
         </HStack>
       ))}
