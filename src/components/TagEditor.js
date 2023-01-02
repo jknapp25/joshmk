@@ -1,4 +1,3 @@
-import { Form } from "react-bootstrap";
 import CreatableSelect from "react-select/creatable";
 
 export default TagEditor;
@@ -14,19 +13,16 @@ function TagEditor({ tags = [], tagsOptions = [], onChange }) {
       : [];
 
   return (
-    <>
-      <Form.Label className="mb-0 mt-2">Tags</Form.Label>
-      <CreatableSelect
-        isMulti
-        onChange={(newVal) => {
-          const updTags = newVal.map((val) => val.value);
-          onChange(updTags);
-        }}
-        menuPlacement="auto"
-        placeholder=""
-        value={selectTags}
-        options={selectTagsOptions}
-      />
-    </>
+    <CreatableSelect
+      isMulti
+      onChange={(newVal) => {
+        const updTags = newVal.map((val) => val.value);
+        onChange(updTags);
+      }}
+      menuPlacement="auto"
+      placeholder=""
+      value={selectTags}
+      options={selectTagsOptions}
+    />
   );
 }

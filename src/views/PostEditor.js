@@ -1,6 +1,13 @@
 import { useState, useEffect } from "react";
-import { Form, FormControl } from "react-bootstrap";
-import { Box, Button, VStack, Input } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Checkbox,
+  FormControl,
+  FormLabel,
+  VStack,
+  Input,
+} from "@chakra-ui/react";
 import { API, graphqlOperation } from "aws-amplify";
 import { useNavigate, useParams } from "react-router-dom";
 import CreatableSelect from "react-select/creatable";
@@ -163,18 +170,18 @@ function PostEditor() {
 
   return (
     <VStack align="stretch" spacing={5}>
-      <VStack align="stretch" spacing={1}>
-        <Form.Label>Title</Form.Label>
-        <FormControl
+      <FormControl>
+        <FormLabel>Title</FormLabel>
+        <Input
           id="title"
           aria-describedby="title"
           value={title || ""}
           onChange={(e) => setTitle(e.target.value)}
         />
-      </VStack>
+      </FormControl>
 
-      <VStack align="stretch" spacing={0}>
-        <Form.Label>Content</Form.Label>
+      <FormControl>
+        <FormLabel>Content</FormLabel>
         <RichTextEditor
           value={richContent}
           onChange={(updRichContent) => {
@@ -198,10 +205,10 @@ function PostEditor() {
           ]}
           classes="bg-white"
         />
-      </VStack>
+      </FormControl>
 
-      <VStack align="stretch" spacing={1}>
-        <Form.Label>Images</Form.Label>
+      <FormControl>
+        <FormLabel>Images</FormLabel>
         <ImageUploader
           images={images || []}
           afterEdit={(imgs) => {
@@ -210,10 +217,10 @@ function PostEditor() {
           fieldId="images"
           fileSizeLimit={5}
         />
-      </VStack>
+      </FormControl>
 
-      <VStack align="stretch" spacing={1}>
-        <Form.Label>Category</Form.Label>
+      <FormControl>
+        <FormLabel>Category</FormLabel>
         <CreatableSelect
           isClearable
           menuPlacement="auto"
@@ -222,35 +229,32 @@ function PostEditor() {
           value={selectCategory}
           options={selectCategoryOptions}
         />
-      </VStack>
+      </FormControl>
 
-      <VStack align="stretch" spacing={1}>
+      <FormControl>
+        <FormLabel>Tags</FormLabel>
         <TagEditor
           tags={tags}
           tagsOptions={tagsOptions}
           onChange={(updTags) => setTags(updTags)}
         />
-      </VStack>
+      </FormControl>
 
-      <VStack align="stretch" spacing={1}>
-        <Form.Label>Created At</Form.Label>
+      <FormControl>
+        <FormLabel>Created At</FormLabel>
         <Input
           placeholder=""
           value={createdAt || ""}
-          size="md"
           type="datetime-local"
           onChange={(e) => setCreatedAt(e.target.value)}
         />
-      </VStack>
+      </FormControl>
 
-      <VStack align="stretch" spacing={1}>
-        <Form.Check
-          type="checkbox"
-          label="Hide from blog"
-          checked={hidden}
-          onChange={() => setHidden(!hidden)}
-        />
-      </VStack>
+      <FormControl>
+        <Checkbox checked={hidden} onChange={() => setHidden(!hidden)}>
+          Hide from blog
+        </Checkbox>
+      </FormControl>
 
       <Box>
         <Button onClick={handleButtonClick}>
