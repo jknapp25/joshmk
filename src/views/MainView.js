@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { useMatch, Outlet } from "react-router-dom";
+import { VStack } from "@chakra-ui/react";
 import { Row, Col } from "react-bootstrap";
 // import { Divider } from "@chakra-ui/react";
 
@@ -40,11 +41,14 @@ function MainView() {
       >
         {isHomeRoute ? (
           <Col lg={secondaryColWidth} className="d-none d-lg-grid">
-            <div
-              className={`py-5 ps-3 pe-5 vh-auto ${
-                config?.prompts.length > 0 ? "border-end" : ""
-              }`}
-              style={{ height: "fit-content" }}
+            <VStack
+              spacing={10}
+              height="fit-content"
+              py={12}
+              paddingStart={3}
+              paddingEnd={12}
+              borderEnd={config?.prompts.length > 0 ? "1px" : undefined}
+              borderColor="gray.200"
             >
               {config?.prompts.length > 0
                 ? config.prompts.map((prompt, i) => (
@@ -55,7 +59,7 @@ function MainView() {
                     />
                   ))
                 : null}
-            </div>
+            </VStack>
           </Col>
         ) : null}
         <Col lg={mainColWidth} className="py-5">

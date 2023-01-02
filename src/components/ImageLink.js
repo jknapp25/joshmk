@@ -26,7 +26,7 @@ function ImageLink({ image = "", link = "" }) {
   if (!image) return;
 
   return (
-    <Row className="gx-2">
+    <Row className="gx-0">
       <Col key={imageUrl}>
         {link ? (
           <a href={link}>
