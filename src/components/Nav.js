@@ -109,6 +109,13 @@ function Nav() {
                         </MenuItem>
                         <MenuItem
                           icon={<FaPlus size=".9em" />}
+                          onClick={() => handlePageClick(`/event/create`)}
+                          px={4}
+                        >
+                          New event
+                        </MenuItem>
+                        <MenuItem
+                          icon={<FaPlus size=".9em" />}
                           onClick={() => handlePageClick(`/item/create`)}
                           px={4}
                         >

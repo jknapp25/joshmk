@@ -27,6 +27,9 @@ import useIsMounted from "./lib/useIsMounted";
 import FullScreenImageCarousel from "./components/FullScreenImageCarousel";
 import Nav from "./components/Nav";
 import Search from "./views/Search";
+import { Event } from "./views/Event";
+import { Events } from "./components/Events";
+import { EventEditor } from "./views/EventEditor";
 
 import "react-vertical-timeline-component/style.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -113,6 +116,9 @@ function App() {
                   <Route path="post/:id" element={<Post />} />
                   <Route path="post/:id/edit" element={<PostEditor />} />
                   <Route path="post/create" element={<PostEditor />} />
+                  <Route path="event/:id" element={<Event />} />
+                  <Route path="event/:id/edit" element={<EventEditor />} />
+                  <Route path="event/create" element={<EventEditor />} />
                   <Route path="item/:id" element={<Item />} />
                   <Route path="item/:id/edit" element={<ItemEditor />} />
                   <Route path="item/create" element={<ItemEditor />} />

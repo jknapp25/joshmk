@@ -1,4 +1,12 @@
-type Post @model @auth(rules: [{ allow: public }]) {
+type Event @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  start: AWSDateTime
+  end: AWSDateTime
+  link: String
+}
+
+type Post @model @auth(rules: [{allow: public}]) {
   id: ID!
   title: String
   content: String
@@ -10,7 +18,7 @@ type Post @model @auth(rules: [{ allow: public }]) {
   hidden: Boolean
 }
 
-type Item @model @auth(rules: [{ allow: public }]) {
+type Item @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String
   description: AWSJSON
@@ -23,7 +31,7 @@ type Item @model @auth(rules: [{ allow: public }]) {
   createdAt: String
 }
 
-type Project @model @auth(rules: [{ allow: public }]) {
+type Project @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String
   summary: String
@@ -38,7 +46,7 @@ type Project @model @auth(rules: [{ allow: public }]) {
   tagUsage: [Float]
 }
 
-type Job @model @auth(rules: [{ allow: public }]) {
+type Job @model @auth(rules: [{allow: public}]) {
   id: ID!
   company: String
   role: String
@@ -54,7 +62,7 @@ type Job @model @auth(rules: [{ allow: public }]) {
   tagUsage: [Float]
 }
 
-type Education @model @auth(rules: [{ allow: public }]) {
+type Education @model @auth(rules: [{allow: public}]) {
   id: ID!
   organization: String
   degree: String
@@ -84,7 +92,7 @@ type Prompt {
   images: [PromptImage]
 }
 
-type Configuration @model @auth(rules: [{ allow: public }]) {
+type Configuration @model @auth(rules: [{allow: public}]) {
   id: ID!
   fullName: String
   nickName: String
@@ -104,7 +112,7 @@ type Configuration @model @auth(rules: [{ allow: public }]) {
   prompts: [Prompt]
 }
 
-type Workout @model @auth(rules: [{ allow: public }]) {
+type Workout @model @auth(rules: [{allow: public}]) {
   id: ID!
   warrior: String
   otherWarriors: [String]
@@ -113,3 +121,4 @@ type Workout @model @auth(rules: [{ allow: public }]) {
   plannedStart: String
   replies: [String]
 }
+ 

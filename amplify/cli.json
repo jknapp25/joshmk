@@ -1,14 +1,15 @@
 {
-  "features": {
-    "graphqltransformer": {
-      "addmissingownerfields": true,
-      "validatetypenamereservedwords": true,
-      "useexperimentalpipelinedtransformer": false,
-      "securityEnhancementNotification": false,
-      "showfieldauthnotification": false
-    },
-    "project": {
-      "overrides": true
+    "features": {
+        "graphqltransformer": {
+            "addmissingownerfields": true,
+            "validatetypenamereservedwords": true,
+            "useexperimentalpipelinedtransformer": false,
+            "securityEnhancementNotification": false,
+            "showfieldauthnotification": false,
+            "enableiterativegsiupdates": true
+        },
+        "project": {
+            "overrides": true
+        }
     }
-  }
 }

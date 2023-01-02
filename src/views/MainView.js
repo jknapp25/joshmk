@@ -9,6 +9,7 @@ import UserMiniSummary from "../components/UserMiniSummary";
 import PopularTags from "../components/PopularTags";
 // import { Footer } from "./Footer";
 import { ConfigContext } from "../App";
+import { Events } from "../components/Events";
 
 export default MainView;
 
@@ -50,6 +51,7 @@ function MainView() {
               borderEnd={config?.prompts.length > 0 ? "1px" : undefined}
               borderColor="gray.200"
             >
+              <Events />
               {config?.prompts.length > 0
                 ? config.prompts.map((prompt, i) => (
                     <Prompt

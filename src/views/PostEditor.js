@@ -247,20 +247,20 @@ function PostEditor() {
           <Text display="inline" me={3}>
             Created At
           </Text>
-          <Text color="gray.400" fontSize="sm" display="inline">
+          <Text color="gray.400" fontSize="xs" display="inline">
             Optional
           </Text>
         </FormLabel>
+        <FormHelperText>
+          Only edit this field if you want it to look like you posted something
+          at a different date/time than now
+        </FormHelperText>
         <Input
           placeholder=""
           value={createdAt || ""}
           type="datetime-local"
           onChange={(e) => setCreatedAt(e.target.value)}
         />
-        <FormHelperText>
-          Only edit this field if you want it to look like you posted something
-          at a different date/time than now
-        </FormHelperText>
       </FormControl>
 
       <FormControl>
