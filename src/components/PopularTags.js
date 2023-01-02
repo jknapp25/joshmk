@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { API } from "aws-amplify";
 
-import { Button } from "@chakra-ui/react";
+import { Box, Button, VStack } from "@chakra-ui/react";
 import sortByFrequencyAndRemoveDuplicates from "../lib/sortByFrequencyAndRemoveDuplicates";
 import { Category } from "./Category";
 
@@ -47,11 +47,9 @@ function PopularTags() {
   if (!tags || tags.length === 0) return null;
 
   return (
-    <div className="mt-5">
-      <div className="mb-3">
-        <Category category="popular topics" />
-      </div>
-      <div>
+    <VStack marginTop={10} spacing={4} align="start">
+      <Category category="popular topics" />
+      <Box>
         {tags.map((tag) => (
           <Button
             key={`tag-${tag}`}
@@ -64,7 +62,7 @@ function PopularTags() {
             {tag}
           </Button>
         ))}
-      </div>
-    </div>
+      </Box>
+    </VStack>
   );
 }
