@@ -17,6 +17,7 @@ import {
   FaBars,
   FaChevronDown,
   FaCog,
+  FaEye,
   FaPlus,
   FaSignOutAlt,
 } from "react-icons/fa";
@@ -143,6 +144,14 @@ function Nav() {
                           New education
                         </MenuItem>
                       </MenuGroup>
+                      <MenuDivider />
+                      <MenuItem
+                        icon={<FaEye size=".9em" />}
+                        onClick={() => handlePageClick(`/create`)}
+                        px={4}
+                      >
+                        View data tables
+                      </MenuItem>
                       <MenuDivider />
                       <MenuItem
                         icon={<FaCog size=".9em" />}

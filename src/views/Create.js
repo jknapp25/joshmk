@@ -10,6 +10,7 @@ import moment from "moment";
 
 import {
   deletePost,
+  deleteEvent,
   deleteItem,
   deleteJob,
   deleteProject,
@@ -25,6 +26,11 @@ const TABLE_FIELDS = {
     { displayName: "Title", field: "title" },
     { displayName: "Category", field: "category" },
     { displayName: "Created At", field: "createdAt" },
+  ],
+  event: [
+    { displayName: "Name", field: "name" },
+    { displayName: "Start", field: "start" },
+    { displayName: "End", field: "End" },
   ],
   item: [
     { displayName: "Name", field: "name" },
@@ -59,6 +65,8 @@ function Create() {
     let mutation = null;
     if (itemType === "post") {
       mutation = deletePost;
+    } else if (itemType === "event") {
+      mutation = deleteEvent;
     } else if (itemType === "item") {
       mutation = deleteItem;
     } else if (itemType === "job") {
@@ -80,6 +88,8 @@ function Create() {
 
       if (itemType === "post") {
         query = "listPosts";
+      } else if (itemType === "event") {
+        query = "listEvents";
       } else if (itemType === "item") {
         query = "listItems";
       } else if (itemType === "job") {
@@ -122,29 +132,28 @@ function Create() {
             className="bg-transparent p-0 text-capitalize border-0"
           >
             {itemType}
-            {["post", "item", "job", "project"].includes(itemType) ? "s" : ""}
+            {["post", "event", "item", "job", "project"].includes(itemType)
+              ? "s"
+              : ""}
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            {["post", "item", "job", "project", "education"].map((type) => (
-              <Dropdown.Item
-                key={type}
-                onClick={() => setItemType(type)}
-                className="text-capitalize"
-              >
-                {type}
-                {["post", "item", "job", "project"].includes(type) ? "s" : ""}
-              </Dropdown.Item>
-            ))}
+            {["post", "event", "item", "job", "project", "education"].map(
+              (type) => (
+                <Dropdown.Item
+                  key={type}
+                  onClick={() => setItemType(type)}
+                  className="text-capitalize"
+                >
+                  {type}
+                  {["post", "event", "item", "job", "project"].includes(type)
+                    ? "s"
+                    : ""}
+                </Dropdown.Item>
+              )
+            )}
           </Dropdown.Menu>
         </Dropdown>
-        <Button
-          variant="primary"
-          className="float-end"
-          onClick={() => navigate(`/${itemType}/create`)}
-        >
-          Create
-        </Button>
       </div>
 
       <Table hover className="cursor-pointer">
