@@ -31,8 +31,15 @@ export const Events = () => {
 
   let preppedEvents = [];
 
+  // remove past events
+  preppedEvents = events.filter(({ start, end }) => {
+    if (!end && moment(start).isBefore()) return false;
+    if (!!end && moment(end).isAfter()) return true;
+    return true;
+  });
+
   // sort events by date
-  preppedEvents = events.sort((a, b) => {
+  preppedEvents = preppedEvents.sort((a, b) => {
     const aSortVal = a.start;
     const bSortVal = b.start;
     if (aSortVal < bSortVal) {
@@ -57,8 +64,6 @@ export const Events = () => {
               <b>{formattedDateTime}</b>
               &nbsp;&nbsp;&nbsp;
               {name}
-              &nbsp;&nbsp;
-              <Icon as={FiExternalLink} mb="1" />
             </Text>
           </Link>
         ) : (
