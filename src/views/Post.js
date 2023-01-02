@@ -66,7 +66,12 @@ function Post({ post = {}, bottomBorder = false }) {
             {title}
           </Heading>
         </Box>
-        <Text color="gray.600" fontWeight="medium" fontSize="sm">
+        <Text
+          color="gray.500"
+          fontWeight="medium"
+          fontSize="sm"
+          textTransform="uppercase"
+        >
           {formattedDateTime}
         </Text>
       </div>

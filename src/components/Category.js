@@ -6,8 +6,9 @@ export const Category = ({ attributes, category }) => {
   return (
     <Text
       display="inline"
-      color="gray.600"
+      color="gray.500"
       fontWeight="medium"
+      textTransform="uppercase"
       fontSize="sm"
       {...attributes}
     >
