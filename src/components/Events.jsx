@@ -1,8 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { API } from "aws-amplify";
 import * as queries from "../graphql/queries";
-import { HStack, Text, VStack } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { HStack, Text, VStack, Link } from "@chakra-ui/react";
 import moment from "moment";
 import { Category } from "./Category";
 
@@ -47,16 +46,14 @@ export const Events = () => {
     <VStack align="start">
       <Category category="Attend an upcoming event" />
       {preppedEvents.map(({ name, start, end, link }) => (
-        <HStack key={name}>
-          <Text>
-            <b>
-              {moment(moment(start)).format("MMM D")}
-              {end ? ` - ${moment(moment(end)).format("MMM D")}` : ""}
-            </b>
-            &nbsp;&nbsp;&nbsp;
-            {link ? <a href={link}>{name}</a> : name}
-          </Text>
-        </HStack>
+        <Link key={name} href={link ? link : undefined}>
+          <b>
+            {moment(moment(start)).format("MMM D")}
+            {end ? ` - ${moment(moment(end)).format("MMM D")}` : ""}
+          </b>
+          &nbsp;&nbsp;&nbsp;
+          {link ? <a href={link}>{name}</a> : name}
+        </Link>
       ))}
     </VStack>
   );

@@ -50,6 +50,7 @@ function MainView() {
               paddingEnd={12}
               borderEnd={config?.prompts.length > 0 ? "1px" : undefined}
               borderColor="gray.200"
+              align="stretch"
             >
               <Events />
               {config?.prompts.length > 0
