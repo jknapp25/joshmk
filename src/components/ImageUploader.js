@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Form, Image } from "react-bootstrap";
+import { Image } from "react-bootstrap";
+import { Box, HStack, Input } from "@chakra-ui/react";
 import { Storage } from "aws-amplify";
 import { FaTimes } from "react-icons/fa";
 
@@ -97,19 +98,19 @@ function ImageUploader({
   return (
     <div className={classes}>
       {!reachedImageLimit ? (
-        <Form.Control
-          id={fieldId}
+        <Input
           type="file"
-          className={images.length ? "mb-1" : ""}
-          multiple={allowMultiple}
-          onChange={handleImageUpload}
+          id={fieldId}
           name={fieldName}
+          // marginBotton={images.length ? 1 : undefined}
+          // multiple={allowMultiple}
+          onChange={handleImageUpload}
         />
       ) : null}
       {images.length ? (
-        <div>
+        <Box>
           {imageUrls.map((url, i) => (
-            <div key={i} className="d-inline-block pr-2 pb-2">
+            <HStack key={i}>
               <Image key={url} src={url} width="100" height="auto" />
               <FaTimes
                 color="#dc3545"
@@ -121,9 +122,9 @@ function ImageUploader({
                   afterEdit(updImages);
                 }}
               />
-            </div>
+            </HStack>
           ))}
-        </div>
+        </Box>
       ) : null}
     </div>
   );

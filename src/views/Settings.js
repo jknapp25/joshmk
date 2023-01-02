@@ -1,14 +1,23 @@
 import { useState, Fragment, useContext } from "react";
+import { Col, Dropdown, Row } from "react-bootstrap";
 import {
+  Box,
+  Button,
   Card,
-  Col,
-  Dropdown,
-  Form,
+  CardBody,
+  CardHeader,
+  Divider,
   FormControl,
-  ListGroup,
-  Row,
-} from "react-bootstrap";
-import { Button, Heading, VStack, Text } from "@chakra-ui/react";
+  FormLabel,
+  Heading,
+  HStack,
+  IconButton,
+  Input,
+  VStack,
+  Text,
+  Textarea,
+  FormHelperText,
+} from "@chakra-ui/react";
 import { FaTimes } from "react-icons/fa";
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 import { API, graphqlOperation } from "aws-amplify";
@@ -66,26 +75,26 @@ function Settings() {
 
       <Heading size="xl">Settings</Heading>
 
-      <VStack spacing={2} align="start">
-        <Heading size="sm">Full Name</Heading>
-        <Text>
+      <FormControl>
+        <FormLabel>Full Name</FormLabel>
+        <FormHelperText marginBottom={3}>
           Your full name will appear in the top left of the navbar if you
           haven't added a logo.
-        </Text>
-        <FormControl
+        </FormHelperText>
+        <Input
           id="fullName"
           aria-describedby="fullName"
           value={settings.fullName || ""}
           onChange={(e) => handleUpdate("fullName", e.target.value)}
         />
-      </VStack>
+      </FormControl>
 
-      <VStack spacing={2} align="start">
-        <Heading size="sm">Logo</Heading>
-        <Text>
+      <FormControl>
+        <FormLabel>Logo</FormLabel>
+        <FormHelperText marginBottom={3}>
           An image that will appear in the top left of the navbar. It's common
           to use a handwritten version of your name.
-        </Text>
+        </FormHelperText>
         <ImageUploader
           images={settings.logo ? [settings.logo] : []}
           afterEdit={(imgs) => {
@@ -97,14 +106,14 @@ function Settings() {
           allowMultiple={false}
           imageDisplayName="Logo"
         />
-      </VStack>
+      </FormControl>
 
-      <VStack spacing={2} align="start">
-        <Heading size="sm">Favicon</Heading>
-        <Text>
+      <FormControl>
+        <FormLabel>Favicon</FormLabel>
+        <FormHelperText marginBottom={3}>
           A favicon is the tiny image that shows in your browsers tab. The max
           size is <b>200kb</b>.
-        </Text>
+        </FormHelperText>
         <ImageUploader
           images={settings.favicon ? [settings.favicon] : []}
           afterEdit={(imgs) => {
@@ -116,14 +125,14 @@ function Settings() {
           allowMultiple={false}
           imageDisplayName="Favicon"
         />
-      </VStack>
+      </FormControl>
 
-      <VStack spacing={2} align="start">
-        <Heading size="sm">Avatar</Heading>
-        <Text>
+      <FormControl>
+        <FormLabel>Avatar</FormLabel>
+        <FormHelperText marginBottom={3}>
           Your avatar is an image that represents you. It will appear at the top
           of the right sidebar on the homepage.
-        </Text>
+        </FormHelperText>
         <ImageUploader
           images={settings.avatar ? [settings.avatar] : []}
           afterEdit={(imgs) => {
@@ -135,27 +144,28 @@ function Settings() {
           allowMultiple={false}
           imageDisplayName="Avatar"
         />
-      </VStack>
+      </FormControl>
 
-      <VStack spacing={2} align="start">
-        <Heading size="sm">Tagline</Heading>
-        <Text>Your tagline will show under your avatar on the homepage.</Text>
-        <FormControl
+      <FormControl>
+        <FormLabel>Tagline</FormLabel>
+        <FormHelperText marginBottom={3}>
+          Your tagline will show under your avatar on the homepage.
+        </FormHelperText>
+        <Textarea
           id="tagline"
-          as="textarea"
           rows={2}
           aria-describedby="tagline"
           value={settings.tagline || ""}
           onChange={(e) => handleUpdate("tagline", e.target.value)}
         />
-      </VStack>
+      </FormControl>
 
-      <VStack spacing={2} align="start">
-        <Heading size="sm">Pages</Heading>
-        <Text>
+      <FormControl>
+        <FormLabel>Pages</FormLabel>
+        <FormHelperText>
           These are the pages that will show in the top navbar. Here are
           examples of how this can be set up...
-        </Text>
+        </FormHelperText>
         <Text>
           <ul>
             <li>
@@ -175,7 +185,7 @@ function Settings() {
           ? settings.pagesCustom.map((page, i) => (
               <Row key={`page-${i}`} className="d-flex mb-2 align-items-center">
                 <Col>
-                  <FormControl
+                  <Input
                     id={`pagesCustom-name-${i}`}
                     aria-describedby={`pagesCustom name ${i}`}
                     value={page.name}
@@ -191,7 +201,7 @@ function Settings() {
                   />
                 </Col>
                 <Col>
-                  <FormControl
+                  <Input
                     id={`pagesCustom-link-${i}`}
                     aria-describedby={`pagesCustom link ${i}`}
                     value={page.link}
@@ -285,131 +295,153 @@ function Settings() {
             ))}
           </Dropdown.Menu>
         </Dropdown>
-      </VStack>
+      </FormControl>
 
-      <VStack spacing={2} align="start">
-        <Heading size="sm">Prompts</Heading>
-        <p className="small">
+      <FormControl>
+        <FormLabel>Prompts</FormLabel>
+        <FormHelperText>
           Prompts are important items that you want visitors to see. They appear
           on the left of the homepage at the top. It is a full post that is
           loaded in the sidebar, so keep it short.
-        </p>
-
-        {settings.prompts?.length > 0
-          ? settings.prompts.map((prompt, i) => (
-              <Card key={`prompts-${i}`} className="mb-3">
-                <Card.Header className="d-flex justify-content-between align-items-center">
-                  <div>Prompt {i + 1}</div>
-                  <FaTimes
-                    color="#dc3545"
-                    className="cursor-pointer"
-                    title="delete prompt"
-                    onClick={() => {
-                      let updPrompts =
-                        settings.prompts?.length > 0
-                          ? JSON.parse(JSON.stringify(settings.prompts))
-                          : [];
-                      updPrompts.splice(i, 1);
-                      handleUpdate("prompts", updPrompts);
-                    }}
-                  />
-                </Card.Header>
-                <ListGroup variant="flush">
-                  <ListGroup.Item>
-                    <Form.Label>Title</Form.Label>
-                    <FormControl
-                      className="mb-2"
-                      id={`prompts-title-${i}`}
-                      aria-describedby={`prompts title ${i}`}
-                      value={prompt.title}
-                      onChange={(e) => {
+        </FormHelperText>
+        <VStack spacing={3} align="stretch" marginTop={3}>
+          {settings.prompts?.length > 0
+            ? settings.prompts.map((prompt, i) => (
+                <Card key={`prompts-${i}`}>
+                  <CardHeader
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    py={2}
+                    backgroundColor="gray.50"
+                  >
+                    <Text>Prompt {i + 1}</Text>
+                    <IconButton
+                      aria-label="Delete Prompt"
+                      variant="ghost"
+                      colorScheme="red"
+                      icon={<FaTimes />}
+                      onClick={() => {
                         let updPrompts =
                           settings.prompts?.length > 0
                             ? JSON.parse(JSON.stringify(settings.prompts))
                             : [];
-                        updPrompts[i].title = e.target.value;
+                        updPrompts.splice(i, 1);
                         handleUpdate("prompts", updPrompts);
                       }}
                     />
-                  </ListGroup.Item>
-                  <ListGroup.Item>
-                    {prompt.images.map((img, j) => (
-                      <Row key={`prompt-image-${j}`} className="mb-2">
-                        <Col>
-                          <Form.Label>Image</Form.Label>
-                          <ImageUploader
-                            images={img.imageUrl ? [img.imageUrl] : []}
-                            afterEdit={(imgs) => {
-                              let updPrompts =
-                                settings.prompts && settings.prompts.length > 0
-                                  ? JSON.parse(JSON.stringify(settings.prompts))
-                                  : [];
+                  </CardHeader>
+                  <Divider />
+                  <CardBody>
+                    <VStack spacing={4} align="start">
+                      <FormControl>
+                        <FormLabel>Title</FormLabel>
+                        <Input
+                          id={`prompts-title-${i}`}
+                          aria-describedby={`prompts title ${i}`}
+                          value={prompt.title}
+                          onChange={(e) => {
+                            let updPrompts =
+                              settings.prompts?.length > 0
+                                ? JSON.parse(JSON.stringify(settings.prompts))
+                                : [];
+                            updPrompts[i].title = e.target.value;
+                            handleUpdate("prompts", updPrompts);
+                          }}
+                        />
+                      </FormControl>
 
-                              updPrompts[i].images[j].imageUrl = imgs[0];
-                              handleUpdate("prompts", updPrompts);
+                      {prompt.images.map((img, j) => (
+                        <HStack
+                          key={`prompt-image-${j}`}
+                          alignItems="start"
+                          w="full"
+                        >
+                          <FormControl>
+                            <FormLabel>Image</FormLabel>
+                            <ImageUploader
+                              images={img.imageUrl ? [img.imageUrl] : []}
+                              afterEdit={(imgs) => {
+                                let updPrompts =
+                                  settings.prompts &&
+                                  settings.prompts.length > 0
+                                    ? JSON.parse(
+                                        JSON.stringify(settings.prompts)
+                                      )
+                                    : [];
 
-                              setEdited(true);
-                            }}
-                            fieldId={`prompt-image-upload-${i}`}
-                            fileSizeLimit={5}
-                            allowMultiple={false}
-                          />
-                        </Col>
-                        <Col>
-                          <Form.Label>Link</Form.Label>
-                          <FormControl
-                            id={`prompts-link-${i}`}
-                            aria-describedby={`prompts link ${i}`}
-                            value={img.link}
-                            placeholder="Add link"
-                            onChange={(e) => {
-                              let updPrompts =
-                                settings.prompts?.length > 0
-                                  ? JSON.parse(JSON.stringify(settings.prompts))
-                                  : [];
+                                updPrompts[i].images[j].imageUrl = imgs[0];
+                                handleUpdate("prompts", updPrompts);
 
-                              updPrompts[i].images[j].link = e.target.value;
-                              handleUpdate("prompts", updPrompts);
-                            }}
-                          />
-                        </Col>
-                      </Row>
-                    ))}
-                  </ListGroup.Item>
-                </ListGroup>
-              </Card>
-            ))
-          : null}
+                                setEdited(true);
+                              }}
+                              fieldId={`prompt-image-upload-${i}`}
+                              fileSizeLimit={5}
+                              allowMultiple={false}
+                            />
+                          </FormControl>
+                          <FormControl>
+                            <FormLabel>Link</FormLabel>
+                            <Input
+                              id={`prompts-link-${i}`}
+                              aria-describedby={`prompts link ${i}`}
+                              value={img.link}
+                              placeholder="Add link"
+                              onChange={(e) => {
+                                let updPrompts =
+                                  settings.prompts?.length > 0
+                                    ? JSON.parse(
+                                        JSON.stringify(settings.prompts)
+                                      )
+                                    : [];
+
+                                updPrompts[i].images[j].link = e.target.value;
+                                handleUpdate("prompts", updPrompts);
+                              }}
+                            />
+                          </FormControl>
+                        </HStack>
+                      ))}
+                    </VStack>
+                  </CardBody>
+                </Card>
+              ))
+            : null}
+          <Box>
+            <Button
+              variant="link"
+              colorScheme="blue"
+              align="flex-start"
+              size="sm"
+              onClick={() => {
+                let updPrompts = settings.prompts ? [...settings.prompts] : [];
+                const newPrompt = {
+                  title: "",
+                  images: [{ imageUrl: "", link: "" }],
+                };
+                updPrompts.push(newPrompt);
+                handleUpdate("prompts", updPrompts, false);
+              }}
+            >
+              Add prompt
+            </Button>
+          </Box>
+        </VStack>
+      </FormControl>
+
+      <Box>
         <Button
-          className="d-block ps-0"
-          variant="link"
           colorScheme="blue"
-          size="sm"
           onClick={() => {
-            let updPrompts = settings.prompts ? [...settings.prompts] : [];
-            const newPrompt = {
-              title: "",
-              images: [{ imageUrl: "", link: "" }],
-            };
-            updPrompts.push(newPrompt);
-            handleUpdate("prompts", updPrompts, false);
+            if (edited) {
+              handleSave();
+            }
           }}
+          isDisabled={!edited}
         >
-          Add prompt
+          Save changes
         </Button>
-      </VStack>
-
-      <Button
-        colorScheme="blue"
-        onClick={() => {
-          if (edited) {
-            handleSave();
-          }
-        }}
-        isDisabled={!edited}
-      >
-        Save changes
-      </Button>
+      </Box>
     </VStack>
   );
 }
