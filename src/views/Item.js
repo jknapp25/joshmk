@@ -64,6 +64,7 @@ function Item({ item = {} }) {
               key={`tag-${tag}`}
               size="xs"
               colorScheme="gray"
+              me={2}
               onClick={() => navigate(`/search?tag=${tag}`)}
             >
               {tag}
