@@ -5,10 +5,10 @@ export const Category = ({ attributes, category }) => {
 
   return (
     <Text
-      fontSize="sm"
       display="inline"
-      text="muted"
-      textTransform="uppercase"
+      color="gray.600"
+      fontWeight="medium"
+      fontSize="sm"
       {...attributes}
     >
       {category}

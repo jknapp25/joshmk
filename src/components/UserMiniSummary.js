@@ -34,7 +34,7 @@ function UserMiniSummary() {
 
   return (
     <VStack align="start" spacing={4}>
-      <Category category="ABOUT THE AUTHOR" />
+      <Category category="About the author" />
       <div className="ratio ratio-1x1 bg-secondary bg-opacity-10">
         {avatarUrl ? (
           <Image

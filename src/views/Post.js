@@ -11,7 +11,7 @@ import * as queries from "../graphql/queries";
 import Helmet from "react-helmet";
 
 import ImageCarousel from "../components/ImageCarousel";
-import { Box, Button, Heading, VStack } from "@chakra-ui/react";
+import { Box, Button, Heading, Text, VStack } from "@chakra-ui/react";
 import RichTextEditor from "../components/RichTextEditor/RichTextEditor";
 import useIsMounted from "../lib/useIsMounted";
 
@@ -66,12 +66,9 @@ function Post({ post = {}, bottomBorder = false }) {
             {title}
           </Heading>
         </Box>
-        <div
-          className="text-muted text-center text-uppercase small"
-          style={{ fontWeight: 500 }}
-        >
+        <Text color="gray.600" fontWeight="medium" fontSize="sm">
           {formattedDateTime}
-        </div>
+        </Text>
       </div>
 
       <ImageCarousel images={images} classes="bg-secondary bg-opacity-10" />
