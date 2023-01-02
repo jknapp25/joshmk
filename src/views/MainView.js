@@ -54,11 +54,7 @@ function MainView() {
               <Events />
               {config?.prompts.length > 0
                 ? config.prompts.map((prompt, i) => (
-                    <Prompt
-                      key={i}
-                      bottomSpace={i !== config.prompts.length - 1}
-                      prompt={prompt}
-                    />
+                    <Prompt key={i} prompt={prompt} />
                   ))
                 : null}
             </VStack>
