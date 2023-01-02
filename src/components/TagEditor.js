@@ -22,6 +22,8 @@ function TagEditor({ tags = [], tagsOptions = [], onChange }) {
           const updTags = newVal.map((val) => val.value);
           onChange(updTags);
         }}
+        menuPlacement="auto"
+        placeholder=""
         value={selectTags}
         options={selectTagsOptions}
       />

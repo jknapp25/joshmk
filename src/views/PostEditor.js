@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Container, Form, FormControl } from "react-bootstrap";
+import { Form, FormControl } from "react-bootstrap";
+import { Box, Button, VStack, Input } from "@chakra-ui/react";
 import { API, graphqlOperation } from "aws-amplify";
 import { useNavigate, useParams } from "react-router-dom";
 import CreatableSelect from "react-select/creatable";
@@ -10,7 +11,6 @@ import RichTextEditor from "../components/RichTextEditor/RichTextEditor";
 import ImageUploader from "../components/ImageUploader";
 import TagEditor from "../components/TagEditor";
 import useIsMounted from "../lib/useIsMounted";
-import { Box, Button, VStack } from "@chakra-ui/react";
 
 export default PostEditor;
 
@@ -216,6 +216,8 @@ function PostEditor() {
         <Form.Label>Category</Form.Label>
         <CreatableSelect
           isClearable
+          menuPlacement="auto"
+          placeholder=""
           onChange={(newVal) => setCategory(newVal?.value)}
           value={selectCategory}
           options={selectCategoryOptions}
@@ -231,11 +233,12 @@ function PostEditor() {
       </VStack>
 
       <VStack align="stretch" spacing={1}>
-        <Form.Label>Created At (ex: 2020-11-21T17:42:34Z)</Form.Label>
-        <FormControl
-          id="createdAt"
-          aria-describedby="createdAt"
+        <Form.Label>Created At</Form.Label>
+        <Input
+          placeholder=""
           value={createdAt || ""}
+          size="md"
+          type="datetime-local"
           onChange={(e) => setCreatedAt(e.target.value)}
         />
       </VStack>
