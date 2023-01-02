@@ -100,7 +100,7 @@ function ImageUploader({
         <Form.Control
           id={fieldId}
           type="file"
-          className="mb-2"
+          className={images.length ? "mb-1" : ""}
           multiple={allowMultiple}
           onChange={handleImageUpload}
           name={fieldName}
