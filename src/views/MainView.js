@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { useMatch, Outlet } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
-import { Divider } from "@chakra-ui/react";
+// import { Divider } from "@chakra-ui/react";
 
 import Prompt from "../components/Prompt";
 import UserMiniSummary from "../components/UserMiniSummary";
 import PopularTags from "../components/PopularTags";
-import { Footer } from "./Footer";
+// import { Footer } from "./Footer";
 import { ConfigContext } from "../App";
 
 export default MainView;
@@ -17,6 +17,7 @@ function MainView() {
   const isHomeRoute = useMatch("/");
   const isGalleryRoute = useMatch("/gallery");
   const isCreateRoute = useMatch("/create");
+  const isPostCreateRoute = useMatch("/post/create");
   const isPostRoute = useMatch("/post/:postId");
   const isItemRoute = useMatch("/item/:itemId");
 
@@ -29,6 +30,7 @@ function MainView() {
   if (isPostRoute) mainColWidth = 8;
   if (isGalleryRoute) mainColWidth = 11;
   if (isItemRoute) mainColWidth = 8;
+  if (isPostCreateRoute) mainColWidth = 6;
 
   return (
     <>

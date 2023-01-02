@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Button, Form, FormControl } from "react-bootstrap";
+import { Container, Form, FormControl } from "react-bootstrap";
 import { API, graphqlOperation } from "aws-amplify";
 import { useNavigate, useParams } from "react-router-dom";
 import CreatableSelect from "react-select/creatable";
@@ -10,6 +10,7 @@ import RichTextEditor from "../components/RichTextEditor/RichTextEditor";
 import ImageUploader from "../components/ImageUploader";
 import TagEditor from "../components/TagEditor";
 import useIsMounted from "../lib/useIsMounted";
+import { Box, Button, VStack } from "@chakra-ui/react";
 
 export default PostEditor;
 
@@ -161,86 +162,98 @@ function PostEditor() {
   }));
 
   return (
-    <>
-      <Form.Label className="mb-0">Title</Form.Label>
-      <FormControl
-        id="title"
-        className="mb-2"
-        aria-describedby="title"
-        value={title || ""}
-        onChange={(e) => setTitle(e.target.value)}
-      />
+    <VStack align="stretch" spacing={5}>
+      <VStack align="stretch" spacing={1}>
+        <Form.Label>Title</Form.Label>
+        <FormControl
+          id="title"
+          aria-describedby="title"
+          value={title || ""}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+      </VStack>
 
-      <Form.Label className="mb-0">Content</Form.Label>
-      <RichTextEditor
-        value={richContent}
-        onChange={(updRichContent) => {
-          setRichContent(updRichContent);
-        }}
-        buttons={[
-          "bold",
-          "italic",
-          "underline",
-          "code",
-          "strikethrough",
-          "heading-one",
-          "heading-two",
-          "block-quote",
-          "numbered-list",
-          "bulleted-list",
-          "link",
-          "image",
-          "video",
-          "kicker",
-        ]}
-        classes="bg-white mb-2"
-      />
+      <VStack align="stretch" spacing={0}>
+        <Form.Label>Content</Form.Label>
+        <RichTextEditor
+          value={richContent}
+          onChange={(updRichContent) => {
+            setRichContent(updRichContent);
+          }}
+          buttons={[
+            "bold",
+            "italic",
+            "underline",
+            "code",
+            "strikethrough",
+            "heading-one",
+            "heading-two",
+            "block-quote",
+            "numbered-list",
+            "bulleted-list",
+            "link",
+            "image",
+            "video",
+            "kicker",
+          ]}
+          classes="bg-white"
+        />
+      </VStack>
 
-      <Form.Label className="mb-1">Images</Form.Label>
-      <ImageUploader
-        images={images || []}
-        afterEdit={(imgs) => {
-          setImages(imgs);
-        }}
-        fieldId="images"
-        fileSizeLimit={5}
-      />
+      <VStack align="stretch" spacing={1}>
+        <Form.Label>Images</Form.Label>
+        <ImageUploader
+          images={images || []}
+          afterEdit={(imgs) => {
+            setImages(imgs);
+          }}
+          fieldId="images"
+          fileSizeLimit={5}
+        />
+      </VStack>
 
-      <Form.Label className="mb-0">Category</Form.Label>
-      <CreatableSelect
-        isClearable
-        onChange={(newVal) => setCategory(newVal?.value)}
-        value={selectCategory}
-        options={selectCategoryOptions}
-      />
+      <VStack align="stretch" spacing={1}>
+        <Form.Label>Category</Form.Label>
+        <CreatableSelect
+          isClearable
+          onChange={(newVal) => setCategory(newVal?.value)}
+          value={selectCategory}
+          options={selectCategoryOptions}
+        />
+      </VStack>
 
-      <TagEditor
-        tags={tags}
-        tagsOptions={tagsOptions}
-        onChange={(updTags) => setTags(updTags)}
-      />
+      <VStack align="stretch" spacing={1}>
+        <TagEditor
+          tags={tags}
+          tagsOptions={tagsOptions}
+          onChange={(updTags) => setTags(updTags)}
+        />
+      </VStack>
 
-      <Form.Label className="mb-0">
-        Created At (ex: 2020-11-21T17:42:34Z)
-      </Form.Label>
-      <FormControl
-        id="createdAt"
-        className="mb-2"
-        aria-describedby="createdAt"
-        value={createdAt || ""}
-        onChange={(e) => setCreatedAt(e.target.value)}
-      />
+      <VStack align="stretch" spacing={1}>
+        <Form.Label>Created At (ex: 2020-11-21T17:42:34Z)</Form.Label>
+        <FormControl
+          id="createdAt"
+          aria-describedby="createdAt"
+          value={createdAt || ""}
+          onChange={(e) => setCreatedAt(e.target.value)}
+        />
+      </VStack>
 
-      <Form.Check
-        type="checkbox"
-        label="Hidden from blog"
-        checked={hidden}
-        onChange={() => setHidden(!hidden)}
-      />
+      <VStack align="stretch" spacing={1}>
+        <Form.Check
+          type="checkbox"
+          label="Hide from blog"
+          checked={hidden}
+          onChange={() => setHidden(!hidden)}
+        />
+      </VStack>
 
-      <Button className="mt-2" onClick={handleButtonClick}>
-        {params.id ? "Update" : "Create"}
-      </Button>
-    </>
+      <Box>
+        <Button onClick={handleButtonClick}>
+          {params.id ? "Update" : "Create"}
+        </Button>
+      </Box>
+    </VStack>
   );
 }
