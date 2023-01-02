@@ -11,7 +11,7 @@ import * as queries from "../graphql/queries";
 import Helmet from "react-helmet";
 
 import ImageCarousel from "../components/ImageCarousel";
-import { Box, Button, Heading, Text, VStack } from "@chakra-ui/react";
+import { Button, Heading, Text, VStack } from "@chakra-ui/react";
 import RichTextEditor from "../components/RichTextEditor/RichTextEditor";
 import useIsMounted from "../lib/useIsMounted";
 
@@ -60,21 +60,14 @@ function Post({ post = {}, bottomBorder = false }) {
       spacing={10}
     >
       <Helmet>{!isBlog && title ? <title>{title}</title> : null}</Helmet>
-      <div className="mx-auto text-center" style={{ maxWidth: "650px" }}>
-        <Box mb={3}>
-          <Heading as={RouterLink} size="3xl" to={`/post/${id}`}>
-            {title}
-          </Heading>
-        </Box>
-        <Text
-          color="gray.500"
-          fontWeight="medium"
-          fontSize="sm"
-          textTransform="uppercase"
-        >
+      <VStack align="center" style={{ maxWidth: "650px" }} spacing={3}>
+        <Heading as={RouterLink} size="3xl" to={`/post/${id}`} align="center">
+          {title}
+        </Heading>
+        <Text color="gray.500" fontWeight="medium" fontSize="md">
           {formattedDateTime}
         </Text>
-      </div>
+      </VStack>
 
       <ImageCarousel images={images} classes="bg-secondary bg-opacity-10" />
 

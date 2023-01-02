@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Auth } from "aws-amplify";
 import { Col, Offcanvas, Row } from "react-bootstrap";
 import {
@@ -31,7 +31,6 @@ export default Nav;
 
 function Nav() {
   const [isSignedIn, setIsSignedIn] = useState(false);
-  const { pathname } = useLocation();
   const [showOffcanvas, setShowOffcanvas] = useState(false);
 
   const handleClose = () => setShowOffcanvas(false);

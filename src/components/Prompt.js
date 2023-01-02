@@ -1,4 +1,4 @@
-import { Text, VStack } from "@chakra-ui/react";
+import { VStack } from "@chakra-ui/react";
 
 import ImageLink from "./ImageLink";
 import { Category } from "./Category";
