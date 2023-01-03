@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { API, graphqlOperation } from "aws-amplify";
 import { useNavigate, useParams } from "react-router-dom";
+import moment from "moment";
 
 import * as queries from "../graphql/queries";
 import { createEvent, updateEvent } from "../graphql/mutations";
@@ -106,7 +107,7 @@ export const EventEditor = () => {
         </FormHelperText>
         <Input
           placeholder=""
-          value={start || ""}
+          value={start ? moment(start).format("YYYY-MM-DDTHH:mm:ss") : ""}
           type="datetime-local"
           onChange={(e) => {
             setStart(e.target.value);
@@ -128,7 +129,7 @@ export const EventEditor = () => {
         </FormHelperText>
         <Input
           placeholder=""
-          value={end || ""}
+          value={end ? moment(end).format("YYYY-MM-DDTHH:mm:ss") : ""}
           type="datetime-local"
           onChange={(e) => setEnd(e.target.value)}
         />

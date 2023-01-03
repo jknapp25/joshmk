@@ -67,7 +67,7 @@ export const Events = () => {
             </Text>
           </Link>
         ) : (
-          <Text>
+          <Text key={name}>
             <b>{formattedDateTime}</b>
             &nbsp;&nbsp;&nbsp;
             {name}
