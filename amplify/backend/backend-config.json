@@ -4,18 +4,19 @@
       "dependsOn": [],
       "output": {
         "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 365,
+              "apiKeyExpirationDate": "2024-02-13T03:45:37.973Z",
+              "description": "ripple-key"
+            }
+          },
           "additionalAuthenticationProviders": [
             {
               "authenticationType": "AWS_IAM"
             }
-          ],
-          "defaultAuthentication": {
-            "apiKeyConfig": {
-              "apiKeyExpirationDays": 30,
-              "description": "api key description"
-            },
-            "authenticationType": "API_KEY"
-          }
+          ]
         }
       },
       "providerPlugin": "awscloudformation",
