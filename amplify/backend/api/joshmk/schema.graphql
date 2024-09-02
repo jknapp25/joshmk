@@ -1,0 +1,124 @@
+type Event @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  start: AWSDateTime
+  end: AWSDateTime
+  link: String
+}
+
+type Post @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String
+  content: String
+  richContent: AWSJSON
+  category: String
+  tags: [String]
+  images: [String]
+  createdAt: String
+  hidden: Boolean
+}
+
+type Item @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  description: AWSJSON
+  category: String
+  tags: [String]
+  images: [String]
+  isForSale: Boolean
+  isSold: Boolean
+  price: Float
+  createdAt: String
+}
+
+type Project @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  summary: String
+  tasks: [String]
+  link: String
+  status: String
+  tags: [String]
+  images: [String]
+  start: String
+  end: String
+  complexity: Float
+  tagUsage: [Float]
+}
+
+type Job @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  company: String
+  role: String
+  location: String
+  summary: String
+  details: [String]
+  companyUrl: String
+  type: String
+  tags: [String]
+  start: String
+  end: String
+  complexity: Float
+  tagUsage: [Float]
+}
+
+type Education @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  organization: String
+  degree: String
+  location: String
+  summary: String
+  details: [String]
+  organizationUrl: String
+  tags: [String]
+  start: String
+  end: String
+  complexity: Float
+  tagUsage: [Float]
+}
+
+type Page {
+  name: String!
+  link: String!
+}
+
+type PromptImage {
+  imageUrl: String!
+  link: String!
+}
+
+type Prompt {
+  title: String!
+  images: [PromptImage]
+}
+
+type Configuration @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  fullName: String
+  nickName: String
+  emailAddress: String
+  tagline: String
+  bio: AWSJSON
+  logo: String
+  avatar: String
+  favicon: String
+  instagramUrl: String
+  youtubeUrl: String
+  supportUrl: String
+  pages: [String]
+  pagesCustom: [Page!]
+  resumeGeneratorEnabled: Boolean
+  galleryImages: [String]
+  prompts: [Prompt]
+}
+
+type Workout @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  warrior: String
+  otherWarriors: [String]
+  description: String
+  joint: Boolean
+  plannedStart: String
+  replies: [String]
+}
+ 

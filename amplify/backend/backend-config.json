@@ -1,1 +1,41 @@
-{}
+{
+  "api": {
+    "joshmk": {
+      "dependsOn": [],
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ],
+          "defaultAuthentication": {
+            "apiKeyConfig": {
+              "apiKeyExpirationDate": "2025-09-02T22:51:26.618Z",
+              "apiKeyExpirationDays": 365,
+              "description": "new-key"
+            },
+            "authenticationType": "API_KEY"
+          }
+        }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync"
+    }
+  },
+  "auth": {
+    "joshmka1fd536a": {
+      "customAuth": false,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
+    }
+  },
+  "function": {},
+  "storage": {
+    "storage": {
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
+    }
+  }
+}
